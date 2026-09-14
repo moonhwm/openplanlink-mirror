@@ -11,11 +11,13 @@
 ```
 AppScope/                 应用级配置（bundleName=com.yehang.stockpulse）
 entry/src/main/ets/
-  entryability/           EntryAbility（Push 初始化 + 通知点击带 alertId 拉起）
+  entryability/           EntryAbility（Push 初始化 + Settings 初始化 + 通知点击带 alertId 拉起）
   pages/Index.ets         大字异动卡片流，点卡即听（服务未连通时显示「示例」卡）
+  pages/Settings.ets      设置页（自选股增删 / 播报开关 / 字体档切换）
   services/PushService    Push Kit 占位封装（无 AGC 配置自动降级）
   services/AlertPoller    前台 5s 轮询兜底（FEED_URL 待 X 落地后替换）
   services/AudioPlayer    云端 TTS 音频流点按播报（AVPlayer）
+  services/SettingsService 设置数据持久化（Preferences：自选股/播报开关/字体档）
   model/AlertItem         异动事实卡数据契约
 ```
 
