@@ -130,6 +130,15 @@ struct Index {
                   .fontWeight(FontWeight.Bold)
                   .fontColor($r('app.color.text_primary'))
                   .margin({ left: 12 })
+                if (item.kind === 'signal') {
+                  Text('自家信号')
+                    .fontSize(18)
+                    .fontColor($r('app.color.accent_gold'))
+                    .border({ width: 1, color: $r('app.color.accent_gold') })
+                    .borderRadius(6)
+                    .padding({ left: 8, right: 8, top: 2, bottom: 2 })
+                    .margin({ left: 10 })
+                }
                 Blank()
                 if (item.audioUrl) {
                   Text(this.playingId === item.alertId ? '■ 停' : '▶ 听')
