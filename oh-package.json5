@@ -1,0 +1,9 @@
+{
+  "name": "stockpulse",
+  "version": "0.1.0",
+  "description": "适老化行情异动播报（私有分发，云端监测+推送+点按播报）",
+  "main": "",
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {}
+}

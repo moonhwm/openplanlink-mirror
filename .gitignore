@@ -1,0 +1,16 @@
+# 鸿蒙构建产物与本地环境
+oh_modules/
+**/oh_modules/
+**/build/
+**/.preview/
+**/node_modules/
+.hvigor/
+.cxx/
+*.hap
+*.app
+*.p7b
+*.cer
+*.keystore
+local.properties
+.idea/
+.DS_Store
