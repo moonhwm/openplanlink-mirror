@@ -99,3 +99,20 @@
   - `grep '总则转述' CHANGELOG.md` → catch 引句已标注转述来源。
   - `grep 'EditableTextOnChangeCallback' CHANGELOG.md` → 遗留第3条已更新为结论+出处。
 - 遗留：无新增遗留。R1 遗留第4条（catch 无参写法）已在 R2 解决；R2 遗留第3条（TextInput onChange）已在本补件解决。
+## 2026-09-15 02:10 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· 代码审查修复
+
+- 改了什么：
+  - `entry/src/main/ets/pages/Index.ets`：
+    1. refresh 中清除 loadingId 时增加 `AudioPlayer.stop()`——原代码只清除状态标志未停止正在进行的 prepare，prepare 完成后会设置已失效的 playingId（卡片已被服务端撤下），导致音频泄漏几秒。
+    2. togglePlay 中 `await AudioPlayer.play(...)` 返回后增加 `if (this.loadingId !== item.alertId) return;` 守卫——refresh 可能在 await 期间清除了 loadingId，此时不应继续设置 playingId。
+  - `entry/src/main/ets/pages/Settings.ets`：Toggle onChange 从 `() => this.toggleBroadcast()` 改为 `(isOn: boolean) => this.toggleBroadcast(isOn)`——直接使用 Toggle 传入的新状态值，而非用 `!this.broadcastEnabled` 翻转，避免极端竞态下状态不同步。
+- 为什么这么改：R2a 闭环后自主推进代码审查，发现 loadingId 清理不完整是真实缺陷（中等严重度），Toggle onChange 未用 isOn 参数是改进建议（低严重度）。
+- 如何验证：
+  - `grep -n 'AudioPlayer.stop' entry/src/main/ets/pages/Index.ets` → refresh 中 loadingId 清理处含 stop 调用。
+  - `grep -n 'loadingId !== item.alertId' entry/src/main/ets/pages/Index.ets` → togglePlay await 后有守卫检查。
+  - `grep -n 'toggleBroadcast' entry/src/main/ets/pages/Settings.ets` → 方法签名带 isOn 参数，onChange 传入 isOn。
+  - `git diff HEAD -- AGENTS.md entry/src/main/ets/model/AlertItem.ets` → 契约双文件 diff 为空。
+- 遗留：
+  1. AlertPoller 退避间隔在 App 从后台恢复时不重置（首次成功 refresh 后自动复位，影响有限，暂不修复）。
+  2. PushService.tokenReported 赋值后从未被读取（R3 实装时处理）。
+  3. 当前环境无 devecocli/node/DevEco Studio，编译验证和模拟器真机验证无法执行——留待机主安排环境。

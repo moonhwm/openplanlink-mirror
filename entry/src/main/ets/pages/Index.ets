@@ -121,6 +121,8 @@ struct Index {
           this.playingId = '';
         }
         if (this.loadingId && !filtered.find((it) => it.alertId === this.loadingId)) {
+          // 加载中的卡片被服务端撤下：停止 prepare 并复位，防止 prepare 完成后设置已失效的 playingId
+          AudioPlayer.stop();
           this.loadingId = '';
         }
         if (this.failedId && !filtered.find((it) => it.alertId === this.failedId)) {
@@ -203,6 +205,10 @@ struct Index {
           this.failedId = item.alertId;
         }
       );
+      // refresh 可能在 await 期间清除了 loadingId（卡片被服务端撤下）——此时不应设置 playingId
+      if (this.loadingId !== item.alertId) {
+        return;
+      }
       this.loadingId = '';
       this.playingId = item.alertId;
     } catch (e) {

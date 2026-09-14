@@ -57,8 +57,8 @@ struct Settings {
     hilog.info(DOMAIN, TAG, `removed stock ${code}, watchlist now ${this.watchlist.length} items`);
   }
 
-  private async toggleBroadcast(): Promise<void> {
-    this.broadcastEnabled = !this.broadcastEnabled;
+  private async toggleBroadcast(isOn: boolean): Promise<void> {
+    this.broadcastEnabled = isOn;
     await SettingsService.setBroadcastEnabled(this.broadcastEnabled);
     hilog.info(DOMAIN, TAG, `broadcast ${this.broadcastEnabled ? 'enabled' : 'disabled'}`);
   }
@@ -170,7 +170,7 @@ struct Settings {
                 .fontColor(this.broadcastEnabled ? $r('app.color.text_primary') : $r('app.color.rise_red'))
                 .layoutWeight(1)
               Toggle({ type: ToggleType.Switch, isOn: this.broadcastEnabled })
-                .onChange((isOn: boolean) => this.toggleBroadcast())
+                .onChange((isOn: boolean) => this.toggleBroadcast(isOn))
                 .width(60)
                 .height(48)
             }
