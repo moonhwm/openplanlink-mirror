@@ -38,7 +38,7 @@ export class AudioPlayer {
       // 清理半初始化的 player
       try {
         await av.release();
-      } catch { /* 忽略重复释放 */ }
+      } catch (e2) { /* 忽略重复释放 */ }
       AudioPlayer.player = null;
       onError?.();
       throw e;
@@ -50,7 +50,7 @@ export class AudioPlayer {
       try {
         await AudioPlayer.player.stop();
         await AudioPlayer.player.release();
-      } catch { /* 忽略重复释放 */ }
+      } catch (e) { /* 忽略重复释放 */ }
       AudioPlayer.player = null;
     }
   }

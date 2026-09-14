@@ -39,7 +39,7 @@ export class PushService {
     try {
       const raw = context.resourceManager.getRawFileContentSync('agconnect-services.json');
       return raw != null && raw.length > 0;
-    } catch {
+    } catch (e) {
       return false;
     }
   }

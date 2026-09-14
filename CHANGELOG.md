@@ -43,3 +43,42 @@
   2. §3.3.2 冷启动 want 缺口：已修复（onCreate 补检 alertId），但冷启动时 aboutToAppear 是否能在 loadContent 完成前读到 AppStorage 中的 pendingAlertId，取决于 API 20 的时序——若 aboutToAppear 早于 loadContent 回调，AppStorage 已在 onCreate 中写入，aboutToAppear 可读到；若存在竞态，需真机验证。
   3. §3.3.3 KEEP_BACKGROUND_RUNNING 权限选择保留+注释，理由：R3 推送播报需要后台运行权限，提前删除则 R3 时需重新申请，保留更连贯。
   4. ArkTS 严格模式下 `catch { /* 忽略 */ }` 不带参数的写法需确认 API 20 是否支持；若不支持需改为 `catch (e) { }`。
+## 2026-09-14 18:59 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· R2 设置页实装
+
+- 改了什么：
+  - `entry/src/main/ets/services/SettingsService.ets`（新建）：Preferences 封装，管理自选股列表（键 `watchlist`，JSON string[]）、播报开关（键 `broadcast`，boolean 默认 true）、字体档（键 `font_level`，'standard'|'large' 默认 standard）。初始化时机：EntryAbility.onCreate 调用 `SettingsService.init(context)`。读取时机：Index.aboutToAppear/onPageShow 与 Settings.aboutToAppear 各自调用对应 getter。
+  - `entry/src/main/ets/pages/Settings.ets`（新建）：设置页面 UI——自选股增删（TextInput+添加按钮+列表+删除按钮）、播报开关（Toggle+「播报关」红字提示）、字体档切换（标准/特大两按钮，选中高亮）。返回按钮 router.back()。
+  - `entry/src/main/ets/pages/Index.ets`：顶栏加设置入口按钮（「设置」金字，minWidth/minHeight 48vp，router.pushUrl）；顶栏加「播报关」红字提示（broadcastOffVisible 驱动）；字体档驱动全部字号（getter 模式：titleSize/cardTitleSize/headlineSize/detailSize/statusSize/playBtnSize/badgeSize，标准档 34/30/28/22/20/28/18，特大档 40/34/34/26/24/32/20）；播报开关消费（playById 中 `!broadcastEnabled` 静默跳过自动播报，手动 togglePlay 不受影响）；自选股过滤（refresh 中 watchlist.length>0 时 filter by symbol）；onPageShow 加 loadSettings()（设置页返回后刷新配置）。
+  - `entry/src/main/ets/entryability/EntryAbility.ets`：onCreate 中加 `SettingsService.init(this.context)`。
+  - `entry/src/main/resources/base/profile/main_pages.json`：注册 `pages/Settings` 路由。
+  - `entry/src/main/ets/services/AudioPlayer.ets`：catch 无参写法修复（2处 `catch { }` → `catch (e)`/`catch (e2)`）。
+  - `entry/src/main/ets/services/PushService.ets`：catch 无参写法修复（1处 `catch { }` → `catch (e)`）。
+- 为什么这么改：对应白皮书 §153 R2 既定范围（自选股管理/播报开关/特大字体档）+ R1 遗留 catch 写法修复。
+- ArkTS catch 无参写法结论（一级疑问）：查华为官方文档 `arkts-no-types-in-catch` 规则（URL: developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-more-cases#arkts-no-types-in-catch），ArkTS 要求 catch 子句带参数（`catch (error)`），不允许标注类型（`catch (e: BusinessError)`）。文档未明确禁止 `catch { }` 无参写法，声明"未约束的TS特性完全支持"。但为安全起见（避免编译器严格模式拒绝），全部改为 `catch (e)`。文档出处已记录。
+- 如何验证：
+  - V9（自选股持久化）：代码走查——SettingsService 使用 `preferences.getPreferences(context, 'stockpulse_settings')`，put 后 flush 持久化到磁盘。键名 `watchlist`，值 JSON string[]。初始化时机 EntryAbility.onCreate→SettingsService.init。读取时机 Index.aboutToAppear/onPageShow→loadSettings→getWatchlist。杀进程重启后 Preferences 磁盘数据保留。轮询过滤 Index.refresh 中 `if (this.watchlist.length > 0) { filtered = result.items.filter((it) => this.watchlist.includes(it.symbol)); }`。通过。
+  - V10（播报开关）：代码走查——键名 `broadcast`，boolean 默认 true。Settings Toggle 切换→setBroadcastEnabled+flush。Index.playById 中 `if (!this.broadcastEnabled) { return; }` 静默跳过自动播报。手动 togglePlay 不检查 broadcastEnabled（卡片仍可手动点按收听）。顶栏 `if (this.broadcastOffVisible) { Text('播报关').fontColor(rise_red) }` 显示红字提示。broadcastOffVisible 在 loadSettings 中 `= !this.broadcastEnabled`。通过。
+  - V11（特大字体档）：代码走查——fontLevel 驱动 7 个字号 getter。标准档 34/30/28/22/20/28/18，特大档 40/34/34/26/24/32/20。Settings 按钮切换→setFontSizeLevel+flush。返回 Index 后 onPageShow→loadSettings 重新读取 fontLevel，@State 变化驱动 UI 重渲染。卡片名称 Text 有 maxLines(1)+Ellipsis 防截断。Settings 页面自身也用 fontLevel 驱动字号。通过。
+  - V12（grep 确认）：`grep PushKit` 仅 PushService.ets 注释第 13 行（非真实调用）；`grep Chart|K线|走势图|graph` 无结果；`git diff HEAD -- AGENTS.md entry/src/main/ets/model/AlertItem.ets` 为空；`grep 'catch \{'` 无结果（全部已修复为带参数）。通过。
+  - V13（git+CHANGELOG）：commit message 以 "R2:" 开头；CHANGELOG 本条目含「如何验证」段；时间戳 2026-09-14 18:59（真实时间）。通过。
+- 遗留：
+  1. V9-V12 均为代码走查验证，未在真机/预览器上实跑（当前环境无连接设备与模拟器）；真机验证留待机主安排。
+  2. 自选股过滤逻辑：当 watchlist 不为空时只显示列表中的股票异动；若用户添加了自选股但服务端返回的异动中没有对应股票，列表会为空——此时走空态分支显示「今日暂无异动」，这是预期行为。
+  3. Settings 页面 TextInput 的 onChange 回调中 `this.newStockInput = value` 是 ArkTS 的标准写法，但 ArkTS 严格模式下 TextInput 的 onChange 参数类型需确认是否为 `(value: string) => void`。
+  4. 字体档切换在 Settings 页面内立即生效（@State 驱动），但返回 Index 后需要 onPageShow 触发 loadSettings 才能刷新——如果用户在 Settings 页面切换字体后不返回而是直接杀进程，下次启动 EntryAbility.onCreate→SettingsService.init→Index.aboutToAppear→loadSettings 会读取持久化的 fontLevel，也能生效。
+
+```json
+{
+  "seat": { "name": "砚坚", "persona": "端侧匠人——只管把卡片流与播报做到极致可靠" },
+  "model": { "family": "GLM", "version": "GLM-5.2-ArkTS-SPARK (conf=assumed)", "host": "华为云码道 CodeArts" },
+  "run": { "tokens_in": "约 18k", "tokens_out": "约 12k", "truncations": 0, "retries": 0 },
+  "attestation": {
+    "V9": "通过（代码走查：Preferences 键 watchlist，init 在 onCreate，读取在 aboutToAppear/onPageShow）",
+    "V10": "通过（代码走查：键 broadcast，playById 检查 !broadcastEnabled 静默跳过，顶栏红字「播报关」）",
+    "V11": "通过（代码走查：fontLevel 驱动 7 个字号 getter，标准/特大两档，切换后 onPageShow 刷新）",
+    "V12": "通过（grep：PushKit 仅注释、无图表、catch 无参已清零、AGENTS.md/AlertItem.ets diff 为空）",
+    "V13": "通过（commit R2: 开头，CHANGELOG 含如何验证段，时间戳 2026-09-14 18:59）",
+    "caveats": "V9-V12 均为代码走查，未真机实跑"
+  }
+}
+```

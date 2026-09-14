@@ -2,6 +2,7 @@ import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { window } from '@kit.ArkUI';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { PushService } from '../services/PushService';
+import { SettingsService } from '../services/SettingsService';
 
 const TAG = 'StockPulse.EntryAbility';
 const DOMAIN = 0x0001;
@@ -12,6 +13,10 @@ export default class EntryAbility extends UIAbility {
     // Push Kit 初始化（取 token 上报服务端）；未配置 AGC 时内部降级为仅日志
     PushService.init(this.context).catch((e: Error) => {
       hilog.warn(DOMAIN, TAG, `push init degraded: ${e.message}`);
+    });
+    // Settings 初始化（Preferences 持久化：自选股/播报开关/字体档）
+    SettingsService.init(this.context).catch((e: Error) => {
+      hilog.warn(DOMAIN, TAG, `settings init degraded: ${e.message}`);
     });
     // 冷启动通知缺口修复（白皮书 §3.3.2）：冷启动时 want 参数经 onCreate 传入，
     // 原代码只在 onNewWant 处理 alertId，冷启动点通知会丢失。此处补检。

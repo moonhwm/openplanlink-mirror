@@ -1,7 +1,9 @@
+import { router } from '@kit.ArkUI';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { AlertItem } from '../model/AlertItem';
 import { AlertPoller } from '../services/AlertPoller';
 import { AudioPlayer } from '../services/AudioPlayer';
+import { SettingsService, FontSizeLevel } from '../services/SettingsService';
 
 const TAG = 'StockPulse.Index';
 const DOMAIN = 0x0001;
@@ -29,17 +31,45 @@ struct Index {
   @State lastRefresh: string = '未连接';
   @State connectionBroken: boolean = false;
   @State isDemoMode: boolean = true;
+  @State fontLevel: FontSizeLevel = 'standard';
+  @State broadcastEnabled: boolean = true;
+  @State broadcastOffVisible: boolean = false;
+  @State watchlist: string[] = [];
   private timer: number = -1;
   private consecutiveFailures: number = 0;
 
+  // 字体档驱动字号
+  private get titleSize(): number {
+    return this.fontLevel === 'large' ? 40 : 34;
+  }
+  private get cardTitleSize(): number {
+    return this.fontLevel === 'large' ? 34 : 30;
+  }
+  private get headlineSize(): number {
+    return this.fontLevel === 'large' ? 34 : 28;
+  }
+  private get detailSize(): number {
+    return this.fontLevel === 'large' ? 26 : 22;
+  }
+  private get statusSize(): number {
+    return this.fontLevel === 'large' ? 24 : 20;
+  }
+  private get playBtnSize(): number {
+    return this.fontLevel === 'large' ? 32 : 28;
+  }
+  private get badgeSize(): number {
+    return this.fontLevel === 'large' ? 20 : 18;
+  }
+
   aboutToAppear(): void {
+    this.loadSettings();
     this.pollLoop();
     this.checkPendingAlertId();
   }
 
   onPageShow(): void {
-    // 后台拉起路径修复（白皮书 §3.3.2）：页面已存在时 aboutToAppear 不会再跑，
-    // onPageShow 补检 pendingAlertId，确保 onNewWant 写入的 alertId 不滞留
+    // 后台拉起路径修复（白皮书 §3.3.2）+ 设置页返回后刷新配置
+    this.loadSettings();
     this.checkPendingAlertId();
   }
 
@@ -49,6 +79,13 @@ struct Index {
       this.timer = -1;
     }
     AudioPlayer.stop();
+  }
+
+  private async loadSettings(): Promise<void> {
+    this.fontLevel = await SettingsService.getFontSizeLevel();
+    this.broadcastEnabled = await SettingsService.getBroadcastEnabled();
+    this.broadcastOffVisible = !this.broadcastEnabled;
+    this.watchlist = await SettingsService.getWatchlist();
   }
 
   private checkPendingAlertId(): void {
@@ -72,22 +109,26 @@ struct Index {
       this.isDemoMode = false;
 
       if (result.items.length > 0) {
+        // 自选股过滤：有自选股列表时只显示列表中的股票
+        let filtered = result.items;
+        if (this.watchlist.length > 0) {
+          filtered = result.items.filter((it) => this.watchlist.includes(it.symbol));
+        }
+
         // 刷新后检查正在播放/加载的 alertId 是否还在新列表中（白皮书 §3.1.4）
-        if (this.playingId && !result.items.find((it) => it.alertId === this.playingId)) {
+        if (this.playingId && !filtered.find((it) => it.alertId === this.playingId)) {
           AudioPlayer.stop();
           this.playingId = '';
         }
-        if (this.loadingId && !result.items.find((it) => it.alertId === this.loadingId)) {
+        if (this.loadingId && !filtered.find((it) => it.alertId === this.loadingId)) {
           this.loadingId = '';
         }
-        // 成功刷新清除失败提示（白皮书 §3.1.2：下一轮成功刷新后清除）
-        if (this.failedId && !result.items.find((it) => it.alertId === this.failedId)) {
+        if (this.failedId && !filtered.find((it) => it.alertId === this.failedId)) {
           this.failedId = '';
         }
-        this.items = result.items;
+        this.items = filtered;
       } else {
         // 空态：服务端连通但无异动（白皮书 §3.2.3）
-        // 停止正在播放的音频（异动已被服务端撤下）
         if (this.playingId) {
           AudioPlayer.stop();
           this.playingId = '';
@@ -100,28 +141,28 @@ struct Index {
       const d = new Date();
       this.lastRefresh = `${d.getHours()}:${String(d.getMinutes()).padStart(2, '0')}:${String(d.getSeconds()).padStart(2, '0')}`;
     } else if (result.rateLimited) {
-      // 429 限流：不计入连接中断提示，保留旧卡片（白皮书 §3.2.4）
       hilog.info(DOMAIN, TAG, 'rate-limited, keeping current items');
     } else {
       this.consecutiveFailures++;
-      // 连续两轮 ok=false 才显示连接中断（白皮书 §3.2.2）
       if (this.consecutiveFailures >= 2) {
         this.connectionBroken = true;
       }
-      // ok=false：保留旧卡片，严禁清空为空白页（白皮书 §3.2.2）
     }
   }
 
   private playById(id: string): void {
     const hit = this.items.find((it) => it.alertId === id);
     if (!hit) {
-      // 目标 alertId 不在当前列表，静默清除（白皮书 §3.1.3）
       hilog.info(DOMAIN, TAG, `pendingAlertId ${id} not in current list, silently cleared`);
       return;
     }
     if (!hit.audioUrl) {
-      // 目标卡无 audioUrl，静默跳过（白皮书 §3.1.3）
       hilog.info(DOMAIN, TAG, `pendingAlertId ${id} has no audioUrl, silently skipped`);
+      return;
+    }
+    // 播报开关关闭时：自动播报静默跳过（白皮书 R2 §2）
+    if (!this.broadcastEnabled) {
+      hilog.info(DOMAIN, TAG, `broadcast disabled, auto-play skipped for ${id}`);
       return;
     }
     this.togglePlay(hit);
@@ -131,49 +172,40 @@ struct Index {
     if (!item.audioUrl) {
       return;
     }
-    // 防连击：正在加载时忽略点击（白皮书 §3.1.1）
     if (this.loadingId === item.alertId) {
       return;
     }
-    // 正在播放同一卡片：停止
     if (this.playingId === item.alertId) {
       this.playingId = '';
       AudioPlayer.stop();
       return;
     }
-    // 正在播放其他卡片：先停旧再起新
     if (this.playingId) {
       AudioPlayer.stop();
       this.playingId = '';
     }
 
-    // 清除该卡之前的失败提示（白皮书 §3.1.2：下一次点击清除）
     if (this.failedId === item.alertId) {
       this.failedId = '';
     }
 
-    // 进入加载状态（白皮书 §3.1.1）
     this.loadingId = item.alertId;
 
     try {
       await AudioPlayer.play(
         item.audioUrl,
         () => {
-          // 播放完成回调
           this.playingId = '';
         },
         () => {
-          // 播放失败回调（AVPlayer error 事件）
           this.loadingId = '';
           this.playingId = '';
           this.failedId = item.alertId;
         }
       );
-      // prepare + play 成功：loadingId 转 playingId（白皮书 §3.1.1）
       this.loadingId = '';
       this.playingId = item.alertId;
     } catch (e) {
-      // prepare/play reject（白皮书 §3.1.2）
       hilog.warn(DOMAIN, TAG, `togglePlay failed: ${(e as Error).message}`);
       this.loadingId = '';
       this.playingId = '';
@@ -203,43 +235,58 @@ struct Index {
 
   build() {
     Column() {
-      // 顶栏：大字标题 + 刷新时刻 + 连接中断提示
+      // 顶栏：标题 + 播报关提示 + 刷新时刻 + 设置入口
       Row() {
         Text('行情播报')
-          .fontSize(34)
+          .fontSize(this.titleSize)
           .fontWeight(FontWeight.Bold)
           .fontColor($r('app.color.text_primary'))
+        if (this.broadcastOffVisible) {
+          Text('播报关')
+            .fontSize(this.statusSize)
+            .fontColor($r('app.color.rise_red'))
+            .margin({ left: 8 })
+        }
         Blank()
         Column() {
           Text(this.lastRefresh)
-            .fontSize(20)
+            .fontSize(this.statusSize)
             .fontColor($r('app.color.text_secondary'))
           if (this.connectionBroken) {
             Text('连接中断，显示旧数据')
-              .fontSize(20)
+              .fontSize(this.statusSize)
               .fontColor($r('app.color.text_secondary'))
           }
         }
+        // 设置入口按钮（热区 ≥48vp）
+        Text('设置')
+          .fontSize(this.statusSize)
+          .fontWeight(FontWeight.Bold)
+          .fontColor($r('app.color.accent_gold'))
+          .padding({ left: 12, right: 12, top: 10, bottom: 10 })
+          .minWidth(48)
+          .minHeight(48)
+          .margin({ left: 12 })
+          .onClick(() => router.pushUrl({ url: 'pages/Settings' }))
       }
       .width('100%')
       .padding({ left: 20, right: 20, top: 16, bottom: 12 })
 
       if (this.items.length > 0) {
-        // 异动卡片流：一张卡=一条白话事实，点卡即听
         List({ space: 16 }) {
           ForEach(this.items, (item: AlertItem) => {
             ListItem() {
               Column({ space: 10 }) {
                 Row() {
                   Text(this.dirLabel(item.direction))
-                    .fontSize(30)
+                    .fontSize(this.cardTitleSize)
                     .fontWeight(FontWeight.Bold)
                     .fontColor(Color.White)
                     .backgroundColor(this.dirColor(item.direction))
                     .borderRadius(10)
                     .padding({ left: 14, right: 14, top: 4, bottom: 4 })
                   Text(item.name)
-                    .fontSize(30)
+                    .fontSize(this.cardTitleSize)
                     .fontWeight(FontWeight.Bold)
                     .fontColor($r('app.color.text_primary'))
                     .margin({ left: 12 })
@@ -248,7 +295,7 @@ struct Index {
                     .textOverflow({ overflow: TextOverflow.Ellipsis })
                   if (item.kind === 'signal') {
                     Text('自家信号')
-                      .fontSize(18)
+                      .fontSize(this.badgeSize)
                       .fontColor($r('app.color.accent_gold'))
                       .border({ width: 1, color: $r('app.color.accent_gold') })
                       .borderRadius(6)
@@ -258,7 +305,7 @@ struct Index {
                   if (item.audioUrl) {
                     Text(this.loadingId === item.alertId ? '…' :
                       this.playingId === item.alertId ? '■ 停' : '▶ 听')
-                      .fontSize(28)
+                      .fontSize(this.playBtnSize)
                       .fontWeight(FontWeight.Bold)
                       .fontColor($r('app.color.accent_gold'))
                   }
@@ -266,21 +313,20 @@ struct Index {
                 .width('100%')
 
                 Text(item.headline)
-                  .fontSize(28)
+                  .fontSize(this.headlineSize)
                   .fontColor($r('app.color.text_primary'))
                   .width('100%')
 
                 if (item.detail.length > 0) {
                   Text(item.detail)
-                    .fontSize(22)
+                    .fontSize(this.detailSize)
                     .fontColor($r('app.color.text_secondary'))
                     .width('100%')
                 }
 
-                // 播放失败提示（白皮书 §3.1.2）
                 if (this.failedId === item.alertId) {
                   Text('语音加载失败，点重试')
-                    .fontSize(22)
+                    .fontSize(this.detailSize)
                     .fontColor($r('app.color.rise_red'))
                     .width('100%')
                 }
@@ -297,14 +343,12 @@ struct Index {
         .layoutWeight(1)
         .padding({ left: 16, right: 16 })
       } else {
-        // 空态：服务连通但无异动（白皮书 §3.2.3）
-        // 与"服务未连通显示示例卡"是两个独立分支，互不覆盖
         Column() {
           Text('今日暂无异动')
-            .fontSize(30)
+            .fontSize(this.headlineSize)
             .fontColor($r('app.color.text_secondary'))
           Text('监测进行中，有新情况会自动推送')
-            .fontSize(20)
+            .fontSize(this.statusSize)
             .fontColor($r('app.color.text_secondary'))
             .margin({ top: 12 })
         }
