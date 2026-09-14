@@ -13,6 +13,12 @@ export default class EntryAbility extends UIAbility {
     PushService.init(this.context).catch((e: Error) => {
       hilog.warn(DOMAIN, TAG, `push init degraded: ${e.message}`);
     });
+    // 冷启动通知缺口修复（白皮书 §3.3.2）：冷启动时 want 参数经 onCreate 传入，
+    // 原代码只在 onNewWant 处理 alertId，冷启动点通知会丢失。此处补检。
+    const alertId = want?.parameters?.alertId as string | undefined;
+    if (alertId) {
+      AppStorage.setOrCreate('pendingAlertId', alertId);
+    }
   }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {

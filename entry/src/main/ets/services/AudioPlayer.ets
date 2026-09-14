@@ -8,10 +8,17 @@ const DOMAIN = 0x0001;
 export class AudioPlayer {
   private static player: media.AVPlayer | null = null;
 
-  static async play(url: string, onDone?: () => void): Promise<void> {
+  /**
+   * 播放音频流。
+   * - onDone：播放完成（completed/idle 状态）时回调
+   * - onError：播放出错（AVPlayer error 事件或 prepare/play reject）时回调
+   * - Promise：prepare+play 成功时 resolve，失败时 reject
+   */
+  static async play(url: string, onDone?: () => void, onError?: () => void): Promise<void> {
     await AudioPlayer.stop();
     const av = await media.createAVPlayer();
     AudioPlayer.player = av;
+
     av.on('stateChange', (state: media.AVPlayerState) => {
       if (state === 'completed' || state === 'idle') {
         onDone?.();
@@ -19,11 +26,23 @@ export class AudioPlayer {
     });
     av.on('error', (err) => {
       hilog.warn(DOMAIN, TAG, `play error: ${err.message}`);
-      onDone?.();
+      onError?.();
     });
+
     av.url = url;
-    await av.prepare();
-    await av.play();
+    try {
+      await av.prepare();
+      await av.play();
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, `prepare/play failed: ${(e as Error).message}`);
+      // 清理半初始化的 player
+      try {
+        await av.release();
+      } catch { /* 忽略重复释放 */ }
+      AudioPlayer.player = null;
+      onError?.();
+      throw e;
+    }
   }
 
   static async stop(): Promise<void> {

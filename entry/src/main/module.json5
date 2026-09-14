@@ -32,6 +32,7 @@
         "name": "ohos.permission.INTERNET"
       },
       {
+        // 为 R3 推送播报预留：当前未实际调用对应 API，R3 实装 Push Kit 后启用
         "name": "ohos.permission.KEEP_BACKGROUND_RUNNING",
         "reason": "$string:perm_bg_reason",
         "usedScene": {
