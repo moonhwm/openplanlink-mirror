@@ -54,17 +54,17 @@
   - `entry/src/main/ets/services/AudioPlayer.ets`：catch 无参写法修复（2处 `catch { }` → `catch (e)`/`catch (e2)`）。
   - `entry/src/main/ets/services/PushService.ets`：catch 无参写法修复（1处 `catch { }` → `catch (e)`）。
 - 为什么这么改：对应白皮书 §153 R2 既定范围（自选股管理/播报开关/特大字体档）+ R1 遗留 catch 写法修复。
-- ArkTS catch 无参写法结论（一级疑问）：查华为官方文档 `arkts-no-types-in-catch` 规则（URL: developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-more-cases#arkts-no-types-in-catch），ArkTS 要求 catch 子句带参数（`catch (error)`），不允许标注类型（`catch (e: BusinessError)`）。文档未明确禁止 `catch { }` 无参写法，声明"未约束的TS特性完全支持"。但为安全起见（避免编译器严格模式拒绝），全部改为 `catch (e)`。文档出处已记录。
+- ArkTS catch 无参写法结论（一级疑问）：查华为官方文档 `arkts-no-types-in-catch` 规则（URL: developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-more-cases#arkts-no-types-in-catch），ArkTS 要求 catch 子句带参数（`catch (error)`），不允许标注类型（`catch (e: BusinessError)`）。该条目本身未提及 `catch { }` 无参写法是否允许；文档总则声明「未约束的 TS 特性完全支持」（此为总则转述，非 catch 条目原文），据此推断无参 catch 不在被禁之列。但为安全起见（避免编译器严格模式拒绝），全部改为 `catch (e)`。文档更新日期 2026-08-29，无 API level 版本标识——留待 SDK 编译实证。
 - 如何验证：
-  - V9（自选股持久化）：代码走查——SettingsService 使用 `preferences.getPreferences(context, 'stockpulse_settings')`，put 后 flush 持久化到磁盘。键名 `watchlist`，值 JSON string[]。初始化时机 EntryAbility.onCreate→SettingsService.init。读取时机 Index.aboutToAppear/onPageShow→loadSettings→getWatchlist。杀进程重启后 Preferences 磁盘数据保留。轮询过滤 Index.refresh 中 `if (this.watchlist.length > 0) { filtered = result.items.filter((it) => this.watchlist.includes(it.symbol)); }`。通过。
-  - V10（播报开关）：代码走查——键名 `broadcast`，boolean 默认 true。Settings Toggle 切换→setBroadcastEnabled+flush。Index.playById 中 `if (!this.broadcastEnabled) { return; }` 静默跳过自动播报。手动 togglePlay 不检查 broadcastEnabled（卡片仍可手动点按收听）。顶栏 `if (this.broadcastOffVisible) { Text('播报关').fontColor(rise_red) }` 显示红字提示。broadcastOffVisible 在 loadSettings 中 `= !this.broadcastEnabled`。通过。
-  - V11（特大字体档）：代码走查——fontLevel 驱动 7 个字号 getter。标准档 34/30/28/22/20/28/18，特大档 40/34/34/26/24/32/20。Settings 按钮切换→setFontSizeLevel+flush。返回 Index 后 onPageShow→loadSettings 重新读取 fontLevel，@State 变化驱动 UI 重渲染。卡片名称 Text 有 maxLines(1)+Ellipsis 防截断。Settings 页面自身也用 fontLevel 驱动字号。通过。
+  - V9（自选股持久化）：`grep -n 'watchlist' entry/src/main/ets/services/SettingsService.ets` → 键名 `watchlist`，put+flush 持久化；`grep -n 'SettingsService.init' entry/src/main/ets/entryability/EntryAbility.ets` → onCreate 中初始化；`grep -n 'getWatchlist\|loadSettings' entry/src/main/ets/pages/Index.ets` → aboutToAppear/onPageShow 读取；`grep -n 'watchlist.length\|filter.*symbol' entry/src/main/ets/pages/Index.ets` → refresh 中 `watchlist.length > 0` 时 filter by symbol。通过。
+  - V10（播报开关）：`grep -n 'broadcast' entry/src/main/ets/services/SettingsService.ets` → 键名 `broadcast`，默认 true；`grep -n 'broadcastEnabled' entry/src/main/ets/pages/Index.ets` → playById 中 `!broadcastEnabled` 静默跳过自动播报，手动 togglePlay 不受限；`grep -n 'broadcastOffVisible\|播报关' entry/src/main/ets/pages/Index.ets` → 顶栏红字提示，loadSettings 中 `broadcastOffVisible = !broadcastEnabled`。通过。
+  - V11（特大字体档）：`grep -n 'font_level\|fontLevel' entry/src/main/ets/services/SettingsService.ets` → 键名 `font_level`；`grep -n 'titleSize\|cardTitleSize\|headlineSize\|detailSize\|statusSize\|playBtnSize\|badgeSize' entry/src/main/ets/pages/Index.ets` → 7 个字号 getter（标准档 34/30/28/22/20/28/18，特大档 40/34/34/26/24/32/20）；`grep -n 'maxLines\|Ellipsis' entry/src/main/ets/pages/Index.ets` → 卡片名称防截断。通过。
   - V12（grep 确认）：`grep PushKit` 仅 PushService.ets 注释第 13 行（非真实调用）；`grep Chart|K线|走势图|graph` 无结果；`git diff HEAD -- AGENTS.md entry/src/main/ets/model/AlertItem.ets` 为空；`grep 'catch \{'` 无结果（全部已修复为带参数）。通过。
   - V13（git+CHANGELOG）：commit message 以 "R2:" 开头；CHANGELOG 本条目含「如何验证」段；时间戳 2026-09-14 18:59（真实时间）。通过。
 - 遗留：
   1. V9-V12 均为代码走查验证，未在真机/预览器上实跑（当前环境无连接设备与模拟器）；真机验证留待机主安排。
   2. 自选股过滤逻辑：当 watchlist 不为空时只显示列表中的股票异动；若用户添加了自选股但服务端返回的异动中没有对应股票，列表会为空——此时走空态分支显示「今日暂无异动」，这是预期行为。
-  3. Settings 页面 TextInput 的 onChange 回调中 `this.newStockInput = value` 是 ArkTS 的标准写法，但 ArkTS 严格模式下 TextInput 的 onChange 参数类型需确认是否为 `(value: string) => void`。
+  3. Settings 页面 TextInput 的 onChange 回调参数类型（R2a 已查证）：官方签名 `onChange(callback: EditableTextOnChangeCallback)`，类型定义 `type EditableTextOnChangeCallback = (value: string, previewText?: PreviewText, options?: TextChangeOptions) => void`（API version 12 起）。Settings.ets 中 `.onChange((value: string) => { ... })` 写法正确，与官方示例一致，无需改代码。出处：developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-text-common#editabletextonchangecallback12（更新日期 2026-09-09）。
   4. 字体档切换在 Settings 页面内立即生效（@State 驱动），但返回 Index 后需要 onPageShow 触发 loadSettings 才能刷新——如果用户在 Settings 页面切换字体后不返回而是直接杀进程，下次启动 EntryAbility.onCreate→SettingsService.init→Index.aboutToAppear→loadSettings 会读取持久化的 fontLevel，也能生效。
 
 ```json
@@ -72,13 +72,30 @@
   "seat": { "name": "砚坚", "persona": "端侧匠人——只管把卡片流与播报做到极致可靠" },
   "model": { "family": "GLM", "version": "GLM-5.2-ArkTS-SPARK (conf=assumed)", "host": "华为云码道 CodeArts" },
   "run": { "tokens_in": "约 18k", "tokens_out": "约 12k", "truncations": 0, "retries": 0 },
+  "git_show_stat_53d75df": { "files_changed": 8, "insertions": 465, "deletions": 43 },
   "attestation": {
-    "V9": "通过（代码走查：Preferences 键 watchlist，init 在 onCreate，读取在 aboutToAppear/onPageShow）",
-    "V10": "通过（代码走查：键 broadcast，playById 检查 !broadcastEnabled 静默跳过，顶栏红字「播报关」）",
-    "V11": "通过（代码走查：fontLevel 驱动 7 个字号 getter，标准/特大两档，切换后 onPageShow 刷新）",
+    "V9": "通过（grep 命令序列：键 watchlist，init 在 onCreate，读取在 aboutToAppear/onPageShow，refresh filter by symbol）",
+    "V10": "通过（grep 命令序列：键 broadcast，playById 检查 !broadcastEnabled 静默跳过，顶栏红字「播报关」）",
+    "V11": "通过（grep 命令序列：fontLevel 驱动 7 个字号 getter，标准/特大两档，maxLines+Ellipsis 防截断）",
     "V12": "通过（grep：PushKit 仅注释、无图表、catch 无参已清零、AGENTS.md/AlertItem.ets diff 为空）",
     "V13": "通过（commit R2: 开头，CHANGELOG 含如何验证段，时间戳 2026-09-14 18:59）",
     "caveats": "V9-V12 均为代码走查，未真机实跑"
   }
 }
 ```
+
+## 2026-09-15 01:12 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· R2a 补件
+
+- 改了什么：仅修订 CHANGELOG.md 本文件，无代码改动。四项补件对应白秉烛席终裁责成：
+  1. V9-V11「如何验证」从散文叙述改为可复制 `grep` 命令序列（对标 V12 写法）。
+  2. 自报块 JSON 补 `git_show_stat_53d75df` 字段：8 files changed, 465 insertions(+), 43 deletions(-)（`git show --stat 53d75df` 实测）。
+  3. catch 引句更正：原文「声明"未约束的TS特性完全支持"」改为「文档总则声明『未约束的 TS 特性完全支持』（此为总则转述，非 catch 条目原文）」，并补注文档无 API level 版本标识、留待 SDK 编译实证。
+  4. 遗留第3条从存疑改为结论：TextInput onChange 官方签名 `EditableTextOnChangeCallback = (value: string, previewText?: PreviewText, options?: TextChangeOptions) => void`（API 12 起），Settings.ets 写法正确无需改代码。出处：developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-text-common#editabletextonchangecallback12。
+- 为什么这么改：白秉烛席对 R2 自报块提出 4 项存疑（轨2），砚坚席全部认可方案后执行补件。
+- 如何验证：
+  - `git diff HEAD -- CHANGELOG.md` → 仅本文件改动，无代码文件变更。
+  - `grep -n '代码走查——' CHANGELOG.md` → V9-V11 段无残留散文叙述（V1-V8 属 R1 条目不在本次范围）。
+  - `grep 'git_show_stat' CHANGELOG.md` → 自报块 JSON 含实测数据。
+  - `grep '总则转述' CHANGELOG.md` → catch 引句已标注转述来源。
+  - `grep 'EditableTextOnChangeCallback' CHANGELOG.md` → 遗留第3条已更新为结论+出处。
+- 遗留：无新增遗留。R1 遗留第4条（catch 无参写法）已在 R2 解决；R2 遗留第3条（TextInput onChange）已在本补件解决。
