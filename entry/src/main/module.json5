@@ -23,6 +23,9 @@
           {
             "entities": ["entity.system.home"],
             "actions": ["action.system.home"]
+          },
+          {
+            "actions": ["action.ohos.push.listener"]
           }
         ]
       }

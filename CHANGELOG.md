@@ -116,3 +116,24 @@
   1. AlertPoller 退避间隔在 App 从后台恢复时不重置（首次成功 refresh 后自动复位，影响有限，暂不修复）。
   2. PushService.tokenReported 赋值后从未被读取（R3 实装时处理）。
   3. 当前环境无 devecocli/node/DevEco Studio，编译验证和模拟器真机验证无法执行——留待机主安排环境。
+## 2026-09-16 06:26 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· R3 Push Kit 实装
+
+- 改了什么：
+  - `entry/src/main/ets/services/PushService.ets`：从占位封装升级为 Push Kit 集成。新增 `import { pushService } from '@kit.PushKit'`、`import { BusinessError } from '@kit.BasicServicesKit'`、`import { http } from '@kit.NetworkKit'`。实装 `fetchToken()` 调用 `pushService.getToken()` 获取 Push Token，带重试逻辑（可重试错误码 1000900001/0008/0009/0011，最多 3 次，间隔 1s）。实装 `reportToken()` POST Token 到 X 服务器 `/api/push/register`（占位 URL）。AGC 配置探针失败时仍然降级为仅日志（保持硬约束 §二.4 要求）。
+  - `entry/src/main/ets/entryability/EntryAbility.ets`：新增 `import { pushService, pushCommon } from '@kit.PushKit'`、`import { BusinessError } from '@kit.BasicServicesKit'`。`onCreate` 中新增 `registerPushMessageReceiver()` 调用——注册 DEFAULT 场景化消息接收器，应用在前台时推送消息直接传递给应用处理（提取 alertId 写入 AppStorage）。新增 `onForeground()` 生命周期回调——预留 `requestSubscribe()` 调用（SUBSCRIPTION 自分类，P5 审批通过后启用，当前注释）。`requestSubscribe()` 方法已编写但注释保留，解封条件为 P5 通过。
+  - `entry/src/main/module.json5`：EntryAbility skills 新增 `{ "actions": ["action.ohos.push.listener"] }`——声明 Ability 可接收 Push Kit 消息。
+- 为什么这么改：对应 R3 白皮书 W1/W3/W4/W5。Push Kit 实装是完整链路（云端监测 → Push 推送 → 锁屏通知 → 点按拉起 → 自动播报）的关键环节。AGC 未配置时自动降级为轮询兜底，不违反 AGENTS.md §二.4 硬约束。
+- 如何验证：
+  - V7：`grep 'action.ohos.push.listener' entry/src/main/module.json5` → 第 28 行命中。通过。
+  - V8：`grep 'catch\s*([^)]*:\s*' *.ets` → 仅 Promise `.catch((e: Error) => ...)` 2 处（非 try-catch 子句，ArkTS 合规）。通过。
+  - V9：`oh-package.json5 dependencies` → `{}`（零三方依赖）。通过。
+  - V10：`git diff HEAD -- AGENTS.md entry/src/main/ets/model/AlertItem.ets` → 空。通过。
+  - `grep 'TODO(实装)' *.ets` → 无结果（全部 TODO 已解封）。通过。
+  - `grep 'pushService.getToken' *.ets` → PushService.ets 第 48 行。通过。
+  - `grep 'pushService.receiveMessage' *.ets` → EntryAbility.ets 第 65 行。通过。
+- 遗留：
+  1. V1-V6（getToken 成功/Token 上报/AGC 降级/receiveMessage 接收/通知 click 拉起/订阅授权弹窗）需真机+AGC 配置验证，当前环境无法执行。
+  2. `requestSubscribe()` 方法已编写但注释保留——解封条件为 P5（AGC 订阅通知自分类权益审批通过，约 15 工作日）。
+  3. `TOKEN_REPORT_URL` 为占位地址 `http://127.0.0.1:8000/api/push/register`，待 X 服务器落地后替换。
+  4. PushPayload.remoteData 中 alertId 的键名需与服务端 Push Kit REST API 下发时的参数格式一致——待联调验证。
+  5. 编译验证和模拟器真机验证无法执行（环境缺 devecocli/node/DevEco Studio）。
