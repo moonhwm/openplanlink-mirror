@@ -159,3 +159,16 @@
   "files_changed": 4, "insertions": 5, "deletions": 5,
   "attestation": "git 实测（diff --stat），无代码逻辑改动" }
 ```
+## 2026-09-17 01:15 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· Navigation迁移 + WARN全消除
+
+- 改了什么：
+  - `entry/src/main/ets/pages/Index.ets`：根容器从 Column 改为 Navigation + NavPathStack；设置按钮 `router.pushUrl` → `navStack.pushPath`；添加 `navDestination` 回调路由到 Settings；`.hideTitleBar(true)` + `.mode(NavigationMode.Stack)`。
+  - `entry/src/main/ets/pages/Settings.ets`：根容器从 Column 改为 NavDestination；返回按钮 `router.back` → `navStack.pop`；移除 `@Entry` 改为 `export @Component`（NavDestination 不需要 Entry）；`.onReady` 获取 pathStack；`.hideTitleBar(true)`。
+  - `entry/src/main/resources/base/profile/main_pages.json`：移除 `pages/Settings`（Settings 不再作为独立入口页面，通过 Navigation 导航）。
+  - `entry/src/main/ets/services/SettingsService.ets`：6 个方法（getWatchlist/setWatchlist/getBroadcastEnabled/setBroadcastEnabled/getFontSizeLevel/setFontSizeLevel）全部添加 try-catch，消除 9 个 "Function may throw" WARN。
+  - `entry/src/main/ets/services/AudioPlayer.ets`：`media.createAVPlayer()` 添加 try-catch，消除 1 个 "Function may throw" WARN。
+- 为什么：
+  - `router.pushUrl` / `router.back` 在 API 12+ 标记为 deprecated，Navigation + NavPathStack 是 HarmonyOS NEXT 推荐导航方式。
+  - "Function may throw" WARN 表示函数可能抛出异常但调用方未处理，添加 try-catch 提高健壮性。
+- 编译结果：BUILD SUCCESSFUL，0 ERROR，0 ArkTS WARN（仅剩签名配置提示）。
+- 遗留：模拟器验证待系统镜像下载；P5 自分类权益申请审批中。
