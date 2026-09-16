@@ -3,7 +3,7 @@ import { hilog } from '@kit.PerformanceAnalysisKit';
 import { AlertItem } from '../model/AlertItem';
 import { AlertPoller } from '../services/AlertPoller';
 import { AudioPlayer } from '../services/AudioPlayer';
-import { SettingsService, FontSizeLevel } from '../services/SettingsService';
+import { SettingsService, FontSizeLevel, ThemeMode, ThemeColors } from '../services/SettingsService';
 import { Settings } from './Settings';
 
 const TAG = 'StockPulse.Index';
@@ -36,6 +36,9 @@ struct Index {
   @State elderlyMode: boolean = true;
   @State broadcastEnabled: boolean = true;
   @State broadcastOffVisible: boolean = false;
+  @State themeMode: ThemeMode = 'night';
+  @State dndEnabled: boolean = false;
+  @State dndActive: boolean = false;
   @State watchlist: string[] = [];
   private timer: number = -1;
   private consecutiveFailures: number = 0;
@@ -84,6 +87,11 @@ struct Index {
     return this.elderlyMode ? 16 : 12;
   }
 
+  // 主题颜色（夜间/白天动态切换）
+  private get theme(): ThemeColors {
+    return SettingsService.getThemeColors(this.themeMode);
+  }
+
   aboutToAppear(): void {
     this.loadSettings();
     this.pollLoop();
@@ -109,6 +117,11 @@ struct Index {
     this.fontLevel = await SettingsService.getFontSizeLevel();
     this.broadcastEnabled = await SettingsService.getBroadcastEnabled();
     this.broadcastOffVisible = !this.broadcastEnabled;
+    this.themeMode = await SettingsService.getThemeMode();
+    this.dndEnabled = await SettingsService.getDndEnabled();
+    const dndStart = await SettingsService.getDndStartHour();
+    const dndEnd = await SettingsService.getDndEndHour();
+    this.dndActive = SettingsService.isDndActive(this.dndEnabled, dndStart, dndEnd);
     this.watchlist = await SettingsService.getWatchlist();
   }
 
@@ -191,6 +204,11 @@ struct Index {
       hilog.info(DOMAIN, TAG, `broadcast disabled, auto-play skipped for ${id}`);
       return;
     }
+    // 免打扰时段：自动播报静默跳过（用户手动点击仍可播放）
+    if (this.dndActive) {
+      hilog.info(DOMAIN, TAG, `dnd active, auto-play skipped for ${id}`);
+      return;
+    }
     this.togglePlay(hit);
   }
 
@@ -243,14 +261,14 @@ struct Index {
     }
   }
 
-  private dirColor(d: string): ResourceColor {
+  private dirColor(d: string): string {
     if (d === 'up') {
-      return $r('app.color.rise_red');
+      return this.theme.riseRed;
     }
     if (d === 'down') {
-      return $r('app.color.fall_green');
+      return this.theme.fallGreen;
     }
-    return $r('app.color.text_secondary');
+    return this.theme.textSecondary;
   }
 
   private dirLabel(d: string): string {
@@ -271,29 +289,35 @@ struct Index {
           Text('铃语')
             .fontSize(this.titleSize)
             .fontWeight(FontWeight.Bold)
-            .fontColor($r('app.color.text_primary'))
+            .fontColor(this.theme.textPrimary)
           if (this.broadcastOffVisible) {
             Text('播报关')
               .fontSize(this.statusSize)
-              .fontColor($r('app.color.rise_red'))
+              .fontColor(this.theme.riseRed)
+              .margin({ left: 8 })
+          }
+          if (this.dndActive) {
+            Text('免打扰')
+              .fontSize(this.statusSize)
+              .fontColor(this.theme.accentGold)
               .margin({ left: 8 })
           }
           Blank()
           Column() {
             Text(this.lastRefresh)
               .fontSize(this.statusSize)
-              .fontColor($r('app.color.text_secondary'))
+              .fontColor(this.theme.textSecondary)
             if (this.connectionBroken) {
               Text('连接中断，显示旧数据')
                 .fontSize(this.statusSize)
-                .fontColor($r('app.color.text_secondary'))
+                .fontColor(this.theme.textSecondary)
             }
           }
           // 设置入口按钮（热区 ≥48vp）
           Text('设置')
             .fontSize(this.statusSize)
             .fontWeight(FontWeight.Bold)
-            .fontColor($r('app.color.accent_gold'))
+            .fontColor(this.theme.accentGold)
             .padding({ left: 12, right: 12, top: 10, bottom: 10 })
             .constraintSize({ minWidth: 48, minHeight: 48 })
             .margin({ left: 12 })
@@ -318,7 +342,7 @@ struct Index {
                     Text(item.name)
                       .fontSize(this.cardTitleSize)
                       .fontWeight(FontWeight.Bold)
-                      .fontColor($r('app.color.text_primary'))
+                      .fontColor(this.theme.textPrimary)
                       .margin({ left: 12 })
                       .layoutWeight(1)
                       .maxLines(1)
@@ -326,8 +350,8 @@ struct Index {
                     if (item.kind === 'signal') {
                       Text('自家信号')
                         .fontSize(this.badgeSize)
-                        .fontColor($r('app.color.accent_gold'))
-                        .border({ width: 1, color: $r('app.color.accent_gold') })
+                        .fontColor(this.theme.accentGold)
+                        .border({ width: 1, color: this.theme.accentGold })
                         .borderRadius(6)
                         .padding({ left: 8, right: 8, top: 2, bottom: 2 })
                         .margin({ left: 10 })
@@ -337,33 +361,33 @@ struct Index {
                         this.playingId === item.alertId ? '■ 停' : '▶ 听')
                         .fontSize(this.playBtnSize)
                         .fontWeight(FontWeight.Bold)
-                        .fontColor($r('app.color.accent_gold'))
+                        .fontColor(this.theme.accentGold)
                     }
                   }
                   .width('100%')
 
                   Text(item.headline)
                     .fontSize(this.headlineSize)
-                    .fontColor($r('app.color.text_primary'))
+                    .fontColor(this.theme.textPrimary)
                     .width('100%')
 
                   if (item.detail.length > 0) {
                     Text(item.detail)
                       .fontSize(this.detailSize)
-                      .fontColor($r('app.color.text_secondary'))
+                      .fontColor(this.theme.textSecondary)
                       .width('100%')
                   }
 
                   if (this.failedId === item.alertId) {
                     Text('语音加载失败，点重试')
                       .fontSize(this.detailSize)
-                      .fontColor($r('app.color.rise_red'))
+                      .fontColor(this.theme.riseRed)
                       .width('100%')
                   }
                 }
                 .width('100%')
                 .padding(this.cardPadding)
-                .backgroundColor($r('app.color.card_background'))
+                .backgroundColor(this.theme.cardBackground)
                 .borderRadius(16)
                 .onClick(() => this.togglePlay(item))
               }
@@ -376,10 +400,10 @@ struct Index {
           Column() {
             Text('今日暂无异动')
               .fontSize(this.headlineSize)
-              .fontColor($r('app.color.text_secondary'))
+              .fontColor(this.theme.textSecondary)
             Text('监测进行中，有新情况会自动推送')
               .fontSize(this.statusSize)
-              .fontColor($r('app.color.text_secondary'))
+              .fontColor(this.theme.textSecondary)
               .margin({ top: 12 })
           }
           .width('100%')
@@ -389,7 +413,7 @@ struct Index {
       }
       .width('100%')
       .height('100%')
-      .backgroundColor($r('app.color.page_background'))
+      .backgroundColor(this.theme.pageBackground)
     }
     .navDestination((name: string) => {
       if (name === 'pages/Settings') {
