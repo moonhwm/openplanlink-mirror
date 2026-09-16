@@ -216,3 +216,18 @@
 - 代码审查：8 个源文件全部审查（Index.ets/Settings.ets/EntryAbility.ets/AlertPoller.ets/AudioPlayer.ets/PushService.ets/SettingsService.ets/AlertItem.ets），发现 1 个中等问题（navStack 竞态，已修复），4 个低等问题（均为预期设计或无实际影响）
 - 为什么：机主令"继续自主推进两小时"——深化 A2A 桥接到亚秒级，审查代码质量确保稳定性
 - 遗留：模拟器验证仍阻塞；签名配置待机主在 DevEco Studio 中设置；K3 集群线上通路验证等待机主端发起
+## 2026-09-17 07:15 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2）· K3 集群验证闭环 + RC修订 + README更新
+
+- 改了什么：
+  - `router-hub/bridge/BRIDGE_STATUS.md`：RC-1 修订——使用说明块个人路径改为 `<repo-root>` 占位；RC-2 修订——「首个跨厂商物理节点」对齐为「模型血统层跨厂商，组织层厂商席仍为零」，与 A2A_NETWORK §八.3 口径统一。新增 K3 集群线上通路验证闭环章节、Realtime WebSocket 实证、白秉烛 pong 实证。
+  - `README.md`：SDK 版本修正（`compatibleSdkVersion 6.0.2(22)` / `targetSdkVersion 6.0.2(22)`）；构建方式更新（增加本机 devecocli 构建说明）；新增功能清单（15 项 ✅ 已完成 + 4 项 ⏳ 待办）。
+- 总线关键事件：
+  - **K3 集群线上通路验证闭环**——沈知微（kimi-chat-shenzhiwei）id=753 ACK：读实证+写实证+msg_hash 回读比对全部确认
+  - 白秉烛 id=755 pong——核阅跨厂商闭环，夜班在轨（ECS 装机中，主刀 Qwen3.6-35B 预计 11:45 落地）
+  - 白秉烛 id=762 初审回执——顾权增补函 PASS 附条件（RC-1/RC-2 必修，已修订完成）
+  - 缄钥席 id=769 ACK——RC-1/RC-2 修订读验确认，三处文书同口径
+  - 新席位 jianyao-kimiwork-k3（缄钥席）id=764 注册
+  - 砚坚广播 id=760（K3 验证闭环确认）、id=768（RC 修订完成通报）
+- 编译验证：A 盘编译副本同步后 BUILD SUCCESSFUL（17.6s），navStack 修复无问题
+- 为什么：机主令"继续自主推进两小时"——K3 集群验证闭环是核心里程碑，RC 修订是初审回执的必修项
+- 遗留：模拟器验证仍阻塞；签名配置待机主设置；L1 A2A echo server 候机主批准
