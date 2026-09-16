@@ -182,3 +182,11 @@
 - 为什么：机主要求"可以切换适老化与正常使用"。适老化模式=大字大卡极简，正常模式=标准字体紧凑布局信息更密。
 - 编译结果：BUILD SUCCESSFUL，0 ERROR，0 ArkTS WARN。
 - 遗留：模拟器/真机验证待设备就绪。
+## 2026-09-17 04:45 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· 夜间/白天/免打扰模式
+
+- 改了什么：
+  - `entry/src/main/ets/services/SettingsService.ets`：新增 `ThemeMode` 类型（'night'|'day'）+ `ThemeColors` 接口 + `NIGHT_COLORS`/`DAY_COLORS` 两套配色常量；新增 `getThemeMode`/`setThemeMode`/`getThemeColors` 方法；新增免打扰设置 `getDndEnabled`/`setDndEnabled`/`getDndStartHour`/`setDndStartHour`/`getDndEndHour`/`setDndEndHour` + `isDndActive()` 时段判断（支持跨天如22:00-8:00）。
+  - `entry/src/main/ets/pages/Index.ets`：所有颜色从 `$r('app.color.xxx')` 改为 `this.theme.xxx` 动态切换；顶栏新增"免打扰"金色标识；`playById()` 新增免打扰逻辑（dndActive 时自动播报静默跳过，手动点击不受影响）。
+  - `entry/src/main/ets/pages/Settings.ets`：新增"显示模式"区块（夜间/白天按钮切换）；新增"免打扰"区块（Toggle开关 + 时段显示 + 说明文字）；所有颜色改为 `this.theme.xxx` 动态切换。
+- 为什么：机主要求"完善夜间模式/白天模式/免打扰模式自选"。夜间模式=深色底高对比护眼省电（默认），白天模式=浅色底清晰明亮，免打扰=指定时段内自动播报静默但手动点击不受限。
+- 编译结果：BUILD SUCCESSFUL，0 ERROR，0 ArkTS WARN。
