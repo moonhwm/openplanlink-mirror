@@ -41,7 +41,7 @@ export class AudioPlayer {
       } catch (e2) { /* 忽略重复释放 */ }
       AudioPlayer.player = null;
       onError?.();
-      throw e;
+      throw new Error((e as Error).message);
     }
   }
 

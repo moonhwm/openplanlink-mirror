@@ -64,11 +64,11 @@ export default class EntryAbility extends UIAbility {
     try {
       pushService.receiveMessage('DEFAULT', this, (data: pushCommon.PushPayload) => {
         try {
-          hilog.info(DOMAIN, TAG, `received push message: ${JSON.stringify(data)}`);
-          // 从推送消息中提取 alertId，写入 AppStorage 供 Index 页消费
-          const remoteData = data.remoteData;
-          if (remoteData) {
-            const alertId = remoteData['alertId'] as string | undefined;
+          hilog.info(DOMAIN, TAG, `received push message: type=${data.type}, data=${data.data}`);
+          // PushPayload.data 是 JSON 字符串，解析后提取 alertId
+          if (data.data) {
+            const parsed: Record<string, string> = JSON.parse(data.data);
+            const alertId = parsed['alertId'];
             if (alertId) {
               AppStorage.setOrCreate('pendingAlertId', alertId);
             }

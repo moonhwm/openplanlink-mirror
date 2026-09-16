@@ -270,8 +270,7 @@ struct Index {
           .fontWeight(FontWeight.Bold)
           .fontColor($r('app.color.accent_gold'))
           .padding({ left: 12, right: 12, top: 10, bottom: 10 })
-          .minWidth(48)
-          .minHeight(48)
+          .constraintSize({ minWidth: 48, minHeight: 48 })
           .margin({ left: 12 })
           .onClick(() => router.pushUrl({ url: 'pages/Settings' }))
       }
