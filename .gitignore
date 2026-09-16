@@ -14,3 +14,5 @@ oh_modules/
 local.properties
 .idea/
 .DS_Store
+# AGC 配置文件（含敏感凭证，每开发者自行下载）
+AppScope/resources/rawfile/agconnect-services.json
