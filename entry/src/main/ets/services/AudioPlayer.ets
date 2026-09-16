@@ -16,7 +16,14 @@ export class AudioPlayer {
    */
   static async play(url: string, onDone?: () => void, onError?: () => void): Promise<void> {
     await AudioPlayer.stop();
-    const av = await media.createAVPlayer();
+    let av: media.AVPlayer;
+    try {
+      av = await media.createAVPlayer();
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, `createAVPlayer failed: ${(e as Error).message}`);
+      onError?.();
+      throw new Error((e as Error).message);
+    }
     AudioPlayer.player = av;
 
     av.on('stateChange', (state: media.AVPlayerState) => {

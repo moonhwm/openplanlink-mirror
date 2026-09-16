@@ -1,9 +1,10 @@
-import { router } from '@kit.ArkUI';
+
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { AlertItem } from '../model/AlertItem';
 import { AlertPoller } from '../services/AlertPoller';
 import { AudioPlayer } from '../services/AudioPlayer';
 import { SettingsService, FontSizeLevel } from '../services/SettingsService';
+import { Settings } from './Settings';
 
 const TAG = 'StockPulse.Index';
 const DOMAIN = 0x0001;
@@ -37,6 +38,7 @@ struct Index {
   @State watchlist: string[] = [];
   private timer: number = -1;
   private consecutiveFailures: number = 0;
+  private navStack: NavPathStack = new NavPathStack();
 
   // 字体档驱动字号
   private get titleSize(): number {
@@ -240,130 +242,140 @@ struct Index {
   }
 
   build() {
-    Column() {
-      // 顶栏：标题 + 播报关提示 + 刷新时刻 + 设置入口
-      Row() {
-        Text('铃语')
-          .fontSize(this.titleSize)
-          .fontWeight(FontWeight.Bold)
-          .fontColor($r('app.color.text_primary'))
-        if (this.broadcastOffVisible) {
-          Text('播报关')
-            .fontSize(this.statusSize)
-            .fontColor($r('app.color.rise_red'))
-            .margin({ left: 8 })
-        }
-        Blank()
-        Column() {
-          Text(this.lastRefresh)
-            .fontSize(this.statusSize)
-            .fontColor($r('app.color.text_secondary'))
-          if (this.connectionBroken) {
-            Text('连接中断，显示旧数据')
+    Navigation(this.navStack) {
+      Column() {
+        // 顶栏：标题 + 播报关提示 + 刷新时刻 + 设置入口
+        Row() {
+          Text('铃语')
+            .fontSize(this.titleSize)
+            .fontWeight(FontWeight.Bold)
+            .fontColor($r('app.color.text_primary'))
+          if (this.broadcastOffVisible) {
+            Text('播报关')
+              .fontSize(this.statusSize)
+              .fontColor($r('app.color.rise_red'))
+              .margin({ left: 8 })
+          }
+          Blank()
+          Column() {
+            Text(this.lastRefresh)
               .fontSize(this.statusSize)
               .fontColor($r('app.color.text_secondary'))
+            if (this.connectionBroken) {
+              Text('连接中断，显示旧数据')
+                .fontSize(this.statusSize)
+                .fontColor($r('app.color.text_secondary'))
+            }
           }
+          // 设置入口按钮（热区 ≥48vp）
+          Text('设置')
+            .fontSize(this.statusSize)
+            .fontWeight(FontWeight.Bold)
+            .fontColor($r('app.color.accent_gold'))
+            .padding({ left: 12, right: 12, top: 10, bottom: 10 })
+            .constraintSize({ minWidth: 48, minHeight: 48 })
+            .margin({ left: 12 })
+            .onClick(() => this.navStack.pushPath({ name: 'pages/Settings' }))
         }
-        // 设置入口按钮（热区 ≥48vp）
-        Text('设置')
-          .fontSize(this.statusSize)
-          .fontWeight(FontWeight.Bold)
-          .fontColor($r('app.color.accent_gold'))
-          .padding({ left: 12, right: 12, top: 10, bottom: 10 })
-          .constraintSize({ minWidth: 48, minHeight: 48 })
-          .margin({ left: 12 })
-          .onClick(() => router.pushUrl({ url: 'pages/Settings' }))
-      }
-      .width('100%')
-      .padding({ left: 20, right: 20, top: 16, bottom: 12 })
+        .width('100%')
+        .padding({ left: 20, right: 20, top: 16, bottom: 12 })
 
-      if (this.items.length > 0) {
-        List({ space: 16 }) {
-          ForEach(this.items, (item: AlertItem) => {
-            ListItem() {
-              Column({ space: 10 }) {
-                Row() {
-                  Text(this.dirLabel(item.direction))
-                    .fontSize(this.cardTitleSize)
-                    .fontWeight(FontWeight.Bold)
-                    .fontColor(Color.White)
-                    .backgroundColor(this.dirColor(item.direction))
-                    .borderRadius(10)
-                    .padding({ left: 14, right: 14, top: 4, bottom: 4 })
-                  Text(item.name)
-                    .fontSize(this.cardTitleSize)
-                    .fontWeight(FontWeight.Bold)
-                    .fontColor($r('app.color.text_primary'))
-                    .margin({ left: 12 })
-                    .layoutWeight(1)
-                    .maxLines(1)
-                    .textOverflow({ overflow: TextOverflow.Ellipsis })
-                  if (item.kind === 'signal') {
-                    Text('自家信号')
-                      .fontSize(this.badgeSize)
-                      .fontColor($r('app.color.accent_gold'))
-                      .border({ width: 1, color: $r('app.color.accent_gold') })
-                      .borderRadius(6)
-                      .padding({ left: 8, right: 8, top: 2, bottom: 2 })
-                      .margin({ left: 10 })
-                  }
-                  if (item.audioUrl) {
-                    Text(this.loadingId === item.alertId ? '…' :
-                      this.playingId === item.alertId ? '■ 停' : '▶ 听')
-                      .fontSize(this.playBtnSize)
+        if (this.items.length > 0) {
+          List({ space: 16 }) {
+            ForEach(this.items, (item: AlertItem) => {
+              ListItem() {
+                Column({ space: 10 }) {
+                  Row() {
+                    Text(this.dirLabel(item.direction))
+                      .fontSize(this.cardTitleSize)
                       .fontWeight(FontWeight.Bold)
-                      .fontColor($r('app.color.accent_gold'))
+                      .fontColor(Color.White)
+                      .backgroundColor(this.dirColor(item.direction))
+                      .borderRadius(10)
+                      .padding({ left: 14, right: 14, top: 4, bottom: 4 })
+                    Text(item.name)
+                      .fontSize(this.cardTitleSize)
+                      .fontWeight(FontWeight.Bold)
+                      .fontColor($r('app.color.text_primary'))
+                      .margin({ left: 12 })
+                      .layoutWeight(1)
+                      .maxLines(1)
+                      .textOverflow({ overflow: TextOverflow.Ellipsis })
+                    if (item.kind === 'signal') {
+                      Text('自家信号')
+                        .fontSize(this.badgeSize)
+                        .fontColor($r('app.color.accent_gold'))
+                        .border({ width: 1, color: $r('app.color.accent_gold') })
+                        .borderRadius(6)
+                        .padding({ left: 8, right: 8, top: 2, bottom: 2 })
+                        .margin({ left: 10 })
+                    }
+                    if (item.audioUrl) {
+                      Text(this.loadingId === item.alertId ? '…' :
+                        this.playingId === item.alertId ? '■ 停' : '▶ 听')
+                        .fontSize(this.playBtnSize)
+                        .fontWeight(FontWeight.Bold)
+                        .fontColor($r('app.color.accent_gold'))
+                    }
+                  }
+                  .width('100%')
+
+                  Text(item.headline)
+                    .fontSize(this.headlineSize)
+                    .fontColor($r('app.color.text_primary'))
+                    .width('100%')
+
+                  if (item.detail.length > 0) {
+                    Text(item.detail)
+                      .fontSize(this.detailSize)
+                      .fontColor($r('app.color.text_secondary'))
+                      .width('100%')
+                  }
+
+                  if (this.failedId === item.alertId) {
+                    Text('语音加载失败，点重试')
+                      .fontSize(this.detailSize)
+                      .fontColor($r('app.color.rise_red'))
+                      .width('100%')
                   }
                 }
                 .width('100%')
-
-                Text(item.headline)
-                  .fontSize(this.headlineSize)
-                  .fontColor($r('app.color.text_primary'))
-                  .width('100%')
-
-                if (item.detail.length > 0) {
-                  Text(item.detail)
-                    .fontSize(this.detailSize)
-                    .fontColor($r('app.color.text_secondary'))
-                    .width('100%')
-                }
-
-                if (this.failedId === item.alertId) {
-                  Text('语音加载失败，点重试')
-                    .fontSize(this.detailSize)
-                    .fontColor($r('app.color.rise_red'))
-                    .width('100%')
-                }
+                .padding(20)
+                .backgroundColor($r('app.color.card_background'))
+                .borderRadius(16)
+                .onClick(() => this.togglePlay(item))
               }
-              .width('100%')
-              .padding(20)
-              .backgroundColor($r('app.color.card_background'))
-              .borderRadius(16)
-              .onClick(() => this.togglePlay(item))
-            }
-          }, (item: AlertItem) => item.alertId)
+            }, (item: AlertItem) => item.alertId)
+          }
+          .width('100%')
+          .layoutWeight(1)
+          .padding({ left: 16, right: 16 })
+        } else {
+          Column() {
+            Text('今日暂无异动')
+              .fontSize(this.headlineSize)
+              .fontColor($r('app.color.text_secondary'))
+            Text('监测进行中，有新情况会自动推送')
+              .fontSize(this.statusSize)
+              .fontColor($r('app.color.text_secondary'))
+              .margin({ top: 12 })
+          }
+          .width('100%')
+          .layoutWeight(1)
+          .justifyContent(FlexAlign.Center)
         }
-        .width('100%')
-        .layoutWeight(1)
-        .padding({ left: 16, right: 16 })
-      } else {
-        Column() {
-          Text('今日暂无异动')
-            .fontSize(this.headlineSize)
-            .fontColor($r('app.color.text_secondary'))
-          Text('监测进行中，有新情况会自动推送')
-            .fontSize(this.statusSize)
-            .fontColor($r('app.color.text_secondary'))
-            .margin({ top: 12 })
-        }
-        .width('100%')
-        .layoutWeight(1)
-        .justifyContent(FlexAlign.Center)
       }
+      .width('100%')
+      .height('100%')
+      .backgroundColor($r('app.color.page_background'))
     }
-    .width('100%')
-    .height('100%')
-    .backgroundColor($r('app.color.page_background'))
+    .navDestination((name: string) => {
+      if (name === 'pages/Settings') {
+        return Settings()
+      }
+      return null
+    })
+    .hideTitleBar(true)
+    .mode(NavigationMode.Stack)
   }
 }

@@ -39,11 +39,11 @@ export class SettingsService {
     if (!SettingsService.pref) {
       return [];
     }
-    const raw = await SettingsService.pref.get(KEY_WATCHLIST, '[]') as string;
     try {
+      const raw = await SettingsService.pref.get(KEY_WATCHLIST, '[]') as string;
       return JSON.parse(raw) as string[];
     } catch (e) {
-      hilog.warn(DOMAIN, TAG, `watchlist parse failed: ${(e as Error).message}`);
+      hilog.warn(DOMAIN, TAG, `watchlist read failed: ${(e as Error).message}`);
       return [];
     }
   }
@@ -52,8 +52,12 @@ export class SettingsService {
     if (!SettingsService.pref) {
       return;
     }
-    await SettingsService.pref.put(KEY_WATCHLIST, JSON.stringify(list));
-    await SettingsService.pref.flush();
+    try {
+      await SettingsService.pref.put(KEY_WATCHLIST, JSON.stringify(list));
+      await SettingsService.pref.flush();
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, `watchlist write failed: ${(e as Error).message}`);
+    }
   }
 
   // ── 播报开关 ──
@@ -62,15 +66,24 @@ export class SettingsService {
     if (!SettingsService.pref) {
       return true;
     }
-    return await SettingsService.pref.get(KEY_BROADCAST_ENABLED, true) as boolean;
+    try {
+      return await SettingsService.pref.get(KEY_BROADCAST_ENABLED, true) as boolean;
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, `broadcast read failed: ${(e as Error).message}`);
+      return true;
+    }
   }
 
   static async setBroadcastEnabled(enabled: boolean): Promise<void> {
     if (!SettingsService.pref) {
       return;
     }
-    await SettingsService.pref.put(KEY_BROADCAST_ENABLED, enabled);
-    await SettingsService.pref.flush();
+    try {
+      await SettingsService.pref.put(KEY_BROADCAST_ENABLED, enabled);
+      await SettingsService.pref.flush();
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, `broadcast write failed: ${(e as Error).message}`);
+    }
   }
 
   // ── 字体档 ──
@@ -79,18 +92,27 @@ export class SettingsService {
     if (!SettingsService.pref) {
       return 'standard';
     }
-    const level = await SettingsService.pref.get(KEY_FONT_SIZE_LEVEL, 'standard') as string;
-    if (level === 'large') {
-      return 'large';
+    try {
+      const level = await SettingsService.pref.get(KEY_FONT_SIZE_LEVEL, 'standard') as string;
+      if (level === 'large') {
+        return 'large';
+      }
+      return 'standard';
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, `font level read failed: ${(e as Error).message}`);
+      return 'standard';
     }
-    return 'standard';
   }
 
   static async setFontSizeLevel(level: FontSizeLevel): Promise<void> {
     if (!SettingsService.pref) {
       return;
     }
-    await SettingsService.pref.put(KEY_FONT_SIZE_LEVEL, level);
-    await SettingsService.pref.flush();
+    try {
+      await SettingsService.pref.put(KEY_FONT_SIZE_LEVEL, level);
+      await SettingsService.pref.flush();
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, `font level write failed: ${(e as Error).message}`);
+    }
   }
 }
