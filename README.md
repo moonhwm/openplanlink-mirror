@@ -4,7 +4,7 @@
 
 > 应用显示名「铃语」（典出苏轼塔铃：铃先响，风将至），bundleName `com.yehang.stockpulse` 保持不变（AGC 注册锚）。
 
-- 目标机型：Mate X5（HarmonyOS NEXT 纯血）；`compatibleSdkVersion 20`（6.0）/ `targetSdkVersion 26`（7.0）
+- 目标机型：Mate X5（HarmonyOS NEXT 纯血）；`compatibleSdkVersion 6.0.2(22)` / `targetSdkVersion 6.0.2(22)`
 - 形态：原生 ArkTS Stage 模型，单 entry 模块，零三方依赖
 - 分发：私有调试证书直装（免审核免软著免备案零公开，100 台/年）
 
@@ -23,13 +23,22 @@ entry/src/main/ets/
   model/AlertItem         异动事实卡数据契约
 ```
 
-## 构建（CodeArts Build 云构建，本机红灯机不装 DevEco）
+## 构建
+
+**本机构建**（A 盘 DevEco Studio 6.0.2，纯英文路径）：
+
+```bash
+# devecocli 构建（debug 模式）
+devecocli build --build-mode debug
+# 产物：entry/build/default/outputs/default/entry-default-unsigned.hap
+```
+
+**云构建**（CodeArts Build）：
 
 1. 把本目录上传码道仓库（CodeArts Repo）。
-2. CodeArts Build 新建构建任务 → 选官方「HarmonyOS 应用构建」模板（自带 SDK/Hvigor，免本机环境）。
+2. CodeArts Build 新建构建任务 → 选官方「HarmonyOS 应用构建」模板（自带 SDK/Hvigor）。
 3. 产物 `entry-default-signed.hap` 下载后经 `hdc install` 装 X5。
 
-待核：Build 鸿蒙模板免费分钟数、机主码道挂账是否含 Build（X 采购时一并问客服经理）。
 注意：码道 AI 编码额度（体验版 500 万 tokens/月）09-09 已 100% 封顶，10 月重置——本工程不依赖码道额度，不受影响。
 
 ## 签名与装机（机主一次动作，约 10 分钟）
@@ -51,3 +60,22 @@ entry/src/main/ets/
 ## 合规红线
 
 1 台自用、不收费；只报涨跌幅/量能/价格穿越等客观事实；不碰荐股。
+## 功能清单（当前版本 0.1.0）
+
+- ✅ 大字异动卡片流（点卡即听）
+- ✅ 适老化模式 / 正常模式切换（适老化=大字大卡，正常=标准紧凑）
+- ✅ 夜间模式 / 白天模式切换（夜间=深色底高对比，白天=浅色底清晰明亮）
+- ✅ 免打扰模式（指定时段内自动播报静默，手动点击不受限）
+- ✅ 自选股管理（添加/删除，过滤显示）
+- ✅ 播报开关（关后自动播报静默，手动点击不受限）
+- ✅ 字体大小切换（标准/特大，适老化模式锁定特大）
+- ✅ 首屏示例卡兜底（服务未连通时显示带「示例」字样的演示卡）
+- ✅ Push Kit 占位封装（AGC 未配置时自动降级轮询）
+- ✅ 前台 5s 轮询兜底（退避策略：失败翻倍封顶 30s，429 限流静默跳过）
+- ✅ 冷启动通知缺口修复（want 参数 alertId 经 onCreate 补检）
+- ✅ Push 场景化消息接收器（DEFAULT 类型，前台时直接传递给应用）
+- ✅ 信号卡「自家信号」角标（kind=signal，与事实卡 kind=fact 视觉区分）
+- ⏳ 签名配置（需机主在 DevEco Studio 中配置 signingConfigs）
+- ⏳ AGC 平台审批 P5（订阅通知自分类，约 15 工作日）
+- ⏳ X 服务器落地（替换 FEED_URL 占位值）
+- ⏳ 模拟器验证（DevEco Studio 6.0.2 < devecocli 要求的 6.1.0）
