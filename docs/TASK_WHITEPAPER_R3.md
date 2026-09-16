@@ -16,10 +16,10 @@ R3 的目标是：**把 PushService.ets 从占位封装升级为真实 Push Kit 
 | # | 操作 | 责任方 | 预计耗时 | 状态 |
 |---|------|--------|----------|------|
 | P1 | 华为个人开发者注册（免费） | 机主 | 已完成 | ✅ |
-| P2 | AppGallery Connect 建项目+应用，bundleName=`com.yehang.stockpulse` | 机主 | 10 分钟 | **定案见 §P2-A** |
-| P3 | AGC 开通 Push Kit 服务 | 机主 | 5 分钟 | 待办 |
-| P4 | 下载 `agconnect-services.json` 放 `AppScope/resources/rawfile/` | 机主 | 5 分钟 | 待办 |
-| P5 | AGC 申请订阅通知自分类权益（SUBSCRIPTION 类型） | 机主 | 约 15 工作日 | 待办 |
+| P2 | AppGallery Connect 建项目+应用，bundleName=`com.yehang.stockpulse` | 机主 | 10 分钟 | ✅ 已完成（2026-09-16） |
+| P3 | AGC 开通 Push Kit 服务 | 机主 | 5 分钟 | ✅ 已完成（2026-09-16） |
+| P4 | 下载 `agconnect-services.json` 放 `AppScope/resources/rawfile/` | 机主 | 5 分钟 | ✅ 已完成（2026-09-16） |
+| P5 | AGC 申请订阅通知自分类权益（SUBSCRIPTION 类型） | 机主 | 约 15 工作日 | ⏳ 申请中（2026-09-16） |
 | P6 | X 服务器落地（FEED_URL 替换 + Push Token 上报接口） | 顾权席 | 待定 | 待办 |
 
 **P5 是关键路径瓶颈**——订阅通知自分类权益审批约 15 工作日，在审批通过前无法推送 SUBSCRIPTION 类通知。审批期间可先用 DEFAULT 类通知（不需自分类权益）进行开发调试。
@@ -255,6 +255,30 @@ P5 自分类权益  →  W4 EntryAbility →     下发通知
 | pushService API | developer.huawei.com/consumer/cn/doc/harmonyos-references/push-pushservice | 2026-09-09 |
 | serviceNotification API | developer.huawei.com/consumer/cn/doc/harmonyos-references/push-servicenotification | 2026-08-29 |
 | PushPayload 结构 | developer.huawei.com/consumer/cn/doc/harmonyos-references/push-pushcommon#pushpayload | 2026-09-09 |
+
+---
+
+## §P5-A 消息类型申请定案（2026-09-16 · 砚坚分析，机主裁定）
+
+### 申请消息类型勾选（3项）
+
+| 消息类型 | 勾选 | 理由 |
+|----------|------|------|
+| **订阅** | ✅ | 核心匹配：用户主动添加自选股→系统推送异动提醒，等同于"主动设置的商品降价提醒" |
+| **账号动态** | ✅ | 辅助匹配：账号安全通知（异地登录等），预留未来用户体系扩展 |
+| **音频、视频通话** | ✅ | **预留扩展**：受豆包电话功能启发——未来铃语可能扩展AI语音交互（如长辈语音问答、重大异动AI语音通知），此类型为"来电提醒"场景预留 |
+| 即时聊天 | ❌ | 铃语非聊天应用，AGENTS.md禁止催促性指令和对外收费形态 |
+| 健康 | ❌ | 仅限运动类/健康类App，铃语不符合准入条件 |
+| 财务 | ❌ | 仅限金融银行类/支付类App，铃语不是持牌金融机构 |
+| 出行/订单物流/设备提醒/邮件/工作事项提醒 | ❌ | 均与铃语场景无关 |
+
+### "音频、视频通话"预留决策的深度分析
+
+豆包（ByteDance AI助手）的"电话"功能提供了重要启发：用户拨打豆包号码→AI接听→实时语音对话。铃语未来可能扩展的同构场景：
+- 长辈收到异动推送→想了解更多→"打电话给铃语"→AI语音解答
+- 重大异动时铃语主动"回拨"——AI语音通知（比文字推送更适老）
+
+当前铃语的语音交互是App内TTS播报（AVPlayer播放云端音频流），不涉及电信通话。但AGC"音频、视频通话"类型的"来电提醒"子场景，为未来AI语音交互扩展预留了可能性。申请成本为零，预留有备无患。
 
 ---
 
