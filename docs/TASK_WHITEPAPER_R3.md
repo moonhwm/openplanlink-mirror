@@ -16,7 +16,7 @@ R3 的目标是：**把 PushService.ets 从占位封装升级为真实 Push Kit 
 | # | 操作 | 责任方 | 预计耗时 | 状态 |
 |---|------|--------|----------|------|
 | P1 | 华为个人开发者注册（免费） | 机主 | 已完成 | ✅ |
-| P2 | AppGallery Connect 建项目+应用，bundleName=`com.yehang.stockpulse` | 机主 | 10 分钟 | 待办 |
+| P2 | AppGallery Connect 建项目+应用，bundleName=`com.yehang.stockpulse` | 机主 | 10 分钟 | **定案见 §P2-A** |
 | P3 | AGC 开通 Push Kit 服务 | 机主 | 5 分钟 | 待办 |
 | P4 | 下载 `agconnect-services.json` 放 `AppScope/resources/rawfile/` | 机主 | 5 分钟 | 待办 |
 | P5 | AGC 申请订阅通知自分类权益（SUBSCRIPTION 类型） | 机主 | 约 15 工作日 | 待办 |
@@ -255,3 +255,25 @@ P5 自分类权益  →  W4 EntryAbility →     下发通知
 | pushService API | developer.huawei.com/consumer/cn/doc/harmonyos-references/push-pushservice | 2026-09-09 |
 | serviceNotification API | developer.huawei.com/consumer/cn/doc/harmonyos-references/push-servicenotification | 2026-08-29 |
 | PushPayload 结构 | developer.huawei.com/consumer/cn/doc/harmonyos-references/push-pushcommon#pushpayload | 2026-09-09 |
+
+---
+
+## §P2-A AGC 注册与开放能力定案（2026-09-16 · 顾权代机主令，外池评审收官）
+
+### 注册值（终审）
+- 应用所属项目：**塔铃**（新建；「塔上一铃独自语」——项目=塔、应用=铃语）
+- 应用名称：**铃语**（苏轼「塔上一铃独自语，明日颠风当断渡」；外池三判官斩「振铎」（撞郑振铎+生僻死结）后定案）
+- 应用包名：**com.yehang.stockpulse**（与 AppScope/app.json5 bundleName 逐字一致，不可改）
+- 应用分类：**应用**
+
+### 开放能力勾选（外池 5 席评审：glm-4.7/GLM-5.2/DS-v4-flash/DS-v4-pro/doubao·hy4·GLM-5.3·K2.8 缺席登记在案）
+**勾选**：推送服务、推送语音播报消息（受限申请：适老化语音提醒需推送后唤醒播报）、锁屏卡片、优先通知、代理提醒、实况窗服务（限调测期）、华为账号。
+**新增勾选（3/5 票通过）**：**AI问答联网增强服务**——申请理由草稿：「用于长辈语音问答/传言核查时检索公开时效信息，检索结果经 K3 集群二次核验后合成语音播报；不直接展示检索结果，不构成投资建议。」启用时点=语音问答功能立项时；隐私政策增量一句（语音提问去标识化后用于联网检索）。
+**不勾（多数否决）**：钱包/IAP（5/5）、App Linking（1:4）、云存储/云托管（5/5）、认证服务（5/5）、RISC（5/5）、围栏后台唤醒（5/5）、接续服务（5/5）、安全检测服务（1:4，GLM-5.2「防二次打包诈骗」论据登记为异常流量信号时启用）、待机屏保卡片（2:3，AOD 零操作常显与锁屏大字同族，列为锁屏族第一扩展候补）、Wear Engine（暂缓：手表播报立项日再勾，预支穿戴+音频+蓝牙三笔成本现在属负债）。
+**敏感权限七项**（定位/位置语义/室内定位/蓝牙/运动健康/背板透明/设备状态检测）：5/5 不勾——零业务关联+隐私弹窗恐慌成本。
+
+### 判官席缺席登记（如实）
+- GLM-5.3（chatglm 积分 web 通道）：浏览器扩展断连，待重连后补评；
+- K2.8（moonshot api.kimi.com/coding）：access_token 已于 2026-09-06 过期且目录无 k2.8 名目，需先刷新再探；
+- doubao 全系（ark）：seed/pro/lite 均 404 无访问权限（账户仅 deepseek 系可用）；
+- hy4-preview（tokenhub）：探针 HTTP 200 实证可用，但长任务 560s 读超时（思考型需流式通道），席位暂缺。
