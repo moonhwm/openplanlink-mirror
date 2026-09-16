@@ -33,6 +33,7 @@ struct Index {
   @State connectionBroken: boolean = false;
   @State isDemoMode: boolean = true;
   @State fontLevel: FontSizeLevel = 'standard';
+  @State elderlyMode: boolean = true;
   @State broadcastEnabled: boolean = true;
   @State broadcastOffVisible: boolean = false;
   @State watchlist: string[] = [];
@@ -63,6 +64,26 @@ struct Index {
     return this.fontLevel === 'large' ? 20 : 18;
   }
 
+  // 适老化模式驱动布局参数
+  private get cardSpace(): number {
+    return this.elderlyMode ? 20 : 12;
+  }
+  private get cardPadding(): number {
+    return this.elderlyMode ? 20 : 16;
+  }
+  private get cardInnerSpace(): number {
+    return this.elderlyMode ? 12 : 8;
+  }
+  private get topBarPaddingTop(): number {
+    return this.elderlyMode ? 16 : 12;
+  }
+  private get topBarPaddingBottom(): number {
+    return this.elderlyMode ? 12 : 8;
+  }
+  private get listSidePadding(): number {
+    return this.elderlyMode ? 16 : 12;
+  }
+
   aboutToAppear(): void {
     this.loadSettings();
     this.pollLoop();
@@ -84,6 +105,7 @@ struct Index {
   }
 
   private async loadSettings(): Promise<void> {
+    this.elderlyMode = await SettingsService.getElderlyMode();
     this.fontLevel = await SettingsService.getFontSizeLevel();
     this.broadcastEnabled = await SettingsService.getBroadcastEnabled();
     this.broadcastOffVisible = !this.broadcastEnabled;
@@ -278,13 +300,13 @@ struct Index {
             .onClick(() => this.navStack.pushPath({ name: 'pages/Settings' }))
         }
         .width('100%')
-        .padding({ left: 20, right: 20, top: 16, bottom: 12 })
+        .padding({ left: 20, right: 20, top: this.topBarPaddingTop, bottom: this.topBarPaddingBottom })
 
         if (this.items.length > 0) {
-          List({ space: 16 }) {
+          List({ space: this.cardSpace }) {
             ForEach(this.items, (item: AlertItem) => {
               ListItem() {
-                Column({ space: 10 }) {
+                Column({ space: this.cardInnerSpace }) {
                   Row() {
                     Text(this.dirLabel(item.direction))
                       .fontSize(this.cardTitleSize)
@@ -340,7 +362,7 @@ struct Index {
                   }
                 }
                 .width('100%')
-                .padding(20)
+                .padding(this.cardPadding)
                 .backgroundColor($r('app.color.card_background'))
                 .borderRadius(16)
                 .onClick(() => this.togglePlay(item))
@@ -349,7 +371,7 @@ struct Index {
           }
           .width('100%')
           .layoutWeight(1)
-          .padding({ left: 16, right: 16 })
+          .padding({ left: this.listSidePadding, right: this.listSidePadding })
         } else {
           Column() {
             Text('今日暂无异动')

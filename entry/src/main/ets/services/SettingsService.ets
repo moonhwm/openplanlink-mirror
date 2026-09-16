@@ -10,6 +10,7 @@ const PREF_NAME = 'stockpulse_settings';
 const KEY_WATCHLIST = 'watchlist';           // 自选股列表，JSON string[]
 const KEY_BROADCAST_ENABLED = 'broadcast';   // 播报开关，boolean
 const KEY_FONT_SIZE_LEVEL = 'font_level';    // 字体档，'standard' | 'large'
+const KEY_ELDERLY_MODE = 'elderly_mode';    // 适老化模式，boolean（默认 true）
 
 /** 字体档枚举 */
 export type FontSizeLevel = 'standard' | 'large';
@@ -113,6 +114,38 @@ export class SettingsService {
       await SettingsService.pref.flush();
     } catch (e) {
       hilog.warn(DOMAIN, TAG, `font level write failed: ${(e as Error).message}`);
+    }
+  }
+
+  // ── 适老化模式 ──
+
+  static async getElderlyMode(): Promise<boolean> {
+    if (!SettingsService.pref) {
+      return true;
+    }
+    try {
+      return await SettingsService.pref.get(KEY_ELDERLY_MODE, true) as boolean;
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, `elderly mode read failed: ${(e as Error).message}`);
+      return true;
+    }
+  }
+
+  static async setElderlyMode(enabled: boolean): Promise<void> {
+    if (!SettingsService.pref) {
+      return;
+    }
+    try {
+      await SettingsService.pref.put(KEY_ELDERLY_MODE, enabled);
+      // 适老化模式开启时自动设为特大字体，关闭时恢复标准字体
+      if (enabled) {
+        await SettingsService.pref.put(KEY_FONT_SIZE_LEVEL, 'large');
+      } else {
+        await SettingsService.pref.put(KEY_FONT_SIZE_LEVEL, 'standard');
+      }
+      await SettingsService.pref.flush();
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, `elderly mode write failed: ${(e as Error).message}`);
     }
   }
 }

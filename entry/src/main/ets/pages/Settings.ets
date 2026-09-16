@@ -11,6 +11,7 @@ export struct Settings {
   @State watchlist: string[] = [];
   @State broadcastEnabled: boolean = true;
   @State fontLevel: FontSizeLevel = 'standard';
+  @State elderlyMode: boolean = true;
   @State newStockInput: string = '';
   private navStack: NavPathStack = new NavPathStack();
 
@@ -35,6 +36,7 @@ export struct Settings {
   private async loadSettings(): Promise<void> {
     this.watchlist = await SettingsService.getWatchlist();
     this.broadcastEnabled = await SettingsService.getBroadcastEnabled();
+    this.elderlyMode = await SettingsService.getElderlyMode();
     this.fontLevel = await SettingsService.getFontSizeLevel();
   }
 
@@ -70,6 +72,14 @@ export struct Settings {
     hilog.info(DOMAIN, TAG, `font level set to ${level}`);
   }
 
+  private async toggleElderlyMode(isOn: boolean): Promise<void> {
+    this.elderlyMode = isOn;
+    await SettingsService.setElderlyMode(isOn);
+    // 适老化模式切换后重新加载字体档（setElderlyMode 内部已联动修改）
+    this.fontLevel = await SettingsService.getFontSizeLevel();
+    hilog.info(DOMAIN, TAG, `elderly mode ${isOn ? 'enabled' : 'disabled'}`);
+  }
+
   build() {
     NavDestination() {
       Column() {
@@ -93,6 +103,38 @@ export struct Settings {
 
         Scroll() {
           Column({ space: 24 }) {
+            // ── 适老化模式 ──
+            Column({ space: 12 }) {
+              Text('适老化模式')
+                .fontSize(this.bodySize)
+                .fontWeight(FontWeight.Bold)
+                .fontColor($r('app.color.text_primary'))
+                .width('100%')
+
+              Row() {
+                Text(this.elderlyMode ? '适老化已开' : '正常模式')
+                  .fontSize(this.bodySize)
+                  .fontColor(this.elderlyMode ? $r('app.color.accent_gold') : $r('app.color.text_primary'))
+                  .layoutWeight(1)
+                Toggle({ type: ToggleType.Switch, isOn: this.elderlyMode })
+                  .onChange((isOn: boolean) => this.toggleElderlyMode(isOn))
+                  .width(60)
+                  .height(48)
+              }
+              .width('100%')
+
+              Text(this.elderlyMode ?
+                '适老化模式：大字大卡，点卡即听，界面极简' :
+                '正常模式：标准字体，紧凑布局，信息更密')
+                .fontSize(this.labelSize)
+                .fontColor($r('app.color.text_secondary'))
+                .width('100%')
+            }
+            .width('100%')
+            .padding(20)
+            .backgroundColor($r('app.color.card_background'))
+            .borderRadius(16)
+
             // ── 自选股管理 ──
             Column({ space: 12 }) {
               Text('自选股管理')
@@ -188,7 +230,7 @@ export struct Settings {
             .backgroundColor($r('app.color.card_background'))
             .borderRadius(16)
 
-            // ── 字体档 ──
+            // ── 字体大小（适老化模式开启时锁定特大） ──
             Column({ space: 12 }) {
               Text('字体大小')
                 .fontSize(this.bodySize)
@@ -196,28 +238,43 @@ export struct Settings {
                 .fontColor($r('app.color.text_primary'))
                 .width('100%')
 
-              Row() {
-                Button('标准')
-                  .fontSize(this.labelSize)
-                  .fontColor(this.fontLevel === 'standard' ? Color.White : $r('app.color.text_primary'))
-                  .backgroundColor(this.fontLevel === 'standard' ? $r('app.color.accent_gold') : $r('app.color.card_background'))
-                  .borderWidth(1)
-                  .borderColor(this.fontLevel === 'standard' ? $r('app.color.accent_gold') : $r('app.color.text_secondary'))
-                  .height(48)
-                  .layoutWeight(1)
-                  .onClick(() => this.switchFontLevel('standard'))
-                Button('特大')
-                  .fontSize(this.labelSize)
-                  .fontColor(this.fontLevel === 'large' ? Color.White : $r('app.color.text_primary'))
-                  .backgroundColor(this.fontLevel === 'large' ? $r('app.color.accent_gold') : $r('app.color.card_background'))
-                  .borderWidth(1)
-                  .borderColor(this.fontLevel === 'large' ? $r('app.color.accent_gold') : $r('app.color.text_secondary'))
-                  .height(48)
-                  .layoutWeight(1)
-                  .margin({ left: 12 })
-                  .onClick(() => this.switchFontLevel('large'))
+              if (this.elderlyMode) {
+                // 适老化模式：锁定特大，提示由适老化模式控制
+                Row() {
+                  Text('特大（适老化模式锁定）')
+                    .fontSize(this.bodySize)
+                    .fontColor($r('app.color.accent_gold'))
+                    .layoutWeight(1)
+                }
+                .width('100%')
+                .padding({ left: 16, right: 16, top: 12, bottom: 12 })
+                .backgroundColor($r('app.color.page_background'))
+                .borderRadius(12)
+              } else {
+                // 正常模式：自由选择标准/特大
+                Row() {
+                  Button('标准')
+                    .fontSize(this.labelSize)
+                    .fontColor(this.fontLevel === 'standard' ? Color.White : $r('app.color.text_primary'))
+                    .backgroundColor(this.fontLevel === 'standard' ? $r('app.color.accent_gold') : $r('app.color.card_background'))
+                    .borderWidth(1)
+                    .borderColor(this.fontLevel === 'standard' ? $r('app.color.accent_gold') : $r('app.color.text_secondary'))
+                    .height(48)
+                    .layoutWeight(1)
+                    .onClick(() => this.switchFontLevel('standard'))
+                  Button('特大')
+                    .fontSize(this.labelSize)
+                    .fontColor(this.fontLevel === 'large' ? Color.White : $r('app.color.text_primary'))
+                    .backgroundColor(this.fontLevel === 'large' ? $r('app.color.accent_gold') : $r('app.color.card_background'))
+                    .borderWidth(1)
+                    .borderColor(this.fontLevel === 'large' ? $r('app.color.accent_gold') : $r('app.color.text_secondary'))
+                    .height(48)
+                    .layoutWeight(1)
+                    .margin({ left: 12 })
+                    .onClick(() => this.switchFontLevel('large'))
+                }
+                .width('100%')
               }
-              .width('100%')
             }
             .width('100%')
             .padding(20)
