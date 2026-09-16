@@ -243,7 +243,7 @@ struct Index {
     Column() {
       // 顶栏：标题 + 播报关提示 + 刷新时刻 + 设置入口
       Row() {
-        Text('行情播报')
+        Text('铃语')
           .fontSize(this.titleSize)
           .fontWeight(FontWeight.Bold)
           .fontColor($r('app.color.text_primary'))

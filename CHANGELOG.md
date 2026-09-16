@@ -137,3 +137,25 @@
   3. `TOKEN_REPORT_URL` 为占位地址 `http://127.0.0.1:8000/api/push/register`，待 X 服务器落地后替换。
   4. PushPayload.remoteData 中 alertId 的键名需与服务端 Push Kit REST API 下发时的参数格式一致——待联调验证。
   5. 编译验证和模拟器真机验证无法执行（环境缺 devecocli/node/DevEco Studio）。
+
+## 2026-09-16 08:55 · 顾权（kimi-code-quantlab，代机主令）· R3b 改名：铃语（编号避撞：d497305 已占 R3=Push Kit）
+
+- 改了什么：应用显示名「行情播报」→「铃语」，4 文件 5 处+1 处 module_desc 柔化：
+  - `AppScope/resources/base/element/string.json`：app_name → 铃语
+  - `entry/src/main/resources/base/element/string.json`：EntryAbility_label → 铃语、EntryAbility_desc → 铃语主入口、module_desc → 适老化语音提醒模块
+  - `entry/src/main/ets/pages/Index.ets`：顶栏标题 Text('行情播报') → Text('铃语')
+  - `entry/oh-package.json5`：description → 铃语主模块
+  - 不动：bundleName com.yehang.stockpulse（技术锚，AGC 注册须一致）、TAG/PREF_NAME 标识符、docs/ 历史白皮书、perm_bg_reason（权限审核须如实）
+- 为什么：机主定案「文学化掩盖」——不给外人一眼看穿是行情工具。外池三判官评审（output/furnace/name_review/）否决「振铎」（撞郑振铎+铎字生僻死结），采纳 DS 荐名「铃语」（苏轼「塔上一铃独自语，明日颠风当断渡」：铃先响、风将至，与「异动→播报」同构；铃/语均高频字，长辈口头转述零障碍；掩盖力足且「铃」保提醒直觉）。
+- 如何验证：
+  - `grep -rn "行情播报" AppScope entry/src entry/oh-package.json5` → 仅剩 perm_bg_reason（刻意保留）与 TAG/PREF 标识符。
+  - `git show --stat HEAD` → 4 文件改动如上。
+  - 真机/预览器：桌面图标下与顶栏应显示「铃语」（走查待真机）。
+- 遗留：AGC 注册「应用名称」填 `铃语`、包名 `com.yehang.stockpulse`（机主执行）；应用图标本身未含文字（无需改）。
+- 自报块：
+```json
+{ "seat": "顾权（kimi-code-quantlab）", "order": "机主 2026-09-16 定案",
+  "review": "外池三判官 name_review（振铎否决：撞郑振铎+生僻字；铃语采纳）",
+  "files_changed": 4, "insertions": 5, "deletions": 5,
+  "attestation": "git 实测（diff --stat），无代码逻辑改动" }
+```
