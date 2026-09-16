@@ -17,7 +17,7 @@ export struct Settings {
   @State dndStartHour: number = 22;
   @State dndEndHour: number = 8;
   @State newStockInput: string = '';
-  private navStack: NavPathStack = new NavPathStack();
+  private navStack: NavPathStack | null = null;
 
   // 字体档驱动字号
   private get titleSize(): number {
@@ -113,7 +113,11 @@ export struct Settings {
             .fontSize(this.bodySize)
             .fontWeight(FontWeight.Bold)
             .fontColor(this.theme.accentGold)
-            .onClick(() => this.navStack.pop())
+            .onClick(() => {
+              if (this.navStack) {
+                this.navStack.pop();
+              }
+            })
             .padding({ left: 8, right: 8, top: 8, bottom: 8 })
             .constraintSize({ minWidth: 48, minHeight: 48 })
           Text('设置')

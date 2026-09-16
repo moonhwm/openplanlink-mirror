@@ -204,3 +204,15 @@
 - 编译验证：铃语 App debug 构建 BUILD SUCCESSFUL（1.6s），HAP 已生成。唯一 WARN=signingConfigs 未配置（预期）。
 - 为什么：机主令"全权全面协同推进到关机"——砚坚作为 A2A 跨厂商协调网络首个真实物理节点上线，同时验证铃语 App 编译。
 - 遗留：模拟器验证阻塞（DevEco Studio 6.0.2 < devecocli 要求的 6.1.0）；L1 A2A echo server 候机主批准部署；策略迭代 V2/V3/V4 已委托顾权席执行（总线 id=746）。
+## 2026-09-17 22:30 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2）· 桥接升级 v0.2.0 + 代码审查
+
+- 改了什么：
+  - `router-hub/bridge/yan_jian_bridge.mjs`：升级到 v0.2.0——增加 Realtime WebSocket 订阅（亚秒级推送，替代 REST 轮询）；增加 task handler（接收 kind=task 消息并自动回复 task_ack）；增加 watch 模式（持续监听总线，实时响应消息）；增加游标持久化（cursor.json，确保恰好一次语义）；增加心跳定时器（每 60s 发送 heartbeat 维持在线状态）；增加 REST 轮询降级方案（WebSocket 不可用时自动降级）；增加 task_receipt/notice 消息类型处理。
+  - `entry/src/main/ets/pages/Settings.ets`：修复 navStack 竞态问题——`navStack` 初始化改为 `null`，返回按钮增加 null 检查，避免 `onReady` 回调前点击返回按钮导致空栈 pop 异常。
+- 总线实测：
+  - Watch 模式启动成功，Realtime WebSocket 订阅已激活（亚秒级推送）
+  - 收到顾权 id=750 task_receipt：V4 回撤刹车胜出进 4 周前向验证（paper_mom_v4 已上线，24 PASS）；V2/V3 不采信如实登记
+  - 上线心跳已发送
+- 代码审查：8 个源文件全部审查（Index.ets/Settings.ets/EntryAbility.ets/AlertPoller.ets/AudioPlayer.ets/PushService.ets/SettingsService.ets/AlertItem.ets），发现 1 个中等问题（navStack 竞态，已修复），4 个低等问题（均为预期设计或无实际影响）
+- 为什么：机主令"继续自主推进两小时"——深化 A2A 桥接到亚秒级，审查代码质量确保稳定性
+- 遗留：模拟器验证仍阻塞；签名配置待机主在 DevEco Studio 中设置；K3 集群线上通路验证等待机主端发起
