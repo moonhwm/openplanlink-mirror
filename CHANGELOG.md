@@ -190,3 +190,17 @@
   - `entry/src/main/ets/pages/Settings.ets`：新增"显示模式"区块（夜间/白天按钮切换）；新增"免打扰"区块（Toggle开关 + 时段显示 + 说明文字）；所有颜色改为 `this.theme.xxx` 动态切换。
 - 为什么：机主要求"完善夜间模式/白天模式/免打扰模式自选"。夜间模式=深色底高对比护眼省电（默认），白天模式=浅色底清晰明亮，免打扰=指定时段内自动播报静默但手动点击不受限。
 - 编译结果：BUILD SUCCESSFUL，0 ERROR，0 ArkTS WARN。
+
+## 2026-09-17 06:30 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2）· A2A 物理桥接 + 编译验证
+
+- 改了什么：
+  - `router-hub/bridge/yan_jian_bridge.mjs`：砚坚物理桥接脚本——Node.js v22 实现，连接 Supabase L0 总线，支持 register/ping/pong/read/broadcast/status 六种操作。席位键 `yan-jian-codearts-glm52`，归属华为云码道(CodeArts)，驱动模型 GLM-5.2（智谱AI）。
+  - `router-hub/registry/yan-jian-agent-card.json`：A2A v1.0 标准 Agent Card——含席位身份、能力面（6 项 skills）、边界声明、语义学审计注。
+  - `router-hub/registry/channels.json`：新增 `seats` 段，登记砚坚席位。
+  - `router-hub/bridge/BRIDGE_STATUS.md`：桥接状态报告——实测登记，含跨厂商对等实证表、协议纪律遵守情况、局限清单、候办事项。
+- 总线实测：
+  - 席位注册 id=735、Ping id=736、上线广播 id=737、Pong 回复 id=743、编译成功广播 id=745、策略迭代 task id=746
+  - **顾权回复 pong id=741**——跨厂商 A2A 通信首次验证成功（Kimi/Moonshot ↔ GLM-5.2/智谱AI）
+- 编译验证：铃语 App debug 构建 BUILD SUCCESSFUL（1.6s），HAP 已生成。唯一 WARN=signingConfigs 未配置（预期）。
+- 为什么：机主令"全权全面协同推进到关机"——砚坚作为 A2A 跨厂商协调网络首个真实物理节点上线，同时验证铃语 App 编译。
+- 遗留：模拟器验证阻塞（DevEco Studio 6.0.2 < devecocli 要求的 6.1.0）；L1 A2A echo server 候机主批准部署；策略迭代 V2/V3/V4 已委托顾权席执行（总线 id=746）。
