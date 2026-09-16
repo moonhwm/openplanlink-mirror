@@ -1,6 +1,8 @@
-# 行情播报（StockPulse）· 鸿蒙 NEXT 私有分发工程
+# 铃语（StockPulse）· 鸿蒙 NEXT 私有分发工程
 
-适老化行情异动播报 App。**云端（X 服务器）秒级监测 → Push Kit 推送 → 锁屏大字通知 → 点按拉起 → 自动语音播报**。只报客观异动事实，不含任何买卖建议。
+适老化语音提醒 App。**云端（X 服务器）秒级监测 → Push Kit 推送 → 锁屏大字通知 → 点按拉起 → 自动语音播报**。只报客观异动事实，不含任何买卖建议。
+
+> 应用显示名「铃语」（典出苏轼塔铃：铃先响，风将至），bundleName `com.yehang.stockpulse` 保持不变（AGC 注册锚）。
 
 - 目标机型：Mate X5（HarmonyOS NEXT 纯血）；`compatibleSdkVersion 20`（6.0）/ `targetSdkVersion 26`（7.0）
 - 形态：原生 ArkTS Stage 模型，单 entry 模块，零三方依赖
@@ -14,7 +16,7 @@ entry/src/main/ets/
   entryability/           EntryAbility（Push 初始化 + Settings 初始化 + 通知点击带 alertId 拉起）
   pages/Index.ets         大字异动卡片流，点卡即听（服务未连通时显示「示例」卡）
   pages/Settings.ets      设置页（自选股增删 / 播报开关 / 字体档切换）
-  services/PushService    Push Kit 占位封装（无 AGC 配置自动降级）
+  services/PushService    Push Kit 集成封装（AGC 未配置时自动降级为轮询）
   services/AlertPoller    前台 5s 轮询兜底（FEED_URL 待 X 落地后替换）
   services/AudioPlayer    云端 TTS 音频流点按播报（AVPlayer）
   services/SettingsService 设置数据持久化（Preferences：自选股/播报开关/字体档）
@@ -40,7 +42,7 @@ entry/src/main/ets/
 ## 推送实装（候 AGC）
 
 1. AppGallery Connect 建项目+应用，开通 Push Kit，下载 `agconnect-services.json` 放 `AppScope/resources/rawfile/`。
-2. `PushService.ets` 内 TODO 解封：`pushService.getToken()` → 上报 X 服务器 `/api/push/register`。
+2. `PushService.ets` 已实装 `pushService.getToken()` → 上报 X 服务器 `/api/push/register`（AGC 配置到位后自动激活）。
 3. 服务端经 Push Kit REST 下发「订阅类 SUBSCRIPTION」通知（含行情提醒，锁屏+铃声+不限量；自分类申请约 15 工作日）。
 4. 通知 click 参数带 `alertId` → `onNewWant` → 页面自动播报对应音频。
 
