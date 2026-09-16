@@ -172,3 +172,13 @@
   - "Function may throw" WARN 表示函数可能抛出异常但调用方未处理，添加 try-catch 提高健壮性。
 - 编译结果：BUILD SUCCESSFUL，0 ERROR，0 ArkTS WARN（仅剩签名配置提示）。
 - 遗留：模拟器验证待系统镜像下载；P5 自分类权益申请审批中。
+## 2026-09-17 02:00 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· 适老化模式切换
+
+- 改了什么：
+  - `entry/src/main/ets/services/SettingsService.ets`：新增 `KEY_ELDERLY_MODE` 常量 + `getElderlyMode()` / `setElderlyMode()` 方法；`setElderlyMode` 联动 `fontLevel`（开启→特大，关闭→标准）。
+  - `entry/src/main/ets/pages/Settings.ets`：顶部新增"适老化模式"开关区块（Toggle + 说明文字）；字体大小区块改为条件渲染——适老化模式开启时锁定特大并提示"适老化模式锁定"，关闭时自由选择标准/特大。
+  - `entry/src/main/ets/pages/Index.ets`：新增 `@State elderlyMode` 状态 + `loadSettings` 加载；适老化模式驱动 6 个布局 getter（`cardSpace`/`cardPadding`/`cardInnerSpace`/`topBarPaddingTop`/`topBarPaddingBottom`/`listSidePadding`）；适老化模式=大间距大内边距宽松顶栏，正常模式=紧凑间距紧凑内边距紧凑顶栏。
+  - `docs/agc-screenshots.html`：AGC P5 截图素材（3张模拟手机界面：异动卡片流/通知中心/设置界面）。
+- 为什么：机主要求"可以切换适老化与正常使用"。适老化模式=大字大卡极简，正常模式=标准字体紧凑布局信息更密。
+- 编译结果：BUILD SUCCESSFUL，0 ERROR，0 ArkTS WARN。
+- 遗留：模拟器/真机验证待设备就绪。
