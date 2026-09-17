@@ -3,7 +3,7 @@ import { hilog } from '@kit.PerformanceAnalysisKit';
 import { AlertItem } from '../model/AlertItem';
 import { AlertPoller } from '../services/AlertPoller';
 import { AudioPlayer } from '../services/AudioPlayer';
-import { SettingsService, FontSizeLevel, ThemeMode, ThemeColors } from '../services/SettingsService';
+import { SettingsService, FontSizeLevel, ThemeMode, ThemeColors, PlayHistoryItem } from '../services/SettingsService';
 import { Settings } from './Settings';
 
 const TAG = 'StockPulse.Index';
@@ -37,9 +37,12 @@ struct Index {
   @State broadcastEnabled: boolean = true;
   @State broadcastOffVisible: boolean = false;
   @State themeMode: ThemeMode = 'night';
+  @State autoThemeEnabled: boolean = true;
   @State dndEnabled: boolean = false;
   @State dndActive: boolean = false;
   @State watchlist: string[] = [];
+  @State readAlertIds: string[] = [];
+  @State playHistory: PlayHistoryItem[] = [];
   private timer: number = -1;
   private consecutiveFailures: number = 0;
   private navStack: NavPathStack = new NavPathStack();
@@ -117,12 +120,19 @@ struct Index {
     this.fontLevel = await SettingsService.getFontSizeLevel();
     this.broadcastEnabled = await SettingsService.getBroadcastEnabled();
     this.broadcastOffVisible = !this.broadcastEnabled;
-    this.themeMode = await SettingsService.getThemeMode();
+    this.autoThemeEnabled = await SettingsService.getAutoThemeEnabled();
+    if (this.autoThemeEnabled) {
+      this.themeMode = SettingsService.computeAutoThemeMode();
+    } else {
+      this.themeMode = await SettingsService.getThemeMode();
+    }
     this.dndEnabled = await SettingsService.getDndEnabled();
     const dndStart = await SettingsService.getDndStartHour();
     const dndEnd = await SettingsService.getDndEndHour();
     this.dndActive = SettingsService.isDndActive(this.dndEnabled, dndStart, dndEnd);
     this.watchlist = await SettingsService.getWatchlist();
+    this.readAlertIds = await SettingsService.getReadAlertIds();
+    this.playHistory = await SettingsService.getPlayHistory();
   }
 
   private checkPendingAlertId(): void {
@@ -253,6 +263,21 @@ struct Index {
       }
       this.loadingId = '';
       this.playingId = item.alertId;
+      // 标记已读 + 记录播报历史
+      SettingsService.markAlertRead(item.alertId);
+      if (!this.readAlertIds.includes(item.alertId)) {
+        this.readAlertIds = [...this.readAlertIds, item.alertId];
+      }
+      const historyItem: PlayHistoryItem = {
+        alertId: item.alertId,
+        symbol: item.symbol,
+        name: item.name,
+        headline: item.headline,
+        ts: Date.now(),
+        alertTs: item.ts,
+      };
+      SettingsService.addPlayHistory(historyItem);
+      this.playHistory = [historyItem, ...this.playHistory.filter((it) => it.alertId !== item.alertId)].slice(0, 50);
     } catch (e) {
       hilog.warn(DOMAIN, TAG, `togglePlay failed: ${(e as Error).message}`);
       this.loadingId = '';
@@ -332,6 +357,12 @@ struct Index {
               ListItem() {
                 Column({ space: this.cardInnerSpace }) {
                   Row() {
+                    // 未读标记：小圆点
+                    if (!this.readAlertIds.includes(item.alertId)) {
+                      Circle({ width: 10, height: 10 })
+                        .fill(this.theme.accentGold)
+                        .margin({ right: 8 })
+                    }
                     Text(this.dirLabel(item.direction))
                       .fontSize(this.cardTitleSize)
                       .fontWeight(FontWeight.Bold)

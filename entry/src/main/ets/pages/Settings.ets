@@ -13,10 +13,12 @@ export struct Settings {
   @State fontLevel: FontSizeLevel = 'standard';
   @State elderlyMode: boolean = true;
   @State themeMode: ThemeMode = 'night';
+  @State autoThemeEnabled: boolean = true;
   @State dndEnabled: boolean = false;
   @State dndStartHour: number = 22;
   @State dndEndHour: number = 8;
   @State newStockInput: string = '';
+  @State feedUrl: string = 'http://127.0.0.1:8000/api/alerts/latest';
   private navStack: NavPathStack | null = null;
 
   // 字体档驱动字号
@@ -47,10 +49,16 @@ export struct Settings {
     this.broadcastEnabled = await SettingsService.getBroadcastEnabled();
     this.elderlyMode = await SettingsService.getElderlyMode();
     this.fontLevel = await SettingsService.getFontSizeLevel();
-    this.themeMode = await SettingsService.getThemeMode();
+    this.autoThemeEnabled = await SettingsService.getAutoThemeEnabled();
+    if (this.autoThemeEnabled) {
+      this.themeMode = SettingsService.computeAutoThemeMode();
+    } else {
+      this.themeMode = await SettingsService.getThemeMode();
+    }
     this.dndEnabled = await SettingsService.getDndEnabled();
     this.dndStartHour = await SettingsService.getDndStartHour();
     this.dndEndHour = await SettingsService.getDndEndHour();
+    this.feedUrl = await SettingsService.getFeedUrl();
   }
 
   private async addStock(): Promise<void> {
@@ -93,9 +101,46 @@ export struct Settings {
   }
 
   private async toggleThemeMode(isDay: boolean): Promise<void> {
+    // 手动选择夜间/白天时关闭自动主题
+    this.autoThemeEnabled = false;
     this.themeMode = isDay ? 'day' : 'night';
+    await SettingsService.setAutoThemeEnabled(false);
     await SettingsService.setThemeMode(this.themeMode);
-    hilog.info(DOMAIN, TAG, `theme mode set to ${this.themeMode}`);
+    hilog.info(DOMAIN, TAG, `theme mode set to ${this.themeMode}, auto theme disabled`);
+  }
+
+  private async toggleAutoTheme(isOn: boolean): Promise<void> {
+    this.autoThemeEnabled = isOn;
+    await SettingsService.setAutoThemeEnabled(isOn);
+    if (isOn) {
+      this.themeMode = SettingsService.computeAutoThemeMode();
+      hilog.info(DOMAIN, TAG, `auto theme enabled, computed mode: ${this.themeMode}`);
+    } else {
+      hilog.info(DOMAIN, TAG, `auto theme disabled`);
+    }
+  }
+
+  private async adjustDndStartHour(delta: number): Promise<void> {
+    let newHour = this.dndStartHour + delta;
+    if (newHour < 0) { newHour = 23; }
+    if (newHour > 23) { newHour = 0; }
+    this.dndStartHour = newHour;
+    await SettingsService.setDndStartHour(newHour);
+    hilog.info(DOMAIN, TAG, `dnd start hour set to ${newHour}`);
+  }
+
+  private async adjustDndEndHour(delta: number): Promise<void> {
+    let newHour = this.dndEndHour + delta;
+    if (newHour < 0) { newHour = 23; }
+    if (newHour > 23) { newHour = 0; }
+    this.dndEndHour = newHour;
+    await SettingsService.setDndEndHour(newHour);
+    hilog.info(DOMAIN, TAG, `dnd end hour set to ${newHour}`);
+  }
+
+  private async saveFeedUrl(): Promise<void> {
+    await SettingsService.setFeedUrl(this.feedUrl);
+    hilog.info(DOMAIN, TAG, `feed url set to ${this.feedUrl}`);
   }
 
   private async toggleDnd(isOn: boolean): Promise<void> {
@@ -131,7 +176,7 @@ export struct Settings {
 
         Scroll() {
           Column({ space: 24 }) {
-            // ── 显示模式（夜间/白天） ──
+            // ── 显示模式（夜间/白天/自动） ──
             Column({ space: 12 }) {
               Text('显示模式')
                 .fontSize(this.bodySize)
@@ -140,29 +185,41 @@ export struct Settings {
                 .width('100%')
 
               Row() {
-                Button('夜间')
+                Button('自动')
                   .fontSize(this.labelSize)
-                  .fontColor(this.themeMode === 'night' ? Color.White : this.theme.textPrimary)
-                  .backgroundColor(this.themeMode === 'night' ? this.theme.accentGold : this.theme.cardBackground)
+                  .fontColor(this.autoThemeEnabled ? Color.White : this.theme.textPrimary)
+                  .backgroundColor(this.autoThemeEnabled ? this.theme.accentGold : this.theme.cardBackground)
                   .borderWidth(1)
-                  .borderColor(this.themeMode === 'night' ? this.theme.accentGold : this.theme.textSecondary)
+                  .borderColor(this.autoThemeEnabled ? this.theme.accentGold : this.theme.textSecondary)
                   .height(48)
                   .layoutWeight(1)
+                  .onClick(() => this.toggleAutoTheme(true))
+                Button('夜间')
+                  .fontSize(this.labelSize)
+                  .fontColor(!this.autoThemeEnabled && this.themeMode === 'night' ? Color.White : this.theme.textPrimary)
+                  .backgroundColor(!this.autoThemeEnabled && this.themeMode === 'night' ? this.theme.accentGold : this.theme.cardBackground)
+                  .borderWidth(1)
+                  .borderColor(!this.autoThemeEnabled && this.themeMode === 'night' ? this.theme.accentGold : this.theme.textSecondary)
+                  .height(48)
+                  .layoutWeight(1)
+                  .margin({ left: 8 })
                   .onClick(() => this.toggleThemeMode(false))
                 Button('白天')
                   .fontSize(this.labelSize)
-                  .fontColor(this.themeMode === 'day' ? Color.White : this.theme.textPrimary)
-                  .backgroundColor(this.themeMode === 'day' ? this.theme.accentGold : this.theme.cardBackground)
+                  .fontColor(!this.autoThemeEnabled && this.themeMode === 'day' ? Color.White : this.theme.textPrimary)
+                  .backgroundColor(!this.autoThemeEnabled && this.themeMode === 'day' ? this.theme.accentGold : this.theme.cardBackground)
                   .borderWidth(1)
-                  .borderColor(this.themeMode === 'day' ? this.theme.accentGold : this.theme.textSecondary)
+                  .borderColor(!this.autoThemeEnabled && this.themeMode === 'day' ? this.theme.accentGold : this.theme.textSecondary)
                   .height(48)
                   .layoutWeight(1)
-                  .margin({ left: 12 })
+                  .margin({ left: 8 })
                   .onClick(() => this.toggleThemeMode(true))
               }
               .width('100%')
 
-              Text(this.themeMode === 'night' ?
+              Text(this.autoThemeEnabled ?
+                '自动模式：6:00-18:00 白天，18:00-6:00 夜间，随系统时间自动切换' :
+                this.themeMode === 'night' ?
                 '夜间模式：深色底，高对比，护眼省电' :
                 '白天模式：浅色底，清晰明亮，适合日间')
                 .fontSize(this.labelSize)
@@ -227,10 +284,71 @@ export struct Settings {
               .width('100%')
 
               if (this.dndEnabled) {
-                Text(`免打扰时段：${this.dndStartHour}:00 - ${this.dndEndHour}:00`)
-                  .fontSize(this.labelSize)
-                  .fontColor(this.theme.textSecondary)
-                  .width('100%')
+                // 时段调整：开始时间
+                Row() {
+                  Text('开始')
+                    .fontSize(this.labelSize)
+                    .fontColor(this.theme.textSecondary)
+                    .width(60)
+                  Button('-')
+                    .fontSize(this.labelSize)
+                    .fontColor(this.theme.textPrimary)
+                    .backgroundColor(this.theme.pageBackground)
+                    .borderWidth(1)
+                    .borderColor(this.theme.textSecondary)
+                    .width(48)
+                    .height(48)
+                    .onClick(() => this.adjustDndStartHour(-1))
+                  Text(`${this.dndStartHour}:00`)
+                    .fontSize(this.bodySize)
+                    .fontWeight(FontWeight.Bold)
+                    .fontColor(this.theme.accentGold)
+                    .textAlign(TextAlign.Center)
+                    .layoutWeight(1)
+                  Button('+')
+                    .fontSize(this.labelSize)
+                    .fontColor(this.theme.textPrimary)
+                    .backgroundColor(this.theme.pageBackground)
+                    .borderWidth(1)
+                    .borderColor(this.theme.textSecondary)
+                    .width(48)
+                    .height(48)
+                    .onClick(() => this.adjustDndStartHour(1))
+                }
+                .width('100%')
+
+                // 时段调整：结束时间
+                Row() {
+                  Text('结束')
+                    .fontSize(this.labelSize)
+                    .fontColor(this.theme.textSecondary)
+                    .width(60)
+                  Button('-')
+                    .fontSize(this.labelSize)
+                    .fontColor(this.theme.textPrimary)
+                    .backgroundColor(this.theme.pageBackground)
+                    .borderWidth(1)
+                    .borderColor(this.theme.textSecondary)
+                    .width(48)
+                    .height(48)
+                    .onClick(() => this.adjustDndEndHour(-1))
+                  Text(`${this.dndEndHour}:00`)
+                    .fontSize(this.bodySize)
+                    .fontWeight(FontWeight.Bold)
+                    .fontColor(this.theme.accentGold)
+                    .textAlign(TextAlign.Center)
+                    .layoutWeight(1)
+                  Button('+')
+                    .fontSize(this.labelSize)
+                    .fontColor(this.theme.textPrimary)
+                    .backgroundColor(this.theme.pageBackground)
+                    .borderWidth(1)
+                    .borderColor(this.theme.textSecondary)
+                    .width(48)
+                    .height(48)
+                    .onClick(() => this.adjustDndEndHour(1))
+                }
+                .width('100%')
 
                 Text('免打扰时段内，推送通知的自动播报将静默；卡片仍可手动点按收听')
                   .fontSize(this.labelSize)
@@ -379,6 +497,42 @@ export struct Settings {
                 }
                 .width('100%')
               }
+            }
+            .width('100%')
+            .padding(20)
+            .backgroundColor(this.theme.cardBackground)
+            .borderRadius(16)
+
+            // ── 数据源地址 ──
+            Column({ space: 12 }) {
+              Text('数据源地址')
+                .fontSize(this.bodySize)
+                .fontWeight(FontWeight.Bold)
+                .fontColor(this.theme.textPrimary)
+                .width('100%')
+
+              TextInput({ text: this.feedUrl, placeholder: 'http://...' })
+                .fontSize(this.inputSize)
+                .fontColor(this.theme.textPrimary)
+                .placeholderColor(this.theme.textSecondary)
+                .height(48)
+                .width('100%')
+                .onChange((value: string) => {
+                  this.feedUrl = value;
+                })
+
+              Button('保存')
+                .fontSize(this.labelSize)
+                .fontColor(Color.White)
+                .backgroundColor(this.theme.accentGold)
+                .height(48)
+                .width('100%')
+                .onClick(() => this.saveFeedUrl())
+
+              Text('X 服务器落地后替换为正式地址；本机联调可填局域网 IP')
+                .fontSize(this.labelSize)
+                .fontColor(this.theme.textSecondary)
+                .width('100%')
             }
             .width('100%')
             .padding(20)

@@ -1,12 +1,13 @@
 import { http } from '@kit.NetworkKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { AlertItem, AlertFeed } from '../model/AlertItem';
+import { SettingsService } from './SettingsService';
 
 const TAG = 'StockPulse.AlertPoller';
 const DOMAIN = 0x0001;
 
-/** X 服务器地址（采购落地后替换；本机联调可指局域网） */
-const FEED_URL = 'http://127.0.0.1:8000/api/alerts/latest';
+/** 默认 X 服务器地址（可被 SettingsService.getFeedUrl 覆盖） */
+const DEFAULT_FEED_URL = 'http://127.0.0.1:8000/api/alerts/latest';
 
 /** 轮询结果：ok=false 表示网络/HTTP 异常，ok=true 且 items 为空表示"连通但无异动" */
 export interface PollResult {
@@ -34,9 +35,10 @@ export class AlertPoller {
   }
 
   static async fetchLatest(limit: number = 20): Promise<PollResult> {
+    const feedUrl = await SettingsService.getFeedUrl();
     const req = http.createHttp();
     try {
-      const resp = await req.request(`${FEED_URL}?limit=${limit}`, {
+      const resp = await req.request(`${feedUrl}?limit=${limit}`, {
         method: http.RequestMethod.GET,
         connectTimeout: 5000,
         readTimeout: 5000

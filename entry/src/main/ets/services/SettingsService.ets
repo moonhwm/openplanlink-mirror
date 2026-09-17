@@ -14,7 +14,11 @@ const KEY_ELDERLY_MODE = 'elderly_mode';    // 适老化模式，boolean（默�
 const KEY_THEME_MODE = 'theme_mode';        // 显示模式，'night' | 'day'（默认 'night'）
 const KEY_DND_ENABLED = 'dnd_enabled';      // 免打扰开关，boolean（默认 false）
 const KEY_DND_START = 'dnd_start';          // 免打扰开始时段，number（默认 22）
-const KEY_DND_END = 'dnd_end';              // 免打扰结束时段，number（默认 8）
+const KEY_DND_END = 'dnd_end';          // 免打扰结束时段，number（默认 8）
+const KEY_AUTO_THEME = 'auto_theme';      // 自动主题切换，boolean（默认 true）
+const KEY_FEED_URL = 'feed_url';          // 数据源地址，string（默认 http://127.0.0.1:8000/api/alerts/latest）
+const KEY_READ_ALERTS = 'read_alerts';    // 已读异动ID列表，JSON string[]
+const KEY_PLAY_HISTORY = 'play_history';  // 播报历史，JSON Array<{alertId, ts}>
 
 /** 字体档枚举 */
 export type FontSizeLevel = 'standard' | 'large';
@@ -306,4 +310,147 @@ export class SettingsService {
     // 同天时段（如 9:00-18:00）
     return hour >= startHour && hour < endHour;
   }
+
+  // ── 自动主题切换 ──
+
+  static async getAutoThemeEnabled(): Promise<boolean> {
+    if (!SettingsService.pref) {
+      return true;
+    }
+    try {
+      return await SettingsService.pref.get(KEY_AUTO_THEME, true) as boolean;
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, `auto theme read failed: ${(e as Error).message}`);
+      return true;
+    }
+  }
+
+  static async setAutoThemeEnabled(enabled: boolean): Promise<void> {
+    if (!SettingsService.pref) {
+      return;
+    }
+    try {
+      await SettingsService.pref.put(KEY_AUTO_THEME, enabled);
+      await SettingsService.pref.flush();
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, `auto theme write failed: ${(e as Error).message}`);
+    }
+  }
+
+  /** 根据当前系统时间计算应使用的主题模式：6:00-18:00 为白天，18:00-6:00 为夜间 */
+  static computeAutoThemeMode(): ThemeMode {
+    const hour = new Date().getHours();
+    if (hour >= 6 && hour < 18) {
+      return 'day';
+    }
+    return 'night';
+  }
+
+  // ── FEED_URL 配置 ──
+
+  static async getFeedUrl(): Promise<string> {
+    if (!SettingsService.pref) {
+      return 'http://127.0.0.1:8000/api/alerts/latest';
+    }
+    try {
+      return await SettingsService.pref.get(KEY_FEED_URL, 'http://127.0.0.1:8000/api/alerts/latest') as string;
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, `feed url read failed: ${(e as Error).message}`);
+      return 'http://127.0.0.1:8000/api/alerts/latest';
+    }
+  }
+
+  static async setFeedUrl(url: string): Promise<void> {
+    if (!SettingsService.pref) {
+      return;
+    }
+    try {
+      await SettingsService.pref.put(KEY_FEED_URL, url);
+      await SettingsService.pref.flush();
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, `feed url write failed: ${(e as Error).message}`);
+    }
+  }
+
+  // ── 已读异动标记 ──
+
+  static async getReadAlertIds(): Promise<string[]> {
+    if (!SettingsService.pref) {
+      return [];
+    }
+    try {
+      const raw = await SettingsService.pref.get(KEY_READ_ALERTS, '[]') as string;
+      return JSON.parse(raw) as string[];
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, `read alerts read failed: ${(e as Error).message}`);
+      return [];
+    }
+  }
+
+  static async markAlertRead(alertId: string): Promise<void> {
+    if (!SettingsService.pref) {
+      return;
+    }
+    try {
+      const raw = await SettingsService.pref.get(KEY_READ_ALERTS, '[]') as string;
+      const list = JSON.parse(raw) as string[];
+      if (!list.includes(alertId)) {
+        list.push(alertId);
+        // 最多保留 200 条已读记录，防止无限增长
+        if (list.length > 200) {
+          list.splice(0, list.length - 200);
+        }
+        await SettingsService.pref.put(KEY_READ_ALERTS, JSON.stringify(list));
+        await SettingsService.pref.flush();
+      }
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, `mark read failed: ${(e as Error).message}`);
+    }
+  }
+
+  // ── 播报历史 ──
+
+  static async getPlayHistory(): Promise<PlayHistoryItem[]> {
+    if (!SettingsService.pref) {
+      return [];
+    }
+    try {
+      const raw = await SettingsService.pref.get(KEY_PLAY_HISTORY, '[]') as string;
+      return JSON.parse(raw) as PlayHistoryItem[];
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, `play history read failed: ${(e as Error).message}`);
+      return [];
+    }
+  }
+
+  static async addPlayHistory(item: PlayHistoryItem): Promise<void> {
+    if (!SettingsService.pref) {
+      return;
+    }
+    try {
+      const raw = await SettingsService.pref.get(KEY_PLAY_HISTORY, '[]') as string;
+      const list = JSON.parse(raw) as PlayHistoryItem[];
+      // 去重：同一 alertId 只保留最新一条
+      const filtered = list.filter((it) => it.alertId !== item.alertId);
+      filtered.unshift(item);
+      // 最多保留 50 条
+      if (filtered.length > 50) {
+        filtered.splice(50);
+      }
+      await SettingsService.pref.put(KEY_PLAY_HISTORY, JSON.stringify(filtered));
+      await SettingsService.pref.flush();
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, `play history write failed: ${(e as Error).message}`);
+    }
+  }
+}
+
+/** 播报历史条目 */
+export interface PlayHistoryItem {
+  alertId: string;
+  symbol: string;
+  name: string;
+  headline: string;
+  ts: number;       // 播报时间戳
+  alertTs: number;  // 异动原始时间戳
 }
