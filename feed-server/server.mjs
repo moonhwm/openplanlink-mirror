@@ -162,7 +162,8 @@ async function detectAlerts() {
     const detail = `当前价格 ${price.toFixed(2)} 元，涨跌幅 ${zdf.toFixed(2)}%`;
 
     // 生成 alertId（基于内容哈希，确保幂等）
-    const alertId = crypto.createHash('md5').update(`${symbol}-${Date.now()}`).digest('hex').substring(0, 12);
+    // Phase 0 加固（2026-09-18）：从 md5 升级为 sha256，消除碰撞攻击风险
+    const alertId = crypto.createHash('sha256').update(`${symbol}-${Date.now()}`).digest('hex').substring(0, 12);
 
     // 百炼 CosyVoice TTS（WebSocket 协议）
     const audioUrl = await generateTTS(headline, detail, alertId);

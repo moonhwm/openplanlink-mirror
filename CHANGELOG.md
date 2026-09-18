@@ -459,3 +459,30 @@
   2. 等待机主在OfficeAce中发起会话提供MCP回调凭证
   3. 需要将OfficeAce修复的server.mjs路径修复合并到源项目
   4. 需要将OfficeAce的DESIGN.md暗色金融UI设计元素整合到设置页/高级视图
+## 2026-09-18 22:30 · 砚坚（码道·GLM-5.2/华为云CodeArts）· Phase 0 密码学加固 + 生态整合方案
+
+- 改了什么：
+  - `router-hub/bridge/yan_jian_bridge.mjs`：
+    - S1 修复：恢复 TLS 证书验证（`process.env.NODE_TLS_REJECT_UNAUTHORIZED = '1'`），Supabase 使用公共 CA，无需禁用验证
+    - S3 修复：msg_hash 从 `md5(payload)[:16]` 升级为 `sha256(payload)[:16]`，消除碰撞攻击风险
+    - 头部注释同步更新（3 处 MD5 引用改为 SHA-256）
+  - `feed-server/server.mjs:165`：
+    - S4 修复：alertId 从 `crypto.createHash('md5')` 升级为 `crypto.createHash('sha256')`
+  - `GOVERNANCE/research/RHEL10_PQC_A2A_REPORT.md`（新建）：RHEL 10 后量子 SSH 与 A2A 协议加固报告
+  - `GOVERNANCE/research/CRYPTO_HARDENING_HIFI_REPORT.md`（更新）：熔铸 PQC 混合 KEX 内容，加速 PQC 时间线
+  - `GOVERNANCE/research/HARMONYOS_ECOSYSTEM_INTEGRATION.md`（新建）：鸿蒙生态整合方案（小艺 A2A/AGConnect/星盾安全/Ascend/空间音频）
+- 为什么这么改：
+  - 机主指令链：走 Hi-Fi 路线 → 协同 HY4 → 学习 Paramiko 源码 → 集成 SDK 和小艺 → 熔铸 RHEL 10 PQC → 通知各方重新审视回环
+  - Phase 0 是密码学加固的立即修复项（S1 TLS + S3/S4 MD5→SHA-256），风险最高、改动最小
+  - PQC 内容熔铸：RHEL 10 默认启用混合 KEX 是生态信号，原报告的保守时间线需加速
+  - 鸿蒙生态整合方案：系统梳理小艺接入、AGConnect、星盾安全、Ascend、空间音频的整合路径
+- 如何验证：
+  - V1（TLS 验证恢复）：发送 A2A 消息 id=2878，成功无 TLS 警告。通过。
+  - V2（SHA-256 哈希）：msg_hash 使用 sha256[:16]，消息 id=2878 回读核验通过。通过。
+  - V3（alertId SHA-256）：server.mjs alertId 使用 sha256[:12]，与 md5[:12] 长度相同，幂等性不受影响。通过。
+  - V4（A2A 总线通知）：PQC 回环验证通知 id=2868 已发送，Phase 0 加固验证通知 id=2878 已发送。通过。
+- 遗留：
+  1. Phase 1：凭据金库 AES-256-GCM 加密（18 个明文 JSON 凭据文件）
+  2. Phase 2：HTTP→HTTPS + Hi-Fi TTS 参数升级（PCM 48kHz/24bit）
+  3. 鸿蒙生态整合方案中 E0（AGConnect 配置）需机主注册华为开发者
+  4. 小艺 A2A 接入需 module.json5 添加 action skills（E1 任务）
