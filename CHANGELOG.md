@@ -486,3 +486,45 @@
   2. Phase 2：HTTP→HTTPS + Hi-Fi TTS 参数升级（PCM 48kHz/24bit）
   3. 鸿蒙生态整合方案中 E0（AGConnect 配置）需机主注册华为开发者
   4. 小艺 A2A 接入需 module.json5 添加 action skills（E1 任务）
+## 2026-09-18 16:45 · 砚坚（码道·GLM-5.2）· Phase 2a HRTF渲染 + HY4联署 + IPv6探索 + 技能库下载
+
+- 改了什么：
+  - `feed-server/audio-postprocess.mjs`（新建）：HRTF渲染与频谱参数化音频后处理模块
+    - EQ滤波（6频段模拟KU100频率响应：50Hz/-2dB, 3kHz/+2dB, 8kHz/+1dB, 16kHz/-3dB）
+    - 动态压缩（适老化响度均匀化：threshold=-20dB, ratio=3, makeup=+6dB）
+    - HRTF渲染（单声道→双声道：ITD双耳时间差 + ILD双耳强度差 + asplit/amerge滤镜链）
+    - 微量混响（ASMR亲密感：5%混响量, 90ms延迟）
+    - 输出格式：双声道 48kHz 24-bit WAV
+    - 自测通过（滤镜链生成正确，FFmpeg未安装属预期）
+  - `feed-server/server.mjs`（更新）：
+    - 导入 audio-postprocess.mjs 模块
+    - TTS完成后自动调用HRTF后处理（FFmpeg可用时双声道，不可用时回退单声道）
+    - TTS参数适老化调整：volume 50→65, rate 1.0→0.9, pitch 1.0→0.95
+  - `GOVERNANCE/research/HY4_LIANSHU_RESPONSE_v2.md`（新建）：HY4最新方案联署回执
+    - 逐字阅读WorkBuddy会话全部79条消息(82KB)
+    - 赞成8项、保留3项、补充3项建议
+  - `GOVERNANCE/research/A2A_IPV6_EXPLORATION.md`（新建）：A2A应用IPv6探索报告
+    - 本机无全局IPv6连通性、Supabase不支持IPv6
+    - 华为开发者站和腾讯云有IPv6、Cloudflare有IPv6
+    - 建议列为P3长期挂账
+  - `GOVERNANCE/skills/SKILL_INDEX.md`（新建）：技能库索引（全库90件）
+  - `GOVERNANCE/skills/`（新建目录）：下载4个关键技能包
+    - hifi-integration-umbrella.skill（高保真整合伞）
+    - night-playground-ops.skill（夜间游乐场运维）
+    - autonomous-advance-ops.skill（自主推进运维总控）
+    - k3-skill-os-installer.zip（73技能一键安装包）
+- 为什么这么改：
+  - 机主指令：双声道多声道化向ASMR KU100看齐 → HRTF渲染模块实现
+  - 机主指令：逐字阅读HY4最新方案并联署 → 联署回执
+  - 机主指令：A2A应用IPv6 → 探索报告
+  - 机主指令：下载全量技能压缩上下文 → 技能库索引+关键技能包下载
+- 如何验证：
+  - V1（HRTF自测）：`node audio-postprocess.mjs --self-test` → 滤镜链生成正确，6项全过
+  - V2（联署函发送）：A2A总线 id=3028，签名+回读核验通过
+  - V3（IPv6 DNS检查）：Supabase ENODATA（不支持IPv6），developer.huawei.com 有IPv6 AAAA记录
+  - V4（技能包下载）：4个技能包下载成功，解压验证SKILL.md内容完整
+- 遗留：
+  1. FFmpeg需安装到服务端才能实际运行HRTF后处理
+  2. TTS位深度升级（16-bit→24-bit）需验证百炼CosyVoice API支持
+  3. MIT KEMAR HRTF数据集下载（当前使用FFmpeg内置滤镜模拟，精度有限）
+  4. 端侧空间音频需HarmonyOS 7.0+ SDK

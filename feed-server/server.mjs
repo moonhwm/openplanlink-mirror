@@ -18,6 +18,7 @@ import { promisify } from 'node:util';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { postProcessAudio, checkFFmpeg } from './audio-postprocess.mjs';
 
 const execAsync = promisify(exec);
 
@@ -293,9 +294,9 @@ async function generateTTS(headline, detail, alertId) {
               voice: TTS_VOICE,
               format: 'wav',           // Phase 2 Hi-Fi：从 mp3 升级为 wav（无损，AVPlayer 兼容）
               sample_rate: 48000,      // Phase 2 Hi-Fi：从 22050 升级为 48000（专业品质）
-              volume: 50,
-              rate: 1.0,
-              pitch: 1.0,
+              volume: 65,              // Phase 2a KU100对标：适老化响度提升 50→65
+              rate: 0.9,               // Phase 2a KU100对标：适老化语速放缓 1.0→0.9
+              pitch: 0.95,             // Phase 2a KU100对标：音色暖化 1.0→0.95
             },
           },
         }));
@@ -346,8 +347,31 @@ async function generateTTS(headline, detail, alertId) {
             clearTimeout(timeout);
             if (chunks.length > 0) {
               const buffer = Buffer.concat(chunks);
-              fs.writeFileSync(cacheFile, buffer);
-              console.log(`[feed-server] TTS generated ${buffer.length} bytes for ${alertId}`);
+              // 先写入原始单声道文件
+              const rawFile = cacheFile.replace('.wav', '.mono.wav');
+              fs.writeFileSync(rawFile, buffer);
+              console.log(`[feed-server] TTS generated ${buffer.length} bytes (mono) for ${alertId}`);
+
+              // Phase 2a: HRTF 后处理（单声道→双声道 KU100级）
+              const ffmpegOk = await checkFFmpeg();
+              if (ffmpegOk) {
+                console.log('[feed-server] applying HRTF post-processing...');
+                const result = await postProcessAudio(rawFile, cacheFile);
+                if (result.success) {
+                  console.log(`[feed-server] HRTF post-process success: ${cacheFile}`);
+                  // 清理原始单声道文件
+                  try { fs.unlinkSync(rawFile); } catch {}
+                } else {
+                  console.error('[feed-server] HRTF post-process failed, using mono:', result.error);
+                  // 后处理失败，回退为单声道
+                  fs.renameSync(rawFile, cacheFile);
+                }
+              } else {
+                // FFmpeg 不可用，直接使用单声道
+                fs.renameSync(rawFile, cacheFile);
+                console.log('[feed-server] FFmpeg not available, using mono WAV');
+              }
+
               done(`${PROTOCOL}://127.0.0.1:${PORT}/audio/${alertId}.wav`);
             } else {
               console.error('[feed-server] TTS finished but no audio received');
