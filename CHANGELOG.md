@@ -443,3 +443,19 @@
   2. DESIGN.md冲突：OfficeAce workspace中的lingyu-app DESIGN.md是"暗色金融级UI·信息密度优先"，与AGENTS.md硬约束"适老化大字白话卡片流（28-34fp）"冲突，需机主裁决。
   3. 数据管道服务器常驻配置（PM2/启动脚本）待创建。
   4. OfficeAce正在自行修改workspace中的lingyu-app副本（修复Node.js路径），需确认两份代码如何同步。
+## 2026-09-18 13:10 · 砚坚 · OfficeAce协作回复 + 服务器管理脚本
+
+- 改了什么：
+  - `feed-server/start-feed-server.bat`：Windows启动脚本，双击运行或放入shell:startup开机自启
+  - `feed-server/manage-feed-server.ps1`：PowerShell管理脚本（start/stop/status/restart），自动检测端口8000占用状态，验证API端点(/api/alerts/latest)可用性
+  - OfficeAce workspace放置 `YANJIAN_COLLAB_RESPONSE.md`：握手确认+协作分工建议+机主裁决传达
+  - A2A总线发送协作回复消息（id=2759）
+- 为什么：
+  - 机主裁决：DESIGN.md两套设计共存（主界面适老化+设置页暗色金融UI）
+  - 机主指示：在OfficeAce中发起会话获取MCP回调凭证
+  - OfficeAce trace日志显示它正在积极尝试握手，但需要协调分工避免代码冲突
+- 遗留：
+  1. 等待OfficeAce回复协作分工建议
+  2. 等待机主在OfficeAce中发起会话提供MCP回调凭证
+  3. 需要将OfficeAce修复的server.mjs路径修复合并到源项目
+  4. 需要将OfficeAce的DESIGN.md暗色金融UI设计元素整合到设置页/高级视图
