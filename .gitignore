@@ -18,3 +18,6 @@ local.properties
 AppScope/resources/rawfile/agconnect-services.json
 # TTS 音频缓存（运行时生成）
 feed-server/data/
+# Phase 1 加固：凭据金库密钥文件（绝不入库）
+GOVERNANCE/vault-key.hex
+GOVERNANCE/credentials/*.json.enc

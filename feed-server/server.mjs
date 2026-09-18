@@ -50,6 +50,13 @@ function loadBailianKey() {
       'C:/Users/欧阳宏俊/Documents/kimi/tasks/2026-08-27/22-20-45-c3ffff44/GOVERNANCE/credentials/aliyun_bailian.json',
     ];
     for (const credPath of paths) {
+      // Phase 1 加固：优先尝试加密版本（.enc）
+      const encPath = credPath + '.enc';
+      if (fs.existsSync(encPath)) {
+        const cred = decryptVaultFile(encPath);
+        console.log('[feed-server] loaded bailian key (encrypted) from:', encPath);
+        return cred.api_key || '';
+      }
       if (fs.existsSync(credPath)) {
         const cred = JSON.parse(fs.readFileSync(credPath, 'utf-8'));
         console.log('[feed-server] loaded bailian key from:', credPath);
@@ -59,6 +66,32 @@ function loadBailianKey() {
     console.log('[feed-server] bailian credential file not found in any path');
   } catch (e) { console.error('[feed-server] loadBailianKey error:', e.message); }
   return '';
+}
+
+// Phase 1 加固：内联 AES-256-GCM 解密
+function decryptVaultFile(encPath) {
+  const encObj = JSON.parse(fs.readFileSync(encPath, 'utf-8'));
+  if (encObj.version !== 1 || encObj.algo !== 'aes-256-gcm') {
+    throw new Error(`不支持的加密格式: version=${encObj.version}, algo=${encObj.algo}`);
+  }
+  let keyHex = process.env.VAULT_MASTER_KEY;
+  if (!keyHex) {
+    const keyFile = path.join(path.dirname(encPath), '..', 'vault-key.hex');
+    if (fs.existsSync(keyFile)) {
+      keyHex = fs.readFileSync(keyFile, 'utf-8').trim();
+    }
+  }
+  if (!keyHex) {
+    throw new Error('未找到 VAULT_MASTER_KEY 环境变量或 vault-key.hex 文件');
+  }
+  const key = Buffer.from(keyHex, 'hex');
+  const iv = Buffer.from(encObj.iv, 'hex');
+  const data = Buffer.from(encObj.data, 'hex');
+  const tag = Buffer.from(encObj.tag, 'hex');
+  const decipher = crypto.createDecipheriv('aes-256-gcm', key, iv);
+  decipher.setAuthTag(tag);
+  const decrypted = Buffer.concat([decipher.update(data), decipher.final()]);
+  return JSON.parse(decrypted.toString('utf8'));
 }
 
 // 确保缓存目录存在
