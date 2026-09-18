@@ -77,12 +77,12 @@ Paramiko 的密钥交换偏好顺序（`transport.py:214-223`）：
 
 | 组件 | 当前状态 | PQC 准备 | 建议 |
 |------|----------|-----------|------|
-| KEX | Curve25519 最强 | 量子攻击下破解（Shor 算法） | 需引入 PQC KEX（如 Kyber/ML-KEM） |
+| KEX | Curve25519 最强 | 量子攻击下破解（Shor 算法） | **需引入混合 KEX（ML-KEM-768 + X25519）**，RHEL 10 已默认启用 |
 | 加密 | AES-256-GCM | AES-256 量子安全（Grover 算法降为 128-bit） | 已足够，无需更换 |
 | MAC | HMAC-SHA2-512-ETM | SHA-512 量子安全（降为 256-bit） | 已足够 |
-| 签名 | Ed25519 | 量子攻击下破解 | 需引入 PQC 签名（如 Dilithium/ML-DSA） |
+| 签名 | Ed25519 | 量子攻击下破解 | 需引入 PQC 签名（如 Dilithium/ML-DSA），但全行业尚缺标准 |
 
-**结论**：Paramiko 在传统密码学层面已属业界最佳实践水平，但**无任何后量子密码学（PQC）准备**。SSH 协议本身尚未标准化 PQC 扩展，这是行业性缺口而非 Paramiko 特有问题。
+**结论**：Paramiko 在传统密码学层面已属业界最佳实践水平，但**无任何后量子密码学（PQC）准备**。然而，**RHEL 10 已于 2025 年默认启用 `mlkem768x25519-sha256` 混合 KEX**，OpenSSH 10.0 也已默认启用，PQC 从"未来规划"变为"当前现实"。SSH 协议的 PQC 标准化正在快速推进（`draft-ietf-sshm-mlkem-hybrid-kex-10` 即将发布 RFC），Paramiko 需尽快跟进。详见 §三 PQC 熔铸章节。
 
 ---
 
@@ -256,14 +256,93 @@ def _unpad_openssh_constant_time(data):
     return data[:-padding_length]
 ```
 
-### 3.3 后量子准备（L3）
+### 3.3 后量子准备（L3）—— 已从"监控"升级为"立即行动"
 
-| 阶段 | 时间 | 行动 | 依赖 |
+**重大变更**：RHEL 10 默认启用 `mlkem768x25519-sha256` 混合 KEX，OpenSSH 10.0 默认启用混合 KEX，PQC 已从"未来规划"变为"当前现实"。原保守时间线需全面加速。
+
+| 阶段 | 原计划时间 | **修订时间** | 行动 | 依赖 |
+|------|-----------|-------------|------|------|
+| ~~监控~~ → **采纳** | ~~2026-2027~~ | **立即** | 所有 Linux 服务器 SSH 升级到支持混合 KEX 的 OpenSSH 9.0+ | OpenSSH 9.0+ |
+| ~~评估~~ → **试点** | ~~2027~~ | **2026 Q4** | 在 A2A 席位间测试 SSH 混合 KEX 隧道 | OpenSSH 10.0+（默认启用） |
+| ~~试点~~ → **部署** | ~~2028~~ | **2027 Q1** | 生产环境启用 PQC 混合 KEX | 全面验证通过 |
+| ~~部署~~ → **创新** | ~~2029+~~ | **2027 Q2+** | A2A 应用层混合 KEX 原型（ML-KEM-768 + X25519） | liboqs-node |
+
+**混合 KEX 工作原理**（`mlkem768x25519-sha256`）：
+
+```
+客户端                          服务端
+  |                               |
+  |--- ML-KEM-768 公钥 + X25519 公钥 --->|
+  |                               |
+  |<-- ML-KEM-768 密文 + X25519 公钥 ----|
+  |                               |
+  |  ss_pq = ML-KEM 解封装        |  ss_pq = ML-KEM 解封装
+  |  ss_classic = X25519 ECDH     |  ss_classic = X25519 ECDH
+  |                               |
+  |  session_key = SHA256(ss_pq || ss_classic)
+  |                               |
+  |  只要任意一路未被攻破 → 安全   |
+```
+
+**三个混合算法变体**：
+
+| 方法名 | 经典 KEX | 后量子 KEM | NIST 安全等级 | 适用场景 |
+|--------|----------|-----------|--------------|----------|
+| `mlkem768x25519-sha256` | X25519 | ML-KEM-768 | Level 1 (128-bit) | **基准组合，RHEL 10 默认** |
+| `mlkem1024nistp384-sha384` | NIST P-384 | ML-KEM-1024 | Level 5 (256-bit) | 最高安全等级，政府/军事 |
+| `mlkem768nistp256-sha256` | NIST P-256 | ML-KEM-768 | Level 1/3 混合 | 兼容 NIST 曲线体系 |
+
+**Paramiko PQC 升级路径**：
+
+```python
+# 概念：Paramiko 混合 KEX 扩展
+from paramiko.kex_curve25519 import KexCurve25519
+# from paramiko.kex_mlkem_x25519 import KexMLKEM768X25519  # 未来新增
+
+class Transport:
+    _preferred_kex = (
+        "mlkem768x25519-sha256",        # 新增：混合 PQC（最高优先级）
+        "curve25519-sha256@libssh.org",  # 现有：经典最强
+        "ecdh-sha2-nistp256",
+        ...
+    )
+```
+
+**实施依赖**：
+- `liboqs-python`（Open Quantum Safe 的 Python 绑定）
+- `cryptography` 库的 ML-KEM 支持（预计 2027 年）
+- SSH PQC KEX RFC 最终发布（`draft-ietf-sshm-mlkem-hybrid-kex-10` 即将发布）
+
+**A2A 协议 PQC 加固三层方案**：
+
+| 层级 | 方案 | 时间 | 说明 |
 |------|------|------|------|
-| 监控 | 2026-2027 | 跟踪 NIST PQC 标准化进展（ML-KEM/ML-DSA 已 finalized） | 无 |
-| 评估 | 2027 | 评估 hybrid KEX 方案（经典+PQC 双算法） | SSH 协议 PQC 扩展 RFC |
-| 试点 | 2028 | 在非生产环境测试 PQC KEX | Paramiko/OpenSSH PQC 支持 |
-| 部署 | 2029+ | 生产环境启用 PQC | 全面验证通过 |
+| **层级一：SSH 运维通道** | 所有 SSH 连接升级到混合 KEX | 立即 | OpenSSH 9.0+ 手动启用，10.0+ 默认 |
+| **层级二：A2A 总线传输层** | SSH 隧道为 A2A 总线提供 PQC 保护 | 2026 Q4 | TLS PQC 尚未默认，用 SSH 隧道过渡 |
+| **层级三：应用层混合 KEX** | A2A 应用层实现 ML-KEM-768 + X25519 | 2027 Q2+ | 需 liboqs-node，创新方案 |
+
+**"回环"验证方案**：
+
+机主提到的"回环"（Loopback）在密码学语境中：
+- **近端回环**：席位内部消息回环测试（发送→接收→验证哈希一致性）
+- **远端回环**：席位间回环测试（A发送→B接收→B回复→A验证）
+
+PQC 回环验证：
+```
+席位A → 发送 PQC 混合 KEX 发起消息 → 席位B
+席位B → 回环：PQC 混合 KEX 响应 → 席位A
+席位A → 验证：ss_pq 一致 + ss_classic 一致 + session_key 一致 → 回环通过
+```
+
+**"还差什么"五个缺口**（在 A2A 协议中的表现）：
+
+| 缺口 | A2A 中的表现 | 解决方案 |
+|------|-------------|----------|
+| 统一互操作标准 | 不同 SSH 实现的 PQC 算法命名不一致 | 跟随 IETF draft-ietf-sshm-mlkem-hybrid-kex 标准化 |
+| MTU 分片优化 | ML-KEM-768 公钥 1184 bytes vs X25519 公钥 32 bytes | SSH 协议已有分片机制（RFC 4253 §6.1） |
+| 大规模部署验证 | 多席位同时握手可能导致 CPU 峰值 | ML-KEM-768 封装/解封装 ~0.1ms，可接受 |
+| 动态密钥管理 | PQC 密钥的生成、存储、轮换 | 借鉴 Paramiko 的 bcrypt KDF + AES-CBC 私钥保护 |
+| 撤销方案 | 席位退出时需撤销其密钥 | A2A 总线增加密钥撤销列表（CRL）机制 |
 
 ---
 
@@ -348,7 +427,7 @@ parameters: {
 | **Phase 1** | 1周内 | S2: 凭据金库 AES-256-GCM 加密 + S4: alertId SHA-256 | 🔴 |
 | **Phase 2** | 2周内 | M1: HTTP→HTTPS + Hi-Fi: TTS 参数升级（PCM 48kHz） | 🟠 |
 | **Phase 3** | 1月内 | M2: 密钥轮换机制 + M3: API Key 传输优化 | 🟡 |
-| **Phase 4** | 持续 | L3: PQC 监控 + Paramiko padding PR | 🟢 |
+| **Phase 4** | ~~持续~~ → **立即+持续** | ~~L3: PQC 监控~~ → **PQC 混合 KEX 立即采纳**：Linux SSH 升级 + A2A SSH 隧道过渡 + Paramiko padding PR | 🔴→🟢 |
 
 ---
 
@@ -361,4 +440,4 @@ parameters: {
 
 ---
 
-*本报告基于 Paramiko 5.0.0 源码实证分析，所有代码引用均可溯源至具体文件和行号。*
+*本报告基于 Paramiko 5.0.0 源码实证分析，所有代码引用均可溯源至具体文件和行号。PQC 混合 KEX 内容已熔铸（2026-09-18 修订），依据 RHEL 10 默认启用 `mlkem768x25519-sha256` 和 OpenSSH 10.0 默认启用混合 KEX 的生态信号，详见 `RHEL10_PQC_A2A_REPORT.md`。*
