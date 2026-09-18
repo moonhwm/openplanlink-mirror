@@ -12,6 +12,7 @@
  */
 
 import http from 'node:http';
+import https from 'node:https';
 import { exec } from 'node:child_process';
 import { promisify } from 'node:util';
 import fs from 'node:fs';
@@ -235,10 +236,10 @@ async function detectAlerts() {
  * 8. 关闭连接
  */
 async function generateTTS(headline, detail, alertId) {
-  // 检查缓存
-  const cacheFile = path.join(TTS_CACHE_DIR, `${alertId}.mp3`);
+  // 检查缓存（Phase 2 Hi-Fi：.mp3 → .wav）
+  const cacheFile = path.join(TTS_CACHE_DIR, `${alertId}.wav`);
   if (fs.existsSync(cacheFile)) {
-    return `http://127.0.0.1:${PORT}/audio/${alertId}.mp3`;
+    return `${PROTOCOL}://127.0.0.1:${PORT}/audio/${alertId}.wav`;
   }
 
   if (!BAILIAN_API_KEY) {
@@ -290,8 +291,8 @@ async function generateTTS(headline, detail, alertId) {
             parameters: {
               text_type: 'PlainText',
               voice: TTS_VOICE,
-              format: 'mp3',
-              sample_rate: 22050,
+              format: 'wav',           // Phase 2 Hi-Fi：从 mp3 升级为 wav（无损，AVPlayer 兼容）
+              sample_rate: 48000,      // Phase 2 Hi-Fi：从 22050 升级为 48000（专业品质）
               volume: 50,
               rate: 1.0,
               pitch: 1.0,
@@ -347,7 +348,7 @@ async function generateTTS(headline, detail, alertId) {
               const buffer = Buffer.concat(chunks);
               fs.writeFileSync(cacheFile, buffer);
               console.log(`[feed-server] TTS generated ${buffer.length} bytes for ${alertId}`);
-              done(`http://127.0.0.1:${PORT}/audio/${alertId}.mp3`);
+              done(`${PROTOCOL}://127.0.0.1:${PORT}/audio/${alertId}.wav`);
             } else {
               console.error('[feed-server] TTS finished but no audio received');
               done(undefined);
@@ -394,9 +395,35 @@ async function refresh() {
 }
 
 /**
- * HTTP 服务器
+ * HTTP/HTTPS 服务器
+ * Phase 2 加固（2026-09-18）：支持可选 HTTPS，本地开发用 HTTP，生产用 HTTPS
+ * HTTPS 启用条件：GOVERNANCE/certs/server-key.pem 和 server-cert.pem 存在
  */
-const server = http.createServer(async (req, res) => {
+const USE_HTTPS = process.env.FEED_SERVER_HTTPS === '1';
+const CERT_DIR = path.join(import.meta.dirname, '..', '..', '..', 'GOVERNANCE', 'certs');
+const HTTPS_KEY_PATH = path.join(CERT_DIR, 'server-key.pem');
+const HTTPS_CERT_PATH = path.join(CERT_DIR, 'server-cert.pem');
+const PROTOCOL = (USE_HTTPS && fs.existsSync(HTTPS_KEY_PATH) && fs.existsSync(HTTPS_CERT_PATH)) ? 'https' : 'http';
+const HTTPS_CERT_PATH = path.join(CERT_DIR, 'server-cert.pem');
+
+let server;
+if (USE_HTTPS && fs.existsSync(HTTPS_KEY_PATH) && fs.existsSync(HTTPS_CERT_PATH)) {
+  const tlsOptions = {
+    key: fs.readFileSync(HTTPS_KEY_PATH),
+    cert: fs.readFileSync(HTTPS_CERT_PATH),
+    minVersion: 'TLSv1.2',  // 借鉴 Paramiko 禁用弱协议的做法
+  };
+  server = https.createServer(tlsOptions, requestHandler);
+  console.log('[feed-server] HTTPS 模式已启用');
+} else {
+  server = http.createServer(requestHandler);
+  if (USE_HTTPS) {
+    console.warn('[feed-server] ⚠ HTTPS 已请求但证书文件不存在，降级到 HTTP');
+  }
+}
+
+// 请求处理函数（HTTP 和 HTTPS 共用）
+function requestHandler(req, res) {
   const url = new URL(req.url, `http://127.0.0.1:${PORT}`);
 
   // CORS 头
@@ -428,7 +455,7 @@ const server = http.createServer(async (req, res) => {
     if (fs.existsSync(filePath)) {
       const stat = fs.statSync(filePath);
       res.writeHead(200, {
-        'Content-Type': 'audio/mpeg',
+        'Content-Type': 'audio/wav',  // Phase 2 Hi-Fi：从 audio/mpeg 改为 audio/wav
         'Content-Length': stat.size,
       });
       fs.createReadStream(filePath).pipe(res);
@@ -454,14 +481,15 @@ const server = http.createServer(async (req, res) => {
   // 404
   res.writeHead(404, { 'Content-Type': 'application/json' });
   res.end(JSON.stringify({ error: 'not found' }));
-});
+}
 
 // 启动
+
 server.listen(PORT, '127.0.0.1', async () => {
-  console.log(`[feed-server] 铃语数据管道服务器已启动 → http://127.0.0.1:${PORT}`);
-  console.log(`[feed-server] AlertFeed API → http://127.0.0.1:${PORT}/api/alerts/latest`);
+  console.log(`[feed-server] 铃语数据管道服务器已启动 → ${PROTOCOL}://127.0.0.1:${PORT}`);
+  console.log(`[feed-server] AlertFeed API → ${PROTOCOL}://127.0.0.1:${PORT}/api/alerts/latest`);
   console.log(`[feed-server] 异动阈值 → ${THRESHOLD}%`);
-  console.log(`[feed-server] TTS → ${BAILIAN_API_KEY ? '百炼 cosyvoice-v3-flash' : '未配置 DASHSCOPE_API_KEY'}`);
+  console.log(`[feed-server] TTS → ${BAILIAN_API_KEY ? '百炼 cosyvoice-v3-flash (Hi-Fi: WAV 48kHz)' : '未配置 DASHSCOPE_API_KEY'}`);
   
   // 首次刷新
   await refresh();
