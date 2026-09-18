@@ -26,6 +26,13 @@
           },
           {
             "actions": ["action.ohos.push.listener"]
+          },
+          {
+            "actions": [
+              "com.yehang.stockpulse.QUERY_ALERTS",
+              "com.yehang.stockpulse.DETAIL_ALERT",
+              "com.yehang.stockpulse.PLAY_AUDIO"
+            ]
           }
         ]
       }

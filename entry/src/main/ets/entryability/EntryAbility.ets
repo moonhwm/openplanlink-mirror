@@ -46,6 +46,26 @@ export default class EntryAbility extends UIAbility {
     if (alertId) {
       AppStorage.setOrCreate('pendingAlertId', alertId);
     }
+
+    // 小艺 A2A 接入（E1）：处理小艺语音助手的 action 请求
+    const action = want?.action;
+    if (action === 'com.yehang.stockpulse.QUERY_ALERTS') {
+      // 小艺查询异动列表 → 设置标志让 Index 页面返回异动摘要
+      AppStorage.setOrCreate('xiaoYiQuery', true);
+    } else if (action === 'com.yehang.stockpulse.DETAIL_ALERT') {
+      // 小艺查询指定异动详情 → 设置 alertId 自动播报
+      const xiaoYiAlertId = want?.parameters?.alertId as string | undefined;
+      if (xiaoYiAlertId) {
+        AppStorage.setOrCreate('pendingAlertId', xiaoYiAlertId);
+      }
+    } else if (action === 'com.yehang.stockpulse.PLAY_AUDIO') {
+      // 小艺请求直接播放指定异动的 TTS 音频
+      const playAlertId = want?.parameters?.alertId as string | undefined;
+      if (playAlertId) {
+        AppStorage.setOrCreate('pendingAlertId', playAlertId);
+        AppStorage.setOrCreate('autoPlay', true);
+      }
+    }
   }
 
   onForeground(): void {
