@@ -428,3 +428,18 @@
   1. 自动主题切换在 App 长时间运行时不会自动检测时间变化（需重启或切后台再切前台触发 loadSettings）——可后续加定时器每小时检查一次。
   2. 播报历史 UI 展示页面尚未实装（数据已记录，展示待后续迭代）。
   3. 真机/模拟器验证仍阻塞。
+## 2026-09-18 · 砚坚（码道·GLM-5.2）· 百炼TTS WebSocket修复 + OfficeAce握手探索
+
+- 改了什么：
+  - `feed-server/server.mjs`：百炼CosyVoice TTS从HTTP REST API改为WebSocket协议（`wss://{workspaceId}.cn-beijing.maas.aliyuncs.com/api-ws/v1/inference`）。原HTTP POST方式返回400 "task can not be null"，CosyVoice只支持WebSocket duplex流式协议。新增 `BAILIAN_WORKSPACE_ID` 和 `TTS_WSS_URL` 常量；`generateTTS` 函数完全重写为WebSocket交互（run-task → task-started → continue-task + finish-task → result-generated binary frames → task-finished）；关键修复 `ws.binaryType = 'arraybuffer'` 确保二进制音频帧正确接收；启用TTS调用（之前被注释掉）。
+  - `.gitignore`：新增 `feed-server/data/` 排除TTS音频缓存文件。
+- 为什么：
+  - 百炼CosyVoice不支持HTTP REST，只支持WebSocket duplex协议。之前代码用HTTP POST导致400错误，TTS功能完全不可用。
+  - 机主指令"自主先在一小时内烧完1M免费阿里额度进行加速"要求TTS必须立即可用。
+- 如何验证：
+  - 启动数据管道服务器后，检测到16条异动并成功生成8+个MP3音频文件（每个120-150KB），音色 longxiaochun_v3。通过。
+- 遗留：
+  1. OfficeAce握手：MCP collab server的26个工具调用需要三个回调凭证（OFFICE_CLAW_API_URL/INVOCATION_ID/CALLBACK_TOKEN），这些由OfficeAce动态注入，无法从外部获取。需机主在OfficeAce中发起会话或提供凭证。
+  2. DESIGN.md冲突：OfficeAce workspace中的lingyu-app DESIGN.md是"暗色金融级UI·信息密度优先"，与AGENTS.md硬约束"适老化大字白话卡片流（28-34fp）"冲突，需机主裁决。
+  3. 数据管道服务器常驻配置（PM2/启动脚本）待创建。
+  4. OfficeAce正在自行修改workspace中的lingyu-app副本（修复Node.js路径），需确认两份代码如何同步。

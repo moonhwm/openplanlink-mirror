@@ -37,6 +37,8 @@ const EXEC_ENV = {
 
 // 百炼 TTS 配置（从环境变量或金库文件读取）
 const BAILIAN_API_KEY = process.env.DASHSCOPE_API_KEY || loadBailianKey();
+const BAILIAN_WORKSPACE_ID = 'ws-ay6o8osb22o9dc3t';
+const TTS_WSS_URL = `wss://${BAILIAN_WORKSPACE_ID}.cn-beijing.maas.aliyuncs.com/api-ws/v1/inference`;
 const TTS_MODEL = 'cosyvoice-v3-flash';
 const TTS_VOICE = 'longxiaochun_v3';
 
@@ -162,8 +164,8 @@ async function detectAlerts() {
     // 生成 alertId（基于内容哈希，确保幂等）
     const alertId = crypto.createHash('md5').update(`${symbol}-${Date.now()}`).digest('hex').substring(0, 12);
 
-    // TTS 暂时跳过（百炼 API 格式待调试），先保证数据管道畅通
-    const audioUrl = undefined; // await generateTTS(headline, detail, alertId);
+    // 百炼 CosyVoice TTS（WebSocket 协议）
+    const audioUrl = await generateTTS(headline, detail, alertId);
 
     alerts.push({
       alertId,
@@ -186,7 +188,17 @@ async function detectAlerts() {
 }
 
 /**
- * 调用百炼 TTS API 生成语音
+ * 调用百炼 CosyVoice TTS API（WebSocket 协议）生成语音
+ * 
+ * 交互流程：
+ * 1. 建立 WebSocket 连接
+ * 2. 发送 run-task 事件（设置模型、音色等参数）
+ * 3. 等待 task-started 事件
+ * 4. 发送 continue-task 事件（发送待合成文本）
+ * 5. 接收 result-generated 事件和音频流（binary frames）
+ * 6. 发送 finish-task 事件
+ * 7. 接收 task-finished 事件
+ * 8. 关闭连接
  */
 async function generateTTS(headline, detail, alertId) {
   // 检查缓存
@@ -200,34 +212,139 @@ async function generateTTS(headline, detail, alertId) {
     return undefined;
   }
 
-  try {
-    const text = `${headline}。${detail}`;
-    const response = await fetch('https://dashscope.aliyuncs.com/api/v1/services/audio/tts', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${BAILIAN_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: TTS_MODEL,
-        input: { text },
-        parameters: { voice: TTS_VOICE, format: 'mp3' },
-      }),
-    });
+  const text = `${headline}。${detail}`;
+  const taskId = crypto.randomUUID();
 
-    if (!response.ok) {
-      console.error(`[feed-server] TTS API ${response.status}: ${await response.text()}`);
-      return undefined;
+  return new Promise((resolve) => {
+    const chunks = [];
+    let resolved = false;
+    const done = (result) => {
+      if (!resolved) { resolved = true; resolve(result); }
+    };
+
+    try {
+      // Node.js v22 内置 WebSocket
+      const ws = new WebSocket(TTS_WSS_URL, {
+        headers: {
+          'Authorization': `Bearer ${BAILIAN_API_KEY}`,
+        },
+      });
+      // 确保 binary 消息以 ArrayBuffer 形式接收（默认可能是 Blob）
+      ws.binaryType = 'arraybuffer';
+
+      const timeout = setTimeout(() => {
+        console.error('[feed-server] TTS WebSocket timeout');
+        try { ws.close(); } catch {}
+        done(undefined);
+      }, 30000);
+
+      ws.addEventListener('open', () => {
+        console.log('[feed-server] TTS WebSocket connected, sending run-task');
+        // 步骤2: 发送 run-task 事件
+        ws.send(JSON.stringify({
+          header: {
+            action: 'run-task',
+            task_id: taskId,
+            streaming: 'duplex',
+          },
+          payload: {
+            task_group: 'audio',
+            task: 'tts',
+            function: 'SpeechSynthesizer',
+            model: TTS_MODEL,
+            input: {},
+            parameters: {
+              text_type: 'PlainText',
+              voice: TTS_VOICE,
+              format: 'mp3',
+              sample_rate: 22050,
+              volume: 50,
+              rate: 1.0,
+              pitch: 1.0,
+            },
+          },
+        }));
+      });
+
+      ws.addEventListener('message', (event) => {
+        // 区分二进制音频帧和文本事件
+        if (event.data instanceof ArrayBuffer) {
+          // 步骤5: 接收音频流（binary frames）
+          chunks.push(Buffer.from(event.data));
+          return;
+        }
+        // 文本消息 = 服务端事件
+        try {
+          const msg = JSON.parse(event.data);
+          const action = msg?.header?.event;
+
+          if (action === 'task-started') {
+            console.log('[feed-server] TTS task-started, sending text');
+            // 步骤4: 发送 continue-task 事件（待合成文本）
+            ws.send(JSON.stringify({
+              header: {
+                action: 'continue-task',
+                task_id: taskId,
+                streaming: 'duplex',
+              },
+              payload: {
+                input: { text },
+              },
+            }));
+            // 步骤6: 发送 finish-task 事件（通知文本发送完毕）
+            ws.send(JSON.stringify({
+              header: {
+                action: 'finish-task',
+                task_id: taskId,
+                streaming: 'duplex',
+              },
+              payload: {
+                input: {},
+              },
+            }));
+          } else if (action === 'result-generated') {
+            const subType = msg?.payload?.output?.type;
+            console.log(`[feed-server] TTS result-generated: ${subType}`);
+            // sentence-synthesis 后紧跟 binary 音频帧
+          } else if (action === 'task-finished') {
+            console.log('[feed-server] TTS task-finished');
+            clearTimeout(timeout);
+            if (chunks.length > 0) {
+              const buffer = Buffer.concat(chunks);
+              fs.writeFileSync(cacheFile, buffer);
+              console.log(`[feed-server] TTS generated ${buffer.length} bytes for ${alertId}`);
+              done(`http://127.0.0.1:${PORT}/audio/${alertId}.mp3`);
+            } else {
+              console.error('[feed-server] TTS finished but no audio received');
+              done(undefined);
+            }
+            try { ws.close(); } catch {}
+          } else if (action === 'task-failed') {
+            console.error('[feed-server] TTS task-failed:', JSON.stringify(msg?.header));
+            clearTimeout(timeout);
+            done(undefined);
+            try { ws.close(); } catch {}
+          }
+        } catch (e) {
+          // 非 JSON 消息，忽略
+        }
+      });
+
+      ws.addEventListener('error', (event) => {
+        console.error('[feed-server] TTS WebSocket error:', event.message || event);
+        clearTimeout(timeout);
+        done(undefined);
+      });
+
+      ws.addEventListener('close', () => {
+        clearTimeout(timeout);
+        done(undefined);
+      });
+    } catch (e) {
+      console.error('[feed-server] TTS WebSocket init failed:', e.message);
+      done(undefined);
     }
-
-    const buffer = Buffer.from(await response.arrayBuffer());
-    fs.writeFileSync(cacheFile, buffer);
-    console.log(`[feed-server] TTS generated for ${alertId}`);
-    return `http://127.0.0.1:${PORT}/audio/${alertId}.mp3`;
-  } catch (e) {
-    console.error('[feed-server] TTS failed:', e.message);
-    return undefined;
-  }
+  });
 }
 
 /**

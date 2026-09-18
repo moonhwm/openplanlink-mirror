@@ -16,3 +16,5 @@ local.properties
 .DS_Store
 # AGC 配置文件（含敏感凭证，每开发者自行下载）
 AppScope/resources/rawfile/agconnect-services.json
+# TTS 音频缓存（运行时生成）
+feed-server/data/
