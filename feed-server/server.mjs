@@ -44,6 +44,57 @@ const TTS_WSS_URL = `wss://${BAILIAN_WORKSPACE_ID}.cn-beijing.maas.aliyuncs.com/
 const TTS_MODEL = 'cosyvoice-v3-flash';
 const TTS_VOICE = 'longxiaochun_v3';
 
+// 百炼额度监控模块（T1.3/T1.4——落地路线图P0任务）
+const BAILIAN_QUOTA = {
+  totalEstimated: 1000000, // 估计1M tokens免费额度
+  usedTokens: 0,
+  warningThreshold: 0.8,   // 80%预警
+  stopThreshold: 1.0,      // 100%止损
+  lastCheckTs: 0,
+  history: [],              // [{ts, usedTokens, estimate}]
+  
+  // 记录TTS调用消耗（粗略估算：每字约2-3 tokens）
+  recordUsage(textLength) {
+    const estimatedTokens = Math.ceil(textLength * 2.5);
+    this.usedTokens += estimatedTokens;
+    this.lastCheckTs = Date.now();
+    this.history.push({
+      ts: new Date().toISOString(),
+      usedTokens: this.usedTokens,
+      estimate: estimatedTokens,
+    });
+    // 保留最近100条历史
+    if (this.history.length > 100) this.history.shift();
+    
+    const ratio = this.usedTokens / this.totalEstimated;
+    if (ratio >= this.stopThreshold) {
+      console.error(`[feed-server] ⚠ 百炼额度止损! 已用 ${this.usedTokens}/${this.totalEstimated} tokens (${(ratio*100).toFixed(1)}%)`);
+    } else if (ratio >= this.warningThreshold) {
+      console.warn(`[feed-server] ⚠ 百炼额度预警: 已用 ${this.usedTokens}/${this.totalEstimated} tokens (${(ratio*100).toFixed(1)}%)`);
+    }
+  },
+  
+  // 获取额度状态
+  getStatus() {
+    const ratio = this.usedTokens / this.totalEstimated;
+    let level = 'normal';
+    if (ratio >= this.stopThreshold) level = 'stop';
+    else if (ratio >= this.warningThreshold) level = 'warning';
+    return {
+      level,
+      usedTokens: this.usedTokens,
+      totalEstimated: this.totalEstimated,
+      usageRatio: parseFloat(ratio.toFixed(4)),
+      lastCheckTs: new Date(this.lastCheckTs).toISOString(),
+    };
+  },
+  
+  // 是否应该停止TTS调用
+  shouldStop() {
+    return this.usedTokens / this.totalEstimated >= this.stopThreshold;
+  },
+};
+
 function loadBailianKey() {
   try {
     // 尝试多个可能的路径
@@ -196,6 +247,20 @@ async function detectAlerts() {
     const headline = `${name} ${direction === 'up' ? '涨了' : '跌了'} ${Math.abs(zdf).toFixed(1)}%`;
     const detail = `当前价格 ${price.toFixed(2)} 元，涨跌幅 ${zdf.toFixed(2)}%`;
 
+    // 信号卡判断（AGENTS.md §二.2 信号松绑）
+    // 涨跌幅≥8%时标记为信号卡，附带白话解读（禁收益承诺/催促/公开）
+    let kind = 'fact';
+    let signalNote = undefined;
+    if (Math.abs(zdf) >= 8.0) {
+      kind = 'signal';
+      // 白话解读——遵循三禁：不承诺收益、不催促、不公开
+      if (zdf > 0) {
+        signalNote = `${name}涨幅较大，留意后续走势`;
+      } else {
+        signalNote = `${name}跌幅较大，注意风险`;
+      }
+    }
+
     // 生成 alertId（基于内容哈希，确保幂等）
     // Phase 0 加固（2026-09-18）：从 md5 升级为 sha256，消除碰撞攻击风险
     const alertId = crypto.createHash('sha256').update(`${symbol}-${Date.now()}`).digest('hex').substring(0, 12);
@@ -209,10 +274,11 @@ async function detectAlerts() {
       symbol,
       name,
       direction,
-      kind: 'fact',
+      kind,
       headline,
       detail,
       audioUrl,
+      ...(signalNote ? { signalNote } : {}),
     });
 
     // 最多 20 条
@@ -248,7 +314,15 @@ async function generateTTS(headline, detail, alertId) {
     return undefined;
   }
 
+  // 百炼额度检查——止损时跳过TTS
+  if (BAILIAN_QUOTA.shouldStop()) {
+    console.warn('[feed-server] 百炼额度已超止损线，跳过TTS生成');
+    return undefined;
+  }
+
   const text = `${headline}。${detail}`;
+  // 记录百炼额度消耗
+  BAILIAN_QUOTA.recordUsage(text.length);
   const taskId = crypto.randomUUID();
 
   return new Promise((resolve) => {
@@ -302,7 +376,7 @@ async function generateTTS(headline, detail, alertId) {
         }));
       });
 
-      ws.addEventListener('message', (event) => {
+      ws.addEventListener('message', async (event) => {
         // 区分二进制音频帧和文本事件
         if (event.data instanceof ArrayBuffer) {
           // 步骤5: 接收音频流（binary frames）
@@ -428,7 +502,7 @@ const CERT_DIR = path.join(import.meta.dirname, '..', '..', '..', 'GOVERNANCE', 
 const HTTPS_KEY_PATH = path.join(CERT_DIR, 'server-key.pem');
 const HTTPS_CERT_PATH = path.join(CERT_DIR, 'server-cert.pem');
 const PROTOCOL = (USE_HTTPS && fs.existsSync(HTTPS_KEY_PATH) && fs.existsSync(HTTPS_CERT_PATH)) ? 'https' : 'http';
-const HTTPS_CERT_PATH = path.join(CERT_DIR, 'server-cert.pem');
+
 
 let server;
 if (USE_HTTPS && fs.existsSync(HTTPS_KEY_PATH) && fs.existsSync(HTTPS_CERT_PATH)) {
@@ -461,14 +535,26 @@ function requestHandler(req, res) {
     return;
   }
 
-  // 健康检查
+  // 健康检查（增强版——返回百炼额度状态+运维信息）
   if (url.pathname === '/health') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({
       ok: true,
       alerts: cachedAlerts.length,
       lastRefresh: new Date(lastRefreshTs).toISOString(),
+      bailian: BAILIAN_QUOTA.getStatus(),
+      ttsEnabled: !!BAILIAN_API_KEY,
+      ttsModel: TTS_MODEL,
+      threshold: THRESHOLD,
+      protocol: PROTOCOL,
     }));
+    return;
+  }
+
+  // 百炼额度状态端点
+  if (url.pathname === '/api/quota') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(BAILIAN_QUOTA.getStatus()));
     return;
   }
 

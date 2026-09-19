@@ -685,3 +685,28 @@
   2. Phase 5: 交接协议验证——需模拟替代角色接续
   3. Phase 8: 知识资产移植工具原型——需实现资产盘点+打包+导入
   4. AI共同体各方攻关产出待提交（7天时限）
+## 2026-09-19 24:00 · 砚坚（码道·GLM-5.2/华为云CodeArts）· 治理下应用合理拓展——额度监控+信号卡+健康检查增强
+
+- 改了什么：
+  - `feed-server/server.mjs`：
+    - **修复**：删除重复声明的 `HTTPS_CERT_PATH`（第431行原重复声明）
+    - **新增百炼额度监控模块(BAILIAN_QUOTA)**：1M tokens免费额度估算+80%预警+100%止损+用量历史记录+getStatus()+shouldStop()
+    - **新增信号卡支持**：涨跌幅≥8%时kind='signal'+signalNote白话解读（遵循三禁：不承诺收益/不催促/不公开）
+    - **增强健康检查端点**：/health返回百炼额度状态+ttsEnabled+ttsModel+threshold+protocol
+    - **新增/api/quota端点**：专门查询百炼额度状态
+    - **修复**：ws.addEventListener('message')回调改为async以支持await
+  - `GOVERNANCE/build-search-index.mjs`：纯JS倒排索引（替代FTS5，Node.js v22不支持FTS5扩展）
+- 为什么这么改：
+  - 机主指令"自主协同自身工作，扩展相关治理下对应用的任何合理拓展"
+  - 百炼额度监控是落地路线图P0任务(T1.3/T1.4)——防止免费额度耗尽导致TTS中断
+  - 信号卡支持是AGENTS.md §二.2信号松绑的要求——涨跌幅≥8%时输出自家信号卡
+  - 健康检查增强是运维需要——需要监控百炼额度和TTS状态
+- 如何验证：
+  - V1（语法）：`node --check feed-server/server.mjs` 通过
+  - V2（约束合规）：信号卡遵循三禁（不承诺收益/不催促/不公开），kind='signal'标记
+  - V3（额度监控）：BAILIAN_QUOTA模块实现80%预警+100%止损+用量历史
+  - V4（端点可用）：/health和/api/quota端点新增
+- 遗留：
+  1. 百炼额度实际值需通过百炼API查询确认（当前为估算1M tokens）
+  2. 信号卡在端侧Index.ets的显示需验证（已有"自家信号"角标支持）
+  3. /api/quota端点需在端侧SettingsService中对接显示
