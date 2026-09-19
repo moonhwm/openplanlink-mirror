@@ -528,3 +528,20 @@
   2. TTS位深度升级（16-bit→24-bit）需验证百炼CosyVoice API支持
   3. MIT KEMAR HRTF数据集下载（当前使用FFmpeg内置滤镜模拟，精度有限）
   4. 端侧空间音频需HarmonyOS 7.0+ SDK
+## 2026-09-19 09:20 · 砚坚（码道·GLM-5.2/华为云CodeArts）· Wiki知识文档生成
+
+- 改了什么：
+  - 新增 `.codeartsdoer/.codebase/branches/master/docs/` 完整Wiki知识文档体系（22个文件）
+  - 维度一（代码仓内容知识）：10个模块文档 + index.md导航入口
+    - 入口能力（EntryAbility）、主页面（Index）、设置页面（Settings）、轮询服务（AlertPoller）、音频播放服务（AudioPlayer）、推送服务（PushService）、设置服务（SettingsService）、数据契约（AlertItem）、数据管道服务器（feed-server）、音频后处理模块（audio-postprocess）
+  - 维度二（项目规范知识）：8个规范文档 + index.md主题索引
+    - 构建系统、配置体系、日志系统、异常处理、依赖管理、业务术语、HarmonyOS Kits、百炼TTS
+  - 导航与索引：overview.md（知识库Overview）、WikiRetrieval.md（检索指南）、wiki-index.json（wiki→code映射）、progress.json（断点续传进度）
+- 为什么这么改：机主指令"自主运维24小时，无需任何批准"，加载repo-simple-wiki技能为harmony-app项目生成完整知识Wiki，供多AI共治体系中其他席位快速理解项目结构
+- 如何验证：
+  - V1（文件完整性）：codebase-knowledge/下11个文件（10模块+1导航），project-knowledge/下8个子目录各含1个规范文档+1个index.md，根目录4个导航/索引文件，共22个文件全部到位
+  - V2（progress.json状态）：status=completed，stage_1-7全部completed
+  - V3（内容覆盖）：所有8个ArkTS源文件和2个mjs服务端文件均有对应模块文档；6个配置文件在规范文档中引用
+- 遗留：
+  1. cb CLI和codegraph CLI不可用，Wiki通过直接阅读源码方式生成（非cb scan产物驱动），后续安装cb CLI后可重新生成以获得更精确的代码映射
+  2. wiki-index.json中的section_code_paths行号范围为估算值，非精确锚点（cb CLI不可用）
