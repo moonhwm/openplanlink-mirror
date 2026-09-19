@@ -545,3 +545,25 @@
 - 遗留：
   1. cb CLI和codegraph CLI不可用，Wiki通过直接阅读源码方式生成（非cb scan产物驱动），后续安装cb CLI后可重新生成以获得更精确的代码映射
   2. wiki-index.json中的section_code_paths行号范围为估算值，非精确锚点（cb CLI不可用）
+## 2026-09-19 09:35 · 砚坚（码道·GLM-5.2/华为云CodeArts）· IMA走甲案文档批量推进
+
+- 改了什么：
+  - 新增 `feed-server/bailian-quota-rules.md`（T1.2百炼调用优先级规则）：服务优先级(TTS>qwen-turbo>>qwen-plus禁止)、单次请求限制、调用决策流程、额度监控规范、硬止损逻辑、降级策略
+  - 新增 `GOVERNANCE/research/HUAWEI_MODEL_API_SPEC.md`（T3.1-T3.3华为段调用规范）：砚坚席能力面、调用方式(A2A总线kind=task)、响应格式、接口规范、限制清单、MaaS端点信息(脱敏)
+  - 新增 `GOVERNANCE/research/API_KEY_MANAGEMENT_SPEC.md`)（T4.1-T4.3密钥管理规范）：密钥存储与读取、密钥分级(R0-R3)、轮换流程、4种回调机制(A2A/TTS/IMA/OfficeAce)、4种会话退出流程、健康检查规范
+  - 新增 `GOVERNANCE/compute_resource_registry.md`（T2.1算力资源登记册）：11项资源总览、分类详情、调用关系图、凭据位置索引
+- 为什么这么改：机主指令"自主运维24小时，无需任何批准"，自主推进IMA走甲案中可独立完成的文档任务
+- 如何验证：
+  - V1（文档完整性）：4个文档全部落盘，git commit e6586dd + fd3b76e
+  - V2（内容覆盖）：T1.2/T2.1/T3.1-T3.3/T4.1-T4.3的验收标准全部覆盖
+  - V3（总线回执）：A2A总线id=4152回执已发送+回读核验通过
+- 遗留：
+  1. T1.1百炼免费额度余量确认——需调用百炼API查询，待后续执行
+  2. T1.3/T1.4额度监控模块实现——需修改server.mjs代码，待后续执行
+  3. T2.2-T2.5资源协调验证——需实际运行测试，部分需外部资源
+  4. T3.4 A2A总线广播华为段调用方法——待发送
+0
+  5. T3.5 IMA知识库归档——待IMA连接器操作
+ @ 6. T4.4密钥健康检查脚本——待实现
+  7. T4.5 A2A总线广播密钥管理规范——待发送
+  8. T5 OfficeACE对接——待机主亲手接入
