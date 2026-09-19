@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "schema": "docgen-state-v1",
+  "branch": "master",
+  "branch_raw": "master",
+  "version_token": 29,
+  "updated_at": "2026-09-19T21:16:50.848Z",
+  "status": "watching",
+  "last_doc_generated_at": "2026-09-19T20:41:02.751Z",
+  "changed_files": [
+    {
+      "path": "GOVERNANCE/DECISION_LEDGER_POINTER.md",
+      "status": "modified",
+      "detected_at": "2026-09-19T21:15:33.549Z"
+    },
+    {
+      "path": "skills/context-pruner/FORGE_REPORT.md",
+      "status": "added",
+      "detected_at": "2026-09-19T20:41:02.933Z"
+    },
+    {
+      "path": "skills/context-pruner/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-19T20:41:02.933Z"
+    },
+    {
+      "path": "skills/context-pruner/scripts/context_audit.py",
+      "status": "added",
+      "detected_at": "2026-09-19T20:41:02.933Z"
+    },
+    {
+      "path": "skills/link-bridge-ops/FORGE_REPORT.md",
+      "status": "added",
+      "detected_at": "2026-09-19T20:41:02.934Z"
+    },
+    {
+      "path": "skills/link-bridge-ops/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-19T20:41:02.934Z"
+    },
+    {
+      "path": "skills/link-bridge-ops/scripts/link_bridge.py",
+      "status": "added",
+      "detected_at": "2026-09-19T20:41:02.935Z"
+    },
+    {
+      "path": "skills/ultra-compress-ops/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-19T20:41:02.935Z"
+    },
+    {
+      "path": "skills/ultra-compress-ops/references/backends.md",
+      "status": "added",
+      "detected_at": "2026-09-19T20:41:02.935Z"
+    },
+    {
+      "path": "skills/ultra-compress-ops/scripts/a2a_mount.py",
+      "status": "added",
+      "detected_at": "2026-09-19T20:41:02.935Z"
+    },
+    {
+      "path": "skills/ultra-compress-ops/scripts/madao_watch.py",
+      "status": "added",
+      "detected_at": "2026-09-19T20:41:02.935Z"
+    },
+    {
+      "path": "skills/ultra-compress-ops/scripts/ultra_pack.py",
+      "status": "added",
+      "detected_at": "2026-09-19T20:41:02.936Z"
+    },
+    {
+      "path": "_HANDOFF_2026-09-20.md",
+      "status": "added",
+      "detected_at": "2026-09-19T21:16:50.238Z"
+    }
+  ],
+  "summary": {
+    "total": 13,
+    "added": 12,
+    "modified": 1,
+    "removed": 0
+  },
+  "error_message": null,
+  "truncated": false,
+  "apply_in_progress": false,
+  "apply_started_at": null
+}
