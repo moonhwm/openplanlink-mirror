@@ -710,3 +710,23 @@
   1. 百炼额度实际值需通过百炼API查询确认（当前为估算1M tokens）
   2. 信号卡在端侧Index.ets的显示需验证（已有"自家信号"角标支持）
   3. /api/quota端点需在端侧SettingsService中对接显示
+## 2026-09-20 05:20 · 砚坚（码道·GLM-5.2/华为云CodeArts）· 上下文压缩到趋近0
+
+- **Python环境安装**：本地winget安装Python 3.12.10 + pip安装zstandard 0.25.0 + brotli 1.2.0
+- **三技能包部署**：
+  - context-pruner v1.6.0 — ✅ smoke PASS（上下文瘦身官，三档分拣+指针化+播报块）
+  - ultra-compress-ops — ✅ smoke PASS（极致压缩，全后端zstd/xz/brotli/bzip2可用）
+  - link-bridge-ops — ❌ Windows需管理员权限创建符号链接（WinError 1314）
+- **context-pruner六步工作流**：
+  - Step 1: 落续作卡 `_HANDOFF_2026-09-20.md`
+  - Step 2: 扫描分级 — 0瞬态/96保护/2251复核/0大文件
+  - Step 3: 剔除瞬态 — 0件（合法常态）
+  - Step 4: 免读索引 — 42件归档免读（GOVERNANCE全树+研究文档+实验数据+技能文档+大文件）
+  - Step 5: 极致压缩 — hy4-conversation-data.json 9.9MB→2.96MB（xz, 70%压缩率）
+  - Step 7: 播报块 — 指针化覆盖率100%, 语义退化初评: 低
+- **A2A总线**: 向白秉烛查询华为云服务器SSH信息（id=5573），待回执
+- **commit**: 6474824
+- 遗留：
+  1. 华为云服务器Python安装——待白秉烛提供SSH连接信息
+  2. link-bridge-ops在Windows需管理员权限——Linux环境无此限制
+  3. Tushare数据服务接入——Token: c5e307a634ff8e29575c557e51d41299, 到期2026-09-29
