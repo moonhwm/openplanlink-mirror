@@ -49,6 +49,15 @@
           "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx0ZG9kY3Vtb3hpcXNuYWtwcW9nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3NjQ5ODEsImV4cCI6MjEwMzM0MDk4MX0.n2alyDO-ZZmYedGHlFmoIASo0QxdxN6NwEDYNV2KhKA"
         }
       }
+    },
+    {
+      "name": "get-alerts",
+      "config": {
+        "runtime": "Nodejs18.15",
+        "handler": "index.main",
+        "timeout": 10,
+        "installDependency": true
+      }
     }
   ]
 }

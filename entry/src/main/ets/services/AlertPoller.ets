@@ -6,8 +6,8 @@ import { SettingsService } from './SettingsService';
 const TAG = 'StockPulse.AlertPoller';
 const DOMAIN = 0x0001;
 
-/** 默认 X 服务器地址（可被 SettingsService.getFeedUrl 覆盖） */
-const DEFAULT_FEED_URL = 'http://127.0.0.1:8000/api/alerts/latest';
+/** 默认 CloudBase 云函数地址（可被 SettingsService.getFeedUrl 覆盖） */
+const DEFAULT_FEED_URL = 'https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com/alerts';
 
 /** 轮询结果：ok=false 表示网络/HTTP 异常，ok=true 且 items 为空表示"连通但无异动" */
 export interface PollResult {

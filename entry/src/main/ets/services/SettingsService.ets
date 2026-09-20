@@ -16,7 +16,7 @@ const KEY_DND_ENABLED = 'dnd_enabled';      // 免打扰开关，boolean（默�
 const KEY_DND_START = 'dnd_start';          // 免打扰开始时段，number（默认 22）
 const KEY_DND_END = 'dnd_end';          // 免打扰结束时段，number（默认 8）
 const KEY_AUTO_THEME = 'auto_theme';      // 自动主题切换，boolean（默认 true）
-const KEY_FEED_URL = 'feed_url';          // 数据源地址，string（默认 http://127.0.0.1:8000/api/alerts/latest）
+const KEY_FEED_URL = 'feed_url';          // 数据源地址，string（默认 CloudBase 云函数）
 const KEY_READ_ALERTS = 'read_alerts';    // 已读异动ID列表，JSON string[]
 const KEY_PLAY_HISTORY = 'play_history';  // 播报历史，JSON Array<{alertId, ts}>
 
@@ -350,13 +350,13 @@ export class SettingsService {
 
   static async getFeedUrl(): Promise<string> {
     if (!SettingsService.pref) {
-      return 'http://127.0.0.1:8000/api/alerts/latest';
+      return 'https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com/alerts';
     }
     try {
-      return await SettingsService.pref.get(KEY_FEED_URL, 'http://127.0.0.1:8000/api/alerts/latest') as string;
+      return await SettingsService.pref.get(KEY_FEED_URL, 'https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com/alerts') as string;
     } catch (e) {
       hilog.warn(DOMAIN, TAG, `feed url read failed: ${(e as Error).message}`);
-      return 'http://127.0.0.1:8000/api/alerts/latest';
+      return 'https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com/alerts';
     }
   }
 

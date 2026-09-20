@@ -18,7 +18,7 @@ export struct Settings {
   @State dndStartHour: number = 22;
   @State dndEndHour: number = 8;
   @State newStockInput: string = '';
-  @State feedUrl: string = 'http://127.0.0.1:8000/api/alerts/latest';
+  @State feedUrl: string = 'https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com/alerts';
   private navStack: NavPathStack | null = null;
 
   // 字体档驱动字号

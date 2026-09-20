@@ -760,3 +760,26 @@
   4. generate-tts 云函数需要 @cloudbase/node-sdk 和 pg 依赖——当前 installDependency=true 但 Node18 可能需要本地打包
   5. broadcast-a2a 的 HTTP 触发模式需配置 HTTP 访问路径（--httpFn --path /api/alerts）
   6. alerts 表需添加索引（ts DESC, symbol, kind）以优化查询性能
+## 2026-09-20 12:50 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· 端侧对接CloudBase后端
+
+- 改了什么：
+  - **新增 `get-alerts` 云函数**（`cloudfunctions/functions/get-alerts/index.js`）：轻量级只读 Event 函数，从 PostgreSQL alerts 表读取最新异动，映射 snake_case→camelCase（alert_id→alertId, audio_url→audioUrl），返回 AlertFeed 格式 `{ items, serverTs }`。不触发广播/Push，专供客户端轮询。部署为 Event 函数 + `--path /alerts` HTTP 访问服务。
+  - **`cloudfunctions/functions/get-alerts/package.json`**：依赖 pg。
+  - **`cloudfunctions/cloudbaserc.json`**：新增 get-alerts 函数配置。
+  - **`entry/src/main/ets/services/AlertPoller.ets`**：DEFAULT_FEED_URL 从 `http://127.0.0.1:8000/api/alerts/latest` 改为 `https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com/alerts`（CloudBase 云函数 HTTP 端点）。
+  - **`entry/src/main/ets/services/SettingsService.ets`**：getFeedUrl() 默认值同步更新为 CloudBase 端点。
+  - **`entry/src/main/ets/pages/Settings.ets`**：feedUrl 初始值同步更新。
+  - **`fetch-tushare-data` 定时触发器**：创建 cron `0 * * * * * *`（每分钟自动调用），实现自动化数据采集。
+- 为什么这么改：
+  - 端侧 App 需要从 CloudBase 后端获取 AlertFeed 数据，替代本地 feed-server
+  - broadcast-a2a 的 HTTP 模式每次调用会触发 Supabase 广播+Push推送，不适合作为客户端轮询端点
+  - 需要独立的轻量级只读端点，只查数据库返回数据，不产生副作用
+  - CloudBase `--path` 方式部署 Event 函数可自动创建 HTTP 访问路由，比 `--httpFn` Web 函数模式更简洁
+- 如何验证：
+  - V1（HTTP端点）：`curl https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com/alerts?limit=5` → 返回 `{"items":[],"serverTs":...}` 格式正确。通过。
+  - V2（构建）：`devecocli build --build-mode debug` → BUILD SUCCESSFUL。通过。
+  - V3（定时触发器）：`tcb fn trigger create fetch-tushare-data --trigger-name tushare-timer --cron "0 * * * * * *"` → 创建成功。通过。
+- 遗留：
+  1. 当前数据库中无异动数据（Tushare API 返回未来日期 20271231 无数据）——需排查 trade_cal 缓存逻辑
+  2. feed-server 适配 CloudBase 数据源（排期3）——将 feed-server 从本地 westock-data 改为调用 CloudBase 云函数
+  3. PushService.ets 中 TOKEN_REPORT_URL 仍指向本地 127.0.0.1:8000——AGC Push 未配置前保持占位

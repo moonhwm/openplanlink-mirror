@@ -1,0 +1,9 @@
+{
+  "name": "get-alerts",
+  "version": "1.0.0",
+  "description": "Lightweight read-only endpoint for client polling - returns AlertFeed format from PostgreSQL",
+  "main": "index.js",
+  "dependencies": {
+    "pg": "^8.11.3"
+  }
+}
