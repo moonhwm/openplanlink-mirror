@@ -1,14 +1,19 @@
 /**
  * 铃语数据管道服务器
  * 
- * 数据链路：westock-data (腾讯自选股) → 异动筛选 → AlertFeed JSON → 铃语App
+ * 数据链路（CloudBase 模式）：CloudBase get-alerts 云函数 → AlertFeed JSON → 铃语App
+ * 数据链路（本地降级模式）：westock-data (腾讯自选股) → 异动筛选 → AlertFeed JSON → 铃语App
  * 
  * 端点：
- *   GET /api/alerts/latest?limit=N  →  AlertFeed JSON
+ *   GET /api/alerts/latest?limit=N  →  AlertFeed JSON（优先 CloudBase，降级本地）
  *   GET /health                      →  健康检查
  * 
  * 异动判断：涨跌幅绝对值 ≥ THRESHOLD（默认 5%）
  * TTS音频：百炼 cosyvoice-v3-flash 生成，缓存到 data/tts-cache/
+ * 
+ * 数据源模式：
+ *   - CLAUDBASE_MODE=1（默认）：从 CloudBase get-alerts 云函数获取数据
+ *   - CLOUDBASE_MODE=0：从本地 westock-data 获取数据（开发降级）
  */
 
 import http from 'node:http';
@@ -30,6 +35,10 @@ const NODE_EXE = 'C:/Users/欧阳宏俊/nodejs/node-v22.11.0-win-x64/node.exe';
 const NODE_DIR = 'C:/Users/欧阳宏俊/nodejs/node-v22.11.0-win-x64';
 const NPX_CLI = 'C:/Users/欧阳宏俊/nodejs/node-v22.11.0-win-x64/node_modules/npm/bin/npx-cli.js';
 const WESTOCK_PKG = 'westock-data-clawhub@1.0.4';
+
+// CloudBase 数据源配置
+const CLOUDBASE_MODE = process.env.CLOUDBASE_MODE !== '0'; // 默认启用 CloudBase 模式
+const CLOUDBASE_ALERTS_URL = process.env.CLOUDBASE_ALERTS_URL || 'https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com/alerts';
 
 // 确保 exec 环境中 PATH 包含 node 目录
 const EXEC_ENV = {
@@ -481,10 +490,42 @@ async function generateTTS(headline, detail, alertId) {
 }
 
 /**
+ * 从 CloudBase get-alerts 云函数获取 AlertFeed
+ */
+async function fetchCloudBaseAlerts(limit = 20) {
+  try {
+    const url = `${CLOUDBASE_ALERTS_URL}?limit=${limit}`;
+    console.log('[feed-server] fetching from CloudBase:', url);
+    const resp = await fetch(url, { signal: AbortSignal.timeout(5000) });
+    if (!resp.ok) {
+      console.warn('[feed-server] CloudBase returned HTTP', resp.status);
+      return null;
+    }
+    const feed = await resp.json();
+    console.log('[feed-server] CloudBase returned', feed.items?.length || 0, 'items');
+    return feed;
+  } catch (e) {
+    console.warn('[feed-server] CloudBase fetch failed:', e.message);
+    return null;
+  }
+}
+
+/**
  * 刷新数据
+ * CloudBase 模式：从云函数获取；降级模式：从 westock-data 获取
  */
 async function refresh() {
   try {
+    if (CLOUDBASE_MODE) {
+      const feed = await fetchCloudBaseAlerts(20);
+      if (feed && feed.items) {
+        cachedAlerts = feed.items;
+        lastRefreshTs = Date.now();
+        return;
+      }
+      // CloudBase 失败时降级到本地数据
+      console.warn('[feed-server] CloudBase unavailable, falling back to local data');
+    }
     cachedAlerts = await detectAlerts();
     lastRefreshTs = Date.now();
   } catch (e) {
@@ -521,7 +562,7 @@ if (USE_HTTPS && fs.existsSync(HTTPS_KEY_PATH) && fs.existsSync(HTTPS_CERT_PATH)
 }
 
 // 请求处理函数（HTTP 和 HTTPS 共用）
-function requestHandler(req, res) {
+async function requestHandler(req, res) {
   const url = new URL(req.url, `http://127.0.0.1:${PORT}`);
 
   // CORS 头
@@ -547,6 +588,8 @@ function requestHandler(req, res) {
       ttsModel: TTS_MODEL,
       threshold: THRESHOLD,
       protocol: PROTOCOL,
+      cloudBaseMode: CLOUDBASE_MODE,
+      cloudBaseUrl: CLOUDBASE_ALERTS_URL,
     }));
     return;
   }
@@ -579,6 +622,20 @@ function requestHandler(req, res) {
   // AlertFeed API
   if (url.pathname === '/api/alerts/latest') {
     const limit = parseInt(url.searchParams.get('limit') || '20', 10);
+
+    // CloudBase 模式：实时代理请求（不依赖本地缓存刷新周期）
+    if (CLOUDBASE_MODE) {
+      const feed = await fetchCloudBaseAlerts(limit);
+      if (feed && feed.items) {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(feed));
+        return;
+      }
+      // CloudBase 失败时降级到本地缓存
+      console.warn('[feed-server] CloudBase proxy failed, serving local cache');
+    }
+
+    // 降级模式：返回本地缓存
     const items = cachedAlerts.slice(0, limit);
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({
@@ -598,6 +655,10 @@ function requestHandler(req, res) {
 server.listen(PORT, '127.0.0.1', async () => {
   console.log(`[feed-server] 铃语数据管道服务器已启动 → ${PROTOCOL}://127.0.0.1:${PORT}`);
   console.log(`[feed-server] AlertFeed API → ${PROTOCOL}://127.0.0.1:${PORT}/api/alerts/latest`);
+  console.log(`[feed-server] 数据源 → ${CLOUDBASE_MODE ? 'CloudBase 云函数' : '本地 westock-data'}`);
+  if (CLOUDBASE_MODE) {
+    console.log(`[feed-server] CloudBase URL → ${CLOUDBASE_ALERTS_URL}`);
+  }
   console.log(`[feed-server] 异动阈值 → ${THRESHOLD}%`);
   console.log(`[feed-server] TTS → ${BAILIAN_API_KEY ? '百炼 cosyvoice-v3-flash (Hi-Fi: WAV 48kHz)' : '未配置 DASHSCOPE_API_KEY'}`);
   
