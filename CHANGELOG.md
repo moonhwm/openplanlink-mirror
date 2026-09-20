@@ -849,3 +849,26 @@
   2. stock_basic API限流中，名称缓存尚未首次填充（需等API恢复后第一次成功调用）。
   3. `app.messaging is not a function`——Push功能需AGC配置后用正确API。
   4. Lovrabet CLI AccessKey待用户提供。
+## 2026-09-21 03:30 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· 股票名称映射全链路修复
+
+- 改了什么：
+  - `cloudfunctions/functions/fetch-tushare-data/index.js`：
+    - 将stock_basic API替换为东方财富免费API（`80.push2.eastmoney.com`），无频率限制
+    - 新增`fetchHttps()`辅助函数：使用Node.js `https`模块替代实验性`fetch`（Node.js 18.15的fetch在云函数环境中不稳定）
+    - 新增硬编码名称映射fallback：`require('./hardcoded-names')`，5560条A股名称，作为东方财富API和CloudBase存储缓存都失败时的最终保障
+  - `cloudfunctions/functions/fetch-tushare-data/hardcoded-names.js`（新增）：5560条A股股票名称映射，从东方财富API获取（2026-09-21），约105KB
+  - `stock-name-map.json`（新增，本地辅助文件）：东方财富API获取的完整名称映射，用于生成hardcoded-names.js
+- 为什么：
+  - stock_basic API持续限流（1次/分钟），name字段全部回退为股票代码（如"000002.SZ"而非"万科A"），严重影响适老化体验
+  - 东方财富API在本地测试成功（5560条），但在CloudBase云函数环境中可能因网络限制或Node.js fetch兼容性问题返回空数据
+  - 硬编码fallback确保无论API是否可用，name字段始终为中文名称
+- 如何验证：
+  - V1：`tcb fn invoke fetch-tushare-data` → name字段为中文名称（"万科A"、"深深房A"等）。通过。
+  - V2：`curl https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com/alerts?limit=5` → name字段为中文名称。通过。
+  - V3：`curl http://127.0.0.1:8000/api/alerts/latest?limit=5` → feed-server代理返回中文名称。通过。
+  - V4：端侧AlertItem.ets字段（alertId/ts/symbol/name/direction/kind/headline/detail/audioUrl）与后端JSON完全匹配。通过。
+- 遗留：
+  1. 东方财富API在云函数环境中可能不可用（需进一步诊断网络配置），但硬编码fallback确保功能正常
+  2. HY4席位尚未回复握手消息
+  3. `app.messaging is not a function`——Push功能需AGC配置后用华为Push Kit REST API
+  4. Lovrabet CLI AccessKey待用户提供

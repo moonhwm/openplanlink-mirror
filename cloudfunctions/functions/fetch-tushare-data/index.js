@@ -20,6 +20,30 @@ const TUSHARE_API_URL = 'https://api.tushare.pro';
 const TUSHARE_TOKEN = process.env.TUSHARE_TOKEN || '';
 const THRESHOLD = parseFloat(process.env.ALERT_THRESHOLD || '5.0');
 
+/**
+ * 使用 https 模块发起 GET 请求（替代实验性 fetch）
+ */
+function fetchHttps(url) {
+  return new Promise((resolve, reject) => {
+    const https = require('https');
+    const req = https.get(url, (res) => {
+      let body = '';
+      res.on('data', (chunk) => { body += chunk; });
+      res.on('end', () => {
+        try {
+          resolve(JSON.parse(body));
+        } catch (e) {
+          reject(new Error(`JSON parse failed: ${e.message}, body length: ${body.length}`));
+        }
+      });
+    });
+    req.on('error', reject);
+    req.setTimeout(15000, () => {
+      req.destroy(new Error('Request timeout'));
+    });
+  });
+}
+
 // 最新交易日缓存（避免频繁调用 trade_cal）
 let cachedTradeDate = null;
 let cachedTradeDateTs = 0;
@@ -106,29 +130,56 @@ async function getStockNameMap() {
     console.log('No stored name map in CloudBase:', e.message);
   }
 
-  // 尝试调用 stock_basic API 刷新
+  // 尝试从东方财富 API 刷新（替代 Tushare stock_basic，无频率限制）
+  // 使用 https 模块而非 fetch（Node.js 18.15 的 fetch 是实验性的）
   try {
-    const stockBasic = await callTushare('stock_basic', {
-      exchange: '',
-      list_status: 'L',
-    }, 'ts_code,name');
+    console.log('Fetching stock names from EastMoney API (https module)...');
+    const nameMap = new Map();
+    const nameObj = {};
 
-    if (stockBasic && stockBasic.items && stockBasic.items.length > 0) {
-      const nameMap = new Map();
-      const nameObj = {}; // 用于存储到 CloudBase
-      stockBasic.items.forEach(row => {
-        const tsCode = row[0];
-        const name = row[1];
-        if (tsCode && name) {
+    const marketFilters = ['m:1+t:2', 'm:1+t:23', 'm:0+t:6', 'm:0+t:80'];
+
+    for (const fs of marketFilters) {
+      let page = 1;
+      while (page <= 20) {
+        const url = `https://80.push2.eastmoney.com/api/qt/clist/get?pn=${page}&pz=100&po=1&np=1&fltt=2&invt=2&fs=${encodeURIComponent(fs)}&fields=f12,f14`;
+        console.log(`EastMoney fetching: fs=${fs}, page=${page}`);
+        const data = await fetchHttps(url);
+
+        if (!data || !data.data || !data.data.diff) {
+          console.log(`EastMoney: no data for fs=${fs}, page=${page}`);
+          break;
+        }
+        const stocks = data.data.diff;
+        if (stocks.length === 0) break;
+
+        for (const s of stocks) {
+          const code = s.f12;
+          const name = s.f14;
+          if (!code || !name) continue;
+
+          let tsCode;
+          if (code.startsWith('6')) tsCode = code + '.SH';
+          else if (code.startsWith('0') || code.startsWith('3')) tsCode = code + '.SZ';
+          else if (code.startsWith('8') || code.startsWith('4')) tsCode = code + '.BJ';
+          else continue;
+
           nameMap.set(tsCode, name);
           nameObj[tsCode] = name;
         }
-      });
+
+        console.log(`EastMoney: fs=${fs}, page=${page}, got ${stocks.length} stocks`);
+        if (stocks.length < 100) break;
+        page++;
+      }
+    }
+
+    console.log(`EastMoney total: ${nameMap.size} entries`);
+    if (nameMap.size > 0) {
       cachedNameMap = nameMap;
       cachedNameMapTs = Date.now();
-      console.log(`Got fresh stock name map: ${nameMap.size} entries`);
+      console.log(`Got fresh stock name map from EastMoney: ${nameMap.size} entries`);
 
-      // 持久化到 CloudBase 存储
       try {
         const cloudbase = require('@cloudbase/node-sdk');
         const app = cloudbase.init({
@@ -140,6 +191,7 @@ async function getStockNameMap() {
             names: nameObj,
             updatedAt: new Date().toISOString(),
             count: nameMap.size,
+            source: 'eastmoney',
           }), 'utf-8'),
         });
         console.log('Name map persisted to CloudBase storage');
@@ -148,9 +200,11 @@ async function getStockNameMap() {
       }
 
       return nameMap;
+    } else {
+      console.log('EastMoney returned 0 entries, will try fallback');
     }
   } catch (e) {
-    console.log('stock_basic API failed (rate limited?):', e.message);
+    console.log('EastMoney API failed:', e.message, e.stack);
   }
 
   // 最后 fallback：尝试用过期的存储缓存
@@ -176,7 +230,20 @@ async function getStockNameMap() {
     // 无缓存可用
   }
 
-  // 最终 fallback：返回空 Map，后续用 ts_code 代替名称
+// 最终 fallback：使用硬编码的名称映射（从东方财富API获取，2026-09-21）
+  console.log('Using hardcoded name map fallback');
+  try {
+    const hardcoded = require('./hardcoded-names');
+    const nameMap = new Map(Object.entries(hardcoded));
+    cachedNameMap = nameMap;
+    cachedNameMapTs = Date.now();
+    console.log(`Hardcoded name map loaded: ${nameMap.size} entries`);
+    return nameMap;
+  } catch (e) {
+    console.log('Hardcoded name map not available:', e.message);
+  }
+
+  // 绝对最终 fallback：返回空 Map
   console.log('Using empty name map fallback');
   return new Map();
 }
