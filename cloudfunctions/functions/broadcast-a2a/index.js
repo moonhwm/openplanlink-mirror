@@ -86,28 +86,66 @@ async function broadcastToSupabase(alerts) {
 }
 
 /**
- * 通过 CloudBase 推送服务发送 Push 通知
+ * 通过华为 Push Kit REST API 发送 Push 通知
+ *
+ * 华为 Push Kit 服务端推送流程：
+ * 1. 获取 OAuth 2.0 Bearer Token（使用 AGC projectId + JWT）
+ * 2. 调用 POST https://push-api.cloud.huawei.com/v3/{projectId}/messages:send
+ *
+ * 环境变量：
+ *   HUAWEI_PUSH_PROJECT_ID - AGC projectId（必需）
+ *   HUAWEI_PUSH_CLIENT_ID - AGC clientId（必需，用于获取OAuth Token）
+ *   HUAWEI_PUSH_CLIENT_SECRET - AGC clientSecret（必需，用于获取OAuth Token）
+ *   HUAWEI_PUSH_TOKEN - 设备Push Token（调试用，生产环境应从数据库获取）
+ *
+ * 当环境变量未配置时，Push功能自动跳过（不报错），等AGC配置完成后即可使用。
  */
 async function sendPushNotification(alert) {
-  let cloudbase;
-  try {
-    cloudbase = require('@cloudbase/node-sdk');
-  } catch (e) {
-    console.log('cloudbase node-sdk not available, skipping push');
+  const PROJECT_ID = process.env.HUAWEI_PUSH_PROJECT_ID || '';
+  const CLIENT_ID = process.env.HUAWEI_PUSH_CLIENT_ID || '';
+  const CLIENT_SECRET = process.env.HUAWEI_PUSH_CLIENT_SECRET || '';
+  const DEVICE_PUSH_TOKEN = process.env.HUAWEI_PUSH_TOKEN || '';
+
+  if (!PROJECT_ID || !CLIENT_ID || !CLIENT_SECRET) {
+    console.log('Push Kit not configured (need HUAWEI_PUSH_PROJECT_ID/CLIENT_ID/CLIENT_SECRET), skipping push');
     return;
   }
 
-  const app = cloudbase.init({ env: ENV_ID });
+  if (!DEVICE_PUSH_TOKEN) {
+    console.log('No device push token available, skipping push');
+    return;
+  }
 
   try {
+    // 步骤1：获取 OAuth 2.0 Bearer Token
+    const tokenResp = await fetch('https://oauth-login.cloud.huawei.com/oauth2/v3/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        grant_type: 'client_credentials',
+        client_id: CLIENT_ID,
+        client_secret: CLIENT_SECRET,
+      }).toString(),
+    });
+
+    if (!tokenResp.ok) {
+      console.error('Push: OAuth token request failed:', tokenResp.status);
+      return;
+    }
+
+    const tokenData = await tokenResp.json();
+    const accessToken = tokenData.access_token;
+    if (!accessToken) {
+      console.error('Push: No access_token in OAuth response');
+      return;
+    }
+
+    // 步骤2：发送 Push 消息
+    const pushUrl = `https://push-api.cloud.huawei.com/v3/${PROJECT_ID}/messages:send`;
     const message = {
-      title: alert.headline,
-      body: alert.detail || '',
-      data: {
-        alertId: alert.alertId,
-        symbol: alert.symbol,
-        kind: alert.kind || 'fact',
-        audioUrl: alert.audioUrl || '',
+      notification: {
+        title: alert.headline,
+        body: alert.detail || '',
       },
       android: {
         notification: {
@@ -119,14 +157,31 @@ async function sendPushNotification(alert) {
           },
         },
       },
+      data: JSON.stringify({
+        alertId: alert.alertId,
+        symbol: alert.symbol,
+        kind: alert.kind || 'fact',
+        audioUrl: alert.audioUrl || '',
+      }),
+      token: [DEVICE_PUSH_TOKEN],
     };
 
-    const result = await app.messaging().send({
-      message,
-      topic: 'stock_alerts',
+    const pushResp = await fetch(pushUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({ message }),
     });
 
-    console.log('Push sent:', JSON.stringify(result));
+    if (pushResp.ok) {
+      const pushResult = await pushResp.json();
+      console.log('Push sent:', JSON.stringify(pushResult));
+    } else {
+      const pushError = await pushResp.text();
+      console.error('Push send failed:', pushResp.status, pushError.substring(0, 200));
+    }
   } catch (e) {
     console.error('Push error:', e.message);
   }
