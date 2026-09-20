@@ -1,15 +1,15 @@
 /**
  * broadcast-a2a 云函数
- * 
+ *
  * 功能：
- * 1. 从 PostgreSQL alerts 表获取最新异动条目
+ * 1. 从 CloudBase 存储读取最新异动条目（alerts.json）
  * 2. 通过 A2A 总线广播异动消息（Supabase 实时推送）
  * 3. 通过 CloudBase 推送服务向鸿蒙设备发送 Push 通知
  * 4. 支持 HTTP 触发（Web 函数模式，scf_bootstrap）和 Event 触发
- * 
+ *
  * 环境变量：
- *   SUPABASE_URL - Supabase 项目 URL
- *   SUPABASE_ANON_KEY - Supabase 匿名密钥
+ *   SUPABASE_URL - Supabase 项目 URL（可选）
+ *   SUPABASE_ANON_KEY - Supabase 匿名密钥（可选）
  *   PUSH_BUNDLE_NAME - 鸿蒙应用包名
  *   PORT / SCF_RUNTIME_PORT - Web 函数模式端口（自动注入）
  */
@@ -18,33 +18,32 @@ const http = require('http');
 const SUPABASE_URL = process.env.SUPABASE_URL || '';
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || '';
 const PUSH_BUNDLE_NAME = process.env.PUSH_BUNDLE_NAME || 'com.lingyu.app';
+const ENV_ID = process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d';
+const ALERTS_FILE_ID = 'cloud://a2a-commonwealth-d2eepjr928e9c4d.6132-a2a-commonwealth-d2eepjr928e9c4d-1475054847/alerts/alerts.json';
 
 /**
- * 从 PostgreSQL 获取最新异动
+ * 从 CloudBase 存储获取最新异动
  */
 async function getLatestAlerts(limit = 20) {
-  const { PG_CONN_STRING } = process.env;
-  if (!PG_CONN_STRING) return [];
-
-  let pg;
-  try { pg = require('pg'); } catch (e) { return []; }
-
-  const client = new pg.Client({ connectionString: PG_CONN_STRING });
   try {
-    await client.connect();
-    const result = await client.query(
-      `SELECT alert_id, ts, symbol, name, direction, kind, headline, detail, audio_url
-       FROM alerts
-       ORDER BY ts DESC
-       LIMIT $1`,
-      [limit]
-    );
-    return result.rows;
-  } catch (e) {
-    console.error('DB query error:', e.message);
+    const cloudbase = require('@cloudbase/node-sdk');
+    const app = cloudbase.init({ env: ENV_ID });
+
+    const result = await app.downloadFile({ fileID: ALERTS_FILE_ID });
+
+    if (result && result.fileContent) {
+      const text = result.fileContent.toString('utf-8');
+      const data = JSON.parse(text);
+      if (data && data.items && Array.isArray(data.items)) {
+        const sorted = data.items.sort((a, b) => b.ts - a.ts);
+        return sorted.slice(0, limit);
+      }
+    }
+
     return [];
-  } finally {
-    await client.end();
+  } catch (e) {
+    console.error('broadcast-a2a: failed to read alerts.json:', e.message);
+    return [];
   }
 }
 
@@ -98,19 +97,17 @@ async function sendPushNotification(alert) {
     return;
   }
 
-  const app = cloudbase.init({
-    env: process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d',
-  });
+  const app = cloudbase.init({ env: ENV_ID });
 
   try {
     const message = {
       title: alert.headline,
       body: alert.detail || '',
       data: {
-        alertId: alert.alert_id,
+        alertId: alert.alertId,
         symbol: alert.symbol,
         kind: alert.kind || 'fact',
-        audioUrl: alert.audio_url || '',
+        audioUrl: alert.audioUrl || '',
       },
       android: {
         notification: {

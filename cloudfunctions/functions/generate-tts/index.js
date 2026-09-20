@@ -1,13 +1,13 @@
 /**
  * generate-tts 云函数
- * 
+ *
  * 功能：
  * 1. 接收异动条目（alertId + headline + detail）
- * 2. 通过 WebSocket 调用阿里百炼 TTS API 生成语音（与 feed-server 同协议）
+ * 2. 通过 WebSocket 调用阿里百炼 TTS API 生成语音
  * 3. 将音频上传到 CloudBase 云存储
- * 4. 更新 alerts 表的 audio_url 字段
- * 5. 缓存到 tts_cache 表避免重复生成
- * 
+ * 4. 更新 alerts.json 中对应条目的 audioUrl 字段
+ * 5. 缓存到 CloudBase 存储（tts-cache/{cacheKey}.json）避免重复生成
+ *
  * 触发方式：由 fetch-tushare-data 调用 或 手动调用
  * 环境变量：DASHSCOPE_API_KEY（必需）
  * 依赖：ws（WebSocket 客户端）
@@ -21,6 +21,8 @@ const BAILIAN_API_KEY = process.env.DASHSCOPE_API_KEY || '';
 const TTS_MODEL = 'cosyvoice-v3-flash';
 const TTS_VOICE = 'longxiaochun_v3';
 const TTS_WSS_URL = `wss://${BAILIAN_WORKSPACE_ID}.cn-beijing.maas.aliyuncs.com/api-ws/v1/inference`;
+const ENV_ID = process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d';
+const ALERTS_FILE_ID = 'cloud://a2a-commonwealth-d2eepjr928e9c4d.6132-a2a-commonwealth-d2eepjr928e9c4d-1475054847/alerts/alerts.json';
 
 // 百炼额度监控
 const QUOTA = {
@@ -56,84 +58,113 @@ function getCacheKey(text) {
 }
 
 /**
- * 查询 tts_cache 表是否已有缓存
+ * 获取 CloudBase app 实例
+ */
+function getCloudBaseApp() {
+  const cloudbase = require('@cloudbase/node-sdk');
+  return cloudbase.init({ env: ENV_ID });
+}
+
+/**
+ * 查询 CloudBase 存储中是否已有 TTS 缓存
+ * 缓存文件格式：tts-cache/{cacheKey}.json，内容为 { audioUrl, text, voice, model, createdAt }
  */
 async function checkCache(cacheKey) {
-  const { PG_CONN_STRING } = process.env;
-  if (!PG_CONN_STRING) return null;
-
-  let pg;
-  try { pg = require('pg'); } catch (e) { return null; }
-
-  const client = new pg.Client({ connectionString: PG_CONN_STRING });
   try {
-    await client.connect();
-    const result = await client.query(
-      'SELECT audio_url FROM tts_cache WHERE cache_key = $1 AND (expires_at IS NULL OR expires_at > NOW())',
-      [cacheKey]
-    );
-    if (result.rows.length > 0) {
-      await client.query('UPDATE tts_cache SET accessed_at = NOW() WHERE cache_key = $1', [cacheKey]);
-      return result.rows[0].audio_url;
+    const app = getCloudBaseApp();
+    const cacheFileID = `cloud://${ENV_ID}.6132-${ENV_ID}-1475054847/tts-cache/${cacheKey}.json`;
+
+    const result = await app.downloadFile({ fileID: cacheFileID });
+    if (result && result.fileContent) {
+      const text = result.fileContent.toString('utf-8');
+      const data = JSON.parse(text);
+      if (data && data.audioUrl) {
+        console.log('TTS cache hit:', cacheKey);
+        return data.audioUrl;
+      }
     }
   } catch (e) {
-    console.error('Cache check error:', e.message);
-  } finally {
-    await client.end();
+    // 缓存文件不存在是正常情况，不记为错误
+    console.log('TTS cache miss:', cacheKey);
   }
   return null;
 }
 
 /**
- * 保存缓存到 tts_cache 表
+ * 保存 TTS 缓存到 CloudBase 存储
  */
 async function saveCache(cacheKey, text, audioUrl) {
-  const { PG_CONN_STRING } = process.env;
-  if (!PG_CONN_STRING) return;
-
-  let pg;
-  try { pg = require('pg'); } catch (e) { return; }
-
-  const client = new pg.Client({ connectionString: PG_CONN_STRING });
   try {
-    await client.connect();
-    await client.query(
-      `INSERT INTO tts_cache (cache_key, text, audio_url, voice, model, expires_at)
-       VALUES ($1, $2, $3, $4, $5, NOW() + INTERVAL '7 days')
-       ON CONFLICT (cache_key) DO UPDATE SET accessed_at = NOW(), audio_url = $3`,
-      [cacheKey, text, audioUrl, TTS_VOICE, TTS_MODEL]
-    );
+    const app = getCloudBaseApp();
+    const cacheData = JSON.stringify({
+      audioUrl,
+      text,
+      voice: TTS_VOICE,
+      model: TTS_MODEL,
+      createdAt: new Date().toISOString(),
+    });
+
+    await app.uploadFile({
+      cloudPath: `tts-cache/${cacheKey}.json`,
+      fileContent: Buffer.from(cacheData, 'utf-8'),
+    });
+
+    console.log('TTS cache saved:', cacheKey);
   } catch (e) {
     console.error('Cache save error:', e.message);
-  } finally {
-    await client.end();
   }
 }
 
 /**
- * 更新 alerts 表的 audio_url
+ * 更新 alerts.json 中对应 alertId 的 audioUrl 字段
+ * 读取 → 修改 → 重新上传
  */
 async function updateAlertAudioUrl(alertId, audioUrl) {
-  const { PG_CONN_STRING } = process.env;
-  if (!PG_CONN_STRING) return;
-
-  let pg;
-  try { pg = require('pg'); } catch (e) { return; }
-
-  const client = new pg.Client({ connectionString: PG_CONN_STRING });
   try {
-    await client.connect();
-    await client.query('UPDATE alerts SET audio_url = $1 WHERE alert_id = $2', [audioUrl, alertId]);
+    const app = getCloudBaseApp();
+
+    // 1. 下载当前 alerts.json
+    const result = await app.downloadFile({ fileID: ALERTS_FILE_ID });
+    if (!result || !result.fileContent) {
+      console.error('updateAlertAudioUrl: alerts.json not found');
+      return;
+    }
+
+    const data = JSON.parse(result.fileContent.toString('utf-8'));
+    if (!data || !data.items || !Array.isArray(data.items)) {
+      console.error('updateAlertAudioUrl: invalid alerts.json format');
+      return;
+    }
+
+    // 2. 找到对应 alertId 并更新 audioUrl
+    let updated = false;
+    for (const item of data.items) {
+      if (item.alertId === alertId) {
+        item.audioUrl = audioUrl;
+        updated = true;
+        break;
+      }
+    }
+
+    if (!updated) {
+      console.log(`updateAlertAudioUrl: alertId ${alertId} not found in alerts.json`);
+      return;
+    }
+
+    // 3. 重新上传 alerts.json
+    await app.uploadFile({
+      cloudPath: 'alerts/alerts.json',
+      fileContent: Buffer.from(JSON.stringify(data), 'utf-8'),
+    });
+
+    console.log(`updateAlertAudioUrl: updated ${alertId} with ${audioUrl}`);
   } catch (e) {
     console.error('Alert update error:', e.message);
-  } finally {
-    await client.end();
   }
 }
 
 /**
  * 通过 WebSocket 调用百炼 TTS API 生成语音
- * 与 feed-server/server.mjs 使用完全相同的协议
  */
 async function generateTTSAudio(text) {
   if (!BAILIAN_API_KEY) {
@@ -277,21 +308,10 @@ async function generateTTSAudio(text) {
  * 上传音频到 CloudBase 云存储
  */
 async function uploadToStorage(audioBuffer, cacheKey) {
-  let cloudbase;
   try {
-    cloudbase = require('@cloudbase/node-sdk');
-  } catch (e) {
-    console.error('cloudbase node-sdk not available');
-    return null;
-  }
+    const app = getCloudBaseApp();
+    const storagePath = `tts/${cacheKey}.mp3`;
 
-  const app = cloudbase.init({
-    env: process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d',
-  });
-
-  const storagePath = `tts/${cacheKey}.mp3`;
-
-  try {
     const result = await app.uploadFile({
       cloudPath: storagePath,
       fileContent: audioBuffer,
@@ -364,7 +384,7 @@ exports.main = async (event, context) => {
     // 4. 保存缓存
     await saveCache(cacheKey, text, audioUrl);
 
-    // 5. 更新 alert 的 audio_url
+    // 5. 更新 alert 的 audioUrl
     if (alertId) {
       await updateAlertAudioUrl(alertId, audioUrl);
     }
