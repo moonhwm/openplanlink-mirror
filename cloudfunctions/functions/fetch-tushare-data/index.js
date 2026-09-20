@@ -61,39 +61,122 @@ async function callTushare(apiName, params = {}, fields = '') {
 /**
  * 获取股票名称映射（ts_code → 中文名称）
  * Tushare daily API 的 name 字段经常为空，需要用 stock_basic 接口补充
+ * 
+ * 缓存策略：
+ * 1. 内存缓存（24小时TTL）——同一次函数调用内复用
+ * 2. CloudBase 存储缓存——跨函数调用持久化，即使冷启动或限流也能读取
+ * 3. stock_basic API（1次/小时限流）——仅在缓存失效时调用
  */
 async function getStockNameMap() {
-  // 检查缓存
+  // 检查内存缓存
   if (cachedNameMap && (Date.now() - cachedNameMapTs) < NAME_MAP_CACHE_TTL) {
-    console.log('Using cached stock name map, size:', cachedNameMap.size);
+    console.log('Using in-memory cached stock name map, size:', cachedNameMap.size);
     return cachedNameMap;
   }
 
+  // 尝试从 CloudBase 存储读取缓存
+  try {
+    const cloudbase = require('@cloudbase/node-sdk');
+    const app = cloudbase.init({
+      env: process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d',
+    });
+
+    const result = await app.downloadFile({
+      cloudPath: 'stock-names/name-map.json',
+    });
+
+    if (result && result.fileContent) {
+      const stored = JSON.parse(result.fileContent.toString('utf-8'));
+      if (stored && stored.names && stored.updatedAt) {
+        const age = Date.now() - new Date(stored.updatedAt).getTime();
+        // 存储缓存也在24小时TTL内时直接使用
+        if (age < NAME_MAP_CACHE_TTL) {
+          const nameMap = new Map(Object.entries(stored.names));
+          cachedNameMap = nameMap;
+          cachedNameMapTs = Date.now();
+          console.log(`Using CloudBase stored name map: ${nameMap.size} entries (age: ${Math.round(age / 3600000)}h)`);
+          return nameMap;
+        }
+        // 缓存过期但仍有数据——先用作 fallback，同时尝试刷新
+        console.log(`Stored name map is stale (${Math.round(age / 3600000)}h old), will try refresh`);
+        const fallbackMap = new Map(Object.entries(stored.names));
+      }
+    }
+  } catch (e) {
+    console.log('No stored name map in CloudBase:', e.message);
+  }
+
+  // 尝试调用 stock_basic API 刷新
   try {
     const stockBasic = await callTushare('stock_basic', {
       exchange: '',
-      list_status: 'L',  // 仅获取上市中的股票
+      list_status: 'L',
     }, 'ts_code,name');
 
     if (stockBasic && stockBasic.items && stockBasic.items.length > 0) {
       const nameMap = new Map();
+      const nameObj = {}; // 用于存储到 CloudBase
       stockBasic.items.forEach(row => {
         const tsCode = row[0];
         const name = row[1];
         if (tsCode && name) {
           nameMap.set(tsCode, name);
+          nameObj[tsCode] = name;
         }
       });
       cachedNameMap = nameMap;
       cachedNameMapTs = Date.now();
-      console.log(`Got stock name map: ${nameMap.size} entries`);
+      console.log(`Got fresh stock name map: ${nameMap.size} entries`);
+
+      // 持久化到 CloudBase 存储
+      try {
+        const cloudbase = require('@cloudbase/node-sdk');
+        const app = cloudbase.init({
+          env: process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d',
+        });
+        await app.uploadFile({
+          cloudPath: 'stock-names/name-map.json',
+          fileContent: Buffer.from(JSON.stringify({
+            names: nameObj,
+            updatedAt: new Date().toISOString(),
+            count: nameMap.size,
+          }), 'utf-8'),
+        });
+        console.log('Name map persisted to CloudBase storage');
+      } catch (storeErr) {
+        console.log('Failed to persist name map:', storeErr.message);
+      }
+
       return nameMap;
     }
   } catch (e) {
-    console.log('stock_basic failed:', e.message);
+    console.log('stock_basic API failed (rate limited?):', e.message);
   }
 
-  // Fallback：返回空 Map，后续用 ts_code 代替名称
+  // 最后 fallback：尝试用过期的存储缓存
+  try {
+    const cloudbase = require('@cloudbase/node-sdk');
+    const app = cloudbase.init({
+      env: process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d',
+    });
+    const result = await app.downloadFile({
+      cloudPath: 'stock-names/name-map.json',
+    });
+    if (result && result.fileContent) {
+      const stored = JSON.parse(result.fileContent.toString('utf-8'));
+      if (stored && stored.names) {
+        const nameMap = new Map(Object.entries(stored.names));
+        cachedNameMap = nameMap;
+        cachedNameMapTs = Date.now();
+        console.log(`Using stale stored name map as fallback: ${nameMap.size} entries`);
+        return nameMap;
+      }
+    }
+  } catch (e) {
+    // 无缓存可用
+  }
+
+  // 最终 fallback：返回空 Map，后续用 ts_code 代替名称
   console.log('Using empty name map fallback');
   return new Map();
 }
