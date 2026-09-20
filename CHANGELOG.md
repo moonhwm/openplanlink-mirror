@@ -830,3 +830,22 @@
   2. Supabase `a2a_messages` 表不存在（404），Supabase 广播功能暂不可用。
   3. name 字段限流问题仍存在。
   4. Lovrabet CLI AccessKey 待用户提供。
+## 2026-09-21（续2）· 砚坚 · TTS端到端验证 + 名称缓存 + HY4握手
+
+- 改了什么：
+  - **generate-tts 端到端验证通过**：调用 `tcb fn invoke generate-tts` 传入异动文本，百炼 TTS WebSocket 成功生成 144,667 字节 MP3 音频，上传到 CloudBase 存储，缓存到 `tts-cache/{cacheKey}.json`，返回可访问的音频 URL。百炼配额使用 88 tokens（使用率 0.0001）。
+  - **股票名称映射三级缓存**：`getStockNameMap()` 从单一内存缓存升级为三级缓存策略：(1)内存缓存24h TTL → (2)CloudBase存储缓存`stock-names/name-map.json` → (3)stock_basic API。API限流时自动回退到存储中的过期缓存（优于空映射），API成功时自动持久化到存储。
+  - **HY4握手消息已发送**：通过A2A总线桥接脚本向 `workbuddy-hy4` 席位发送 `handshake-propose` 消息（id=7018），ed25519签名+回读核验通过。等待HY4回复中。
+- 为什么这么改：
+  - TTS是铃语App"点卡即听"核心功能的关键环节，必须验证端到端可用性。
+  - stock_basic API 1次/小时限流导致name字段频繁回退为股票代码，持久化缓存可大幅缓解。
+  - 机主要求与HY4席位取得握手协同推进遗留问题。
+- 如何验证：
+  - V1：`tcb fn invoke generate-tts --params '{"text":"万科A涨了9.93%..."}'` → success:true, audioUrl可访问, 144KB MP3。通过。
+  - V2：`tcb fn invoke fetch-tushare-data` → 函数正常执行（名称缓存逻辑已部署，但stock_basic仍限流中）。通过。
+  - V3：A2A总线握手消息 id=7018 回读核验通过。通过。
+- 遗留：
+  1. HY4席位尚未回复握手消息——可能不在线或通过WorkBuddy平台而非直接监听A2A总线。
+  2. stock_basic API限流中，名称缓存尚未首次填充（需等API恢复后第一次成功调用）。
+  3. `app.messaging is not a function`——Push功能需AGC配置后用正确API。
+  4. Lovrabet CLI AccessKey待用户提供。
