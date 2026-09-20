@@ -25,6 +25,11 @@ let cachedTradeDate = null;
 let cachedTradeDateTs = 0;
 const TRADE_DATE_CACHE_TTL = 3600000; // 1小时缓存
 
+// 股票名称映射缓存（ts_code → 中文名称）
+let cachedNameMap = null;
+let cachedNameMapTs = 0;
+const NAME_MAP_CACHE_TTL = 86400000; // 24小时缓存（股票名称很少变化）
+
 /**
  * 调用 Tushare API
  */
@@ -54,7 +59,48 @@ async function callTushare(apiName, params = {}, fields = '') {
 }
 
 /**
+ * 获取股票名称映射（ts_code → 中文名称）
+ * Tushare daily API 的 name 字段经常为空，需要用 stock_basic 接口补充
+ */
+async function getStockNameMap() {
+  // 检查缓存
+  if (cachedNameMap && (Date.now() - cachedNameMapTs) < NAME_MAP_CACHE_TTL) {
+    console.log('Using cached stock name map, size:', cachedNameMap.size);
+    return cachedNameMap;
+  }
+
+  try {
+    const stockBasic = await callTushare('stock_basic', {
+      exchange: '',
+      list_status: 'L',  // 仅获取上市中的股票
+    }, 'ts_code,name');
+
+    if (stockBasic && stockBasic.items && stockBasic.items.length > 0) {
+      const nameMap = new Map();
+      stockBasic.items.forEach(row => {
+        const tsCode = row[0];
+        const name = row[1];
+        if (tsCode && name) {
+          nameMap.set(tsCode, name);
+        }
+      });
+      cachedNameMap = nameMap;
+      cachedNameMapTs = Date.now();
+      console.log(`Got stock name map: ${nameMap.size} entries`);
+      return nameMap;
+    }
+  } catch (e) {
+    console.log('stock_basic failed:', e.message);
+  }
+
+  // Fallback：返回空 Map，后续用 ts_code 代替名称
+  console.log('Using empty name map fallback');
+  return new Map();
+}
+
+/**
  * 获取最新交易日（带缓存，避免 trade_cal 频率超限）
+ * 关键修复：加 start_date/end_date 限制查询范围，避免返回未来交易日
  */
 async function getLatestTradeDate() {
   // 检查缓存
@@ -63,10 +109,29 @@ async function getLatestTradeDate() {
     return cachedTradeDate;
   }
 
+  // 计算 end_date（今天）和 start_date（30天前，确保能查到数据）
+  const now = new Date();
+  const endDateObj = new Date(now);
+  const startDateObj = new Date(now);
+  startDateObj.setDate(now.getDate() - 30);
+
+  const fmt = (d) => {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}${m}${day}`;
+  };
+
+  const endDate = fmt(endDateObj);
+  const startDate = fmt(startDateObj);
+
   try {
+    // 查询最近30天内已开盘的交易日，按日期降序取最新一个
     const tradeCal = await callTushare('trade_cal', {
       exchange: 'SSE',
       is_open: '1',
+      start_date: startDate,
+      end_date: endDate,
       limit: '1',
       offset: '0',
     }, 'cal_date');
@@ -74,7 +139,7 @@ async function getLatestTradeDate() {
     if (tradeCal && tradeCal.items && tradeCal.items.length > 0) {
       cachedTradeDate = tradeCal.items[0][0];
       cachedTradeDateTs = Date.now();
-      console.log('Got latest trade date:', cachedTradeDate);
+      console.log('Got latest trade date:', cachedTradeDate, `(range: ${startDate}~${endDate})`);
       return cachedTradeDate;
     }
   } catch (e) {
@@ -82,59 +147,69 @@ async function getLatestTradeDate() {
   }
 
   // Fallback：使用当前日期推算（如果是工作日，用今天；否则用最近的周五）
-  const now = new Date();
   const day = now.getDay(); // 0=周日, 6=周六
   let fallbackDate;
   if (day === 0) {
-    // 周日 → 用上周五
     const friday = new Date(now);
     friday.setDate(now.getDate() - 2);
     fallbackDate = friday;
   } else if (day === 6) {
-    // 周六 → 用本周五
     const friday = new Date(now);
     friday.setDate(now.getDate() - 1);
     fallbackDate = friday;
   } else {
     fallbackDate = now;
   }
-  const y = fallbackDate.getFullYear();
-  const m = String(fallbackDate.getMonth() + 1).padStart(2, '0');
-  const d = String(fallbackDate.getDate()).padStart(2, '0');
-  const fallbackStr = `${y}${m}${d}`;
+  const fallbackStr = fmt(fallbackDate);
   console.log('Using fallback trade date:', fallbackStr);
   return fallbackStr;
 }
 
 /**
  * 获取日线行情数据并筛选异动
+ * 关键修复：用 stock_basic 名称映射补充 daily API 返回的空 name 字段
  */
 async function getDailyMovers() {
   const tradeDate = await getLatestTradeDate();
   console.log(`Fetching daily data for ${tradeDate}...`);
 
-  try {
-    const dailyData = await callTushare('daily', {
+  // 并行获取日线数据和股票名称映射
+  const [dailyResult, nameMap] = await Promise.all([
+    callTushare('daily', {
       trade_date: tradeDate,
-    }, 'ts_code,name,pct_chg,close,vol,amount,open,high,low,pre_close');
+    }, 'ts_code,name,pct_chg,close,vol,amount,open,high,low,pre_close').catch(e => {
+      console.error('daily API failed:', e.message);
+      return null;
+    }),
+    getStockNameMap(),
+  ]);
 
-    if (dailyData && dailyData.items && dailyData.items.length > 0) {
-      console.log(`Got ${dailyData.items.length} daily records`);
-      const movers = dailyData.items.map(row => {
-        const obj = {};
-        dailyData.fields.forEach((field, i) => {
-          obj[field] = row[i];
-        });
-        return obj;
-      }).filter(item => {
-        const pct = parseFloat(item.pct_chg || 0);
-        return Math.abs(pct) >= THRESHOLD;
+  if (dailyResult && dailyResult.items && dailyResult.items.length > 0) {
+    console.log(`Got ${dailyResult.items.length} daily records, name map size: ${nameMap.size}`);
+
+    const movers = dailyResult.items.map(row => {
+      const obj = {};
+      dailyResult.fields.forEach((field, i) => {
+        obj[field] = row[i];
       });
-      console.log(`Filtered to ${movers.length} movers above ${THRESHOLD}%`);
-      return movers;
-    }
-  } catch (e) {
-    console.error('daily API failed:', e.message);
+      // 关键修复：用 stock_basic 映射补充名称，daily API 的 name 字段经常为空
+      if (!obj.name && obj.ts_code) {
+        const mappedName = nameMap.get(obj.ts_code);
+        if (mappedName) {
+          obj.name = mappedName;
+        }
+      }
+      return obj;
+    }).filter(item => {
+      const pct = parseFloat(item.pct_chg || 0);
+      return Math.abs(pct) >= THRESHOLD;
+    });
+
+    console.log(`Filtered to ${movers.length} movers above ${THRESHOLD}%`);
+    // 统计有多少条成功映射了名称
+    const withName = movers.filter(m => m.name && m.name !== m.ts_code).length;
+    console.log(`Name mapping: ${withName}/${movers.length} have Chinese names`);
+    return movers;
   }
 
   return [];
@@ -196,54 +271,62 @@ function createAlertItems(movers) {
 }
 
 /**
- * 写入 PostgreSQL alerts 表
+ * 将异动数据上传到 CloudBase 存储（JSON 文件）
+ * 替代 PostgreSQL——用存储服务存取 alerts.json
  */
 async function saveAlertsToDB(alerts) {
-  const { PG_CONN_STRING } = process.env;
-  if (!PG_CONN_STRING) {
-    console.log('PG_CONN_STRING not set, skipping DB write');
-    return;
-  }
-
-  let pg;
-  try { pg = require('pg'); } catch (e) {
-    console.log('pg module not available, skipping DB write');
-    return;
-  }
-
-  const client = new pg.Client({ connectionString: PG_CONN_STRING });
   try {
-    await client.connect();
-    console.log('Connected to PostgreSQL');
+    const cloudbase = require('@cloudbase/node-sdk');
+    const app = cloudbase.init({
+      env: process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d',
+    });
 
-    for (const alert of alerts) {
-      try {
-        await client.query(
-          `INSERT INTO alerts (alert_id, ts, symbol, name, direction, kind, headline, detail, audio_url)
-           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-           ON CONFLICT (alert_id) DO NOTHING`,
-          [
-            alert.alertId,
-            alert.ts,
-            alert.symbol,
-            alert.name,
-            alert.direction,
-            alert.kind || 'fact',
-            alert.headline,
-            alert.detail,
-            alert.audioUrl || null,
-          ]
-        );
-      } catch (e) {
-        console.error(`Failed to insert alert ${alert.alertId}:`, e.message);
+    // 先下载现有数据（合并新旧，保留历史）
+    let existingItems = [];
+    try {
+      const result = await app.downloadFile({
+        cloudPath: 'alerts/alerts.json',
+      });
+      if (result && result.fileContent) {
+        const data = JSON.parse(result.fileContent.toString('utf-8'));
+        existingItems = data.items || [];
       }
+    } catch (e) {
+      // 文件不存在时正常，用空数组
+      console.log('No existing alerts.json, creating new');
     }
 
-    console.log(`Saved ${alerts.length} alerts to DB`);
+    // 合并新旧数据，按 alertId 去重
+    const alertMap = new Map();
+    // 先放旧数据
+    for (const item of existingItems) {
+      alertMap.set(item.alertId, item);
+    }
+    // 再放新数据（覆盖同 alertId 的旧数据）
+    for (const alert of alerts) {
+      alertMap.set(alert.alertId, alert);
+    }
+
+    // 保留最新的 500 条（按 ts 降序）
+    const allItems = Array.from(alertMap.values())
+      .sort((a, b) => b.ts - a.ts)
+      .slice(0, 500);
+
+    const jsonContent = JSON.stringify({
+      items: allItems,
+      serverTs: Math.floor(Date.now() / 1000),
+      updatedAt: new Date().toISOString(),
+    });
+
+    // 上传到 CloudBase 存储
+    const uploadResult = await app.uploadFile({
+      cloudPath: 'alerts/alerts.json',
+      fileContent: Buffer.from(jsonContent, 'utf-8'),
+    });
+
+    console.log(`Saved ${alerts.length} new alerts (total ${allItems.length}) to CloudBase storage, fileID: ${uploadResult?.fileID || 'N/A'}`);
   } catch (e) {
-    console.error('DB connection error:', e.message);
-  } finally {
-    await client.end();
+    console.error('CloudBase storage error:', e.message);
   }
 }
 

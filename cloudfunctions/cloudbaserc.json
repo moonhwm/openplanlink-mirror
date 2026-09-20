@@ -58,6 +58,15 @@
         "timeout": 10,
         "installDependency": true
       }
+    },
+    {
+      "name": "diag-env",
+      "config": {
+        "runtime": "Nodejs18.15",
+        "handler": "index.main",
+        "timeout": 10,
+        "installDependency": true
+      }
     }
   ]
 }

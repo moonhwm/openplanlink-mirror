@@ -783,3 +783,30 @@
   1. 当前数据库中无异动数据（Tushare API 返回未来日期 20271231 无数据）——需排查 trade_cal 缓存逻辑
   2. feed-server 适配 CloudBase 数据源（排期3）——将 feed-server 从本地 westock-data 改为调用 CloudBase 云函数
   3. PushService.ets 中 TOKEN_REPORT_URL 仍指向本地 127.0.0.1:8000——AGC Push 未配置前保持占位
+## 2026-09-21 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· CloudBase 存储架构落地 + 数据链路打通
+
+- 改了什么：
+  - **数据存储架构变更：PostgreSQL → CloudBase 存储服务**。发现 `PG_CONN_STRING` 从未在任何云函数中配置，Supabase alerts 表也不存在，之前认为"数据写入 PostgreSQL"是错误的。尝试 6 种方案访问 CloudBase 内置 PostgreSQL 均失败（db.server() 不存在、app.database() 不是函数、fetch rdb URL 401、app.rdb().fetch() host:null 错误、app.callApis() invalid api name、NoSQL 未开通）。最终改用 CloudBase 存储服务存取 JSON 文件。
+  - **`fetch-tushare-data/index.js` 大幅重写**：
+    - 新增 `getStockNameMap()`：用 Tushare `stock_basic` API 获取中文股票名称映射，24 小时缓存。`daily` API 返回的 name 字段为空，需额外查 `stock_basic` 补全。限流时回退为股票代码。
+    - 修复 `getLatestTradeDate()`：给 `trade_cal` API 加 `start_date`/`end_date` 参数（最近 30 天），避免返回未来交易日（之前返回 20271231）。
+    - `saveAlertsToDB()` 重写：从 PostgreSQL INSERT 改为 `app.uploadFile({cloudPath: 'alerts/alerts.json', fileContent: Buffer})`，上传时合并新旧数据，按 alertId 去重，保留最新 500 条。
+  - **`get-alerts/index.js` 重写**：从 PostgreSQL SELECT 改为 `app.downloadFile({fileID: 'cloud://...'})` 下载 alerts.json 并返回 AlertFeed 格式。硬编码 fileID（格式稳定）。
+  - **`fetch-tushare-data/package.json`** 和 **`get-alerts/package.json`**：依赖从 `pg` 改为 `@cloudbase/node-sdk`。
+  - **`cloudbaserc.json`**：更新函数配置。
+  - **新增 `diag-env` 诊断云函数**（临时）：用于探测 CloudBase SDK API 能力，发现 `app` 对象原型方法列表（uploadFile/downloadFile/callFunction 等），确认无 SQL 执行能力。待清理。
+- 为什么这么改：
+  - PostgreSQL 从未真正连通，数据链路一直是断的。CloudBase 存储服务是唯一能从云函数中可靠读写的持久化方案。
+  - Tushare `daily` API 的 name 字段返回空值，必须额外查 `stock_basic` 补全中文名称。
+  - `trade_cal` 不加日期范围会返回未来交易日，导致 `getLatestTradeDate()` 返回错误日期。
+- 如何验证：
+  - V1：`tcb fn invoke fetch-tushare-data` → 413 条异动写入 CloudBase 存储。通过。
+  - V2：`tcb fn invoke get-alerts` → 20 条异动从 CloudBase 存储读取返回。通过。
+  - V3：HTTP 端点 `https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com/alerts` → 返回 20 条异动 JSON。通过。
+  - V4：端侧 AlertPoller/SettingsService/Settings 的 FEED_URL 均指向 CloudBase HTTP 端点。通过。
+- 遗留：
+  1. name 字段限流问题：`stock_basic` API 1 次/小时限流，限流时 name 回退为股票代码。需考虑预加载或缓存策略。
+  2. `diag-env` 诊断函数待清理删除。
+  3. `broadcast-a2a` 和 `generate-tts` 云函数仍引用旧 PostgreSQL 架构，需适配新存储架构。
+  4. `feed-server` 的 CloudBase 模式指向 get-alerts HTTP 端点，端点已通但 feed-server 未端到端验证。
+  5. Lovrabet CLI AccessKey 待用户提供（ak_xxx）。

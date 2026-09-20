@@ -1,9 +1,9 @@
 {
   "name": "get-alerts",
   "version": "1.0.0",
-  "description": "Lightweight read-only endpoint for client polling - returns AlertFeed format from PostgreSQL",
+  "description": "Lightweight read-only endpoint for client polling - reads alerts from CloudBase storage",
   "main": "index.js",
   "dependencies": {
-    "pg": "^8.11.3"
+    "@cloudbase/node-sdk": "^3.0.0"
   }
 }

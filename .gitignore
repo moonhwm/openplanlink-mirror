@@ -21,3 +21,11 @@ feed-server/data/
 # Phase 1 加固：凭据金库密钥文件（绝不入库）
 GOVERNANCE/vault-key.hex
 GOVERNANCE/credentials/*.json.enc
+# 工具临时文件与进程锁
+.codeartsdoer/.codebase/watch.pid
+.codeartsdoer/.codebase/watch.pid.lock
+.agents/
+.claude/
+nul
+create-coll-cmd.json
+skills-lock.json
