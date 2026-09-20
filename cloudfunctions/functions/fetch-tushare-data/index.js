@@ -511,6 +511,50 @@ exports.main = async (event, context) => {
     const alerts = createAlertItems(movers);
     console.log(`Generated ${alerts.length} alert items`);
 
+    // 为信号卡（kind=signal）批量生成 TTS 音频，预填充 audioUrl
+    // 信号卡是"自家信号"，更需要语音播报；事实卡用户可自行阅读
+    // 限制最多10条，避免百炼额度过度消耗
+    const signalAlerts = alerts.filter(a => a.kind === 'signal').slice(0, 10);
+    if (signalAlerts.length > 0) {
+      console.log(`Generating TTS for ${signalAlerts.length} signal alerts...`);
+      try {
+        const cloudbase = require('@cloudbase/node-sdk');
+        const app = cloudbase.init({
+          env: process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d',
+        });
+
+        const ttsResults = await Promise.allSettled(
+          signalAlerts.map(alert =>
+            app.callFunction({
+              name: 'generate-tts',
+              data: {
+                alertId: alert.alertId,
+                text: `${alert.headline}。${alert.detail}`,
+              },
+            })
+          )
+        );
+
+        let ttsSuccess = 0;
+        for (let i = 0; i < signalAlerts.length; i++) {
+          const result = ttsResults[i];
+          if (result.status === 'fulfilled' && result.value?.result?.success) {
+            signalAlerts[i].audioUrl = result.value.result.audioUrl;
+            ttsSuccess++;
+            console.log(`TTS OK for ${signalAlerts[i].alertId}: ${result.value.result.audioUrl?.substring(0, 60)}...`);
+          } else {
+            const errMsg = result.status === 'rejected'
+              ? result.reason?.message || 'unknown error'
+              : result.value?.result?.error || 'unknown error';
+            console.log(`TTS FAIL for ${signalAlerts[i].alertId}: ${errMsg}`);
+          }
+        }
+        console.log(`TTS batch done: ${ttsSuccess}/${signalAlerts.length} succeeded`);
+      } catch (e) {
+        console.log('TTS batch generation failed (non-blocking):', e.message);
+      }
+    }
+
     await saveAlertsToDB(alerts);
 
     return {

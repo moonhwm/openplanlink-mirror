@@ -872,3 +872,30 @@
   2. HY4席位尚未回复握手消息
   3. `app.messaging is not a function`——Push功能需AGC配置后用华为Push Kit REST API
   4. Lovrabet CLI AccessKey待用户提供
+## 2026-09-21 05:30 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· 全链路数据流验证+audioUrl缺口修复
+
+- 改了什么：
+  - `cloudfunctions/functions/fetch-tushare-data/index.js`：
+    - 在 `exports.main` 中 `saveAlertsToDB(alerts)` 之前，新增信号卡批量TTS生成逻辑
+    - 筛选 `kind === 'signal'` 的前10条信号卡，通过 `app.callFunction` 并行调用 `generate-tts` 云函数
+    - 使用 `Promise.allSettled` 确保单条TTS失败不影响其他条目
+    - 将成功的 `audioUrl` 填充到对应 alert item 中，然后统一保存到 alerts.json
+    - TTS生成失败时 non-blocking，不影响异动数据获取和保存
+- 为什么：
+  - 全链路数据流验证发现关键缺口：alerts.json 中 audioUrl 始终为 undefined
+  - 端侧 Index.ets 中 `if (!item.audioUrl) { return; }`——没有 audioUrl 的卡片不显示"▶ 听"按钮
+  - 这是铃语App核心功能"点卡即听"的根本性阻塞——用户无法听播报
+  - 信号卡是"自家信号"（涨跌幅≥8%），更需要语音播报；事实卡用户可自行阅读
+  - 限制前10条避免百炼额度过度消耗（10条×约125tokens=1250tokens/次）
+- 如何验证：
+  - V1：`tcb fn invoke fetch-tushare-data` → 信号卡前10条有 audioUrl，事实卡无 audioUrl。通过。
+  - V2：`curl CloudBase HTTP端点` → 20条数据，10条有 audioUrl。通过。
+  - V3：`curl feed-server /api/alerts/latest` → 20条数据，10条有 audioUrl。通过。
+  - V4：`curl -sI audioUrl` → HTTP 200, Content-Type: audio/mpeg。通过。
+  - V5：端侧 AlertItem.ets 字段契约 → 所有必需字段完整。通过。
+- 遗留：
+  1. 第11条及之后的信号卡没有 audioUrl（slice(0,10)限制）——可按需调整上限
+  2. 事实卡（kind=fact）没有 audioUrl——设计如此，事实卡用户可自行阅读
+  3. HY4席位尚未回复握手消息
+  4. Push功能需AGC P5审批+Push Token+环境变量配置
+  5. Lovrabet CLI AccessKey待用户提供
