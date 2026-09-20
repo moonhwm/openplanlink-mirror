@@ -31,7 +31,8 @@
         "timeout": 60,
         "installDependency": true,
         "envVariables": {
-          "BAILIAN_WORKSPACE_ID": "ws-ay6o8osb22o9dc3t"
+          "BAILIAN_WORKSPACE_ID": "ws-ay6o8osb22o9dc3t",
+          "DASHSCOPE_API_KEY": "sk-ws-H.PHLIMMY.GPIc.MEUCIQCPjDov2hI6E3dHuthorFmf4aNejDjvsJ9aHJe2BKJ-ggIgdryh-IeI8ZehjypK88H3o96kWFTaO7n4HJb95j1Gzbs"
         }
       }
     },
@@ -43,7 +44,9 @@
         "timeout": 30,
         "installDependency": true,
         "envVariables": {
-          "PUSH_BUNDLE_NAME": "com.lingyu.app"
+          "PUSH_BUNDLE_NAME": "com.lingyu.app",
+          "SUPABASE_URL": "https://ltdodcumoxiqsnakpqog.supabase.co",
+          "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx0ZG9kY3Vtb3hpcXNuYWtwcW9nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3NjQ5ODEsImV4cCI6MjEwMzM0MDk4MX0.n2alyDO-ZZmYedGHlFmoIASo0QxdxN6NwEDYNV2KhKA"
         }
       }
     }
