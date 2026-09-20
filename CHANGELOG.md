@@ -810,3 +810,23 @@
   3. `broadcast-a2a` 和 `generate-tts` 云函数仍引用旧 PostgreSQL 架构，需适配新存储架构。
   4. `feed-server` 的 CloudBase 模式指向 get-alerts HTTP 端点，端点已通但 feed-server 未端到端验证。
   5. Lovrabet CLI AccessKey 待用户提供（ak_xxx）。
+## 2026-09-21（续）· 砚坚 · 云函数全量适配 + diag-env 清理
+
+- 改了什么：
+  - **`broadcast-a2a/index.js` 适配 CloudBase 存储**：`getLatestAlerts()` 从 PostgreSQL SELECT 改为 `app.downloadFile()` 读取 alerts.json；字段名从 snake_case 改为 camelCase（`alert_id`→`alertId`、`audio_url`→`audioUrl`）；移除 `pg` 依赖引用。
+  - **`generate-tts/index.js` 适配 CloudBase 存储**：`checkCache()` 改为从 CloudBase 存储 `downloadFile` 读取 `tts-cache/{cacheKey}.json`；`saveCache()` 改为 `uploadFile` 写入缓存元数据 JSON；`updateAlertAudioUrl()` 改为读取 alerts.json→更新对应条目→重新上传；移除 `pg` 依赖引用。
+  - **`cloudbaserc.json`**：移除 diag-env 函数配置。
+  - **`diag-env` 诊断函数清理**：从 CloudBase 删除部署 + 本地文件删除 + 配置移除。
+  - **`.gitignore`**：新增排除 `.agents/`、`.claude/`、`nul`、`create-coll-cmd.json`、`skills-lock.json`、watch.pid 等工具临时文件。
+- 为什么这么改：
+  - 所有云函数必须统一到 CloudBase 存储架构，消除对未连通的 PostgreSQL 的依赖。
+  - diag-env 诊断函数已完成使命（确认 SDK API 能力），不再需要。
+- 如何验证：
+  - V1：`tcb fn invoke broadcast-a2a` → 成功从 CloudBase 存储读取 20 条异动数据。通过。
+  - V2：`tcb fn invoke get-alerts` → 20 条异动正常返回。通过。
+  - V3：`tcb fn deploy broadcast-a2a` 和 `tcb fn deploy generate-tts` → 部署成功。通过。
+- 遗留：
+  1. `app.messaging is not a function`：`@cloudbase/node-sdk` v3 无 `messaging()` 方法，Push 功能需 AGC 配置后用正确 API 实装。
+  2. Supabase `a2a_messages` 表不存在（404），Supabase 广播功能暂不可用。
+  3. name 字段限流问题仍存在。
+  4. Lovrabet CLI AccessKey 待用户提供。
