@@ -2,23 +2,28 @@
  * fetch-tushare-data 云函数
  * 
  * 功能：
- * 1. 调用 Tushare API 获取A股实时行情数据
+ * 1. 调用 Tushare API 获取A股日线行情数据
  * 2. 筛选涨跌幅 ≥ 阈值（默认5%）的异动股票
  * 3. 将异动记录写入 PostgreSQL alerts 表
  * 4. 返回异动列表 JSON
  * 
- * 触发方式：定时触发器（每30秒）或手动调用
+ * 触发方式：定时触发器或手动调用
  * 环境变量：TUSHARE_TOKEN（必需）
+ * 
+ * 数据接口策略（按 token 权限降级）：
+ *   1. daily（日线行情）—— 基础权限，需指定 trade_date
+ *   2. trade_cal（交易日历）—— 基础权限，频率限制1次/小时，缓存最新交易日
+ *   3. top_list（龙虎榜）—— 高级权限，当前 token 无权限
  */
 
-// Tushare API 配置
 const TUSHARE_API_URL = 'https://api.tushare.pro';
-const TUSHARE_TOKEN = process.env.TUSHARE_TOKEN || 'c5e307a634ff8e29575c557e51d41299';
-const THRESHOLD = parseFloat(process.env.ALERT_THRESHOLD || '5.0'); // 涨跌幅阈值(%)
-const BATCH_SIZE = parseInt(process.env.BATCH_SIZE || '50', 10); // 每批查询股票数
+const TUSHARE_TOKEN = process.env.TUSHARE_TOKEN || '';
+const THRESHOLD = parseFloat(process.env.ALERT_THRESHOLD || '5.0');
 
-// CloudBase PostgreSQL 连接（云函数环境中自动注入）
-const { PG_CONN_STRING } = process.env;
+// 最新交易日缓存（避免频繁调用 trade_cal）
+let cachedTradeDate = null;
+let cachedTradeDateTs = 0;
+const TRADE_DATE_CACHE_TTL = 3600000; // 1小时缓存
 
 /**
  * 调用 Tushare API
@@ -49,60 +54,16 @@ async function callTushare(apiName, params = {}, fields = '') {
 }
 
 /**
- * 获取实时行情（涨跌幅排名）
- * 使用 ts5 接口获取5分钟涨跌幅排名
+ * 获取最新交易日（带缓存，避免 trade_cal 频率超限）
  */
-async function getRealtimeQuotes() {
-  // 实时行情 - 涨跌幅排名前100
-  const data = await callTushare('realtime_quote', {
-    ts_code: '', // 空表示全部
-    trade_date: '', // 空表示最新
-  }, 'ts_code,name,price,pct_chg,vol,amount,open,high,low,pre_close');
-
-  if (!data || !data.items || data.items.length === 0) {
-    console.log('No realtime data returned');
-    return [];
+async function getLatestTradeDate() {
+  // 检查缓存
+  if (cachedTradeDate && (Date.now() - cachedTradeDateTs) < TRADE_DATE_CACHE_TTL) {
+    console.log('Using cached trade date:', cachedTradeDate);
+    return cachedTradeDate;
   }
 
-  // data.items 是数组，每个元素是 [ts_code, name, price, pct_chg, vol, amount, open, high, low, pre_close]
-  const items = data.items.map(row => {
-    const obj = {};
-    data.fields.forEach((field, i) => {
-      obj[field] = row[i];
-    });
-    return obj;
-  });
-
-  return items;
-}
-
-/**
- * 获取涨跌幅排名（使用 daily_basic + top_list）
- */
-async function getTopMovers() {
-  // 获取今日涨跌幅排名
   try {
-    // 方案1: 使用 top_list 获取龙虎榜（涨跌幅异常的股票）
-    const topData = await callTushare('top_list', {
-      trade_date: '', // 最新交易日
-    }, 'ts_code,name,pct_chg,close,amount');
-
-    if (topData && topData.items && topData.items.length > 0) {
-      return topData.items.map(row => {
-        const obj = {};
-        topData.fields.forEach((field, i) => {
-          obj[field] = row[i];
-        });
-        return obj;
-      }).filter(item => Math.abs(parseFloat(item.pct_chg || 0)) >= THRESHOLD);
-    }
-  } catch (e) {
-    console.log('top_list failed, trying daily_basic:', e.message);
-  }
-
-  // 方案2: 使用 daily_basic 获取每日指标（需要指定交易日）
-  try {
-    // 先获取最新交易日
     const tradeCal = await callTushare('trade_cal', {
       exchange: 'SSE',
       is_open: '1',
@@ -111,25 +72,69 @@ async function getTopMovers() {
     }, 'cal_date');
 
     if (tradeCal && tradeCal.items && tradeCal.items.length > 0) {
-      const latestDate = tradeCal.items[0][0]; // cal_date
-      console.log('Latest trade date:', latestDate);
-
-      const dailyData = await callTushare('daily', {
-        trade_date: latestDate,
-      }, 'ts_code,name,pct_chg,close,vol,amount,open,high,low,pre_close');
-
-      if (dailyData && dailyData.items) {
-        return dailyData.items.map(row => {
-          const obj = {};
-          dailyData.fields.forEach((field, i) => {
-            obj[field] = row[i];
-          });
-          return obj;
-        }).filter(item => Math.abs(parseFloat(item.pct_chg || 0)) >= THRESHOLD);
-      }
+      cachedTradeDate = tradeCal.items[0][0];
+      cachedTradeDateTs = Date.now();
+      console.log('Got latest trade date:', cachedTradeDate);
+      return cachedTradeDate;
     }
   } catch (e) {
-    console.log('daily approach failed:', e.message);
+    console.log('trade_cal failed:', e.message);
+  }
+
+  // Fallback：使用当前日期推算（如果是工作日，用今天；否则用最近的周五）
+  const now = new Date();
+  const day = now.getDay(); // 0=周日, 6=周六
+  let fallbackDate;
+  if (day === 0) {
+    // 周日 → 用上周五
+    const friday = new Date(now);
+    friday.setDate(now.getDate() - 2);
+    fallbackDate = friday;
+  } else if (day === 6) {
+    // 周六 → 用本周五
+    const friday = new Date(now);
+    friday.setDate(now.getDate() - 1);
+    fallbackDate = friday;
+  } else {
+    fallbackDate = now;
+  }
+  const y = fallbackDate.getFullYear();
+  const m = String(fallbackDate.getMonth() + 1).padStart(2, '0');
+  const d = String(fallbackDate.getDate()).padStart(2, '0');
+  const fallbackStr = `${y}${m}${d}`;
+  console.log('Using fallback trade date:', fallbackStr);
+  return fallbackStr;
+}
+
+/**
+ * 获取日线行情数据并筛选异动
+ */
+async function getDailyMovers() {
+  const tradeDate = await getLatestTradeDate();
+  console.log(`Fetching daily data for ${tradeDate}...`);
+
+  try {
+    const dailyData = await callTushare('daily', {
+      trade_date: tradeDate,
+    }, 'ts_code,name,pct_chg,close,vol,amount,open,high,low,pre_close');
+
+    if (dailyData && dailyData.items && dailyData.items.length > 0) {
+      console.log(`Got ${dailyData.items.length} daily records`);
+      const movers = dailyData.items.map(row => {
+        const obj = {};
+        dailyData.fields.forEach((field, i) => {
+          obj[field] = row[i];
+        });
+        return obj;
+      }).filter(item => {
+        const pct = parseFloat(item.pct_chg || 0);
+        return Math.abs(pct) >= THRESHOLD;
+      });
+      console.log(`Filtered to ${movers.length} movers above ${THRESHOLD}%`);
+      return movers;
+    }
+  } catch (e) {
+    console.error('daily API failed:', e.message);
   }
 
   return [];
@@ -194,17 +199,14 @@ function createAlertItems(movers) {
  * 写入 PostgreSQL alerts 表
  */
 async function saveAlertsToDB(alerts) {
+  const { PG_CONN_STRING } = process.env;
   if (!PG_CONN_STRING) {
     console.log('PG_CONN_STRING not set, skipping DB write');
     return;
   }
 
-  // 使用 pg 模块连接 PostgreSQL
-  // 在云函数环境中，CloudBase 会自动注入 PG_CONN_STRING
   let pg;
-  try {
-    pg = require('pg');
-  } catch (e) {
+  try { pg = require('pg'); } catch (e) {
     console.log('pg module not available, skipping DB write');
     return;
   }
@@ -249,11 +251,19 @@ async function saveAlertsToDB(alerts) {
  * 云函数入口
  */
 exports.main = async (event, context) => {
-  console.log('fetch-tushare-data invoked', JSON.stringify({ event, THRESHOLD }));
+  console.log('fetch-tushare-data invoked', JSON.stringify({ THRESHOLD, token: TUSHARE_TOKEN ? 'set' : 'not set' }));
+
+  if (!TUSHARE_TOKEN) {
+    return {
+      success: false,
+      error: 'TUSHARE_TOKEN not configured',
+      items: [],
+      serverTs: Math.floor(Date.now() / 1000),
+    };
+  }
 
   try {
-    // 获取异动股票
-    const movers = await getTopMovers();
+    const movers = await getDailyMovers();
     console.log(`Found ${movers.length} movers above ${THRESHOLD}% threshold`);
 
     if (movers.length === 0) {
@@ -265,11 +275,9 @@ exports.main = async (event, context) => {
       };
     }
 
-    // 生成异动条目
     const alerts = createAlertItems(movers);
     console.log(`Generated ${alerts.length} alert items`);
 
-    // 写入数据库
     await saveAlertsToDB(alerts);
 
     return {

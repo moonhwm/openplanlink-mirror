@@ -18,7 +18,7 @@
         "timeout": 60,
         "installDependency": true,
         "envVariables": {
-          "TUSHARE_TOKEN": "c5e307a634ff8e29575c557e51d41299",
+          "TUSHARE_TOKEN": "a7ad47b0fcdc8964610b7101dcfee0016ce47cf3db2bf6e421ab21d0",
           "ALERT_THRESHOLD": "5.0"
         }
       }
