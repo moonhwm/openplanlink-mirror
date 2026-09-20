@@ -1,0 +1,7 @@
+{
+  "name": "fetch-tushare-data",
+  "version": "1.0.0",
+  "description": "Fetch stock market data from Tushare API, detect significant price movements, and store alerts in PostgreSQL",
+  "main": "index.js",
+  "dependencies": {}
+}

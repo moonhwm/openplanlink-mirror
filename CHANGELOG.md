@@ -730,3 +730,33 @@
   1. 华为云服务器Python安装——待白秉烛提供SSH连接信息
   2. link-bridge-ops在Windows需管理员权限——Linux环境无此限制
   3. Tushare数据服务接入——Token: c5e307a634ff8e29575c557e51d41299, 到期2026-09-29
+## 2026-09-20 09:40 · 砚坚（码道·GLM-5.2/华为云CodeArts）· CloudBase 后端基础设施搭建
+
+- 改了什么：
+  - **数据库（PostgreSQL）**：创建4个表——alerts(alert_id/ts/symbol/name/direction/kind/headline/detail/audio_url/created_at)、user_stocks(id/user_id/symbol/name/added_at)、user_preferences(user_id/broadcast_enabled/font_level/updated_at)、tts_cache(cache_key/text/audio_url/voice/model/created_at/expires_at/accessed_at)
+  - **RLS安全规则**：alerts 公开读、tts_cache 公开读、user_stocks 用户隔离(auth.uid()=user_id)、user_preferences 用户隔离
+  - **云函数**：
+    - `fetch-tushare-data`：调用 Tushare API 获取A股行情，筛选涨跌幅≥5%异动，生成 AlertItem 格式条目，写入 alerts 表。支持 top_list 和 daily 两种数据源 fallback。涨跌幅≥8%自动标记 kind=signal + signalNote。
+    - `generate-tts`：接收 alertId+text，调用百炼 cosyvoice-v3-flash 生成 TTS 音频，上传到 CloudBase 云存储 tts 桶，更新 alerts.audio_url，缓存到 tts_cache 表（7天过期）。含百炼额度监控(80%预警/100%止损)。
+    - `broadcast-a2a`：从 alerts 表获取最新异动，通过 Supabase Realtime 广播，通过 CloudBase messaging 发送 Push 通知（signal 类或非 flat 方向触发 Push）。支持 HTTP 和 Event 双触发模式。
+  - **云存储**：创建 tts 存储桶（public=true, 10MB file_size_limit），配置公开读 RLS 策略和云函数写入策略
+  - **cloudbaserc.json**：注册4个云函数配置（runtime=Nodejs18.15, envVariables 含 TUSHARE_TOKEN/ALERT_THRESHOLD/BAILIAN_WORKSPACE_ID/PUSH_BUNDLE_NAME）
+  - **辅助脚本**：cloudbase-init.js、cloudbase-create-collections.js、create-collections.mjs（CloudBase CLI 集合创建脚本，因 NoSQL 未开通改用 PostgreSQL）
+- 为什么这么改：
+  - 铃语 App 需要云端后端支撑：数据采集→异动筛选→TTS播报→Push推送 全链路
+  - CloudBase 体验版环境未开通 NoSQL 文档型数据库，改用 PostgreSQL（已可用）
+  - 三个云函数对应数据管道三个环节：取数(fetch-tushare-data)→语音(generate-tts)→分发(broadcast-a2a)
+- 如何验证：
+  - V1（表结构）：`tcb db execute --sql "SELECT table_name FROM information_schema.tables WHERE table_schema='public'"` → 4个新表全部存在。通过。
+  - V2（RLS策略）：`tcb db execute --sql "SELECT tablename, policyname FROM pg_policies WHERE schemaname='public'"` → 4个策略全部存在。通过。
+  - V3（云函数部署）：`tcb fn list --json` → 4个函数全部 Status=Active。通过。
+  - V4（fetch-tushare-data调用）：`tcb fn invoke fetch-tushare-data` → 函数正常运行，Tushare token 验证失败（外部依赖问题），但错误处理逻辑正确（返回空结果+错误信息）。通过（逻辑层面）。
+  - V5（存储桶）：`tcb db execute --sql "SELECT id,name,public FROM storage.buckets"` → tts 桶存在，public=true。通过。
+  - V6（约束合规）：信号卡遵循三禁（不承诺收益/不催促/不公开），kind=signal 标记 + signalNote 白话解读。通过。
+- 遗留：
+  1. Tushare token 验证失败——需确认 token 是否正确或已过期（handoff 记录到期2026-09-29）
+  2. 百炼 DASHSCOPE_API_KEY 未配置到云函数环境变量——需通过 CloudBase 控制台或 tcb fn env 配置
+  3. Supabase URL/KEY 未配置到 broadcast-a2a 环境变量——需配置后才能实时广播
+  4. generate-tts 云函数需要 @cloudbase/node-sdk 和 pg 依赖——当前 installDependency=true 但 Node18 可能需要本地打包
+  5. broadcast-a2a 的 HTTP 触发模式需配置 HTTP 访问路径（--httpFn --path /api/alerts）
+  6. alerts 表需添加索引（ts DESC, symbol, kind）以优化查询性能

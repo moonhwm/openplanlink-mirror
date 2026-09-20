@@ -1,0 +1,51 @@
+{
+  "envId": "a2a-commonwealth-d2eepjr928e9c4d",
+  "functions": [
+    {
+      "name": "init-db",
+      "config": {
+        "runtime": "Nodejs18.15",
+        "handler": "index.main",
+        "timeout": 30,
+        "installDependency": true
+      }
+    },
+    {
+      "name": "fetch-tushare-data",
+      "config": {
+        "runtime": "Nodejs18.15",
+        "handler": "index.main",
+        "timeout": 60,
+        "installDependency": true,
+        "envVariables": {
+          "TUSHARE_TOKEN": "c5e307a634ff8e29575c557e51d41299",
+          "ALERT_THRESHOLD": "5.0"
+        }
+      }
+    },
+    {
+      "name": "generate-tts",
+      "config": {
+        "runtime": "Nodejs18.15",
+        "handler": "index.main",
+        "timeout": 60,
+        "installDependency": true,
+        "envVariables": {
+          "BAILIAN_WORKSPACE_ID": "ws-ay6o8osb22o9dc3t"
+        }
+      }
+    },
+    {
+      "name": "broadcast-a2a",
+      "config": {
+        "runtime": "Nodejs18.15",
+        "handler": "index.main",
+        "timeout": 30,
+        "installDependency": true,
+        "envVariables": {
+          "PUSH_BUNDLE_NAME": "com.lingyu.app"
+        }
+      }
+    }
+  ]
+}
