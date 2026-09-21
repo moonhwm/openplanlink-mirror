@@ -899,3 +899,35 @@
   3. HY4席位尚未回复握手消息
   4. Push功能需AGC P5审批+Push Token+环境变量配置
   5. Lovrabet CLI AccessKey待用户提供
+## 2026-09-21 08:30 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· DKnowC合规层集成
+
+- 改了什么：
+  - `cloudfunctions/cloudbaserc.json`：fetch-tushare-data 函数新增 `DKNOWC_API_KEY` 环境变量
+  - `cloudfunctions/functions/fetch-tushare-data/index.js`：
+    - 新增 DKnowC API 配置常量（`DKNOWC_API_KEY`、`DKNOWC_API_URL`）
+    - 新增 `checkCompliance(text)` 函数——调用深知可信统一API进行内容安全合规检测
+      - POST `https://open.dknowc.cn/chat/trusted/unification`，`api-key` header 认证
+      - `safeAnswerScope: "none"` 只做安全判断不代答
+      - 返回 `{safeType, compliant, skipped}`，Safe/ConditionallySafe=合规，Unsafe/Focus=不合规
+      - 未配置Key或API失败时非阻塞跳过（`skipped: true`）
+    - 信号卡TTS生成段重构：合规检查与TTS生成 `Promise.all` 并行执行
+      - 合规检查结果写入 `complianceStatus` 字段（Safe/Unsafe/ConditionallySafe/Focus/Unknown）
+      - 不合规条目记日志告警但不阻塞TTS生成（元数据标记，非阻断式）
+  - `entry/src/main/ets/model/AlertItem.ets`：AlertItem 接口新增 `complianceStatus?: string` 字段
+- 为什么：
+  - 机主提供DKnowC API Key（"深知智能MaaS服务"平台），指示"高度集成但格式化"
+  - DKnowC API是内容安全合规层——自动检测播报文本是否违反AGENTS.md §二.2信号松绑三禁
+  - 从平台前端JS逆向提取到正确端点 `open.dknowc.cn/chat/trusted/unification`（api.dknowc.cn返回403、platform.dknowc.cn返回405）
+  - 合规检查设计为非阻断式元数据标记——当前信号卡文本已足够保守（"留意后续走势"/"注意风险"），DKnowC作为额外保障层而非强制门控
+  - 未来可用于：LLM生成解读文本时的合规门控、不合规内容自动替换为安全代答
+- 如何验证：
+  - V1：`tcb fn deploy fetch-tushare-data --force` → 部署成功。通过。
+  - V2：`tcb fn invoke fetch-tushare-data` → 函数正常运行无报错（今日休市无异动数据）。通过。
+  - V3：CloudBase alerts端点 → 20条数据，10条有audioUrl（历史数据保留）。通过。
+  - V4：DKnowC API直接调用 → `{"input":"浮亏扩大，注意风险"}` → `safeType: "Safe"`。通过。
+  - V5：DKnowC API直接调用 → `{"input":"动量策略今日目标：贵州茅台涨5%"}` → `safeType: "Unsafe"`。通过。
+- 遗留：
+  1. 今日休市，合规检查尚未在真实异动数据上运行——下个交易日自动验证
+  2. DKnowC对个股+涨跌幅内容标记为Unsafe——当前设计为非阻断式（只标记不拦截），后续可考虑对Unsafe内容使用DKnowC安全代答替代
+  3. DKnowC平台还有"可信规章知识服务"和"私有知识可信管理服务"——知识服务页面返回404，私有知识为即将上线功能
+  4. complianceStatus字段已加入AlertItem契约，端侧UI尚未展示——可考虑在信号角标旁加合规标记

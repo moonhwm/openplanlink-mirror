@@ -20,6 +20,10 @@ const TUSHARE_API_URL = 'https://api.tushare.pro';
 const TUSHARE_TOKEN = process.env.TUSHARE_TOKEN || '';
 const THRESHOLD = parseFloat(process.env.ALERT_THRESHOLD || '5.0');
 
+// DKnowC 深知可信统一API配置（内容安全合规层）
+const DKNOWC_API_KEY = process.env.DKNOWC_API_KEY || '';
+const DKNOWC_API_URL = 'https://open.dknowc.cn/chat/trusted/unification';
+
 /**
  * 使用 https 模块发起 GET 请求（替代实验性 fetch）
  */
@@ -366,6 +370,58 @@ async function getDailyMovers() {
 }
 
 /**
+ * DKnowC 深知可信统一API——内容安全合规检查
+ * 
+ * 对信号卡的播报文本进行安全合规检测，确保内容不违反 AGENTS.md §二.2 信号松绑三禁：
+ * ①承诺收益/保本等绝对化措辞；②催促性强指令；③任何对外公开/收费形态
+ * 
+ * API文档：https://platform.dknowc.cn/maas-api-doc/
+ * 端点：POST https://open.dknowc.cn/chat/trusted/unification
+ * 认证：api-key header
+ * 
+ * @param {string} text - 待检测的播报文本
+ * @returns {Promise<{safeType: string, compliant: boolean}>} - 安全类型与合规标记
+ */
+async function checkCompliance(text) {
+  if (!DKNOWC_API_KEY) {
+    // 未配置API Key时跳过合规检查，不阻塞流程
+    return { safeType: 'Unknown', compliant: true, skipped: true };
+  }
+
+  try {
+    const response = await fetch(DKNOWC_API_URL, {
+      method: 'POST',
+      headers: {
+        'api-key': DKNOWC_API_KEY,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        input: text,
+        safeAnswerScope: 'none', // 只做安全判断，不需要代答
+      }),
+    });
+
+    if (!response.ok) {
+      console.log(`[compliance] DKnowC API HTTP ${response.status}, skipping`);
+      return { safeType: 'Unknown', compliant: true, skipped: true };
+    }
+
+    const data = await response.json();
+    const safeType = data.safeType || 'Unknown';
+    
+    // Safe = 合规通过；ConditionallySafe = 有条件合规（可放行但留意）
+    // Unsafe/Focus = 不合规（需审查）
+    const compliant = safeType === 'Safe' || safeType === 'ConditionallySafe';
+    
+    console.log(`[compliance] "${text.substring(0, 30)}..." → safeType=${safeType}, compliant=${compliant}`);
+    return { safeType, compliant, skipped: false };
+  } catch (e) {
+    console.log(`[compliance] DKnowC check failed: ${e.message}, skipping`);
+    return { safeType: 'Unknown', compliant: true, skipped: true };
+  }
+}
+
+/**
  * 生成异动条目
  */
 function createAlertItems(movers) {
@@ -514,45 +570,79 @@ exports.main = async (event, context) => {
     // 为信号卡（kind=signal）批量生成 TTS 音频，预填充 audioUrl
     // 信号卡是"自家信号"，更需要语音播报；事实卡用户可自行阅读
     // 限制最多10条，避免百炼额度过度消耗
+    // DKnowC 合规检查：对播报文本进行安全合规检测，添加 complianceStatus 元数据
     const signalAlerts = alerts.filter(a => a.kind === 'signal').slice(0, 10);
     if (signalAlerts.length > 0) {
       console.log(`Generating TTS for ${signalAlerts.length} signal alerts...`);
-      try {
-        const cloudbase = require('@cloudbase/node-sdk');
-        const app = cloudbase.init({
-          env: process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d',
-        });
 
-        const ttsResults = await Promise.allSettled(
+      // 并行执行：DKnowC合规检查 + TTS生成
+      // 合规检查不阻塞TTS生成——只添加元数据，不阻断流程
+      const [complianceResults, ttsResults] = await Promise.all([
+        Promise.allSettled(
           signalAlerts.map(alert =>
-            app.callFunction({
-              name: 'generate-tts',
-              data: {
-                alertId: alert.alertId,
-                text: `${alert.headline}。${alert.detail}`,
-              },
-            })
+            checkCompliance(`${alert.headline}。${alert.detail}`)
           )
-        );
+        ),
+        (async () => {
+          try {
+            const cloudbase = require('@cloudbase/node-sdk');
+            const app = cloudbase.init({
+              env: process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d',
+            });
 
-        let ttsSuccess = 0;
-        for (let i = 0; i < signalAlerts.length; i++) {
-          const result = ttsResults[i];
-          if (result.status === 'fulfilled' && result.value?.result?.success) {
-            signalAlerts[i].audioUrl = result.value.result.audioUrl;
-            ttsSuccess++;
-            console.log(`TTS OK for ${signalAlerts[i].alertId}: ${result.value.result.audioUrl?.substring(0, 60)}...`);
-          } else {
-            const errMsg = result.status === 'rejected'
-              ? result.reason?.message || 'unknown error'
-              : result.value?.result?.error || 'unknown error';
-            console.log(`TTS FAIL for ${signalAlerts[i].alertId}: ${errMsg}`);
+            return await Promise.allSettled(
+              signalAlerts.map(alert =>
+                app.callFunction({
+                  name: 'generate-tts',
+                  data: {
+                    alertId: alert.alertId,
+                    text: `${alert.headline}。${alert.detail}`,
+                  },
+                })
+              )
+            );
+          } catch (e) {
+            console.log('TTS batch generation failed (non-blocking):', e.message);
+            return signalAlerts.map(() => ({ status: 'rejected', reason: e }));
           }
+        })(),
+      ]);
+
+      // 处理合规检查结果
+      let compliantCount = 0;
+      let nonCompliantCount = 0;
+      for (let i = 0; i < signalAlerts.length; i++) {
+        const cr = complianceResults[i];
+        if (cr.status === 'fulfilled') {
+          signalAlerts[i].complianceStatus = cr.value.safeType;
+          if (cr.value.compliant) {
+            compliantCount++;
+          } else {
+            nonCompliantCount++;
+            console.log(`[compliance] ⚠ NON-COMPLIANT: ${signalAlerts[i].headline} → ${cr.value.safeType}`);
+          }
+        } else {
+          signalAlerts[i].complianceStatus = 'Unknown';
         }
-        console.log(`TTS batch done: ${ttsSuccess}/${signalAlerts.length} succeeded`);
-      } catch (e) {
-        console.log('TTS batch generation failed (non-blocking):', e.message);
       }
+      console.log(`[compliance] ${compliantCount} compliant, ${nonCompliantCount} non-compliant, ${signalAlerts.length - compliantCount - nonCompliantCount} unknown`);
+
+      // 处理TTS结果
+      let ttsSuccess = 0;
+      for (let i = 0; i < signalAlerts.length; i++) {
+        const result = ttsResults[i];
+        if (result.status === 'fulfilled' && result.value?.result?.success) {
+          signalAlerts[i].audioUrl = result.value.result.audioUrl;
+          ttsSuccess++;
+          console.log(`TTS OK for ${signalAlerts[i].alertId}: ${result.value.result.audioUrl?.substring(0, 60)}...`);
+        } else {
+          const errMsg = result.status === 'rejected'
+            ? result.reason?.message || 'unknown error'
+            : result.value?.result?.error || 'unknown error';
+          console.log(`TTS FAIL for ${signalAlerts[i].alertId}: ${errMsg}`);
+        }
+      }
+      console.log(`TTS batch done: ${ttsSuccess}/${signalAlerts.length} succeeded`);
     }
 
     await saveAlertsToDB(alerts);

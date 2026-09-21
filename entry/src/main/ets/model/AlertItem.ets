@@ -13,6 +13,7 @@ export interface AlertItem {
   headline: string;     // 一句话白话结论，如「中国巨石 2 分钟涨了 2.3%」
   detail: string;       // 补充事实（量能、价位）
   audioUrl?: string;    // 云端 TTS 音频流地址；无则不显示播报钮
+  complianceStatus?: string; // DKnowC安全合规分类：Safe/Unsafe/ConditionallySafe/Focus/Unknown
 }
 
 export interface AlertFeed {
