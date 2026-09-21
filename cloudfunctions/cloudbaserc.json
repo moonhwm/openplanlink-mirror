@@ -45,7 +45,7 @@
         "timeout": 30,
         "installDependency": true,
         "envVariables": {
-          "PUSH_BUNDLE_NAME": "com.lingyu.app",
+          "PUSH_BUNDLE_NAME": "com.yehang.stockpulse",
           "HUAWEI_PUSH_PROJECT_ID": "",
           "HUAWEI_PUSH_CLIENT_ID": "",
           "HUAWEI_PUSH_CLIENT_SECRET": "",
@@ -64,6 +64,15 @@
         "installDependency": true
       }
 
+    },
+    {
+      "name": "push-token-register",
+      "config": {
+        "runtime": "Nodejs18.15",
+        "handler": "index.main",
+        "timeout": 10,
+        "installDependency": true
+      }
     }
   ]
 }

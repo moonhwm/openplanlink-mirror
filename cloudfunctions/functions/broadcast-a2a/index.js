@@ -17,7 +17,7 @@
 const http = require('http');
 const SUPABASE_URL = process.env.SUPABASE_URL || '';
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || '';
-const PUSH_BUNDLE_NAME = process.env.PUSH_BUNDLE_NAME || 'com.lingyu.app';
+const PUSH_BUNDLE_NAME = process.env.PUSH_BUNDLE_NAME || 'com.yehang.stockpulse';
 const ENV_ID = process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d';
 const ALERTS_FILE_ID = 'cloud://a2a-commonwealth-d2eepjr928e9c4d.6132-a2a-commonwealth-d2eepjr928e9c4d-1475054847/alerts/alerts.json';
 
@@ -104,15 +104,29 @@ async function sendPushNotification(alert) {
   const PROJECT_ID = process.env.HUAWEI_PUSH_PROJECT_ID || '';
   const CLIENT_ID = process.env.HUAWEI_PUSH_CLIENT_ID || '';
   const CLIENT_SECRET = process.env.HUAWEI_PUSH_CLIENT_SECRET || '';
-  const DEVICE_PUSH_TOKEN = process.env.HUAWEI_PUSH_TOKEN || '';
 
   if (!PROJECT_ID || !CLIENT_ID || !CLIENT_SECRET) {
     console.log('Push Kit not configured (need HUAWEI_PUSH_PROJECT_ID/CLIENT_ID/CLIENT_SECRET), skipping push');
     return;
   }
 
-  if (!DEVICE_PUSH_TOKEN) {
-    console.log('No device push token available, skipping push');
+  // 从 CloudBase 数据库获取所有活跃的 Push Token
+  let deviceTokens = [];
+  try {
+    const cloudbase = require('@cloudbase/node-sdk');
+    const app = cloudbase.init({ env: ENV_ID });
+    const db = app.database();
+    const result = await db.collection('push_tokens').where({ active: true }).get();
+    deviceTokens = (result.data || []).map(item => item.token);
+  } catch (e) {
+    console.log('Failed to fetch device tokens from DB, falling back to env var');
+    // Fallback：调试用环境变量中的单个 Token
+    const envToken = process.env.HUAWEI_PUSH_TOKEN || '';
+    if (envToken) deviceTokens = [envToken];
+  }
+
+  if (deviceTokens.length === 0) {
+    console.log('No device push tokens available, skipping push');
     return;
   }
 
@@ -140,7 +154,7 @@ async function sendPushNotification(alert) {
       return;
     }
 
-    // 步骤2：发送 Push 消息
+    // 步骤2：向所有设备批量发送 Push 消息
     const pushUrl = `https://push-api.cloud.huawei.com/v3/${PROJECT_ID}/messages:send`;
     const message = {
       notification: {
@@ -163,7 +177,7 @@ async function sendPushNotification(alert) {
         kind: alert.kind || 'fact',
         audioUrl: alert.audioUrl || '',
       }),
-      token: [DEVICE_PUSH_TOKEN],
+      token: deviceTokens,
     };
 
     const pushResp = await fetch(pushUrl, {
@@ -177,7 +191,7 @@ async function sendPushNotification(alert) {
 
     if (pushResp.ok) {
       const pushResult = await pushResp.json();
-      console.log('Push sent:', JSON.stringify(pushResult));
+      console.log(`Push sent to ${deviceTokens.length} devices:`, JSON.stringify(pushResult).substring(0, 200));
     } else {
       const pushError = await pushResp.text();
       console.error('Push send failed:', pushResp.status, pushError.substring(0, 200));

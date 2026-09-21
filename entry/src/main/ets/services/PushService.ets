@@ -7,8 +7,8 @@ import { http } from '@kit.NetworkKit';
 const TAG = 'StockPulse.PushService';
 const DOMAIN = 0x0001;
 
-/** X 服务器 Push Token 上报地址（待 X 落地后替换） */
-const TOKEN_REPORT_URL = 'http://127.0.0.1:8000/api/push/register';
+/** Push Token 上报地址——CloudBase push-token-register 云函数 HTTP 端点 */
+const TOKEN_REPORT_URL = 'https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com/push-token-register';
 
 /** getToken 可重试错误码（官方文档） */
 const RETRYABLE_ERROR_CODES = [1000900001, 1000900008, 1000900009, 1000900011];
