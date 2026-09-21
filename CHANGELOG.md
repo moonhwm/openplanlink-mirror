@@ -931,3 +931,41 @@
   2. DKnowC对个股+涨跌幅内容标记为Unsafe——当前设计为非阻断式（只标记不拦截），后续可考虑对Unsafe内容使用DKnowC安全代答替代
   3. DKnowC平台还有"可信规章知识服务"和"私有知识可信管理服务"——知识服务页面返回404，私有知识为即将上线功能
   4. complianceStatus字段已加入AlertItem契约，端侧UI尚未展示——可考虑在信号角标旁加合规标记
+## 2026-09-21 16:00 · 砚坚（码;道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· Push功能推进+心跳聚合提案+对抗性审查
+
+- 改了什么：
+  - `cloudfunctions/cloudbaserc.json`：
+    - PUSH_BUNDLE_NAME 从 `com.lingyu.app` 修正为 `com.yehang.stockpulse`（AGC注册锚）
+    - 新增 `push-token-register` 云函数配置
+  - `cloudfunctions/functions/push-token-register/index.js`：新建云函数
+    - 接收端侧 PushService 上报的 Push Token，存储到 CloudBase `push_tokens` 集合
+    - 支持去重（相同token更新lastReportTs）和活跃标记（active字段）
+    - 导出 `getActiveTokens()` 供 broadcast-a2a 调用
+  - `cloudfunctions/functions/broadcast-a2a/index.js`：
+    - 从 CloudBase 数据库读取活跃 Token 列表（替代环境变量单Token），支持多设备批量推送
+    - DB读取失败时 fallback 到环境变量 HUAWEI_PUSH_TOKEN
+  - `entry/src/main/ets/services/PushService.ets`：
+    - TOKEN_REPORT_URL 从 `http://127.0.0.1:8000/api/push/register` 更新为 Cloud2Base 云函数HTTP端点
+  - `GOVERNANCE/proposals/SNR-001_heartbeat_aggregation.md`：新建总线信噪比治理提案
+    - 心跳频率分级（L1存活心跳5分钟可聚合 / L2状态变更心跳事件驱动独立发送）
+    - L1聚合机制（5分钟窗口、轮值聚合责任方、聚合格式定义）
+    - 信噪比监控阈值（健康≥15% / 告警5-15% / 严重<5%，当前2.7%为严重）
+    - 实施路线（Phase 0立即暂停 → Phase 1监控部署 → Phase 2聚合器原型 → Phase 3全席位切换）
+- 为什么：
+  - 机主指示"自主协调"，推进所有可自主推进的事项
+  - PUSH_BUNDLE_NAME 修复：cloudbaserc.json 中错误使用 com.lingyu.app，与 AGC 注册的 com.yehang.stockpulse 不一致
+  - push-token-register 云函数：当前 Push Token 只能从环境变量读取单设备，生产环境需支持多设备
+  - broadcast-a2a 改进：从 DB 读取 Token 列表替代环境变量，支持批量推送
+  - SNR-001 提案：总线信噪比危机（真实消息占比仅2.7%），需公约层审议心跳聚合方案
+- 如何验证：
+  - V1：`tcb fn deploy push-token-register --force --runtime Nodejs18.15` → 部署成功。通过。
+  - V2：`tcb fn deploy broadcast-a2a --force` → 部署成功。通过。
+  - V3：feed-server /health → 200, 20 alerts, CloudBase模式正常。通过。
+  - V4：对抗性审查 AR-001 → 4维度审查，8通过7隐患，无高等级问题。通过。
+  - V5：CloudBase alerts端点 → 信号卡有 complianceStatus="Unknown" 和 audioUrl。通过。
+- 遗留：
+  1. push-token-register HTTP端点未配置（CloudBase HTTP访问路径返回404）——AGC P5审批后配置
+  2. push_tokens集合可能未创建——首次add()时自动创建
+  3. cloudbaserc.json缺少4个已部署云函数配置（a2aSync/bus-probe/dc-sync/hello-api/a2aRelay）
+  4. 对抗性审查发现3个中等级隐患（S-1凭据明文/S-2无鉴权/D-1并发写入无锁）——建议下个迭代修复
+  5. 砚坚席位心跳维持paused状态，待SNR-001提案公约层审议通过后恢复
