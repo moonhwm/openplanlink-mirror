@@ -489,6 +489,7 @@ async function saveAlertsToDB(alerts) {
 
     // 先下载现有数据（合并新旧，保留历史）
     let existingItems = [];
+    let existingServerTs = 0;
     try {
       const result = await app.downloadFile({
         cloudPath: 'alerts/alerts.json',
@@ -496,10 +497,19 @@ async function saveAlertsToDB(alerts) {
       if (result && result.fileContent) {
         const data = JSON.parse(result.fileContent.toString('utf-8'));
         existingItems = data.items || [];
+        existingServerTs = data.serverTs || 0;
       }
     } catch (e) {
       // 文件不存在时正常，用空数组
       console.log('No existing alerts.json, creating new');
+    }
+
+    // P2 并发写入保护：若现有数据的 serverTs 比当前数据的最新 ts 更新，
+    // 说明另一个实例已经写入了更新的4更新的数据，跳过本次写入避免覆盖
+    const currentLatestTs = alerts.length > 0 ? Math.max(...alerts.map(a => a.ts)) : 0;
+    if (existingServerTs > currentLatestTs) {
+      console.log(`Skip write: existing serverTs=${existingServerTs} > current latestTs=${currentLatestTs} (concurrent write protection)`);
+      return;
     }
 
     // 合并新旧数据，按 alertId 去重

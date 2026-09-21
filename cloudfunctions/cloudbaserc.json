@@ -18,9 +18,9 @@
         "timeout": 60,
         "installDependency": true,
         "envVariables": {
-          "TUSHARE_TOKEN": "a7ad47b0fcdc8964610b7101dcfee0016ce47cf3db2bf6e421ab21d0",
+          "TUSHARE_TOKEN": "",
           "ALERT_THRESHOLD": "5.0",
-          "DKNOWC_API_KEY": "sk-BnlaZHEpJQjYV223N03mIqYTaF3h34001iG92D556Q"
+          "DKNOWC_API_KEY": ""
         }
       }
     },
@@ -32,8 +32,8 @@
         "timeout": 60,
         "installDependency": true,
         "envVariables": {
-          "BAILIAN_WORKSPACE_ID": "ws-ay6o8osb22o9dc3t",
-          "DASHSCOPE_API_KEY": "sk-ws-H.PHLIMMY.GPIc.MEUCIQCPjDov2hI6E3dHuthorFmf4aNejDjvsJ9aHJe2BKJ-ggIgdryh-IeI8ZehjypK88H3o96kWFTaO7n4HJb95j1Gzbs"
+          "BAILIAN_WORKSPACE_ID": "",
+          "DASHSCOPE_API_KEY": ""
         }
       }
     },
@@ -50,8 +50,8 @@
           "HUAWEI_PUSH_CLIENT_ID": "",
           "HUAWEI_PUSH_CLIENT_SECRET": "",
           "HUAWEI_PUSH_TOKEN": "",
-          "SUPABASE_URL": "https://ltdodcumoxiqsnakpqog.supabase.co",
-          "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx0ZG9kY3Vtb3hpcXNuYWtwcW9nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3NjQ5ODEsImV4cCI6MjEwMzM0MDk4MX0.n2alyDO-ZZmYedGHlFmoIASo0QxdxN6NwEDYNV2KhKA"
+          "SUPABASE_URL": "",
+          "SUPABASE_ANON_KEY": ""
         }
       }
     },
