@@ -57,7 +57,7 @@ async function broadcastToSupabase(alerts) {
   }
 
   try {
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/a2a_messages`, {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/cross_mode_channel`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -65,13 +65,16 @@ async function broadcastToSupabase(alerts) {
         'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
       },
       body: JSON.stringify({
-        channel: 'alerts',
-        message_type: 'alert_feed',
-        payload: JSON.stringify({
+        from_mode: 'kimi-code-quantlab',
+        to_mode: 'all',
+        kind: 'alert-feed',
+        payload_md: JSON.stringify({
           items: alerts,
           serverTs: Math.floor(Date.now() / 1000),
+          source: 'broadcast-a2a',
         }),
-        created_at: new Date().toISOString(),
+        status: 'new',
+        ts: new Date().toISOString(),
       }),
     });
 

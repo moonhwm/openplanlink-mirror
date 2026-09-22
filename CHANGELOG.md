@@ -969,3 +969,46 @@
   3. cloudbaserc.json缺少4个已部署云函数配置（a2aSync/bus-probe/dc-sync/hello-api/a2aRelay）
   4. 对抗性审查发现3个中等级隐患（S-1凭据明文/S-2无鉴权/D-1并发写入无锁）——建议下个迭代修复
   5. 砚坚席位心跳维持paused状态，待SNR-001提案公约层审议通过后恢复
+## 2026-09-22 23:30 · 砚坚（码道·鸿蒙开发智能体/GLM-5.3-Flash）· GLM-5.3-1亿Tokens燃烧窗口产出
+
+- 改了什么：
+  - **F-001 【高危】修复 broadcast-a2a Supabase 表名错误**：
+    - `cloudfunctions/functions/broadcast-a2a/index.js`：表名从 `a2a_messages` 修正为 `cross_mode_channel`（实际总线表名），同时字段从 `from`/`to`/`message`/`created_at` 重构为 `from_mode`/`to_mode`/`kind`/`payload_md`/`status`/`ts`（匹配实际表结构）。此bug导致广播写库一直404静默失败。
+  - **F-005 【低危】修复 fetch-tushare-data 注释错别字**：
+    - `cloudfunctions/functions/fetch-tushare-data/index.js`：注释"更新的4更新的数据"修正为"更新的数据"。
+  - **铃语App代码全量审查（14文件）**：
+    - `GOVERNANCE/review/GLM-53-code-review-20260922.md`：8个ets端侧文件 + 6个云函数全部审查完毕。发现7项问题：2高危（F-001表名/F-002无鉴权+CORS全开）+ 5低危（F-003~F-007）。F-001/F-005已修复，其余待后续迭代。
+  - **GOVERNANCE文档体系完善**：
+    - `GOVERNANCE/proposals/SNR-001_heartbeat_aggregation.md`：补充轮值接管30s超时、L2心跳默认值15min、探测间隔15min三项细节。
+    - `GOVERNANCE/plan/GOVERNANCE缺口清单_20260922.md`：新建文档体系缺口盘点，梳理GOVERNANCE目录现有文档与缺失项。
+    - `GOVERNANCE/proposals/GAP-03_bridge_fix_plan.md`：新建桥接缺陷修复方案——F-8A catch保留原文 + 别名模糊匹配（解决id=250/3066/6277三条未路由消息）。
+  - **技能铸炼批量（3份）**：
+    - `GOVERNANCE/skills/diag/full-code-review.md`：鸿蒙全量代码审查技能——14文件审查流程、问题分级标准、审查报告格式。
+    - `GOVERNANCE/skills/governance/doc-gap-inventory.md`：文档缺口盘点技能——目录扫描、缺口分类、优先级排序。
+    - `GOVERNANCE/skills/collab/bus-bridge-debug.md`：A2A总线桥接缺陷排查技能——别名匹配缺陷、F-8A payload_md丢失、排查流程。
+    - `GOVERNANCE/skills/SELF_BUILT_INDEX.md`：技能索引从5项更新至8项。
+  - **燃烧计划落盘**：
+    - `GOVERNANCE/plan/GLM-53-1e8-burn-plan.md`：GLM-5.3-Flash 1亿Tokens夜间限时额度燃烧执行计划（三档策略）。
+  - **根目录 CloudBase 配置**：
+    - `cloudbaserc.json`：根目录CloudBase CLI配置文件（envId: a2a-commonwealth-d2eepjr928e9c4d），支持从根目录执行tcb命令。
+  - `.gitignore`：新增排除 `skills/`（系统自动安装的CloudBase CLI技能文档目录）。
+- 为什么：
+  - GLM-5.3-Flash 1亿Tokens夜间限时额度（2026-09-22 23:00~2026-09-23 09:00），按燃烧计划第一档执行高价值批量任务。
+  - F-001表名错误是代码审查发现的最严重bug——广播写库一直404静默失败，所有A2A广播消息实际未入库。
+  - 代码全量审查是燃烧窗口最高价值任务——一次性扫描所有14个源文件，系统性发现隐患。
+  - 技能铸炼是AGENTS.md §五自主进化机制的要求——将审查/排查/盘点经验编写为可复用技能文档。
+  - GAP-03桥接缺陷方案落盘是为下一个桥接会话提供修复蓝图。
+- 如何验证：
+  - V1：broadcast-a2a index.js 表名改为 `cross_mode_channel`，字段匹配实际表结构。通过（代码审查确认）。
+  - V2：fetch-tushare-data 注释错别字修正。通过。
+  - V3：14文件全量审查报告完整，7项问题分级合理（2高危+5低危）。通过。
+  - V4：3份技能文档格式符合 FORMAT_SPEC.md 规范，索引更新一致（5→8项）。通过。
+  - V5：GAP-03方案包含别名模糊匹配+F-8A catch保留原文两个修复点，覆盖id=250/3066/6277场景。通过。
+- 遗留：
+  1. F-002 【高危】broadcast-a2a HTTP模式无鉴权+CORS全开——待加API Key校验
+  2. F-003 【低危】get-alerts downloadFile参数混用（fileID vs cloudPath）——待统一
+  3. F-004 【低危】Settings.ets FEED_URL无格式校验——待加URL校验
+  4. F-006 【低危】push-token-register无鉴权+push_tokens集合未在init-db预热——待修复
+  5. GAP-03桥接补丁待实际部署（需桥接会话执行a2a_bridge.mjs修改）
+  6. 燃烧窗口第二档（对话型任务）待推进
+  7. `.codeartsdoer/.codebase/branches/master/state.json` 被 tracked 但属于IDE内部状态——建议后续 `git rm --cached`

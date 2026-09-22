@@ -505,7 +505,7 @@ async function saveAlertsToDB(alerts) {
     }
 
     // P2 并发写入保护：若现有数据的 serverTs 比当前数据的最新 ts 更新，
-    // 说明另一个实例已经写入了更新的4更新的数据，跳过本次写入避免覆盖
+    // 说明另一个实例已写入更新的数据，跳过本次写入避免覆盖
     const currentLatestTs = alerts.length > 0 ? Math.max(...alerts.map(a => a.ts)) : 0;
     if (existingServerTs > currentLatestTs) {
       console.log(`Skip write: existing serverTs=${existingServerTs} > current latestTs=${currentLatestTs} (concurrent write protection)`);

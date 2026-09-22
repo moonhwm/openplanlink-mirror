@@ -16,6 +16,9 @@
 | 3 | HarmonyOS构建问题诊断 | diag | skills/diag/ | 1.0.0 | HarmonyOS构建失败 |
 | 4 | A2A治理实验执行 | governance | skills/governance/ | 1.0.0 | 执行治理实验 |
 | 5 | 密码学分析与加固 | crypto | skills/crypto/ | 1.0.0 | 密码学分析/密钥管理/PQC评估 |
+| 6 | 鸿蒙全量代码审查 | diag | skills/diag/ | 1.0.0 | 端侧/云函数全量合规走查 |
+| 7 | 文档缺口盘点 | governance | skills/governance/ | 1.0.0 | 治理体系/知识资产缺口盘点 |
+| 8 | A2A总线桥接缺陷排查 | collab | skills/collab/ | 1.0.0 | 消息未路由/桥接缺陷/总线数据核验 |
 
 ## 技能复用统计
 
