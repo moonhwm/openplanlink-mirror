@@ -1374,3 +1374,22 @@
   2. 无设备/模拟器——无法端侧验证
   3. 东方财富API在云函数环境中返回socket hang up——但Tushare fallback正常工作，数据链路已打通
   4. Tushare daily接口404问题仍待机主向客服确认
+---
+
+## 2026-09-23 · 砚坚（号道·鸿蒙开发智能体/deepseek-v4-pro-0813）· 双模型专家团自动切换方案 + 燃烧引擎点火
+
+- **改了什么**：
+  - 新增 `docs/llm-auto-switch/LLM_AUTO_SWITCH_PLAN.md`：铃语应用双模型专家团自动切换方案（OpenPangu-2.0-pro ↔ deepseek-v4-pro-0813），含切换架构（LLMRouter + RuleEngine + 双Adapter + BurnLedger）、切换规则决策矩阵、铃语应用落点、三档燃烧策略、风险合规。
+  - 新增 `docs/llm-auto-switch/llm-router/index.js`：可执行路由层代码骨架（Node.js），含 LLMRouter / RuleEngine / PanguAdapter / DeepSeekAdapter / BurnLedger / 燃烧引擎（`--burn` 高性能点火）。
+- **为什么**：
+  - 机主指令：读取 Tushare doc_id=290（积分频次对应表）+ 专家团名单.zip（码道Space平台的16张专家团截图 + 立宪方案.md），为本应用内部设计 OpenPangu-2.0-pro / deepseek-v4-pro-0813 专家团自动切换方案，并高性能燃烧 1000 万 token（2026-09-23 22:00 截止）。
+  - 铃语应用当前 signalNote 为硬编码模板，缺乏 LLM 生成能力；引入双模型路由层后可按任务类型自动切换生成白话解读、合规审查、文案润色。
+- **如何验证**：
+  - V1：`node --check` 语法通过
+  - V2：`node index.js --status` 返回 remain=10000000、remainRate=811 token/s（与方案 §6.1 数学 794 token/s 吻合）
+  - V3：`RouteEngine.decide` 六类任务路由均正确（signal_note/compliance/architecture→deepseek，polish/code_review/legal→pangu）
+  - V4：额度耗尽降级验证——pangu 额度烧满后 code_review 自动切 deepseek
+- **遗留**：
+  1. 两个模型 API endpoint/key 为占位（example.com），需机主注入真实码道Space（OpenPangu）与 inferhub（deepseek）通道凭据后，燃烧引擎才可真实点火烧 token
+  2. LLMRouter 尚未接入 fetch-tushare-data 云函数的 signalNote 生成链路（当前仍硬编码）
+  3. 燃烧台账 burn-ledger.jsonl 尚未产生真实记录（dry-run 验证已通过）
