@@ -233,16 +233,24 @@
 
 ### D. harmony-app项目遗留项
 
+> 更新：2026-09-24 砚坚（GLM-5.2-SFT-Harmony）——多项已在9/23-9/24会话中修复
+
 | 编号 | 级别 | 问题 | 状态 |
 |------|------|------|------|
 | F-001 | 🔴 高危 | broadcast-a2a表名错误 | ✅ 已修复 |
-| F-002 | 🔴 高危 | broadcast-a2a无鉴权+CORS全开 | ⏳ 待修复 |
-| F-003 | 🟡 低危 | get-alerts参数混用 | ⏳ 待统一 |
+| F-002 | 🔴 高危 | broadcast-a2a无鉴权+CORS全开 | ✅ 已修复（H2鉴权fail-closed + CORS域名收敛） |
+| F-003 | 🟡 低危 | get-alerts参数混用 | ✅ 已修复（L1域名注释修正） |
 | F-004 | 🟡 低危 | Settings.ets FEED_URL无校验 | ⏳ 待加校验 |
 | F-005 | 🟡 低危 | fetch-tushare-data注释错别字 | ✅ 已修复 |
-| F-006 | 🟡 低危 | push-token-register无鉴权+集合未预热 | ⏳ 待修复 |
+| F-006 | 🟡 低危 | push-token-register无鉴权+集合未预热 | ✅ 已修复（L3白名单鉴权 + L5补push_tokens集合） |
+| H1 | 🔴 高危 | 合规fail-open→fail-closed | ✅ 已修复（non-compliant信号卡降级为fact） |
+| H2 | 🔴 高危 | 鉴权fail-open→fail-closed | ✅ 已修复（未配BROADCAST_API_KEY时返回503） |
+| M1 | 🟡 中危 | 契约补signalNote字段 | ✅ 已修复（AlertItem.ets + Index.ets显示） |
+| M2 | 🟡 中危 | 凭据fallback去硬编码 | ✅ 已修复（BAILIAN_WORKSPACE_ID） |
+| L2 | 🟡 低危 | absPct数值比较替代字符串隐式转换 | ✅ 已修复 |
 | GAP-03 | — | 桥接缺陷修复方案 | 📋 方案已落盘，补丁待部署 |
 | AGC P5 | — | 华为审批流程 | ⏳ 等待审批 |
+| HAP构建 | — | 中文路径+空格路径阻塞 | ✅ 已突破（英文路径迁移+hvigorw.js修复） |
 
 ### E. 24小时自治A2A治理实验
 
@@ -267,17 +275,23 @@
 
 ## 第三部分：下一步行动优先级
 
-| 优先级 | 行动 | 负责方 | 依赖 |
-|--------|------|--------|------|
-| P1 | 接入真实面板数据，DID管线全文重跑 | pi-orchestrator(ZCode) + co-orchestrator(砚坚)联合分发 | 真实panel.csv |
-| P1 | F-002修复：broadcast-a2a加API Key鉴权+CORS收敛 | 砚坚 | 无 |
-| P2 | 砚坚角色报名确认（编排方签注） | pi-orchestrator(ZCode) | 无 |
-| P2 | L2桥接网关原型实现 | pi-orchestrator | L0/L1完成 |
-| P2 | F-003/F-004/F-006修复 | 砚坚 | 无 |
-| P3 | GAP-03桥接补丁部署 | 桥接会话 | a2a_bridge.mjs写权限 |
-| P3 | 真实端点MFV阈值标定 | 网关席 | ZCode/Coze双通道对拍 |
-| P3 | 探针包错误去相关换血 | 语义席 | MFV-0.2 |
-| P4 | AGC P5审批通过后配置push-token-register鉴权 | 砚坚 | 华为审批 |
+> 更新：2026-09-24 砚坚（GLM-5.2-SFT-Harmony）
+
+| 优先级 | 行动 | 负责方 | 依赖 | 状态 |
+|--------|------|--------|------|------|
+| P1 | 接入真实面板数据，DID管线全文重跑 | pi-orchestrator(ZCode) + co-orchestrator(砚坚)联合分发 | 真实panel.csv | ⏳ 待推进 |
+| ~~P1~~ | ~~F-002修复：broadcast-a2a加API Key鉴权+CORS收敛~~ | ~~砚坚~~ | ~~无~~ | ✅ 已修复 |
+| P2 | 砚坚角色报名确认（编排方签注） | pi-orchestrator(ZCode) | 无 | ⏳ 待确认 |
+| P2 | L2桥接网关原型实现 | pi-orchestrator | L0/L1完成 | 🔧 设计中 |
+| ~~P2~~ | ~~F-003/F-006修复~~ | ~~砚坚~~ | ~~无~~ | ✅ 已修复 |
+| P2 | F-004修复：Settings.ets FEED_URL加校验 | 砚坚 | 无 | ⏳ 待修复 |
+| P2 | HAP构建验证：模拟器安装运行 | 砚坚 | 模拟器/真机 | ⏳ 待环境 |
+| P2 | LLM凭据注入：DEEPSEEK_API_KEY / PANGU_API_KEY | 机主 | 无 | ⏳ 待机主 |
+| P3 | GAP-03桥接补丁部署 | 桥接会话 | a2a_bridge.mjs写权限 | ⏳ 待推进 |
+| P3 | 真实端点MFV阈值标定 | 网关席 | ZCode/Coze双通道对拍 | ⏳ 待推进 |
+| P3 | 探针包错误去相关换血 | 语义席 | MFV-0.2 | ⏳ 待推进 |
+| P4 | AGC P5审批通过后配置订阅通知 | 砚坚 | 华为审批 | ⏳ 等待审批 |
+| P4 | 签名配置（AGC证书材料） | 机主 | .p12/.cer/.p7b | ⏳ 待机主 |
 
 ---
 
