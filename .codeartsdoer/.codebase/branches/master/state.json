@@ -3,8 +3,8 @@
   "schema": "docgen-state-v1",
   "branch": "master",
   "branch_raw": "master",
-  "version_token": 511,
-  "updated_at": "2026-09-23T03:36:35.786Z",
+  "version_token": 516,
+  "updated_at": "2026-09-23T03:54:45.878Z",
   "status": "watching",
   "last_doc_generated_at": "2026-09-22T11:28:42.959Z",
   "changed_files": [
@@ -1531,12 +1531,12 @@
     {
       "path": "CHANGELOG.md",
       "status": "modified",
-      "detected_at": "2026-09-23T03:36:31.867Z"
+      "detected_at": "2026-09-23T03:54:41.124Z"
     },
     {
       "path": "GOVERNANCE/DECISION_LEDGER_POINTER.md",
       "status": "modified",
-      "detected_at": "2026-09-23T02:42:40.037Z"
+      "detected_at": "2026-09-23T03:45:57.921Z"
     },
     {
       "path": "GOVERNANCE/cred_health_check.mjs",
@@ -1571,7 +1571,7 @@
     {
       "path": "GOVERNANCE/skills/SELF_BUILT_INDEX.md",
       "status": "modified",
-      "detected_at": "2026-09-23T02:42:41.168Z"
+      "detected_at": "2026-09-23T03:45:57.962Z"
     },
     {
       "path": "GOVERNANCE/skills/collab/bus-bridge-debug.md",
@@ -1656,7 +1656,7 @@
     {
       "path": "feed-server/server.mjs",
       "status": "modified",
-      "detected_at": "2026-09-23T02:42:41.205Z"
+      "detected_at": "2026-09-23T03:45:58.009Z"
     },
     {
       "path": "skills/cloudbase/SKILL.md",
@@ -2581,7 +2581,7 @@
     {
       "path": "GOVERNANCE/skills/crypto/pqc-migration-assessment.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:30:34.251Z"
+      "detected_at": "2026-09-23T03:40:59.944Z"
     },
     {
       "path": "GOVERNANCE/skills/crypto/credential-vault-encryption.md",
@@ -4417,11 +4417,16 @@
       "path": "GOVERNANCE/skills/code/A36_端侧性能优化审查.md",
       "status": "added",
       "detected_at": "2026-09-23T03:34:40.161Z"
+    },
+    {
+      "path": "GOVERNANCE/research/CRYPTO_HARDENING_INTEGRATED.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:52:15.876Z"
     }
   ],
   "summary": {
-    "total": 882,
-    "added": 878,
+    "total": 883,
+    "added": 879,
     "modified": 4,
     "removed": 0
   },

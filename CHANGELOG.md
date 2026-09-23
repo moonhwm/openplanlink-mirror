@@ -1191,3 +1191,16 @@
   1. P3: loadSettings() 在 aboutToAppear+onPageShow 可能重复执行（收益不大，不修复）
   2. P3: playHistory 数组重建（50条上限，影响可忽略）
   3. 性能审查为代码走查，未在真机/模拟器上实跑——真机验证留待机主安排
+## 2026-09-23 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· H3 PQC报告熔铸整合
+
+- **改了什么**：
+  - `GOVERNANCE/research/CRYPTO_HARDENING_INTEGRATED.md`（新建）：将 RHEL10_PQC_A2A_REPORT.md（267行）和 CRYPTO_HARDENING_HIFI_REPORT.md（443行）熔铸整合为一份连贯的密码学加固总报告（~280行），消除重复内容（PQC混合KEX原理、三个变体、回环验证、五个缺口等在两份报告中各出现一次），保持逻辑连贯。原始报告保留作为溯源参考。
+- **为什么**：
+  - 两份报告有大量重叠内容，机主指令"熔铸 RHEL 10 PQC SSH 到密码学中"。整合后单一文档覆盖：问题诊断→Paramiko分析→RHEL10 PQC→A2A加固→Paramiko升级→Hi-Fi协同→实施路径。
+- **如何验证**：
+  - V1：确认整合文档覆盖两份原始报告的所有核心内容——通过
+  - V2：确认无重复段落（PQC混合KEX原理只出现一次）——通过
+  - V3：确认原始报告保留未删除（作为溯源参考）——通过
+- **遗留**：
+  1. S1-S4 严重问题修复尚未实施（需机主确认优先级）
+  2. PQC 时间线修订需通知所有 A2A 席位
