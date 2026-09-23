@@ -21,7 +21,7 @@ const KEY_READ_ALERTS = 'read_alerts';    // 已读异动ID列表，JSON string[
 const KEY_PLAY_HISTORY = 'play_history';  // 播报历史，JSON Array<{alertId, ts}>
 
 /** CloudBase 云函数基础地址——所有端点共享同一域名 */
-export const CLOUDBASE_BASE_URL = 'https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com';
+export const CLOUDBASE_BASE_URL = 'https://a2a-commonwealth-d2eepjr928e9c4d-1475054847.ap-shanghai.app.tcloudbase.com';
 
 /** 默认数据源地址（get-alerts 云函数 HTTP 端点） */
 export const DEFAULT_FEED_URL = `${CLOUDBASE_BASE_URL}/alerts`;
