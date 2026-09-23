@@ -27,6 +27,7 @@ cloudfunctions/.env
 # 工具临时文件与进程锁
 .codeartsdoer/.codebase/watch.pid
 .codeartsdoer/.codebase/watch.pid.lock
+.codeartsdoer/.codebase/branches/
 .agents/
 .claude/
 nul
