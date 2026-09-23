@@ -145,18 +145,27 @@ Settings 作为 NavDestination 只挂了 aboutToAppear，未挂 onShown/onHidden
 
 异步状态机防护是本仓库亮点，整改时不得回退：刷新时校验正在播放/加载的 alertId 是否仍在新列表，不在则停播复位（`Index.ets:166-177`）；`togglePlay` 在 await 后复核 loadingId 未被清除才置 playingId（260-265 行），防「prepare 期间卡片被服务端撤下、完成后错误亮播放态」。这类防护直接决定适老化用户会不会看到「明明点了停、声音还在响」的诡异现象，属于生命周期正确性的关键路径。
 
-## 十、整改优先级汇总
+## 十、want 数据结构安全与销毁兜底补充
 
-| 编号 | 级别 | 问题 | 位置 |
-|---|---|---|---|
-| P0-C | P0 | pollLoop 销毁后复活泄漏 | Index.ets:146-149,110-116 |
-| P1-A | P1 | init 与首帧读配置竞态，首帧闪标准字体 | EntryAbility.ets:20-22；Index.ets:98 |
-| P1-F | P1 | 后台轮询不暂停，耗电耗流 | EntryAbility.ets 缺 onBackground |
-| P2-B | P2 | loadSettings 无外层 catch | Index.ets:98 |
-| P2-D | P2 | AVPlayer 事件监听未 off | AudioPlayer.ets:29-37 |
-| P2-E | P2 | 销毁时 async stop 未等待（登记取舍） | Index.ets:115 |
+### 10.1 want 参数的类型边界
 
-## 十一、验收清单
+`EntryAbility.ets:25` 与 45-48 行把 `want?.parameters?.alertId` 直接 `as string | undefined` 断言。若外部传入的 alertId 实为数字或对象（恶意应用可构造任意 want，见 A35 暴露面分析），断言在运行期不做校验，`AppStorage.setOrCreate('pendingAlertId', alertId)` 会存入非字符串值；下游 `Index.ets:139` 取出后传入 `playById`，在 `this.items.find((it) => it.alertId === id)`（203 行）做严格等值比较时永不相等，走「未命中静默清除」分支（205 行），无崩溃。结论：类型边界虽然不严谨，但下游全链路为只读比较、无字符串方法调用，畸形输入自然衰减，判定可接受并登记。加固一行更稳：存入前 `typeof alertId === 'string' && alertId.length > 0` 双条件过滤。
+
+### 10.2 播放中销毁的竞态走查
+
+场景：用户点卡片后立刻退出应用。时序：togglePlay 进入 await（`Index.ets:249-259`）→ aboutToDisappear 执行 AudioPlayer.stop()（115 行）→ prepare 完成回调继续执行，264-265 行置 playingId、267 行 markAlertRead 写历史。结果：应用已退出但历史里记了一条「已播报」，实际没播完。评估：markAlertRead 只影响未读圆点显示（361-364 行），误差量级为一个圆点，适老化用户无感，登记为已知可接受偏差；若要严格，可给 Index 加销毁标志（同 P0-C 的 stopped），await 复核后再写历史，与 5.1 整改同批落地，零额外成本。
+
+### 10.3 AppStorage 键清单与残留检查
+
+全仓库 AppStorage 键盘点（grep setOrCreate 实证）：`pendingAlertId`（EntryAbility.ets:27,47,59,65,93 五处写入）、`autoPlay`（66 行一处）、`xiaoYiQuery`（54 行一处）。逐键核对消费方：pendingAlertId 有消费（Index.ets:139-143，先删后用）；autoPlay 与 xiaoYiQuery 均无消费者（grep 实证全仓库无 get 调用）。残留影响：AppStorage 为进程级单例，键不清理只会随进程销毁回收，无跨会话泄漏；但 xiaoYiQuery 作为小艺查询标志（注释 52-53 行自述「设置标志让 Index 页面返回异动摘要」）写而不读，说明该功能为半成品桩，登记至功能台账，与 A31 P2-3 合并处置：要么补消费逻辑，要么删桩并留注释，禁止悬挂。
+
+## 十一、生命周期审查checklist（可复用模板）
+
+本节把全篇判定抽成十问清单，任何 ArkTS 页面/服务接入时逐条过一遍，即为一次标准生命周期审查。一问：aboutToAppear 里启动的每个定时器、监听器、播放器，aboutToDisappear 是否有配对清理？（本篇 P0-C 即此问未过。）二问：异步链悬挂期间的销毁，清理是否仍有效——await 前后是否都查停止标志？三问：fire-and-forget 的 async 调用是否至少挂了 catch 留痕？四问：单例服务（本项目 AudioPlayer、SettingsService 均为 static 单例）的初始化与首次使用之间是否有就绪保证？五问：跨组件通信的 AppStorage 键，写入方与消费方的触发时机是否在全部场景都成立？（A31 P1-4 即此问未过。）六问：前后台切换时，持续动作（轮询/播放）是否正确暂停与恢复？七问：异步回调闭包是否持有大对象或组件引用，销毁后是否延迟释放？八问：增长的容器（列表/历史）是否设有上限截断？九问：await 复合操作完成后写入状态前，是否复核期间组件/数据未被并发更改？（本项目 Index.ets:260-265 的 loadingId 复核是正面范例。）十问：want 或外部输入进入 AppStorage 前，类型与内容是否校验？本篇将这十问全部跑完一遍，产出第六至十节的全部发现；后续新增页面照单执行，审查质量即可复制而不依赖审查者经验。
+
+## 十二、整改优先级汇总
+
+## 十三、验收清单
 
 - [ ] 页面销毁后 30 秒内 logcat 无新 fetch 日志（P0-C 实测法见 5.1）。
 - [ ] 冷启动首帧即呈现用户已保存的特大字体档（P1-A 修复后）。

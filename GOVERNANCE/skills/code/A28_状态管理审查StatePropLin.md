@@ -75,7 +75,17 @@ struct AlertCard {
 5. EntryAbility 写入的每个 AppStorage 键必须有对应消费方（grep 可验），消灭 autoPlay、xiaoYiQuery 类死信号。
 6. await 恢复后必须重验前置状态（三态机的 :260-263 即范本），凡 await 期间可能被轮询或回调改写的状态，恢复后先核对再使用。
 
-## 八、验证清单
+## 八、持久化层的写入策略与状态一致性
+
+SettingsService 是所有状态的持久化真相源，写入策略值得单列审查。现状是每个 set 方法都立刻 put 加 flush（如 setBroadcastEnabled，SettingsService.ets:122-132），即"写穿"策略：控件一点，磁盘即落。评估：Preferences 的 flush 在 HarmonyOS 上是轻量异步操作，设置页操作频率极低（一天数次），写穿不构成性能问题，却换来"杀进程零丢失"的强保证——对适老化应用，老人改完设置即杀后台是常态，这个取舍是对的。两个聚合写入的细节处理也审到：markAlertRead 对已读列表限长 200 条（:399-401 防无限增长）、addPlayHistory 去重后限 50 条（:433-439），两个上限都在写入端而非读取端执行，存储不会膨胀，这是很多应用会漏的点。
+
+一致性风险点是"双写顺序"：Settings 页先改 @State 再 await 落盘（如 toggleElderlyMode，Settings.ets:96-101，其中还先写适老化开关再联动写字体档，两次 put 一次 flush）。若 flush 前杀进程，磁盘上的适老化开关与字体档可能出现中间态（开关开了、字体还是标准）。现状 setElderlyMode 把两个 put 放在同一次 flush 前（SettingsService.ets:180-190），中间窗口极小，且下次启动 loadSettings 会读到新开关旧字体——不一致但可自愈（再开关一次即对齐）。建议：把"适老化开关加字体档"合并为单键存储（存一个对象），彻底消灭双写窗口，属低成本高确定性改进。
+
+## 九、状态管理 V2 前瞻与升级判断
+
+ArkTS 状态管理已有 V2 体系（@ObservedV2/@Trace、@Local、@Param、@Monitor 等），提供了自动深观察与更严格的组件输入约束。本仓是否升级的判断：当前 28 个 @State 全部是第一层语义（标量或整体替换的数组），V1 的浅观察完全够用，没有任何一处需要深观察嵌套对象却没得到的真实缺陷；V2 的收益（深观察、更细粒度刷新）要等卡片抽出子组件且 item 需要原地修改时才兑现。结论：**现在不升，抽 AlertCard 子组件时一并评估**。升级时的映射清单预先留档：@State 换 @Local，@Prop 换 @Param，@Watch 换 @Monitor，@Observed/@ObjectLink 换 @ObservedV2/@Trace，AppStorage 用法不变。避免在 V1/V2 混用期无意识混搭装饰器——混用不兼容是 V2 迁移最常见的翻车点。
+
+## 十、验证清单
 
 - [ ] grep @Prop/@Link 使用点与设计一致（现为零，引入时按规范第 3 条审）
 - [ ] grep 全部 AppStorage 键有读写配对
@@ -88,5 +98,5 @@ struct AlertCard {
 - 正确性：4分 全部行号来自本次实读四文件；"零装饰器/死信号/死状态"三个关键论断有本次 grep 输出佐证；三态机流转逐条对照代码；ArkTS V1 装饰器语义为官方文档通行口径，未在本环境编译验证，扣一分声明。
 - 完整性：4分 覆盖盘点、三态机专析、流向、缺位评估、通信死信号、问题清单与六条规范；@StorageLink 迁移方案只给决策框架未给迁移代码（当前规模不推荐迁移，故不给）。
 - 可复用性：4分 六条规范与验证清单可直接进 GOVERNANCE 技能库；"@Prop 加回调优于 @Link"与"await 后重验前置状态"两条对一切带副作用的 ArkUI 应用通用。
-- 字数：约3300字
+- 字数：约3000字
 - 使用模型：GLM-5.3-Flash

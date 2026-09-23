@@ -344,15 +344,52 @@ if (typeof bundleName !== 'string' || bundleName.length > 128) {
 3. 六个函数的密钥全部走 `process.env`：`TUSHARE_TOKEN`、`DKNOWC_API_KEY`（fetch-tushare-data:20/24）、`DASHSCOPE_API_KEY`（generate-tts:20）、`SUPABASE_ANON_KEY`、`HUAWEI_PUSH_CLIENT_SECRET`（broadcast-a2a:19/144）。唯一硬编码兜底是 `generate-tts:19` 的 workspace id（非密钥，低敏，S9）。
 4. 本文自身不含任何密钥值，符合"不泄露任何Token/密钥"红线；全文不涉及收益承诺类内容，不推翻架构基调。
 
-## 九、修复优先级与验收清单
+## 九、HTTP 暴露面专项：CORS、未鉴权端点与攻击面最小化
 
-### 9.1 修复顺序
+### 9.1 公网可达面盘点
+
+云函数经 CloudBase HTTP 访问服务暴露后，真正公网可达的入口有两个：
+
+- `get-alerts`：按头注释（`get-alerts/index.js:15-16`）以 `--path /alerts` 挂载，供端侧 AlertPoller 轮询。只读、无副作用，被滥用的最坏后果是**读放大**——攻击者高频轮询拉空 alerts.json，函数按 `timeout: 10`（cloudbaserc.json）秒计费，产生费用与日志噪音。
+- `broadcast-a2a`：`index.js:284-316` 在 `PORT` 环境变量存在时自建 HTTP 服务器（scf_bootstrap 启动 Web 函数模式）。**POST 也可触发**（285 行处理任意 method，293 行仅对 OPTIONS 特判），即公网调用方可驱动 `handleBroadcast` → 逐条 `sendPushNotification`——虽然 Push 发送需要 AGC 凭证齐备（146 行未配置即跳过），但一旦生产配齐，此端点等于把"向全体设备推送"的能力暴露给任意公网来源。
+
+### 9.2 CORS 通配符评估
+
+`broadcast-a2a/index.js:289-291` 三个响应头全部放通：`Access-Control-Allow-Origin: *`。风险界定要准确：CORS 是**浏览器侧**约束，`*` 意味着任意网页的脚本可读取该端点响应；它不拦截 curl/脚本化调用（那些根本不发预检）。对本端点的实际影响：任意第三方网页可以用已登录用户的浏览器作为跳板读取异动数据（低敏）并隐性触发广播（副作用）。修复建议分两级：
+
+- 低成本：删掉 POST 支持，Web 面只留 GET 只读语义；
+- 正解：加共享密钥头校验（端侧与云函数约定 `X-App-Key`，从环境变量读取比对），并按包名收敛 CORS 白名单。
+
+### 9.3 攻击面最小化清单
+
+| 端点 | 现状 | 建议 |
+| --- | --- | --- |
+| get-alerts HTTP | 未鉴权只读 | 保留；加每秒限流（CloudBase 网关层）或前端 CDN 缓存 3-5 秒 |
+| broadcast-a2a Web | 未鉴权可 POST 触发推送 | 必须加共享密钥；生产可整体下线 Web 模式改定时触发 |
+| push-token-register | 未鉴权写库 | 修 S2 后写入受格式白名单约束，可接受；建议再加 bundleName 白名单 |
+| generate-tts | 仅函数间调用 | 保持不暴露 HTTP；text 长度上限（S8）落地前警惕额度放大 |
+| fetch-tushare-data | 定时触发 | 不消费 event，风险最低，无需改动 |
+| init-db | 一次性 | 建议执行后从 cloudbaserc.json 移除或加禁用标记 |
+
+## 十、密钥轮换与应急响应预案
+
+### 10.1 轮换矩阵
+
+本会话实测的密钥消费点（全部 `process.env`）：`TUSHARE_TOKEN`（fetch-tushare-data:20）、`DKNOWC_API_KEY`（:24）、`DASHSCOPE_API_KEY`（generate-tts:20）、`SUPABASE_ANON_KEY`（broadcast-a2a:20）、`HUAWEI_PUSH_CLIENT_ID/CLIENT_SECRET/PROJECT_ID`（broadcast-a2a:142-144）。轮换操作互不阻塞、可独立执行：改 `cloudfunctions/.env` 或平台控制台环境变量 → 重新部署对应函数 → 旧值作废。**唯一依赖时序的是华为 Push 三元组**：PROJECT_ID/CLIENT_ID/CLIENT_SECRET 需同步更换，缺一会让 146 行守卫直接跳过推送（静默降级，非报错——排查时注意这个表现）。
+
+### 10.2 泄漏应急剧本
+
+若日志平台或工单中发现 Token 外泄：第一小时内在上游控制台吊销并换新（Tushare/百炼/DKnowC 均支持即时作废）；对华为 Push 泄漏额外评估 push_tokens 集合是否被灌入外来设备（67-75 行 `getActiveTokens` 会把库内所有 active token 作为推送目标，攻击面在"写"不在"读"）；事后用第七节的 grep 清单复核代码没有回潮。
+
+## 十一、修复优先级与验收清单
+
+### 11.1 修复顺序
 
 1. **P0（当日）**：S1 日志泄漏、S2 操作符注入、S3 e.stack 移除——三处都是几行的改动。
-2. **P1（本周）**：S4 错误码化返回、S5 东财形态归一化、S6 状态码与体积上限。
+2. **P1（本周）**：S4 错误码化返回、S5 东财形态归一化、S6 状态码与体积上限、broadcast-a2a Web 面鉴权（第九节）。
 3. **P2（随版本）**：S7 limit 兜底、S8 text 上限、S9 workspace id 环境变量化。
 
-### 9.2 验收命令清单（代码席位落地后逐条复跑）
+### 11.2 验收命令清单（代码席位落地后逐条复跑）
 
 ```bash
 # S1/S3：两条 grep 均应无输出（或仅在 DEBUG 门控内）
@@ -366,7 +403,7 @@ grep -n "statusCode" cloudfunctions/functions/fetch-tushare-data/index.js
 node --check cloudfunctions/functions/fetch-tushare-data/index.js
 ```
 
-### 9.3 本会话检查状态汇总
+### 11.3 本会话检查状态汇总
 
 | 检查 | 状态 | 备注 |
 | --- | --- | --- |
@@ -376,9 +413,13 @@ node --check cloudfunctions/functions/fetch-tushare-data/index.js
 | node --check | 未运行 | 本机无 node（`node: command not found`） |
 | 运行时注入复现（真实调用） | 未运行 | 未部署云函数，属代码席位验收项 |
 
+## 十二、审计留痕与复查节奏
+
+本审查的结论有半衰期：代码在演进（本会话已亲历六个云函数两小时内被并发修改），今日通过项可能明日回潮。建议把复查固化为三档节奏。第一档是每次合并前的机器闸门：把 11.2 节的 grep 断言接进流水线，任何一条命中即阻断，成本最低、防回潮最有效。第二档是每周一次的人工抽查：重点盯新增 console 语句与新增 where 查询，这两类是历史问题的两大温床，抽查范围小、二十分钟可完成。第三档是每月全量复审：按本文目录重跑一轮并对照风险表销号，同时复查依赖与环境变量清单是否出现新的密钥消费点。所有档位共用同一份验收命令，保证口径一致。另建议把本文的风险编号（S1-S9）登记进问题跟踪系统，修复时引用编号、复审时按编号销号，避免同一问题在不同批次里被反复发现、反复修复、反复遗漏。
+
 ### 自我评估
 - 正确性：4分——全部发现均以本会话实际执行的 grep/Read/Python 扫描输出为据，行号锚定 735 行快照并给出 md5；风险机理（NaN 路径、操作符注入、idle 超时语义等）为 JavaScript/Node 语义可推导结论；但未做运行时复现，注入可行性为静态推断。
 - 完整性：4分——覆盖任务指定的四要素（输入验证/东财格式验证/脱敏/e.stack/日志/注入）并含密钥治理与验收清单；运行时类检查（部署后日志审计）只能给步骤未给结果。
 - 可复用性：5分——修复代码均为可直接粘贴的片段，附全库验收命令与日志规约清单，可整体沉淀为团队安全基线。
-- 字数：约5100字
+- 字数：约4400字
 - 使用模型：GLM-5.3-Flash

@@ -177,6 +177,18 @@ cloudbaserc.json 给 generate-tts 60 秒，链路耗时构成（逐段估算，�
 
 端侧播放（AudioPlayer.ets:17-53）对 url 的唯一要求是 AVPlayer 能直接 prepare 的网络地址，三点对齐结论：其一，mp3 16000Hz（generate-tts/index.js:221-222）在 AVPlayer 支持面内，无需转码；其二，若按第十节采用 fileID 方案，端侧**不能**直接播 fileID，必须先换临时链接——换链应放在按需调用 generate-tts 的返回体或 get-alerts 出口统一完成，因为端侧在"零三方依赖"约束下引不了云存储 SDK，换链必须在服务端做；其三，端侧 onDone 在 completed/idle 触发、onError 在 error 事件触发（AudioPlayer.ets:29-37），5.2 的半截音频会让 onDone 正常触发而内容残缺——错误形态比报错更隐蔽，这正是 partial 必须隔离出缓存与回写的最终理由。
 
+## 十四、日志排障字典
+
+按"看到什么日志→去查什么"整理，全部对应现有代码路径：`TTS cache hit`（index.js:82）→ 缓存命中，无需排障但可统计命中率；`TTS cache miss`（index.js:88）→ 正常首播路径，异常高频出现说明缓存写入失败，转查 `Cache save error`（index.js:114）；`TTS WebSocket connected, sending run-task`（index.js:204）→ 握手成功，若之后长时间无 task-started，查服务端限流或 task_id 冲突；`TTS task-started, sending text`（index.js:240）→ 协议推进正常；`TTS task-finished, N audio chunks`（index.js:264）→ N 为 0 时音频为空，Buffer.concat 产出零字节文件，上游会把它当成功上传——**建议在 concat 后加 N>0 与总字节数下限校验**，零块成品是比 partial 更早暴露的坑；`TTS task-failed`（index.js:273）→ 附带完整报文，对照百炼错误码文档定位（额度、文本含违禁内容、模型名错误都在这里现形）；`TTS WebSocket timeout`（index.js:198）→ 三十秒总闸到点，结合十一节预算判断是合成慢还是挂死；`WebSocket closed with N chunks, using partial audio`（index.js:292）→ 5.2 的截断场景，出现即说明有用户会听到残音频；`updateAlertAudioUrl: alertId not found`（index.js:150）→ 上游还没把该条写进 alerts.json 就先完成了合成，时序倒挂，属链路竞态的温和形态（见 A20 篇五.4）；`DASHSCOPE_API_KEY not configured`（index.js:353）→ 部署时环境变量漏注，检查 cloudbaserc.json generate-tts 段与控制台实际配置是否一致。
+
+## 十五、回写方案对比（6.4 的展开）
+
+三个候选的取舍：**方案一 serverTs 比对保护**（把上游 fetch-tushare-data/index.js:518-524 的写法搬过来）——改动最小，但仍整文件覆盖，保护只降概率不除根，且每次回写仍下载-上传 200KB 级文件；**方案二 数据库单字段更新**（`db.collection('alerts').where({alertId}).update({audioUrl})`，集合化联动 A17/A20）——从根上消除覆盖语义，代价是 alerts 数据要在文件与集合间选一个事实源，属二期拓扑改造；**方案三 不回写 alerts.json，端侧合并**（generate-tts 只返回 audioUrl，由调用方或端侧自行关联）——最彻底的解耦，但端侧需缓存 alertId→audioUrl 映射、且缓存过期后映射丢失，复杂度转移到端侧，不符合"端侧零依赖轻逻辑"的适老化基调。推荐路径：立即落方案一（两行级改动），二期随集合化迁到方案二，方案三仅作记录不实施。选型原则一句话：**回写这种"支线改主线数据"的动作，保护措施必须与主写入同级，否则宁可不写**。
+
+## 十六、部署配置核对单
+
+部署本函数前逐项核对（依据 cloudbaserc.json generate-tts 段与代码内读取点）：①`DASHSCOPE_API_KEY` 已注入且非空（index.js:20、352 两处依赖）；②`BAILIAN_WORKSPACE_ID` 已注入（3.1 修复后缺失即拒启）；③`TCB_ENV` 与实际环境一致（index.js:24，未注入回落硬编码默认环境）；④timeout 保持 60 秒（十一节预算的前提，误配 10 秒会让长音频必然超时截断）；⑤`installDependency: true` 未被改动（ws 与 node-sdk 两依赖需在线安装）；⑥node_modules 与 package.json 声明一致（ws ^8.16.0 的次版本漂移一般安全，但升级前应跑一遍第十节验收）；⑦HTTP 访问服务路径若暴露了本函数，确认第七节的限流已配——未暴露则纯走 callFunction，鉴权面收窄到云函数网络内，输入约束（第七节）可降为 P2。核对单与第十节验收标准配合使用：核对单管部署前，验收管部署后，中间不留真空。
+
 ### 自我评估
 - 正确性：4分 端点与协议结论经官方文档当日核实并明确纠正了"端点写错"的先入判断；tempFileURL 过期、额度内存态、回写竞态三项均有行号级证据；未实测项如实标注。
 - 完整性：4分 覆盖调用方式、连接管理、音频流、缓存、额度、鉴权六大维度并给出 P0-P3 清单；未展开百炼错误码全表与成本核算。

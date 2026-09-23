@@ -182,9 +182,82 @@ export default class EntryAbilityStage extends AbilityStage {
 6. 系统字号放大后布局溢出：未监听fontScale，或文本容器固定了vp高度。
 7. 销毁路径内存泄漏：窗口监听（on('windowSizeChange')）在onWindowStageDestroy里忘了off。
 
+## 8 Want与启动参数详解
+
+Want是Ability间通信的标准载体，冷启动与热启动都要解析它：
+
+```ts
+onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+  const action: string = want.action ?? '';
+  const uri: string = want.uri ?? '';
+  const params = want.parameters as Record<string, Object> | undefined;
+  const alertId: string = (params?.['alertId'] as string) ?? '';
+}
+```
+
+- action、uri、entities描述"想做什么"，parameters承载业务参数；铃语约定键名alertId，推送侧与端侧共用一个常量文件登记键名，杜绝两侧拼写漂移。
+- launchParam.launchReason区分APP_INIT（正常点图标启动）、CALL（被其他应用拉起）、CONTINUATION（跨端迁移）等；按launchReason分支可以在本地统计"推送唤起率"，为后续Push效果评估留数据。
+- 参数一律按"可能缺失"处理：空串兜底、不做非空断言；ArkTS禁any，取值统一走Record收敛。
+- 安全边界：want.parameters来自外部（推送服务、其他应用），不得直接用于路径拼接或SQL类操作，只做标识符匹配。
+
+## 9 UIAbilityContext能力清单
+
+EntryAbility持有的this.context即UIAbilityContext，铃语会用到的能力：
+
+| 能力 | 用途 | 铃语纪律 |
+|---|---|---|
+| startAbility(want) | 拉起其他Ability/应用 | 跳系统设置页可用；不拉第三方应用 |
+| requestPermissionsFromUser | 运行时权限申请 | 页面可见时申请，禁启动即弹窗 |
+| terminateSelf | 退出当前Ability | 不主动调用，交给系统返回 |
+| getFilesDir / getCacheDir | 应用文件/缓存目录 | TTS临时音频放cacheDir，系统可回收 |
+| eventHub | 轻量事件总线 | Ability层与页面层解耦通信 |
+| setLaunchWant | 设置默认Want | 铃语不需要，单页面无多入口 |
+
+注意UIAbilityContext与页面侧的UIContext不是同一个体系：前者管Ability级能力，后者管组件树与弹窗；混用是常见编译期错误。
+
+## 10 Ability与页面解耦：EventHub实践
+
+```ts
+// EntryAbility：注册一次
+this.context.eventHub.on('consumeAlert', (id: string) => {
+  PushService.markConsumed(id); // 通知Push侧该条已读，避免重复唤起定位
+});
+
+// Index.ets：页面侧触发
+const ctx = this.getUIContext().getHostContext();
+ctx.eventHub.emit('consumeAlert', id);
+```
+
+- 好处：页面不import Ability类，Ability不依赖页面生命周期，双向都可单测。
+- 事件名集中登记在常量文件（同alertId键名一个文件），on/off必须配对，onDestroy里统一off。
+- EventHub只传轻量标识符，不传大对象；大数据走AppStorage或数据层单例。
+
+## 11 启动性能基线
+
+- 冷启动到首帧目标：中端真机≤2秒。演示卡是纯本地常量渲染，天然满足；超标先查onCreate是否混入同步IO。
+- onCreate禁await；PushService.init内部异步执行，不阻塞窗口加载。
+- 首帧后再做的三件事：发起首次网络请求（AlertPoller首tick）、注册Push token、预热音频组件。
+- 用DevEco Profiler的Launch模板抓冷启动分布，Ability阶段耗时与页面阶段耗时分开归因。
+
+## 12 页面栈与路由纪律
+
+铃语当前是单页面Index加组件内展开，不引入多页栈。若未来加设置页：
+
+- 用Navigation组件与NavPathStack，不用已不推荐的router接口。
+- 页面栈深度上限2：卡片流→设置，一键返回，返回后保持原滚动位置——老人最怕"回来找不到刚才那条"。
+- 返回键行为显式定义，不依赖默认出栈。
+
+## 13 生命周期验证清单（发版前执行）
+
+1. 三条启动路径分别验证alertId到达：冷启动（onCreate）、热启动点图标、推送热启动（onNewWant）。
+2. 前后台切换50次：轮询启停配对，无泄漏（onPageShow/onPageHide计数相等）。
+3. 息屏再解锁：轮询恢复且不双跑（单飞与代次号生效，见E9）。
+4. 杀进程重启：先演示卡、再快照数据、再网络新数据，三层递进不白屏。
+5. 折叠屏展开合拢与旋转：卡片流重排不错位，热区仍在64vp以上。
+
 ### 自我评估
-- 正确性：4分——生命周期时序、四类启动模式、WindowStage边界均基于官方公开机制书写，EntryAbility骨架与项目A22审查结论一致；个别API细节（AvoidAreaType组合、长时任务签名）以compatibleSdkVersion 20的d.ts为准。
-- 完整性：4分——覆盖Stage核心对象、全生命周期、WindowStage、多实例、配置与内存、坑位清单；Push降级与音频续播只交代接口边界，细节在E7、E9等篇。
-- 可复用性：4分——表格加骨架代码加坑位清单可直接迁移到其他Stage工程，铃语特有约束已单独标注，specified示例可平移到多账号类应用。
-- 字数：约3150字
+- 正确性：4分——生命周期时序、四类启动模式、WindowStage边界、Want/Context/EventHub均基于官方公开机制书写，EntryAbility骨架与项目A22审查结论一致；个别API细节（AvoidAreaType组合、长时任务签名）以compatibleSdkVersion 20的d.ts为准。
+- 完整性：4分——覆盖Stage核心对象、全生命周期、WindowStage、多实例、Want解析、Context与EventHub解耦、性能基线、路由纪律与验证清单；Push降级与音频续播细节由E7、E9承接。
+- 可复用性：4分——表格加骨架代码加清单可直接迁移到其他Stage工程，铃语特有约束已单独标注，specified示例可平移到多账号类应用。
+- 字数：约待填字
 - 使用模型：GLM-5.3-Flash

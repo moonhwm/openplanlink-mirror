@@ -145,6 +145,70 @@ const scf = new CloudBase({
 
 未做：云端实调 init-db 验证 -502001 错误码匹配（本地无凭证）；索引管理接口的具体函数签名（标注"以官方文档为准"，脚本骨架为伪代码）；push_tokens 集合在目标环境的现存状态（可能已手工建过，P0 第二项施工前先 listCollections 对账）。以上均如实标注。
 
+## 九、初始化执行顺序与环境就绪依赖图
+
+初始化不是孤立动作，它处于部署链的特定位置。完整的首次部署顺序应为：①部署全部六个云函数（cloudbaserc.json functions 列表）；②跑 init-db 建集合（当前等价于手工建 push_tokens）；③建索引（第四节）；④控制台收紧集合安全规则（第七节第 3 项）；⑤注入环境变量（TUSHARE_TOKEN、DASHSCOPE_API_KEY、HUAWEI 三件套等——cloudbaserc.json 中现值均为空串，属已知未配置态）；⑥配置 fetch-tushare-data 定时触发器；⑦配置 HTTP 访问服务路径（/alerts、/push-token-register）；⑧冒烟验收（第七节）。顺序错了会发生什么：集合未建先开推送注册——push-token-register 报集合不存在，端侧只记日志不重试（PushService.ets:89-91），该设备静默失联直到下次冷启动；环境变量未注先开定时器——fetch-tushare-data 返回 TUSHARE_TOKEN not configured（fetch-tushare-data/index.js:566-573），属快速失败无害态。把这张顺序图写进部署手册，比事后排障便宜一个数量级。
+
+## 十、幂等性与可重入的边界
+
+init-db 的幂等性依赖错误码匹配：`already exists` 字符串或 `-502001`（functions/init-db/index.js:29）。两点边界要说清：其一，云厂商错误文案可能随 SDK 版本变化，字符串匹配是脆弱的——建议以 -502001 数字码为主判据、字符串为辅，并在 verify 段把结果分三档：全 already_exists/created（可重入成功）、部分 error（需人工介入，禁止盲目重跑掩盖问题）、verify 段 count 报错（集合权限或安全规则问题，与创建无关）。其二，幂等只覆盖"集合存在性"，不覆盖"集合内容正确性"：若目标环境的 push_tokens 是老结构（无 active 字段的历史文档），init-db 不会也不该改写数据——结构迁移是另一个独立动作，建议出一份 scripts/migrate-push-tokens.mjs（补 active:true 默认值、按 token 指纹去重），与初始化解耦，避免运维函数长出数据手术刀。
+
+## 十一、区域与配额的注意事项
+
+两点施工前须知（以控制台实际显示为准）：其一，CloudBase 部分套餐对集合数量有上限（免费档通常十余个量级），瘦身后的清单（1 个 + 二期 3 个）远在安全区内，这也是 3.2 建议删掉两个僵尸集合的现实理由之一——配额留给真实需求。其二，索引数量同样计入配额，第四节方案的 5 条索引（现期 2 条 + 二期 3 条）不构成压力，但组合索引的字段顺序有讲究：(active, lastReportTs) 的顺序服务"先筛 active 再按时间扫"的查询形态，反序 (lastReportTs, active) 对该查询无效——建索引时按查询语句的字段序对齐，别凭感觉排。
+
+## 十二、验收脚本示例（本地形态）
+
+第七节清单可固化为一段对账脚本（与 scripts/init-db.mjs 同源凭证，走环境变量）：
+
+```js
+// scripts/verify-db.mjs —— 只读对账，不做任何写操作
+import CloudBase from '@cloudbase/manager-node';
+const scf = new CloudBase({ envId: process.env.TCB_ENV,
+  secretId: process.env.TCB_SECRET_ID, secretKey: process.env.TCB_SECRET_KEY });
+const PLAN = {
+  push_tokens: ['token(unique)', 'active+lastReportTs'],
+  // 二期: alerts: ['alertId(unique)', 'ts(desc)'], quota_daily: ['date(unique)']
+};
+const existing = await scf.database.listCollections();
+for (const [coll, idxs] of Object.entries(PLAN)) {
+  const found = existing.find(c => c.name === coll);
+  console.log(found ? `[ok] ${coll} exists` : `[MISS] ${coll} NOT FOUND`);
+  // 索引核对经 describeCollection/索引接口逐一比对 idxs，缺失即列出
+}
+```
+
+把"建了没有"从人眼对账变成一条命令，是初始化资产里最值得沉淀的部分——五份分叉脚本的存在本身就证明人肉对账撑不住。
+
+## 十三、云函数形态与本地脚本形态的分工
+
+两种初始化载体各有不可替代性，分工应写死：**云函数 init-db**（functions/init-db/）——可在无本地凭证的运维窗口手动触发（Event 调用走函数自身权限），适合应急补建集合与快速对账；**本地脚本 scripts/*.mjs**（manager-node + 环境变量凭证）——能做云函数做不了的事：索引管理、安全规则下发、大规模数据迁移、与版本库同评审。判据一句话：**建集合走云函数（快），建索引/改规则/迁移走本地脚本（全）**。现状的病根是把"云函数建集合"这一件事在本地脚本里重复实现了四遍（第一节 3-5 号），每遍都拖着凭证与执行环境问题——收敛成两载体后，五份分叉自然归一。
+
+## 十四、错误码速查（本函数会遇到的全部形态）
+
+施工与排障对照用，均来自代码中已处理的路径与 CloudBase 常见错误：`-502001 / already exists` → 集合已存在，幂等成功路径（functions/init-db/index.js:29）；`DATABASE_COLLECTION_EXISTS` → 同义的字符串码形态（cloudbase-init.js:28 也在匹配它）；`-502003` 集合不存在 → verify 段 count() 时出现，说明主循环建失败但被吞，回去查 results 里对应条目；`TypeError: db.command is not a function` → 2.2 兜底路径的必然产物，出现即证明走到了死代码分支；鉴权类错误（凭证明细随环境）→ Event 函数内 SDK 走平台注入凭证，本地跑这份代码会失败，属预期行为而非 bug，本地调试请改用第五节脚本。速查表的用法：init-db 返回体的 results 数组逐条对号入座，任何 `error` 状态先在此表匹配再决定是否重跑。
+
+## 十五、多环境管理建议
+
+当前全部代码与脚本硬编码单一 envId（functions/init-db/index.js:8 及四份本地脚本的默认值）。若未来出现测试/生产双环境：云函数侧靠 `TCB_ENV` 环境变量区分（代码已支持，第 8 行的 `process.env.TCB_ENV ||` 落点正确），本地脚本侧靠环境变量注入（第五节方案已内置）；要防的是"脚本里再写死一个测试 envId"——那会造出第六份分叉。配套纪律：测试环境的集合清单可以超集（多几个实验集合），但**安全规则必须与生产同严格**，测试库的宽松规则是最常见的越权入口。清单文件建议独立成 `scripts/db-plan.json`（集合+索引+规则的声明式描述），init-db 与本地脚本同读一份计划——单一事实源，这是治理五处分叉的最终形态。
+
+## 十六、返回体解读示例
+
+健康环境与故障环境的返回体形态对照，运维照此读数（结构对应 functions/init-db/index.js:60 的 `{results, verify}`）：
+
+```json
+// 健康（第二次执行，全部已存在）：
+{ "results": [ {"collection":"push_tokens","status":"already_exists"}, ... ],
+  "verify":  [ {"collection":"push_tokens","count":3}, ... ] }
+
+// 典型故障（集合未建 + 兜底死代码触发）：
+{ "results": [ {"collection":"push_tokens","status":"error",
+                "error":"TypeError: db.command is not a function"} ],
+  "verify":  [ {"collection":"push_tokens","error":"-502003 collection not exists"} ] }
+```
+
+读数三规则：results 与 verify 要对读——results 说 created 但 verify 报错，说明创建动作返回了假成功（把 2.2 修复后此形态应消失）；verify 的 count 含初始化脏文档时（残留版 add 方案的历史环境），先跑第十二节的迁移脚本清档再读数；error 字段先对照第十四节速查表匹配，匹配不上再进日志细查。**禁止盲目重跑**：error 形态下重跑最多再得一份同样报错，掩盖问题的同时浪费时间——init-db 是幂等的，但幂等不是排障手段。
+
 ### 自我评估
 - 正确性：5分 "清单四集合无一被用、实际所需 push_tokens 不在清单"由六文件交叉核对得出；db.command 兜底失效为 node-sdk API 语义判断；安全发现给出位置与处置且不复述凭证。
 - 完整性：4分 覆盖初始化逻辑、表结构、索引、脚本治理、验收清单；索引 API 具体签名未展开（已标注）。
