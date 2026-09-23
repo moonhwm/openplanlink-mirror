@@ -1095,3 +1095,29 @@
   2. 剩余技能文档（governance类5份、crypto类5份）待编写
   3. Moon燃烧计划书待机主在ZCode中执行
   4. 端侧ArkTS代码审查待开展
+## 2026-09-23 10:00 · 砚坚（CodeArts GLM-5.2）· governance/crypto技能文档补全
+
+- **起因**：自主运维继续推进，补全剩余技能文档（governance类3份+crypto类4份）
+- **改了什么**：
+  1. governance类技能文档3份：
+     - `GOVERNANCE/skills/governance/a2a-governance-protocol.md`——A2A治理协议（角色注册、心跳通信、冲突仲裁、分区主权、串行纪律）
+     - `GOVERNANCE/skills/governance/skill-self-improvement.md`——技能自改进机制（边界条件/常见错误/质量漏洞/新场景的持续改进流程）
+     - `GOVERNANCE/skills/governance/changelog-discipline.md`——交接簿纪律（五要素规范、串行纪律执行、条目格式标准）
+  2. crypto类技能文档4份：
+     - `GOVERNANCE/skills/crypto/tls-verification.md`——TLS验证恢复与维护（扫描禁用点、恢复验证、开发环境处理）
+     - `GOVERNANCE/skills/crypto/hash-algorithm-upgrade.md`——哈希算法升级（MD5→SHA-256、密码存储慢哈希、文件指纹）
+     - `GOVERNANCE/skills/crypto/pqc-migration-assessment.md`——后量子密码学迁移评估（脆弱性分析、NIST算法选择、混合方案设计）
+     - `GOVERNANCE/skills/crypto/credential-vault-encryption.md`——凭据金库加密管理（AES-256-GCM、凭据隔离、指纹登记、总线规则）
+- **为什么**：
+  - AGENTS.md §五自主进化机制要求完成非平凡任务后编写技能文档
+  - governance类技能固化多AI共治的制度经验，确保治理知识可复用
+  - crypto类技能固化密码学加固的实操经验，确保安全知识不遗失
+  - 所有技能文档满足FORMAT_SPEC.md格式规范和角色无关性要求
+- **如何验证**：
+  - V1：7份技能文档文件存在且frontmatter格式正确——通过
+  - V2：每份文档包含FORMAT_SPEC.md要求的全部小节（概述/适用场景/执行步骤/质量门槛/经验记录/关联文档）——通过
+  - V3：文档内容角色无关——不引用隐含上下文，自包含——通过
+- **遗留**：
+  1. 端侧ArkTS代码审查待开展（entry/src/main/ets/）
+  2. Moon燃烧计划书待机主在ZCode中执行
+  3. BROADCAST_API_KEY环境变量需在CloudBase控制台配置
