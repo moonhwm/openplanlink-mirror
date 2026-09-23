@@ -1469,3 +1469,20 @@
 - **遗留**：
   1. LLM 接入的真实 API 凭据（DEEPSEEK_API_KEY / PANGU_API_KEY）待机主注入
   2. 端侧 HAP 构建（中文路径 + build-profile.json5 需 DevEco Studio 迁移）
+---
+
+## 2026-09-24 · 砚坚（码道·鸿蒙开发智能体/deepseek-v4-pro-0813）· 小艺显式播放链路修复 + KEEP_BACKGROUND_RUNNING 审计
+
+- **改了什么**：
+  - **PLAY_AUDIO 链路冲突修复**（`Index.ets` + `EntryAbility.ets`，落 A22 审查结论）：
+    - `checkPendingAlertId` 读取 `autoPlay` 标志 → 传给 `playById(id, force)`
+    - `playById` 加 `force` 参数：小艺显式 PLAY_AUDIO（force=true）无视播报开关/免打扰；DETAIL_ALERT（force=false）仍受约束
+  - **xiaoYiQuery 死标志诚实标注**（`EntryAbility.ets`）：QUERY_ALERTS 设置的标志当前无消费方，注释如实标注「摘要返回机制待小艺 A2A 数据返回协议对接」，不假装已实现（K3 铁律一）
+- **为什么**：
+  - A22 审查发现：小艺显式 PLAY_AUDIO 指令被播报开关/免打扰静默拦截，违反"用户显式指令应无条件响应"的交互预期
+  - autoPlay 标志设置后无消费方，是"写了没人读"的死代码，误导后续开发者
+- **如何验证**：
+  - V1：代码走查——PLAY_AUDIO → autoPlay=true → checkPendingAlertId 读 force=true → playById 绕过 broadcastEnabled/dndActive 两个检查
+  - V2：DETAIL_ALERT → 无 autoPlay → force=false → 仍受两个检查约束（行为不变）
+- **遗留**：
+  1. xiaoYiQuery 的真正消费方（Index 回填小艺摘要）待小艺 A2A 数据返回协议对接
