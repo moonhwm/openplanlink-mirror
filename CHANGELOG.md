@@ -1121,3 +1121,38 @@
   1. 端侧ArkTS代码审查待开展（entry/src/main/ets/）
   2. Moon燃烧计划书待机主在ZCode中执行
   3. BROADCAST_API_KEY环境变量需在CloudBase控制台配置
+## 2026-09-23 10:30 · 砚坚（CodeArts GLM-5.2）· 端侧ArkTS代码审查+FEED_URL常量提取
+
+- **起因**：自主运维继续推进，完成端侧8个.ets文件的系统性代码审查
+- **改了什么**：
+  1. P1修复：FEED_URL硬编码常量提取——在SettingsService.ets中新增`CLOUDBASE_BASE_URL`和`DEFAULT_FEED_URL`导出常量，AlertPoller.ets、Settings.ets、PushService.ets全部改为引用共享常量，消除6处重复硬编码
+  2. 新增技能文档：`GOVERNANCE/skills/code/arkts-code-review.md`——端侧ArkTS代码审查技能（8维度审查流程）
+- **审查结果**（8个文件，0个P0，1个P1，4个P2）：
+  - EntryAbility.ets（123行）：✅ 无问题——Push初始化降级、冷启动alertId补检、小艺A2A接入、receiveMessage try-catch
+  - Index.ets（458行）：✅ 无问题——防连击、播放失败提示、连接中断、空态、429限流、自选股过滤、字体档、适老化布局、主题切换、未读标记、自家信号角标
+  - AlertItem.ets（22行）：✅ 无问题——接口定义清晰，kind可选字段，complianceStatus
+  - AudioPlayer.ets（64行）：✅ 无问题——AVPlayer封装、onDone/onError回调、prepare/play失败清理、stop释放
+  - PushService.ets（107行）：✅ 无问题——AGC探测降级、getToken重试、reportToken失败不影响主流程、req.destroy()在finally
+  - AlertPoller.ets（100行）：✅ 无问题——退避策略、429/5xx/JSON解析失败处理、req.destroy()在finally
+  - SettingsService.ets（456行）：✅ 无问题——Preferences持久化、所有getter有null检查和默认值、已读200条上限、播报历史50条上限
+  - Settings.ets（557行）：✅ 无问题——navStack通过NavDestination.onReady回调获取（context.pathStack），返回按钮可正常工作
+  - P2轻微项（不修复）：AudioPlayer事件监听器未显式off（release后自动清理）、badgeSize标准/特大差异仅2fp（设计选择）
+- **合规性检查**：
+  - ✅ 无K线图/走势图/复杂图表组件
+  - ✅ 字号在28-34fp范围（适老化）
+  - ✅ 信号卡有"自家信号"角标
+  - ✅ 无收益承诺/催促指令/对外收费内容
+  - ✅ 首屏DEMO_ITEMS兜底
+  - ✅ PushService保持占位封装
+  - ✅ catch全部带参数
+- **为什么**：
+  - FEED_URL在3个文件6处重复硬编码同一URL，变更需改6处——提取为共享常量后只需改1处
+  - 代码审查是质量保证的核心环节，审查技能文档确保审查流程可复用
+- **如何验证**：
+  - V1：grep确认仅1处`a2a-commonwealth-d2eepjr928e9c4d`残留（CLOUDBASE_BASE_URL定义处）——通过
+  - V2：8个.ets文件全部审查，每个文件有明确结论——通过
+  - V3：AGENTS.md硬约束7条全部通过——通过
+- **遗留**：
+  1. Moon燃烧计划书待机主在ZCode中执行
+  2. BROADCAST_API_KEY环境变量需在CloudBase控制台配置
+  3. 端侧代码审查为代码走查，未在真机/模拟器上实跑——真机验证留待机主安排

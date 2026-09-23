@@ -20,6 +20,12 @@ const KEY_FEED_URL = 'feed_url';          // 数据源地址，string（默认 C
 const KEY_READ_ALERTS = 'read_alerts';    // 已读异动ID列表，JSON string[]
 const KEY_PLAY_HISTORY = 'play_history';  // 播报历史，JSON Array<{alertId, ts}>
 
+/** CloudBase 云函数基础地址——所有端点共享同一域名 */
+export const CLOUDBASE_BASE_URL = 'https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com';
+
+/** 默认数据源地址（get-alerts 云函数 HTTP 端点） */
+export const DEFAULT_FEED_URL = `${CLOUDBASE_BASE_URL}/alerts`;
+
 /** 字体档枚举 */
 export type FontSizeLevel = 'standard' | 'large';
 
@@ -350,13 +356,13 @@ export class SettingsService {
 
   static async getFeedUrl(): Promise<string> {
     if (!SettingsService.pref) {
-      return 'https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com/alerts';
+      return DEFAULT_FEED_URL;
     }
     try {
-      return await SettingsService.pref.get(KEY_FEED_URL, 'https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com/alerts') as string;
+      return await SettingsService.pref.get(KEY_FEED_URL, DEFAULT_FEED_URL) as string;
     } catch (e) {
       hilog.warn(DOMAIN, TAG, `feed url read failed: ${(e as Error).message}`);
-      return 'https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com/alerts';
+      return DEFAULT_FEED_URL;
     }
   }
 

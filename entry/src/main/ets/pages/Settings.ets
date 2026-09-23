@@ -1,6 +1,6 @@
 
 import { hilog } from '@kit.PerformanceAnalysisKit';
-import { SettingsService, FontSizeLevel, ThemeMode, ThemeColors } from '../services/SettingsService';
+import { SettingsService, FontSizeLevel, ThemeMode, ThemeColors, DEFAULT_FEED_URL } from '../services/SettingsService';
 
 const TAG = 'StockPulse.Settings';
 const DOMAIN = 0x0001;
@@ -18,7 +18,7 @@ export struct Settings {
   @State dndStartHour: number = 22;
   @State dndEndHour: number = 8;
   @State newStockInput: string = '';
-  @State feedUrl: string = 'https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com/alerts';
+  @State feedUrl: string = DEFAULT_FEED_URL;
   private navStack: NavPathStack | null = null;
 
   // 字体档驱动字号
