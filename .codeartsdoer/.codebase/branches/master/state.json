@@ -3,8 +3,8 @@
   "schema": "docgen-state-v1",
   "branch": "master",
   "branch_raw": "master",
-  "version_token": 530,
-  "updated_at": "2026-09-23T04:22:06.719Z",
+  "version_token": 533,
+  "updated_at": "2026-09-23T04:28:49.526Z",
   "status": "watching",
   "last_doc_generated_at": "2026-09-22T11:28:42.959Z",
   "changed_files": [
@@ -1531,7 +1531,7 @@
     {
       "path": "CHANGELOG.md",
       "status": "modified",
-      "detected_at": "2026-09-23T04:22:05.119Z"
+      "detected_at": "2026-09-23T04:28:46.546Z"
     },
     {
       "path": "GOVERNANCE/DECISION_LEDGER_POINTER.md",
@@ -1611,37 +1611,37 @@
     {
       "path": "cloudfunctions/functions/broadcast-a2a/index.js",
       "status": "added",
-      "detected_at": "2026-09-23T03:14:01.907Z"
+      "detected_at": "2026-09-23T04:23:53.111Z"
     },
     {
       "path": "cloudfunctions/functions/fetch-tushare-data/hardcoded-names.js",
       "status": "added",
-      "detected_at": "2026-09-23T03:21:18.906Z"
+      "detected_at": "2026-09-23T04:23:53.136Z"
     },
     {
       "path": "cloudfunctions/functions/fetch-tushare-data/index.js",
       "status": "added",
-      "detected_at": "2026-09-23T03:23:18.967Z"
+      "detected_at": "2026-09-23T04:23:53.163Z"
     },
     {
       "path": "cloudfunctions/functions/generate-tts/index.js",
       "status": "added",
-      "detected_at": "2026-09-23T03:14:04.813Z"
+      "detected_at": "2026-09-23T04:23:52.987Z"
     },
     {
       "path": "cloudfunctions/functions/get-alerts/index.js",
       "status": "added",
-      "detected_at": "2026-09-23T03:14:50.140Z"
+      "detected_at": "2026-09-23T04:23:53.032Z"
     },
     {
       "path": "cloudfunctions/functions/init-db/index.js",
       "status": "added",
-      "detected_at": "2026-09-23T03:14:55.648Z"
+      "detected_at": "2026-09-23T04:23:53.060Z"
     },
     {
       "path": "cloudfunctions/functions/push-token-register/index.js",
       "status": "added",
-      "detected_at": "2026-09-23T03:14:52.863Z"
+      "detected_at": "2026-09-23T04:23:53.086Z"
     },
     {
       "path": "cloudfunctions/init-db/index.js",
@@ -4437,11 +4437,16 @@
       "path": "README.md",
       "status": "modified",
       "detected_at": "2026-09-23T04:20:49.479Z"
+    },
+    {
+      "path": "GOVERNANCE/proposals/ENV_VAR_CONFIG_GUIDE.md",
+      "status": "added",
+      "detected_at": "2026-09-23T04:27:12.756Z"
     }
   ],
   "summary": {
-    "total": 886,
-    "added": 881,
+    "total": 887,
+    "added": 882,
     "modified": 5,
     "removed": 0
   },

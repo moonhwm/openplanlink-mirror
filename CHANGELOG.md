@@ -1244,3 +1244,18 @@
 - **遗留**：
   1. 签名配置指南链接指向的skill文件待确认存在
   2. 部署文档为简要版，详细部署步骤待机主实操后补充
+## 2026-09-23 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· H7 环境变量审计+配置指南
+
+- **改了什么**：
+  - `GOVERNANCE/proposals/ENV_VAR_CONFIG_GUIDE.md`（新建）：云函数环境变量配置指南，含全量环境变量审计（21处process.env引用，6个云函数）、BROADCAST_API_KEY生成与配置步骤、生产环境配置清单、安全注意事项。
+  - 审计发现：A3 BROADCAST_API_KEY未在.env中配置（高危），A1 .env已在.gitignore中（安全），A4 HUAWEI_PUSH_*系列为空（AGC配置后填写）。
+- **为什么**：
+  - BROADCAST_API_KEY是broadcast-a2a鉴权的关键配置，原.env中缺失。环境变量审计确保所有云函数配置完整且一致。
+- **如何验证**：
+  - V1：grep确认21处process.env引用全部在审计清单中——通过
+  - V2：确认.env在.gitignore中未被git跟踪——通过
+  - V3：确认BROADCAST_API_KEY配置步骤可执行——通过
+- **遗留**：
+  1. BROADCAST_API_KEY需机主生成并配置到CloudBase控制台
+  2. HUAWEI_PUSH_*系列待AGC配置后填写
+  3. S2凭据金库加密方案待实施
