@@ -137,3 +137,28 @@ P2（排期）：
 ## 七、与 LLMRouter 方案的关系
 
 本报告 H1（合规 fail-open）是**接入双模型切换的强前置**：LLMRouter 生成的 signalNote 是 LLM 产物（非硬编码），合规检查必须 fail-closed 才能守住 AGENTS.md 三禁红线。建议在 `llm-router` 的 `compliance` 任务中直接复用本报告的 fail-closed 结论，将 DKnowC `Unsafe/Focus` 判定为硬拦截。
+---
+
+## 八、修复状态追踪（2026-09-23 更新）
+
+| 编号 | 级别 | 问题 | 修复状态 | 修复方式 | Git Commit |
+|------|------|------|----------|----------|------------|
+| H1 | 🔴 P0 | 合规 fail-open | ✅ 已修复 | non-compliant signal 卡降级为 fact + TTS 跳过降级卡 | `531c772` |
+| H2 | 🔴 P0 | 鉴权 fail-open | ✅ 已修复 | 未配 BROADCAST_API_KEY 时返回 503 拒绝 | `531c772` |
+| M1 | 🟠 P1 | 契约缺 signalNote | ✅ 已修复 | AlertItem.ets 补 `signalNote?: string` + Index.ets 显示 | `531c772` + `2fc7a80` |
+| M2 | 🟠 P1 | 凭据硬编码 fallback | ✅ 已修复 | BAILIAN_WORKSPACE_ID fallback 改空串 | `531c772` |
+| L1 | 🟡 P2 | 注释域名错误 | ✅ 已修复 | service→app.tcloudbase.com | `531c772` |
+| L1b | 🟡 P2 | CORS 旧域名 | ✅ 已修复 | allowedOrigins 域名修正 | `531c772` |
+| L2 | 🟡 P2 | absPct 字符串隐式比较 | ⏳ 待修复 | 功能正确，类型不严谨，低优先级 | — |
+| L3 | 🟡 P2 | push-token-register 无鉴权 | ✅ 已修复 | 加 ALLOWED_BUNDLE_NAMES 白名单 | `5e292e9` |
+| L4 | 🟡 P2 | PushService 超占位边界 | ✅ 已判定 | AGC 已配置，实装合理，不需回退 | `5e292e9` |
+| L5 | 🟡 P2 | init-db 缺 push_tokens | ✅ 已修复 | collections 补 push_tokens | `5e292e9` |
+
+**总计：9 项发现，8 项已修复/判定，1 项待修复（L2 低优先级）**
+
+### 端侧增强（审查外发现）
+- Index.ets 卡片流新增 signalNote 白话解读显示（金色字体，与 fact 卡区分）—— commit `2fc7a80`
+
+### 遗留
+- 端侧 HAP 未重新构建（中文路径 + build-profile.json5 配置 + 项目结构需升级，需 DevEco Studio 操作）
+- L2 absPct 类型改为 number（低优先级，功能正确）
