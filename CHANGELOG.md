@@ -1446,3 +1446,26 @@
 - **遗留**：
   1. 端侧 HAP 未重新构建（AlertItem.ets 的 signalNote 字段改动需 DevEco Studio 构建）
   2. 全量代码审查所有发现项已修复完毕（2 P0 + 2 P1 + 5 P2 = 9 项全部 closed）
+---
+
+## 2026-09-24 · 砚坚（码道·鸿蒙开发智能体/deepseek-v4-pro-0813）· 信号解读LLM落地方案 + 域名一致性修复 + 实盘准备核查
+
+- **改了什么**：
+  - 新增 `docs/llm-auto-switch/SIGNALNOTE_LLM_INTEGRATION.md`：signalNote 接入 LLMRouter 的完整落地方案（三级降级链 LLM→备选模型→硬编码模板、双重合规护栏 prompt自检+DKnowC fail-closed、部署形态抉择内嵌模块V1/独立云函数V2、成本控制仅signal卡触发/3s超时/同symbol缓存）
+  - `GOVERNANCE/skills/SELF_BUILT_INDEX.md` v3.1→v3.2：纳入 fail-open-fix + contract-sync-check 两个新技能
+  - 4 个 code 类技能文档域名一致性修复：`service.tcloudbase.com`（404废弃）→ `app.tcloudbase.com`（实际HTTP路由域名）
+    - arkts-cloud-function-pattern.md / arkts-network-wrapper.md / A17_getalerts云函数审查Clou.md（2处）/ A19_pushtokenregister云.md
+  - 端侧 Index.ets 卡片流新增 signalNote 白话解读显示（金色字体区分 fact 卡）
+- **为什么**：
+  - signalNote 目前硬编码（"留意后续走势/注意风险"两句固定话术），丧失信息量；LLM 落地方案在 H1 合规硬闸之上将其升级为动态白话解读
+  - 技能文档引用废弃域名违反 AGENTS.md §5.3 角色无关性 + skill-doc-format「以事实为准立即修订」原则
+- **实盘准备核查（正向结论）**：
+  - ✅ bundleName `com.yehang.stockpulse` 全局一致（app.json5 / PushService.ets / 云函数白名单 / AGC agconnect-services.json 的 package_name）
+  - ✅ `agconnect-services.json` 已 .gitignore 排除，凭据为 AGC 加密格式（`[!...]`），从未提交 git
+  - ✅ 端侧 CLOUDBASE_BASE_URL 已用新域名 `a2a-commonwealth-d2eepjr928e9c4d-1475054847.ap-shanghai.app.tcloudbase.com`
+- **如何验证**：
+  - V1：`grep -rl service.tcloudbase.com GOVERNANCE/skills/` 从 5 处降到 1 处（full-code-review.md 经验记录，作反面教材，正确保留）
+  - V2：端侧 SettingsService.ets L24 CLOUDBASE_BASE_URL 已确认新域名
+- **遗留**：
+  1. LLM 接入的真实 API 凭据（DEEPSEEK_API_KEY / PANGU_API_KEY）待机主注入
+  2. 端侧 HAP 构建（中文路径 + build-profile.json5 需 DevEco Studio 迁移）
