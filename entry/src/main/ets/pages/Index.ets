@@ -306,6 +306,25 @@ struct Index {
     return this.theme.textSecondary;
   }
 
+  /** 相对时间格式化：将秒级时间戳转为"刚刚/N分钟前/N小时前" */
+  private relTime(ts: number): string {
+    if (ts === 0) {
+      return '';
+    }
+    const now = Math.floor(Date.now() / 1000);
+    const diff = now - ts;
+    if (diff < 60) {
+      return '刚刚';
+    }
+    if (diff < 3600) {
+      return `${Math.floor(diff / 60)}分钟前`;
+    }
+    if (diff < 86400) {
+      return `${Math.floor(diff / 3600)}小时前`;
+    }
+    return `${Math.floor(diff / 86400)}天前`;
+  }
+
   private dirLabel(d: string): string {
     if (d === 'up') {
       return '涨';
@@ -411,6 +430,15 @@ struct Index {
                     .fontSize(this.headlineSize)
                     .fontColor(this.theme.textPrimary)
                     .width('100%')
+
+                  // 相对时间显示（适老化：让长辈知道这条异动是多久前的）
+                  if (item.ts > 0) {
+                    Text(this.relTime(item.ts))
+                      .fontSize(this.statusSize)
+                      .fontColor(this.theme.textSecondary)
+                      .width('100%')
+                      .margin({ top: 4 })
+                  }
 
                   // signal 卡的白话解读（仅 kind=signal 且 signalNote 有值时显示）
                   if (item.kind === 'signal' && item.signalNote && item.signalNote.length > 0) {

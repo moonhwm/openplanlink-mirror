@@ -139,6 +139,11 @@ export struct Settings {
   }
 
   private async saveFeedUrl(): Promise<void> {
+    // F-004修复：URL格式校验——必须以http://或https://开头
+    if (!this.feedUrl.startsWith('http://') && !this.feedUrl.startsWith('https://')) {
+      hilog.warn(DOMAIN, TAG, `feed url invalid format: ${this.feedUrl}`);
+      return;
+    }
     await SettingsService.setFeedUrl(this.feedUrl);
     hilog.info(DOMAIN, TAG, `feed url set to ${this.feedUrl}`);
   }
