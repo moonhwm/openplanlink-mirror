@@ -1547,3 +1547,38 @@
   1. LLM 接入真实 API 凭据待机主注入
   2. 签名配置待 AGC 证书材料
   3. 模拟器安装运行待 DevEco Studio 升级或手动启动
+---
+
+## 2026-09-24 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-SFT-Harmony）· 深化审查+A2A网络跟进+A组补件
+
+- **模型切换**：deepseek-v4-pro-0813 → GLM-5.2-SFT-Harmony（回归码道IDE原生模型）
+- **改了什么**：
+  - **云函数深化审查**（4个云函数）：
+    - generate-tts：QUOTA不持久化标注设计限制 + updateAlertAudioUrl并发写入标注风险注释
+    - get-alerts：审查通过，无问题
+    - push-token-register：添加action路由（getActiveTokens可通过callFunction调用）
+    - init-db：审查通过，无问题
+  - **端侧深度审查**（4个文件）：SettingsService.ets / PushService.ets / AlertItem.ets / Settings.ets——全部审查通过，无新问题
+  - **A2A网络跟进**：
+    - A2A_DISPATCH_AND_PLAN.md 遗留项状态更新（F-002/F-006/H1/H2/M1/M2/L2已修复，HAP构建突破记录）
+    - 检查燃烧协作函（守藏席→码道Agent，50项缺口燃料清单）
+  - **A组补件A11-A15**（5份审查文档）：
+    - A11：fetch-tushare-data数据源降级链fallbackMap审查
+    - A12：alertId传递链路审查（8环节+3条小艺action）
+    - A13：fetch-tushare-data并行与重试逻辑审查
+    - A14：broadcast-a2a云函数安全审查（fail-closed鉴权+CORS收敛）
+    - A15：合规fail-closed机制审查（DKnowC+TTS降级+三禁约束）
+  - 技能索引v3.2→v3.3（纳入5个新技能）
+- **为什么**：
+  - 云函数和端侧代码需要深度审查确保实盘前无隐患
+  - A2A计划书状态过时，多项已修复仍标记"待修复"
+  - A组补件是守藏席燃烧燃料清单中的高价值缺口
+- **如何验证**：
+  - V1：`git status` 确认工作区干净
+  - V2：A11-A15五份文档内容均取自源码分析，审查结论与实际代码一致
+  - V3：技能索引v3.3包含所有新技能
+- **遗留**：
+  1. LLM接入真实API凭据待机主注入
+  2. 签名配置待AGC证书材料
+  3. 模拟器安装运行待DevEco Studio升级或手动启动
+  4. F-004（Settings.ets FEED_URL加校验）待修复
