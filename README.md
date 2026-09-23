@@ -33,10 +33,16 @@ GOVERNANCE/                   治理文档体系（AGENTS.md/CHANGELOG/技能文
 
 ## 构建
 
-**本机构建**（DevEco Studio 6.0.2+，纯英文路径）：
+**本机构建**（DevEco Studio 6.0.2+，**纯英文路径必需**）：
+
+> ⚠️ hvigor 工具链不支持中文路径。项目当前位于 `C:\Users\欧阳宏俊\...`（含中文用户名），必须先迁移到纯英文路径再构建。详见 [hvigor 中文路径诊断技能](GOVERNANCE/skills/diag/hvigor-chinese-path.md)。
 
 ```bash
-# devecocli 构建（debug 模式）
+# 1. 复制项目到纯英文路径（排除缓存目录）
+robocopy <项目原路径> C:\dev\lingyu\harmony-app /E /XD node_modules oh_modules .hvigor .codeartsdoer
+
+# 2. 在英文路径下构建（debug 模式）
+cd C:\dev\lingyu\harmony-app
 devecocli build --build-mode debug
 # 产物：entry/build/default/outputs/default/entry-default-unsigned.hap
 ```
