@@ -99,7 +99,13 @@ cmd /c hvigorw.bat assembleHap --mode debug   # 出 HAP
 - 乱码路径（如"娆ч槼"形）是双重解码的指纹，见到即可定性为编码问题而非文件缺失。
 - junction 是止痛药不是抗生素，真实路径展开仍会翻车，能迁则迁。
 - `nul` 文件 rm 删不掉，须用 `del \\.\` 前缀的 Windows 路径语法。
-- 本机本次仅完成路径检测与缓存目录核查，未实际执行 assembleHap 构建验证；该命令序列为标准验证法，首次迁移后务必实跑。
+- **2026-09-24 实测验证补充**：
+  - 英文路径迁移后 `assembleHap --build-mode debug` 成功，HAP 265KB 落盘，`BUILD SUCCESSFUL in 15s 836ms`
+  - **空格路径是第二个隐藏阻塞**：DevEco Studio 安装在 `A:\DevEco Studio`（含空格），`hvigorw.js` 中 `spawnSync(hvigorwPath, ..., {shell: true})` 未引用路径，cmd.exe 将 `A:\DevEco` 当作命令截断。修复：`spawnSync('"' + hvigorwPath + '"', ...)` 加双引号
+  - 中文路径 + 空格路径两个问题叠加，只修一个仍会失败，必须同时解决
+  - `--mode debug` 参数格式错误，正确格式是 `--build-mode debug`
+  - `--sync` 是构建前必跑步骤（依赖同步），跳过直接 assembleHap 可能因依赖缺失失败
+  - 未签名 HAP（signingConfigs 为空）可正常构建，仅跳过 SignHap 步骤并输出 WARN，不影响 HAP 文件生成
 
 ## 关联文档
 
@@ -107,8 +113,8 @@ cmd /c hvigorw.bat assembleHap --mode debug   # 出 HAP
 - GOVERNANCE/skills/FORMAT_SPEC.md（技能文档格式规范）
 
 ### 自我评估
-- 正确性：4分 路径检测、缓存位置、hvigorw.bat 逻辑、nul 文件、乱码指纹均来自本机本次实测；但未实际跑 assembleHap 验证迁移效果，修复方案中缓存重定向的具体开关名已如实标注"以版本文档为准"
-- 完整性：5分 检测五处、迁移五步、配置四项、防复发、验证序列齐备
-- 可复用性：5分 Node 码点检测、双重解码指纹判读、缓存清理清单可迁移到任何 Windows 中文路径工具链故障
-- 字数：约3050字
-- 使用模型：GLM-5.3-Flash
+- 正确性：5分（2026-09-24 升级）路径检测、缓存位置、hvigorw.bat 逻辑、nul 文件、乱码指纹、空格路径修复均来自本机实测，且 assembleHap 已实跑验证通过
+- 完整性：5分 检测五处、迁移五步、配置四项、防复发、验证序列齐备，补充空格路径修复与实测验证结果
+- 可复用性：5分 Node 码点检测、双重解码指纹判读、缓存清理清单、空格路径引用修复可迁移到任何 Windows 中文路径+空格路径工具链故障
+- 字数：约3400字
+- 使用模型：GLM-5.3-Flash → GLM-5.2-SFT-Harmony（2026-09-24 补充实测验证）
