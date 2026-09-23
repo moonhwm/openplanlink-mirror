@@ -2,7 +2,7 @@
 
 > 编纂：砚坚（码道·鸿蒙开发智能体/deepseek-v4-pro-0813）
 > 日期：2026-09-24（v3.2更新）
-> 版本：v3.2
+> 版本：v3.3
 > 关联：外部技能索引见 SKILL_INDEX.md，格式规范见 FORMAT_SPEC.md
 
 ---
@@ -24,6 +24,11 @@
 | 9 | fetch-tushare-data云函数深度审查 | A35_fetchtusharedata云函数深度审查.md | 1.0.0 | 审查fetch-tushare-data云函数 |
 | 10 | 端侧性能优化审查 | A36_端侧性能优化审查.md | 1.0.0 | 端侧性能审查/优化 |
 | 11 | 命令行构建环境配置 | A38_命令行构建环境配置.md | 1.0.0 | 无devecocli环境下构建HAP |
+| 12 | fetch-tushare-data数据源降级链 | A11_fetchtusharedata数据源降级链fallbackMap审查.md | 1.0.0 | 审查数据源降级/fallbackMap |
+| 13 | alertId传递链路审查 | A12_alertId传递链路审查.md | 1.0.0 | 审查alertId推送→拉起→播报全链路 |
+| 14 | fetch-tushare-data并行与重试 | A13_fetchtusharedata并行与重试逻辑审查.md | 1.0.0 | 审查并行请求/重试/TTS顺序执行 |
+| 15 | broadcast-a2a安全审查 | A14_broadcasta2a云函数安全审查.md | 1.0.0 | 审查鉴权/CORS/凭据/SDK单例 |
+| 16 | 合规fail-closed机制审查 | A15_合规failclosed机制审查.md | 1.0.0 | 审查DKnowC合规/TTS降级/三禁约束 |
 
 ### collab类（协作技能）
 
