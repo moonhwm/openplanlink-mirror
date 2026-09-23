@@ -1,24 +1,35 @@
-# code技能：ArkTS云函数开发模式
+# code技能：ArkTS云函数开发模式——requestHttps封装、CloudBase单例、错误降级链
 
 > 编写时间：2026-09-23
-> 编写席位：砚坚（CodeArts GLM-5.2-sft-harmony）
-> 适用场景：harmony-app项目中所有CloudBase云函数的开发与维护
+> 编写席位：Moon席位批次写手-B组-1号（GLM-5.3-Flash）
+> 适用范围：harmony-app（铃语）项目 `cloudfunctions/functions/` 下全部 CloudBase 云函数的编写、审查与重构
+> 前置事实：本文所有代码引用均来自仓库现网文件，路径可直接定位；无源码支撑处会显式标注"规划"。
 
-## 1. requestHttps统一封装规范
+## 0. 项目背景与硬约束（自包含说明）
 
-### 问题背景
-Node.js 18.15的实验性`fetch`存在已知缺陷（如name字段返回代码而非名称），云函数中不应使用`fetch`。应统一使用`https`模块封装的`requestHttps`。
+铃语是鸿蒙适老化股票异动播报应用，架构为「纯ArkTS端侧 + CloudBase云函数服务端」。端侧 `Index.ets` 以 5 秒前台轮询（`entry/src/main/ets/services/AlertPoller.ets`）拉取 `FEED_URL`，契约即 `AlertFeed`（`entry/src/main/ets/model/AlertItem.ets:19-22`）。数据源地址默认指向 CloudBase 云函数 HTTP 端点：`DEFAULT_FEED_URL = ${CLOUDBASE_BASE_URL}/alerts`（`entry/src/main/ets/services/SettingsService.ets:27`），基础域名为 `https://a2a-commonwealth-d2eepjr928e9c4d-1475054847.ap-shanghai.app.tcloudbase.com`（同文件 24 行）。
 
-### 标准封装代码
+云函数承担四类职责：行情拉取（`fetch-tushare-data`）、异动聚合（`get-alerts`）、TTS 生成（`generate-tts`）、推送广播（`broadcast-a2a`），另含 `push-token-register`、`init-db`。已知问题须内化进设计：Tushare token 失效（错误码 40101）已降级东方财富 API；百炼 TTS 只支持 WebSocket（`cloudfunctions/functions/generate-tts/index.js:6,16`）；`broadcast-a2a` 的 Push 通道需换华为 Push Kit REST；`alerts.json` 中 `audioUrl` 为 undefined 时由端侧按需调 `generate-tts`。
+
+合规红线（云函数同样适用）：不承诺收益/保本、不输出催促性指令、不涉对外公开/收费、不泄露任何 Token/密钥。
+
+## 1. requestHttps 统一封装规范
+
+### 1.1 为什么禁用 fetch
+
+CloudBase Node 运行时的 `fetch` 属实验性实现，存在字段行为不一致、超时不可控、无法精细监听流式错误等缺陷。云函数的执行计费与总超时是硬边界，网络请求必须自带超时与错误语义。因此规定：**云函数内一律使用 Node 内置 `https` 模块封装的 `requestHttps`，禁止直接调用 `fetch()`**。
+
+### 1.2 标准实现（逐段讲解）
 
 ```javascript
+// 云函数内通用 HTTPS 请求封装（返回 Promise<object>）
 function requestHttps(url, options = {}) {
   return new Promise((resolve, reject) => {
     const https = require('https');
     const urlObj = new URL(url);
     const reqOptions = {
       hostname: urlObj.hostname,
-      path: urlObj.pathname + urlObj.search,
+      path: urlObj.pathname + urlObj.search,   // 显式拼接查询串
       method: options.method || 'GET',
       headers: options.headers || {},
     };
@@ -29,10 +40,11 @@ function requestHttps(url, options = {}) {
         try { resolve(JSON.parse(body)); }
         catch (e) { reject(new Error(`JSON parse failed: ${e.message}`)); }
       });
+      res.on('error', reject);                 // 响应流本身的错误也要接住
     });
-    req.on('error', reject);
+    req.on('error', reject);                   // 只监听真实存在的 'error' 事件
     req.setTimeout(options.timeout || 15000, () => {
-      req.destroy(new Error('Request timeout'));
+      req.destroy(new Error('Request timeout')); // destroy(err) 会触发上面的 error 回调
     });
     if (options.body) req.write(options.body);
     req.end();
@@ -40,7 +52,14 @@ function requestHttps(url, options = {}) {
 }
 ```
 
-### 带重试的版本
+四个易错点，审查时逐条核对：
+
+1. **事件名必须是 `'error'`**。历史文档曾出现 `req.on('error+timeout', reject)` 这种写法，Node 没有该事件名，监听形同虚设，超时会静默漏掉。超时走 `setTimeout` 回调里 `req.destroy(new Error(...))`，销毁错误会转发到 `error` 处理器统一 reject。
+2. **超时默认 15 秒**，且每个调用点可覆盖（见 1.4 超时表）。云函数总执行时长有限，单请求超时必须小于函数总预算。
+3. **JSON 解析失败按异常处理**，不允许把半截 JSON 当有效数据继续走。端侧对解析失败同样按失败计并记原文前 200 字符（`AlertPoller.ets:67-71`），两端语义对齐。
+4. **`res.on('error')` 不可省**。请求建立后响应流仍可能中断，只挂 `req.on('error')` 会漏接这类失败。
+
+### 1.3 带重试的版本（指数退避）
 
 ```javascript
 async function requestHttpsRetry(url, options = {}, maxRetries = 2) {
@@ -49,27 +68,36 @@ async function requestHttpsRetry(url, options = {}, maxRetries = 2) {
       return await requestHttps(url, options);
     } catch (e) {
       if (attempt === maxRetries) throw e;
-      const delay = 500 * Math.pow(2, attempt);
+      const delay = 500 * Math.pow(2, attempt);   // 500ms → 1s → 2s
+      console.log(`retry ${attempt + 1}/${maxRetries} in ${delay}ms: ${e.message}`);
       await new Promise(r => setTimeout(r, delay));
     }
   }
 }
 ```
 
-### 使用规则
-- **禁止**在云函数中使用`fetch()`（实验性API）
-- **必须**使用`requestHttps`或`requestHttpsRetry`发起所有HTTPS请求
-- **必须**为每个请求设置`timeout`（默认15秒）
-- **推荐**对外部API调用使用`requestHttpsRetry`（最多2次重试，指数退避）
+重试纪律：**只对幂等的读请求重试**（行情查询、名称映射、日历）；写操作与推送类请求默认不重试，防止重复副作用；4xx 业务错误（如鉴权失败）不该靠重试解决，40101 类 token 失效要走降级链而非重试轰炸。
 
-## 2. CloudBase SDK单例模式
+### 1.4 超时基准表
 
-### 问题背景
-`cloudbase.init()`每次调用都创建新的SDK实例，消耗资源且可能导致连接泄漏。在单个云函数中多处调用`init`会造成严重的性能问题。
+| 调用对象 | 超时 | 重试 | 理由 |
+| --- | --- | --- | --- |
+| Tushare 日线接口 | 15s | 最多2次 | 数据量中等，主数据源 |
+| 东方财富分页列表 | 15s | 最多2次 | 每页100条，是降级主力（`fetch-tushare-data/index.js:100`） |
+| 百炼 TTS WebSocket | 15s | 不重试 | 长连接另见 generate-tts 内部超时与"部分音频"兜底（`index.js:202,296`） |
+| 华为 Push OAuth/发送 | 10s | 不重试 | 认证与下发需快速失败，由 broadcast 层面另行补偿 |
+| 合规检查类旁路 | 10s | 不重试 | 非阻塞流程，超时可跳过 |
 
-### 标准单例代码
+## 2. CloudBase SDK 单例模式
+
+### 2.1 问题
+
+`@cloudbase/node-sdk` 的 `cloudbase.init()` 每调用一次就创建一个新实例。云函数实例是跨调用复用的（实例暖存期间 module 作用域存活），若在 handler 体内反复 `init`，会叠加连接与初始化开销，极端情况下拖垮函数执行时长。
+
+### 2.2 标准单例
 
 ```javascript
+// 模块级缓存：同一云函数实例内只 init 一次
 let _cloudbaseApp = null;
 function getCloudbaseApp() {
   if (!_cloudbaseApp) {
@@ -82,91 +110,99 @@ function getCloudbaseApp() {
 }
 ```
 
-### 使用规则
-- **禁止**在函数体内直接调用`cloudbase.init()`
-- **必须**通过`getCloudbaseApp()`获取SDK实例
-- **每个云函数**都需要自己的`getCloudbaseApp()`定义（云函数间不共享模块作用域）
+使用规则：
+
+- **禁止**在 handler 函数体内直接调用 `cloudbase.init()`；
+- **必须**通过 `getCloudbaseApp()` 取实例；数据库、存储、云调用一律经该实例发起；
+- **每个云函数各自持有一份**该定义——云函数之间不共享 module 作用域，不要幻想抽一个公共文件就全局单例；
+- 环境变量 `TCB_ENV` 优先，缺省回退到项目实际环境 ID（该 ID 已出现在端侧 `SettingsService.ets:24` 的域名里，不属于密钥）；
+- 冷启动时首次调用会付出 init 成本，属预期；不要为了"预热"在模块顶层就 init 并阻塞加载，惰性获取即可。
+
+### 2.3 存储访问注意
+
+经单例访问 CloudBase 存储（如 `alerts.json`、股票名称缓存）时，读到的内容要按"不可信外部数据"处理：JSON 解析包 try-catch，结构字段逐一判空。写回时必须带并发保护（见第 4 节）。
 
 ## 3. 错误降级链设计
 
-### 设计原则
-云函数中的每个外部依赖都可能失败，必须设计多层降级链确保核心功能可用。
+### 3.1 设计原则
 
-### 降级链模板
-
-```
-主数据源 → 降级源1 → 降级源2 → 硬编码fallback → 空值兜底
-```
-
-### fetch-tushare-data中的降级链实例
+云函数每个外部依赖都可能失败，核心功能（端侧能拿到一份可解释的异动列表）必须活到最后。降级链模板：
 
 ```
-股票名称映射降级链：
-内存缓存(24h TTL) → CloudBase存储缓存(24h TTL) → 东方财富API → 过期存储缓存 → 硬编码5560条 → 空 Map
-
-交易日降级链：
-内存缓存(1h TTL) → Tushare trade_cal API → 当前日期推算(工作日/最近周五)
-
-数据源降级链：
-Tushare daily API → 东方财富行情API（待实现）→ DEMO_ITEMS演示数据
+主数据源 → 降级源1 → 降级源2 → 过期缓存 → 硬编码兜底 → 有效空值
 ```
 
-### 降级链设计规则
-1. 每层降级必须**不阻塞**后续尝试（失败后继续尝试下一层）
-2. 每层降级必须有**独立的try-catch**
-3. 降级到硬编码数据时必须**日志标注**（`console.log('Using hardcoded fallback')`）
-4. 最终兜底必须返回**有效空值**（空数组/空Map），不能返回null/undefined
+四条硬规则：
 
-## 4. 并发写入保护
+1. **每层独立 try-catch**，一层失败只影响自己，不允许异常冒泡中断整条链；
+2. **失败即落下一层**，不做无谓等待（除非该层自带短超时）；
+3. **每次降级必须留日志**，例如 `console.log('tushare degraded to eastmoney')`——没有日志的降级等于线上黑箱；
+4. **终点必须是"有效空值"**（空数组/空 Map/空对象），禁止把 null/undefined 抛给端侧，端侧 `AlertPoller` 对畸形数据只能整轮作废（`AlertPoller.ets:64-72`）。
 
-### 问题背景
-多个云函数实例可能同时写入同一个CloudBase存储文件（如alerts.json），导致数据覆盖。
+### 3.2 本项目现网降级链实例
 
-### 标准保护代码
+**行情数据源链**：Tushare `daily` 接口 →（40101 token 失效或网络异常）→ 东方财富行情 API（现网 `fetch-tushare-data/index.js:100` 的分页拉取、272 行 `source: 'eastmoney'` 标记）→ 端侧演示卡兜底（`Index.ets:13-23` 的 `DEMO_ITEMS`，首屏永不空白约束的最后一环）。
+
+**股票名称映射链**：内存缓存（24h TTL）→ CloudBase 存储缓存（24h TTL）→ 东方财富 API → 过期存储缓存（聊胜于无）→ 硬编码映射 → 空 Map。名称缺失时 headline 退化为纯代码展示，不能因名字缺失丢弃异动。
+
+**交易日历链**：内存缓存（1h TTL）→ Tushare `trade_cal` → 本地日期推算（工作日/最近周五）。判断"今天是否开市"是轮询前置闸门，这条链保证它永不阻塞。
+
+**TTS 链**：百炼 WebSocket 正常合成 → 超时/异常时若已收到部分分片则用"部分音频"拼装（`generate-tts/index.js:296`）→ 端侧按需重调；`alerts.json` 里 `audioUrl` 为 undefined 时，端侧按需调 `generate-tts` 补齐，卡片上无播报钮即静默无音频。
+
+### 3.3 降级链的端侧镜像
+
+服务端降级与端侧降级要成对设计：端侧 `refresh()` 在 `ok=false` 时**保持当前数据不清空**，连续 2 次失败才置 `connectionBroken` 提示"连接中断，显示旧数据"（`Index.ets:194-198`）；429 限流静默跳过不惊动用户（`AlertPoller.ets:44-49`）。云函数在高压时返回 429 是合法的降级信号，不要把它当故障报警。
+
+## 4. 并发写入保护与确定性 ID
+
+### 4.1 多实例写同一文件的防覆盖
+
+云函数水平扩出多实例同时写 `alerts.json` 时会互相覆盖。防覆盖两板斧：
 
 ```javascript
-// 检查 serverTs：如果现有数据比当前数据更新，跳过写入
+// 其一：serverTs 新鲜度检查——存量比增量还新就放弃写入
 const currentLatestTs = alerts.length > 0 ? Math.max(...alerts.map(a => a.ts)) : 0;
 if (existingServerTs > currentLatestTs) {
-  console.log(`Skip write: existing serverTs=${existingServerTs} > current latestTs=${currentLatestTs}`);
+  console.log(`skip write: existing serverTs=${existingServerTs} > latest=${currentLatestTs}`);
   return;
 }
 ```
 
-### 去重合并策略
-
 ```javascript
-// 按 alertId 去重合并
+// 其二：按 alertId 去重合并，新盖旧，截断保留最新500条
 const alertMap = new Map();
-for (const item of existingItems) {
-  alertMap.set(item.alertId, item);
-}
-for (const alert of alerts) {
-  alertMap.set(alert.alertId, alert); // 新数据覆盖同ID旧数据
-}
-// 保留最新500条
-const allItems = Array.from(alertMap.values())
-  .sort((a, b) => b.ts - a.ts)
-  .slice(0, 500);
+for (const item of existingItems) alertMap.set(item.alertId, item);
+for (const a of alerts) alertMap.set(a.alertId, a);
+const merged = Array.from(alertMap.values()).sort((a, b) => b.ts - a.ts).slice(0, 500);
 ```
 
-## 5. 确定性ID生成
+### 4.2 确定性 ID
 
-### 问题背景
-使用`Math.random()`生成ID有碰撞风险，在去重场景中可能导致数据丢失。
+- ID 由业务关键字段拼出，如 `${symbol}_${ts}`——同一股票同一秒天然唯一；
+- **禁止** `Math.random()` 参与 ID 生成：碰撞会导致去重时丢数据，且不可复现、不可排查；
+- ID 保持人类可读，日志里一眼定位。
 
-### 标准方案
+## 5. 出口契约、日志与密钥安全
 
-```javascript
-// 确定性alertId：同一股票同一秒只生成一条alert
-alertId: `${symbol}_${now}`,
-```
+1. **响应形状统一**：`{ code, message, data }` 或与端侧约定的 `AlertFeed` 原形（`items` + `serverTs`），错误码枚举固化进文档，禁止随手发明；
+2. **Token 脱敏**：错误信息拼装前先替换，现网范式 `const safeMsg = (data.msg || '').replace(TUSHARE_TOKEN, '***')`（`fetch-tushare-data/index.js:161`）；日志只允许打 `token: TUSHARE_TOKEN ? 'set' : 'not set'`（616 行），密钥本体与 `e.stack`（可能带环境变量路径）一律不打；
+3. **密钥只走环境变量**：`process.env.TUSHARE_TOKEN`（`index.js:20`），缺失时返回明确错误（618-621 行的 `TUSHARE_TOKEN not configured`），不要硬编码兜底密钥；
+4. **输入校验**：外部 API 返回逐条验形，股票代码必须 `/^\d{6}$/`，名称非空且长度合理，不合规条目直接丢弃而不是带病入库。
 
-### 规则
-- ID必须由**业务关键字段**组合生成（symbol + timestamp）
-- **禁止**使用`Math.random()`作为ID组成部分
-- ID格式应**人类可读**，便于调试
+## 6. 审查清单（云函数合入前过一遍）
 
----
+- [ ] 全部 HTTPS 请求走 `requestHttps`/`requestHttpsRetry`，无 `fetch`；
+- [ ] 每个请求显式设置超时，且小于函数总执行预算；
+- [ ] `req.on('error')` 与 `res.on('error')` 均已挂载，超时用 `destroy(err)` 收口；
+- [ ] CloudBase 实例经 `getCloudbaseApp()` 获取，handler 内无裸 `init()`；
+- [ ] 每个外部依赖都有降级路径，降级发生时有日志，终点是有效空值；
+- [ ] 共享文件写入有 serverTs 检查或去重合并，ID 为确定性生成；
+- [ ] 日志无 Token/密钥/完整 stack；外部数据入库前已验形；
+- [ ] 429/5xx 语义与端侧 `PollResult`（`AlertPoller.ets:10-14`）约定一致。
 
-*本技能文档由砚坚席位于2026-09-23编写，基于fetch-tushare-data云函数的P0/P1修复实战经验提炼。*
+### 自我评估
+- 正确性：4分 核心范式取自现网 `fetch-tushare-data/index.js` 与端侧源码并逐处标注行号；修正了历史文档中 `error+timeout` 伪事件写法，该修正是依据 Node 事件语义判断的，未在本环境运行 Node 验证。
+- 完整性：4分 三大主题（requestHttps/单例/降级链）均展开到代码级，另覆盖并发保护、确定性ID、日志安全与清单；generate-tts 的 WebSocket 细节仅引用未展开（属另篇范围）。
+- 可复用性：4分 封装代码可直接粘贴进新云函数，超时表与审查清单可直接作为 CR 模板；单例需每函数复制一份的约束已显式说明。
+- 字数：约3100字
+- 使用模型：GLM-5.3-Flash

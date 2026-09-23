@@ -6,7 +6,7 @@
 
 审查对象：`cloudfunctions/functions/get-alerts/index.js`（76 行，全文通读）与同目录 package.json（仅依赖 `@cloudbase/node-sdk ^3.0.0`）。参照物：部署配置 `cloudfunctions/cloudbaserc.json`（get-alerts 段：Nodejs18.15，timeout 10 秒，无环境变量）；端侧消费方 `entry/src/main/ets/services/AlertPoller.ets`（100 行）与数据契约 `entry/src/main/ets/model/AlertItem.ets`；写入方 `cloudfunctions/functions/fetch-tushare-data/index.js`。
 
-函数职责一句话：Event 函数 + CloudBase HTTP 访问服务（`--path /alerts`，文件头注释 15-16 行），每次请求从云存储下载 `alerts/alerts.json`，按 ts 降序取前 limit 条，返回 `{items, serverTs}`。它是端侧 5 秒轮询的唯一数据出口（AlertPoller.ets:10 默认地址 `https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com/alerts`，可被 SettingsService.getFeedUrl 覆盖，SettingsService.ets:351-356），是全应用"首屏永不空白"链条的第一环。契约与 `AlertItem.ets:19-22` 的 `AlertFeed{items,serverTs}` 完全一致。
+函数职责一句话：Event 函数 + CloudBase HTTP 访问服务（`--path /alerts`，文件头注释 15-16 行），每次请求从云存储下载 `alerts/alerts.json`，按 ts 降序取前 limit 条，返回 `{items, serverTs}`。它是端侧 5 秒轮询的唯一数据出口（AlertPoller.ets:10 默认地址 `https://a2a-commonwealth-d2eepjr928e9c4d-1475054847.ap-shanghai.app.tcloudbase.com/alerts`，可被 SettingsService.getFeedUrl 覆盖，SettingsService.ets:351-356），是全应用"首屏永不空白"链条的第一环。契约与 `AlertItem.ets:19-22` 的 `AlertFeed{items,serverTs}` 完全一致。
 
 ## 二、读取链路审查
 
@@ -143,7 +143,7 @@ limit 解析（index.js:58-61）已做 Math.min(…,100) 上限保护且容忍 q
 
 ## 十一、HTTP 触发形态的两个施工注意点
 
-其一，**5xx 映射必须先验证**：P0 第一项落地后，临时加一个 force_error 测试分支，用 `curl -i "https://{env}.service.tcloudbase.com/alerts?force_error=1"` 看函数抛错时 HTTP 访问服务回什么状态码；若平台把函数异常统一映射为 200 加错误体（以实测为准），"抛错"路线不成立，必须改走 degraded 字段路线——这是两条 P0 路线的分岔点，施工第一天就要定，不能等联调时才发现。其二，Event 函数形态下响应头不可控（加不了 Cache-Control），若未来确需 HTTP 层缓存，唯一路径是迁移为 Web 函数模式（参照 broadcast-a2a/index.js:258-293 的 http.createServer 形态）；迁移成本可控但收益有限，除非限流与缓存压力实测顶不住，否则不做。
+其一，**5xx 映射必须先验证**：P0 第一项落地后，临时加一个 force_error 测试分支，用 `curl -i "https://{env}.app.tcloudbase.com/alerts?force_error=1"` 看函数抛错时 HTTP 访问服务回什么状态码；若平台把函数异常统一映射为 200 加错误体（以实测为准），"抛错"路线不成立，必须改走 degraded 字段路线——这是两条 P0 路线的分岔点，施工第一天就要定，不能等联调时才发现。其二，Event 函数形态下响应头不可控（加不了 Cache-Control），若未来确需 HTTP 层缓存，唯一路径是迁移为 Web 函数模式（参照 broadcast-a2a/index.js:258-293 的 http.createServer 形态）；迁移成本可控但收益有限，除非限流与缓存压力实测顶不住，否则不做。
 
 ## 十二、端侧联动改造清单（AlertPoller 侧）
 
@@ -156,6 +156,40 @@ get-alerts:26-51 与 broadcast-a2a:27-48 是近乎逐行相同的两份 getLates
 ## 十四、limit 与请求面安全
 
 现有 limit 上限 100（index.js:58-61）已防住巨值参数。剩余的请求面风险是无鉴权下任意频次全量拉取：方案A 的 since 与内存缓存落地后，不带 since 的高频请求仍会每次穿透缓存打 downloadFile，因此 6.2 的限流不是可选项，而是方案A 的配套项——按预期设备数的两倍配 QPS 上限（估算 5-10 QPS 起步），超限 429 由端侧既有分支静默承接。建议对 limit>20 的请求单独设更低限流档位，把容量倾斜给默认轮询流量；同时拒绝带未知查询参数组合的重放请求可暂不做（收益低），优先保住带宽大头。
+
+## 十五、与首屏永不空白约束的配合语义
+
+共享约束"服务未连通显示带示例字样演示卡"在本函数视角的精确语义：演示卡是**端侧**状态，服务端永远不应该产出演示数据。四种服务端形态与端侧呈现的对应关系——200+有数据：正常卡片流；200+空 items（真实无异动或文件缺失）：端侧应呈现"暂无异动"的空态而非演示卡（此时服务是连通的，演示卡只在未连通时出现，这个区分目前依赖端侧对 ok 的判定，AlertPoller.ets:12-17 的注释已定义该语义）；5xx/网络异常：ok=false，退避+按约束显示演示卡；429：ok=false 但静默（rateLimited 标记，AlertPoller.ets:51）。要害在于第二种：本篇第五节指出"故障被伪装成空 items"后，端侧会把故障态误判为连通态——**演示卡契约的失守不是端侧代码的错，而是服务端把两种语义压成了一个返回**。这就是 P0 显式化在产品层的意义：它不只关乎日志好看，直接决定适老化用户看到的是"今天没有异动"还是"服务出问题了正在重试"。
+
+## 十六、方案对比总表（三方案横向对照）
+
+| 维度 | A：增量协议 | B：实例缓存 | C：集合化 |
+|---|---|---|---|
+| 改动面 | 云函数出口+端侧拼参（两处小改） | 仅云函数内部（一处） | 三函数+数据迁移（大） |
+| 流量收益 | 无更新轮询降到百字节级 | 同实例合并下载，约一个数量级 | 读取量=limit 条，彻底消除放大 |
+| 生效周期 | 端侧发版后全量生效 | 部署即生效 | 二期窗口 |
+| 风险 | 端云两侧需同批上线（兼容性已论证安全） | 实例间短暂不一致（TTL 内） | 迁移期双写/双读复杂度 |
+| 依赖 | 需 serverTs 改为数据水位（P0） | 无 | 依赖 A18 集合与索引就绪 |
+
+落地建议重申：B 先行（部署即收益、零风险），A 跟进（端侧可发版时同批上），C 作为二期治本与 A16/A18/A20 的同类项合并施工。单做 B 不做 A 时收益有限（实例冷启动即失效），单做 A 不做 B 时高频穿透仍在——两者是互补关系而非替代关系，表里看不出的是这个组合逻辑，文字说明补上。
+
+## 十七、轮询节奏与服务端节拍的错位分析
+
+上游 fetch-tushare-data 按定时器节拍写入（交易日日频量级，非秒级），端侧却按 5 秒节奏轮询——两个节拍差着数量级，意味着 5 秒轮询的绝大多数请求注定扑空。这个错位不是缺陷而是设计（推送未通时轮询是唯一实时性来源），但它量化了 A/B 两方案的价值上限：两次写入之间的全部轮询理论上都可被 A 方案压成空响应、被 B 方案合并成一次下载。进一步的方向（记录不实施）：若未来 X 服务器落地、FEED_URL 切换到真正的秒级监测源（共享上下文"数据源 FEED_URL 待 X 服务器落地"），轮询节奏与服务端节拍差距收窄，A 方案收益同步收窄，届时评估升级为长连接或推送为主的模式——但那是换数据源的事，与本函数当前形态无关，本篇不展开。
+
+## 十八、响应体契约字段表
+
+把返回体的每个字段讲清楚，作为端云两侧共同的接口文档（现状字段 + 方案落地后新增字段，新增者标注）：
+
+| 字段 | 类型 | 语义 | 备注 |
+|---|---|---|---|
+| items | AlertItem[] | 按 ts 降序的最新异动 | 空数组语义见第十五节四形态 |
+| serverTs | number | 秒级时间戳 | **现状为 Date.now()（index.js:67），必须改为数据水位**（P0）；端侧拿它做 since 增量基准 |
+| changed | boolean | 本次是否有新条目 | 方案A 新增；false 时端侧跳过 diff |
+| degraded | boolean | 读失败降级标记 | 五节新增；true 时端侧按故障退避不弹提示 |
+| source | string | 数据来源：file/memory/backup | 可观测性用（第十节），端侧可忽略 |
+
+AlertItem 各字段（alertId/ts/symbol/name/direction/kind/headline/detail/audioUrl/complianceStatus）的契约由 AlertItem.ets:6-17 唯一定义，本函数不增删不改——**服务端是契约的搬运工不是定义者**，这是端云协作的第一纪律。历史上最容易出的偏差是服务端私自给 item 加字段或改字段名，端侧 ArkTS 接口是编译期检查不了的（JSON.parse 直转），运行时才炸——所以字段表要放进评审清单：任何对本表的改动必须端云两侧同评审。
 
 ### 自我评估
 - 正确性：4分 全部结论有行号证据；"失败伪装成无异动"与"serverTs 不能当水位"两处为源码直读所得的关键发现；下载放大比标注为估算。

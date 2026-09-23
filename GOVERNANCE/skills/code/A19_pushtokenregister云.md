@@ -6,7 +6,7 @@
 
 审查对象：`cloudfunctions/functions/push-token-register/index.js`（95 行，全文通读）与同目录 package.json（仅依赖 `@cloudbase/node-sdk ^3.0.0`）。参照物：部署配置 `cloudfunctions/cloudbaserc.json`（push-token-register 段：Nodejs18.15、timeout 10 秒、无环境变量）；端侧唯一调用方 `entry/src/main/ets/services/PushService.ets`（107 行）；下游消费方 `cloudfunctions/functions/broadcast-a2a/index.js`（293 行）；建库方 `cloudfunctions/functions/init-db/index.js`。
 
-端侧契约（PushService.ets:11、80-86）：POST 到 `https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com/push-token-register`，`Content-Type: application/json`，body 为 `{ token, bundleName: 'com.yehang.stockpulse' }`。超时 connect/read 各 5000ms，失败仅记日志不影响主流程（PushService.ets:77-97）。云函数头注释（index.js:9-12）声明同一契约，两侧一致。
+端侧契约（PushService.ets:11、80-86）：POST 到 `https://a2a-commonwealth-d2eepjr928e9c4d-1475054847.ap-shanghai.app.tcloudbase.com/push-token-register`，`Content-Type: application/json`，body 为 `{ token, bundleName: 'com.yehang.stockpulse' }`。超时 connect/read 各 5000ms，失败仅记日志不影响主流程（PushService.ets:77-97）。云函数头注释（index.js:9-12）声明同一契约，两侧一致。
 
 ## 二、注册流程审查
 
@@ -97,6 +97,57 @@ index.js:58-67 定义并第 95 行导出 `getActiveTokens`，注释称"供 broad
 ## 八、未实测项
 
 未做：云端实调（无测试设备 token，无法验证注册-推送全链路）；华为 Push Kit 失效错误码的具体码表（"推送失败回写 inactive"的匹配规则需按官方文档施工，本文只定机制不定码表）；node-sdk doc().set 的 upsert 支持形态（方案A 施工时以官方文档为准，方案B 为保底路径）。以上均如实标注，未作为已验证结论。
+
+## 九、注册流程状态机（含规划态）
+
+把 token 的生命周期画成显式状态机，避免更新机制散落各处后无人看得全貌：
+
+```
+[未注册] --端侧冷启动上报--> [active] --推送失败(失效类错误码)--> [inactive]
+[active] --90天未上报(清理任务)--> [inactive]
+[active] --端侧重复上报--> [active](仅刷lastReportTs，幂等短路)
+[inactive] --同token再次上报--> [active](复活：重装后华为可能发同一token)
+```
+
+现状只实现了第一条边和第三条边的一半（更新路径，index.js:31-40）；第二条、第四条是第四节列的欠账；第五条复活边是唯一有坑的：如果清理任务已把 token 置 inactive，之后同一 token 重新上报（华为 token 有跨重装复用的可能，以官方文档为准），现有"重复路径"只刷 lastReportTs 而不动 active（index.js:34-37），复活边断死——设备永远收不到推送。修复：重复路径的 update 里加 `active: true` 一并回写。一行改动，堵住状态机的死胡同。
+
+## 十、验收标准（与第七节清单一一对应）
+
+- **P0-建集合**：listCollections 输出含 push_tokens；全新环境下端侧冷启动后日志出现 `Token registered`（index.js:50 的成功分支）。
+- **P0-白名单+格式**：bundleName 传 `com.other.app` 返回明确错误；token 传 `abc`（过短）被拒；正常端侧上报仍成功。
+- **P1-唯一索引+upsert**：并发 20 次同 token 上报后集合中该 token 恰好 1 个文档；随后上报返回 action='updated' 而非 created。
+- **P1-失效回收**：人为写入一个失效 token 并触发 broadcast-a2a，推送返回失效错误码后该文档 active 变为 false，且下次广播不再包含它（broadcast-a2a/index.js:122 的 where({active:true}) 生效）。
+- **P1-频控**：同 token 一小时内第二次上报立即返回（日志耗时应为毫秒级，无数据库写放大）；跨小时后恢复写路径。
+- **P2-补报机制（端侧）**：飞行模式冷启动→恢复网络→不做新冷启动的情况下，token 最终抵达服务端（Preferences 暂存路径生效）。
+- **P2-死导出删除**：grep 全仓库无 getActiveTokens 引用残留。
+
+## 十一、数据治理与合规边界
+
+三件事说清楚：其一，push_tokens 属设备标识数据，集合里没有用户个人信息字段（bundleName 是应用标识、token 是推送地址），合规面干净；但 token 一旦泄露可被用于定向推送骚扰，因此 3.1 的"安全规则禁客户端直读"与日志脱敏（现有 substring(0,20)）是两道必须同时存在的闸门。其二，留存策略：inactive 文档不必物理删除（保留排障线索），但建议 180 天后归档或清理，量级个位数到百位数，无成本压力，纯粹是数据卫生。其三，对账口径：active 数量 = 预期在网设备数，偏差大时优先查垃圾注册（reportCount=1 且 lastPushError 有值的文档），这也是 3.1 建议加 reportCount 字段的排障用途。
+
+## 十二、与广播链路的联调检查单
+
+注册链路的最终价值在链 3（broadcast-a2a）兑现，联调时按序核对五点：①端侧 getToken 成功（PushService.ets:48 有 token.length 日志）；②POST 返回 success:true 且 action 符合预期；③集合中出现/更新文档；④broadcast-a2a 日志显示 `Push sent to N devices`（broadcast-a2a/index.js:197）且 N 等于 active 文档数；⑤端侧收到通知，点击后 onNewWant 拿到 alertId（EntryAbility.ets:43-48）并定位到卡片。任一环断掉，先查第七节 P0 两项——当前最可能的断点是集合未建（3.1），其次是 AGC 三环境变量未配置（此时 broadcast-a2a:111-114 直接跳过推送，日志有明确 skip 字样，属设计内降级而非故障）。
+
+## 十三、性能预算与容量估算（估算值）
+
+链路的时序预算：端侧 connect+read 超时各 5 秒（PushService.ets:82-83），云函数超时 10 秒（cloudbaserc.json）。正常路径耗时构成——SDK 初始化与一次 `where({token}).get()` 查重在无索引时随集合规模线性增长，百级文档估 50-200ms，加唯一索引后降到个位数毫秒；update/add 一次往返同量级；合计远低于 1 秒，10 秒预算裕量充足。容量侧：设备数=活跃用户数，适老化应用量级估十到百；即便按千级设备、每日一次冷启动上报算，日写入千次、集合千文档，count 查询与唯一索引都是毫秒级——**本函数不存在量能焦虑，所有优化（索引、频控）都为正确性与防滥用，不为性能**。这个结论的价值是把后续优化精力从"快"转向"对"：状态机补全（第九节）与失效回收（4.1）比任何查询优化都重要。
+
+## 十四、威胁模型小结（STRIDE 视角的简化版）
+
+针对本入口的四个现实威胁与对应缓解：**伪造注册（Spoofing）**——攻击者灌伪造 token 换取推送资格：缓解=白名单+格式校验（P0）+频控（P1），伪造 token 在华为侧推送时会失败，真正的代价是配额与风控，所以第五节的限流配置是最后闸门；**重复通知（用户侧 DoS 体验）**——竞态双档导致同一设备收双推：缓解=唯一索引+upsert（P1）；**数据投毒（Tampering）**——恶意 bundleName 或超长字段污染集合：缓解=白名单天然限定 bundleName，建议再对 token 长度设上限（与格式校验同批）；**信息泄露（Information disclosure）**——token 集合被拉取后定向骚扰：缓解=安全规则禁直读（P3）+日志脱敏（已有）。列这张表不为形式：四个威胁恰好映射第七节的四组工单，安全项不是附加题而是缺陷单的一部分。
+
+## 十五、返回契约的规范化建议
+
+现状返回三种形态：成功 `{success:true, action:'created'|'updated', docId}`（index.js:39、51）、参数错误 `{success:false, error:...}`（78、82）、内部错误同形态（90）。建议补两个字段使端侧可做无歧义分支：`code`（机器可读：OK/INVALID_PARAM/RATE_LIMITED/DB_ERROR）与 `serverTs`（便于端侧日志对齐）。端侧现状只看 HTTP 200 与否（PushService.ets:87-91），加 code 后未来可在 RATE_LIMITED 时退避重报而不盲目重试。规范化的同时保持向后兼容：新增字段不删旧字段，端侧不升级也不受影响——与 A17 篇增量协议同一条升级纪律：**加字段安全，改语义危险**。
+
+## 十六、与华为 Push Kit 协同的细节核对
+
+注册链路的对端协议细节，逐条与 broadcast-a2a 侧实现核对：其一，token 批量上限——broadcast-a2a 把全部活跃 token 一次放进 `message.token` 数组下发（broadcast-a2a/index.js:183），华为侧对单请求 token 数有上限（以官方文档为准），设备量过百时需分批发送，本函数的 getActiveTokens 若未来真的被启用（4.2 修复后转正或删除），应同步支持分页；其二，推送失败回写的依据——华为侧响应中会逐 token 返回成功/失败及错误码，失效回收（4.1）的匹配规则要对着这个响应结构写，而不是猜错误码；其三，通知点击链路——broadcast-a2a 的 click_action intent 指向 `EntryAbility`（broadcast-a2a/index.js:171-175），data 内联 alertId（:177-182），端侧 EntryAbility.ets:85-95 解析同一份数据——注册链路本身不碰这些字段，但要知道**注册的质量直接决定这些精心构造的 payload 有没有人收到**；其四，本函数与 broadcast-a2a 之间靠 push_tokens 集合间接耦合（无函数间调用），集合 schema 的任何变更（如 3.1 字段扩展）必须两侧同步评审——这是 A20 篇读写矩阵的治理要求在本篇的落地。
+
+## 十七、本函数的"完成态"画像
+
+把全部修复项落实后的目标形态固化，作为重构完成的定义：入口有白名单与格式校验、频控短路毫秒级返回幂等成功；写入走指纹主键 upsert、并发零重复；状态机五条边全通（第九节）、失效由推送结果驱动回收、长期未上报由清理任务收敛；返回体带 code 与 serverTs；集合有唯一索引与组合索引、安全规则禁直读；端侧失败补报兜住弱网窗口。到那时这个函数约 150 行，职责单一（登记设备推送地址）、零外部依赖（只碰 CloudBase 库）、零密钥处理（合规红线天然满足）——它应该是六个云函数里最"无聊"的一个，无聊即正确：**注册这种基础设施工序，全部价值在于可靠，任何趣味都是隐患**。
 
 ### 自我评估
 - 正确性：4分 流程拆解与竞态、死代码、清单缺集合三处发现均有行号级证据；华为侧行为与 SDK upsert 细节如实标注未实测。
