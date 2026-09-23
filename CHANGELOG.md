@@ -1325,3 +1325,28 @@
   2. HAP 未签名——需机主在 DevEco Studio 中配置 signingConfigs
   3. 构建工作目录 `C:\hmos-build\harmony-app` 是临时副本，代码修改需同步回原项目
   4. hvigorw.js 中 `hvigor.execute()` API 不匹配问题已通过改用 DevEco Studio 自带 hvigorw.bat 绕过
+---
+
+## 2026-09-23 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-8SPARK）· 实盘模拟数据链路准备
+
+- **改了什么**：
+  - `cloudfunctions/functions/fetch-tushare-data/index.js`：核心数据源切换——新增 `fetchEastMoneyDaily()` 函数（分页获取4市场全量A股日线行情），重写 `getDailyMovers()`（东方财富API为主、Tushare daily为fallback），放开 TUSHARE_TOKEN 限制（不再必需），`createAlertItems()` 增加换手率字段。
+  - 文件头注释更新：数据接口策略从"Tushare为主"改为"东方财富API为主"。
+- **为什么**：
+  - Tushare `daily` 接口持续返回 HTTP 404（平台技术问题，非积分问题——daily 只需120积分，机主有2000+积分）。
+  - 机主提供了新 Tushare Token（`a7ad47b0...`），验证结果：trade_cal/stock_basic/daily_basic 有权限（频率超限），daily 返回404，top_list 无权限。
+  - 东方财富 API 免费、无频率限制、字段更丰富（含换手率、振幅），已验证可获取完整日线数据。
+  - 积分燃烧分析：Tushare 积分是权限门槛（不消耗），机主至少有2000积分（daily_basic可用），但 daily 的404不是积分问题。
+- **如何验证**：
+  - V1：Tushare 新 Token trade_cal 返回频率超限（有效）——通过
+  - V2：Tushare daily 返回 HTTP 404（3次重试均失败）——确认平台问题
+  - V3：东方财富 API 返回400条股票名称+涨跌幅数据——通过
+  - V4：东方财富 API 完整行情字段（开高低收、涨跌幅、成交量、换手率）——通过
+  - V5：东方财富 API 分页获取（每页100条，深市A股总计1641只）——通过
+  - V6：端侧 DEMO_ITEMS 兜底机制（首屏永不空白）——通过
+  - V7：端侧 FEED_URL 指向 CloudBase get-alerts HTTP 端点——配置正确但函数未部署
+- **遗留**：
+  1. CloudBase 云函数全部未部署（4个函数均返回404）——需安装 CloudBase CLI 部署
+  2. 东方财富 API 分页获取需在云函数环境验证（本地测试因IP临时封禁未完成全量验证）
+  3. 端侧 HAP 未签名——需机主在 DevEco Studio 中配置 signingConfigs
+  4. 无设备/模拟器——无法端侧验证
