@@ -1524,3 +1524,26 @@
   1. 英文路径 `C:\dev\lingyu\harmony-app` 是构建专用副本，源码仍在中文路径 `C:\Users\欧阳宏俊\...` 下
   2. 后续开发在中文路径进行，构建时需同步到英文路径（或使用 junction）
   3. 签名配置待配置（需 AGC 证书材料）
+---
+
+## 2026-09-24 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-SFT-Harmony）· 技能文档升级+README更新+同步脚本+代码审查
+
+- **模型切换**：deepseek-v4-pro-0813 → GLM-5.2-SFT-Harmony（回归码道 IDE 原生模型）
+- **改了什么**：
+  - `GOVERNANCE/skills/diag/hvigor-chinese-path.md` v1.0→v1.1：追加空格路径修复经验（`spawnSync` + `shell:true` 时路径含空格需加双引号）+ 实测验证结果（HAP 265KB 落盘）+ 正确构建参数格式（`--build-mode debug`）
+  - `README.md` 构建说明更新：加入英文路径迁移步骤（robocopy 命令）+ 中文路径警告 + 指向 hvigor-chinese-path.md 的链接
+  - 新增 `sync-to-build.bat`：从中文路径源码同步到英文路径构建副本的一键脚本（排除 node_modules/oh_modules/.hvigor/.codeartsdoer）
+  - 端侧代码审查（Index.ets / EntryAbility.ets / AlertPoller.ets / AudioPlayer.ets）——未发现新问题
+  - 云函数代码审查（fetch-tushare-data / broadcast-a2a）——合规 fail-closed + 鉴权 fail-closed 确认完整
+- **为什么**：
+  - HAP 构建突破后须将经验沉淀为技能文档（AGENTS.md §5.1 技能自动编写）
+  - README 构建说明缺少英文路径迁移步骤，新开发者会踩坑
+  - 同步脚本减少手动操作出错风险
+- **如何验证**：
+  - V1：`git status` 确认工作区干净
+  - V2：`fc /b` 确认原项目与英文路径副本的 hvigorw.js 一致
+  - V3：`devecocli build --build-mode debug` 在英文路径下成功（增量构建 8s）
+- **遗留**：
+  1. LLM 接入真实 API 凭据待机主注入
+  2. 签名配置待 AGC 证书材料
+  3. 模拟器安装运行待 DevEco Studio 升级或手动启动
