@@ -3,81 +3,3216 @@
   "schema": "docgen-state-v1",
   "branch": "master",
   "branch_raw": "master",
-  "version_token": 29,
-  "updated_at": "2026-09-19T21:16:50.848Z",
+  "version_token": 502,
+  "updated_at": "2026-09-23T03:17:46.262Z",
   "status": "watching",
-  "last_doc_generated_at": "2026-09-19T20:41:02.751Z",
+  "last_doc_generated_at": "2026-09-22T11:28:42.959Z",
   "changed_files": [
+    {
+      "path": ".agents/skills/cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.490Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/activation-map.yaml",
+      "status": "added",
+      "detected_at": "2026-09-22T23:20:38.608Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/ai-model-nodejs/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.002Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/ai-model-nodejs/references/api-reference.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:42.968Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/ai-model-nodejs/references/custom-onboarding.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:42.987Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/ai-model-web/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:42.984Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/ai-model-wechat/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:42.997Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/auth-nodejs-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:42.980Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/auth-tool-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.010Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/auth-tool-cloudbase/checklist.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.001Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/auth-tool-cloudbase/references/extended-guide.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.007Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/auth-web-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.018Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/auth-web-cloudbase/references/extended-guide.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.015Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/auth-wechat-miniprogram/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.032Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/auth-wechat-miniprogram/references/extended-guide.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.025Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloud-api-operations/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.063Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloud-api-operations/references/calling-methods.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.037Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloud-api-operations/references/recipes/README.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.044Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloud-api-operations/references/recipes/pg-storage-alarm.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.039Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloud-api-operations/references/service-versions.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.047Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloud-functions/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.107Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloud-functions/checklist.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.073Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloud-functions/references/event-functions.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.079Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloud-functions/references/http-function-credentials.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.081Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloud-functions/references/http-functions-custom-image.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.087Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloud-functions/references/http-functions.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.092Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloud-functions/references/operations-and-config.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.097Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloud-functions/references/vpc-and-tcp-database.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.101Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloud-functions/references.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.104Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloud-storage-web/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.109Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.161Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/py/adapter-coze.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.116Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/py/adapter-development.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.117Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/py/adapter-langgraph.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.123Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/py/agent-deployment.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.127Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/py/authentication.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.130Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/py/references/observability.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.134Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/py/references/recipes.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.140Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/py/references/server.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.142Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/py/references/storage.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.144Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/py/references/tools.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.148Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/py/server-quickstart.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.155Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/py/skill.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.157Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/ts/adapter-development.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.160Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/ts/adapter-langchain.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.165Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/ts/adapter-langgraph.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.171Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/ts/agent-deployment.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.175Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/ts/agui-protocol.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.180Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/ts/server-quickstart.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.184Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/ts/skill.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.193Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/ts/ui-clients.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.196Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-agent/ts/ui-miniprogram.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.200Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-cli/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.238Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-cli/references/access.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.203Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-cli/references/app.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.207Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-cli/references/cloudrun.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.208Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-cli/references/core.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.217Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-cli/references/functions.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.218Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-cli/references/hosting.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.220Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-cli/references/mysql.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.223Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-cli/references/nosql.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.227Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-cli/references/permission.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.230Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-cli/references/storage.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.234Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-code-review/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.271Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-code-review/references/RULES_INDEX.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.268Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-code-review/references/lint-rules/README.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.242Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-code-review/references/rules/cross-cutting/AUTH001.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.245Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-code-review/references/rules/cross-cutting/SEC001.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.249Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-code-review/references/rules/cross-cutting/SKILL001.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.250Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-code-review/references/rules/postgresql/PG-CR001.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.254Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-code-review/references/rules/postgresql/PG-CR002.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.256Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-code-review/references/rules/postgresql/PG-CR003.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.258Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-code-review/references/rules/postgresql/PG-CR004.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.261Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-code-review/references/rules/postgresql/PG-CR005.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.262Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-code-review/references/rules/storage/STORAGE001.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.266Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-declarative-deploy/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.279Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-declarative-deploy/references/config-schema.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.274Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-declarative-deploy/references/multi-env.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.275Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-declarative-deploy/references/plan-and-apply.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.276Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.297Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/aggregation.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.283Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/complex-queries.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.287Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/crud-operations.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.288Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/geolocation.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.293Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/pagination.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.294Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/security-rules.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.296Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-document-database-web-sdk/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.321Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-document-database-web-sdk/aggregation.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.300Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-document-database-web-sdk/complex-queries.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.305Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-document-database-web-sdk/crud-operations.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.306Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-document-database-web-sdk/geolocation.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.308Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-document-database-web-sdk/pagination.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.309Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-document-database-web-sdk/realtime.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.312Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-document-database-web-sdk/security-rules.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.315Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-platform/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.342Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-platform/references/protocols/change-safety-protocol.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.323Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-platform/references/protocols/deployment-gate.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.328Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-platform/references/protocols/deployment-share.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.331Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-platform/references/protocols/sensitive-runtime-data-protection.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.335Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-wechat-integration/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.381Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-wechat-integration/references/mini-program-pay.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.346Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-wechat-integration/references/native-qr-pay.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.349Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-wechat-integration/references/official-account-jsapi-pay.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.353Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-wechat-integration/references/official-account-oauth.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.355Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-wechat-integration/references/overview.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.361Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-wechat-integration/references/troubleshooting.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.364Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudbase-wechat-integration/references/virtual-payment.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.370Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudrun-development/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.393Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudrun-development/references/image-deploy-troubleshooting.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.384Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/cloudrun-development/references/vpc-and-database.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.386Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/console-links.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.394Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/data-model-creation/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.397Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/deployment-workflow.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.399Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/http-api-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.407Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/http-api-cloudbase/checklist.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.402Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/http-api-cloudbase/references/extended-guide.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.405Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/mcp-setup.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.409Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/minimal-web-baas-demo/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.413Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/miniprogram-development/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.432Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/miniprogram-development/references/cloudbase-integration.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.415Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/miniprogram-development/references/devtools-debug-preview.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.418Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/miniprogram-development/references/message-push-customer-service.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.419Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/miniprogram-development/references/pitfalls.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.420Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/miniprogram-development/references/seo-search-optimization.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.426Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/miniprogram-development/references/wxide-vs-cloudbase-mcp.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.429Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/ops-inspector/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.440Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/ops-inspector/references/alarm-interpretation.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.433Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/ops-inspector/references/fault-playbooks.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.436Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/postgresql-best-practices-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.450Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/postgresql-best-practices-cloudbase/references/access-patterns.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.440Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/postgresql-best-practices-cloudbase/references/capacity-and-connections.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.443Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/postgresql-best-practices-cloudbase/references/indexes-and-explain.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.444Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/postgresql-best-practices-cloudbase/references/schema-and-rls.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.446Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/postgresql-development-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.468Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/postgresql-development-cloudbase/references/app-workflow.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.452Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/postgresql-development-cloudbase/references/auth-and-rls.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.455Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/postgresql-development-cloudbase/references/http-api.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.457Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/postgresql-development-cloudbase/references/index.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.459Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/postgresql-development-cloudbase/references/pg-mode-overview.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.460Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/postgresql-development-cloudbase/references/rls-patterns.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.462Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/postgresql-development-cloudbase/references/storage-pg.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.465Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/postgresql-development-cloudbase/references/troubleshooting.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.467Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/relational-database-mcp-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.471Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/relational-database-web-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.471Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/scenarios.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.473Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/spec-workflow/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.476Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/tooling-fallback.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.478Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/ui-design/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.483Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/ui-design/checklist.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.481Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/web-development/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.489Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/web-development/browser-testing.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.485Z"
+    },
+    {
+      "path": ".agents/skills/cloudbase/references/web-development/frameworks.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.486Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.490Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/activation-map.yaml",
+      "status": "added",
+      "detected_at": "2026-09-22T23:20:38.601Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/ai-model-nodejs/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:42.976Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/ai-model-nodejs/references/api-reference.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:42.991Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/ai-model-nodejs/references/custom-onboarding.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.014Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/ai-model-web/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:42.992Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/ai-model-wechat/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:42.983Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/auth-nodejs-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:42.995Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/auth-tool-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:42.994Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/auth-tool-cloudbase/checklist.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:42.986Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/auth-tool-cloudbase/references/extended-guide.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:42.999Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/auth-web-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.020Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/auth-web-cloudbase/references/extended-guide.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.014Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/auth-wechat-miniprogram/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.021Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/auth-wechat-miniprogram/references/extended-guide.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.023Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloud-api-operations/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.065Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloud-api-operations/references/calling-methods.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.035Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloud-api-operations/references/recipes/README.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.052Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloud-api-operations/references/recipes/pg-storage-alarm.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.041Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloud-api-operations/references/service-versions.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.051Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloud-functions/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.108Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloud-functions/checklist.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.066Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloud-functions/references/event-functions.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.075Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloud-functions/references/http-function-credentials.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.084Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloud-functions/references/http-functions-custom-image.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.085Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloud-functions/references/http-functions.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.092Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloud-functions/references/operations-and-config.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.095Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloud-functions/references/vpc-and-tcp-database.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.097Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloud-functions/references.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.106Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloud-storage-web/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.111Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.158Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/py/adapter-coze.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.112Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/py/adapter-development.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.120Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/py/adapter-langgraph.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.126Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/py/agent-deployment.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.129Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/py/authentication.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.131Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/py/references/observability.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.134Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/py/references/recipes.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.140Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/py/references/server.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.143Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/py/references/storage.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.145Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/py/references/tools.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.150Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/py/server-quickstart.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.153Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/py/skill.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.156Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/ts/adapter-development.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.163Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/ts/adapter-langchain.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.166Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/ts/adapter-langgraph.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.173Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/ts/agent-deployment.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.176Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/ts/agui-protocol.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.185Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/ts/server-quickstart.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.189Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/ts/skill.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.195Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/ts/ui-clients.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.197Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-agent/ts/ui-miniprogram.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.200Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-cli/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.241Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-cli/references/access.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.209Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-cli/references/app.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.214Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-cli/references/cloudrun.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.215Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-cli/references/core.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.217Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-cli/references/functions.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.218Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-cli/references/hosting.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.219Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-cli/references/mysql.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.224Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-cli/references/nosql.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.225Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-cli/references/permission.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.231Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-cli/references/storage.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.233Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-code-review/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.269Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-code-review/references/RULES_INDEX.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.268Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-code-review/references/lint-rules/README.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.243Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-code-review/references/rules/cross-cutting/AUTH001.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.245Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-code-review/references/rules/cross-cutting/SEC001.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.247Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-code-review/references/rules/cross-cutting/SKILL001.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.251Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-code-review/references/rules/postgresql/PG-CR001.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.255Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-code-review/references/rules/postgresql/PG-CR002.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.258Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-code-review/references/rules/postgresql/PG-CR003.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.260Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-code-review/references/rules/postgresql/PG-CR004.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.261Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-code-review/references/rules/postgresql/PG-CR005.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.263Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-code-review/references/rules/storage/STORAGE001.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.265Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-declarative-deploy/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.280Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-declarative-deploy/references/config-schema.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.271Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-declarative-deploy/references/multi-env.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.274Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-declarative-deploy/references/plan-and-apply.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.277Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.299Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/aggregation.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.281Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/complex-queries.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.285Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/crud-operations.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.290Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/geolocation.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.292Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/pagination.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.294Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/security-rules.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.296Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-document-database-web-sdk/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.319Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-document-database-web-sdk/aggregation.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.299Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-document-database-web-sdk/complex-queries.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.303Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-document-database-web-sdk/crud-operations.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.304Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-document-database-web-sdk/geolocation.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.307Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-document-database-web-sdk/pagination.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.309Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-document-database-web-sdk/realtime.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.312Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-document-database-web-sdk/security-rules.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.314Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-platform/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.339Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-platform/references/protocols/change-safety-protocol.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.324Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-platform/references/protocols/deployment-gate.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.325Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-platform/references/protocols/deployment-share.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.332Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-platform/references/protocols/sensitive-runtime-data-protection.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.338Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-wechat-integration/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.382Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-wechat-integration/references/mini-program-pay.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.344Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-wechat-integration/references/native-qr-pay.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.348Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-wechat-integration/references/official-account-jsapi-pay.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.351Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-wechat-integration/references/official-account-oauth.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.355Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-wechat-integration/references/overview.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.358Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-wechat-integration/references/troubleshooting.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.366Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudbase-wechat-integration/references/virtual-payment.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.369Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudrun-development/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.393Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudrun-development/references/image-deploy-troubleshooting.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.385Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/cloudrun-development/references/vpc-and-database.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.388Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/console-links.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.395Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/data-model-creation/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.396Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/deployment-workflow.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.400Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/http-api-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.407Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/http-api-cloudbase/checklist.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.402Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/http-api-cloudbase/references/extended-guide.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.404Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/mcp-setup.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.409Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/minimal-web-baas-demo/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.411Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/miniprogram-development/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.433Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/miniprogram-development/references/cloudbase-integration.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.414Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/miniprogram-development/references/devtools-debug-preview.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.416Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/miniprogram-development/references/message-push-customer-service.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.419Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/miniprogram-development/references/pitfalls.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.420Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/miniprogram-development/references/seo-search-optimization.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.427Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/miniprogram-development/references/wxide-vs-cloudbase-mcp.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.429Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/ops-inspector/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.438Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/ops-inspector/references/alarm-interpretation.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.434Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/ops-inspector/references/fault-playbooks.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.437Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/postgresql-best-practices-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.449Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/postgresql-best-practices-cloudbase/references/access-patterns.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.442Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/postgresql-best-practices-cloudbase/references/capacity-and-connections.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.445Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/postgresql-best-practices-cloudbase/references/indexes-and-explain.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.446Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/postgresql-best-practices-cloudbase/references/schema-and-rls.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.449Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/postgresql-development-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.469Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/postgresql-development-cloudbase/references/app-workflow.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.452Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/postgresql-development-cloudbase/references/auth-and-rls.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.455Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/postgresql-development-cloudbase/references/http-api.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.457Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/postgresql-development-cloudbase/references/index.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.459Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/postgresql-development-cloudbase/references/pg-mode-overview.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.460Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/postgresql-development-cloudbase/references/rls-patterns.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.464Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/postgresql-development-cloudbase/references/storage-pg.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.464Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/postgresql-development-cloudbase/references/troubleshooting.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.465Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/relational-database-mcp-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.471Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/relational-database-web-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.473Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/scenarios.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.474Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/spec-workflow/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.477Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/tooling-fallback.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.478Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/ui-design/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.482Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/ui-design/checklist.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.480Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/web-development/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.488Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/web-development/browser-testing.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.484Z"
+    },
+    {
+      "path": ".claude/skills/cloudbase/references/web-development/frameworks.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.486Z"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "status": "modified",
+      "detected_at": "2026-09-23T02:42:41.147Z"
+    },
     {
       "path": "GOVERNANCE/DECISION_LEDGER_POINTER.md",
       "status": "modified",
-      "detected_at": "2026-09-19T21:15:33.549Z"
+      "detected_at": "2026-09-23T02:42:40.037Z"
     },
     {
-      "path": "skills/context-pruner/FORGE_REPORT.md",
+      "path": "GOVERNANCE/cred_health_check.mjs",
       "status": "added",
-      "detected_at": "2026-09-19T20:41:02.933Z"
+      "detected_at": "2026-09-23T00:08:35.700Z"
     },
     {
-      "path": "skills/context-pruner/SKILL.md",
+      "path": "GOVERNANCE/plan/GLM-53-1e8-burn-plan.md",
       "status": "added",
-      "detected_at": "2026-09-19T20:41:02.933Z"
+      "detected_at": "2026-09-23T01:15:43.692Z"
     },
     {
-      "path": "skills/context-pruner/scripts/context_audit.py",
+      "path": "GOVERNANCE/plan/GOVERNANCE缺口清单_20260922.md",
       "status": "added",
-      "detected_at": "2026-09-19T20:41:02.933Z"
+      "detected_at": "2026-09-23T01:15:43.697Z"
     },
     {
-      "path": "skills/link-bridge-ops/FORGE_REPORT.md",
+      "path": "GOVERNANCE/proposals/GAP-03_bridge_fix_plan.md",
       "status": "added",
-      "detected_at": "2026-09-19T20:41:02.934Z"
+      "detected_at": "2026-09-23T01:15:43.699Z"
     },
     {
-      "path": "skills/link-bridge-ops/SKILL.md",
+      "path": "GOVERNANCE/proposals/SNR-001_heartbeat_aggregation.md",
       "status": "added",
-      "detected_at": "2026-09-19T20:41:02.934Z"
+      "detected_at": "2026-09-23T01:15:43.702Z"
     },
     {
-      "path": "skills/link-bridge-ops/scripts/link_bridge.py",
+      "path": "GOVERNANCE/review/GLM-53-code-review-20260922.md",
       "status": "added",
-      "detected_at": "2026-09-19T20:41:02.935Z"
+      "detected_at": "2026-09-23T01:15:43.728Z"
     },
     {
-      "path": "skills/ultra-compress-ops/SKILL.md",
-      "status": "added",
-      "detected_at": "2026-09-19T20:41:02.935Z"
+      "path": "GOVERNANCE/skills/SELF_BUILT_INDEX.md",
+      "status": "modified",
+      "detected_at": "2026-09-23T02:42:41.168Z"
     },
     {
-      "path": "skills/ultra-compress-ops/references/backends.md",
+      "path": "GOVERNANCE/skills/collab/bus-bridge-debug.md",
       "status": "added",
-      "detected_at": "2026-09-19T20:41:02.935Z"
+      "detected_at": "2026-09-23T01:15:43.788Z"
     },
     {
-      "path": "skills/ultra-compress-ops/scripts/a2a_mount.py",
+      "path": "GOVERNANCE/skills/diag/full-code-review.md",
       "status": "added",
-      "detected_at": "2026-09-19T20:41:02.935Z"
+      "detected_at": "2026-09-23T01:15:43.799Z"
     },
     {
-      "path": "skills/ultra-compress-ops/scripts/madao_watch.py",
+      "path": "GOVERNANCE/skills/governance/doc-gap-inventory.md",
       "status": "added",
-      "detected_at": "2026-09-19T20:41:02.935Z"
+      "detected_at": "2026-09-23T01:15:43.850Z"
     },
     {
-      "path": "skills/ultra-compress-ops/scripts/ultra_pack.py",
+      "path": "GOVERNANCE/协作记录与最终状态汇总_v1.0.md",
       "status": "added",
-      "detected_at": "2026-09-19T20:41:02.936Z"
+      "detected_at": "2026-09-23T01:15:43.865Z"
     },
     {
       "path": "_HANDOFF_2026-09-20.md",
       "status": "added",
-      "detected_at": "2026-09-19T21:16:50.238Z"
+      "detected_at": "2026-09-23T01:15:46.070Z"
+    },
+    {
+      "path": "cloudbase-create-collections.js",
+      "status": "added",
+      "detected_at": "2026-09-23T00:08:35.640Z"
+    },
+    {
+      "path": "cloudbase-init.js",
+      "status": "added",
+      "detected_at": "2026-09-23T00:08:35.666Z"
+    },
+    {
+      "path": "cloudfunctions/functions/broadcast-a2a/index.js",
+      "status": "added",
+      "detected_at": "2026-09-23T03:14:01.907Z"
+    },
+    {
+      "path": "cloudfunctions/functions/fetch-tushare-data/hardcoded-names.js",
+      "status": "added",
+      "detected_at": "2026-09-23T01:31:50.425Z"
+    },
+    {
+      "path": "cloudfunctions/functions/fetch-tushare-data/index.js",
+      "status": "added",
+      "detected_at": "2026-09-23T03:13:59.101Z"
+    },
+    {
+      "path": "cloudfunctions/functions/generate-tts/index.js",
+      "status": "added",
+      "detected_at": "2026-09-23T03:14:04.813Z"
+    },
+    {
+      "path": "cloudfunctions/functions/get-alerts/index.js",
+      "status": "added",
+      "detected_at": "2026-09-23T03:14:50.140Z"
+    },
+    {
+      "path": "cloudfunctions/functions/init-db/index.js",
+      "status": "added",
+      "detected_at": "2026-09-23T03:14:55.648Z"
+    },
+    {
+      "path": "cloudfunctions/functions/push-token-register/index.js",
+      "status": "added",
+      "detected_at": "2026-09-23T03:14:52.863Z"
+    },
+    {
+      "path": "cloudfunctions/init-db/index.js",
+      "status": "added",
+      "detected_at": "2026-09-23T00:08:35.685Z"
+    },
+    {
+      "path": "create-collections.mjs",
+      "status": "added",
+      "detected_at": "2026-09-23T00:08:35.687Z"
+    },
+    {
+      "path": "feed-server/server.mjs",
+      "status": "modified",
+      "detected_at": "2026-09-23T02:42:41.205Z"
+    },
+    {
+      "path": "skills/cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.491Z"
+    },
+    {
+      "path": "skills/cloudbase/references/activation-map.yaml",
+      "status": "added",
+      "detected_at": "2026-09-22T23:20:38.584Z"
+    },
+    {
+      "path": "skills/cloudbase/references/ai-model-nodejs/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:42.990Z"
+    },
+    {
+      "path": "skills/cloudbase/references/ai-model-nodejs/references/api-reference.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:42.982Z"
+    },
+    {
+      "path": "skills/cloudbase/references/ai-model-nodejs/references/custom-onboarding.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:42.989Z"
+    },
+    {
+      "path": "skills/cloudbase/references/ai-model-web/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.005Z"
+    },
+    {
+      "path": "skills/cloudbase/references/ai-model-wechat/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:42.998Z"
+    },
+    {
+      "path": "skills/cloudbase/references/auth-nodejs-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:42.985Z"
+    },
+    {
+      "path": "skills/cloudbase/references/auth-tool-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.006Z"
+    },
+    {
+      "path": "skills/cloudbase/references/auth-tool-cloudbase/checklist.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.003Z"
+    },
+    {
+      "path": "skills/cloudbase/references/auth-tool-cloudbase/references/extended-guide.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.007Z"
+    },
+    {
+      "path": "skills/cloudbase/references/auth-web-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.019Z"
+    },
+    {
+      "path": "skills/cloudbase/references/auth-web-cloudbase/references/extended-guide.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.017Z"
+    },
+    {
+      "path": "skills/cloudbase/references/auth-wechat-miniprogram/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.029Z"
+    },
+    {
+      "path": "skills/cloudbase/references/auth-wechat-miniprogram/references/extended-guide.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.021Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloud-api-operations/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.058Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloud-api-operations/references/calling-methods.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.036Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloud-api-operations/references/recipes/README.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.043Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloud-api-operations/references/recipes/pg-storage-alarm.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.038Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloud-api-operations/references/service-versions.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.049Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloud-functions/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.107Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloud-functions/checklist.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.071Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloud-functions/references/event-functions.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.077Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloud-functions/references/http-function-credentials.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.080Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloud-functions/references/http-functions-custom-image.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.089Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloud-functions/references/http-functions.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.094Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloud-functions/references/operations-and-config.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.100Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloud-functions/references/vpc-and-tcp-database.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.102Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloud-functions/references.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.105Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloud-storage-web/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.109Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.159Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/py/adapter-coze.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.114Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/py/adapter-development.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.122Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/py/adapter-langgraph.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.125Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/py/agent-deployment.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.126Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/py/authentication.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.132Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/py/references/observability.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.136Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/py/references/recipes.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.141Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/py/references/server.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.144Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/py/references/storage.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.147Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/py/references/tools.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.152Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/py/server-quickstart.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.155Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/py/skill.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.158Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/ts/adapter-development.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.167Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/ts/adapter-langchain.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.169Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/ts/adapter-langgraph.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.174Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/ts/agent-deployment.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.178Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/ts/agui-protocol.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.182Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/ts/server-quickstart.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.187Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/ts/skill.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.192Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/ts/ui-clients.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.199Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-agent/ts/ui-miniprogram.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.201Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-cli/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.239Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-cli/references/access.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.204Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-cli/references/app.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.205Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-cli/references/cloudrun.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.212Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-cli/references/core.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.212Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-cli/references/functions.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.221Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-cli/references/hosting.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.222Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-cli/references/mysql.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.224Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-cli/references/nosql.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.229Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-cli/references/permission.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.232Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-cli/references/storage.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.235Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-code-review/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.270Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-code-review/references/RULES_INDEX.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.267Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-code-review/references/lint-rules/README.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.244Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-code-review/references/rules/cross-cutting/AUTH001.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.248Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-code-review/references/rules/cross-cutting/SEC001.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.249Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-code-review/references/rules/cross-cutting/SKILL001.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.253Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-code-review/references/rules/postgresql/PG-CR001.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.254Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-code-review/references/rules/postgresql/PG-CR002.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.256Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-code-review/references/rules/postgresql/PG-CR003.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.257Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-code-review/references/rules/postgresql/PG-CR004.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.261Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-code-review/references/rules/postgresql/PG-CR005.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.263Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-code-review/references/rules/storage/STORAGE001.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.265Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-declarative-deploy/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.278Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-declarative-deploy/references/config-schema.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.273Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-declarative-deploy/references/multi-env.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.276Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-declarative-deploy/references/plan-and-apply.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.277Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.298Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/aggregation.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.284Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/complex-queries.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.286Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/crud-operations.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.290Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/geolocation.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.291Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/pagination.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.293Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-document-database-in-wechat-miniprogram/security-rules.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.295Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-document-database-web-sdk/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.320Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-document-database-web-sdk/aggregation.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.301Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-document-database-web-sdk/complex-queries.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.305Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-document-database-web-sdk/crud-operations.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.306Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-document-database-web-sdk/geolocation.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.307Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-document-database-web-sdk/pagination.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.309Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-document-database-web-sdk/realtime.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.311Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-document-database-web-sdk/security-rules.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.316Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-platform/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.340Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-platform/references/protocols/change-safety-protocol.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.322Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-platform/references/protocols/deployment-gate.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.328Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-platform/references/protocols/deployment-share.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.334Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-platform/references/protocols/sensitive-runtime-data-protection.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.336Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-wechat-integration/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.379Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-wechat-integration/references/mini-program-pay.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.343Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-wechat-integration/references/native-qr-pay.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.348Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-wechat-integration/references/official-account-jsapi-pay.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.352Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-wechat-integration/references/official-account-oauth.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.357Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-wechat-integration/references/overview.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.364Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-wechat-integration/references/troubleshooting.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.365Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudbase-wechat-integration/references/virtual-payment.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.371Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudrun-development/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.389Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudrun-development/references/image-deploy-troubleshooting.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.386Z"
+    },
+    {
+      "path": "skills/cloudbase/references/cloudrun-development/references/vpc-and-database.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.388Z"
+    },
+    {
+      "path": "skills/cloudbase/references/console-links.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.396Z"
+    },
+    {
+      "path": "skills/cloudbase/references/data-model-creation/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.397Z"
+    },
+    {
+      "path": "skills/cloudbase/references/deployment-workflow.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.401Z"
+    },
+    {
+      "path": "skills/cloudbase/references/http-api-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.406Z"
+    },
+    {
+      "path": "skills/cloudbase/references/http-api-cloudbase/checklist.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.401Z"
+    },
+    {
+      "path": "skills/cloudbase/references/http-api-cloudbase/references/extended-guide.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.405Z"
+    },
+    {
+      "path": "skills/cloudbase/references/mcp-setup.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.410Z"
+    },
+    {
+      "path": "skills/cloudbase/references/minimal-web-baas-demo/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.411Z"
+    },
+    {
+      "path": "skills/cloudbase/references/miniprogram-development/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.431Z"
+    },
+    {
+      "path": "skills/cloudbase/references/miniprogram-development/references/cloudbase-integration.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.415Z"
+    },
+    {
+      "path": "skills/cloudbase/references/miniprogram-development/references/devtools-debug-preview.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.417Z"
+    },
+    {
+      "path": "skills/cloudbase/references/miniprogram-development/references/message-push-customer-service.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.422Z"
+    },
+    {
+      "path": "skills/cloudbase/references/miniprogram-development/references/pitfalls.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.424Z"
+    },
+    {
+      "path": "skills/cloudbase/references/miniprogram-development/references/seo-search-optimization.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.428Z"
+    },
+    {
+      "path": "skills/cloudbase/references/miniprogram-development/references/wxide-vs-cloudbase-mcp.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.430Z"
+    },
+    {
+      "path": "skills/cloudbase/references/ops-inspector/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.438Z"
+    },
+    {
+      "path": "skills/cloudbase/references/ops-inspector/references/alarm-interpretation.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.434Z"
+    },
+    {
+      "path": "skills/cloudbase/references/ops-inspector/references/fault-playbooks.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.436Z"
+    },
+    {
+      "path": "skills/cloudbase/references/postgresql-best-practices-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.451Z"
+    },
+    {
+      "path": "skills/cloudbase/references/postgresql-best-practices-cloudbase/references/access-patterns.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.441Z"
+    },
+    {
+      "path": "skills/cloudbase/references/postgresql-best-practices-cloudbase/references/capacity-and-connections.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.443Z"
+    },
+    {
+      "path": "skills/cloudbase/references/postgresql-best-practices-cloudbase/references/indexes-and-explain.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.445Z"
+    },
+    {
+      "path": "skills/cloudbase/references/postgresql-best-practices-cloudbase/references/schema-and-rls.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.448Z"
+    },
+    {
+      "path": "skills/cloudbase/references/postgresql-development-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.470Z"
+    },
+    {
+      "path": "skills/cloudbase/references/postgresql-development-cloudbase/references/app-workflow.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.453Z"
+    },
+    {
+      "path": "skills/cloudbase/references/postgresql-development-cloudbase/references/auth-and-rls.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.456Z"
+    },
+    {
+      "path": "skills/cloudbase/references/postgresql-development-cloudbase/references/http-api.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.458Z"
+    },
+    {
+      "path": "skills/cloudbase/references/postgresql-development-cloudbase/references/index.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.460Z"
+    },
+    {
+      "path": "skills/cloudbase/references/postgresql-development-cloudbase/references/pg-mode-overview.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.462Z"
+    },
+    {
+      "path": "skills/cloudbase/references/postgresql-development-cloudbase/references/rls-patterns.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.463Z"
+    },
+    {
+      "path": "skills/cloudbase/references/postgresql-development-cloudbase/references/storage-pg.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.464Z"
+    },
+    {
+      "path": "skills/cloudbase/references/postgresql-development-cloudbase/references/troubleshooting.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.468Z"
+    },
+    {
+      "path": "skills/cloudbase/references/relational-database-mcp-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.470Z"
+    },
+    {
+      "path": "skills/cloudbase/references/relational-database-web-cloudbase/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.474Z"
+    },
+    {
+      "path": "skills/cloudbase/references/scenarios.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.475Z"
+    },
+    {
+      "path": "skills/cloudbase/references/spec-workflow/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.476Z"
+    },
+    {
+      "path": "skills/cloudbase/references/tooling-fallback.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.478Z"
+    },
+    {
+      "path": "skills/cloudbase/references/ui-design/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.483Z"
+    },
+    {
+      "path": "skills/cloudbase/references/ui-design/checklist.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.480Z"
+    },
+    {
+      "path": "skills/cloudbase/references/web-development/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.488Z"
+    },
+    {
+      "path": "skills/cloudbase/references/web-development/browser-testing.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.484Z"
+    },
+    {
+      "path": "skills/cloudbase/references/web-development/frameworks.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.486Z"
+    },
+    {
+      "path": "skills/context-pruner/FORGE_REPORT.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:46.053Z"
+    },
+    {
+      "path": "skills/context-pruner/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:46.054Z"
+    },
+    {
+      "path": "skills/context-pruner/scripts/context_audit.py",
+      "status": "added",
+      "detected_at": "2026-09-22T20:16:43.069Z"
+    },
+    {
+      "path": "skills/link-bridge-ops/FORGE_REPORT.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:46.060Z"
+    },
+    {
+      "path": "skills/link-bridge-ops/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:46.063Z"
+    },
+    {
+      "path": "skills/link-bridge-ops/scripts/link_bridge.py",
+      "status": "added",
+      "detected_at": "2026-09-22T20:16:43.078Z"
+    },
+    {
+      "path": "skills/ultra-compress-ops/SKILL.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:46.067Z"
+    },
+    {
+      "path": "skills/ultra-compress-ops/references/backends.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:46.065Z"
+    },
+    {
+      "path": "skills/ultra-compress-ops/scripts/a2a_mount.py",
+      "status": "added",
+      "detected_at": "2026-09-22T20:16:43.085Z"
+    },
+    {
+      "path": "skills/ultra-compress-ops/scripts/madao_watch.py",
+      "status": "added",
+      "detected_at": "2026-09-22T20:16:43.086Z"
+    },
+    {
+      "path": "skills/ultra-compress-ops/scripts/ultra_pack.py",
+      "status": "added",
+      "detected_at": "2026-09-22T20:16:43.092Z"
+    },
+    {
+      "path": "GOVERNANCE/a2a/YANJIAN_ROLE_REGISTRATION.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.499Z"
+    },
+    {
+      "path": "GOVERNANCE/a2a/A2A_DISPATCH_AND_PLAN.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.498Z"
+    },
+    {
+      "path": "GOVERNANCE/a2a/TECH_EVAL_GLM_RL_MIMO.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:15:43.498Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-moon-plan.md",
+      "status": "added",
+      "detected_at": "2026-09-23T00:38:11.543Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/A28_状态管理审查StatePropLin.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:17:43.861Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/cloud-function-refactor.md",
+      "status": "added",
+      "detected_at": "2026-09-23T00:32:19.260Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/arkts-cloud-function-pattern.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:30:34.222Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/arkts-network-wrapper.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:30:34.223Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/arkts-cache-strategy.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:30:34.225Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/A20_云函数间调用关系图谱6个云函数调用链.md",
+      "status": "added",
+      "detected_at": "2026-09-23T00:38:48.756Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/collab/a2a-handshake.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:30:34.233Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/error-handling.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:17:43.867Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/collab/quota-burning.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:30:34.236Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/A31_页面导航审查NavDestinati.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:17:43.862Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/diag/tushare-token-failure.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:17:43.870Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/diag/tts-websocket.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:17:43.869Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/governance/a2a-governance-protocol.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:30:34.240Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/governance/skill-self-improvement.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:30:34.241Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/governance/changelog-discipline.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:30:34.244Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/crypto/tls-verification.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:30:34.243Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/crypto/hash-algorithm-upgrade.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:30:34.247Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/crypto/pqc-migration-assessment.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:30:34.251Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/crypto/credential-vault-encryption.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:30:34.250Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/06.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:04:36.934Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/01.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:07:59.992Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/02.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:08:53.338Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/03.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:08:53.383Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/16.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:08:09.879Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/04.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:08:20.645Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/05.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:08:20.684Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/06.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:08:20.711Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/01.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:09:32.537Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/02.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:09:32.686Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/03.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:09:32.763Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/04.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:09:32.823Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/arkts-code-review.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:30:34.255Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/05.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:09:48.535Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/06.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:09:48.742Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/07.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:12:36.998Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/08.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:12:37.042Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/VALVE.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:16:27.827Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/07.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:12:51.768Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/09.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:16:17.104Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/10.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:16:17.147Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/11.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:16:31.144Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/12.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:16:31.244Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/33.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:14:39.142Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/13.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:19:44.984Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/14.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:19:44.999Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/15.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:19:45.032Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/16.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:19:54.836Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/17.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:19:54.884Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/A26_PushServiceets审查占位.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:17:43.859Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/18.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:20:15.313Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/19.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:21:03.608Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/20.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:21:03.661Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/21.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:21:03.770Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/22.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:21:32.826Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/23.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:21:21.948Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/24.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:21:22.033Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/A32_生命周期管理审查aboutToApp.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:17:43.863Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/01.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:21:50.069Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/02.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:21:50.106Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/03.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:21:50.143Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/A27_适老化UI审查2834fp大字白话卡.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:17:43.861Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/04.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:22:44.284Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/05.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:22:44.313Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/06.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:22:44.341Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/cache-strategy.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:23:22.024Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/07.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:23:31.005Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/08.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:23:31.024Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/09.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:23:31.026Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/A33_错误边界审查trycatch覆盖用户.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:17:43.866Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/45.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:39:18.515Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/A16_generatetts云函数审查百炼.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:17:43.851Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/A34_性能审查List虚拟化图片懒加载渲染.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:17:43.867Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/03.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:33:52.301Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/04.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:33:52.351Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/05.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:33:52.414Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/06.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:34:11.540Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/07.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:34:11.572Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/08.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:40:10.078Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/A17_getalerts云函数审查Clou.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:17:43.857Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/09.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:34:35.282Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/10.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:40:10.098Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/11.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:34:35.363Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/12.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:34:53.944Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/13.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:34:53.986Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/14.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:34:54.019Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/15.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:35:12.856Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/16.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:38:34.988Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/17.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:35:13.180Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/18.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:38:51.758Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/19.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:35:32.611Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/20.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:35:32.648Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/21.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:35:46.767Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/22.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:38:51.779Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/23.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:38:51.802Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/24.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:39:07.729Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/25.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:36:03.030Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/26.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:36:03.113Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/27.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:39:07.755Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/28.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:39:07.781Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/29.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:36:22.911Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/30.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:36:40.815Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/31.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:39:18.491Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/32.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:36:40.878Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/33.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:37:02.292Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/34.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:37:02.324Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/35.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:37:02.358Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/36.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:37:16.485Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/38.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:37:16.532Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/39.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:37:16.562Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/40.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:37:33.748Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/42.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:37:33.778Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/44.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:37:33.805Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/46.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:37:46.731Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/VALVE.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:46:59.900Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a02-mcp-tool-design/01.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:43:59.744Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/01.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:43:59.865Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/01.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:44:15.786Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/02.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:51:13.973Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/03.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:45:55.256Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/04.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:45:55.275Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/02.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:46:42.226Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/03.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:46:51.053Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/04.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:47:02.847Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/05.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:47:15.352Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/06.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:47:25.042Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/05.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:47:28.469Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/06.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:47:28.488Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/08.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:48:34.940Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/07.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:49:15.667Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/08.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:49:28.057Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/09.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:49:38.688Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a02-mcp-tool-design/02.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:49:56.514Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a02-mcp-tool-design/03.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:50:10.722Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a02-mcp-tool-design/04.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:51:06.830Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a02-mcp-tool-design/05.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:51:15.528Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a02-mcp-tool-design/06.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:50:48.885Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/10.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:51:04.353Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/09.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:51:13.995Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/10.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:51:14.017Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/11.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:51:14.040Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/12.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:51:14.064Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/11.md",
+      "status": "added",
+      "detected_at": "2026-09-23T01:51:15.424Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/E8_HarmonyOS适老化设计规范字体.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:11:30.425Z"
     }
   ],
   "summary": {
-    "total": 13,
-    "added": 12,
-    "modified": 1,
+    "total": 640,
+    "added": 636,
+    "modified": 4,
     "removed": 0
   },
   "error_message": null,

@@ -153,6 +153,30 @@ if (text.length > MAX_TEXT_LEN) return { success:false, error:`text too long (>$
 
 未做真实链路验证：本地无 DASHSCOPE_API_KEY 与 CloudBase 凭证，"端点可连通、tempFileURL 实际有效期、task-failed 报文样例"三项均未实测，上述判断分别基于官方文档当日取回内容与 CloudBase 通用行为，施工后需用一条真实 alertId 做端到端验收（生成→缓存命中→回写→端侧 AVPlayer 播放完整不破音）。合规面：本函数文本源头上游已经 DKnowC 检查并携带 complianceStatus 元数据（fetch-tushare-data/index.js:601-646），白话文案无催促与收益承诺措辞，本层无需重复审查，保持即可。
 
+## 十、修复项验收标准（与第八节清单一一对应）
+
+验收要可执行，逐项给验收动作与通过判据：
+
+- **P0-audioUrl（5.3）**：验收=同一文本连调 generate-tts 两次，第二次返回 cached:true；若采用 fileID 方案，从 alerts.json 取出 fileID 后经 getTempFileURL 换链返回 200 可播；六小时后重复换链仍成功。若采用公开读方案，需复核存储权限面，确认放开的是 tts/ 路径而非整桶。
+- **P0-额度落库（6.3）**：验收=两个不同函数实例各合成一次后，用量文档的 usedTokens 是两次之和而非互相覆盖；人为把阈值调到 1% 再调用，返回体 error 应明确指向 quota 而非笼统的 generation failed。
+- **P1-回写保护（6.4）**：验收=在 generate-tts 回写前手工向 alerts.json 注入一条新异动（模拟上游刚写完），回写完成后新异动仍在文件中；若改走数据库单字段更新，验收=该 alertId 文档仅 audioUrl 字段变化。
+- **P1-缓存键（6.1）**：验收=同文本换音色后 cacheKey 改变、触发新合成而非命中旧缓存。
+- **P1-输入约束（七）**：验收=501 字文本被拒并返回明确错误；HTTP 访问服务限流配置后超限请求拿到 429，端侧日志出现 rate-limited 字样（AlertPoller.ets:49 的既有分支承接）。
+- **P2-三项**：单例化=一次请求日志中不再出现多次 SDK 初始化；降并发=上游批量日志按 2-3 条一组分批；partial 隔离=截断场景下 tts/partial/ 有产物而 tts-cache/ 与 alerts.json 无新增。
+- **P3-两项**：缺 workspace 环境变量时函数冷启动即失败并返回配置错误；close 日志带 code/reason，能区分握手失败与中途断链。
+
+## 十一、超时预算拆解（60 秒函数超时的分配）
+
+cloudbaserc.json 给 generate-tts 60 秒，链路耗时构成（逐段估算，施工后以日志实测校准）：TLS+WSS 握手 0.3-0.8 秒（首连含 DNS 解析）；run-task 到 task-started 往返 0.2-0.5 秒；CosyVoice 合成时长与音频时长同量级（实时率以实测为准）约 10-16 秒；上传 40-96KB 音频到 CloudBase 0.5-2 秒；checkCache、saveCache、updateAlertAudioUrl 三次存储往返合计 1-3 秒（未做单例改造时更差，见 4.2）。正常单条合计 13-23 秒，60 秒裕量充足。真正吃满超时的形态是同一实例被上游批量灌入 10 条串行执行——按 4.1 的降并发改造后单实例 60 秒内最多完成 3-4 条，其余靠多实例分摊，这正是上游按 10 条截断并用 allSettled 的设计边界（fetch-tushare-data/index.js:595、611-626）。若未来要提量，优先做连接复用而不是加函数超时。
+
+## 十二、成本与容量估算（估算值，供预算参考）
+
+假设前提均为估算：信号卡每交易日 0-10 条（上游截断 10），每条播报文本约 40-60 字；按语速 0.9 折算音频约 10-16 秒，mp3 16000Hz 单声道按 32-48kbps 估体积 40-96KB。日新增音频不超过 10 个文件、月不超过 300 个；采用 fileID 方案后 alerts.json 里只是指针，不受文件数增长影响。百炼计费以控制台账单为准；代码内置的 `totalEstimated: 1000000`（generate-tts/index.js:29）是估算额度，建议与真实配额核对后改由环境变量注入。缓存的省钱效果值得实测：同一文本重复触发（定时器重叠、人工补跑）时第二次起走缓存命中（index.js:359-366），命中率取决于上游触发模式，上线后用第十一节日志字段聚合一周即可得到真实比例，再决定是否上调单条文本上限。
+
+## 十三、与端侧 AudioPlayer 的契约对齐
+
+端侧播放（AudioPlayer.ets:17-53）对 url 的唯一要求是 AVPlayer 能直接 prepare 的网络地址，三点对齐结论：其一，mp3 16000Hz（generate-tts/index.js:221-222）在 AVPlayer 支持面内，无需转码；其二，若按第十节采用 fileID 方案，端侧**不能**直接播 fileID，必须先换临时链接——换链应放在按需调用 generate-tts 的返回体或 get-alerts 出口统一完成，因为端侧在"零三方依赖"约束下引不了云存储 SDK，换链必须在服务端做；其三，端侧 onDone 在 completed/idle 触发、onError 在 error 事件触发（AudioPlayer.ets:29-37），5.2 的半截音频会让 onDone 正常触发而内容残缺——错误形态比报错更隐蔽，这正是 partial 必须隔离出缓存与回写的最终理由。
+
 ### 自我评估
 - 正确性：4分 端点与协议结论经官方文档当日核实并明确纠正了"端点写错"的先入判断；tempFileURL 过期、额度内存态、回写竞态三项均有行号级证据；未实测项如实标注。
 - 完整性：4分 覆盖调用方式、连接管理、音频流、缓存、额度、鉴权六大维度并给出 P0-P3 清单；未展开百炼错误码全表与成本核算。
