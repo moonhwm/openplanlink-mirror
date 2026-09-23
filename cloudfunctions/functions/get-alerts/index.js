@@ -13,7 +13,7 @@
  *   }
  *
  * 触发方式：Event 函数 + CloudBase HTTP 访问服务（--path /alerts）
- *   URL: https://{envId}.service.tcloudbase.com/alertsD
+ *   URL: https://{envId}.app.tcloudbase.com/alerts
  */
 
 const ENV_ID = process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d';

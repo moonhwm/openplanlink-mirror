@@ -16,7 +16,7 @@
 const WebSocket = require('ws');
 const crypto = require('crypto');
 
-const BAILIAN_WORKSPACE_ID = process.env.BAILIAN_WORKSPACE_ID || 'ws-ay6o8osb22o9dc3t';
+const BAILIAN_WORKSPACE_ID = process.env.BAILIAN_WORKSPACE_ID || '';
 const BAILIAN_API_KEY = process.env.DASHSCOPE_API_KEY || '';
 const TTS_MODEL = 'cosyvoice-v3-flash';
 const TTS_VOICE = 'longxiaochun_v3';

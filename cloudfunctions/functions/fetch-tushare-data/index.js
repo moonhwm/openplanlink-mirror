@@ -759,7 +759,7 @@ exports.main = async (event, context) => {
         })(),
       ]);
 
-      // 处理合规检查结果
+      // 处理合规检查结果（fail-closed 硬闸：不达标信号卡降级为事实卡，剥离白话解读与自家信号角标）
       let compliantCount = 0;
       let nonCompliantCount = 0;
       for (let i = 0; i < signalAlerts.length; i++) {
@@ -771,6 +771,13 @@ exports.main = async (event, context) => {
           } else {
             nonCompliantCount++;
             console.log(`[compliance] ⚠ NON-COMPLIANT: ${signalAlerts[i].headline} → ${cr.value.safeType}`);
+            // fail-closed：不达标信号卡降级为 fact，剥离 signalNote 与自家信号角标
+            const removedNote = signalAlerts[i].signalNote || '';
+            signalAlerts[i].kind = 'fact';
+            delete signalAlerts[i].signalNote;
+            if (removedNote && signalAlerts[i].detail) {
+              signalAlerts[i].detail = String(signalAlerts[i].detail).replace(`。${removedNote}`, '');
+            }
           }
         } else {
           signalAlerts[i].complianceStatus = 'Unknown';
@@ -778,9 +785,14 @@ exports.main = async (event, context) => {
       }
       console.log(`[compliance] ${compliantCount} compliant, ${nonCompliantCount} non-compliant, ${signalAlerts.length - compliantCount - nonCompliantCount} unknown`);
 
-      // 处理TTS结果
+      // 处理TTS结果（跳过已降级为fact的卡——不达标信号卡不应播报白话解读）
       let ttsSuccess = 0;
       for (let i = 0; i < signalAlerts.length; i++) {
+        // fail-closed：已被合规检查降级为 fact 的卡跳过 TTS（不设置 audioUrl）
+        if (signalAlerts[i].kind !== 'signal') {
+          console.log(`TTS SKIP for ${signalAlerts[i].alertId}: degraded to ${signalAlerts[i].kind}, no audio`);
+          continue;
+        }
         const result = ttsResults[i];
         if (result.status === 'fulfilled' && result.value?.result?.success) {
           signalAlerts[i].audioUrl = result.value.result.audioUrl;

@@ -286,7 +286,7 @@ if (process.env.PORT || process.env.SCF_RUNTIME_PORT) {
     console.log(`HTTP ${req.method} ${req.url}`);
 
     // CORS headers——限制为已知来源而非通配
-    const allowedOrigins = ['https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com'];
+    const allowedOrigins = ['https://a2a-commonwealth-d2eepjr928e9c4d.app.tcloudbase.com'];
     const origin = req.headers.origin || '';
     if (allowedOrigins.includes(origin)) {
       res.setHeader('Access-Control-Allow-Origin', origin);
@@ -301,13 +301,17 @@ if (process.env.PORT || process.env.SCF_RUNTIME_PORT) {
     }
 
     // API Key鉴权——GET /healthz 除外（健康检查不需要鉴权）
+    // fail-closed：未配置 BROADCAST_API_KEY 时默认拒绝，防止无鉴权广播
     const url = new URL(req.url, `http://localhost:${port}`);
     if (url.pathname !== '/healthz') {
       const apiKey = req.headers['x-api-key'] || url.searchParams.get('apiKey') || '';
       const expectedKey = process.env.BROADCAST_API_KEY || '';
       if (!expectedKey) {
-        // 未配置API Key时允许访问但记录警告（便于初期部署）
-        console.log('[WARN] BROADCAST_API_KEY not configured, allowing unauthenticated access');
+        // fail-closed：未配置 Key 时拒绝访问，防止无鉴权广播端点暴露
+        console.error('[SECURITY] BROADCAST_API_KEY not configured, rejecting request (fail-closed)');
+        res.writeHead(503, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, error: 'Service unavailable: broadcast API key not configured' }));
+        return;
       } else if (apiKey !== expectedKey) {
         res.writeHead(401, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ success: false, error: 'Unauthorized: invalid API key' }));

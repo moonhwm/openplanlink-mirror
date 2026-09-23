@@ -1393,3 +1393,35 @@
   1. 两个模型 API endpoint/key 为占位（example.com），需机主注入真实码道Space（OpenPangu）与 inferhub（deepseek）通道凭据后，燃烧引擎才可真实点火烧 token
   2. LLMRouter 尚未接入 fetch-tushare-data 云函数的 signalNote 生成链路（当前仍硬编码）
   3. 燃烧台账 burn-ledger.jsonl 尚未产生真实记录（dry-run 验证已通过）
+---
+
+## 2026-09-23 · 砚坚（码道·鸿蒙开发智能体/deepseek-v4-pro-0813）· 全量代码审查 P0/P1/P2 修复
+
+- **改了什么**：
+  - **P0-H1 合规 fail-open → fail-closed**（`cloudfunctions/functions/fetch-tushare-data/index.js`）：
+    - 合规处理循环（L762-785）：non-compliant signal 卡现在降级为 fact（剥离 signalNote + 自家信号角标），而非只贴标签不拦截
+    - TTS 处理循环（L788-805）：已被降级为 fact 的卡跳过 TTS（不设置 audioUrl），不达标信号卡不再播报白话解读
+  - **P0-H2 鉴权 fail-open → fail-closed**（`cloudfunctions/functions/broadcast-a2a/index.js` L303-316）：
+    - BROADCAST_API_KEY 未配置时返回 503 拒绝访问，而非允许无鉴权广播
+  - **P1-M1 契约补 signalNote 字段**（`entry/src/main/ets/model/AlertItem.ets`）：
+    - AlertItem 接口新增 `signalNote?: string`（仅 kind=signal 时有值；合规降级后剥离）
+  - **P1-M2 凭据 fallback 去硬编码**（`cloudfunctions/functions/generate-tts/index.js` L19）：
+    - BAILIAN_WORKSPACE_ID fallback 从硬编码 'ws-ay6o8osb22o9dc3t' 改为空串
+  - **P2-L1 域名统一**（`cloudfunctions/functions/get-alerts/index.js` L16）：
+    - 注释 URL 从旧域名 service.tcloudbase.com/alertsD 修正为 app.tcloudbase.com/alerts
+  - **P2-L1b CORS 域名统一**（`cloudfunctions/functions/broadcast-a2a/index.js` L289）：
+    - allowedOrigins 从 service.tcloudbase.com 修正为 app.tcloudbase.com
+- **为什么**：
+  - 全量代码审查发现 2 个 P0 高危 fail-open 漏洞（合规+鉴权），接入 LLM 后风险放大，必须修复后才可安全上线
+  - P1 契约不同步会导致端侧无法接收 signalNote 字段；凭据硬编码 fallback 在环境变量缺失时可能连错 workspace
+  - P2 域名不一致虽不影响功能但增加维护困惑
+- **如何验证**：
+  - V1：4 个 .js 文件 `node -c` 语法验证全部通过
+  - V2：3 个云函数（fetch-tushare-data / broadcast-a2a / generate-tts）已重新部署到 CloudBase，全部部署成功
+  - V3：H1 降级逻辑——non-compliant signal 卡 kind 改为 fact + signalNote 被 delete + detail 中白话解读被剥离
+  - V4：H2 fail-closed——未配 BROADCAST_API_KEY 时返回 503 而非 200
+- **遗留**：
+  1. L3 push-token-register 无鉴权（P2，待机主确认是否需要加 Key）
+  2. L4 PushService.ets 超"占位封装"边界（P2，待机主确认是否回退）
+  3. L5 init-db 集合清单缺 push_tokens（P2，低优先级）
+  4. 端侧 HAP 未重新构建（.ets 改动需 DevEco Studio 构建）
