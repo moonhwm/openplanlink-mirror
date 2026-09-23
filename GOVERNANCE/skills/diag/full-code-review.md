@@ -2,10 +2,10 @@
 name: full-code-review
 type: diag
 created: 2026-09-22
-updated: 2026-09-22
-version: 1.0.0
+updated: 2026-09-23
+version: 1.1.0
 trigger: 对鸿蒙端侧或云函数做全量代码审查、合规走查、契约一致性检查
-source_files: [entry/src/main/ets/, cloudfunctions/functions/, GOVERNANCE/review/GLM-53-code-review-20260922.md]
+source_files: [entry/src/main/ets/, cloudfunctions/functions/, docs/audit/2026-09-23-full-review.md]
 ---
 
 # 鸿蒙全量代码审查技能
@@ -38,8 +38,14 @@ source_files: [entry/src/main/ets/, cloudfunctions/functions/, GOVERNANCE/review
 - `downloadFile` 的 `fileID` 与 `cloudPath` 两种参数在不同 SDK 版本行为可能不一致，应统一
 - ArkTS 端侧硬约束核验可用 "无 K线/图表组件 + 字号范围 + 状态机完整性" 三查法快速通过
 - 注释错别字类低级问题单独清点，修复成本近乎为零
+- **fail-open 是云函数最高危模式**：合规检查"只贴标签不拦截"等于没有合规检查；鉴权"未配Key时允许访问"等于没有鉴权。接入 LLM 后风险放大。修复必须 fail-closed：不达标降级、未配Key拒绝
+- **合规降级必须联动 TTS 跳过**：signal 卡被降级为 fact 后，TTS 循环必须跳过该卡（不设置 audioUrl），否则降级卡仍会播报白话解读，合规闸门形同虚设
+- **端侧场景鉴权用 bundleName 白名单优于 API Key**：API Key 需在端侧硬编码（不安全），bundleName 白名单由系统签名保证不可伪造，更适合 Push token 注册等端侧发起的请求
+- **契约字段必须端侧+服务端双向同步**：服务端新增 signalNote 字段但端侧 AlertItem.ets 未声明，会导致端侧 JSON 解析时该字段被丢弃。审查时必须对照端侧 interface 与服务端返回 JSON 逐字段核验
+- **域名迁移后必须全局搜索旧域名**：从 service.tcloudbase.com 迁移到 app.tcloudbase.com 后，注释、CORS allowedOrigins 中仍残留旧域名，需全局搜索彻底清理
+- **AGENTS.md 约束条件需结合当前状态判断**：PushService.ets 标记为"占位封装"约束，但约束原文是"AGC 未配置前不得展开实装"——AGC 已配置后实装即合理。审查时不能只看约束字面，需结合约束的触发条件判断
 
 ## 关联文档
 - AGENTS.md（工程硬约束）
 - GOVERNANCE/AUDIT_REPORT.md（对抗性审查基线）
-- GOVERNANCE/review/GLM-53-code-review-20260922.md（本次审查报告）
+- docs/audit/2026-09-23-full-review.md（2026-09-23 全量审查报告：2P0+2P1+5P2）
