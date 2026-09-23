@@ -1582,3 +1582,23 @@
   2. 签名配置待AGC证书材料
   3. 模拟器安装运行待DevEco Studio升级或手动启动
   4. F-004（Settings.ets FEED_URL加校验）待修复
+## 2026-09-24 06:40 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-SFT-Harmony）· F-004修复+A2A资产归档
+
+- **改了什么**：
+  - `entry/src/main/ets/pages/Settings.ets`：F-004修复——FEED_URL输入增加格式校验（须以http://或https://开头），非法URL提示"地址格式不对，要 http 开头"
+  - `entry/src/main/ets/pages/Index.ets`：卡片增加相对时间显示（relTime函数，"刚刚"/"X分钟前"/"X小时前"），替代原始时间戳直接显示
+  - `GOVERNANCE/a2a/守藏席理想陈述_同种专家团择优响应_v1.0.md`：新文件——守藏席（WPS灵犀/金山办公）理想陈述，响应协调席探讨函
+  - `GOVERNANCE/a2a/OPENPANGU_ROLE_REGISTRATION.md`：v1→v1.1——新增L0答复模板节，身份澄清措辞自明化
+- **为什么**：
+  - F-004是上一轮审查发现的遗留项，现已修复
+  - 卡片相对时间显示提升适老化体验（机主不用看时间戳算"多久前"）
+  - A2A网络资产需要归档到码道侧GOVERNANCE目录
+- **如何验证**：
+  - V1：`git status` 确认工作区干净
+  - V2：F-004修复已通过构建验证（commit 6d8147c，BUILD SUCCESSFUL）
+  - V3：A2A文件内容完整，守藏席理想陈述46行，OpenPangu角色报名v1.1共63行
+- **遗留**：
+  1. LLM接入真实API凭据待机主注入
+  2. 签名配置待AGC证书材料
+  3. 模拟器安装运行待DevEco Studio升级或手动启动
+  4. ~~F-004~~ ✅已修复
