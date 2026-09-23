@@ -2,18 +2,21 @@
  * fetch-tushare-data 云函数
  * 
  * 功能：
- * 1. 调用 Tushare API 获取A股日线行情数据
+ * 1. 获取A股日线行情数据（东方财富API为主，Tushare为fallback）
  * 2. 筛选涨跌幅 ≥ 阈值（默认5%）的异动股票
  * 3. 将异动记录写入 CloudBase 存储（alerts/alerts.json）
  * 4. 返回异动列表 JSON
  * 
  * 触发方式：定时触发器或手动调用
- * 环境变量：TUSHARE_TOKEN（必需）
+ * 环境变量：TUSHARE_TOKEN（可选，用于 trade_cal 和 fallback）
  * 
- * 数据接口策略（按 token 权限降级）：
- *   1. daily（日线行情）—— 基础权限，需指定 trade_date
- *   2. trade_cal（交易日历）—— 基础权限，频率限制1次/小时，缓存最新交易日
- *   3. top_list（龙虎榜）—— 高级权限，当前 token 无权限
+ * 数据接口策略：
+ *   主数据源：东方财富 API（免费，无频率限制，实时数据）
+ *     - 分页获取全量A股行情（开高低收、涨跌幅、成交量、换手率）
+ *   辅助数据源：Tushare API（需 token）
+ *     - trade_cal：获取最新交易日（频率限制1次/小时）
+ *     - daily：fallback（当前 token 返回404，暂不可用）
+ *     - stock_basic：获取股票名称映射（频率限制1次/小时）
  */
 
 const TUSHARE_API_URL = 'https://api.tushare.pro';
@@ -369,14 +372,116 @@ async function getLatestTradeDate() {
 }
 
 /**
+ * 从东方财富 API 分页获取全量A股日线行情数据
+ * 替代 Tushare daily 接口（当前 token 返回 404）
+ * 
+ * 字段映射（东方财富 → Tushare daily 格式）：
+ *   f12 → ts_code（需转换为 Tushare 格式，如 000001 → 000001.SZ）
+ *   f14 → name
+ *   f3  → pct_chg
+ *   f2  → close
+ *   f17 → open
+ *   f15 → high
+ *   f16 → low
+ *   f18 → pre_close
+ *   f5  → vol
+ *   f6  → amount
+ *   f8  → turnover_rate（额外字段）
+ */
+async function fetchEastMoneyDaily() {
+  const marketFilters = ['m:0+t:6', 'm:0+t:80', 'm:1+t:2', 'm:1+t:23'];
+  const marketNames = ['深市A股', '深市创业板', '沪市A股', '沪市科创板'];
+  const allRecords = [];
+
+  for (let mi = 0; mi < marketFilters.length; mi++) {
+    const fs = marketFilters[mi];
+    const marketName = marketNames[mi];
+    let page = 1;
+    let marketTotal = 0;
+
+    while (page <= 50) { // 安全上限：50页 × 100条 = 5000条/市场
+      try {
+        const url = `https://80.push2.eastmoney.com/api/qt/clist/get?pn=${page}&pz=100&po=1&np=1&fltt=2&invt=2&fs=${encodeURIComponent(fs)}&fields=f12,f14,f2,f3,f4,f5,f6,f7,f8,f15,f16,f17,f18`;
+        const data = await requestHttps(url, { timeout: 10000 });
+
+        if (!data.data || !data.data.diff || data.data.diff.length === 0) break;
+
+        if (page === 1) {
+          marketTotal = data.data.total || 0;
+          console.log(`[${marketName}] 总计 ${marketTotal} 只股票，开始分页获取...`);
+        }
+
+        for (const row of data.data.diff) {
+          // 跳过停牌/退市股票（字段值为 "-"）
+          if (row.f3 === '-' || row.f2 === '-') continue;
+
+          const code = row.f12;
+          // 转换为 Tushare 格式的 ts_code
+          let tsCode;
+          if (code.startsWith('6') || code.startsWith('9')) {
+            tsCode = `${code}.SH`;
+          } else {
+            tsCode = `${code}.SZ`;
+          }
+
+          allRecords.push({
+            ts_code: tsCode,
+            name: row.f14,
+            pct_chg: parseFloat(row.f3 || 0),
+            close: parseFloat(row.f2 || 0),
+            open: parseFloat(row.f17 || 0),
+            high: parseFloat(row.f15 || 0),
+            low: parseFloat(row.f16 || 0),
+            pre_close: parseFloat(row.f18 || 0),
+            vol: parseFloat(row.f5 || 0),
+            amount: parseFloat(row.f6 || 0),
+            turnover_rate: parseFloat(row.f8 || 0),
+          });
+        }
+
+        if (data.data.diff.length < 100) break; // 最后一页
+        page++;
+      } catch (e) {
+        console.log(`[${marketName}] 第${page}页获取失败: ${e.message}`);
+        break;
+      }
+    }
+
+    console.log(`[${marketName}] 获取完成，累计 ${allRecords.length} 条`);
+  }
+
+  console.log(`东方财富全量数据: ${allRecords.length} 条`);
+  return allRecords;
+}
+
+/**
  * 获取日线行情数据并筛选异动
- * 关键修复：用 stock_basic 名称映射补充 daily API 返回的空 name 字段
+ * 数据源优先级：东方财富 API（主） → Tushare daily（fallback）
  */
 async function getDailyMovers() {
-  const tradeDate = await getLatestTradeDate();
-  console.log(`Fetching daily data for ${tradeDate}...`);
+  // 主数据源：东方财富 API
+  console.log('Fetching daily data from EastMoney API...');
+  const eastMoneyRecords = await fetchEastMoneyDaily();
 
-  // 并行获取日线数据和股票名称映射
+  if (eastMoneyRecords.length > 0) {
+    console.log(`Got ${eastMoneyRecords.length} records from EastMoney`);
+
+    const movers = eastMoneyRecords.filter(item => {
+      const pct = parseFloat(item.pct_chg || 0);
+      return !isNaN(pct) && Math.abs(pct) >= THRESHOLD;
+    });
+
+    console.log(`Filtered to ${movers.length} movers above ${THRESHOLD}%`);
+    const withName = movers.filter(m => m.name && m.name !== m.ts_code).length;
+    console.log(`Name mapping: ${withName}/${movers.length} have Chinese names`);
+    return movers;
+  }
+
+  // Fallback：Tushare daily API（当前返回 404，暂不可用）
+  console.log('EastMoney API returned no data, trying Tushare daily fallback...');
+  const tradeDate = await getLatestTradeDate();
+  console.log(`Fetching daily data from Tushare for ${tradeDate}...`);
+
   const [dailyResult, nameMap] = await Promise.all([
     callTushare('daily', {
       trade_date: tradeDate,
@@ -395,7 +500,6 @@ async function getDailyMovers() {
       dailyResult.fields.forEach((field, i) => {
         obj[field] = row[i];
       });
-      // 关键修复：用 stock_basic 映射补充名称，daily API 的 name 字段经常为空
       if (!obj.name && obj.ts_code) {
         const mappedName = nameMap.get(obj.ts_code);
         if (mappedName) {
@@ -409,7 +513,6 @@ async function getDailyMovers() {
     });
 
     console.log(`Filtered to ${movers.length} movers above ${THRESHOLD}%`);
-    // 统计有多少条成功映射了名称
     const withName = movers.filter(m => m.name && m.name !== m.ts_code).length;
     console.log(`Name mapping: ${withName}/${movers.length} have Chinese names`);
     return movers;
@@ -498,10 +601,13 @@ function createAlertItems(movers) {
       headline = `${name} 横盘 ${absPct}%`;
     }
 
-    // 补充细节
+    // 补充细节（含换手率——东方财富API提供）
     const close = parseFloat(mover.close || 0).toFixed(2);
     const vol = parseFloat(mover.vol || 0).toFixed(0);
-    const detail = `当前价 ${close}元，成交量 ${vol}手`;
+    const turnoverRate = parseFloat(mover.turnover_rate || 0).toFixed(2);
+    const detail = turnoverRate > 0
+      ? `当前价 ${close}元，成交量 ${vol}手，换手率 ${turnoverRate}%`
+      : `当前价 ${close}元，成交量 ${vol}手`;
 
     return {
       alertId: `${symbol}_${now}`,
@@ -591,16 +697,10 @@ async function saveAlertsToDB(alerts) {
  * 云函数入口
  */
 exports.main = async (event, context) => {
-  console.log('fetch-tushare-data invoked', JSON.stringify({ THRESHOLD, token: TUSHARE_TOKEN ? 'set' : 'not set' }));
+  console.log('fetch-tushare-data invoked', JSON.stringify({ THRESHOLD, token: TUSHARE_TOKEN ? 'set' : 'not set', dataSource: 'EastMoney API (primary)' }));
 
-  if (!TUSHARE_TOKEN) {
-    return {
-      success: false,
-      error: 'TUSHARE_TOKEN not configured',
-      items: [],
-      serverTs: Math.floor(Date.now() / 1000),
-    };
-  }
+  // TUSHARE_TOKEN 不再是必需——东方财富 API 是主数据源
+  // token 仅用于 trade_cal（获取交易日）和 fallback
 
   try {
     const movers = await getDailyMovers();
