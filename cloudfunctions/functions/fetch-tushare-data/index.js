@@ -231,29 +231,7 @@ async function getStockNameMap() {
         nameObj[tsCode] = name;
       }
     }
-        const stocks = data.data.diff;
-        if (stocks.length === 0) break;
 
-        for (const s of stocks) {
-          const code = s.f12;
-          const name = s.f14;
-          if (!code || !name) continue;
-
-          let tsCode;
-          if (code.startsWith('6')) tsCode = code + '.SH';
-          else if (code.startsWith('0') || code.startsWith('3')) tsCode = code + '.SZ';
-          else if (code.startsWith('8') || code.startsWith('4')) tsCode = code + '.BJ';
-          else continue;
-
-          nameMap.set(tsCode, name);
-          nameObj[tsCode] = name;
-        }
-
-        console.log(`EastMoney: fs=${fs}, page=${page}, got ${stocks.length} stocks`);
-        if (stocks.length < 100) break;
-        page++;
-      }
-    }
 
     console.log(`EastMoney total: ${nameMap.size} entries`);
     if (nameMap.size > 0) {
