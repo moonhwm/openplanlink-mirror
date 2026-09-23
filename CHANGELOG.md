@@ -1064,3 +1064,34 @@
   3. get-alerts的F-003低危（fileID vs cloudPath混用）——确认fileID方式正确，无需修复
   4. Moon燃烧计划书待机主在ZCode中执行（窗口09:00已过期）
   5. 剩余技能文档（collab/diag/governance/crypto类）待编写
+## 2026-09-23 09:30 · 砚坚（CodeArts GLM-5.2）· P2修复+collab/diag技能文档+A2A治理目录
+
+- **起因**：自主运维继续推进，完成P2级修复和第二批技能文档编写
+- **改了什么**：
+  1. P2-1：TTS优先级排序——`fetch-tushare-data/index.js`中signalAlerts按涨跌幅绝对值降序排列，确保最显著的异动优先播报
+  2. P2-2：broadcast-a2a HTTP鉴权（F-002高危修复）——添加API Key校验（`BROADCAST_API_KEY`环境变量）、CORS来源限制（仅允许`*.cloudbase.net`）、`/healthz`健康检查端点、未授权请求返回401
+  3. collab类技能文档2份：
+     - `GOVERNANCE/skills/collab/a2a-handshake.md`——A2A多AI席位握手协议（心跳格式、角色注册、冲突仲裁）
+     - `GOVERNANCE/skills/collab/quota-burning.md`——额度燃烧策略（GLM-5.3-Flash窗口燃烧、模型切换决策树）
+  4. diag类技能文档2份：
+     - `GOVERNANCE/skills/diag/tushare-token-failure.md`——Tushare Token失效诊断流程（检测、降级、恢复）
+     - `GOVERNANCE/skills/diag/tts-websocket.md`——TTS WebSocket连接诊断（百炼API、ws模块、超时处理）
+  5. A2A治理目录3份文档：
+     - `GOVERNANCE/a2a/A2A_DISPATCH_AND_PLAN.md`——A2A调度与计划
+     - `GOVERNANCE/a2a/TECH_EVAL_GLM_RL_MIMO.md`——GLM强化学习多输入多输出技术评估
+     - `GOVERNANCE/a2a/YANJIAN_ROLE_REGISTRATION.md`——砚坚角色注册文件
+- **为什么**：
+  - TTS排序确保用户最先听到最重要的异动（涨跌幅最大的），适老化场景下顺序即优先级
+  - F-002是安全审计标记的高危——HTTP模式无鉴权+CORS全开，任何人可触发广播
+  - 技能文档是AGENTS.md §五自主进化机制的强制要求
+  - A2A治理文档为多AI共治网络提供制度基础
+- **如何验证**：
+  - V1：grep确认signalAlerts排序逻辑存在——通过
+  - V2：grep确认broadcast-a2a含API Key校验和CORS限制——通过
+  - V3：4份技能文档文件存在且内容完整——通过
+  - V4：3份A2A治理文档文件存在——通过
+- **遗留**：
+  1. `BROADCAST_API_KEY`环境变量需在CloudBase控制台配置
+  2. 剩余技能文档（governance类5份、crypto类5份）待编写
+  3. Moon燃烧计划书待机主在ZCode中执行
+  4. 端侧ArkTS代码审查待开展

@@ -644,7 +644,10 @@ exports.main = async (event, context) => {
     // 信号卡是"自家信号"，更需要语音播报；事实卡用户可自行阅读
     // 限制最多10条，避免百炼额度过度消耗
     // DKnowC 合规检查：对播报文本进行安全合规检测，添加 complianceStatus 元数据
-    const signalAlerts = alerts.filter(a => a.kind === 'signal').slice(0, 10);
+    const signalAlerts = alerts
+      .filter(a => a.kind === 'signal')
+      .sort((a, b) => Math.abs(b.pctChg) - Math.abs(a.pctChg))
+      .slice(0, 10);
     if (signalAlerts.length > 0) {
       console.log(`Generating TTS for ${signalAlerts.length} signal alerts...`);
 

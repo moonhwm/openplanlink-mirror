@@ -125,19 +125,62 @@ AppStorage.setOrCreate('fontLevel', level);
 1. **P2-3：`autoPlay` 信号无消费者。** `grep` 证实 `autoPlay` 仅在 `EntryAbility.ets:66`（小艺 PLAY_AUDIO action）写入，全仓库无任何读取。当前行为等同降级为 pendingAlertId 播报，功能上碰巧可用，但属死代码且语义丢失（「直接播放」与「定位播报」未区分）。整改：要么在 `playById` 里读取该标志实现「跨免打扰强制播放」语义，要么删除写入行并注释说明，二选一，禁止悬挂。
 2. **小艺 action 的外部可拉起性**：`module.json5:30-36` 把 `QUERY_ALERTS/DETAIL_ALERT/PLAY_AUDIO` 三个 action 声明在 skills 中，任意应用可构造 want 拉起。安全影响评估见 A35（结论：因 `playById` 只在当前列表内匹配 alertId，`Index.ets:202-210`，外部无法注入播报内容，风险有限）。
 
-## 六、问题清单与整改优先级
+## 六、NavDestination 生命周期对照与拉起场景走查
+
+### 6.1 两套生命周期对照（P1-3 的机理依据）
+
+| 事件 | @Entry 页面（Index） | NavDestination（Settings） | 本项目挂接点 |
+|---|---|---|---|
+| 首次挂载 | aboutToAppear | aboutToAppear | Index.ets:98；Settings.ets:43 |
+| 每次转可见 | onPageShow（页面级） | onShown（组件级） | Index.ets:104；Settings 未挂 |
+| 每次转隐藏 | onPageHide | onHidden | 均未挂 |
+| 销毁 | aboutToDisappear | aboutToDisappear / onWillDisappear | Index.ets:110 |
+
+机理结论：pushPath 的出入栈发生在同一个 @Entry 页面内部，Index 的 onPageShow/onPageHide **不因** Settings 出入栈而触发，页面级显隐事件只响应 Ability 前后台与页面级切换。所以「设置页改配置→返回→主页面刷新」唯一可靠通道是显式数据同步（P1-3 方案），不能指望生命周期兜底。另一约束登记：Settings.ets:43-45 用 aboutToAppear 重读配置，正确性依赖「每次入栈都新建组件实例、无复用」这一隐含前提，若未来为性能引入 @Reusable 复用，必须改挂 NavDestination 的 onShown，否则读到的是旧状态。
+
+### 6.2 拉起场景逐条走查
+
+| 场景 | 入口 | 完整链路 | 判定 |
+|---|---|---|---|
+| 冷启动点通知 | onCreate want 补检（EntryAbility.ets:25-28） | 写 pendingAlertId → loadContent → aboutToAppear checkPendingAlertId（Index.ets:98-102） | 通过 |
+| 热启动点通知 | onNewWant（EntryAbility.ets:45-48） | 写 pendingAlertId → onPageShow（Index.ets:104-108）消费 | 通过 |
+| 小艺 DETAIL_ALERT / PLAY_AUDIO | onNewWant（EntryAbility.ets:55-68） | 写 pendingAlertId（另写 autoPlay，66 行，孤立信号见 P2-3） | 部分通过 |
+| 前台收 DEFAULT 推送 | registerPushMessageReceiver（EntryAbility.ets:83-99） | 仅写 pendingAlertId（93 行），无消费时机 | **不通过，P1-4** |
+
+**P1-4（本轮新发现，P1 级）：前台推送的自动播报失效。** 应用在前台收到 DEFAULT 推送时，接收器把 alertId 写入 AppStorage（EntryAbility.ets:93）便结束；而 checkPendingAlertId 仅有的两个调用点（Index.ets:98-102 与 104-108）在该场景都不执行——前台时页面一直可见、没有发生任何页面切换或前后台翻转，onPageShow 不会触发。结果 pendingAlertId 悬挂到下一次前后台切换才被消费，且因前台轮询照常刷新列表、卡片本身会出现，缺陷被「卡片反正看得到」部分掩盖，更难察觉——但「点击通知自动播报」的产品承诺在前台场景实际落空。整改：
+
+```typescript
+// Index.ets：绑定 AppStorage 信号并监听变更，前台推送即刻消费
+@StorageLink('pendingAlertId') @Watch('onPendingAlert') pendingAlertId: string = '';
+private onPendingAlert(): void { this.checkPendingAlertId(); }
+// checkPendingAlertId（Index.ets:138-144）内部先 AppStorage.delete 再消费，
+// 重复触发安全；StorageLink 写回会同步 EntryAbility 侧写入，无双写冲突。
+```
+
+### 6.3 入栈 API 对照与选用规范
+
+| API | 特点 | 本项目选用 |
+|---|---|---|
+| pushPath({name, param}) | 字符串路由名 + 参数，配合 navDestination 工厂 | 在用（Index.ets:349） |
+| pushPathByName | 等价便捷写法 | 未用，能力等价 |
+| pushDestination | 支持 route_map 声明式解析与 onNotFound 错误回调 | route_map 演进（P2-4）落地时推荐改用 |
+
+选用约束登记：全应用统一一种入栈 API，禁止混用，否则栈操作来源无法审计；参数传递统一走 param 字段（见 3.3），AppStorage 只承载事件信号，两通道不混用。
+
+## 七、问题清单与整改优先级
 
 | 编号 | 级别 | 问题 | 位置 | 整改方向 |
 |---|---|---|---|---|
 | P1-1 | P1 | 设置入口无防重复入栈 | Index.ets:349 | 入栈前 getAllPathName 查重 |
 | P1-2 | P1 | 返回按钮依赖 onReady 注入，null 窗口静默失效 | Settings.ets:22,161-165,553-555 | 判空反馈或去注入化取栈 |
 | P1-3 | P1 | 设置返回后主界面状态不刷新（待真机验证） | Index.ets:98-108 | AppStorage 镜像 + @StorageLink |
+| P1-4 | P1 | 前台推送 pendingAlertId 无消费时机，自动播报失效 | EntryAbility.ets:93；Index.ets:98-108 | @StorageLink + @Watch 即时消费 |
 | P2-1 | P2 | 路由名硬编码两处 | Index.ets:349,450 | 路由常量表 |
 | P2-2 | P2 | 未知路由静默返回 null | Index.ets:453 | 补 hilog.warn |
 | P2-3 | P2 | autoPlay 信号无消费者 | EntryAbility.ets:66 | 实装语义或删除 |
 | P2-4 | P2 | route_map 演进项 | 全局 | 子页 ≥3 时再迁 |
 
-## 七、验收清单
+## 八、验收清单
 
 - [ ] `grep -rn "router\." entry/src/main/ets/` 持续为空（已完成本次审查，输出 NO router API）。
 - [ ] 连点设置按钮 3 次，栈中 Settings 实例数 ≤ 1。
@@ -145,6 +188,7 @@ AppStorage.setOrCreate('fontLevel', level);
 - [ ] 设置页改字号/主题后返回主页立即生效（@StorageLink 联动）。
 - [ ] 路由名只出现在常量表一处定义。
 - [ ] 通知/小艺拉起 → pendingAlertId → 播报定位链路回归通过（冷启动 + 热启动两路）。
+- [ ] 前台收 DEFAULT 推送后，无需前后台切换即触发定位播报（P1-4 回归）。
 - [ ] 栈内最深仍为 2 层，无 replacePath 调用。
 
 ### 自我评估

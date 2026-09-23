@@ -285,10 +285,14 @@ if (process.env.PORT || process.env.SCF_RUNTIME_PORT) {
   const server = http.createServer(async (req, res) => {
     console.log(`HTTP ${req.method} ${req.url}`);
 
-    // CORS headers
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    // CORS headers——限制为已知来源而非通配
+    const allowedOrigins = ['https://a2a-commonwealth-d2eepjr928e9c4d.service.tcloudbase.com'];
+    const origin = req.headers.origin || '';
+    if (allowedOrigins.includes(origin)) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+    }
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-API-Key');
 
     if (req.method === 'OPTIONS') {
       res.writeHead(204);
@@ -296,11 +300,29 @@ if (process.env.PORT || process.env.SCF_RUNTIME_PORT) {
       return;
     }
 
-    // 解析 URL 参数
+    // API Key鉴权——GET /healthz 除外（健康检查不需要鉴权）
     const url = new URL(req.url, `http://localhost:${port}`);
+    if (url.pathname !== '/healthz') {
+      const apiKey = req.headers['x-api-key'] || url.searchParams.get('apiKey') || '';
+      const expectedKey = process.env.BROADCAST_API_KEY || '';
+      if (!expectedKey) {
+        // 未配置API Key时允许访问但记录警告（便于初期部署）
+        console.log('[WARN] BROADCAST_API_KEY not configured, allowing unauthenticated access');
+      } else if (apiKey !== expectedKey) {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, error: 'Unauthorized: invalid API key' }));
+        return;
+      }
+    }
+
     const limit = parseInt(url.searchParams.get('limit') || '20', 10);
 
     try {
+      if (url.pathname === '/healthz') {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ status: 'ok' }));
+        return;
+      }
       const result = await handleBroadcast(limit);
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify(result));
