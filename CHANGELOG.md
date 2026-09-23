@@ -1486,3 +1486,20 @@
   - V2：DETAIL_ALERT → 无 autoPlay → force=false → 仍受两个检查约束（行为不变）
 - **遗留**：
   1. xiaoYiQuery 的真正消费方（Index 回填小艺摘要）待小艺 A2A 数据返回协议对接
+---
+
+## 2026-09-24 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS）· Moon燃烧补充产出归档
+
+- **改了什么**：
+  - 84 文件变更，2101 行新增，27 行删除
+  - **Swarm A2A 编排 48 篇补充章节**：每篇增补约10行（模式语言维护、案例化、词汇纪律、演化通道等）
+  - **技能文档增补**：bridge-script.md 加常见问题速答、_count.ps1 路径硬编码修复（改用 $PSScriptRoot）、多个 code 类技能文档内容补充
+  - **新增文件**：
+    - `GOVERNANCE/a2a/BURN_COLLABORATION_LETTER.md` — 守藏席→码道Agent燃烧协作函
+    - `GOVERNANCE/burn-output/H1_harmonyapp项目架构复盘需求.md` — Moon编纂的项目架构复盘
+    - `GOVERNANCE/burn-output/H2_fetchtusharedata演进.md` — fetch-tushare-data 云函数演进复盘
+    - `GOVERNANCE/burn-output/H3_适老化设计实战复盘2834fp大字白.md` — 适老化设计复盘
+    - `GOVERNANCE/burn-output/swarm/a23-a2a-orchestration/VALVE.md` — 蜂群阀门机制
+    - `GOVERNANCE/skills/diag/hvigor-chinese-path.md` — hvigor中文路径构建失败诊断技能
+- **为什么**：Moon席位（GLM-5.3-Flash）在燃烧窗口产出的知识资产补充，需归档提交以保持工作区干净
+- **如何验证**：`git status` 确认工作区无未提交修改
