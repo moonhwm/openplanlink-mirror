@@ -18,7 +18,7 @@ exports.main = async (event, context) => {
   const app = getCloudbaseApp();
   const db = app.database();
   
-  const collections = ['alerts', 'user_stocks', 'user_preferences', 'tts_cache'];
+  const collections = ['alerts', 'user_stocks', 'user_preferences', 'tts_cache', 'push_tokens'];
   const results = [];
   
   for (const coll of collections) {

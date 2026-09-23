@@ -1425,3 +1425,24 @@
   2. L4 PushService.ets 超"占位封装"边界（P2，待机主确认是否回退）
   3. L5 init-db 集合清单缺 push_tokens（P2，低优先级）
   4. 端侧 HAP 未重新构建（.ets 改动需 DevEco Studio 构建）
+---
+
+## 2026-09-23 · 砚坚（码道·鸿蒙开发智能体/deepseek-v4-pro-0813）· P2 遗留项修复
+
+- **改了什么**：
+  - **L3 push-token-register 加鉴权**（`cloudfunctions/functions/push-token-register/index.js`）：
+    - 新增 `ALLOWED_BUNDLE_NAMES` 白名单（当前仅 `com.yehang.stockpulse`），未知 bundleName 的注册请求被拒绝
+    - 端侧场景不适合 API Key（需硬编码），用 bundleName 白名单更合适
+  - **L4 PushService.ets 判定**：AGC 已配置（APP ID: 6917616539905779525），PushService 实装合理，不需回退。AGENTS.md §二.4 的"不得展开实装"约束针对"AGC 未配置前"，现已配置。
+  - **L5 init-db 补 push_tokens 集合**（`cloudfunctions/functions/init-db/index.js` L21）：
+    - collections 数组从 4 项补为 5 项，加入 `push_tokens`
+- **为什么**：
+  - L3：无鉴权的 token 注册端点可被恶意注入垃圾 token，虽 broadcast-a2a 已 fail-closed 无法触发广播，但纵深防御仍需加白名单
+  - L4：审查时标记为"待机主确认"，经核查 AGC 状态后判定实装合理
+  - L5：push_tokens 集合缺位会导致首次部署时 token 注册失败
+- **如何验证**：
+  - V1：2 个 .js 文件 `node -c` 语法验证通过
+  - V2：2 个云函数（push-token-register / init-db）已重新部署，全部成功
+- **遗留**：
+  1. 端侧 HAP 未重新构建（AlertItem.ets 的 signalNote 字段改动需 DevEco Studio 构建）
+  2. 全量代码审查所有发现项已修复完毕（2 P0 + 2 P1 + 5 P2 = 9 项全部 closed）

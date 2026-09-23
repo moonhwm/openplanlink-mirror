@@ -25,10 +25,19 @@ function getCloudbaseApp() {
   return _cloudbaseApp;
 }
 
+// 合法 bundleName 白名单——防止恶意注册垃圾 token
+const ALLOWED_BUNDLE_NAMES = ['com.yehang.stockpulse'];
+
 /**
  * 注册或更新 Push Token
  */
 async function registerToken(token, bundleName) {
+  // 鉴权：bundleName 必须在白名单中
+  if (!ALLOWED_BUNDLE_NAMES.includes(bundleName)) {
+    console.error(`[SECURITY] Rejected token registration from unknown bundle: ${bundleName}`);
+    return { success: false, error: 'Unauthorized: unknown bundle name' };
+  }
+
   const app = getCloudbaseApp();
   const db = app.database();
 
