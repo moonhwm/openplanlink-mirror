@@ -43,6 +43,7 @@ struct Index {
   @State watchlist: string[] = [];
   @State readAlertIds: string[] = [];
   @State playHistory: PlayHistoryItem[] = [];
+  private readAlertIdSet: Set<string> = new Set();
   private timer: number = -1;
   private consecutiveFailures: number = 0;
   private navStack: NavPathStack = new NavPathStack();
@@ -132,6 +133,7 @@ struct Index {
     this.dndActive = SettingsService.isDndActive(this.dndEnabled, dndStart, dndEnd);
     this.watchlist = await SettingsService.getWatchlist();
     this.readAlertIds = await SettingsService.getReadAlertIds();
+    this.readAlertIdSet = new Set(this.readAlertIds);
     this.playHistory = await SettingsService.getPlayHistory();
   }
 
@@ -265,8 +267,9 @@ struct Index {
       this.playingId = item.alertId;
       // 标记已读 + 记录播报历史
       SettingsService.markAlertRead(item.alertId);
-      if (!this.readAlertIds.includes(item.alertId)) {
+      if (!this.readAlertIdSet.has(item.alertId)) {
         this.readAlertIds = [...this.readAlertIds, item.alertId];
+        this.readAlertIdSet.add(item.alertId);
       }
       const historyItem: PlayHistoryItem = {
         alertId: item.alertId,
@@ -358,7 +361,7 @@ struct Index {
                 Column({ space: this.cardInnerSpace }) {
                   Row() {
                     // 未读标记：小圆点
-                    if (!this.readAlertIds.includes(item.alertId)) {
+                    if (!this.readAlertIdSet.has(item.alertId)) {
                       Circle({ width: 10, height: 10 })
                         .fill(this.theme.accentGold)
                         .margin({ right: 8 })

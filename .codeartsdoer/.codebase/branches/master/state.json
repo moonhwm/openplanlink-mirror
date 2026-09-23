@@ -3,8 +3,8 @@
   "schema": "docgen-state-v1",
   "branch": "master",
   "branch_raw": "master",
-  "version_token": 509,
-  "updated_at": "2026-09-23T03:25:51.851Z",
+  "version_token": 511,
+  "updated_at": "2026-09-23T03:36:35.786Z",
   "status": "watching",
   "last_doc_generated_at": "2026-09-22T11:28:42.959Z",
   "changed_files": [
@@ -1531,7 +1531,7 @@
     {
       "path": "CHANGELOG.md",
       "status": "modified",
-      "detected_at": "2026-09-23T03:25:50.269Z"
+      "detected_at": "2026-09-23T03:36:31.867Z"
     },
     {
       "path": "GOVERNANCE/DECISION_LEDGER_POINTER.md",
@@ -4412,11 +4412,16 @@
       "path": "GOVERNANCE/skills/code/A35_fetchtusharedata云函数深度审查.md",
       "status": "added",
       "detected_at": "2026-09-23T03:24:30.623Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/A36_端侧性能优化审查.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:34:40.161Z"
     }
   ],
   "summary": {
-    "total": 881,
-    "added": 877,
+    "total": 882,
+    "added": 878,
     "modified": 4,
     "removed": 0
   },

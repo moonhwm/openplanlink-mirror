@@ -1174,3 +1174,20 @@
   1. P2: `requestHttps` 在 fetch-tushare-data 和 broadcast-a2a 中重复定义（共享模块需额外配置，暂不修复）
   2. P2: `getCloudbaseApp` 在全部6个云函数中重复定义（同上）
   3. 云函数审查为代码走查，未在云端实跑验证——部署验证留待机主安排
+## 2026-09-23 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· H2端侧性能优化
+
+- **改了什么**：
+  - `entry/src/main/ets/pages/Index.ets`：新增 `private readAlertIdSet: Set<string>` 缓存，将 ForEach 中 `readAlertIds.includes()` (O(n)) 替换为 `readAlertIdSet.has()` (O(1))，在 loadSettings() 和 togglePlay() 中同步更新 Set。最坏情况从4000次比较降至20次哈希查找。
+  - `GOVERNANCE/skills/code/A36_端侧性能优化审查.md`（新建）：性能审查技能文档，覆盖 List虚拟化、渲染优化、内存泄漏排查、AudioPlayer竞态分析、AlertPoller退避策略。
+- **为什么**：
+  - readAlertIds 上限200条，ForEach 中对每个列表项执行 includes() 线性搜索，最坏情况4000次比较。Set 缓存将查找复杂度从 O(n) 降至 O(1)。
+  - 性能审查技能文档确保审查流程可复用。
+- **如何验证**：
+  - V1：grep 确认 `readAlertIds.includes` 在 Index.ets 中不再出现——通过
+  - V2：确认 readAlertIdSet 在 loadSettings() 和 togglePlay() 中都有同步更新——通过
+  - V3：确认 aboutToDisappear 中 timer 清理 + AudioPlayer.stop()——通过
+  - V4：确认 AlertPoller finally 中 req.destroy()——通过
+- **遗留**：
+  1. P3: loadSettings() 在 aboutToAppear+onPageShow 可能重复执行（收益不大，不修复）
+  2. P3: playHistory 数组重建（50条上限，影响可忽略）
+  3. 性能审查为代码走查，未在真机/模拟器上实跑——真机验证留待机主安排
