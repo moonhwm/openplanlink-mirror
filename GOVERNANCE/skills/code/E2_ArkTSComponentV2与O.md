@@ -123,6 +123,97 @@ struct FeedPanel {
 4. **迁移节奏建议**：先迁 `AlertFeed/AlertItem` 数据契约（第 2 步），再迁 AlertCard 叶子组件，Index 页面最后；每步保持可编译可运行，不为迁移停迭代。
 5. **首屏永不空白约束不依赖范式**：演示卡数据同样走 @Trace 属性，服务未连通时喂示例数据即可，无特殊处理。
 
+## 八、双向同步落地：@Param + @Event（含 !! 语法糖）
+
+@Link 的隐式双向被拆成显式两件套后，标准写法如下：
+
+```ts
+@ComponentV2
+struct PlayToggle {
+  @Param playingId: string = ''          // 父 → 子，只读
+  @Event onToggle: (id: string) => void  // 子 → 父，回调
+    = () => {}
+
+  build() {
+    Button(this.playingId === this.alertId ? '正在播，再点停' : '点喇叭听')
+      .onClick(() => this.onToggle(this.alertId))
+  }
+}
+
+// 父组件使用：
+PlayToggle({
+  playingId: this.playingId,
+  onToggle: (id) => { this.playingId = id }   // 修改点显式可查
+})
+```
+
+V2 还提供 `!!` 双向同步语法糖：子组件内写 `this.playingId!!` 读值时，框架自动生成配对的 @Event 回写，等价于上面的两件套但省掉样板。建议的取舍是：**简单值回写用 `!!` 提效，回写伴随业务逻辑（校验、联动清理）时用显式 @Event**——糖把修改点藏起来了，逻辑复杂的场景宁可多写三行也要看得见改动发生在哪。
+
+## 九、@Computed 与 @Monitor 实战
+
+```ts
+@ComponentV2
+struct FeedHeader {
+  @Local feed: AlertFeed = new AlertFeed()
+
+  @Computed
+  get headline(): string {
+    const n = this.feed.items.length
+    return n === 0 ? '今天还没有异动' : `今天有 ${n} 条异动`
+  }
+
+  @Monitor('feed.items.length', 'feed.updatedAt')
+  onFeedTouched() {
+    // 路径级监听：条目数或时间戳变化才触发，条目内容变化不打扰
+    this.announceIfNeeded()
+  }
+}
+```
+
+三个实战要点：@Computed 里只做纯派生，不写请求与定时器；@Monitor 监听的是路径而非对象整体，**路径选得粗，回调就触发得勤**——上例刻意监听 `items.length` 而非 `items`，把"内容微调"与"条目增删"区分开；@Watch 迁移过来时顺手检查旧代码里手工保存的旧值变量，@Monitor 回调参数自带前后值，这些缓存变量可以全部删除。
+
+## 十、跨层级：@Provider/@Consumer
+
+```ts
+@ComponentV2
+struct IndexPage {
+  @Provider playingId: string = ''      // 页面声明供给
+  build() {
+    Column() { CardList() }
+  }
+}
+
+@ComponentV2
+struct CardList {                        // 中间层不需要转发
+  build() {
+    LazyForEach(this.ds, (a: AlertItem) => {
+      ListItem() { PlayToggle() }        // 无 props 透传
+    }, (a: AlertItem) => a.id)
+  }
+}
+
+@ComponentV2
+struct PlayToggle {
+  @Consumer playingId: string = ''       // 任意深度直接消费
+  build() { /* ... */ }
+}
+```
+
+适用边界：真正的全局语义（页面级播放状态）才上 @Provider；把"只有父子两层用的值"也搞成跨层级供给，会让人追不到数据来源。命名建议供给方与消费方同名同类型，检索时可一眼配对。
+
+## 十一、迁移决策：迁与不迁
+
+| 情形 | 建议 | 理由 |
+| --- | --- | --- |
+| 数据模型类（AlertFeed/AlertItem） | 迁 | 属性级刷新收益最大，改动独立 |
+| 深嵌套 + @Observed/@ObjectLink 套娃 | 迁 | 消灭样板代码的主战场 |
+| 依赖 @Watch 手工存旧值的页面 | 迁 | @Monitor 直接替代，删代码 |
+| 只有 @State/@Prop 两层的小叶子 | 可缓 | V1 已够用，收益有限 |
+| 共享出去的组件库/模块 | 谨慎 | 使用方可能是 V1，接口形态要兼容 |
+| 全局 AppStorage 重度使用者 | 先评估 | 需连同 AppStorageV2 一起规划 |
+
+反模式提醒：**不要为了"新"而迁移**。V1 不是废弃态，两种范式将长期共存；每次迁移的立项理由应该是"深观测粒度"或"删样板"这类具体痛点，而不是版本号焦虑。迁移完成后必须删干净 V1 时代的 workaround（整对象重建、手工旧值缓存），否则等于背两套成本。
+
 ### 自我评估
 - 正确性：4分 装饰器语义、映射关系、混用限制均按官方文档口径书写；@Monitor 回调字段与个别边界行为已注明以 SDK 声明实测为准，未把不确定细节写成定论。
 - 完整性：4分 新范式总览、@ObservedV2 细则、V1 逐项对比、混用限制、六步迁移与落地建议全覆盖；未展开 AppStorageV2/PersistenceV2 深度用法（本项目未用到，仅备查）。

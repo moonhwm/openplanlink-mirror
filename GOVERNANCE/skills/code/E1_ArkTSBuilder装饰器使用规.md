@@ -190,6 +190,84 @@ CardShell({ body: this.detailBuilder })
 3. 全局 @Builder 只放 `common/builders/` 下无状态的纯渲染（等级角标等），组件内 @Builder 不跨文件传递，收敛 this 与刷新的心智负担；
 4. 把 §3.2 与 §六 的清单纳入 code review checklist，新增卡片类组件时逐条过。
 
+## 八、进阶：多属性字面量与刷新边界
+
+按引用传递的对象字面量可以携带多个属性，每个被状态变量引用的属性都独立参与刷新判定。理解这一点的价值在于**控制刷新范围**：
+
+```ts
+@Builder
+alertRow(p: { name: string, speak: string, playing: boolean }) {
+  Column() {
+    Text(p.name).fontSize(34)
+    Text(p.speak).fontSize(30)
+    if (p.playing) {
+      Text('正在播放…').fontSize(28).fontColor('#1D4ED8')
+    }
+  }
+}
+
+// 调用点
+this.alertRow({
+  name: this.feed.items[i].stockName,     // 引用状态 → 参与刷新
+  speak: this.feed.items[i].plainSpeak,   // 引用状态 → 参与刷新
+  playing: this.playingId === this.feed.items[i].id  // 派生表达式
+})
+```
+
+边界说明：字面量的形状在调用点固定，**不能在运行时增删属性**；字面量内的派生表达式（如上例的布尔判断）会在所引用的状态变化时重新求值。若把"不需要联动"的常量也塞进同一个字面量，虽然不会引起额外刷新，但会让读代码的人误以为它参与联动——**字面量里只放真正要联动的字段，常量走值传参或组件内字段**。另一个常见疑问是嵌套字面量：外层与内层属性各自建立绑定，但层级越深可读性越差，两 层封顶，再深就该拆组件或先整理状态结构。
+
+## 九、常见错误模式速查
+
+| 现象 | 根因 | 修法 |
+| --- | --- | --- |
+| @Builder 内文字不随状态更新 | 按值传参 | 改对象字面量引用传参 |
+| 传了对象还是不刷新 | 传的是普通对象变量而非字面量 | 在调用点写字面量，属性引用状态变量 |
+| @Builder 里改参数属性，UI 与调用方都没变 | 参数是单向输入 | 修改逻辑移到事件回调里改状态变量 |
+| 组件内 @Builder 传出后行为异常（this 为空） | this 丢失 | 换 @LocalBuilder 或全局 @Builder 显式传参 |
+| 尾随闭包不生效 | 组件声明了多个 @BuilderParam | 全部改为显式传参 |
+| 列表滚动卡顿，帧率掉 | 条目套了多层自定义组件 | 条目内小块降为 @Builder，条目整体加 @Reusable |
+| @Builder 内发起请求/改状态后界面诡异刷新 | 把渲染函数当生命周期用 | 副作用移出 @Builder |
+
+这张表的定位是评审速查：出现左列现象时直接对照中列定位，不必重新推演绑定规则。
+
+## 十、完整示例：铃语卡片参考实现
+
+把前文规则收拢成一套可直接抄的骨架（与 A24 审查的 AlertItem 现状对照，属建议形态而非现状描述）：
+
+```ts
+@Component
+struct AlertCard {
+  @Prop alert: AlertItem          // 现状为 V1；迁 V2 后换 @Param
+  @Link playingId: string         // 页面级三态，双向
+  @Builder
+  titleRow(p: { name: string, pct: string }) {
+    Row() {
+      Text(p.name).fontSize(34).fontWeight(FontWeight.Bold)
+      Text(p.pct).fontSize(34).fontColor(p.pct.startsWith('跌') ? '#16A34A' : '#B42318')
+    }.width('100%')
+  }
+  @Builder
+  playBtnRow(p: { id: string }) {
+    Button(this.playingId === p.id ? '正在播，再点一下停' : '点喇叭，听这条')
+      .fontSize(30).height(72)
+      .onClick(() => this.toggle(p.id))
+  }
+  build() {
+    Column({ space: 10 }) {
+      this.titleRow({ name: this.alert.stockName, pct: this.alert.pctText })
+      Text(this.alert.plainSpeak).fontSize(32)   // 白话解读
+      this.playBtnRow({ id: this.alert.id })
+    }.padding(16)
+  }
+}
+```
+
+注意三个细节：标题行与按钮行各自用字面量引用了会变的状态；涨幅文案与颜色判断放在渲染前的数据层预处理；按钮文案的三态切换只依赖 playingId 一条状态线，刷新面最小。
+
+## 十一、与 V1/V2 状态体系的协作
+
+@Builder 的传参规则不随组件范式变化，但配合方式有讲究：V1 组件里，@Builder 引用 @State/@Prop/@Link 的字面量属性均可联动；V2 组件（@ComponentV2）里，@ObservedV2 类的 @Trace 属性被字面量引用后同样获得属性级精确刷新，且粒度比 V1 更细——这正是 E2 推荐先迁数据层的原因：数据类换上 @Trace 后，@Builder 的字面量引用立刻从"整对象感知"升级为"单属性感知"，无需改动任何 @Builder 代码。反过来也有一个提醒：无论 V1 还是 V2，@Builder 都不持有状态，**不要试图通过给 @Builder 加装饰器来"让它自己有状态"**——需要内部状态的那块 UI，从第一天起就应该是组件而不是 @Builder。
+
 ### 自我评估
 - 正确性：4分 值/引用传递刷新规则、@BuilderParam 默认值与尾随闭包限制、@LocalBuilder 定位均按官方口径书写；引用传递的部分绑定边界行为官方文档存在版本差异，已明确提示以编译实测为准，未夸大为确定结论。
 - 完整性：4分 任务指定的参数传递、条件渲染、复用模式、性能四主题全部覆盖，含对比表、正反例代码与工程清单；未展开 @Builder 与动画、手势组合的边缘用法（与本项目场景无关）。

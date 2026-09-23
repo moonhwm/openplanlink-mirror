@@ -199,11 +199,13 @@ export class AlertDataSource implements IDataSource {
 - [ ] `AlertPoller` 前台启后台停，句柄成对清理；
 - [ ] 重解析进 taskpool，`@Concurrent` 无闭包；
 - [ ] 各类缓存有界；
-- [ ] 演示卡纯静态 `@Builder` 渲染。
+- [ ] 演示卡纯静态 `@Builder` 渲染；
+- [ ] 发版记录附冷启动实测耗时，劣化超两成须解释原因；
+- [ ] 状态装饰器按速查表选型，无整包数据进 `@State` 的反模式。
 
 ### 自我评估
 - 正确性：4分。LazyForEach/IDataSource、@Reusable、@Observed/@ObjectLink/@Track/@Computed、taskpool/@Concurrent 约束均按官方模型编写，IDataSource 实现为可运行风格；个别装饰器版本前提（如 @Computed 为 API 12+）未逐条标注版本号，以 SDK 文档为准。
 - 完整性：4分。五大主题（渲染、内存、懒加载、对象池、多余刷新）各有机制说明与代码或清单，并与项目实际（AlertPoller 5s 轮询、AudioPlayer 单例、演示卡静态化）对齐。
 - 可复用性：4分。AlertDataSource 与复用/池化模板可直接迁移；反面清单与落地清单可当评审用表。
-- 字数：约3100字
+- 字数：约2576字（正文汉字，实测）
 - 使用模型：GLM-5.3-Flash

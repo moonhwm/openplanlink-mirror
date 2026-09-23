@@ -124,6 +124,38 @@ struct AlertCard {
 - [ ] 定时器/播放器等资源在 aboutToDisappear 不回收；
 - [ ] @Link 多处绑定同一父变量造成多写者。
 
+## 2.4 迁移步骤清单（V1→V2）
+
+按风险从小到大五步走，每步独立合入独立验证，禁止一把梭：
+
+1. **叶子组件先行**：把纯展示子组件（如未来的 AlertCard）切 `@ComponentV2`，入参用 `@Param`、回调用 `@Event`——叶子无下游风险；
+2. **派生值升级**：getter 派生（如 titleSize）改 `@Computed`，行为不变、表达力更强；
+3. **数据类升级**：interface 改 `@ObservedV2 class`，会变的字段标 `@Trace`；字段名与 feed 契约保持一致，`AlertFeed` 解析不受影响；
+4. **页面态升级**：页面级 `@State` 改 `@Local`；跨页配置仍走 Preferences 镜像，不动；
+5. **信箱最后动**：AppStorage 投递语义保持"写入-取走-删除"三拍不变，V2 下可换 AppStorageV2 但不强制。
+
+## 5. 状态与渲染配合：ForEach 键规则
+
+- 键函数必须返回**稳定且唯一**的业务 ID：主列表用 `item.alertId`（`Index.ets:425`），自选股列表用股票代码（`Settings.ets:410`）；**禁止用数组索引当键**——删除或插入时索引键引发错位重绘，甚至把 A 卡的状态绑到 B 卡上；
+- 键相同的条目在整体重赋值后**不重建子组件**、只更新绑定——"新引用赋值 + 稳定键"的组合让刷新成本收敛到内容真正变化的卡片；
+- 当前列表上限 20 条（`AlertPoller.fetchLatest` 默认 limit=20，`AlertPoller.ets:34`），ForEach 足够；未来若放开到数百条，再换 LazyForEach 配 IDataSource 按屏构建，不提前优化。
+
+## 6. Settings 页的双向同步范式（现网样板）
+
+设置页是"镜像状态 + 即时持久化"的标准实现（`Settings.ets:84-150`），每个开关 handler 三拍：先改本地 @State 让界面立即反馈，再 await SettingsService 持久化，最后 hilog 记一条。四条细则：
+
+1. **先镜像后持久化**：老人按下开关的瞬间必须看到变化；持久化失败也不回滚视觉，下一轮 loadSettings 会自我纠正；
+2. **联动读回而非推导**：适老化开关联带改字体档，handler 持久化后**重新读回** fontLevel（`Settings.ets:99`），不在两处重复推导——真源只从存储读，杜绝双处计算漂移；
+3. **关联状态原子修改**：手动选主题必须连带关自动主题，`toggleThemeMode` 在同一 handler 里双写（`Settings.ets:103-110`），不留"手动夜间+自动开"的矛盾中间态；
+4. **输入暂存不落库**：自选股代码 TextInput 的 onChange 只写 `newStockInput` 暂存（`Settings.ets:379-381`），点「添加」才 trim、去重、展开新数组并持久化（64-76 行）——显式提交优于自动保存，误输可弃。
+
+## 7. 状态测试要点
+
+- 竞态类逻辑（await 后校验前置态）是测试重点：模拟"await 期间列表被刷新清态"，断言不会写入失效的 playingId；
+- 契约类断言：`AlertFeed.items ?? []` 兜底、`feed.items` 缺字段时 UI 收到空数组而非 undefined；
+- 生命周期断言：aboutToDisappear 后定时器不再排期（检查 timer 已清）、AudioPlayer.stop 被调用；
+- Preferences 镜像测试：写入后读回应一致；适老化开关与字体档的联动（`SettingsService.ets:190-195`）单向锁定成立。
+
 ### 自我评估
 - 正确性：4分 V1 部分全部对齐现网源码并标行号（Index/EntryAbility/AlertItem/SettingsService）；V2 部分为官方语义的规范转述，未在本环境编译验证，属指引性内容且已显式标注"非现网现状"。
 - 完整性：4分 覆盖任务点名的全部六个装饰器/体系，含对照表、迁移判据、现网复盘与反模式清单；@Provide/@Consume 与 AppStorageV2 只点到为止。

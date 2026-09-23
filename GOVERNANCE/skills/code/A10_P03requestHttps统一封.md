@@ -206,6 +206,155 @@ grep -c "function requestHttps" cloudfunctions/functions/*/index.js  # 若未合
 
 运行时：Tushare daily 正常调用；东财 4 市场名称刷新；DKnowC 合规检查；Supabase 广播；华为 OAuth+Push（需 AGC 凭证）；超时演练同 A9 第六节。
 
+## 八、全量调用点使用示例（以现行代码为蓝本）
+
+统一封装的价值要在调用侧体感出来。以下六个示例覆盖全部出站形态，均以现行代码行号为蓝本，可直接作为新调用点的模板抄用。
+
+示例一，Tushare JSON POST（蓝本 152-157 行）——认证走 body 内 token、响应固定 JSON：
+
+```js
+const data = await requestHttps('https://api.tushare.pro', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ api_name: 'daily', token: TUSHARE_TOKEN, params, fields }),
+  timeout: 15000,
+});
+if (data.code !== 0) { /* 业务错误分流，见 A9 第八节错误码表 */ }
+```
+
+示例二，东财 GET 分页（蓝本 100-102 行）——query 全部预拼进 URL、动态分量必须编码：
+
+```js
+const url = `https://80.push2.eastmoney.com/api/qt/clist/get?pn=${page}&pz=100&po=1&np=1&fltt=2&invt=2&fs=${encodeURIComponent(fs)}&fields=f12,f14`;
+const data = await requestHttpsRetry(url); // 补全类数据可重试；关键主数据禁用重试
+```
+
+示例三，DKnowC 自定义头鉴权 POST（蓝本 463-474 行）——`api-key` 头透传、短超时：
+
+```js
+const data = await requestHttps('https://open.dknowc.cn/chat/trusted/unification', {
+  method: 'POST',
+  headers: { 'api-key': DKNOWC_API_KEY, 'Content-Type': 'application/json' },
+  body: JSON.stringify({ input: text, safeAnswerScope: 'none' }),
+  timeout: 10000,
+});
+```
+
+示例四，华为 OAuth form 编码 POST（蓝本 172-181 行，broadcast-a2a）——表单体手工序列化：
+
+```js
+const tokenData = await requestHttps('https://oauth-login.cloud.huawei.com/oauth2/v3/token', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  body: new URLSearchParams({ grant_type: 'client_credentials', client_id: CLIENT_ID, client_secret: CLIENT_SECRET }).toString(),
+  timeout: 10000,
+});
+```
+
+示例五，带 Bearer 的 Push 下发（蓝本 215-223 行）——动态路径段拼 URL：
+
+```js
+const pushResult = await requestHttps(`https://push-api.cloud.huawei.com/v3/${PROJECT_ID}/messages:send`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${accessToken}` },
+  body: JSON.stringify({ message }),
+  timeout: 10000,
+});
+```
+
+示例六，Supabase 双头鉴权 POST（蓝本 99-118 行）——同 key 两处携带的第三方约定：
+
+```js
+await requestHttps(`${SUPABASE_URL}/rest/v1/cross_mode_channel`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` },
+  body: JSON.stringify(payload),
+});
+```
+
+六个示例读下来的共同纪律：URL 里的动态分量一律 `encodeURIComponent`（示例二）或模板拼接环境变量（示例五，环境变量属可信面）；认证头由调用方自带、封装层不碰；timeout 按业务关键度分档（关键 15 秒、辅助 10 秒）。新调用点只要对号入座，就不需要再读一遍封装源码。
+
+## 九、与 fetch / axios / node-fetch 的全面对比
+
+选型要在对比里站得住。fetch（Node 18.15 内置实验版）：优点是语法现代、无依赖；缺点在本仓库语境致命——无内建超时、实验状态在部分小版本打印警告、错误对象不带响应体上下文、对 form 编码需要手工组装。axios：功能最全（拦截器、自动 JSON、超时成熟）；缺点是引入三方依赖，违反本项目云函数零三方强约束（现有依赖仅 `@cloudbase/node-sdk` 与 `ws`），且拦截器体系对六个函数的体量属过度设计。node-fetch：把浏览器 fetch 搬到 Node；仍需手工接 AbortController 实现超时，等于把封装层的活儿换个地方重写一遍。requestHttps 现行版：零依赖、默认 15 秒超时、错误统一为带稳定前缀的 Error、代码三十五行可整屏审读；代价是不跟随重定向、不自动编码 form（由调用方 URLSearchParams 完成）、仅支持 JSON 响应（本项目六个上游恰好全是 JSON）。结论：在"零三方依赖 + 全 JSON 上游 + 需要强超时"这三个约束同时成立时，现行封装是甜点位；任一约束松动（比如上游出现非 JSON 响应需求）应优先考虑第五节 v2 增强而非引入库。
+
+## 十、辅助函数：query 构造与 form 编码的规范化
+
+两处高频样板值得收敛为小工具（与 requestHttps 同文件放置，仍是零依赖）：
+
+```js
+// 把对象构造成 querystring，自动编码，空值跳过——东财分页类 URL 的生成器
+function buildQuery(params = {}) {
+  const q = new URLSearchParams();
+  for (const [k, v] of Object.entries(params)) {
+    if (v !== undefined && v !== null && v !== '') q.append(k, String(v));
+  }
+  const s = q.toString();
+  return s ? '?' + s : '';
+}
+// 用法：requestHttps(`https://.../clist/get${buildQuery({ pn: page, pz: 100, fs, fields: 'f12,f14' })}`)
+
+// form 编码请求的快捷方式——华为 OAuth 专用形态
+function postForm(url, fields, timeout = 10000) {
+  return requestHttps(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(fields).toString(),
+    timeout,
+  });
+}
+```
+
+`buildQuery` 的价值是把"手工拼 query 忘了编码"这类注入隐患（security.md 第七节 URL 注入项）从纪律问题变成结构不可能：所有 query 分量过它就必须编码。`postForm` 则把示例四的五行样板压成一行。两个工具都保持"纯函数、无状态"，与封装层同寿命。
+
+## 十一、本地 mock 测试方案
+
+封装层的回归不该依赖真实上游。以下测试脚本用 Node 内置 `http` 起本地桩服务器，覆盖封装的四个关键行为（超时、非 JSON、网络错误、正常解析）。属代码席位执行项——本会话机器无 node，未运行：
+
+```js
+// test/request-https.test.js
+const assert = require('assert');
+const http = require('http');
+const { requestHttps } = require('../functions/_shared/requestHttps'); // 路径按合并方案调整
+
+function serveOnce(handler) {
+  return new Promise(resolve => {
+    const srv = http.createServer(handler);
+    srv.listen(0, () => resolve({ srv, port: srv.address().port }));
+  });
+}
+
+(async () => {
+  // 用例1：正常 JSON
+  let t = await serveOnce((req, res) => { res.end('{"ok":1}'); });
+  assert.deepStrictEqual(await requestHttps(`http://127.0.0.1:${t.port}`), { ok: 1 });
+  t.srv.close();
+
+  // 用例2：非 JSON 响应 → JSON parse failed 前缀
+  t = await serveOnce((req, res) => { res.end('<html>err</html>'); });
+  await assert.rejects(() => requestHttps(`http://127.0.0.1:${t.port}`), /JSON parse failed/);
+  t.srv.close();
+
+  // 用例3：服务端挂起 → 超时拒绝（timeout=200ms）
+  t = await serveOnce(() => { /* 故意不响应 */ });
+  const started = Date.now();
+  await assert.rejects(() => requestHttps(`http://127.0.0.1:${t.port}`, { timeout: 200 }), /Request timeout/);
+  assert.ok(Date.now() - started < 3000, '超时应在数秒内生效');
+  t.srv.close();
+
+  // 用例4：连接被拒 → reject（error 事件路径）
+  await assert.rejects(() => requestHttps('http://127.0.0.1:1')); // 1号端口无服务
+
+  console.log('PASS: requestHttps 四用例全部通过');
+})();
+```
+
+注意两点：封装用 `https` 模块而桩是 http——测试时桩服务器需走 `https.createServer` 加自签证书，或给封装加 `options.insecureLocalHttp` 测试钩子（仅测试构建可见）；用例三同时验证了 A9 的事件链闭环在真实 socket 上成立。脚本进仓库后接 CI，封装层任何改动即改即测。
+
+## 十二、迁移 FAQ
+
+问：还有函数想直接用全局 fetch 怎么办？答：先看第五节错误矩阵——除非需要流式响应（本项目仅 TTS 走 WebSocket，不经此封装），否则没有 fetch 能做而 requestHttps 做不了的场景；坚持要用的话，评审时按第七节闸门命令会被 grep 直接拦下。问：上游返回 204 或空体怎么处理？答：空体经 `JSON.parse('')` 抛错走解析失败路径；确有空体合法的上游，调用前先确认其契约，或等 v2 的 `options.parseJson:false` 开关（拿到原始 body 自行处理）。问：并发调用同一封装安全吗？答：安全——封装无共享状态，每次调用独立创建请求对象，`requestHttpsRetry` 的循环变量也是调用内局部。问：能在 ArkTS 端侧复用这份封装吗？答：不能直接复用——端侧是 `@kit.NetworkKit` 的 http API 而非 Node https 模块，但"默认超时+统一错误前缀+JSON 直解析"三件套的设计完全可平移到端侧封装，属另一批次的任务。问：v2 什么时候替换现行版？答：v2 的三个补丁各自独立，可按需拆分落地——状态码校验与体积上限优先（安全收益），deadline 其次（尾部风险），落地时两份实现（第六节）必须同改，否则去重前的分裂状态会让修复本身产生分叉。
+
 ### 自我评估
 - 正确性：4分——替代映射表三处行号为修复前后两版实测对照；fetchHttps 无实码的口径如实澄清；v2 增强代码为设计产出未落地运行，兼容性论证基于参数语义分析。
 - 完整性：4分——覆盖任务四要素（双模式/超时/错误处理/替代 fetch 与 fetchHttps）并补齐错误矩阵、去重方案；运行时回归未执行已标注。

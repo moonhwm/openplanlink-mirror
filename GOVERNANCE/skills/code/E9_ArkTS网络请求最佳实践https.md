@@ -182,9 +182,84 @@ export class AlertPoller {
 6. 页面隐藏不stop轮询：后台空转耗电，也违反"前台5秒轮询"的架构基调。
 7. 捕获后吞错不降级：catch里既不清数据也不提示，用户面对的是静默过期数据；必须明示状态。
 
+## 9 POST封装与请求头纪律
+
+generate-tts、pushtokenregister类调用走POST，与getJson同构：
+
+```ts
+static async postJson(url: string, body: object, timeoutMs: number = 15000): Promise<object> {
+  const req = http.createHttp();
+  try {
+    const resp = await req.request(url, {
+      method: http.RequestMethod.POST,
+      header: { 'Content-Type': 'application/json' },
+      extraData: JSON.stringify(body),
+      connectTimeout: 8000,
+      readTimeout: timeoutMs,
+      expectDataType: http.HttpDataType.STRING
+    });
+    if (resp.responseCode < 200 || resp.responseCode >= 300) {
+      throw new NetError('HTTP', resp.responseCode, `HTTP ${resp.responseCode}`);
+    }
+    return JSON.parse(resp.result as string) as object;
+  } catch (e) {
+    if (e instanceof NetError) { throw e; }
+    throw new NetError('NETWORK', 0, '网络不可达');
+  } finally {
+    req.destroy();
+  }
+}
+```
+
+- extraData统一传字符串（自控编码），不传对象让框架猜序列化。
+- 请求头白名单管理：本项目端侧无凭据，只允许Content-Type等标准头；新增任何头必须登记用途，禁止夹带设备指纹类信息（合规红线）。
+- POST默认不重试；带幂等键（alertId）的TTS合成例外，重试安全由服务端幂等保证。
+
+## 10 网络状态监听与省电联动
+
+用connection模块监听网络变化，让轮询跟随网络呼吸：
+
+- 断网（netLost）：立刻暂停轮询计时器，省电也省无效重试；界面提示"网络已断开"。
+- 恢复（netAvailable）：立即手动tick一次拿最新数据，再恢复5秒节奏——用户刚恢复网络时最想看的就是最新异动。
+- 计费/弱网感知：弱网时可临时降档到10秒间隔；本项目不做分档计费判断，保持简单。
+- 该监听注册在Index生命周期内，onPageHide时一并注销，与轮询同进退。
+
+## 11 缓存与快照
+
+- HTTP层：轮询请求usingCache固定false，保实时；静态配置类请求可开。
+- 业务快照：每次成功响应写本地快照（节流30秒），冷启动先快照后网络——机制与E7第8节同一套，网络层只负责产出数据，落盘归数据层。
+- 条件请求（FEED服务器落地后可选）：支持ETag/If-None-Match，304响应不重渲染直接续用旧数据，弱网省流量明显。
+- 快照读取也走isAlertFeed守卫，坏快照直接弃用走演示卡。
+
+## 12 音频链路的网络边界
+
+- AVPlayer直接播云端直链：缓冲与重试是播放器职责，网络层不重复包装，也不要"先下载完再播"（首播延迟不可接受）。
+- 直链过期（播放403）：不经网络层，由AudioPlayer按E7流程触发"重新合成→换链→重播"。
+- 大文件长下载不挂在前台http请求上：超时预算内完不成的任务交给后台任务或改为流播，保证轮询通道永不被长任务占用。
+
+## 13 流量与时段策略
+
+- 增量请求（since参数）是省流量第一手段：只传变化，不重复拉全量。
+- 非交易时段（收盘后、周末、深夜）自动拉长轮询到60秒或暂停，开盘恢复5秒；判断用本地时间即可，错了顶多多拉几次，无正确性风险。
+- 前台才轮询加息屏暂停双保险：退后台必stop，这是省电底线也是架构基调。
+
+## 14 可观测与埋点
+
+- 每请求记录四元组（kind、status、耗时、urlTag不带查询串）进内存环形缓冲（最近50条），排障时可导出。
+- 核心指标：轮询成功率、P95耗时、重试触发率、熔断进入次数、降级链各层命中率——降级链命中率是服务端健康度的端侧信号。
+- 埋点数据脱敏：不含URL查询参数、不含响应体、不含任何用户标识。
+- 连续失败达上报阈值时随诊断包一次性上报（需用户设置中开关允许，默认关）。
+
+## 15 测试要点
+
+- NetClient可测性：抽出NetTransport接口（request(url, options)），真实实现包http模块，测试用假实现注入——不依赖真网即可测分支。
+- 纯函数直测：backoffMs边界（attempt=0,1,2）、HTTP分类（2xx/3xx/4xx/5xx）、四类NetError映射。
+- AlertPoller行为测：假时钟驱动，验证单飞（并发tick只发一次）、代次丢弃（stop后旧响应不落地）、熔断升降档。
+- 集成冒烟：真机断网→恢复→断FEED_URL→全断，四场景各跑一轮对照UI表现。
+
 ### 自我评估
-- 正确性：4分——@kit.NetworkKit的http能力、超时双旋钮、单飞+代次号取消模式均为标准做法，代码骨架经ArkTS类型纪律书写；caPath等证书参数的API版本支持点已标注需按d.ts核对，未实测真机联调。
-- 完整性：4分——四个指定维度（封装、超时、重试、并发）全部展开并补错误呈现与坑位；AlertPoller与E6生命周期、E7 TTS按需合成的衔接有明确引用。
-- 可复用性：5分——NetClient、AlertPoller、退避函数均为可直接复制的通用件，仅FEED_URL与AlertFeed为本项目契约，替换成本低。
-- 字数：约3050字
+- 正确性：4分——@kit.NetworkKit的http能力、超时双旋钮、单飞加代次号取消模式均为标准做法，代码骨架经ArkTS类型纪律书写；caPath等证书参数与connection回调细节以compatibleSdkVersion 20的d.ts为准，未真机联调。
+- 完整性：4分——四个指定维度（封装、超时、重试、并发）全部展开，另补POST与请求头、网络状态联动、缓存快照、音频边界、流量策略、可观测与测试要点；与E6生命周期、E7降级链衔接明确。
+- 可复用性：5分——NetClient、AlertPoller、退避函数、NetTransport接口均为可直接复制的通用件，仅FEED_URL与AlertFeed为本项目契约，替换成本低。
+- 字数：约待填字
 - 使用模型：GLM-5.3-Flash

@@ -85,7 +85,11 @@ SettingsService 是所有状态的持久化真相源，写入策略值得单列�
 
 ArkTS 状态管理已有 V2 体系（@ObservedV2/@Trace、@Local、@Param、@Monitor 等），提供了自动深观察与更严格的组件输入约束。本仓是否升级的判断：当前 28 个 @State 全部是第一层语义（标量或整体替换的数组），V1 的浅观察完全够用，没有任何一处需要深观察嵌套对象却没得到的真实缺陷；V2 的收益（深观察、更细粒度刷新）要等卡片抽出子组件且 item 需要原地修改时才兑现。结论：**现在不升，抽 AlertCard 子组件时一并评估**。升级时的映射清单预先留档：@State 换 @Local，@Prop 换 @Param，@Watch 换 @Monitor，@Observed/@ObjectLink 换 @ObservedV2/@Trace，AppStorage 用法不变。避免在 V1/V2 混用期无意识混搭装饰器——混用不兼容是 V2 迁移最常见的翻车点。
 
-## 十、验证清单
+## 十、AppStorage 与 Preferences 的边界纪律
+
+本仓有两个容易混淆的全局仓，边界必须立清。AppStorage 是内存态、随进程生死，适合做跨组件的一次性消息与瞬时标志——pendingAlertId 是范本：写、读、删三步一气呵成，不留残值；Preferences 是磁盘态、跨启动存活，适合做配置与累积记录——watchlist 与播报历史是范本。判定规则一句话：**丢了要不要紧**。丢了就要紧的（配置、历史）进 Preferences，丢了无所谓的（页面间口信）进 AppStorage。反例警示：若把 pendingAlertId 改存 Preferences，通知点击会在应用未启动时写盘，下次启动读到陈旧口信误触发播报——一次性语义被持久化破坏。正向扩展：未来若加"上次看到的最新 alertId 用于未读计数"，属于丢了要紧的累积状态，应进 Preferences 并设上限，与 readAlertIds 同构管理。另外 AppStorage 不设清理约定会随时间堆积死键，现状只用一个键且读后即删，健康；新增键必须同步在规范第四、五条登记。
+
+## 十一、验证清单
 
 - [ ] grep @Prop/@Link 使用点与设计一致（现为零，引入时按规范第 3 条审）
 - [ ] grep 全部 AppStorage 键有读写配对

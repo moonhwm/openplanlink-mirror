@@ -283,5 +283,5 @@ NavDestination 有自己的生命周期回调，与组件生命周期叠加时�
 - 正确性：4分。Navigation/NavDestination/NavPathStack 用法、onReady 取参、onBackPressed 语义、onNewWant 深链解析均符合官方模型；onPop 回调标注了 API 12+ 前提并给出 AppStorage 兜底，个别 API 细节（如 PopInfo 形参名）以当前 SDK 签名为准。
 - 完整性：4分。覆盖页面栈管理、前进/返回传参、返回控制、深链接四大主题，并与项目架构（AlertPoller 兜底、PushService 占位、AudioPlayer）对齐；未含转场动画自定义写法。
 - 可复用性：4分。骨架代码、路由常量类、深链 AppStorage 协议可直接迁移到其他 Stage 模型应用。
-- 字数：约3000字
+- 字数：约2608字（正文汉字，实测）
 - 使用模型：GLM-5.3-Flash

@@ -200,6 +200,8 @@ onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
 - 参数一律按"可能缺失"处理：空串兜底、不做非空断言；ArkTS禁any，取值统一走Record收敛。
 - 安全边界：want.parameters来自外部（推送服务、其他应用），不得直接用于路径拼接或SQL类操作，只做标识符匹配。
 
+推送拉起的完整数据流用一句话概括：通知点击 → 系统按launchType路由（singleton已存活走onNewWant，否则onCreate）→ want.parameters.alertId进入暂存变量 → onForeground写入AppStorage → Index的@StorageLink触发滚动定位 → 定位成功后清空暂存，EventHub通知Push侧记已读。任何一环断链，表现都是"点了通知没定位"，排查顺序即沿此链逐环打印日志。
+
 ## 9 UIAbilityContext能力清单
 
 EntryAbility持有的this.context即UIAbilityContext，铃语会用到的能力：

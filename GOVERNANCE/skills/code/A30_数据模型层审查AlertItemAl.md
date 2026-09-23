@@ -73,7 +73,33 @@ function isValidItem(it: AlertItem): boolean {
 
 端侧还有三个自有模型与契约的关系需要说清：PlayHistoryItem（SettingsService.ets:449-456）是 AlertItem 的投影（取 alertId/symbol/name/headline/ts 五字段加播报时间），投影在播放成功时发生（Index.ets:271-278），意味着历史记录的字段正确性继承自当时的条目验证结果；ThemeColors 与 FontSizeLevel/ThemeMode 是纯端侧配置模型，与服务端契约无关，不应混进 AlertFeed；DEMO_ITEMS 是契约的合法实例（Index.ets:13-23，kind 缺省按 fact），可用于验证层的单测基准样例——一个"合法条目长什么样"的活文档。
 
-## 八、测试用例清单（建议落地为单测）
+## 八、契约样例与三类演进场景演练
+
+给一个符合现行契约的最小样例（可直接用作联调桩与服务端自检基准，与 DEMO_ITEMS 同构）：
+
+```json
+{
+  "items": [
+    {
+      "alertId": "a-20260924-0001",
+      "ts": 1780000000,
+      "symbol": "600176",
+      "name": "中国巨石",
+      "direction": "up",
+      "kind": "fact",
+      "headline": "中国巨石 2 分钟上涨 2.3%",
+      "detail": "成交量比平时多出一倍，现价 11.6 元",
+      "audioUrl": "https://example.invalid/tts/a-0001.mp3",
+      "complianceStatus": "Safe"
+    }
+  ],
+  "serverTs": 1780000060
+}
+```
+
+注意样例里的 detail 是白话（"比平时多出一倍"而非"量比 2.1"），这正是白话契约的精神：字段名叫 detail，语义叫"给老人听的补充说明"。以此样例演练第六节的三类演进：场景一加字段——服务端新增可信度评分，加一个可选字段即可，端侧验证层不受影响（未知字段被自然忽略），老版本应用照常运行，属安全演进；场景二改语义——若服务端把 ts 从秒改毫秒以对齐前端习惯，属于破坏性变更，必须走 schemaVersion 升版加端侧同步改造，否则时间显示错乱且无报错，是最危险的一类；场景三废弃字段——比如未来 TTS 全部预生成后想删 audioUrl 的可选语义，正确顺序是先在注释标注"计划废弃"、观察一个版本周期、确认无消费方后再删，端侧因验证层对 undefined 已兜底而全程无感。三类演练的结论一致：**可选加验证层的契约，演进成本最低**；缺了验证层，每次演进都是端侧的盲盒。
+
+## 九、测试用例清单（建议落地为单测）
 
 - 正常 feed 全字段齐备：全数通过验证层。
 - JSON 断裂（截断、HTML 错误页）：ok:false、日志含前 200 字符、退避生效。
