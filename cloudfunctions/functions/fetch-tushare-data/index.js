@@ -580,8 +580,8 @@ function createAlertItems(movers) {
     const name = mover.name || mover.ts_code;
     const symbol = mover.ts_code || '';
 
-    // 信号卡判断：涨跌幅 ≥ 8% 时输出自家信号
-    const kind = absPct >= 8.0 ? 'signal' : 'fact';
+    // 信号卡判断：涨跌幅 ≥ 8% 时输出自家信号（用数值比较，非字符串隐式转换）
+    const kind = Math.abs(pctChg) >= 8.0 ? 'signal' : 'fact';
     let signalNote = '';
     if (kind === 'signal') {
       if (direction === 'up') {
