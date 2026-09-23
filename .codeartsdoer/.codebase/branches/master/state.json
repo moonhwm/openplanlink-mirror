@@ -3,8 +3,8 @@
   "schema": "docgen-state-v1",
   "branch": "master",
   "branch_raw": "master",
-  "version_token": 502,
-  "updated_at": "2026-09-23T03:17:46.262Z",
+  "version_token": 509,
+  "updated_at": "2026-09-23T03:25:51.851Z",
   "status": "watching",
   "last_doc_generated_at": "2026-09-22T11:28:42.959Z",
   "changed_files": [
@@ -1531,7 +1531,7 @@
     {
       "path": "CHANGELOG.md",
       "status": "modified",
-      "detected_at": "2026-09-23T02:42:41.147Z"
+      "detected_at": "2026-09-23T03:25:50.269Z"
     },
     {
       "path": "GOVERNANCE/DECISION_LEDGER_POINTER.md",
@@ -1616,12 +1616,12 @@
     {
       "path": "cloudfunctions/functions/fetch-tushare-data/hardcoded-names.js",
       "status": "added",
-      "detected_at": "2026-09-23T01:31:50.425Z"
+      "detected_at": "2026-09-23T03:21:18.906Z"
     },
     {
       "path": "cloudfunctions/functions/fetch-tushare-data/index.js",
       "status": "added",
-      "detected_at": "2026-09-23T03:13:59.101Z"
+      "detected_at": "2026-09-23T03:23:18.967Z"
     },
     {
       "path": "cloudfunctions/functions/generate-tts/index.js",
@@ -2591,62 +2591,62 @@
     {
       "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/06.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:04:36.934Z"
+      "detected_at": "2026-09-23T03:18:33.488Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/01.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:07:59.992Z"
+      "detected_at": "2026-09-23T03:18:33.974Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/02.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:08:53.338Z"
+      "detected_at": "2026-09-23T03:18:33.976Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/03.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:08:53.383Z"
+      "detected_at": "2026-09-23T03:18:33.979Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/16.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:08:09.879Z"
+      "detected_at": "2026-09-23T03:18:33.874Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/04.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:08:20.645Z"
+      "detected_at": "2026-09-23T03:18:33.982Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/05.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:08:20.684Z"
+      "detected_at": "2026-09-23T03:18:33.984Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/06.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:08:20.711Z"
+      "detected_at": "2026-09-23T03:18:33.987Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/01.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:09:32.537Z"
+      "detected_at": "2026-09-23T03:18:34.201Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/02.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:09:32.686Z"
+      "detected_at": "2026-09-23T03:18:34.206Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/03.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:09:32.763Z"
+      "detected_at": "2026-09-23T03:18:34.211Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/04.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:09:32.823Z"
+      "detected_at": "2026-09-23T03:18:34.211Z"
     },
     {
       "path": "GOVERNANCE/skills/code/arkts-code-review.md",
@@ -2656,82 +2656,82 @@
     {
       "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/05.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:09:48.535Z"
+      "detected_at": "2026-09-23T03:18:34.216Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/06.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:09:48.742Z"
+      "detected_at": "2026-09-23T03:18:34.218Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/07.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:12:36.998Z"
+      "detected_at": "2026-09-23T03:18:33.991Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/08.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:12:37.042Z"
+      "detected_at": "2026-09-23T03:18:33.993Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/VALVE.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:16:27.827Z"
+      "detected_at": "2026-09-23T03:18:33.959Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/07.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:12:51.768Z"
+      "detected_at": "2026-09-23T03:18:34.219Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/09.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:16:17.104Z"
+      "detected_at": "2026-09-23T03:18:33.996Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/10.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:16:17.147Z"
+      "detected_at": "2026-09-23T03:18:33.999Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/11.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:16:31.144Z"
+      "detected_at": "2026-09-23T03:18:34.001Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/12.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:16:31.244Z"
+      "detected_at": "2026-09-23T03:18:34.005Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/33.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:14:39.142Z"
+      "detected_at": "2026-09-23T03:18:33.918Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/13.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:19:44.984Z"
+      "detected_at": "2026-09-23T03:18:34.008Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/14.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:19:44.999Z"
+      "detected_at": "2026-09-23T03:18:34.012Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/15.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:19:45.032Z"
+      "detected_at": "2026-09-23T03:18:34.016Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/16.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:19:54.836Z"
+      "detected_at": "2026-09-23T03:18:34.019Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/17.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:19:54.884Z"
+      "detected_at": "2026-09-23T03:18:34.023Z"
     },
     {
       "path": "GOVERNANCE/skills/code/A26_PushServiceets审查占位.md",
@@ -2741,37 +2741,37 @@
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/18.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:20:15.313Z"
+      "detected_at": "2026-09-23T03:18:34.026Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/19.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:21:03.608Z"
+      "detected_at": "2026-09-23T03:18:34.029Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/20.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:21:03.661Z"
+      "detected_at": "2026-09-23T03:18:34.033Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/21.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:21:03.770Z"
+      "detected_at": "2026-09-23T03:18:34.036Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/22.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:21:32.826Z"
+      "detected_at": "2026-09-23T03:18:34.039Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/23.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:21:21.948Z"
+      "detected_at": "2026-09-23T03:18:34.042Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/24.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:21:22.033Z"
+      "detected_at": "2026-09-23T03:18:34.046Z"
     },
     {
       "path": "GOVERNANCE/skills/code/A32_生命周期管理审查aboutToApp.md",
@@ -2781,17 +2781,17 @@
     {
       "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/01.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:21:50.069Z"
+      "detected_at": "2026-09-23T03:18:33.854Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/02.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:21:50.106Z"
+      "detected_at": "2026-09-23T03:18:33.855Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/03.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:21:50.143Z"
+      "detected_at": "2026-09-23T03:18:33.856Z"
     },
     {
       "path": "GOVERNANCE/skills/code/A27_适老化UI审查2834fp大字白话卡.md",
@@ -2801,37 +2801,37 @@
     {
       "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/04.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:22:44.284Z"
+      "detected_at": "2026-09-23T03:18:33.858Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/05.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:22:44.313Z"
+      "detected_at": "2026-09-23T03:18:33.859Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/06.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:22:44.341Z"
+      "detected_at": "2026-09-23T03:18:33.859Z"
     },
     {
       "path": "GOVERNANCE/skills/code/cache-strategy.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:23:22.024Z"
+      "detected_at": "2026-09-23T03:18:34.340Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/07.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:23:31.005Z"
+      "detected_at": "2026-09-23T03:18:33.860Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/08.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:23:31.024Z"
+      "detected_at": "2026-09-23T03:18:33.864Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/09.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:23:31.026Z"
+      "detected_at": "2026-09-23T03:18:33.865Z"
     },
     {
       "path": "GOVERNANCE/skills/code/A33_错误边界审查trycatch覆盖用户.md",
@@ -2841,7 +2841,7 @@
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/45.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:39:18.515Z"
+      "detected_at": "2026-09-23T03:18:34.188Z"
     },
     {
       "path": "GOVERNANCE/skills/code/A16_generatetts云函数审查百炼.md",
@@ -2856,32 +2856,32 @@
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/03.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:33:52.301Z"
+      "detected_at": "2026-09-23T03:18:34.074Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/04.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:33:52.351Z"
+      "detected_at": "2026-09-23T03:18:34.078Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/05.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:33:52.414Z"
+      "detected_at": "2026-09-23T03:18:34.081Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/06.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:34:11.540Z"
+      "detected_at": "2026-09-23T03:18:34.085Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/07.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:34:11.572Z"
+      "detected_at": "2026-09-23T03:18:34.088Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/08.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:40:10.078Z"
+      "detected_at": "2026-09-23T03:18:34.091Z"
     },
     {
       "path": "GOVERNANCE/skills/code/A17_getalerts云函数审查Clou.md",
@@ -2891,327 +2891,1532 @@
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/09.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:34:35.282Z"
+      "detected_at": "2026-09-23T03:18:34.093Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/10.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:40:10.098Z"
+      "detected_at": "2026-09-23T03:18:34.096Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/11.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:34:35.363Z"
+      "detected_at": "2026-09-23T03:18:34.099Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/12.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:34:53.944Z"
+      "detected_at": "2026-09-23T03:18:34.102Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/13.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:34:53.986Z"
+      "detected_at": "2026-09-23T03:18:34.105Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/14.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:34:54.019Z"
+      "detected_at": "2026-09-23T03:18:34.107Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/15.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:35:12.856Z"
+      "detected_at": "2026-09-23T03:18:34.110Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/16.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:38:34.988Z"
+      "detected_at": "2026-09-23T03:18:34.114Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/17.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:35:13.180Z"
+      "detected_at": "2026-09-23T03:18:34.115Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/18.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:38:51.758Z"
+      "detected_at": "2026-09-23T03:18:34.118Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/19.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:35:32.611Z"
+      "detected_at": "2026-09-23T03:18:34.120Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/20.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:35:32.648Z"
+      "detected_at": "2026-09-23T03:18:34.124Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/21.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:35:46.767Z"
+      "detected_at": "2026-09-23T03:18:34.127Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/22.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:38:51.779Z"
+      "detected_at": "2026-09-23T03:18:34.130Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/23.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:38:51.802Z"
+      "detected_at": "2026-09-23T03:18:34.131Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/24.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:39:07.729Z"
+      "detected_at": "2026-09-23T03:18:34.134Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/25.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:36:03.030Z"
+      "detected_at": "2026-09-23T03:18:34.137Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/26.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:36:03.113Z"
+      "detected_at": "2026-09-23T03:18:34.138Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/27.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:39:07.755Z"
+      "detected_at": "2026-09-23T03:18:34.141Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/28.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:39:07.781Z"
+      "detected_at": "2026-09-23T03:18:34.145Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/29.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:36:22.911Z"
+      "detected_at": "2026-09-23T03:18:34.148Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/30.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:36:40.815Z"
+      "detected_at": "2026-09-23T03:18:34.151Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/31.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:39:18.491Z"
+      "detected_at": "2026-09-23T03:18:34.153Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/32.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:36:40.878Z"
+      "detected_at": "2026-09-23T03:18:34.156Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/33.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:37:02.292Z"
+      "detected_at": "2026-09-23T03:18:34.159Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/34.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:37:02.324Z"
+      "detected_at": "2026-09-23T03:18:34.160Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/35.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:37:02.358Z"
+      "detected_at": "2026-09-23T03:18:34.163Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/36.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:37:16.485Z"
+      "detected_at": "2026-09-23T03:18:34.165Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/38.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:37:16.532Z"
+      "detected_at": "2026-09-23T03:18:34.170Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/39.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:37:16.562Z"
+      "detected_at": "2026-09-23T03:18:34.172Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/40.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:37:33.748Z"
+      "detected_at": "2026-09-23T03:18:34.175Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/42.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:37:33.778Z"
+      "detected_at": "2026-09-23T03:18:34.181Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/44.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:37:33.805Z"
+      "detected_at": "2026-09-23T03:18:34.186Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/46.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:37:46.731Z"
+      "detected_at": "2026-09-23T03:18:34.191Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/VALVE.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:46:59.900Z"
+      "detected_at": "2026-09-23T03:18:33.458Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a02-mcp-tool-design/01.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:43:59.744Z"
+      "detected_at": "2026-09-23T03:18:33.461Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/01.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:43:59.865Z"
+      "detected_at": "2026-09-23T03:18:33.775Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/01.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:44:15.786Z"
+      "detected_at": "2026-09-23T03:18:33.809Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/02.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:51:13.973Z"
+      "detected_at": "2026-09-23T03:18:33.810Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/03.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:45:55.256Z"
+      "detected_at": "2026-09-23T03:18:33.810Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/04.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:45:55.275Z"
+      "detected_at": "2026-09-23T03:18:33.812Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/02.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:46:42.226Z"
+      "detected_at": "2026-09-23T03:18:33.776Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/03.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:46:51.053Z"
+      "detected_at": "2026-09-23T03:18:33.777Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/04.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:47:02.847Z"
+      "detected_at": "2026-09-23T03:18:33.779Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/05.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:47:15.352Z"
+      "detected_at": "2026-09-23T03:18:33.779Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/06.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:47:25.042Z"
+      "detected_at": "2026-09-23T03:18:33.780Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/05.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:47:28.469Z"
+      "detected_at": "2026-09-23T03:18:33.813Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/06.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:47:28.488Z"
+      "detected_at": "2026-09-23T03:18:33.814Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/08.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:48:34.940Z"
+      "detected_at": "2026-09-23T03:18:33.816Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/07.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:49:15.667Z"
+      "detected_at": "2026-09-23T03:18:33.781Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/08.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:49:28.057Z"
+      "detected_at": "2026-09-23T03:18:33.782Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/09.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:49:38.688Z"
+      "detected_at": "2026-09-23T03:18:33.782Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a02-mcp-tool-design/02.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:49:56.514Z"
+      "detected_at": "2026-09-23T03:18:33.463Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a02-mcp-tool-design/03.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:50:10.722Z"
+      "detected_at": "2026-09-23T03:18:33.465Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a02-mcp-tool-design/04.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:51:06.830Z"
+      "detected_at": "2026-09-23T03:18:33.469Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a02-mcp-tool-design/05.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:51:15.528Z"
+      "detected_at": "2026-09-23T03:18:33.471Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a02-mcp-tool-design/06.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:50:48.885Z"
+      "detected_at": "2026-09-23T03:18:33.472Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/10.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:51:04.353Z"
+      "detected_at": "2026-09-23T03:18:33.783Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/09.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:51:13.995Z"
+      "detected_at": "2026-09-23T03:18:33.817Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/10.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:51:14.017Z"
+      "detected_at": "2026-09-23T03:18:33.818Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/11.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:51:14.040Z"
+      "detected_at": "2026-09-23T03:18:33.820Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/12.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:51:14.064Z"
+      "detected_at": "2026-09-23T03:18:33.821Z"
     },
     {
       "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/11.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:51:15.424Z"
+      "detected_at": "2026-09-23T03:18:33.785Z"
     },
     {
       "path": "GOVERNANCE/skills/code/E8_HarmonyOS适老化设计规范字体.md",
       "status": "added",
       "detected_at": "2026-09-23T03:11:30.425Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/01.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.348Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/02.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.350Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/03.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.353Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/04.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.355Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/05.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.358Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/06.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.361Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/07.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.363Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/08.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.366Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/09.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.368Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/10.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.371Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/11.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.373Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/12.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.374Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/13.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.378Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/14.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.380Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/15.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.381Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/16.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.383Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/17.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.387Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/18.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.388Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/19.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.391Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/20.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.392Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/21.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.396Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/22.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.399Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/23.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.401Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/24.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.404Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/25.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.406Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/26.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.407Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/27.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.410Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/28.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.412Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/29.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.414Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/30.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.417Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/31.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.419Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/32.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.421Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/33.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.424Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/34.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.427Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/35.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.429Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/36.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.433Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/37.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.435Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/38.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.438Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/39.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.439Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/40.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.442Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/41.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.445Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/42.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.448Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/43.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.449Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/44.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.452Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a01-mcp-transports/45.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.455Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a02-mcp-tool-design/_check.py",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.476Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/01.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.479Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/02.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.479Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/03.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.482Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/04.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.483Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/05.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.486Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/07.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.491Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/08.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.494Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/09.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.496Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/10.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.499Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/11.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.501Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/12.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.504Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/13.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.507Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/14.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.510Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/15.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.512Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/16.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.515Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/17.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.517Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/18.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.520Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/19.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.522Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/20.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.525Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/21.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.530Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/22.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.532Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/23.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.534Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/24.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.536Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/25.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.540Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/26.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.543Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/27.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.561Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/28.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.577Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/29.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.598Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/30.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.611Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/31.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.626Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/32.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.656Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/33.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.662Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/34.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.665Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/35.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.669Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/36.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.678Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/37.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.701Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/38.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.732Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/39.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.739Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/40.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.744Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/41.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.750Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/42.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.755Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/43.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.757Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/44.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.761Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a03-mcp-resources-prompts/45.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.763Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a04-mcp-sampling-roots/01.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.766Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a04-mcp-sampling-roots/02.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.767Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a05-mcp-auth/01.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.769Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a05-mcp-auth/02.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.770Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a05-mcp-auth/03.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.771Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a05-mcp-auth/04.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.774Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/01.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.785Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a06-mcp-gateway/12.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.786Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/02.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.787Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/03.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.787Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/04.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.788Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/05.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.788Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/06.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.790Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/07.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.791Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/08.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.792Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/09.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.792Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/10.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.793Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/11.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.794Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/12.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.795Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/13.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.797Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/14.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.797Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/15.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.798Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/16.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.799Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/17.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.799Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/18.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.801Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/19.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.802Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/20.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.803Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/21.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.804Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/22.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.805Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/23.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.808Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a07-mcp-supply-chain/24.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.811Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/07.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.815Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/13.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.822Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a08-mcp-injection-defense/14.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.824Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/01.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.826Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/02.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.828Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/03.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.828Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/04.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.829Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/05.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.830Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/06.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.832Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/07.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.834Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/08.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.835Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/09.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.837Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/10.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.839Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/11.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.840Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/12.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.841Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/13.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.842Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/14.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.843Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/15.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.845Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/16.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.846Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/17.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.846Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/18.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.847Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/19.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.849Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/20.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.851Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/21.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.852Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a16-mcp-edge-cases/22.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.853Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/10.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.866Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/11.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.869Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/12.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.870Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/13.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.871Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/14.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.871Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/15.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.872Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/17.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.876Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/18.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.877Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/19.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.879Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/20.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.882Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/21.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.885Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/22.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.888Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/23.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.891Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/24.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.895Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/25.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.897Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/26.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.901Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/27.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.902Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/28.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.905Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/29.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.908Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/30.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.911Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/31.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.913Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/32.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.915Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/34.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.920Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/35.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.923Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/36.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.926Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/37.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.928Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/38.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.930Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/39.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.933Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/40.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.935Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/41.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.938Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/42.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.939Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/43.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.943Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/44.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.945Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/45.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.948Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/46.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.950Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/47.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.952Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a27-arkts-media/48.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.955Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a31-hos-push/01.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.962Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a31-hos-push/02.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.965Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a31-hos-push/03.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.967Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a31-hos-push/04.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:33.971Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/25.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.048Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/26.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.052Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/27.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.056Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/28.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.059Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/29.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.062Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a32-hos-testing/30.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.065Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/01.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.067Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/02.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.071Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/37.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.168Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/41.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.180Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/43.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.183Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/47.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.193Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/48.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.198Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a38-cf-observability/VALVE.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.198Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/08.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.222Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/09.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.223Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/10.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.225Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/11.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.228Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/12.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.229Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/13.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.231Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/14.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.234Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/15.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.236Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/16.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.239Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/17.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.241Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/18.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.245Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/19.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.248Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/20.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.251Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/21.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.252Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/22.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.255Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/23.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.259Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/24.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.261Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/25.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.272Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/26.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.280Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/27.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.290Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/28.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.291Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a44-gov-heartbeat/VALVE.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.292Z"
+    },
+    {
+      "path": "GOVERNANCE/burn-output/swarm/a45-gov-audit/01.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.295Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/A10_P03requestHttps统一封.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.308Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/A8_P01CloudBaseSDK单例化.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.314Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/A9_P02callTushare超时控制.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.319Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/E11_ArkTS数据模型与JSON契约接口.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.323Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/E12_HarmonyOSNavDestin.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.325Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/E13_ArkTS性能优化渲染优化内存管理懒.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.331Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/E1_ArkTSBuilder装饰器使用规.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.332Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/E6_HarmonyOSStage模型开发.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.333Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/E7_HarmonyOSCloudBase.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.338Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/E9_ArkTS网络请求最佳实践https.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.339Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/integrity.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.343Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/governance/24h-autonomy.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.348Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/governance/changelog-format.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.349Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/governance/handover-protocol.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.350Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/governance/learning-loop.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.351Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/governance/skill-doc-format.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:18:34.354Z"
+    },
+    {
+      "path": "GOVERNANCE/skills/code/A35_fetchtusharedata云函数深度审查.md",
+      "status": "added",
+      "detected_at": "2026-09-23T03:24:30.623Z"
     }
   ],
   "summary": {
-    "total": 640,
-    "added": 636,
+    "total": 881,
+    "added": 877,
     "modified": 4,
     "removed": 0
   },

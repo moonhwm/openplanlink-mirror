@@ -283,7 +283,7 @@ async function getStockNameMap() {
     // 无缓存可用
   }
 
-// 最终 fallback：使用硬编码的名称映射（从东方财富API获取，2026-09-21）
+  // 最终 fallback：使用硬编码的名称映射（从东方财富API获取，2026-09-21）
   console.log('Using hardcoded name map fallback');
   try {
     const hardcoded = require('./hardcoded-names');

@@ -1156,3 +1156,21 @@
   1. Moon燃烧计划书待机主在ZCode中执行
   2. BROADCAST_API_KEY环境变量需在CloudBase控制台配置
   3. 端侧代码审查为代码走查，未在真机/模拟器上实跑——真机验证留待机主安排
+## 2026-09-23 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· H1云函数深度审查+P0修复
+
+- **改了什么**：
+  - `cloudfunctions/functions/fetch-tushare-data/index.js`：删除 `getStockNameMap()` 中第234-256行旧串行循环代码残留（22行）。`Promise.all` 并行化改造后旧代码未清理，第234行 `const stocks = data.data.diff;` 引用不存在的 `data` 变量导致 ReferenceError，东方财富刷新路径**总是异常走 fallback**。修复后并行化逻辑（第228-233行 `for...of marketResults`）正确合并4市场结果。同时修复第286行注释缩进不一致。
+  - `GOVERNANCE/skills/code/A35_fetchtusharedata云函数深度审查.md`（新建）：审查技能文档，记录P0 BUG根因分析、架构审查、安全审查、并发保护审查、验证步骤。
+- **为什么**：
+  - P0 BUG导致股票名称映射实时刷新完全失效，用户看到的异动卡片中股票名称可能不准确或缺失。根因是P1-1并行化改造时新旧代码并存，旧代码未清理。
+  - 审查技能文档确保审查流程可复用，遵循AGENTS.md §5.1技能自动编写约束。
+- **如何验证**：
+  - V1：`grep "data.data.diff" cloudfunctions/functions/fetch-tushare-data/index.js` 确认在 `getStockNameMap` 函数体内不再出现（只在 `fetchEastMoneyMarket` 内出现）——通过
+  - V2：确认 `Promise.all` + `for...of marketResults` 逻辑完整闭合，大括号匹配——通过
+  - V3：确认 `fetchEastMoneyMarket` 返回 `Map`，`getStockNameMap` 正确合并——通过
+  - V4：grep "承诺|保本|立即|满仓" 确认信号松绑三禁无违反——通过
+  - V5：git diff 确认只删除旧代码残留+修复缩进，未改动新代码逻辑——通过
+- **遗留**：
+  1. P2: `requestHttps` 在 fetch-tushare-data 和 broadcast-a2a 中重复定义（共享模块需额外配置，暂不修复）
+  2. P2: `getCloudbaseApp` 在全部6个云函数中重复定义（同上）
+  3. 云函数审查为代码走查，未在云端实跑验证——部署验证留待机主安排
