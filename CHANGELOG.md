@@ -1350,3 +1350,27 @@
   2. 东方财富 API 分页获取需在云函数环境验证（本地测试因IP临时封禁未完成全量验证）
   3. 端侧 HAP 未签名——需机主在 DevEco Studio 中配置 signingConfigs
   4. 无设备/模拟器——无法端侧验证
+---
+
+## 2026-09-23 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· 云函数部署+数据链路打通
+
+- **改了什么**：
+  - `cloudfunctions/cloudbaserc.json`：配置全部环境变量——TUSHARE_TOKEN（新Token）、DASHSCOPE_API_KEY、BAILIAN_WORKSPACE_ID、SUPABASE_URL/ANON_KEY、DKNOWC_API_KEY。
+  - `entry/src/main/ets/services/SettingsService.ets`：CLOUDBASE_BASE_URL 从 `service.tcloudbase.com`（404）修正为 `a2a-commonwealth-d2eepjr928e9c4d-1475054847.ap-shanghai.app.tcloudbase.com`（HTTP路由实际域名）。
+  - 安装 CloudBase CLI 3.8.4（`npm install -g @cloudbase/cli`）。
+  - 4个云函数全部重新部署：fetch-tushare-data、get-alerts、generate-tts、broadcast-a2a。
+- **为什么**：
+  - 上次遗留第1项"CloudBase云函数全部未部署"——这是端侧获取真实数据的核心阻塞项。
+  - 端侧 FEED_URL 原域名 `service.tcloudbase.com` 返回404 INVALID_PATH，实际HTTP路由绑定在 `app.tcloudbase.com` 域名上。
+  - 环境变量未配置导致 fetch-tushare-data 中 Tushare Token 显示 "not set"，fallback 也失败。
+- **如何验证**：
+  - V1：`cloudbase fn list` 显示4个函数状态均为"Deployment completed"——通过
+  - V2：`cloudbase fn invoke get-alerts` 返回20条异动数据（含fact/signal类型、audioUrl）——通过
+  - V3：`cloudbase fn invoke fetch-tushare-data` 返回大量异动数据（11.7s运行时间，东方财富API+Tushare fallback）——通过
+  - V4：`curl https://...app.tcloudbase.com/alerts` HTTP端点返回异动JSON——通过
+  - V5：`curl https://...service.tcloudbase.com/alerts` 返回404 INVALID_PATH——确认旧域名不可用
+- **遗留**：
+  1. 端侧 HAP 未签名——需机主在 DevEco Studio 中配置 signingConfigs
+  2. 无设备/模拟器——无法端侧验证
+  3. 东方财富API在云函数环境中返回socket hang up——但Tushare fallback正常工作，数据链路已打通
+  4. Tushare daily接口404问题仍待机主向客服确认
