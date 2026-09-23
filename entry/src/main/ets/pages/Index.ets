@@ -405,6 +405,15 @@ struct Index {
                     .fontColor(this.theme.textPrimary)
                     .width('100%')
 
+                  // signal 卡的白话解读（仅 kind=signal 且 signalNote 有值时显示）
+                  if (item.kind === 'signal' && item.signalNote && item.signalNote.length > 0) {
+                    Text(item.signalNote)
+                      .fontSize(this.detailSize)
+                      .fontColor(this.theme.accentGold)
+                      .width('100%')
+                      .margin({ top: 4 })
+                  }
+
                   if (item.detail.length > 0) {
                     Text(item.detail)
                       .fontSize(this.detailSize)
