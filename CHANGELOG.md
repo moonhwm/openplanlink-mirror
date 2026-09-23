@@ -1287,3 +1287,41 @@
 **新增文档**：6份（A35/A36/A37技能文档 + CRYPTO_HARDENING_INTEGRATED + A2A_AUTONOMY_EXPERIMENT_SUMMARY + ENV_VAR_CONFIG_GUIDE + SEAT_IMPERSONATION_DETECTION）
 **技能总数**：29项（v3.0索引）
 **CHANGELOG条目**：8条（H1-H8各一条）
+---
+
+## 2026-09-23 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· 构建链路验证里程碑
+
+- **改了什么**：
+  - `hvigorw.js`：完全重写——添加 JSON5 require 扩展（Node.js 18 不原生支持 .json5）、自动查找 DevEco Studio 安装路径、设置完整构建环境（NODE_HOME/JAVA_HOME/DEVECO_SDK_HOME/PATH）、非 ASCII 路径检测警告、调用 DevEco Studio 自带 hvigorw.bat 执行构建。
+  - 新增 `C:\hmos-build\harmony-app` 构建工作目录（ASCII 安全路径，通过 robocopy 从原项目复制构建必需文件）。
+  - 在 `node_modules\@ohos\` 下创建 hvigor 和 hvigor-ohos-plugin 的 junction 链接，指向 DevEco Studio 自带模块。
+- **为什么**：
+  - 阶段二"握手协作"要求务实迭代——先验证项目能否编译构建，这是所有后续协作的基础。
+  - 原项目路径含中文字符（`欧阳宏俊`），hvigor 构建系统拒绝非 ASCII 路径（错误码 00306003）。
+  - devecocli 需要 Node.js >=22 但 DevEco Studio 自带 v18.20.1，无法通过 npm 安装 devecocli。
+  - 项目原 hvigorw.js 使用 `require('@ohos/hvigor').execute()` API，但 DevEco Studio 自带的 hvigor 模块 API 不匹配（`execute is not a function`）。
+- **如何验证**：
+  - V1：DevEco Studio 自带 Node.js v18.20.1 可用——通过
+  - V2：ohpm install 在 ASCII 路径下成功——通过
+  - V3：hvigorw assembleHap 编译 ArkTS 成功（17s 709ms）——通过
+  - V4：PackageHap 打包成功（708ms）——通过
+  - V5：HAP 文件生成 `entry-default-unsigned.hap`——通过
+  - V6：签名警告（无 signingConfigs 配置）——预期行为，模拟器可用未签名 HAP
+- **构建命令**（可复现）：
+  ```
+  # 环境变量
+  NODE_HOME=A:\DevEco Studio\tools\node
+  JAVA_HOME=A:\DevEco Studio\jbr
+  DEVECO_SDK_HOME=A:\DevEco Studio\sdk
+  PATH=A:\DevEco Studio\tools\node;A:\DevEco Studio\tools\ohpm\bin;A:\DevEco Studio\jbr\bin;...
+
+  # 在 ASCII 安全路径下执行
+  cd C:\hmos-build\harmony-app
+  ohpm install
+  "A:\DevEco Studio\tools\hvigor\bin\hvigorw.bat" assembleHap --mode module -p product=default -p module=entry@default --no-daemon
+  ```
+- **遗留**：
+  1. 无设备/模拟器——devecocli 未安装，无法通过命令行创建/启动模拟器
+  2. HAP 未签名——需机主在 DevEco Studio 中配置 signingConfigs
+  3. 构建工作目录 `C:\hmos-build\harmony-app` 是临时副本，代码修改需同步回原项目
+  4. hvigorw.js 中 `hvigor.execute()` API 不匹配问题已通过改用 DevEco Studio 自带 hvigorw.bat 绕过
