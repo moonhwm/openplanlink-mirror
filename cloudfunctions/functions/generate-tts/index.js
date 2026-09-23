@@ -58,11 +58,15 @@ function getCacheKey(text) {
 }
 
 /**
- * 获取 CloudBase app 实例
+ * 获取 CloudBase app 实例（单例）
  */
+let _cloudbaseApp = null;
 function getCloudBaseApp() {
-  const cloudbase = require('@cloudbase/node-sdk');
-  return cloudbase.init({ env: ENV_ID });
+  if (!_cloudbaseApp) {
+    const cloudbase = require('@cloudbase/node-sdk');
+    _cloudbaseApp = cloudbase.init({ env: ENV_ID });
+  }
+  return _cloudbaseApp;
 }
 
 /**

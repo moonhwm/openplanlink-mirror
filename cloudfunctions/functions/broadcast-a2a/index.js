@@ -15,6 +15,7 @@
  */
 
 const http = require('http');
+const https = require('https');
 const SUPABASE_URL = process.env.SUPABASE_URL || '';
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || '';
 const PUSH_BUNDLE_NAME = process.env.PUSH_BUNDLE_NAME || 'com.yehang.stockpulse';
@@ -22,12 +23,50 @@ const ENV_ID = process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d';
 const ALERTS_FILE_ID = 'cloud://a2a-commonwealth-d2eepjr928e9c4d.6132-a2a-commonwealth-d2eepjr928e9c4d-1475054847/alerts/alerts.json';
 
 /**
+ * 统一 HTTPS 请求封装（替代实验性 fetch）
+ */
+function requestHttps(url, options = {}) {
+  return new Promise((resolve, reject) => {
+    const urlObj = new URL(url);
+    const reqOptions = {
+      hostname: urlObj.hostname,
+      path: urlObj.pathname + urlObj.search,
+      method: options.method || 'GET',
+      headers: options.headers || {},
+    };
+    const req = https.request(reqOptions, (res) => {
+      let body = '';
+      res.on('data', (chunk) => { body += chunk; });
+      res.on('end', () => {
+        try { resolve(JSON.parse(body)); }
+        catch (e) { reject(new Error(`JSON parse failed: ${e.message}`)); }
+      });
+    });
+    req.on('error', reject);
+    req.setTimeout(options.timeout || 15000, () => {
+      req.destroy(new Error('Request timeout'));
+    });
+    if (options.body) req.write(options.body);
+    req.end();
+  });
+}
+
+// CloudBase SDK 单例
+let _cloudbaseApp = null;
+function getCloudbaseApp() {
+  if (!_cloudbaseApp) {
+    const cloudbase = require('@cloudbase/node-sdk');
+    _cloudbaseApp = cloudbase.init({ env: ENV_ID });
+  }
+  return _cloudbaseApp;
+}
+
+/**
  * 从 CloudBase 存储获取最新异动
  */
 async function getLatestAlerts(limit = 20) {
   try {
-    const cloudbase = require('@cloudbase/node-sdk');
-    const app = cloudbase.init({ env: ENV_ID });
+    const app = getCloudbaseApp();
 
     const result = await app.downloadFile({ fileID: ALERTS_FILE_ID });
 
@@ -57,7 +96,7 @@ async function broadcastToSupabase(alerts) {
   }
 
   try {
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/cross_mode_channel`, {
+    const data = await requestHttps(`${SUPABASE_URL}/rest/v1/cross_mode_channel`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -78,11 +117,7 @@ async function broadcastToSupabase(alerts) {
       }),
     });
 
-    if (response.ok) {
-      console.log(`Broadcast ${alerts.length} alerts to Supabase`);
-    } else {
-      console.error('Supabase broadcast failed:', response.status);
-    }
+    console.log(`Broadcast ${alerts.length} alerts to Supabase`);
   } catch (e) {
     console.error('Supabase broadcast error:', e.message);
   }
@@ -116,8 +151,7 @@ async function sendPushNotification(alert) {
   // 从 CloudBase 数据库获取所有活跃的 Push Token
   let deviceTokens = [];
   try {
-    const cloudbase = require('@cloudbase/node-sdk');
-    const app = cloudbase.init({ env: ENV_ID });
+    const app = getCloudbaseApp();
     const db = app.database();
     const result = await db.collection('push_tokens').where({ active: true }).get();
     deviceTokens = (result.data || []).map(item => item.token);
@@ -135,7 +169,7 @@ async function sendPushNotification(alert) {
 
   try {
     // 步骤1：获取 OAuth 2.0 Bearer Token
-    const tokenResp = await fetch('https://oauth-login.cloud.huawei.com/oauth2/v3/token', {
+    const tokenData = await requestHttps('https://oauth-login.cloud.huawei.com/oauth2/v3/token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({
@@ -143,14 +177,9 @@ async function sendPushNotification(alert) {
         client_id: CLIENT_ID,
         client_secret: CLIENT_SECRET,
       }).toString(),
+      timeout: 10000,
     });
 
-    if (!tokenResp.ok) {
-      console.error('Push: OAuth token request failed:', tokenResp.status);
-      return;
-    }
-
-    const tokenData = await tokenResp.json();
     const accessToken = tokenData.access_token;
     if (!accessToken) {
       console.error('Push: No access_token in OAuth response');
@@ -183,22 +212,17 @@ async function sendPushNotification(alert) {
       token: deviceTokens,
     };
 
-    const pushResp = await fetch(pushUrl, {
+    const pushResult = await requestHttps(pushUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`,
       },
       body: JSON.stringify({ message }),
+      timeout: 10000,
     });
 
-    if (pushResp.ok) {
-      const pushResult = await pushResp.json();
-      console.log(`Push sent to ${deviceTokens.length} devices:`, JSON.stringify(pushResult).substring(0, 200));
-    } else {
-      const pushError = await pushResp.text();
-      console.error('Push send failed:', pushResp.status, pushError.substring(0, 200));
-    }
+    console.log(`Push sent to ${deviceTokens.length} devices:`, JSON.stringify(pushResult).substring(0, 200));
   } catch (e) {
     console.error('Push error:', e.message);
   }

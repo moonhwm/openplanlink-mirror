@@ -4,12 +4,18 @@
 
 const cloudbase = require('@cloudbase/node-sdk');
 
+// CloudBase SDK 单例
+let _cloudbaseApp = null;
+function getCloudbaseApp() {
+  if (!_cloudbaseApp) {
+    const envId = process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d';
+    _cloudbaseApp = cloudbase.init({ env: envId });
+  }
+  return _cloudbaseApp;
+}
+
 exports.main = async (event, context) => {
-  const envId = process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d';
-  
-  // 在SCF环境中，context 包含临时凭证
-  // 使用 cloudbase.init() 时，SDK会自动使用环境变量中的临时凭证
-  const app = cloudbase.init({ env: envId });
+  const app = getCloudbaseApp();
   const db = app.database();
   
   const collections = ['alerts', 'user_stocks', 'user_preferences', 'tts_cache'];

@@ -15,12 +15,21 @@
 
 const ENV_ID = process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d';
 
+// CloudBase SDK 单例
+let _cloudbaseApp = null;
+function getCloudbaseApp() {
+  if (!_cloudbaseApp) {
+    const cloudbase = require('@cloudbase/node-sdk');
+    _cloudbaseApp = cloudbase.init({ env: ENV_ID });
+  }
+  return _cloudbaseApp;
+}
+
 /**
  * 注册或更新 Push Token
  */
 async function registerToken(token, bundleName) {
-  const cloudbase = require('@cloudbase/node-sdk');
-  const app = cloudbase.init({ env: ENV_ID });
+  const app = getCloudbaseApp();
   const db = app.database();
 
   const collection = db.collection('push_tokens');
@@ -56,8 +65,7 @@ async function registerToken(token, bundleName) {
  * 供 broadcast-a2a 云函数调用
  */
 async function getActiveTokens() {
-  const cloudbase = require('@cloudbase/node-sdk');
-  const app = cloudbase.init({ env: ENV_ID });
+  const app = getCloudbaseApp();
   const db = app.database();
 
   const collection = db.collection('push_tokens');

@@ -17,16 +17,24 @@
  */
 
 const ENV_ID = process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d';
-// CloudBase 存储 fileID（格式稳定：cloud://envId.bucket/cloudPath）
 const ALERTS_FILE_ID = 'cloud://a2a-commonwealth-d2eepjr928e9c4d.6132-a2a-commonwealth-d2eepjr928e9c4d-1475054847/alerts/alerts.json';
+
+// CloudBase SDK 单例
+let _cloudbaseApp = null;
+function getCloudbaseApp() {
+  if (!_cloudbaseApp) {
+    const cloudbase = require('@cloudbase/node-sdk');
+    _cloudbaseApp = cloudbase.init({ env: ENV_ID });
+  }
+  return _cloudbaseApp;
+}
 
 /**
  * 从 CloudBase 存储获取最新异动 JSON
  */
 async function getLatestAlerts(limit = 20) {
   try {
-    const cloudbase = require('@cloudbase/node-sdk');
-    const app = cloudbase.init({ env: ENV_ID });
+    const app = getCloudbaseApp();
 
     // 下载 alerts.json 文件
     const result = await app.downloadFile({

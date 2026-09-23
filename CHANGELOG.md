@@ -1012,3 +1012,55 @@
   5. GAP-03桥接补丁待实际部署（需桥接会话执行a2a_bridge.mjs修改）
   6. 燃烧窗口第二档（对话型任务）待推进
   7. `.codeartsdoer/.codebase/branches/master/state.json` 被 tracked 但属于IDE内部状态——建议后续 `git rm --cached`
+## 2026-09-23 06:55 · 砚坚（CodeArts GLM-5.2）· 云函数P0修复+燃烧计划书
+
+- **起因**：云函数fetch-tushare-data七维度审查发现5个P0级缺陷，GLM-5.3-Flash 1亿Tokens限时额度窗口需燃烧策略
+- **改了什么**：
+  1. P0-1：CloudBase SDK单例化——新增`getCloudbaseApp()`函数，替换5处`cloudbase.init()`调用，消除连接泄漏
+  2. P0-2：callTushare超时控制——改用`requestHttps`统一封装，内置15s超时，替代无超时的实验性`fetch`
+  3. P0-3：requestHttps统一封装——新增支持GET/POST的`requestHttps`函数，替代`fetchHttps`和所有`fetch`调用（callTushare、checkCompliance、东方财富分页），消除实验性fetch依赖
+  4. P0-4：fallbackMap变量修复——第152行声明后未使用的`fallbackMap`改为加载到内存缓存作为降级预备，刷新失败时自动fallback
+  5. P0-5：alertId碰撞修复——从`symbol_timestamp_random`改为确定性`symbol_timestamp`，消除Math.random碰撞导致的数据丢失
+  6. 安全：callTushare error message增加token脱敏（`replace(TUSHARE_TOKEN, '***')`）
+  7. 注释：头部注释从"PostgreSQL alerts表"更新为"CloudBase 存储（alerts/alerts.json）"
+  8. 新增：`GOVERNANCE/burn-moon-plan.md`——Moon自主燃烧计划书（120项任务，目标50万字，含GLM-5.3/Flash自主切换协议）
+- **为什么**：
+  - 5处重复init导致资源泄漏和冷启动延迟
+  - 实验性fetch在Node.js 18.15有已知缺陷（name字段返回代码而非名称）
+  - fallbackMap逻辑断裂导致过期缓存无法作为降级预备
+  - Math.random alertId在saveAlertsToDB按alertId去重时可能碰撞丢数据
+- **如何验证**：
+  - V1：grep确认0处`cloudbase.init`残留——通过
+  - V2：grep确认0处`fetch(`和`fetchHttps(`残留——通过
+  - V3：fallbackMap现在被赋值到cachedNameMap——通过
+  - V4：alertId格式为`symbol_timestamp`无随机后缀——通过
+- **遗留**：
+  1. P1级问题未修复（东方财富分页并行化、fetchHttps重试机制、TTS优先级排序）
+  2. Moon燃烧计划书待机主在ZCode中执行
+  3. 其他云函数（broadcast-a2a、generate-tts等）的CloudBase SDK单例化待统一
+## 2026-09-23 08:30 · 砚坚（CodeArts GLM-5.2）· P1修复+全云函数单例化+技能文档
+
+- **起因**：自主运维4小时任务，继续推进P1级修复和全云函数基础设施统一
+- **改了什么**：
+  1. P1-1：东方财富分页并行化——4个市场从串行改为`Promise.all`并行，新增`fetchEastMoneyMarket`辅助函数，预估从16秒降至4秒
+  2. P1-2：requestHttps重试机制——新增`requestHttpsRetry`函数（指数退避，最多2次重试），东方财富分页调用改用重试版本
+  3. 全云函数CloudBase SDK单例化——broadcast-a2a(2处)、generate-tts(1处)、get-alerts(1处)、push-token-register(2处)、init-db(1处)全部改为`getCloudbaseApp()`单例模式
+  4. broadcast-a2a fetch替换——新增`requestHttps`封装，替换Supabase广播和华为Push Kit中的3处`fetch`调用
+  5. generate-tts确认——已使用WebSocket（`ws`模块）调用百炼TTS API，无需修复
+  6. GOVERNANCE技能文档——编写3份code类技能文档：arkts-cloud-function-pattern.md、arkts-network-wrapper.md、arkts-cache-strategy.md
+- **为什么**：
+  - 串行80次HTTP请求占据16秒，接近云函数超时限制
+  - 5个云函数共7处重复init导致资源泄漏
+  - broadcast-a2a中3处fetch使用实验性API
+  - 技能文档是AGENTS.md §五自主进化机制的强制要求
+- **如何验证**：
+  - V1：grep确认每个云函数仅1处`cloudbase.init`（在单例函数内）——通过
+  - V2：grep确认broadcast-a2a中0处`fetch(`残留——通过
+  - V3：`fetchEastMoneyMarket`函数存在且使用`requestHttpsRetry`——通过
+  - V4：3份技能文档文件存在且内容完整——通过
+- **遗留**：
+  1. TTS优先级排序（signalAlerts按涨跌幅绝对值排序）待实施
+  2. broadcast-a2a的F-002高危（HTTP模式无鉴权+CORS全开）待修复
+  3. get-alerts的F-003低危（fileID vs cloudPath混用）——确认fileID方式正确，无需修复
+  4. Moon燃烧计划书待机主在ZCode中执行（窗口09:00已过期）
+  5. 剩余技能文档（collab/diag/governance/crypto类）待编写

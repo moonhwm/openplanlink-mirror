@@ -4,7 +4,7 @@
  * 功能：
  * 1. 调用 Tushare API 获取A股日线行情数据
  * 2. 筛选涨跌幅 ≥ 阈值（默认5%）的异动股票
- * 3. 将异动记录写入 PostgreSQL alerts 表
+ * 3. 将异动记录写入 CloudBase 存储（alerts/alerts.json）
  * 4. 返回异动列表 JSON
  * 
  * 触发方式：定时触发器或手动调用
@@ -24,13 +24,34 @@ const THRESHOLD = parseFloat(process.env.ALERT_THRESHOLD || '5.0');
 const DKNOWC_API_KEY = process.env.DKNOWC_API_KEY || '';
 const DKNOWC_API_URL = 'https://open.dknowc.cn/chat/trusted/unification';
 
+// CloudBase SDK 单例（避免重复 init 导致连接泄漏）
+let _cloudbaseApp = null;
+function getCloudbaseApp() {
+  if (!_cloudbaseApp) {
+    const cloudbase = require('@cloudbase/node-sdk');
+    _cloudbaseApp = cloudbase.init({
+      env: process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d',
+    });
+  }
+  return _cloudbaseApp;
+}
+
 /**
- * 使用 https 模块发起 GET 请求（替代实验性 fetch）
+ * 统一 HTTPS 请求封装（替代实验性 fetch 和 fetchHttps）
+ * 支持 GET/POST，内置超时控制和错误处理
  */
-function fetchHttps(url) {
+function requestHttps(url, options = {}) {
   return new Promise((resolve, reject) => {
     const https = require('https');
-    const req = https.get(url, (res) => {
+    const urlObj = new URL(url);
+    const reqOptions = {
+      hostname: urlObj.hostname,
+      path: urlObj.pathname + urlObj.search,
+      method: options.method || 'GET',
+      headers: options.headers || {},
+    };
+
+    const req = https.request(reqOptions, (res) => {
       let body = '';
       res.on('data', (chunk) => { body += chunk; });
       res.on('end', () => {
@@ -41,11 +62,70 @@ function fetchHttps(url) {
         }
       });
     });
+
     req.on('error', reject);
-    req.setTimeout(15000, () => {
+    req.setTimeout(options.timeout || 15000, () => {
       req.destroy(new Error('Request timeout'));
     });
+
+    if (options.body) {
+      req.write(options.body);
+    }
+    req.end();
   });
+}
+
+/**
+ * 带重试的 HTTPS 请求（指数退避）
+ */
+async function requestHttpsRetry(url, options = {}, maxRetries = 2) {
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      return await requestHttps(url, options);
+    } catch (e) {
+      if (attempt === maxRetries) throw e;
+      const delay = 500 * Math.pow(2, attempt); // 500ms, 1000ms
+      console.log(`Retry ${attempt + 1}/${maxRetries} after ${delay}ms: ${e.message}`);
+      await new Promise(r => setTimeout(r, delay));
+    }
+  }
+}
+
+/**
+ * 从东方财富API拉取单个市场的股票名称映射（页面串行，带重试）
+ */
+async function fetchEastMoneyMarket(fs) {
+  const marketMap = new Map();
+  for (let page = 1; page <= 20; page++) {
+    const url = `https://80.push2.eastmoney.com/api/qt/clist/get?pn=${page}&pz=100&po=1&np=1&fltt=2&invt=2&fs=${encodeURIComponent(fs)}&fields=f12,f14`;
+    try {
+      const data = await requestHttpsRetry(url);
+      if (!data || !data.data || !data.data.diff) break;
+      const stocks = data.data.diff;
+      if (stocks.length === 0) break;
+
+      for (const s of stocks) {
+        const code = s.f12;
+        const name = s.f14;
+        if (!code || !name) continue;
+
+        let tsCode;
+        if (code.startsWith('6')) tsCode = code + '.SH';
+        else if (code.startsWith('0') || code.startsWith('3')) tsCode = code + '.SZ';
+        else if (code.startsWith('8') || code.startsWith('4')) tsCode = code + '.BJ';
+        else continue;
+
+        marketMap.set(tsCode, name);
+      }
+
+      if (stocks.length < 100) break;
+    } catch (e) {
+      console.log(`EastMoney market ${fs} page ${page} failed: ${e.message}`);
+      break;
+    }
+  }
+  console.log(`EastMoney market ${fs}: ${marketMap.size} entries`);
+  return marketMap;
 }
 
 // 最新交易日缓存（避免频繁调用 trade_cal）
@@ -69,19 +149,17 @@ async function callTushare(apiName, params = {}, fields = '') {
     fields,
   });
 
-  const response = await fetch(TUSHARE_API_URL, {
+  const data = await requestHttps(TUSHARE_API_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body,
+    timeout: 15000,
   });
 
-  if (!response.ok) {
-    throw new Error(`Tushare API HTTP ${response.status}: ${response.statusText}`);
-  }
-
-  const data = await response.json();
   if (data.code !== 0) {
-    throw new Error(`Tushare API error: ${data.msg || data.code}`);
+    // 脱敏：避免 error message 中泄露 token 信息
+    const safeMsg = (data.msg || '').replace(TUSHARE_TOKEN, '***');
+    throw new Error(`Tushare API error: ${safeMsg || data.code}`);
   }
   return data.data;
 }
@@ -104,10 +182,7 @@ async function getStockNameMap() {
 
   // 尝试从 CloudBase 存储读取缓存
   try {
-    const cloudbase = require('@cloudbase/node-sdk');
-    const app = cloudbase.init({
-      env: process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d',
-    });
+    const app = getCloudbaseApp();
 
     const result = await app.downloadFile({
       cloudPath: 'stock-names/name-map.json',
@@ -125,9 +200,12 @@ async function getStockNameMap() {
           console.log(`Using CloudBase stored name map: ${nameMap.size} entries (age: ${Math.round(age / 3600000)}h)`);
           return nameMap;
         }
-        // 缓存过期但仍有数据——先用作 fallback，同时尝试刷新
+        // 缓存过期但仍有数据——先加载到内存作为降级预备，同时尝试刷新
         console.log(`Stored name map is stale (${Math.round(age / 3600000)}h old), will try refresh`);
         const fallbackMap = new Map(Object.entries(stored.names));
+        cachedNameMap = fallbackMap;
+        cachedNameMapTs = Date.now();
+        // 不 return，继续尝试从东方财富刷新；刷新失败时内存缓存已是 fallback
       }
     }
   } catch (e) {
@@ -135,25 +213,24 @@ async function getStockNameMap() {
   }
 
   // 尝试从东方财富 API 刷新（替代 Tushare stock_basic，无频率限制）
-  // 使用 https 模块而非 fetch（Node.js 18.15 的 fetch 是实验性的）
   try {
-    console.log('Fetching stock names from EastMoney API (https module)...');
+    console.log('Fetching stock names from EastMoney API (parallel markets)...');
     const nameMap = new Map();
     const nameObj = {};
 
     const marketFilters = ['m:1+t:2', 'm:1+t:23', 'm:0+t:6', 'm:0+t:80'];
 
-    for (const fs of marketFilters) {
-      let page = 1;
-      while (page <= 20) {
-        const url = `https://80.push2.eastmoney.com/api/qt/clist/get?pn=${page}&pz=100&po=1&np=1&fltt=2&invt=2&fs=${encodeURIComponent(fs)}&fields=f12,f14`;
-        console.log(`EastMoney fetching: fs=${fs}, page=${page}`);
-        const data = await fetchHttps(url);
+    // 4个市场并行拉取，每个市场内部页面串行
+    const marketResults = await Promise.all(
+      marketFilters.map(fs => fetchEastMoneyMarket(fs))
+    );
 
-        if (!data || !data.data || !data.data.diff) {
-          console.log(`EastMoney: no data for fs=${fs}, page=${page}`);
-          break;
-        }
+    for (const marketMap of marketResults) {
+      for (const [tsCode, name] of marketMap) {
+        nameMap.set(tsCode, name);
+        nameObj[tsCode] = name;
+      }
+    }
         const stocks = data.data.diff;
         if (stocks.length === 0) break;
 
@@ -185,10 +262,7 @@ async function getStockNameMap() {
       console.log(`Got fresh stock name map from EastMoney: ${nameMap.size} entries`);
 
       try {
-        const cloudbase = require('@cloudbase/node-sdk');
-        const app = cloudbase.init({
-          env: process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d',
-        });
+        const app = getCloudbaseApp();
         await app.uploadFile({
           cloudPath: 'stock-names/name-map.json',
           fileContent: Buffer.from(JSON.stringify({
@@ -213,10 +287,7 @@ async function getStockNameMap() {
 
   // 最后 fallback：尝试用过期的存储缓存
   try {
-    const cloudbase = require('@cloudbase/node-sdk');
-    const app = cloudbase.init({
-      env: process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d',
-    });
+    const app = getCloudbaseApp();
     const result = await app.downloadFile({
       cloudPath: 'stock-names/name-map.json',
     });
@@ -389,7 +460,7 @@ async function checkCompliance(text) {
   }
 
   try {
-    const response = await fetch(DKNOWC_API_URL, {
+    const data = await requestHttps(DKNOWC_API_URL, {
       method: 'POST',
       headers: {
         'api-key': DKNOWC_API_KEY,
@@ -399,14 +470,9 @@ async function checkCompliance(text) {
         input: text,
         safeAnswerScope: 'none', // 只做安全判断，不需要代答
       }),
+      timeout: 10000,
     });
 
-    if (!response.ok) {
-      console.log(`[compliance] DKnowC API HTTP ${response.status}, skipping`);
-      return { safeType: 'Unknown', compliant: true, skipped: true };
-    }
-
-    const data = await response.json();
     const safeType = data.safeType || 'Unknown';
     
     // Safe = 合规通过；ConditionallySafe = 有条件合规（可放行但留意）
@@ -460,7 +526,7 @@ function createAlertItems(movers) {
     const detail = `当前价 ${close}元，成交量 ${vol}手`;
 
     return {
-      alertId: `${symbol}_${now}_${Math.random().toString(36).substring(2, 8)}`,
+      alertId: `${symbol}_${now}`,
       ts: now,
       symbol,
       name,
@@ -482,10 +548,7 @@ function createAlertItems(movers) {
  */
 async function saveAlertsToDB(alerts) {
   try {
-    const cloudbase = require('@cloudbase/node-sdk');
-    const app = cloudbase.init({
-      env: process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d',
-    });
+    const app = getCloudbaseApp();
 
     // 先下载现有数据（合并新旧，保留历史）
     let existingItems = [];
@@ -595,10 +658,7 @@ exports.main = async (event, context) => {
         ),
         (async () => {
           try {
-            const cloudbase = require('@cloudbase/node-sdk');
-            const app = cloudbase.init({
-              env: process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d',
-            });
+            const app = getCloudbaseApp();
 
             return await Promise.allSettled(
               signalAlerts.map(alert =>
