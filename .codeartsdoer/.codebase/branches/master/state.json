@@ -3,8 +3,8 @@
   "schema": "docgen-state-v1",
   "branch": "master",
   "branch_raw": "master",
-  "version_token": 516,
-  "updated_at": "2026-09-23T03:54:45.878Z",
+  "version_token": 521,
+  "updated_at": "2026-09-23T04:04:23.496Z",
   "status": "watching",
   "last_doc_generated_at": "2026-09-22T11:28:42.959Z",
   "changed_files": [
@@ -1531,7 +1531,7 @@
     {
       "path": "CHANGELOG.md",
       "status": "modified",
-      "detected_at": "2026-09-23T03:54:41.124Z"
+      "detected_at": "2026-09-23T04:04:19.193Z"
     },
     {
       "path": "GOVERNANCE/DECISION_LEDGER_POINTER.md",
@@ -2476,12 +2476,12 @@
     {
       "path": "GOVERNANCE/a2a/YANJIAN_ROLE_REGISTRATION.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:15:43.499Z"
+      "detected_at": "2026-09-23T03:58:29.292Z"
     },
     {
       "path": "GOVERNANCE/a2a/A2A_DISPATCH_AND_PLAN.md",
       "status": "added",
-      "detected_at": "2026-09-23T01:15:43.498Z"
+      "detected_at": "2026-09-23T03:58:21.504Z"
     },
     {
       "path": "GOVERNANCE/a2a/TECH_EVAL_GLM_RL_MIMO.md",
@@ -4422,11 +4422,16 @@
       "path": "GOVERNANCE/research/CRYPTO_HARDENING_INTEGRATED.md",
       "status": "added",
       "detected_at": "2026-09-23T03:52:15.876Z"
+    },
+    {
+      "path": "GOVERNANCE/a2a/A2A_AUTONOMY_EXPERIMENT_SUMMARY.md",
+      "status": "added",
+      "detected_at": "2026-09-23T04:01:38.167Z"
     }
   ],
   "summary": {
-    "total": 883,
-    "added": 879,
+    "total": 884,
+    "added": 880,
     "modified": 4,
     "removed": 0
   },
