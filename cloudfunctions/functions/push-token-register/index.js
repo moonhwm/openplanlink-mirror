@@ -85,9 +85,21 @@ async function getActiveTokens() {
 
 /**
  * 云函数入口
+ * 支持 action 参数路由：action=getActiveTokens 时返回活跃 token 列表（供其他云函数 callFunction 调用）
  */
 exports.main = async (event, context) => {
   console.log('push-token-register invoked:', JSON.stringify(event));
+
+  // action 路由：供其他云函数通过 callFunction 获取活跃 token 列表
+  if (event?.action === 'getActiveTokens') {
+    try {
+      const tokens = await getActiveTokens();
+      return { success: true, tokens };
+    } catch (e) {
+      console.error('getActiveTokens error:', e.message);
+      return { success: false, error: e.message, tokens: [] };
+    }
+  }
 
   const { token, bundleName } = event;
 
@@ -107,6 +119,3 @@ exports.main = async (event, context) => {
     return { success: false, error: e.message };
   }
 };
-
-// 导出 getActiveTokens 供其他云函数通过 callFunction 调用
-exports.getActiveTokens = getActiveTokens;

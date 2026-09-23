@@ -25,6 +25,8 @@ const ENV_ID = process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d';
 const ALERTS_FILE_ID = 'cloud://a2a-commonwealth-d2eepjr928e9c4d.6132-a2a-commonwealth-d2eepjr928e9c4d-1475054847/alerts/alerts.json';
 
 // 百炼额度监控
+// 设计限制：QUOTA.usedTokens 在云函数冷启动后重置为0，仅监控单次冷启动周期内的用量。
+// 百炼平台本身有独立的额度限制和告警，此对象仅作辅助参考，不作为额度控制的权威来源。
 const QUOTA = {
   totalEstimated: 1000000,
   usedTokens: 0,
@@ -122,6 +124,8 @@ async function saveCache(cacheKey, text, audioUrl) {
 /**
  * 更新 alerts.json 中对应 alertId 的 audioUrl 字段
  * 读取 → 修改 → 重新上传
+ * 并发风险：多个 TTS 生成可能同时读取 alerts.json 并写回，导致 lost update（后写覆盖先写）。
+ * 当前 fetch-tushare-data 中 TTS 生成是顺序执行的，实际风险较低。如需并行 TTS，应改为数据库原子更新。
  */
 async function updateAlertAudioUrl(alertId, audioUrl) {
   try {
