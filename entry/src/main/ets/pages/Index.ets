@@ -141,7 +141,12 @@ struct Index {
     const pending = AppStorage.get('pendingAlertId') as string | undefined;
     if (pending) {
       AppStorage.delete('pendingAlertId');
-      this.playById(pending);
+      // 小艺显式 PLAY_AUDIO 指令（autoPlay=true）无视播报开关/免打扰
+      const force = AppStorage.get('autoPlay') === true;
+      if (force) {
+        AppStorage.delete('autoPlay');
+      }
+      this.playById(pending, force);
     }
   }
 
@@ -201,7 +206,7 @@ struct Index {
     }
   }
 
-  private playById(id: string): void {
+  private playById(id: string, force: boolean = false): void {
     const hit = this.items.find((it) => it.alertId === id);
     if (!hit) {
       hilog.info(DOMAIN, TAG, `pendingAlertId ${id} not in current list, silently cleared`);
@@ -211,13 +216,15 @@ struct Index {
       hilog.info(DOMAIN, TAG, `pendingAlertId ${id} has no audioUrl, silently skipped`);
       return;
     }
-    // 播报开关关闭时：自动播报静默跳过（白皮书 R2 §2）
-    if (!this.broadcastEnabled) {
+    // 播报开关关闭时：自动播报静默跳过（白皮书 R2 §2）。
+    // 小艺显式 PLAY_AUDIO（force=true）无视此开关。
+    if (!this.broadcastEnabled && !force) {
       hilog.info(DOMAIN, TAG, `broadcast disabled, auto-play skipped for ${id}`);
       return;
     }
-    // 免打扰时段：自动播报静默跳过（用户手动点击仍可播放）
-    if (this.dndActive) {
+    // 免打扰时段：自动播报静默跳过（用户手动点击仍可播放）。
+    // 小艺显式 PLAY_AUDIO（force=true）无视免打扰（用户主动要求播放）。
+    if (this.dndActive && !force) {
       hilog.info(DOMAIN, TAG, `dnd active, auto-play skipped for ${id}`);
       return;
     }

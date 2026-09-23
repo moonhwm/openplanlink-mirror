@@ -50,7 +50,8 @@ export default class EntryAbility extends UIAbility {
     // 小艺 A2A 接入（E1）：处理小艺语音助手的 action 请求
     const action = want?.action;
     if (action === 'com.yehang.stockpulse.QUERY_ALERTS') {
-      // 小艺查询异动列表 → 设置标志让 Index 页面返回异动摘要
+      // 小艺查询异动列表。当前仅置标志占位——摘要返回机制待小艺 A2A 数据返回协议对接后，
+      // 由 Index 页面消费 xiaoYiQuery 并回填结果。在此之前该标志无消费方（诚实标注，避免误判已实现）。
       AppStorage.setOrCreate('xiaoYiQuery', true);
     } else if (action === 'com.yehang.stockpulse.DETAIL_ALERT') {
       // 小艺查询指定异动详情 → 设置 alertId 自动播报
