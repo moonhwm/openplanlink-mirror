@@ -1503,3 +1503,24 @@
     - `GOVERNANCE/skills/diag/hvigor-chinese-path.md` — hvigor中文路径构建失败诊断技能
 - **为什么**：Moon席位（GLM-5.3-Flash）在燃烧窗口产出的知识资产补充，需归档提交以保持工作区干净
 - **如何验证**：`git status` 确认工作区无未提交修改
+---
+
+## 2026-09-24 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS）· HAP构建突破——英文路径迁移+空格路径修复
+
+- **改了什么**：
+  - `hvigorw.js` 第104行：`spawnSync(hvigorwPath, ...)` → `spawnSync('"' + hvigorwPath + '"', ...)`，修复 DevEco Studio 安装路径 `A:\DevEco Studio` 中空格导致 cmd.exe 将 `A:\DevEco` 当作命令的截断问题
+  - 项目迁移到纯英文路径 `C:\dev\lingyu\harmony-app`（排除 node_modules/oh_modules/.hvigor/.codeartsdoer 缓存目录），解决用户名"欧阳宏俊"导致的中文路径构建失败
+  - 在英文路径下成功构建 HAP：`entry-default-unsigned.hap`（265KB），`BUILD SUCCESSFUL in 15s 836ms`
+- **为什么**：
+  - 中文路径问题：hvigor 工具链将 UTF-8 字节按 Latin-1 解码，"欧阳宏俊" → `ćŹ§éłĺŽäż`，build-profile.json5 schema 验证失败
+  - 空格路径问题：`spawnSync` + `shell: true` 时，cmd.exe 不引用含空格的路径，`A:\DevEco Studio\...` 被截断为命令 `A:\DevEco` + 参数 `Studio\...`
+  - 两个问题叠加，导致 HAP 构建完全阻塞
+- **如何验证**：
+  - V1：英文路径检测——`[...p].filter(c=>c.charCodeAt(0)>127)` 返回空数组
+  - V2：`hvigorw --sync` 成功——hvigor daemon 正常启动，clean+init 任务完成
+  - V3：`assembleHap --build-mode debug` 成功——26 个构建任务全部 Finished，HAP 文件落盘 265KB
+  - V4：签名警告预期内——signingConfigs 为空数组，未签名 HAP 可在模拟器安装
+- **遗留**：
+  1. 英文路径 `C:\dev\lingyu\harmony-app` 是构建专用副本，源码仍在中文路径 `C:\Users\欧阳宏俊\...` 下
+  2. 后续开发在中文路径进行，构建时需同步到英文路径（或使用 junction）
+  3. 签名配置待配置（需 AGC 证书材料）

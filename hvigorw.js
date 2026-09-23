@@ -101,7 +101,7 @@ console.log(`SDK: ${sdkPath}`);
 console.log(`任务: ${args.join(' ')}`);
 console.log('');
 
-const result = spawnSync(hvigorwPath, args, {
+const result = spawnSync('"' + hvigorwPath + '"', args, {
   cwd: projectPath,
   env: env,
   stdio: 'inherit',
