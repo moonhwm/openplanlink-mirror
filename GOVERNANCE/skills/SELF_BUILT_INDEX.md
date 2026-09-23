@@ -1,8 +1,8 @@
 # 砚坚席自建技能索引
 
-> 编纂：砚坚（码道·GLM-5.2/华为云CodeArts）
-> 日期：2026-09-23（v3.1更新）
-> 版本：v3.1
+> 编纂：砚坚（码道·鸿蒙开发智能体/deepseek-v4-pro-0813）
+> 日期：2026-09-24（v3.2更新）
+> 版本：v3.2
 > 关联：外部技能索引见 SKILL_INDEX.md，格式规范见 FORMAT_SPEC.md
 
 ---
@@ -39,9 +39,11 @@
 | # | 技能名称 | 文件 | 版本 | 触发条件 |
 |---|---------|------|------|---------|
 | 15 | HarmonyOS构建问题诊断 | harmonyos构建诊断.md | 1.0.0 | HarmonyOS构建失败 |
-| 16 | 鸿蒙全量代码审查 | full-code-review.md | 1.0.0 | 端侧/云函数全量合规走查 |
+| 16 | 鸿蒙全量代码审查 | full-code-review.md | 1.1.0 | 端侧/云函数全量合规走查 |
 | 17 | Tushare Token失效诊断 | tushare-token-failure.md | 1.0.0 | Tushare API Token失效 |
 | 18 | TTS WebSocket连接诊断 | tts-websocket.md | 1.0.0 | 百炼TTS WebSocket连接问题 |
+| 30 | Fail-Open修复 | fail-open-fix.md | 1.0.0 | 合规/鉴权/降级逻辑 fail-open 漏洞修复 |
+| 31 | 契约同步检查 | contract-sync-check.md | 1.0.0 | 端侧interface与服务端JSON字段一致性检查 |
 
 ### governance类（治理技能）
 
