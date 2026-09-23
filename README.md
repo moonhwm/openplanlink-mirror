@@ -8,24 +8,32 @@
 - 形态：原生 ArkTS Stage 模型，单 entry 模块，零三方依赖
 - 分发：私有调试证书直装（免审核免软著免备案零公开，100 台/年）
 
-## 目录
+## 目录结构
 
 ```
-AppScope/                 应用级配置（bundleName=com.yehang.stockpulse）
+AppScope/                     应用级配置（bundleName=com.yehang.stockpulse）
 entry/src/main/ets/
-  entryability/           EntryAbility（Push 初始化 + Settings 初始化 + 通知点击带 alertId 拉起）
-  pages/Index.ets         大字异动卡片流，点卡即听（服务未连通时显示「示例」卡）
-  pages/Settings.ets      设置页（自选股增删 / 播报开关 / 字体档切换）
-  services/PushService    Push Kit 集成封装（AGC 未配置时自动降级为轮询）
-  services/AlertPoller    前台 5s 轮询兜底（FEED_URL 待 X 落地后替换）
-  services/AudioPlayer    云端 TTS 音频流点按播报（AVPlayer）
-  services/SettingsService 设置数据持久化（Preferences：自选股/播报开关/字体档）
-  model/AlertItem         异动事实卡数据契约
+  entryability/EntryAbility   Push 初始化 + Settings 初始化 + 通知点击带 alertId 拉起
+  pages/Index.ets             大字异动卡片流，点卡即听（服务未连通时显示「示例」卡）
+  pages/Settings.ets          设置页（自选股增删 / 播报开关 / 字体档切换 / 主题 / 免打扰）
+  services/PushService        Push Kit 集成封装（AGC 未配置时自动降级为轮询）
+  services/AlertPoller        前台 5s 轮询兜底（退避策略：失败翻倍封顶 30s）
+  services/AudioPlayer        云端 TTS 音频流点按播报（AVPlayer）
+  services/SettingsService    设置数据持久化（Preferences：自选股/播报开关/字体档/主题/免打扰/已读/播报历史）
+  model/AlertItem             异动事实卡数据契约（含 kind=fact/signal, complianceStatus）
+cloudfunctions/functions/
+  fetch-tushare-data          A股日线行情获取 + 异动筛选 + 名称映射 + 合规检查 + TTS预生成
+  broadcast-a2a               A2A总线消息广播（API Key鉴权 + CORS限制）
+  generate-tts                百炼CosyVoice TTS音频生成（WebSocket）
+  get-alerts                  异动列表查询（CloudBase存储读取）
+  push-token-register         Push Kit token注册（AGC配置后激活）
+  init-db                     数据库初始化
+GOVERNANCE/                   治理文档体系（AGENTS.md/CHANGELOG/技能文档/A2A协议/密码学报告）
 ```
 
 ## 构建
 
-**本机构建**（A 盘 DevEco Studio 6.0.2，纯英文路径）：
+**本机构建**（DevEco Studio 6.0.2+，纯英文路径）：
 
 ```bash
 # devecocli 构建（debug 模式）
@@ -39,14 +47,36 @@ devecocli build --build-mode debug
 2. CodeArts Build 新建构建任务 → 选官方「HarmonyOS 应用构建」模板（自带 SDK/Hvigor）。
 3. 产物 `entry-default-signed.hap` 下载后经 `hdc install` 装 X5。
 
-注意：码道 AI 编码额度（体验版 500 万 tokens/月）09-09 已 100% 封顶，10 月重置——本工程不依赖码道额度，不受影响。
-
 ## 签名与装机（机主一次动作，约 10 分钟）
 
 1. 免费注册华为个人开发者（无费用）。
 2. 任一可联网电脑装 DevEco Studio → 打开本工程 → 自动化签名（自动生成调试证书+profile）。
 3. X5 开开发者模式 → UDID 录入调试设备列表 → `hdc install` 直装。
 4. 调试证书一年有效，到期重签（已建日历提醒）。
+
+详见 [签名配置指南](GOVERNANCE/skills/governance/hmos-signing.md)。
+
+## 云函数部署
+
+### 环境变量配置
+
+在 CloudBase 控制台为每个云函数配置环境变量：
+
+| 云函数 | 必需环境变量 | 可选环境变量 |
+|--------|-------------|-------------|
+| fetch-tushare-data | `TUSHARE_TOKEN`, `TCB_ENV` | `ALERT_THRESHOLD`(默认5.0), `DKNOWC_API_KEY` |
+| broadcast-a2a | `BROADCAST_API_KEY`, `TCB_ENV` | — |
+| generate-tts | `DASHSCOPE_API_KEY`, `TTS_VOICE`, `TCB_ENV` | — |
+| get-alerts | `TCB_ENV` | — |
+| push-token-register | `TCB_ENV` | — |
+| init-db | `TCB_ENV` | — |
+
+### 部署步骤
+
+1. 安装 CloudBase CLI：`npm install -g @cloudbase/cli`
+2. 登录：`cloudbase login`
+3. 部署全部云函数：`cloudbase functions deploy --all`
+4. 或单个部署：`cloudbase functions deploy fetch-tushare-data`
 
 ## 推送实装（候 AGC）
 
@@ -57,25 +87,92 @@ devecocli build --build-mode debug
 
 降级链：Push 未实装时 App 打开期间 5s 轮询兜底，首屏永不空白。
 
+## API 文档
+
+### 端侧接口
+
+| 服务 | 方法 | 说明 |
+|------|------|------|
+| AlertPoller | `fetchLatest(limit=20)` | 拉取最新异动列表，返回 `PollResult { ok, items, rateLimited? }` |
+| AlertPoller | `getInterval()` | 获取当前轮询间隔（退避时动态增大） |
+| AudioPlayer | `play(url, onDone?, onError?)` | 播放云端TTS音频流 |
+| AudioPlayer | `stop()` | 停止播放并释放AVPlayer |
+| SettingsService | `getWatchlist()` | 获取自选股列表 |
+| SettingsService | `getBroadcastEnabled()` | 获取播报开关状态 |
+| SettingsService | `getFontSizeLevel()` | 获取字体档（standard/large） |
+| SettingsService | `getFeedUrl()` | 获取数据源URL |
+| SettingsService | `markAlertRead(alertId)` | 标记异动已读 |
+| SettingsService | `addPlayHistory(item)` | 记录播报历史 |
+
+### 云函数接口
+
+| 云函数 | 入参 | 出参 |
+|--------|------|------|
+| fetch-tushare-data | `{}` | `{ success, items: AlertItem[], serverTs, count }` |
+| get-alerts | `{ limit?: number }` | `{ success, items: AlertItem[], serverTs }` |
+| generate-tts | `{ alertId, text }` | `{ success, audioUrl }` |
+| broadcast-a2a | `{ message, apiKey }` | `{ success, messageId }` |
+| push-token-register | `{ token, deviceId }` | `{ success }` |
+
+### 数据契约（AlertItem）
+
+```typescript
+interface AlertItem {
+  alertId: string;        // 格式: ${symbol}_${timestamp}
+  ts: number;             // Unix时间戳（秒）
+  symbol: string;         // 股票代码（如 600176.SH）
+  name: string;           // 股票中文名
+  direction: 'up' | 'down' | 'flat';
+  kind: 'fact' | 'signal'; // 事实卡 or 自家信号卡
+  headline: string;       // 白话头条（如"中国巨石 涨了 5.2%"）
+  detail: string;         // 补充细节
+  signalNote?: string;    // 信号卡备注（如"留意后续走势"）
+  pctChg: number;         // 涨跌幅
+  close: string;          // 收盘价
+  vol: string;            // 成交量
+  audioUrl?: string;      // TTS音频URL
+  complianceStatus?: string; // 合规检查结果
+}
+```
+
 ## 合规红线
 
 1 台自用、不收费；只报涨跌幅/量能/价格穿越等客观事实；不碰荐股。
+
+信号松绑（2026-09-14 机主裁）：允许输出自家策略信号（kind=signal），保留三禁：①承诺收益/保本等绝对化措辞；②催促性强指令；③任何对外公开/收费形态。
+
 ## 功能清单（当前版本 0.1.0）
 
 - ✅ 大字异动卡片流（点卡即听）
-- ✅ 适老化模式 / 正常模式切换（适老化=大字大卡，正常=标准紧凑）
-- ✅ 夜间模式 / 白天模式切换（夜间=深色底高对比，白天=浅色底清晰明亮）
-- ✅ 免打扰模式（指定时段内自动播报静默，手动点击不受限）
+- ✅ 适老化模式 / 正常模式切换
+- ✅ 夜间模式 / 白天模式切换（支持自动主题）
+- ✅ 免打扰模式（指定时段内自动播报静默）
 - ✅ 自选股管理（添加/删除，过滤显示）
-- ✅ 播报开关（关后自动播报静默，手动点击不受限）
-- ✅ 字体大小切换（标准/特大，适老化模式锁定特大）
+- ✅ 播报开关（关后自动播报静默）
+- ✅ 字体大小切换（标准/特大）
 - ✅ 首屏示例卡兜底（服务未连通时显示带「示例」字样的演示卡）
 - ✅ Push Kit 占位封装（AGC 未配置时自动降级轮询）
 - ✅ 前台 5s 轮询兜底（退避策略：失败翻倍封顶 30s，429 限流静默跳过）
 - ✅ 冷启动通知缺口修复（want 参数 alertId 经 onCreate 补检）
-- ✅ Push 场景化消息接收器（DEFAULT 类型，前台时直接传递给应用）
-- ✅ 信号卡「自家信号」角标（kind=signal，与事实卡 kind=fact 视觉区分）
+- ✅ 信号卡「自家信号」角标（kind=signal，与事实卡视觉区分）
+- ✅ DKnowC 合规检查集成（信号卡播报文本安全合规检测）
+- ✅ 已读标记 + 播报历史（50条上限）
+- ✅ readAlertIdSet 缓存优化（O(1)查找）
 - ⏳ 签名配置（需机主在 DevEco Studio 中配置 signingConfigs）
 - ⏳ AGC 平台审批 P5（订阅通知自分类，约 15 工作日）
 - ⏳ X 服务器落地（替换 FEED_URL 占位值）
 - ⏳ 模拟器验证（DevEco Studio 6.0.2 < devecocli 要求的 6.1.0）
+
+## 已修复问题
+
+| 级别 | 问题 | 修复版本 |
+|------|------|---------|
+| P0 | CloudBase SDK重复init | 2026-09-22 |
+| P0 | callTushare无超时控制 | 2026-09-22 |
+| P0 | requestHttps未统一封装 | 2026-09-22 |
+| P0 | getStockNameMap旧代码残留（ReferenceError） | 2026-09-23 |
+| P1 | 东方财富分页并行化 | 2026-09-22 |
+| P1 | FEED_URL硬编码常量提取 | 2026-09-23 |
+| P2 | TTS优先级排序 | 2026-09-22 |
+| P2 | broadcast-a2a HTTP鉴权 | 2026-09-22 |
+| P2 | readAlertIds Set缓存优化 | 2026-09-23 |

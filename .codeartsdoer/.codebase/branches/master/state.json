@@ -3,8 +3,8 @@
   "schema": "docgen-state-v1",
   "branch": "master",
   "branch_raw": "master",
-  "version_token": 527,
-  "updated_at": "2026-09-23T04:15:22.819Z",
+  "version_token": 530,
+  "updated_at": "2026-09-23T04:22:06.719Z",
   "status": "watching",
   "last_doc_generated_at": "2026-09-22T11:28:42.959Z",
   "changed_files": [
@@ -1531,7 +1531,7 @@
     {
       "path": "CHANGELOG.md",
       "status": "modified",
-      "detected_at": "2026-09-23T04:15:20.281Z"
+      "detected_at": "2026-09-23T04:22:05.119Z"
     },
     {
       "path": "GOVERNANCE/DECISION_LEDGER_POINTER.md",
@@ -4432,12 +4432,17 @@
       "path": "GOVERNANCE/proposals/SEAT_IMPERSONATION_DETECTION.md",
       "status": "added",
       "detected_at": "2026-09-23T04:13:33.857Z"
+    },
+    {
+      "path": "README.md",
+      "status": "modified",
+      "detected_at": "2026-09-23T04:20:49.479Z"
     }
   ],
   "summary": {
-    "total": 885,
+    "total": 886,
     "added": 881,
-    "modified": 4,
+    "modified": 5,
     "removed": 0
   },
   "error_message": null,
