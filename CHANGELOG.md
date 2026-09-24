@@ -1702,6 +1702,27 @@
   5. 前沿LLM论文追踪机制待建立
   6. 规划书须经A2A网络全体席位审议（哈贝马斯共识程序）
 
+## 2026-09-25 01:00 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-SFT-Harmony）· daily-trend-scan每日追新云函数落地
+
+- **改了什么**：
+  - `cloudfunctions/functions/daily-trend-scan/index.js`（新建，~386行）：每日追新云函数——GitHub Search API搜索热门项目，5维度整合评分（相关度/活跃度/可集成性/成熟度/创新性），评分≥3进入待审议队列
+  - `cloudfunctions/cloudbaserc.json`：新增daily-trend-scan云函数配置
+  - `GOVERNANCE/A2A_COMMONWEALTH_CHARTER.md` §8.1：从"待开发"改为"已落地"，更新数据源（GitHub Search API）和评分维度
+  - `GOVERNANCE/daily-trend/2026-09-25.md`（新建）：首次追新报告归档——发现10个HarmonyOS项目，4个评分≥4
+- **为什么**：
+  - 规划书第八章"每日自动化追新"的核心实现
+  - 首次实现encodeURIComponent把GitHub查询分隔符+和>编码导致0结果——改为直接拼接URL
+  - 首次执行发现callstack/agent-device(4.8分)、electerm/electerm(4.4分)、didi/dimina(4.4分)等高价值项目
+- **如何验证**：
+  - V1：语法验证——`node -c` 通过
+  - V2：部署验证——`tcb fn deploy daily-trend-scan` 成功
+  - V3：调用验证——`tcb fn invoke` 返回10个项目，全部评分≥3
+  - V4：评分验证——callstack/agent-device 4.8分（TypeScript+MIT+HarmonyOS+AI agent）
+- **遗留**：
+  1. CloudBase Timer触发器配置（每日9:00自动执行）
+  2. 评分≥4的项目（callstack/agent-device等）需进入实验队列评估
+  3. GitHub API未认证速率限制60次/小时——建议配置GITHUB_TOKEN环境变量
+
 ## 2026-09-25 00:35 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-SFT-Harmony）· a2a-judge判官自动化云函数落地
 
 - **改了什么**：

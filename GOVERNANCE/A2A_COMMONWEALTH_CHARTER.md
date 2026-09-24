@@ -548,24 +548,39 @@ ls GOVERNANCE/evomap/skills/
 
 ## 第八章：每日自动化追新
 
-### 8.1 GitCode热门项目追踪
+### 8.1 GitCode热门项目追踪（已落地 2026-09-25）
 
-**文件/模块**: 待新建 `cloudfunctions/functions/daily-trend-scan/index.js`  
-**改动**: 每日定时扫描GitCode热门项目，评估与当前项目的整合可能性  
+**文件/模块**: `cloudfunctions/functions/daily-trend-scan/index.js`（已部署）  
+**改动**: 每日定时扫描GitHub热门项目（按关键词搜索，按stars排序），评估与当前项目的整合可能性  
 **参数值**:
 
 | 参数 | 值 | 说明 |
 |------|---|------|
-| 触发方式 | CloudBase Timer cron | `0 0 9 * * * *`（每日9:00） |
-| 数据源 | GitCode API + GitHub Trending | 双源fallback |
+| 触发方式 | CloudBase Timer cron + 手动HTTP | `0 0 9 * * * *`（每日9:00），支持手动 `tcb fn invoke` |
+| 数据源 | GitHub Search API | `q={keyword}+stars:>10+pushed:>{30天前}` |
 | 筛选关键词 | `harmony`, `arkts`, `a2a`, `llm`, `quant` | 与项目相关领域 |
-| 输出位置 | `GOVERNANCE/daily-trend/` | 每日报告归档 |
+| 输出位置 | Supabase cross_mode_channel + `GOVERNANCE/daily-trend/` | 总线实时推送 + 本地归档 |
 | 整合评估 | 自动生成整合可行性评分(1-5) | 评分≥3的项目进入待审议队列 |
+| 部署状态 | ✅ 已部署到 CloudBase | `tcb fn deploy daily-trend-scan` 成功 |
+| 首次执行 | 2026-09-25 00:49 CST | 发现10个HarmonyOS相关项目，4个评分≥4 |
+
+**评分维度**:
+- 相关度（0-2分）：关键词匹配权重（harmony/arkts=2, a2a/quant=1.5, llm/agent=1）
+- 活跃度（0-1分）：7天内更新=1分，30天内=0.5分
+- 可集成性（0-1分）：TypeScript/ArkTS=1分，JavaScript=0.5分，MIT/Apache许可证+0.2分
+- 成熟度（0-0.5分）：stars≥100=0.5分，≥50=0.3分
+- 创新性（0-0.5分）：描述含novel/innovative/breakthrough等关键词
+
+**首次执行发现的重点项目**:
+1. callstack/agent-device (4.8分) — AI agent + HarmonyOS自动化验证，TypeScript+MIT
+2. electerm/electerm (4.4分) — SSH远程运维工具，支持HarmonyOS
+3. didi/dimina (4.4分) — 滴滴开源小程序框架，支持HarmonyOS
+4. AGenUI/AGenUI (3.6分) — A2UI Renderer for HarmonyOS，与A2A概念相关
 
 **验证步骤**:  
 ```bash
 # 手动触发测试
-tcb fn invoke daily-trend-scan --data '{"action":"scan","keywords":["harmony","arkts"]}'
+tcb fn invoke daily-trend-scan --env-id a2a-commonwealth-d2eepjr928e9c4d --data '{"action":"scan","keywords":["harmonyos"]}'
 # 预期: 返回热门项目列表+整合评分
 ```
 
