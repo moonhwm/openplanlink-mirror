@@ -183,6 +183,118 @@ async function sendPush(accessToken, tokens, alertId, title, body) {
 8. 降级矩阵每一行是否都有对应代码路径，且失败静默？
 9. 首屏演示卡是否与 Push 状态完全解耦（未连通也有内容）？
 
+## 八、端侧 alertId 解析参考实现（EntryAbility）
+
+通知点击拉起的数据经 want 传给 UIAbility，冷热启动两条路都要接：
+
+```ts
+// entry/src/main/ets/entryability/EntryAbility.ets
+import { Want } from '@kit.AbilityKit';
+
+export default class EntryAbility extends UIAbility {
+  pendingAlertId: string | null = null
+
+  onCreate(want: Want): void {           // 冷启动
+    PushService.init()                   // Push 初始化（架构基调）
+    this.pendingAlertId = this.extractAlertId(want)
+  }
+
+  onNewWant(want: Want): void {          // 热启动再点通知
+    this.pendingAlertId = this.extractAlertId(want)
+    this.emitToIndex(this.pendingAlertId)
+  }
+
+  private extractAlertId(want: Want): string | null {
+    // clickAction.data 的解析形态以 SDK/文档为准；约定为 JSON 字符串
+    const raw = want?.parameters?.['pushData'] ?? want?.parameters?.['data']
+    if (typeof raw !== 'string' || raw.length === 0) return null
+    try {
+      const parsed = JSON.parse(raw) as Record<string, string>
+      return parsed.alertId ?? null
+    } catch {
+      return null
+    }
+  }
+
+  private emitToIndex(id: string | null): void {
+    // 事件总线或 AppStorage 传递，Index 拿到后 scrollToIndex 定位
+  }
+}
+```
+
+三条纪律：解析失败返回 null 静默降级，应用正常进入首页（Push 数据形态异常不能拦住启动）；alertId 只做定位不做内容渲染——正文永远从 get-alerts 拉，Push 里的 data 保持"门铃"定位；Index 侧消费后清空 pending，防止重复定位。
+
+## 九、push-token-register 云函数参考实现
+
+```js
+// cloudfunctions/functions/push-token-register/index.js
+exports.main = async (event) => {
+  const { pushToken, deviceId, appVersion } = event.body ?? {}
+  if (typeof pushToken !== 'string' || pushToken.length < 10) {
+    return { ok: false, reason: 'invalid_token' }   // 不落 token 内容，只落结论
+  }
+  // 同设备覆盖写：Token 刷新后旧值自然被替换
+  await db.collection('push_tokens').doc(deviceId).set({
+    pushToken, appVersion, updatedAt: Date.now(),
+  })
+  return { ok: true }
+}
+```
+
+要点：日志与返回体里**永不出现 Token 明文**，失败只回原因码；写库幂等（docId=deviceId 覆盖）；入参做最小形状校验，脏数据进不了库。字段契约以 A19 审查结论为准，本示例是形状示意。
+
+## 十、access_token 缓存与批量重试工程化
+
+云函数实例级缓存 + 过期重取 + 失败退避，是发消息前的标准三件：
+
+```js
+let cached = { token: '', expireAt: 0 }
+
+async function getToken(): Promise<string> {
+  if (cached.token && Date.now() < cached.expireAt - 60_000) {
+    return cached.token                       // 提前 60s 失效，避开边界
+  }
+  const data = await requestOAuth()           // §4.1 的两步之第一步
+  cached = { token: data.access_token,
+             expireAt: Date.now() + (data.expires_in ?? 3600) * 1000 }
+  return cached.token
+}
+
+async function sendWithRetry(tokens, payload, maxRetry = 2): Promise<void> {
+  for (let i = 0; i <= maxRetry; i++) {
+    const token = await getToken()
+    const res = await sendPush(token, tokens, payload)
+    if (isOk(res)) return
+    if (isTokenExpired(res)) { cached = { token: '', expireAt: 0 }; continue }  // 换新 token 重试
+    if (!isRateLimited(res)) break            // 非限流类错误不盲重
+    await sleep(500 * 2 ** i)                 // 限流退避
+  }
+}
+```
+
+凭据全部来自环境变量（PUSH_CLIENT_ID / PUSH_CLIENT_SECRET / PUSH_PROJECT_ID），示例与测试均不出现可用凭据字面量；错误分类的判定规则以官方错误码表为准，先落"分类框架"，码值接入时对表填入。
+
+## 十一、测试与灰度验证方法
+
+不依赖端侧也能先把云端链路验通：
+
+1. **REST 两步联调**（curl，凭据用环境变量注入，命令里只写占位）：第一步取 access_token（检查返回体含 token 与 expires_in），第二步向**自己一台测试设备的 Token** 发一条测试通知——先在真机看到通知栏弹出，再验证点击拉起与 alertId 定位；
+2. **失败注入**：故意用过期 access_token、错 projectId、伪造 Token 各发一次，确认错误被正确分类落日志且不重试风暴；
+3. **端到端灰度顺序**：开发者设备 → 小范围体验用户 → 全量；每级观察送达率（发送成功数 / 登记设备数）与点击率，异常回滚只需把广播开关关回轮询形态——降级设计保证了回滚零成本；
+4. **文案过闸抽检**：灰度期每天抽推送文案过三禁词闸（不承诺收益/保本、无催促指令、不涉公开收费），Push 文案与卡片文案同池治理；
+5. **端侧降级演练**：AGC 配置暂时关掉，确认应用启动、首屏演示卡、5s 轮询全部正常——降级路径不是理论设计，要定期真跑。
+
+## 十二、FAQ
+
+| 问题 | 答案 |
+| --- | --- |
+| AGC 没配置能上线吗 | 能，纯轮询形态即降级态，功能完整 |
+| Token 会变吗 | 会，系统重置后刷新；端侧每次启动 getToken 重报覆盖 |
+| 透传消息能不能当主通道 | 不建议：需进程在线、时序不可控，铃语以通知消息为主 |
+| 发送失败会丢异动吗 | 不会，异动仍在 feed，轮询兜底刷新 |
+| 一台设备收到多条重复通知 | 检查发送侧去重（按 alertId 幂等）与登记表是否重复登记 |
+| Push 数据里能放正文全文吗 | 不放，只放 alertId；正文端侧拉取，Push 只做门铃 |
+
 ### 自我评估
 - 正确性：4分 鉴权域名、v3 发送端点、client_credentials 流程、getToken 端侧用法经 2026-09-23 公开资料核对；请求体字段、错误码、透传接收机制明确标注"以官方文档为准"，未虚构码值。降级设计与项目架构基调逐条对齐。
 - 完整性：4分 REST 调用、Token 注册、消息接收、降级四主题全覆盖，另有安全合规与检查清单；未做 AGC 控制台配置逐步截图类内容（无后台访问权限，如实声明）。

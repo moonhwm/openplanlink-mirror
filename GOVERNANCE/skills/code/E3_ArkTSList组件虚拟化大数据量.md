@@ -124,6 +124,112 @@ List({ space: 12 }) {
 4. 真机跑 Profiler 滑动录制，记录基线帧率与内存，作为 cachedCount 调参依据；
 5. 分页（onReachEnd + loadMore）在数据源增长到百条量级前不必实装，但 DataSource 的 appendItems 接口先行预留。
 
+## 八、分页加载：触底追加
+
+数据源增长到几十条以上就该分页，端侧只在用户滑到底时取下一页：
+
+```ts
+@Entry
+@Component
+struct Index {
+  @State loadingMore: boolean = false   // 防重复触发闸
+  private dataSource: AlertDataSource = new AlertDataSource()
+  private nextCursor: string | null = null
+
+  build() {
+    List({ space: 12 }) {
+      LazyForEach(this.dataSource,
+        (item: AlertItem) => {
+          ListItem() { AlertCard({ alert: item }) }
+        },
+        (item: AlertItem) => item.id
+      ).cachedCount(5)
+    }
+    .onReachEnd(() => this.loadMore())
+  }
+
+  async loadMore(): Promise<void> {
+    if (this.loadingMore || this.nextCursor === null) return
+    this.loadingMore = true
+    try {
+      const page = await this.fetchNextPage(this.nextCursor)
+      this.nextCursor = page.nextCursor
+      this.dataSource.appendItems(page.items)   // 走 onDataAdd，不整表 reload
+    } catch (e) {
+      // 取下一页失败不打扰用户：底部无感，滑上来内容没变而已
+    } finally {
+      this.loadingMore = false
+    }
+  }
+}
+```
+
+要点：**loadingMore 闸必须有**——onReachEnd 在惯性滚动中可能连续触发，无闸会并发拉多页；追加走 appendItems（onDataAdd），新条目落在缓存区外，不冲刷可视区；失败静默是适老化取舍，用户对"分页"无感知，也就不该看到分页的报错。
+
+## 九、滚动定位：Push 拉起定位到 alertId 卡片
+
+架构基调要求"EntryAbility 以 onNewWant 带 alertId 拉起定位"，落到 List 上就是 scrollToIndex：
+
+```ts
+locateTo(alertId: string): void {
+  const idx = this.dataSource.indexOf(alertId)   // DataSource 需提供 indexOf
+  if (idx < 0) return                            // 未加载到：先拉全量或忽略
+  this.scroller.scrollToIndex(idx, false)        // 第二参 false=不带动画，直接到位
+}
+```
+
+两个虚拟化特有的坑：**目标条目可能尚未构建**——LazyForEach 只保证可视区附近存在，若 alertId 在深处，先确认数据源已包含该条（轮询已拉到），再跳转；跳转瞬间目标条目会经历"按需创建"，cachedCount 给的缓冲能减少跳转后的白块。第二个坑是**跳转时机与数据刷新竞争**——Push 拉起时 feed 可能还没就绪，正确顺序是：等首屏数据装完再定位，数据未到先用演示卡占位，绝不能"等不到就白屏"。
+
+## 十、组件复用：@Reusable 完整示例
+
+LazyForEach 解决"不构建屏幕外的"，@Reusable 解决"滑出后销毁、回滑重建"的浪费——组件树被回收进复用池，同结构条目直接领用：
+
+```ts
+@Reusable
+@Component
+struct AlertCard {
+  @State alert: AlertItem | null = null
+
+  aboutToReuse(params: Record<string, Object>): void {
+    // 复用实例换数据前，重置一切与旧数据相关的内部状态
+    this.alert = params.alert as AlertItem
+  }
+
+  build() {
+    Column({ space: 10 }) {
+      Text(this.alert?.stockName ?? '').fontSize(34)
+      Text(this.alert?.plainSpeak ?? '').fontSize(30)
+    }
+  }
+}
+```
+
+纪律只有一条但最关键：**aboutToReuse 必须把上一条目的残留状态清干净**。播放态、展开态这类"看起来属于卡片"的瞬态如果不在复用时重置，用户会看到上一条的内容闪现在新条目上——虚拟化场景下这类串台 bug 的根因几乎都在复用重置缺失。铃语把播放三态放在页面级（playingId 等）而非卡片内，正是为了绕开复用串台：状态不在卡片里，复用就无从污染。
+
+## 十一、优化有效性怎么证明：实测方法
+
+所有虚拟化改造都要拿数字验收，步骤固定：
+
+1. **建基线**：改造前用 DevEco Profiler 录一次"冷启动到首屏可交互"耗时、一次快速滑动全程的丢帧数、一次长驻后的应用内存；
+2. **单变量对照**：只换迭代器（ForEach→LazyForEach）再录一次，其余不动——同时改 cachedCount 与组件层级会让归因失效；
+3. **逐级加码**：LazyForEach 落定后再分别试 cachedCount 3/5/8、再上 @Reusable，每步一录，形成"参数—帧率/内存"曲线；
+4. **数据规模外推**：用 100/500/2000 条假数据各测一轮，确认曲线随规模线性而非平方恶化——线性说明虚拟化生效，平方说明仍有隐藏的全量路径；
+5. **回归确认功能**：条目点击、Push 定位、轮询刷新逐项过一遍，性能改造最常见的翻车是"快了但功能坏了"。
+
+没有这五步，任何"感觉更流畅了"的结论都不成立；改造工单的验收栏应直接贴这组数字。
+
+## 十二、FAQ
+
+| 问题 | 答案 |
+| --- | --- |
+| 数据改了但列表不动 | 忘了调 listener 通知，LazyForEach 不做探测 |
+| 改一条要不要先删再加 | 不要，onDataChange 就是干这个的，先删后加会丢复用 |
+| cachedCount 设 20 更流畅？ | 常驻内存与首屏构建量同步涨，从 5 起按 Profiler 数据调 |
+| LazyForEach 里能用 if 吗 | 能，itemGenerator 内部支持条件渲染，但分支结构差异大会削弱复用 |
+| key 用 index 行不行 | 不行，插入删除后 index 漂移，复用会张冠李戴，必须业务 id |
+| 首屏要等多久 | 演示卡先上，数据到了再替换——首屏永不空白是硬约束 |
+| 嵌套 List 横向+竖向行吗 | 不同方向可以，同方向禁止，改用平铺或分组 |
+
 ### 自我评估
 - 正确性：4分 IDataSource 接口形状、listener 语义、cachedCount 作用域描述均按 ArkUI 公开文档口径；性能量级结论已标注"以 Profiler 实测为准"，未虚构具体数字。
 - 完整性：4分 虚拟化原理、数据源实现、缓存调参、keyGenerator、轮询增量刷新、滑动清单全覆盖；未展开多 List 联动与瀑布流变体（与本项目无关）。

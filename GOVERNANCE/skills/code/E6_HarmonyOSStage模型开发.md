@@ -261,5 +261,5 @@ ctx.eventHub.emit('consumeAlert', id);
 - 正确性：4分——生命周期时序、四类启动模式、WindowStage边界、Want/Context/EventHub均基于官方公开机制书写，EntryAbility骨架与项目A22审查结论一致；个别API细节（AvoidAreaType组合、长时任务签名）以compatibleSdkVersion 20的d.ts为准。
 - 完整性：4分——覆盖Stage核心对象、全生命周期、WindowStage、多实例、Want解析、Context与EventHub解耦、性能基线、路由纪律与验证清单；Push降级与音频续播细节由E7、E9承接。
 - 可复用性：4分——表格加骨架代码加清单可直接迁移到其他Stage工程，铃语特有约束已单独标注，specified示例可平移到多账号类应用。
-- 字数：约待填字
+- 字数：约2624字（正文汉字，实测统计）
 - 使用模型：GLM-5.3-Flash

@@ -73,6 +73,33 @@
         "timeout": 10,
         "installDependency": true
       }
+    },
+    {
+      "name": "a2a-registry",
+      "config": {
+        "runtime": "Nodejs18.15",
+        "handler": "index.main",
+        "timeout": 10,
+        "installDependency": true,
+        "envVariables": {
+          "SUPABASE_URL": "https://ltdodcumoxiqsnakpqog.supabase.co",
+          "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx0ZG9kY3Vtb3hpcXNuYWtwcW9nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3NjQ5ODEsImV4cCI6MjEwMzM0MDk4MX0.n2alyDO-ZZmYedGHlFmoIASo0QxdxN6NwEDYNV2KhKA",
+          "A2A_DAILY_BUDGET": "50"
+        }
+      }
+    },
+    {
+      "name": "a2a-task-dispatch",
+      "config": {
+        "runtime": "Nodejs18.15",
+        "handler": "index.main",
+        "timeout": 10,
+        "installDependency": true,
+        "envVariables": {
+          "SUPABASE_URL": "https://ltdodcumoxiqsnakpqog.supabase.co",
+          "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx0ZG9kY3Vtb3hpcXNuYWtwcW9nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3NjQ5ODEsImV4cCI6MjEwMzM0MDk4MX0.n2alyDO-ZZmYedGHlFmoIASo0QxdxN6NwEDYNV2KhKA"
+        }
+      }
     }
   ]
 }

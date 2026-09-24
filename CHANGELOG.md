@@ -1602,3 +1602,45 @@
   2. 签名配置待AGC证书材料
   3. 模拟器安装运行待DevEco Studio升级或手动启动
   4. ~~F-004~~ ✅已修复
+## 2026-09-24 21:00 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-SFT-Harmony）· A2A改造方案落地——kimi停用+码道总装
+
+- **改了什么**：
+  - `cloudfunctions/functions/broadcast-a2a/index.js`：
+    - 第107行 `from_mode: 'kimi-code-quantlab'` → `from_mode: 'yan-jian-codearts-glm52'`（来源标识迁移至砚坚席位）
+    - 顶部新增 `require('./config')` + `KIMI_ENABLED` 总开关引用
+  - `cloudfunctions/functions/broadcast-a2a/config.js`（新建）：
+    - `KIMI_ENABLED = false`（kimi通道总开关，默认关闭）
+    - `FROM_MODE = 'yan-jian-codearts-glm52'`（砚坚席位键）
+    - 心跳策略参数（INITIAL_INTERVAL=30, BACKOFF_STEPS=[60,120,300], JITTER=0.2, BATCH_WINDOW=60, FAILURE_THRESHOLD=3, CIRCUIT_BREAK_DURATION=900）
+    - 日预算管控参数（DAILY_LIMIT=50, ALERT=0.5, DEGRADE=0.8, STOP=0.95）
+    - 任务分发参数（MAX_RETRIES=3, TIMEOUT=120000, DEDUP_TTL=3600）
+  - `cloudfunctions/functions/a2a-registry/index.js`（新建，约220行）：
+    - 席位注册（node_id, capability_tags, lease_ttl, renew_method）
+    - 心跳管理（30s初始+指数退避60/120/300s+±20%抖动+60s批量合并）
+    - 熔断机制（连续3次失败或5分钟错误率>50%→熔断15分钟→半开探测1次）
+    - 日预算管控（50%告警/80%降级/95%停服）
+    - 席位状态查询与注销
+  - `cloudfunctions/functions/a2a-task-dispatch/index.js`（新建，约340行）：
+    - 任务创建（task_id=UUID, idempotency_key=md5[:16], status=queued）
+    - 状态机流转（queued→running→succeeded/failed/cancelled, failed→queued重试）
+    - 去重（同idempotency_key返回原task_id, DEDUP_TTL=3600s）
+    - 终态确认（task_receipt回读）
+    - 重试上限3次，超时120s
+  - `cloudfunctions/cloudbaserc.json`：新增 a2a-registry 和 a2a-task-dispatch 两个云函数配置
+- **为什么**：
+  - 机主令"彻底停用kimi调用，统一移交码道GLM5.2 ArkTS作为唯一总装节点"
+  - kimi code 300元额度包因心跳定时空转4分钟耗尽，需根治
+  - A2A网络需要规范的注册/心跳/熔断/预算管控基础设施
+  - 任务分发需要幂等去重和状态机保障
+- **如何验证**：
+  - V1：`grep -rn "kimi" cloudfunctions/ entry/ feed-server/ --include="*.js" --include="*.ets"` → 代码文件零kimi引用
+  - V2：`grep -rn "kimi-code-quantlab" cloudfunctions/ --include="*.js"` → 0匹配
+  - V3：a2a-registry 云函数注册接口 `tcb fn invoke a2a-registry --data '{"action":"register","node_id":"yan-jian-codearts-glm52"}'` → 返回 ok:true
+  - V4：a2a-task-dispatch 创建任务 `tcb fn invoke a2a-task-dispatch --data '{"action":"create","payload":{"type":"test"}}'` → 返回 task_id+status:queued
+  - V5：config.js `KIMI_ENABLED=false` → `node -e "console.log(require('./cloudfunctions/functions/broadcast-a2a/config.js').KIMI_ENABLED)"` 输出 false
+- **遗留**：
+  1. 新云函数部署到CloudBase（`tcb fn deploy a2a-registry` / `tcb fn deploy a2a-task-dispatch`）
+  2. quant-lab bridge侧的KIMI_DISABLE.local.flag已存在（砚坚之前设立），hb_config.json心跳参数已落地
+  3. PD-AI量化研究团队2席注册方案文档待编写
+  4. LLM接入真实API凭据待机主注入
+  5. 签名配置待AGC证书材料

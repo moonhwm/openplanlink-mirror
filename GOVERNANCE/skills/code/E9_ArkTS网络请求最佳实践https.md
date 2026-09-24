@@ -257,9 +257,59 @@ static async postJson(url: string, body: object, timeoutMs: number = 15000): Pro
 - AlertPoller行为测：假时钟驱动，验证单飞（并发tick只发一次）、代次丢弃（stop后旧响应不落地）、熔断升降档。
 - 集成冒烟：真机断网→恢复→断FEED_URL→全断，四场景各跑一轮对照UI表现。
 
+## 16 参数速查与错误文案表
+
+轮询与重试参数集中一处（NetConfig常量），改参只动一个文件：
+
+| 参数 | 取值 | 说明 |
+|---|---|---|
+| 轮询间隔 | 5000毫秒 | 前台节奏，架构基调值 |
+| 建连超时 | 8000毫秒 | connectTimeout |
+| 读取超时 | 10000毫秒 | readTimeout，轮询场景 |
+| 重试上限 | 2次 | 共3次尝试 |
+| 退避基数 | 500毫秒 | 指数退避base |
+| 熔断阈值 | 连续3轮失败 | 进入长退避 |
+| 长退避间隔 | 30000毫秒 | 熔断期间轮询节奏 |
+| 全局并发上限 | 4 | 信号量限制 |
+
+错误到白话文案的映射固定成表，禁止各页面自行发挥：
+
+| 错误类型 | 上屏文案 |
+|---|---|
+| NETWORK | 网络连不上，请检查手机网络 |
+| HTTP 5xx | 服务器正忙，稍后自动再试 |
+| HTTP 4xx | 数据暂时取不到，稍后再试 |
+| PARSE | 数据有点问题，正在自动恢复 |
+| 超时 | 网络有点慢，正在重试 |
+
+文案三条硬规则：不出现码值与URL；不出现"立即""马上"等催促词（红线）；不出现"故障""损坏"等惊吓词——老人看到"故障"会以为手机坏了。
+
+## 17 Index侧调用全貌（串联示例）
+
+页面层只做三件事：启动轮询、订阅状态、按需触发合成。完整链路：
+
+```ts
+// pages/Index.ets 节选
+@StorageLink('alerts') alerts: AlertItem[] = [];   // 轮询落库的唯一出口
+@StorageLink('pendingAlertId') pendingAlertId: string = '';
+private poller: AlertPoller = new AlertPoller();
+
+onPageShow(): void {
+  this.poller.start();          // 前台恢复轮询（E6挂载点）
+}
+onPageHide(): void {
+  this.poller.stop();           // 后台必停
+}
+```
+
+- 首帧渲染不依赖alerts初值：空态渲染演示卡常量，数据到达后List自动替换——首屏永不空白的网络层承诺。
+- pendingAlertId变化时滚动定位对应卡片，定位后置空，避免轮询刷新触发重复滚动。
+- 点播报按钮：先查该条audioUrl，缺省则调CloudApi.requestTts（E7），拿到直链交给AudioPlayer；按钮置灰防重复提交，失败恢复按钮并给白话提示。
+- 整个页面不含任何http细节——网络封装是否合格的判据就是业务页零网络代码。
+
 ### 自我评估
 - 正确性：4分——@kit.NetworkKit的http能力、超时双旋钮、单飞加代次号取消模式均为标准做法，代码骨架经ArkTS类型纪律书写；caPath等证书参数与connection回调细节以compatibleSdkVersion 20的d.ts为准，未真机联调。
 - 完整性：4分——四个指定维度（封装、超时、重试、并发）全部展开，另补POST与请求头、网络状态联动、缓存快照、音频边界、流量策略、可观测与测试要点；与E6生命周期、E7降级链衔接明确。
 - 可复用性：5分——NetClient、AlertPoller、退避函数、NetTransport接口均为可直接复制的通用件，仅FEED_URL与AlertFeed为本项目契约，替换成本低。
-- 字数：约待填字
+- 字数：约2635字（正文汉字，实测统计）
 - 使用模型：GLM-5.3-Flash

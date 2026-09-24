@@ -16,11 +16,14 @@
 
 const http = require('http');
 const https = require('https');
+const config = require('./config');
 const SUPABASE_URL = process.env.SUPABASE_URL || '';
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || '';
 const PUSH_BUNDLE_NAME = process.env.PUSH_BUNDLE_NAME || 'com.yehang.stockpulse';
 const ENV_ID = process.env.TCB_ENV || 'a2a-commonwealth-d2eepjr928e9c4d';
 const ALERTS_FILE_ID = 'cloud://a2a-commonwealth-d2eepjr928e9c4d.6132-a2a-commonwealth-d2eepjr928e9c4d-1475054847/alerts/alerts.json';
+// kimi 通道总开关（默认 false，2026-09-24 机主令彻底停用 kimi 调用）
+const KIMI_ENABLED = config.KIMI_ENABLED;
 
 /**
  * 统一 HTTPS 请求封装（替代实验性 fetch）
@@ -104,7 +107,7 @@ async function broadcastToSupabase(alerts) {
         'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
       },
       body: JSON.stringify({
-        from_mode: 'kimi-code-quantlab',
+        from_mode: 'yan-jian-codearts-glm52',
         to_mode: 'all',
         kind: 'alert-feed',
         payload_md: JSON.stringify({

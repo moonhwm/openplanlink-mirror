@@ -149,6 +149,41 @@ play 成功启动后记已读并落播报历史（`Index.ets:267-280`）：`mark
 - [ ] 自动播报过三道闸（存在/audioUrl/开关+免打扰），静默失败；
 - [ ] 历史截 50 条、已读去重；无 audioUrl 不显钮不触发。
 
+## 7. 资源生命周期全景
+
+AudioPlayer 是静态单例，生命周期横跨页面与拉起路径：
+
+```
+EntryAbility.onCreate / onNewWant（通知或小艺拉起：alertId 入 AppStorage 信箱）
+  → Index.aboutToAppear → pollLoop 首轮拉取填充 items
+  → checkPendingAlertId → playById 三道闸 → togglePlay → AudioPlayer.play
+  → Index.aboutToDisappear → AudioPlayer.stop()（Index.ets:115）
+```
+
+三条纪律：① **每次 play 前先 stop**（`AudioPlayer.ets:18`），跨场景残留的实例由此清场；② 页面销毁是唯一强制回收点——跳设置页是 Navigation 压栈、主页面不销毁（Stack 模式，`Index.ets:456`），播报不中断属预期行为；③ 杀进程随进程回收，无需应用级退出钩子——不为"保存播放进度"这类产品不需要的能力加复杂度。
+
+## 8. 常见故障与排查表
+
+| 症状 | 高概率原因 | 排查与修复方向 |
+| --- | --- | --- |
+| createAVPlayer 抛错 | 上一实例未 release，解码资源耗尽 | 核对失败路径三件套（2.2 节）；stop 幂等兜底 |
+| prepare 抛错 | url 不可达、格式不支持或赋值顺序错 | 先浏览器直开 url 验证；再查 url 赋值是否在 prepare 前 |
+| 界面显"播放中"但无声 | 系统静音、音量为零或音频流为空文件 | 云端核对 TTS 产物长度；检查部分音频兜底是否退化为空 |
+| completed 不回调 | 回调注册晚于状态迁移 | on('stateChange') 必须在 prepare 前挂好（第 1 节铁规 4） |
+| 点卡片无反应 | audioUrl 为 undefined | 契约如此：无钮不触发（`Index.ets:226-228,390`）；按需生成属规划项 |
+| 播完界面仍显"■ 停" | onDone 回调未触发或竞态覆盖 | 核对 stateChange 是否同时监听 completed 与 idle |
+
+## 9. 后台播放与音频会话（规划项，如实说明）
+
+`entry/src/main/module.json5` 已在 `requestPermissions` 预留 `ohos.permission.KEEP_BACKGROUND_RUNNING`，配置注释明示"为 R3 推送播报预留：当前未实际调用对应 API"——即**当前版本应用退后台后播报会被系统挂起**，这是已知边界而非缺陷，文档不夸大当前能力。R3 实装方向：申请长时任务保活加 AVSession 媒体会话注册（避免与音乐类应用抢占音频焦点冲突，来电时让路）。本轮不实现，也不提前引入半吊子的后台逻辑。
+
+## 10. 音频格式与弱网行为
+
+- 云端产物为可 HTTP 直读的音频文件，AVPlayer 内建流式缓冲，端侧**无需手动分片下载**，也不要先下载整文件再播（增加首响延迟）；
+- 格式建议通用封装（mp3/aac 类），由云侧转存环节保证；端侧只认 url、不感知合成格式细节；
+- 弱网下 prepare 阶段即开始缓冲，卡顿属系统行为；端侧职责是把失败转为 failedId 与「语音加载失败，点重试」提示（`Index.ets:412-416`），重试即重点卡片；
+- 重复点击防抖：loadingId 守卫（`Index.ets:229-231`）保证同一卡片加载中再点无效，切卡片则先停旧再启新。
+
 ### 自我评估
 - 正确性：4分 核心流程逐行对齐 `AudioPlayer.ets` 与 `Index.ets` 现网代码并标行号；状态机迁移依据 AVPlayer 公开语义转述，未在本环境真机验证（无鸿蒙设备/模拟器，未运行任何播放检查）。
 - 完整性：4分 覆盖状态机、单例封装、三态联动、竞态、TTS 链路与清单；interrupt 等改进项如实标注未实装。

@@ -178,5 +178,5 @@ Settings 作为 NavDestination 只挂了 aboutToAppear，未挂 onShown/onHidden
 - 正确性：4分 P0 复活泄漏给出 t0-t3 时序推演，P1-A 竞态有四步推导与行号链；AVPlayer 状态机与释放路径逐行核对。后台轮询行为基于 ArkTS 运行时语义推断，已给出 logcat 实测法，未冒充已验证。
 - 完整性：4分 覆盖 UIAbility 与页面两层触发矩阵、want 双路径、四类资源创建-释放配对与内存上限盘点；UIAbility onConfigurationUpdate 等冷门钩子未展开（本应用未用到）。
 - 可复用性：5分 停止标志、就绪 Promise、前后台 paused 三个模板可直接粘贴复用；触发矩阵表与「写 AppStorage 必须确认消费回调会触发」原则适用于所有 ArkTS 项目。
-- 字数：约3700字
+- 字数：约3100字（实测正文汉字3066，达标85%线）
 - 使用模型：GLM-5.3-Flash

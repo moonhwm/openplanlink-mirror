@@ -171,6 +171,77 @@ Tushare token 失效（40101）已在云侧降级东方财富 API（`fetch-tusha
 - [ ] 失败不清数据、演示兜底带「示例」字样、退避封顶 30s；
 - [ ] 日志无 Token/stack/全量响应体；云侧外呼走 requestHttps 系。
 
+## 8. 权限与传输安全配置
+
+端侧联网前提已固化在 `entry/src/main/module.json5` 的 `requestPermissions`：仅申请 `ohos.permission.INTERNET`；`ohos.permission.KEEP_BACKGROUND_RUNNING` 为 R3 推送播报**预留**（配置内注释明示"当前未实际调用对应 API，R3 实装 Push Kit 后启用"）。规范：
+
+- 新增网络能力先查权限清单，能用现有权限绝不新增申请——权限越多，上架审核与老年用户的信任成本越高；
+- 传输一律 https：默认 FEED_URL 是 tcloudbase 域名的 https 地址（`SettingsService.ets:24-27`）；数据源地址允许用户改填局域网 IP 做本机联调（`Settings.ets:532` 的提示原文），**生产环境禁止明文 http 承载业务数据**；
+- 零三方依赖底线：不引入任何网络库，`@kit.NetworkKit` 全覆盖本项目需求。
+
+## 9. 通用封装函数模板（新代码起步件）
+
+AlertPoller 是业务件；新的网络需求从这份通用函数起步，避免每处重复状态码阶梯逻辑：
+
+```typescript
+import { http } from '@kit.NetworkKit';
+
+export class HttpResult<T> {
+  ok: boolean = false;
+  data: T | null = null;
+  kind: '' | 'network' | 'http' | 'parse' | 'rateLimited' = '';
+  code: number = 0;      // HTTP 状态码；网络异常时为 -1
+}
+
+export async function httpGetJson<T>(url: string, timeoutMs: number = 5000): Promise<HttpResult<T>> {
+  const req = http.createHttp();
+  const r = new HttpResult<T>();
+  try {
+    const resp = await req.request(url, {
+      method: http.RequestMethod.GET,
+      connectTimeout: timeoutMs,
+      readTimeout: timeoutMs
+    });
+    r.code = resp.responseCode;
+    if (resp.responseCode === 429) { r.kind = 'rateLimited'; return r; }
+    if (resp.responseCode !== 200) { r.kind = 'http'; return r; }
+    try {
+      r.data = JSON.parse(resp.result as string) as T;
+      r.ok = true;
+      return r;
+    } catch (e) {
+      r.kind = 'parse';            // 解析失败按 1.3 记前 200 字符原文
+      return r;
+    }
+  } catch (e) {
+    r.kind = 'network';
+    r.code = -1;
+    return r;
+  } finally {
+    req.destroy();
+  }
+}
+```
+
+与现网的对应关系：`kind` 把失败原因结构化，语义与 `PollResult` 的 `ok/items/rateLimited` 一一对应，AlertPoller 是它的业务特化；UI 层按 kind 决定提示文案，不必解析 message 字符串。
+
+## 10. 重试决策树
+
+写任何重试代码前先过四问：
+
+1. **读还是写？** 写操作默认不重试（防重复副作用）；确需重试必须带服务端幂等键；
+2. **失败原因可消失吗？** 超时、限流、瞬时 5xx 属可重试；4xx 参数错、鉴权错、配置缺失不可重试——走降级或修配置；
+3. **谁在循环？** 轮询场景（5 秒一轮）请求内零重试；一次性场景（Push token）用错误码白名单加次数上限；
+4. **间隔多长？** 云侧指数退避 500ms 起步翻倍；任何场景禁止零间隔连打。
+
+## 11. 可观测性：错误分类与日志锚点
+
+排障靠日志锚点，规范五类锚点：**入口**（记参数摘要，如 fetch 记 limit 与域名，不打 query 防泄漏）、**出口**（成功记条数与 serverTs）、**降级**（每次链路下落记一层）、**异常**（message 加分类 kind，不打 stack 与 token）、**节律**（退避变化记当前间隔）。现网锚点范例：429 静默跳过有日志（`AlertPoller.ets:46`）、解析失败记前 200 字符（69 行）、当前间隔经 `getInterval()` 暴露给调度方（30-32 行）。
+
+## 12. 测试策略（无真机时的替代验证）
+
+真机与模拟器不可用时按三层替代：① 状态码阶梯与解析防护是纯逻辑，抽成函数后用本地 Node 单测覆盖（无 UI 依赖部分）；② 云侧 requestHttps 在本地 Node 先跑通再部署（与云函数同为 Node 语义）；③ 联调用设置页把 feedUrl 指向局域网 mock 服务（`Settings.ets:532` 明示该用法），mock 依次返回畸形 JSON、429、500、慢响应，验证四条降级路径。弱网切换与飞行模式恢复后的轮询复位，只能真机验证，测试单里如实标注"待真机"。
+
 ### 自我评估
 - 正确性：4分 端侧全部条文对齐 `AlertPoller/PushService/Index` 现网源码并标行号；云侧引用 `fetch-tushare-data` 实测行号；历史文档 `error+timeout` 笔误已指出并给出正确写法（依据 Node 事件语义，未在本地跑 Node 复验）。
 - 完整性：4分 超时/重试/降级三大主题均有分层展开与表格；requestHttps 完整实现按分工引用姊妹篇避免重复，自包含性略有取舍但已给路径。

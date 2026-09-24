@@ -142,6 +142,101 @@ A25 已确认现有实现无音频焦点处理。铃语播的是 30 秒级短语
 7. 临时链接过期类失败是否引导到按需 generate-tts 路径（audioUrl undefined 的已知规划）？
 8. 音频焦点至少做了最低配（audioInterrupt → stop）？
 
+## 八、进度与重播：durationUpdate / timeUpdate / seek
+
+prepared 之后才能拿到总时长，播放中框架周期性推送进度，seek 完成靠 seekDone 确认：
+
+```ts
+av.on('durationUpdate', (d: number) => { this.totalMs = d })   // prepared 后一次
+av.on('timeUpdate', (t: number) => { this.posMs = t })         // 播放中周期回调
+av.on('seekDone', () => { this.seeking = false })
+
+// 重播：completed 状态下 seek 回开头再 play，复用实例省一次建连
+async replay(): Promise<void> {
+  if (this.av && this.av.state === 'completed') {
+    this.seeking = true
+    this.av.seek(0)
+    await this.av.play()
+  }
+}
+```
+
+铃语取舍说明：适老化"点卡片=听、再点=停"的极简交互**默认不渲染进度条**——进度条对老年用户是噪音，30 秒级短语音也不需要拖拽；但 timeUpdate 仍然建议订阅，用于"播放超过预期时长自动熔断"的兜底（云端误产超长音频时止损），以及 completed 误判时的双保险。seek 的合法状态是 prepared/playing/paused/completed，在错误状态调用会直接抛错，重播前判状态是必须动作而非可选项。
+
+## 九、完整参考实现（整合版）
+
+把 §二~§五 的规则收拢成一份可直接落库的骨架，标注与 A25 现状的差异点：
+
+```ts
+// services/AudioPlayer.ets —— 目标形态（约 90 行）
+export class AudioPlayer {
+  private static player: media.AVPlayer | null = null
+
+  static async play(url: string,
+                    onDone: () => void,
+                    onError: (msg: string) => void): Promise<void> {
+    await AudioPlayer.stop()                     // ① 幂等清场（§三）
+    let av = await media.createAVPlayer()
+    AudioPlayer.player = av                      // ② 立刻登记，供下轮 stop 使用
+    let settled = false
+    const finish = (isErr: boolean, msg?: string) => {
+      if (settled) return                        // ③ 完成/错误互斥
+      settled = true
+      isErr ? onError(msg ?? 'play failed') : onDone()
+    }
+    av.on('stateChange', (s: string) => {
+      if (s === 'completed') finish(false)
+      if (s === 'error') finish(true, 'state error')   // ④ error 也走清理（A25 P1）
+    })
+    av.on('error', (e) => { finish(true, `code:${e?.code}`) })
+    av.on('durationUpdate', (d) => { AudioPlayer.guardTooLong(d) })
+    av.url = url
+    await av.prepare()
+    await av.play()
+  }
+
+  static async stop(): Promise<void> {
+    const p = AudioPlayer.player
+    AudioPlayer.player = null                    // ⑤ 先置空关竞态窗口（A25 P0）
+    if (!p) return
+    try {
+      p.off('stateChange'); p.off('error')
+      if (p.state !== 'released') p.release()
+    } catch { /* 幂等吞掉 */ }
+  }
+}
+```
+
+与现状（64 行）相比多出的行数花在三处：settled 互斥标记、error 状态清理、静态字段读一次再操作。这三处正是 A25 定级的 P0/P1 修复点，其余结构维持原样——这份骨架同时是修复工单的验收基准。
+
+## 十、后台播放与音频会话的边界
+
+本项目当前定位是**前台短音频**：应用退到后台即随页面生命周期处理（默认不申请后台长任务），理由有三：30 秒级播报不需要后台续播；申请后台播放要额外的长时任务权限与通知常驻，对适老化用户是负担；股票异动播报的时效性由 Push 与轮询保证，不依赖音频抢占注意力。若未来产品决策改为"锁屏听完"，再引入后台任务申请与锁屏控制，届时 AudioPlayer 的封装边界不用动，只在 EntryAbility 层加生命周期接线。这条边界写在此处是为了防止后续迭代"顺手"加后台播放——那是一个权限与交互成本都显著上升的独立需求，必须走产品决策而不是技术顺手。
+
+## 十一、测试方法：状态迁移验证
+
+无真机环境时按清单逐条静态核对，有真机时逐条实测：
+
+1. **正常链路**：播一条 → completed → onDone → 三态归位；
+2. **互斥链路**：A 播放中点 B → A 先停（旧实例释放，无叠音）→ B 起；
+3. **连点闸**：loading 中连点同卡不产生并发播放；
+4. **网络失败**：飞行模式点播 → prepare 拒绝 → failedId + 重试入口可见；
+5. **过期链接**：喂一个已过期的临时 URL → 重试路径应换新链接而非重放（§四已知坑）；
+6. **页面销毁**：播放中退出页面 → aboutToDisappear 触发 stop → 无后台余音；
+7. **错误注入后复播**：制造一次 error 后再点播 → 新实例正常起播（验证 P1 修复后无僵尸实例）；
+8. **打断**：播放中来电话 → audioInterrupt 生效（最低配方案）→ 播放停止不崩溃。
+
+## 十二、常见错误模式速查
+
+| 现象 | 根因 | 修法 |
+| --- | --- | --- |
+| 播完没回调 onDone | 把 idle 当完成信号 | 只认 completed |
+| 点新条目旧音频还响一会 | stop 未等旧实例释放就播新 | play 入口 await stop() |
+| 偶发"点谁都没声音" | error 后实例滞留占通道 | error 回调内同步清理置空 |
+| 重试必败 | 临时链接已过期 | 重试前先换新链接/触发按需合成 |
+| 页面退出后余音 | 未挂 aboutToDisappear 清理 | 页面销毁钩子调 stop |
+| 第二次播放崩溃 | 对 released 实例继续调用 | 引用置空 + 判 state |
+
 ### 自我评估
 - 正确性：4分 状态机九态、迁移约束、事件清单按公开文档通用口径书写；错误码数值与焦点接口细节明确标注以 SDK/真机为准，未编造具体码值。项目已知问题（竞态/滞留/临时链接）引自 A25 审查结论并标注出处。
 - 完整性：4分 状态机、流播放链路、竞态管理、错误分类、释放时机、音频焦点、检查清单全覆盖；未展开 Seek/倍速/进度条类高级交互（与极简适老交互无关，已说明取舍）。

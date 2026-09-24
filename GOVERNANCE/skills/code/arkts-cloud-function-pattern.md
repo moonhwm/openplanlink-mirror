@@ -200,6 +200,45 @@ const merged = Array.from(alertMap.values()).sort((a, b) => b.ts - a.ts).slice(0
 - [ ] 日志无 Token/密钥/完整 stack；外部数据入库前已验形；
 - [ ] 429/5xx 语义与端侧 `PollResult`（`AlertPoller.ets:10-14`）约定一致。
 
+## 7. 冷启动、执行预算与模块作用域纪律
+
+云函数实例跨调用存活，module 作用域里的变量（第 2 节单例、第 3 节内存缓存）在暖实例期间持续有效——这是它们存在的前提；但冷启动时全部归零，因此**任何正确性都不许依赖内存缓存的存活**：缓存只做加速器，不做唯一真源，唯一真源永远是 CloudBase 存储与外部 API。执行预算的纪律是"四段分账"：一次调用按「读外部 → 合并 → 写存储 → 返回」分段，每段独立超时，任何一段超时不拖垮整函数；串行外呼的超时总和必须给写存储与出口留出余量，否则出现"数据拉到了却没来得及写回"的白忙一轮。
+
+## 8. 服务端外呼的安全边界
+
+在 requestHttps 之上再叠两层硬校验，合入验收时逐条过：
+
+1. **协议白名单**：仅允许 `http:`/`https:` 两个协议，`file:`、`data:` 等一律在发请求前拒绝——`requestHttps` 用 `new URL(url)` 解析后先判协议再建连接；
+2. **目标地址校验**：请求发起前校验 host，**拒绝 localhost、环回地址（127.0.0.0/8、::1）、私有网段（10/8、172.16/12、192.168/16、169.254 链路本地）与保留地址**——云函数入参一旦可控 URL，不校验就是 SSRF 直通道；目标域名收敛为白名单常量表（api.tushare.pro、80.push2.eastmoney.com、百炼网关、华为 Push 域），不在白名单内的 host 直接拒绝并记日志；
+3. **凭据零字面量**：源码、示例、测试里都不许出现可用的密钥字面量，一律 `process.env` 读取（第 5 节第 3 条的延伸，含测试用的假 token 也要写成显式占位符）。
+
+## 9. 推送链路的云侧设计要点（broadcast-a2a 演进）
+
+已知 broadcast-a2a 的 Push 通道需换华为 Push Kit REST，云侧规范四条：
+
+1. **OAuth token 服务级缓存**：access_token 在有效期内以模块级变量复用，过期再取；取 token 单独 10s 超时、失败不重试——认证类失败重试没有意义；
+2. **下发接口不做自动重试**：按 token 维度失败即记日志放行。推送是"尽力而为"通道，可靠性兜底由端侧 5 秒轮询完成（架构基调：轮询兜底，不可推翻）；
+3. **端侧行为已定型，云侧对齐即可**：端侧 getToken 失败按官方可重试错误码白名单（1000900001/0008/0009/0011）最多 3 次、间隔 1s（`PushService.ets:14-17,64-72`）；AGC 未配置时探测 rawfile 缺失即静默降级轮询（`PushService.ets:100-107`）。云侧不因端侧未拿到 token 而重发轰炸；
+4. **payload 只带 alertId**：音频地址由端侧拉 feed 获得，不在推送报文里塞大字段，报文瘦身同时降低敏感信息外泄面。
+
+## 10. 标准 handler 骨架
+
+```javascript
+exports.main = async (event) => {
+  try {
+    const input = validate(event);              // 1. 入口校验：白名单参数、类型
+    const data = await loadWithFallback(input); // 2. 降级链取数（第3节）
+    await persistIfFresh(data);                 // 3. 新鲜才写、并发保护（第4节）
+    return { code: 0, message: 'ok', data: shape(data) };  // 4. 固定出口
+  } catch (e) {
+    console.log('handler fatal:', e.message);   // 只打 message，不打 stack/token
+    return { code: 500, message: 'internal error' };       // 对外不泄漏内部细节
+  }
+};
+```
+
+骨架四段论：校验、取数、落库、出口。新云函数一律从这份骨架起步再填业务；校验失败的出口 code 与内部异常的出口 code 必须可区分，端侧与运维才能分清"调用方错"还是"服务方错"。
+
 ### 自我评估
 - 正确性：4分 核心范式取自现网 `fetch-tushare-data/index.js` 与端侧源码并逐处标注行号；修正了历史文档中 `error+timeout` 伪事件写法，该修正是依据 Node 事件语义判断的，未在本环境运行 Node 验证。
 - 完整性：4分 三大主题（requestHttps/单例/降级链）均展开到代码级，另覆盖并发保护、确定性ID、日志安全与清单；generate-tts 的 WebSocket 细节仅引用未展开（属另篇范围）。
