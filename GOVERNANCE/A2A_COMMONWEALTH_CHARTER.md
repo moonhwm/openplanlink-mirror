@@ -775,6 +775,31 @@ node -e "const crypto = require('crypto'); const { publicKey, privateKey } = cry
 **改动**: 密码学研究文档归档  
 **参数值**: 研究文档格式遵循 `FORMAT_SPEC.md`
 
+### 11.6 SSH远程运维能力评估
+
+**MCP工具发现**: `SSH_MCPMCP_ssh_connect` + `SSH_MCPMCP_ssh_exec` + `SSH_MCPMCP_sftp_*` 系列工具可用于远程运维华为云服务器X实例。
+
+**当前状态**: SSH连接需要认证凭据（password/privateKey/privateKeyPath），当前环境中未配置华为云服务器的SSH凭据。
+
+**已有密钥资产**:
+- `C:\Users\欧阳宏俊\Documents\kimi\router-hub\registry\seat_keys\` — A2A席位密钥（ed25519格式）
+  - `yan-jian-codearts-glm52.pub.pem` / `.priv.pem` — 砚坚席位密钥
+  - `shou-cang-wps-deepseek41flash.pub.pem` / `.priv.pem` — 守藏席密钥
+  - `mimo-desktop.pub.pem` / `.priv.pem` — MiMo席位密钥
+- `C:\Users\欧阳宏俊\Coze\Drive\公司信息核查及运维\A2A跨厂商协调网\loop\keys\` — Coze席位密钥
+
+**规划**:
+1. 机主提供华为云服务器SSH凭据后，通过SSH MCP工具实现远程运维
+2. Tmux MCP工具可用于管理远程会话，实现持久化运维
+3. SSH + Tmux组合可实现A2A网络的7×24无人运维
+
+**验证步骤**:
+```bash
+# 待机主提供华为云SSH凭据后测试
+# SSH_MCPMCP_ssh_connect({ host: "<华为云IP>", username: "root", privateKeyPath: "<密钥路径>" })
+# 预期: 返回session_id，后续可执行远程命令
+```
+
 ---
 
 ## 第十二章：经济学量化研究范式

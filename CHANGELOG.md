@@ -1701,3 +1701,18 @@
   4. 每日追新云函数（daily-trend-scan）待开发
   5. 前沿LLM论文追踪机制待建立
   6. 规划书须经A2A网络全体席位审议（哈贝马斯共识程序）
+## 2026-09-24 23:30 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-SFT-Harmony）· 自主运维——规划书深化+播报历史+EvoMap
+
+- **改了什么**：
+  - `GOVERNANCE/A2A_COMMONWEALTH_CHARTER.md`：规划书深化——新增哈贝马斯四有效性主张映射（真实性/正当性/真诚性/可理解性→落地机制）、Hermess对标分析（6维度差距评估）、EvoMap进化路径追踪（5类事件+JSON格式）、ed25519指纹签名落地、DID方法具体实现、PD-AI协同拉取、SSH远程运维评估、LLM论文复现路线图
+  - `GOVERNANCE/evomap/`（新建目录）：EvoMap进化路径追踪——5个子目录（skills/charter/architecture/seats/incidents）+3个进化节点JSON
+  - `GOVERNANCE/skills/code/A37_A2A共建公约规划书编写经验.md`（新建）：技能文档A37——规划书编写方法论与经验提炼
+  - `GOVERNANCE/skills/SELF_BUILT_INDEX.md`：技能索引 v3.4→v3.5，纳入A37
+  - `GOVERNANCE/research/llm-papers/`（新建目录）：LLM论文追踪——3个子目录（queue/reproduced/failed）
+  - `entry/src/main/ets/pages/Settings.ets`：新增播报历史区块——显示最近20条播报记录（名称+标题+相对时间），超过20条显示总数提示；新增relTime辅助方法
+- **为什么**：
+  - 机主令继续推进无人运维，高效燃烧充分
+  - 规划书需持续深化——哈贝马斯四有效性主张是公约理论核心，必须有落地机制
+  - EvoMap是自进化机制的可视化追踪，与Hermess同步构建
+  - 播报历史是适老化应用的重要功能——长辈可以回顾之前听过的异动
+ 6. 规划书须经A2A网络全体席位审议（哈贝马斯共识程序）

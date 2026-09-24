@@ -1,6 +1,6 @@
 
 import { hilog } from '@kit.PerformanceAnalysisKit';
-import { SettingsService, FontSizeLevel, ThemeMode, ThemeColors, DEFAULT_FEED_URL } from '../services/SettingsService';
+import { SettingsService, FontSizeLevel, ThemeMode, ThemeColors, DEFAULT_FEED_URL, PlayHistoryItem } from '../services/SettingsService';
 
 const TAG = 'StockPulse.Settings';
 const DOMAIN = 0x0001;
@@ -19,6 +19,7 @@ export struct Settings {
   @State dndEndHour: number = 8;
   @State newStockInput: string = '';
   @State feedUrl: string = DEFAULT_FEED_URL;
+  @State playHistory: PlayHistoryItem[] = [];
   private navStack: NavPathStack | null = null;
 
   // 字体档驱动字号
@@ -59,6 +60,7 @@ export struct Settings {
     this.dndStartHour = await SettingsService.getDndStartHour();
     this.dndEndHour = await SettingsService.getDndEndHour();
     this.feedUrl = await SettingsService.getFeedUrl();
+    this.playHistory = await SettingsService.getPlayHistory();
   }
 
   private async addStock(): Promise<void> {
@@ -152,6 +154,25 @@ export struct Settings {
     this.dndEnabled = isOn;
     await SettingsService.setDndEnabled(this.dndEnabled);
     hilog.info(DOMAIN, TAG, `dnd ${isOn ? 'enabled' : 'disabled'}`);
+  }
+
+  /** 相对时间格式化：将毫秒时间戳转为"刚刚/N分钟前/N小时前" */
+  private relTime(ts: number): string {
+    if (ts === 0) {
+      return '';
+    }
+    const now = Date.now();
+    const diff = Math.floor((now - ts) / 1000);
+    if (diff < 60) {
+      return '刚刚';
+    }
+    if (diff < 3600) {
+      return `${Math.floor(diff / 60)}分钟前`;
+    }
+    if (diff < 86400) {
+      return `${Math.floor(diff / 3600)}小时前`;
+    }
+    return `${Math.floor(diff / 86400)}天前`;
   }
 
   build() {
@@ -538,6 +559,66 @@ export struct Settings {
                 .fontSize(this.labelSize)
                 .fontColor(this.theme.textSecondary)
                 .width('100%')
+            }
+            .width('100%')
+            .padding(20)
+            .backgroundColor(this.theme.cardBackground)
+            .borderRadius(16)
+
+            // ── 播报历史 ──
+            Column({ space: 12 }) {
+              Text('播报历史')
+                .fontSize(this.bodySize)
+                .fontWeight(FontWeight.Bold)
+                .fontColor(this.theme.textPrimary)
+                .width('100%')
+
+              if (this.playHistory.length > 0) {
+                ForEach(this.playHistory.slice(0, 20), (item: PlayHistoryItem) => {
+                  Row() {
+                    Column() {
+                      Text(item.name)
+                        .fontSize(this.labelSize)
+                        .fontColor(this.theme.textPrimary)
+                        .maxLines(1)
+                        .textOverflow({ overflow: TextOverflow.Ellipsis })
+                      Text(item.headline)
+                        .fontSize(this.labelSize)
+                        .fontColor(this.theme.textSecondary)
+                        .maxLines(1)
+                        .textOverflow({ overflow: TextOverflow.Ellipsis })
+                        .margin({ top: 4 })
+                    }
+                    .layoutWeight(1)
+                    .alignItems(HorizontalAlign.Start)
+
+                    Text(this.relTime(item.ts))
+                      .fontSize(this.labelSize)
+                      .fontColor(this.theme.textSecondary)
+                      .margin({ left: 8 })
+                  }
+                  .width('100%')
+                  .padding({ left: 16, right: 16, top: 12, bottom: 12 })
+                  .backgroundColor(this.theme.pageBackground)
+                  .borderRadius(12)
+                }, (item: PlayHistoryItem) => item.alertId)
+
+                if (this.playHistory.length > 20) {
+                  Text(`共 ${this.playHistory.length} 条，仅显示最近 20 条`)
+                    .fontSize(this.labelSize)
+                    .fontColor(this.theme.textSecondary)
+                    .width('100%')
+                    .textAlign(TextAlign.Center)
+                    .margin({ top: 8 })
+                }
+              } else {
+                Text('暂无播报历史')
+                  .fontSize(this.labelSize)
+                  .fontColor(this.theme.textSecondary)
+                  .width('100%')
+                  .textAlign(TextAlign.Center)
+                  .padding({ top: 16, bottom: 16 })
+              }
             }
             .width('100%')
             .padding(20)
