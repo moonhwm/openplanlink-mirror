@@ -43,6 +43,7 @@ struct Index {
   @State watchlist: string[] = [];
   @State readAlertIds: string[] = [];
   @State playHistory: PlayHistoryItem[] = [];
+  @State isRefreshing: boolean = false;
   private readAlertIdSet: Set<string> = new Set();
   private timer: number = -1;
   private consecutiveFailures: number = 0;
@@ -204,6 +205,13 @@ struct Index {
         this.connectionBroken = true;
       }
     }
+  }
+
+  /** 下拉刷新触发：手动拉取最新数据，与自动轮询独立 */
+  private async onPullRefresh(): Promise<void> {
+    this.isRefreshing = true;
+    await this.refresh();
+    this.isRefreshing = false;
   }
 
   private playById(id: string, force: boolean = false): void {
@@ -381,8 +389,9 @@ struct Index {
         .padding({ left: 20, right: 20, top: this.topBarPaddingTop, bottom: this.topBarPaddingBottom })
 
         if (this.items.length > 0) {
-          List({ space: this.cardSpace }) {
-            ForEach(this.items, (item: AlertItem) => {
+          Refresh({ refreshing: $$this.isRefreshing }) {
+            List({ space: this.cardSpace }) {
+              ForEach(this.items, (item: AlertItem) => {
               ListItem() {
                 Column({ space: this.cardInnerSpace }) {
                   Row() {
@@ -474,6 +483,8 @@ struct Index {
           .width('100%')
           .layoutWeight(1)
           .padding({ left: this.listSidePadding, right: this.listSidePadding })
+          }
+          .onRefreshing(() => this.onPullRefresh())
         } else {
           Column() {
             Text('今日暂无异动')

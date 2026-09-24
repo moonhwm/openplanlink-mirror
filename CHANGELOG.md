@@ -1644,3 +1644,23 @@
   3. PD-AI量化研究团队2席注册方案文档待编写
   4. LLM接入真实API凭据待机主注入
   5. 签名配置待AGC证书材料
+## 2026-09-24 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· 自主运维——下拉刷新+技能沉淀+合规归档
+
+- **改了什么**：
+  - `entry/src/main/ets/pages/Index.ets`：新增下拉刷新功能——用 `Refresh({ refreshing: $$this.isRefreshing })` 包裹 `List`，新增 `@State isRefreshing: boolean = false` 状态变量和 `onPullRefresh()` 方法（手动下拉触发 `refresh()`，与自动轮询独立，不互相干扰刷新动画）。适老化考虑：Refresh 组件自带系统标准下拉指示器，长辈无需学习即可使用。
+  - `GOVERNANCE/compliance/W001_量化与股票异动推送_合规要点简报_v1.md`（新建）：W001合规简报归档——推送内容只保留客观数据/异动监测/量化指标呈现，禁止投资建议/走势预测/买卖时机建议。
+  - `GOVERNANCE/skills/code/A36_A2A改造方案落地kimi停用与码道总装.md`（新建）：技能文档A36——将A2A改造方案落地经验编写为可复用技能。
+  - `GOVERNANCE/skills/SELF_BUILT_INDEX.md`：技能索引 v3.3→v3.4，纳入A36。
+  - `GOVERNANCE/a2a/A2A_DISPATCH_AND_PLAN.md`：F-004标记已修复，新增G节（A2A改造方案落地），优先级表更新。
+- **为什么**：
+  - 下拉刷新是适老化应用的基础交互——长辈习惯下拉拉取最新内容，比等待自动轮询更直观
+  - 合规简报归档确保推送内容边界有据可查
+  - 技能沉淀遵循AGENTS.md §五自主进化机制，将个案经验提炼为可复用模式
+- **如何验证**：
+  - V1：HAP构建 `BUILD SUCCESSFUL in 2 min 5 s 591 ms`（英文路径副本 C:\dev\lingyu\harmony-app）
+  - V2：代码走查——`Refresh` 正确包裹 `List`，`onRefreshing` 绑定 `onPullRefresh()`，`isRefreshing` 在 `onPullRefresh` 开始时置true、结束时置false，自动轮询 `pollLoop` 不操作 `isRefreshing`
+  - V3：`grep -rn "Refresh" entry/src/main/ets/pages/Index.ets` → 仅下拉刷新相关引用
+- **遗留**：
+  1. 真机/模拟器验证下拉刷新交互体验（当前环境无连接设备）
+  2. broadcast-a2a 云函数 from_mode 已改但尚未重新部署到 CloudBase
+  3. PD-AI 2席实际注册待机主批准

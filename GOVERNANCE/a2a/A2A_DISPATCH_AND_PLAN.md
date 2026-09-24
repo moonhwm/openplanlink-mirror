@@ -240,7 +240,7 @@
 | F-001 | 🔴 高危 | broadcast-a2a表名错误 | ✅ 已修复 |
 | F-002 | 🔴 高危 | broadcast-a2a无鉴权+CORS全开 | ✅ 已修复（H2鉴权fail-closed + CORS域名收敛） |
 | F-003 | 🟡 低危 | get-alerts参数混用 | ✅ 已修复（L1域名注释修正） |
-| F-004 | 🟡 低危 | Settings.ets FEED_URL无校验 | ⏳ 待加校验 |
+| F-004 | 🟡 低危 | Settings.ets FEED_URL无校验 | ✅ 已修复（commit 6d8147c，FEED_URL格式校验+卡片相对时间显示） |
 | F-005 | 🟡 低危 | fetch-tushare-data注释错别字 | ✅ 已修复 |
 | F-006 | 🟡 低危 | push-token-register无鉴权+集合未预热 | ✅ 已修复（L3白名单鉴权 + L5补push_tokens集合） |
 | H1 | 🔴 高危 | 合规fail-open→fail-closed | ✅ 已修复（non-compliant信号卡降级为fact） |
@@ -251,6 +251,7 @@
 | GAP-03 | — | 桥接缺陷修复方案 | 📋 方案已落盘，补丁待部署 |
 | AGC P5 | — | 华为审批流程 | ⏳ 等待审批 |
 | HAP构建 | — | 中文路径+空格路径阻塞 | ✅ 已突破（英文路径迁移+hvigorw.js修复） |
+| A2A改造 | — | kimi停用+码道总装+新云函数 | ✅ 已落地（见G节） |
 
 ### E. 24小时自治A2A治理实验
 
@@ -271,6 +272,30 @@
 
 > v1错误：将砚坚（挂帅席）降格为data-engineer（执行层零时工），混淆了AI席位与工具端点概念。v2已修正。
 
+### G. A2A改造方案落地（2026-09-24 砚坚/GLM-5.2-SFT-Harmony）
+
+> 背景：kimi code 300元额度包因心跳定时空转4分钟耗尽。机主令彻底停用kimi调用，统一移交码道GLM5.2 ArkTS作为唯一总装节点。
+
+| 改动项 | 状态 | 说明 |
+|--------|------|------|
+| broadcast-a2a from_mode迁移 | ✅ 已完成 | `kimi-code-quantlab` → `yan-jian-codearts-glm52` |
+| config.js总开关 KIMI_ENABLED=false | ✅ 已完成 | 新建配置文件，kimi通道默认关闭 |
+| a2a-registry云函数 | ✅ 已部署 | 注册+心跳(30s初始+退避60/120/300+抖动20%)+熔断(3次/15min)+预算管控(50%/80%/95%) |
+| a2a-task-dispatch云函数 | ✅ 已部署 | 任务分发+状态机(queued/running/succeeded/failed/cancelled)+去重+重试3次+超时120s |
+| cloudbaserc.json更新 | ✅ 已完成 | 新增2个云函数配置 |
+| quant-lab bridge停用 | ✅ 已确认 | KIMI_DISABLE.local.flag + SPEND_FREEZE.local.flag 已存在；hb_config.json心跳参数已落地 |
+| PD-AI量化研究团队2席 | 📋 方案已落盘 | pd-quant-researcher-001 + pd-quant-engineer-001，待机主批准后注册 |
+| W001合规简报归档 | ✅ 已完成 | GOVERNANCE/compliance/目录已创建 |
+| HAP构建验证 | ✅ 通过 | BUILD SUCCESSFUL（英文路径增量构建） |
+
+**新增云函数（已部署到CloudBase）**：
+- `a2a-registry`（lam-dszee5wr）——席位注册/心跳/熔断/预算管控
+- `a2a-task-dispatch`（lam-3ht9mlfp）——任务分发/状态机/去重/终态确认
+
+**PD-AI量化研究团队**（待注册）：
+- `pd-quant-researcher-001`——tushare财经新闻/交易数据/量化因子协同拉取
+- `pd-quant-engineer-001`——数据管道工程化/回测脚本/CloudBase运维
+
 ---
 
 ## 第三部分：下一步行动优先级
@@ -284,7 +309,7 @@
 | P2 | 砚坚角色报名确认（编排方签注） | pi-orchestrator(ZCode) | 无 | ⏳ 待确认 |
 | P2 | L2桥接网关原型实现 | pi-orchestrator | L0/L1完成 | 🔧 设计中 |
 | ~~P2~~ | ~~F-003/F-006修复~~ | ~~砚坚~~ | ~~无~~ | ✅ 已修复 |
-| P2 | F-004修复：Settings.ets FEED_URL加校验 | 砚坚 | 无 | ⏳ 待修复 |
+| ~~P2~~ | ~~F-004修复：Settings.ets FEED_URL加校验~~ | ~~砚坚~~ | ~~无~~ | ✅ 已修复 |
 | P2 | HAP构建验证：模拟器安装运行 | 砚坚 | 模拟器/真机 | ⏳ 待环境 |
 | P2 | LLM凭据注入：DEEPSEEK_API_KEY / PANGU_API_KEY | 机主 | 无 | ⏳ 待机主 |
 | P3 | GAP-03桥接补丁部署 | 桥接会话 | a2a_bridge.mjs写权限 | ⏳ 待推进 |
