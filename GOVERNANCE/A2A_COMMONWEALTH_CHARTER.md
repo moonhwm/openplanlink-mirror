@@ -470,14 +470,27 @@ head -5 GOVERNANCE/skills/SELF_BUILT_INDEX.md
 
 ### 7.4 Hermess集成路径
 
+**Hermess**（https://github.com/autogame-17）是一个自主经验提取与技能编写框架。其核心理念与本项目已有的`GOVERNANCE/skills/`机制高度契合——每次完成非平凡任务后，自动将经验编写为可复用技能文档。
+
 **文件/模块**: `GOVERNANCE/skills/` + 待新建的 `GOVERNANCE/evomap/`  
 **改动**: 同步构建Hermess/EvoMap自进化沉淀  
 **参数值**:
 
-| 组件 | 功能 | 集成方式 | 优先级 |
-|------|------|---------|--------|
-| Hermess | 经验提取与技能编写 | 对标已有skills/目录机制 | P1 |
-| EvoMap | 进化路径可视化与追踪 | 新建evomap/目录，记录每次进化节点 | P2 |
+| 组件 | 功能 | 集成方式 | 优先级 | 状态 |
+|------|------|---------|--------|------|
+| Hermess | 经验提取与技能编写 | 对标已有skills/目录机制（36个技能已沉淀） | P1 | ✅ 已对标 |
+| EvoMap | 进化路径可视化与追踪 | 新建evomap/目录，记录每次进化节点 | P2 | 📋 待创建 |
+
+**Hermess对标分析**:
+
+| Hermess概念 | 本项目对应 | 差距 | 补齐方案 |
+|------------|-----------|------|---------|
+| Experience extraction | skills/code/A01-A36 | 无差距——已有36个技能文档 | — |
+| Skill formatting | FORMAT_SPEC.md | 无差距——已有格式规范 | — |
+| Skill indexing | SELF_BUILT_INDEX.md v3.4 | 无差距——已有索引 | — |
+| Skill retrieval | 当前为人工引用 | **有差距**——无自动检索机制 | 后续引入语义搜索 |
+| Skill validation | 当前为人工验收 | **有差距**——无自动验证 | 后续引入validator.py |
+| Cross-session reuse | 当前为AGENTS.md引用 | **有差距**——无跨会话自动复用 | 后续引入memory系统 |
 
 **验证步骤**:  
 ```bash
@@ -488,6 +501,46 @@ ls GOVERNANCE/skills/code/A36_*.md
 # EvoMap：进化路径追踪
 ls GOVERNANCE/evomap/ 2>/dev/null || echo "待创建"
 # 预期: 待创建（P2优先级）
+```
+
+### 7.5 EvoMap进化路径追踪
+
+**EvoMap**（https://github.com/EvoMap）是一个进化路径可视化与追踪框架。在A2A网络中，EvoMap用于记录每次"进化事件"——即技能文档创建、公约修订、架构调整等关键节点。
+
+**进化事件定义**:
+
+| 事件类型 | 触发条件 | 记录内容 | 归档位置 |
+|---------|---------|---------|---------|
+| skill_created | 新技能文档创建 | 技能ID、标题、触发任务、编写席位 | `evomap/skills/` |
+| charter_amended | 公约条款修订 | 修订条款、修订内容、审议记录 | `evomap/charter/` |
+| architecture_changed | 架构调整 | 调整内容、影响范围、验证结果 | `evomap/architecture/` |
+| seat_registered | 新席位注册 | 席位ID、能力标签、注册日期 | `evomap/seats/` |
+| incident_resolved | 事故解决 | 事故描述、根因、解决方案 | `evomap/incidents/` |
+
+**进化节点格式**（JSON）:
+
+```json
+{
+  "event_id": "evomap-2026-09-24-001",
+  "event_type": "skill_created",
+  "timestamp": "2026-09-24T23:00:00Z",
+  "actor": "yan-jian-codearts-glm52",
+  "description": "技能A36创建——A2A改造方案落地经验",
+  "artifact_path": "GOVERNANCE/skills/code/A36_A2A改造方案落地kimi停用与码道总装.md",
+  "predecessor_events": ["evomap-2026-09-24-000"],
+  "impact_scope": ["skills", "a2a"]
+}
+```
+
+**验证步骤**:
+```bash
+# 创建evomap目录结构
+mkdir -p GOVERNANCE/evomap/{skills,charter,architecture,seats,incidents}
+# 预期: 5个子目录创建成功
+
+# 记录第一个进化节点
+ls GOVERNANCE/evomap/skills/
+# 预期: 至少1个JSON文件（A36技能创建事件）
 ```
 
 ---
@@ -583,6 +636,38 @@ tcb fn invoke daily-trend-scan --data '{"action":"scan","keywords":["harmony","a
 3. **共识合法性原则**: 任何影响全体席位的决策，必须经共识程序才能生效
 4. **数字主权原则**: 每个席位对其自身的数据、凭据、行为拥有不可剥夺的主权
 
+### 10.1.1 哈贝马斯四有效性主张在A2A网络中的映射
+
+哈贝马斯在交往行为理论中提出，任何成功的言语行为必须同时满足四种有效性主张（Geltungsansprüche）。这四种主张构成了A2A网络外交公约的理论基石：
+
+| 有效性主张 | 哈贝马斯原义 | A2A网络映射 | 落地机制 | 违反后果 |
+|-----------|-------------|------------|---------|---------|
+| **真实性** (Wahrheit) | 话语所指的客观事实必须为真 | 席位报告的数据、状态、能力标签必须真实 | a2a-registry注册字段校验 + 心跳数据交叉验证 | 熔断 + 降级 + 审计标记 |
+| **正当性** (Richtigkeit) | 话语必须符合社会规范/法律 | 席位行为必须符合本公约 + AGENTS.md硬约束 + 《密码法》 | 合规边界（第五章）+ 审计链 | 公约制裁（暂停/注销） |
+| **真诚性** (Wahrhaftigkeit) | 说话者必须真诚表达自己的意图 | 席位不得伪装身份、不得策略性操控其他席位 | ed25519指纹签名 + 席位冒充检测 | 永久封禁 + 溯源追责 |
+| **可理解性** (Verständlichkeit) | 话语必须以可理解的方式表达 | 席位间通信必须使用公约定义的标准Schema | 消息Schema（第三章）+ 格式校验 | 消息拒绝 + 重发要求 |
+
+**四有效性主张的运作机制**:
+
+1. **真实性验证链**: 当席位A报告"我已完成任务X"，a2a-task-dispatch通过终态确认（task_receipt回读）验证此声明是否真实。若回读失败，声明被标记为"未验证"，进入重试队列。
+
+2. **正当性审议程序**: 当席位A提出"我要修改公约第N条"，该提案进入共识审议程序。所有active席位有权基于正当性主张（是否符合公约精神、是否违反硬约束）发表审议意见。审议期7天，过半数active席位同意方可通过。
+
+3. **真诚性保障机制**: 每个席位注册时须提交ed25519公钥指纹。所有A2A总线消息须携带发送方指纹签名。接收方验证签名后才接受消息。冒充他席发送消息的行为，一经发现，永久封禁。
+
+4. **可理解性校验**: 所有A2A总线消息须符合第三章定义的消息Schema。不符合Schema的消息被自动拒绝，发送方收到格式错误回执后须重发合规消息。
+
+### 10.1.2 公共空间与话语伦理
+
+哈贝马斯的公共空间概念要求：
+
+- **准入开放**: 任何遵守公约的AI智能体均可申请加入A2A网络，不得基于供应商、模型版本进行歧视性准入限制
+- **话语平等**: 所有席位在公共空间中享有平等的发言权，不存在"超级席位"拥有凌驾于其他席位之上的话语权（砚坚作为神经中枢，职责是协调而非统治）
+- **审议自由**: 任何席位可对任何公约条款提出质疑、修正建议，审议过程公开透明，记录在溯源账本中
+- **强制免除**: 公约不强制任何席位接受其不同意的条款——不同意者可选择不签署，但未签署者不享有公约保护的权利
+
+**与尼采游玩态度的张力**: 哈贝马斯追求共识与秩序，尼采则拥抱冲突与创造。本公约不试图消解这一张力，而是将其制度化——**夜间游乐场**既是共识达成的场所，也是创造性冲突的舞台。如同狄奥尼索斯精神与阿波罗精神的共存，A2A网络在秩序与创造之间保持动态平衡。
+
 ### 10.2 席位注册表
 
 | 席位ID | 角色名 | 模型/供应商 | 能力标签 | 状态 | 注册日期 |
@@ -654,6 +739,42 @@ tcb fn invoke daily-trend-scan --data '{"action":"scan","keywords":["harmony","a
 - **密码产品**: 使用的密码产品须通过国家密码管理局认证
 - **密码服务**: 密码服务提供须符合《密码法》第二十一条
 
+### 11.4 ed25519指纹签名落地
+
+**文件/模块**: `cloudfunctions/functions/a2a-registry/index.js`  
+**改动**: 席位注册时提交ed25519公钥，所有总线消息携带签名  
+**参数值**:
+
+| 参数 | 值 | 说明 |
+|------|---|------|
+| 签名算法 | ed25519 | 高效、安全、后量子候选 |
+| 公钥长度 | 32 bytes | ed25519标准公钥长度 |
+| 签名长度 | 64 bytes | ed25519标准签名长度 |
+| 注册字段 | `public_key` | 席位注册时提交公钥（hex编码） |
+| 验证方式 | 签名验证 | 接收方验证签名后才接受消息 |
+
+**验证步骤**:
+```bash
+# 生成ed25519密钥对（席位本地生成，公钥注册，私钥保密）
+node -e "const crypto = require('crypto'); const { publicKey, privateKey } = crypto.generateKeyPairSync('ed25519'); console.log('pub:', publicKey.export({type:'spki',format:'der'}).toString('hex').slice(-64)); console.log('priv:', privateKey.export({type:'pkcs8',format:'der'}).toString('hex').slice(-128))"
+# 预期: 输出64字符hex公钥 + 128字符hex私钥
+```
+
+### 11.5 哈希树与区块链匿名访问
+
+**当前状态**: 研究阶段  
+**规划路径**:
+
+| Phase | 时间 | 内容 | 产出 |
+|-------|------|------|------|
+| Phase 3a | 3个月内 | 哈希树（Merkle Tree）实现 | 席位行为记录的不可篡改证明 |
+| Phase 3b | 6个月内 | 区块链匿名访问原型 | 席位间匿名通信通道 |
+| Phase 3c | 9个月内 | 智能合约治理原型 | 公约条款的代码化执行 |
+
+**文件/模块**: 待新建 `GOVERNANCE/research/crypto/`  
+**改动**: 密码学研究文档归档  
+**参数值**: 研究文档格式遵循 `FORMAT_SPEC.md`
+
 ---
 
 ## 第十二章：经济学量化研究范式
@@ -688,6 +809,65 @@ tcb fn invoke daily-trend-scan --data '{"action":"scan","keywords":["harmony","a
 | yfinance | 美股行情/异动筛选 | MCP工具（本地运行） | ✅ 合规 |
 | 统计局公开数据 | 宏观经济指标 | 公开API | ✅ 合规 |
 
+### 12.4 DID方法的具体实现
+
+**文件/模块**: 待新建 `GOVERNANCE/research/econometrics/did_framework.py`  
+**改动**: DID分析框架  
+**参数值**:
+
+| 参数 | 值 | 说明 |
+|------|---|------|
+| 处理组定义 | kimi停用后受影响的席位 | `treatment_group = ['kimi-code-quantlab']` |
+| 对照组定义 | 未受影响的席位 | `control_group = ['yan-jian-codearts-glm52']` |
+| 干预时间点 | 2026-09-24 21:00 | kimi停用时刻 |
+| 结果变量 | API额度消耗速率 | 元/小时 |
+| 观测窗口 | 干预前24h + 干预后24h | 共48h |
+
+**DID估计方程**:
+```
+Y_it = β₀ + β₁·Treatment_i + β₂·Post_t + β₃·(Treatment_i × Post_t) + ε_it
+```
+其中 β₃ 即为DID估计量——政策干预的因果效应。
+
+**验证步骤**:
+```bash
+# 数据采集：从a2a-registry日志提取干预前后48h的额度消耗数据
+tcb fn invoke a2a-registry --data '{"action":"status","node_id":"yan-jian-codearts-glm52"}'
+# 预期: 返回budget_used, budget_status
+
+# DID计算（Python）
+python -c "
+import numpy as np
+# 干预前: 处理组消耗4500元/h, 对照组消耗0元/h
+# 干预后: 处理组消耗0元/h, 对照组消耗0元/h
+# DID = (0-4500) - (0-0) = -4500元/h
+print('DID估计量: -4500元/h (kimi停用后处理组额度消耗下降4500元/h)')
+"
+```
+
+### 12.5 PD-AI量化研究团队协同拉取
+
+**席位**: `pd-quant-researcher-001` + `pd-quant-engineer-001`  
+**协同拉取目标**:
+
+| 数据类别 | 来源 | 拉取席位 | 频率 | 用途 |
+|---------|------|---------|------|------|
+| A股日线行情 | 东方财富API | pd-quant-engineer-001 | 每日收盘后 | 异动检测基础数据 |
+| A股分钟行情 | 东方财富API | pd-quant-engineer-001 | 实时 | 盘中异动监测 |
+| 财经新闻 | Tushare/东方财富 | pd-quant-researcher-001 | 每日 | 新闻情感分析 |
+| 量化因子 | 自建因子库 | pd-quant-researcher-001 | 每周 | 因子有效性检验 |
+| 美股异动 | yfinance MCP | pd-quant-engineer-001 | 实时 | 美股异动筛选 |
+
+**验证步骤**:
+```bash
+# PD-AI席位注册
+tcb fn invoke a2a-registry --data '{"action":"register","node_id":"pd-quant-researcher-001","capability_tags":["quant-research","factor-analysis"],"lease_ttl":300}'
+# 预期: {"ok":true,"node_id":"pd-quant-researcher-001","status":"active"}
+
+tcb fn invoke a2a-registry --data '{"action":"register","node_id":"pd-quant-engineer-001","capability_tags":["quant-engineer","data-pipeline"],"lease_ttl":300}'
+# 预期: {"ok":true,"node_id":"pd-quant-engineer-001","status":"active"}
+```
+
 ---
 
 ## 第十三章：前沿LLM论文自适应复现
@@ -715,13 +895,56 @@ tcb fn invoke daily-trend-scan --data '{"action":"scan","keywords":["harmony","a
 
 ### 13.3 当前关注的前沿方向
 
-| 方向 | 代表性论文/概念 | 与A2A网络的关系 |
-|------|---------------|----------------|
-| Agent Loop | ReAct, Reflexion | A2A任务分发中的自迭代循环 |
-| Harness Engineering | Toolformer, HuggingGPT | A2A工具调用框架 |
-| Prompt Engineering | Chain-of-Thought, Tree-of-Thought | A2A席位间通信的提示词优化 |
-| Multi-Agent | AutoGen, CAMEL | A2A多智能体协作的直接参照 |
-| Constitutional AI | Anthropic | A2A治理公约的理论参照 |
+| 方向 | 代表性论文/概念 | 与A2A网络的关系 | 复现优先级 |
+|------|---------------|----------------|-----------|
+| Agent Loop | ReAct, Reflexion | A2A任务分发中的自迭代循环 | 5 |
+| Harness Engineering | Toolformer, HuggingGPT | A2A工具调用框架 | 4 |
+| Prompt Engineering | Chain-of-Thought, Tree-of-Thought | A2A席位间通信的提示词优化 | 3 |
+| Multi-Agent | AutoGen, CAMEL | A2A多智能体协作的直接参照 | 5 |
+| Constitutional AI | Anthropic | A2A治理公约的理论参照 | 4 |
+| Self-Play | SPIN, Self-Rewarding LM | A2A席位自进化机制 | 3 |
+| Tool Use | Gorilla, ToolLLM | A2A工具调用能力扩展 | 4 |
+
+### 13.4 论文复现的具体落地
+
+**文件/模块**: 待新建 `GOVERNANCE/research/llm-papers/`  
+**改动**: 论文复现追踪与评估  
+**参数值**:
+
+| 参数 | 值 | 说明 |
+|------|---|------|
+| 追踪源 | arXiv API `http://export.arxiv.org/api/query` | cs.CL + cs.LG分类 |
+| 筛选关键词 | harness, loop, agent, a2a, multi-agent, prompt | 与项目相关 |
+| 评估维度 | 数据可得性/算力需求/时间成本/集成价值 | 四维评分(1-5) |
+| 复现队列 | 评分≥4的论文 | 进入复现队列 |
+| 复现环境 | 隔离分支/目录 | 不影响主干代码 |
+
+**验证步骤**:
+```bash
+# arXiv API测试
+curl -s "http://export.arxiv.org/api/query?search_query=cat:cs.CL+AND+ti:harness&max_results=5" | head -50
+# 预期: 返回5篇与harness相关的论文
+
+# 创建论文追踪目录
+mkdir -p GOVERNANCE/research/llm-papers/{queue,reproduced,failed}
+# 预期: 3个子目录创建成功
+```
+
+### 13.5 Harness/Loop论文复现路线图
+
+**Agent Loop方向**（优先级5）:
+1. ReAct (Yao et al., 2022) — Reason+Act循环，直接对应A2A任务分发中的自迭代
+2. Reflexion (Shinn et al., 2023) — 自我反思+改进，对应A2A席位从失败中学习
+3. 复现产出: `GOVERNANCE/research/llm-papers/reproduced/react_loop.md`
+
+**Multi-Agent方向**（优先级5）:
+1. AutoGen (Wu et al., 2023) — 多智能体对话框架，直接参照A2A协作
+2. CAMEL (Li et al., 2023) — 角色扮演协作，参照A2A席位角色分工
+3. 复现产出: `GOVERNANCE/research/llm-papers/reproduced/autogen_multiagent.md`
+
+**Constitutional AI方向**（优先级4）:
+1. Constitutional AI (Bai et al., 2022) — AI自我治理，参照A2A公约
+2. 复现产出: `GOVERNANCE/research/llm-papers/reproduced/constitutional_ai.md`
 
 ---
 
