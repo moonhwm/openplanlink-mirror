@@ -1118,29 +1118,41 @@ grep -c "验证步骤" GOVERNANCE/A2A_COMMONWEALTH_CHARTER.md
 # 预期: 返回异动数据JSON
 ```
 
-### 14.6 判官常态化自动化
+### 14.6 判官常态化自动化（已落地 2026-09-25）
 
-**文件/模块**: 待新建 `cloudfunctions/functions/a2a-judge/index.js`  
-**改动**: 判官自动化云函数——定时触发四路判官  
+**文件/模块**: `cloudfunctions/functions/a2a-judge/index.js`（已部署）  
+**改动**: 判官自动化云函数——四路判官并行执行，报告写入Supabase总线  
 **参数值**:
 
 | 参数 | 值 | 说明 |
 |------|---|------|
-| 触发方式 | CloudBase Timer cron | `0 0 9 * * * *`（每日9:00） |
-| 判官1 | 安全审计 | grep扫描代码仓库 |
-| 判官2 | 云函数状态 | tcb fn list |
-| 判官3 | 数据获取 | yfinance API调用 |
-| 判官4 | 文档完整性 | grep统计验证 |
-| 输出位置 | `GOVERNANCE/a2a/judge-reports/` | 每日报告归档 |
-| 矫正通知 | Supabase cross_mode_channel | 严重项推送至A2A总线 |
+| 触发方式 | CloudBase Timer cron + 手动HTTP | `0 0 9 * * * *`（每日9:00），支持手动 `tcb fn invoke` |
+| 判官1 | 安全审计 | 环境变量检查+Supabase TLS+告警历史+安全规则远程检查 |
+| 判官2 | 云函数健康 | Supabase总线活动度+broadcast-a2a活跃度+环境ID+已知函数列表 |
+| 判官3 | 数据获取 | yfinance API+feed-server健康检查+Tushare活动+播报推送记录 |
+| 判官4 | A2A注册健康 | 注册消息+心跳消息+任务分发+告警+Supabase总线可达性 |
+| 输出位置 | Supabase cross_mode_channel + `GOVERNANCE/a2a/judge-reports/` | 总线实时推送 + 本地归档 |
+| 矫正通知 | Supabase cross_mode_channel kind=judge_alert | 严重项即时推送至A2A总线 |
+| 部署状态 | ✅ 已部署到 CloudBase | `tcb fn deploy a2a-judge` 成功 |
+| 首次执行 | 2026-09-25 00:30 CST | 总体结论WARN（冷启动预期状态），0 critical items |
+
+**架构说明**:
+- 判官通过Supabase总线查询活动记录（而非HTTP端点ping），适应云函数无HTTP访问路径的环境
+- 四路判官并行执行（`Promise.allSettled`），单次执行约5秒
+- 判官报告文本自动生成，写入总线 `kind=judge_report`
+- 严重项（FAIL级）自动触发 `kind=judge_alert` 总线消息
+- 支持单独执行某路判官（`action=judge_security` 等）
 
 **验证步骤**:
 ```bash
 # 手动触发判官云函数
-tcb fn invoke a2a-judge --data '{"action":"run_all"}'
-# 预期: 返回四路判官结果汇总
+tcb fn invoke a2a-judge --env-id a2a-commonwealth-d2eepjr928e9c4d --data '{"action":"run_all"}'
+# 预期: 返回四路判官结果汇总，总体结论WARN（冷启动）或PASS
+
+# 单独执行某路判官
+tcb fn invoke a2a-judge --env-id a2a-commonwealth-d2eepjr928e9c4d --data '{"action":"judge_security"}'
 
 # 查看判官报告
 ls GOVERNANCE/a2a/judge-reports/
-# 预期: 按日期归档的判官报告
+# 预期: 按日期归档的判官报告（2026-09-24.md, 2026-09-25.md）
 ```

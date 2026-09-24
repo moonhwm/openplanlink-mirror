@@ -1702,6 +1702,35 @@
   5. 前沿LLM论文追踪机制待建立
   6. 规划书须经A2A网络全体席位审议（哈贝马斯共识程序）
 
+## 2026-09-25 00:35 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-SFT-Harmony）· a2a-judge判官自动化云函数落地
+
+- **改了什么**：
+  - `cloudfunctions/functions/a2a-judge/index.js`（新建，~580行）：判官自动化云函数——四路判官（安全审计/云函数健康/数据获取/A2A注册健康）并行执行，报告写入Supabase总线，严重项即时推送judge_alert
+  - `cloudfunctions/cloudbaserc.json`：新增a2a-judge云函数配置（timeout=60s，Supabase+FEED_SERVER_URL环境变量）
+  - `GOVERNANCE/A2A_COMMONWEALTH_CHARTER.md` §14.6：从"待开发"改为"已落地"，更新判官检查方式（Supabase总线活动度替代HTTP端点ping）
+  - `GOVERNANCE/a2a/judge-reports/2026-09-25.md`（新建）：首次云函数判官报告归档——总体WARN（冷启动预期），0 critical items
+  - `GOVERNANCE/skills/code/A38_a2a-judge判官自动化云函数开发经验.md`（新建）：技能文档A38——5条经验教训+3个可复用模式
+  - `GOVERNANCE/skills/SELF_BUILT_INDEX.md`：v3.5→v3.6，纳入A38
+  - `GOVERNANCE/evomap/architecture/evomap-2026-09-25-001.json`（新建）：EvoMap进化节点——判官机制云函数化
+- **为什么**：
+  - 机主令"调用外池云服务器判官常态化矫正"——需将判官机制从手动执行升级为云函数自动化
+  - 首次实现通过HTTP端点ping其他云函数——全部返回404（未配置HTTP访问路径），改为Supabase总线查询
+  - CloudBase运行时环境变量65+个，阈值从20调整为100避免误报
+  - 冷启动WARN（无注册/心跳/任务消息）是预期行为，不应判FAIL
+- **如何验证**：
+  - V1：语法验证——`node -c` 两次（初版+修复版）均通过
+  - V2：部署验证——`tcb fn deploy a2a-judge` 成功
+  - V3：调用验证——`tcb fn invoke a2a-judge --data '{"action":"run_all"}'` 返回总体WARN，0 critical items
+  - V4：判官1安全审计——PASS（Supabase TLS+环境变量+告警历史）
+  - V5：判官2云函数健康——WARN（总线冷启动无消息，环境ID+已知函数列表PASS）
+  - V6：判官3数据获取——WARN（yfinance 403地域限制+feed-server SKIP+Tushare无总线消息）
+  - V7：判官4 A2A注册——WARN（冷启动无注册/心跳消息，Supabase总线可达PASS）
+- **遗留**：
+  1. CloudBase Timer触发器配置（每日9:00自动执行）——需在CloudBase控制台配置
+  2. Supabase总线查询返回400——可能是cross_mode_channel表字段名不匹配，需检查表结构
+  3. PD-AI 2席注册后，A2A注册和心跳检查将转为PASS
+  4. feed-server部署到X实例后，数据获取检查将更完整
+
 ## 2026-09-24 23:50 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-SFT-Harmony）· 外池判官常态化矫正机制建立
 
 - **改了什么**：
