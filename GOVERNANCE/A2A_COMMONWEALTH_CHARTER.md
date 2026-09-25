@@ -12462,3 +12462,304 @@ class A2AGameModel {
 | 智能体策略 | 收益 | 判官处置 |
 |-----------|------|---------|
 | 诚实报价 | 
+
+---
+
+## 第二百零一章：A2A网络与边缘计算深化
+
+### 201.1 边缘计算在A2A网络中的定位
+
+边缘计算将计算能力从云端下沉到设备边缘，在A2A网络中承担"近端智能"的角色：
+
+| 边缘层 | 位置 | 计算能力 | A2A角色 | 延迟 |
+|--------|------|---------|---------|------|
+| 设备边缘 | 用户手机 | 有限 | 端侧智能体 | <10ms |
+| 近边缘 | 本地网关/路由器 | 中等 | 区域协调者 | <50ms |
+| 远边缘 | 区域服务器 | 较强 | 边缘判官 | <100ms |
+| 云中心 | CloudBase | 强 | 中心判官+全局协调 | <500ms |
+
+### 201.2 边缘-云协同架构
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    云中心（CloudBase）                        │
+│  全局判官 │ 全局注册 │ 策略生成 │ 大数据分析 │ 模型训练      │
+└─────────────────────────────────────────────────────────────┘
+         │                    │                    │
+         ▼                    ▼                    ▼
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│ 远边缘-华东   │     │ 远边缘-华南   │     │ 远边缘-华北   │
+│ 边缘判官      │     │ 边缘判官      │     │ 边缘判官      │
+│ 区域注册      │     │ 区域注册      │     │ 区域注册      │
+│ 区域策略      │     │ 区域策略      │     │ 区域策略      │
+└──────────────┘     └──────────────┘     └──────────────┘
+         │                    │                    │
+         ▼                    ▼                    ▼
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│ 设备边缘      │     │ 设备边缘      │     │ 设备边缘      │
+│ 端侧智能体    │     │ 端侧智能体    │     │ 端侧智能体    │
+│ 本地推理      │     │ 本地推理      │     │ 本地推理      │
+│ UI渲染        │     │ UI渲染        │     │ UI渲染        │
+└──────────────┘     └──────────────┘     └──────────────┘
+```
+
+### 201.3 边缘计算任务分配策略
+
+```typescript
+// 边缘-云任务分配策略
+class EdgeCloudTaskAllocator {
+  // 根据任务特征决定在边缘还是云端执行
+  async allocate(task: A2ATask): Promise<AllocationDecision> {
+    const profile = this.profileTask(task);
+    
+    // 决策矩阵
+    if (profile.latencySensitive && profile.computeLight) {
+      return { location: 'DEVICE_EDGE', reason: '低延迟+轻计算→设备边缘' };
+    }
+    if (profile.latencySensitive && profile.computeMedium) {
+      return { location: 'NEAR_EDGE', reason: '低延迟+中计算→近边缘' };
+    }
+    if (!profile.latencySensitive && profile.computeHeavy) {
+      return { location: 'CLOUD_CENTER', reason: '非延迟敏感+重计算→云中心' };
+    }
+    if (profile.privacySensitive) {
+      return { location: 'DEVICE_EDGE', reason: '隐私敏感→设备边缘' };
+    }
+    if (profile.requiresGlobalData) {
+      return { location: 'CLOUD_CENTER', reason: '需要全局数据→云中心' };
+    }
+    return { location: 'FAR_EDGE', reason: '默认→远边缘' };
+  }
+}
+```
+
+### 201.4 边缘计算与适老化
+
+边缘计算对适老化设计的贡献：
+
+| 适老化需求 | 边缘计算贡献 | 实现方式 |
+|-----------|-------------|---------|
+| 低延迟响应 | 设备边缘本地处理 | 本地缓存+预计算 |
+| 离线可用 | 边缘本地数据 | 本地存储+降级模式 |
+| 语音交互 | 边缘语音识别 | 本地ASR模型 |
+| 个性化 | 边缘用户画像 | 本地画像+边缘更新 |
+| 隐私保护 | 数据不出设备 | 本地处理+匿名上传 |
+
+### 201.5 边缘判官
+
+边缘判官是云中心判官的"地方分院"——在边缘执行快速审判：
+
+| 边缘判官能力 | 审判范围 | 与云判官关系 | 延迟 |
+|-------------|---------|-------------|------|
+| 快速预审判 | 简单任务预审 | 云判官授权 | <50ms |
+| 实时监控 | 区域内智能体监控 | 定期同步 | <100ms |
+| 紧急熔断 | 严重违规紧急熔断 | 事后报备云判官 | <10ms |
+| 区域协调 | 区域内智能体协调 | 接受云判官指导 | <100ms |
+| 降级处理 | 云判官不可用时降级 | 临时接管 | - |
+
+---
+
+## 第二百零二章：A2A网络与微服务架构深化
+
+### 202.1 微服务架构在A2A网络中的映射
+
+A2A网络的每个智能体本质上就是一个微服务——独立部署、独立扩展、独立演进：
+
+| 微服务概念 | A2A网络映射 | 实现方式 | 差异 |
+|-----------|------------|---------|------|
+| 服务 | 智能体 | CloudBase云函数 | 智能体更自主 |
+| API网关 | A2A注册中心 | a2a-registry | 注册中心更动态 |
+| 服务发现 | 智能体发现 | 心跳+注册 | 实时发现 |
+| 负载均衡 | 任务分发 | a2a-task-dispatch | 智能分发 |
+| 熔断器 | 判官熔断 | a2a-judge | 审判式熔断 |
+| 配置中心 | 宪法+规则 | 配置云函数 | 治理化配置 |
+| 链路追踪 | A2A审计 | 审计日志 | 全链路审判 |
+| 服务网格 | A2A通信层 | 消息总线 | 信任化通信 |
+
+### 202.2 智能体微服务设计原则
+
+```typescript
+// 智能体微服务设计原则
+const AgentMicroservicePrinciples = {
+  // 1. 单一职责——每个智能体只做一件事
+  singleResponsibility: {
+    principle: '每个智能体只承担一个核心职责',
+    example: '取数智能体只负责数据采集，不负责分析',
+    benefit: '简化智能体设计，提高可维护性',
+  },
+  
+  // 2. 自主性——智能体自主决策
+  autonomy: {
+    principle: '智能体在能力范围内自主决策',
+    example: '策略智能体自主选择分析策略',
+    benefit: '减少中心控制，提高响应速度',
+    constraint: '判官监督确保合规',
+  },
+  
+  // 3. 松耦合——智能体间松耦合
+  looseCoupling: {
+    principle: '智能体通过A2A协议通信，不直接依赖',
+    example: '播报智能体不直接调用策略智能体，通过A2A消息',
+    benefit: '独立演进，不影响其他智能体',
+  },
+  
+  // 4. 高内聚——智能体内部高内聚
+  highCohesion: {
+    principle: '智能体内部功能紧密相关',
+    example: '播报智能体包含TTS生成+音频播放+播报控制',
+    benefit: '减少内部复杂度',
+  },
+  
+  // 5. 容错性——智能体故障不影响网络
+  faultTolerance: {
+    principle: '单个智能体故障不导致网络崩溃',
+    example: '取数智能体故障→降级到缓存数据',
+    benefit: '提高网络鲁棒性',
+    mechanism: '熔断+降级+重试',
+  },
+  
+  // 6. 可观测性——智能体行为可观测
+  observability: {
+    principle: '智能体的行为、状态、性能可观测',
+    example: '每个智能体暴露健康检查+指标+日志',
+    benefit: '快速定位问题',
+  },
+};
+```
+
+### 202.3 智能体间通信模式
+
+| 通信模式 | 描述 | 适用场景 | 实现方式 | 示例 |
+|---------|------|---------|---------|------|
+| 同步请求-响应 | 发送方等待响应 | 简单查询 | HTTP/RPC | 取数→策略 |
+| 异步消息 | 发送方不等待响应 | 事件通知 | 消息队列 | 异动→播报 |
+| 发布-订阅 | 一对多通知 | 广播通知 | 事件总线 | 系统公告 |
+| 流式传输 | 持续数据流 | 实时数据 | WebSocket | 行情推送 |
+| 批处理 | 批量任务 | 定时任务 | 任务队列 | 每日扫描 |
+
+### 202.4 微服务治理与A2A治理的融合
+
+| 治理维度 | 微服务治理 | A2A治理 | 融合方式 |
+|---------|-----------|---------|---------|
+| 服务注册 | 服务注册中心 | A2A注册中心 | 统一注册 |
+| 配置管理 | 配置中心 | 宪法+规则 | 分层配置 |
+| 流量控制 | 流量网关 | 任务分发 | 智能路由 |
+| 安全管控 | API安全 | 判官审判 | 审判式安全 |
+| 可观测性 | 链路追踪 | A2A审计 | 全链路审计 |
+| 容错处理 | 熔断+降级 | 判官熔断 | 审判式容错 |
+
+---
+
+## 第二百零三章：A2A网络与事件溯源深化
+
+### 203.1 事件溯源在A2A网络中的价值
+
+事件溯源（Event Sourcing）将所有状态变更记录为不可变的事件序列——这与A2A网络的审计需求和判官机制天然契合：
+
+| 事件溯源概念 | 定义 | A2A网络映射 | 实用价值 |
+|-------------|------|------------|---------|
+| 事件 | 已发生的事实 | 智能体执行的每个操作 | 完整审计 |
+| 事件序列 | 事件的有序集合 | 智能体的操作历史 | 行为回溯 |
+| 状态重建 | 从事件序列重建当前状态 | 从历史操作重建智能体状态 | 状态恢复 |
+| 快照 | 定期保存当前状态 | 智能体定期状态快照 | 快速恢复 |
+| 投影 | 从事件序列派生视图 | 从操作历史派生报表 | 数据分析 |
+| Saga | 跨服务的事务 | 跨智能体的协作事务 | 分布式事务 |
+
+### 203.2 A2A事件模型
+
+```typescript
+// A2A事件模型
+interface A2AEvent {
+  eventId: string;              // 事件唯一标识
+  eventType: string;            // 事件类型
+  timestamp: string;            // 事件时间
+  agentId: string;              // 产生事件的智能体
+  taskId?: string;              // 关联任务
+  eventData: {                  // 事件数据
+    action: string;             // 执行的动作
+    input: any;                 // 输入
+    output: any;                // 输出
+    result: string;             // 结果（SUCCESS/FAILURE）
+    judgeVerdict?: string;       // 判官裁决
+  };
+  metadata: {                   // 元数据
+    version: string;            // 事件版本
+    correlationId: string;      // 关联ID（同一任务的所有事件）
+    causationId?: string;       // 因果ID（触发此事件的前序事件）
+  };
+  signature: string;            // 数字签名（防篡改）
+}
+
+// 事件存储
+class A2AEventStore {
+  // 追加事件（不可修改）
+  async append(event: A2AEvent): Promise<void> {
+    await this.validateSignature(event);
+    await this.store(event);
+    await this.publishToProjections(event);
+  }
+  
+  // 查询事件
+  async query(filter: EventFilter): Promise<A2AEvent[]> {
+    return await this.retrieve(filter);
+  }
+  
+  // 重建状态
+  async rebuildState(agentId: string, upTo?: string): Promise<AgentState> {
+    const events = await this.query({
+      agentId,
+      upToTimestamp: upTo,
+    });
+    
+    let state = this.getSnapshot(agentId) || this.initialState();
+    for (const event of events) {
+      state = this.applyEvent(state, event);
+    }
+    return state;
+  }
+}
+```
+
+### 203.3 事件溯源与判官机制
+
+事件溯源为判官提供了完整的审判依据：
+
+| 判官需求 | 事件溯源支持 | 实现方式 |
+|---------|-------------|---------|
+| 行为回溯 | 完整事件序列 | 从事件序列回溯智能体行为 |
+| 责任定位 | 因果链追踪 | 通过causationId追踪因果链 |
+| 模式识别 | 事件模式分析 | 从事件序列中识别行为模式 |
+| 合规验证 | 事件合规检查 | 验证每个事件是否符合规则 |
+| 影响评估 | 影响范围分析 | 从事件序列分析影响范围 |
+| 回滚恢复 | 状态回滚 | 从事件序列回滚到任意时间点 |
+
+### 203.4 Saga模式：跨智能体事务
+
+```typescript
+// A2A Saga模式——跨智能体协作事务
+class A2ASaga {
+  private steps: SagaStep[] = [];
+  private compensations: Map<string, Compensation> = new Map();
+  
+  // 定义Saga步骤
+  defineSaga(task: A2ATask): void {
+    this.steps = [
+      { name: 'FETCH_DATA', agent: 'data-fetcher', 
+        compensation: 'CLEAR_CACHE' },
+      { name: 'ANALYZE', agent: 'strategy-analyzer',
+        compensation: 'DISCARD_RESULT' },
+      { name: 'GENERATE_CONTENT', agent: 'broadcast-generator',
+        compensation: 'DISCARD_CONTENT' },
+      { name: 'DELIVER', agent: 'delivery-agent',
+        compensation: 'RECALL_DELIVERY' },
+    ];
+  }
+  
+  // 执行Saga
+  async execute(): Promise<SagaResult> {
+    const completedSteps: string[] = [];
+    
+    for (const step of this.steps) {
+      try {
+        await this.executeStep(step);
+        completedSteps.push(st
