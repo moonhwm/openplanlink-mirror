@@ -13381,3 +13381,319 @@ class A2ASecureMultiParty {
       remaining -= share;
     }
    
+
+---
+
+## 第二百一十六章：A2A网络与同态加密
+
+### 216.1 同态加密在A2A网络中的价值
+
+同态加密（Homomorphic Encryption）允许在加密数据上直接进行计算，无需解密——这在A2A网络中意味着智能体可以在不看到原始数据的情况下处理数据：
+
+| 同态加密类型 | 支持运算 | 计算效率 | A2A应用场景 | 成熟度 |
+|-------------|---------|---------|------------|--------|
+| 部分同态（PHE） | 单一运算（加法或乘法） | 高 | 加密数据求和 | 成熟 |
+| 半同态（SHE） | 有限次加法+乘法 | 中 | 加密数据分析 | 中等 |
+| 全同态（FHE） | 任意运算 | 低 | 加密数据复杂计算 | 发展中 |
+
+### 216.2 A2A同态加密实装
+
+```typescript
+// A2A同态加密实装（基于CKKS方案）
+class A2AHomomorphicEncryption {
+  // 密钥生成
+  generateKeys(): KeyPair {
+    const secretKey = this.generateSecretKey();
+    const publicKey = this.generatePublicKey(secretKey);
+    const evaluationKey = this.generateEvaluationKey(secretKey);
+    return { secretKey, publicKey, evaluationKey };
+  }
+  
+  // 加密
+  encrypt(plaintext: number, publicKey: PublicKey): Ciphertext {
+    return this.ckksEncrypt(plaintext, publicKey);
+  }
+  
+  // 同态加法
+  homomorphicAdd(
+    ciphertext1: Ciphertext,
+    ciphertext2: Ciphertext,
+    evaluationKey: EvaluationKey
+  ): Ciphertext {
+    return this.ckksAdd(ciphertext1, ciphertext2, evaluationKey);
+  }
+  
+  // 同态乘法
+  homomorphicMultiply(
+    ciphertext1: Ciphertext,
+    ciphertext2: Ciphertext,
+    evaluationKey: EvaluationKey
+  ): Ciphertext {
+    return this.ckksMultiply(ciphertext1, ciphertext2, evaluationKey);
+  }
+  
+  // 解密
+  decrypt(ciphertext: Ciphertext, secretKey: SecretKey): number {
+    return this.ckksDecrypt(ciphertext, secretKey);
+  }
+  
+  // A2A应用：加密数据上的统计分析
+  async encryptedStatistics(
+    encryptedData: Ciphertext[],
+    operation: 'SUM' | 'AVG' | 'MAX',
+    keys: KeyPair
+  ): Promise<number> {
+    let result: Ciphertext;
+    
+    switch (operation) {
+      case 'SUM':
+        result = encryptedData.reduce((acc, ct) => 
+          this.homomorphicAdd(acc, ct, keys.evaluationKey)
+        );
+        break;
+      case 'AVG':
+        const sum = encryptedData.reduce((acc, ct) => 
+          this.homomorphicAdd(acc, ct, keys.evaluationKey)
+        );
+        // 同态除法（通过乘以倒数实现）
+        const inverseN = this.encrypt(1 / encryptedData.length, keys.publicKey);
+        result = this.homomorphicMultiply(sum, inverseN, keys.evaluationKey);
+        break;
+      case 'MAX':
+        // 同态比较需要更复杂的电路
+        result = await this.encryptedMax(encryptedData, keys);
+        break;
+    }
+    
+    return this.decrypt(result, keys.secretKey);
+  }
+}
+```
+
+### 216.3 同态加密在A2A网络中的应用
+
+| 应用场景 | 同态运算 | 参与方 | 隐私保证 | 性能考量 |
+|---------|---------|--------|---------|---------|
+| 加密预算汇总 | 同态加法 | 所有智能体 | 各智能体预算不泄露 | PHE足够 |
+| 加密偏好匹配 | 同态比较 | 端侧+取数 | 用户偏好不泄露 | 需要FHE |
+| 加密信誉计算 | 同态加法+乘法 | 所有智能体+判官 | 信誉评分不泄露 | SHE足够 |
+| 加密策略评估 | 同态乘法+比较 | 策略+判官 | 策略细节不泄露 | 需要FHE |
+
+### 216.4 同态加密的性能优化
+
+| 优化策略 | 描述 | 效果 | 复杂度 |
+|---------|------|------|--------|
+| 批处理（SIMD） | 多个值打包到一个密文 | 10-100x加速 | 中 |
+| 密文压缩 | 压缩密文大小 | 减少通信 | 低 |
+| 自举优化 | 优化自举操作 | 减少噪声积累 | 高 |
+| 混合方案 | PHE+SHE+FHE混合 | 按需选择 | 中 |
+| 硬件加速 | GPU/FPGA加速 | 10-1000x加速 | 高 |
+
+---
+
+## 第二百一十七章：A2A网络与可信执行环境
+
+### 217.1 可信执行环境（TEE）在A2A网络中的角色
+
+TEE提供硬件级别的隔离执行环境——在A2A网络中，TEE用于保护最敏感的计算：
+
+| TEE技术 | 描述 | A2A网络应用 | 硬件要求 |
+|--------|------|------------|---------|
+| Intel SGX | Intel处理器的安全飞地 | 云端敏感计算 | Intel CPU |
+| ARM TrustZone | ARM处理器的安全区域 | 端侧敏感计算 | ARM CPU |
+| AMD SEV | AMD处理器的加密虚拟机 | 云端隔离 | AMD CPU |
+| RISC-V Keystone | RISC-V的安全飞地 | 开源安全计算 | RISC-V CPU |
+
+### 217.2 A2A TEE架构
+
+```typescript
+// A2A可信执行环境架构
+class A2ATEEArchitecture {
+  // TEE远程认证——验证TEE的可信状态
+  async remoteAttestation(
+    teeInstance: TEEInstance
+  ): Promise<AttestationResult> {
+    // 1. TEE生成认证报告
+    const report = await teeInstance.generateAttestation();
+    
+    // 2. 验证认证报告
+    const verified = await this.verifyAttestation(report);
+    
+    // 3. 建立安全通道
+    if (verified) {
+      const secureChannel = await this.establishSecureChannel(teeInstance);
+      return { verified: true, secureChannel };
+    }
+    
+    return { verified: false };
+  }
+  
+  // 在TEE中执行敏感计算
+  async executeInTEE(
+    computation: SecureComputation,
+    data: EncryptedData
+  ): Promise<ComputationResult> {
+    // 1. 认证TEE
+    const attestation = await this.remoteAttestation(this.teeInstance);
+    if (!attestation.verified) {
+      throw new Error('TEE认证失败');
+    }
+    
+    // 2. 将加密数据传入TEE
+    await this.teeInstance.loadEncryptedData(data);
+    
+    // 3. 在TEE内解密并计算
+    const result = await this.teeInstance.execute(computation);
+    
+    // 4. 结果加密后传出TEE
+    const encryptedResult = await this.teeInstance.encryptResult(result);
+    
+    return { result: encryptedResult };
+  }
+}
+```
+
+### 217.3 TEE在A2A网络中的应用
+
+| 应用场景 | TEE用途 | 数据保护 | 性能影响 |
+|---------|---------|---------|---------|
+| 判官核心计算 | 判官决策在TEE中执行 | 决策逻辑不泄露 | 中等 |
+| 密钥管理 | 密钥在TEE中生成和存储 | 密钥不出TEE | 低 |
+| 用户画像处理 | 画像在TEE中计算 | 画像数据不泄露 | 中等 |
+| 策略参数保护 | 策略参数在TEE中存储 | 策略不泄露 | 低 |
+| 数据解密 | 数据在TEE中解密处理 | 解密数据不暴露 | 中等 |
+
+---
+
+## 第二百一十八章：A2A网络与安全多方计算实装
+
+### 218.1 A2A MPC完整实装流程
+
+```typescript
+// A2A安全多方计算完整实装
+class A2AMPCImplementation {
+  // 阶段1：协议协商
+  async negotiateProtocol(
+    participants: string[],
+    computation: ComputationType
+  ): Promise<MPCProtocol> {
+    // 根据计算类型和参与方数量选择最优协议
+    if (participants.length === 2) {
+      return 'YAO_GC'; // 两方用Yao混淆电路
+    } else if (computation === 'ARITHMETIC') {
+      return 'BGW'; // 算术运算用BGW
+    } else if (computation === 'BOOLEAN') {
+      return 'GMW'; // 布尔运算用GMW
+    } else {
+      return 'SPDZ'; // 高安全要求用SPDZ
+    }
+  }
+  
+  // 阶段2：输入共享
+  async shareInputs(
+    participants: string[],
+    privateInputs: Map<string, number>,
+    protocol: MPCProtocol
+  ): Promise<Map<string, Share[]>> {
+    const allShares = new Map<string, Share[]>();
+    
+    for (const [participant, value] of privateInputs) {
+      const shares = this.createShares(value, participants.length, protocol);
+      allShares.set(participant, shares);
+    }
+    
+    // 分发份额
+    const distributedShares = new Map<string, Share[]>();
+    for (let i = 0; i < participants.length; i++) {
+      const receivedShares: Share[] = [];
+      for (const [sender, shares] of allShares) {
+        receivedShares.push(shares[i]);
+      }
+      distributedShares.set(participants[i], receivedShares);
+    }
+    
+    return distributedShares;
+  }
+  
+  // 阶段3：安全计算
+  async secureCompute(
+    distributedShares: Map<string, Share[]>,
+    circuit: Circuit,
+    protocol: MPCProtocol
+  ): Promise<Map<string, Share>> {
+    // 根据协议执行安全计算
+    switch (protocol) {
+      case 'BGW':
+        return await this.bgwCompute(distributedShares, circuit);
+      case 'GMW':
+        return await this.gmwCompute(distributedShares, circuit);
+      case 'SPDZ':
+        return await this.spdzCompute(distributedShares, circuit);
+      case 'YAO_GC':
+        return await this.yaoCompute(distributedShares, circuit);
+    }
+  }
+  
+  // 阶段4：结果重构
+  async reconstructResult(
+    outputShares: Map<string, Share>,
+    participants: string[]
+  ): Promise<number> {
+    // 收集足够的份额来重构结果
+    const shares: Share[] = [];
+    for (const p of participants) {
+      shares.push(outputShares.get(p)!);
+    }
+    
+    return this.reconstruct(shares);
+  }
+}
+```
+
+### 218.2 A2A MPC典型应用
+
+**应用1：安全预算汇总**
+
+```typescript
+// 安全预算汇总——各智能体预算不泄露
+async function secureBudgetAggregation(
+  agents: string[],
+  budgets: Map<string, number>
+): Promise<number> {
+  const mpc = new A2AMPCImplementation();
+  
+  // 1. 协商协议
+  const protocol = await mpc.negotiateProtocol(agents, 'ARITHMETIC');
+  
+  // 2. 各智能体将预算秘密共享
+  const shares = await mpc.shareInputs(agents, budgets, protocol);
+  
+  // 3. 安全计算总和
+  const sumCircuit = new AdditionCircuit(agents.length);
+  const outputShares = await mpc.secureCompute(shares, sumCircuit, protocol);
+  
+  // 4. 重构结果
+  const totalBudget = await mpc.reconstructResult(outputShares, agents);
+  
+  return totalBudget;
+}
+```
+
+**应用2：安全信誉排名**
+
+```typescript
+// 安全信誉排名——各智能体评分不泄露
+async function secureReputationRanking(
+  agents: string[],
+  scores: Map<string, number>
+): Promise<string[]> {
+  const mpc = new A2AMPCImplementation();
+  
+  // 1. 协商协议
+  const protocol = await mpc.negotiateProtocol(agents, 'BOOLEAN');
+  
+  // 2. 各智能体将评分秘密共享
+  const shares = await mpc.shareInputs(agents, scores, protocol);
+  
+  // 3. 安全计算排序
+  
