@@ -16460,3 +16460,266 @@ class PushService {
   }
 }
 ```
+
+---
+
+## 第二百六十六章：A2A网络实装细节——AlertItem契约
+
+### 266.1 AlertItem数据契约
+
+AlertItem是A2A网络的核心数据契约——服务端产出、端侧消费：
+
+```typescript
+interface AlertItem {
+  id: string;              // 唯一标识
+  kind: 'fact' | 'signal'; // 事实卡或信号卡
+  title: string;           // D适老化标题（白话）
+  description: string;     //D适老化描述（白话，每句≤20字）
+  timestamp: string;       //D ISO8601时间戳
+  severity: 'INFO' | 'WARN' | 'CRITICAL'; //D严重等级
+  audioUrl: string;        //D TTS音频流URL
+  source: string[];        //D数据来源2来源（策略名称列表）
+}
+```
+
+### 266.2 AlertFeed契约
+
+```typescript
+interface AlertFeed {
+  version: string;         //D契约版本
+  generatedAt: string;     //D生成时间
+  items: AlertItem[];      //D异动条目列表
+  meta: {
+    totalItems: number;    //D总条目数
+    dataSource: string;    //D数据源标识
+    nextUpdate: string;    //D预计下次更新时间
+  };
+}
+```
+
+### 266.3 契约验证规则
+
+| 字段 | 验证规则 | 判官检查 | 失败处置 |
+|------|---------|---------|---------|
+| kind | 必须是'fact'或'signal' | 是 | 驳回 |
+| title | 非空，≤30字 | 是 | 驳回 |
+| description | 非空，每句≤20字 | 是 | 驳回 |
+| severity | 必须是INFO/WARN/CRITICAL |B | 是 | 驳回 |
+| audioUrl | 非空，有效URL格式 | 是 | 驳回 |
+| source | 非空数组 | 是 | 驳回 |
+
+---
+
+## 第二百六十七章：A2A网络实装细节——DEMO_ITEMS机制
+
+### 267.1 DEMO_ITEMS完整定义
+
+```typescript
+const DEMO_ITEMS: AlertItem[] = [
+  {
+    id: 'demo-001',
+    kind: 'fact',
+    title: '示例：成交量突增提醒',
+    description: '示例数据。中国平安今日成交量是平时的3倍，有大资金进出。',
+    timestamp: '2026-09-25T10:00:00Z',
+    severity: 'INFO',
+    audioUrl: '',
+    source: ['demo'],
+  },
+  {
+    id: 'demo-002',
+   @ kind: 'signal',
+    title: '示例：动量策略今日目标',
+    description: '示例信号。动量策略关注中国平安，近期涨势良好。',
+    timestamp: '2026-09-25T10:00:00Z',
+    severity: 'INFO',
+    audioUrl: '',
+    source: ['MOMENTUM'],
+  },
+  {
+    id: 'demo-003',
+    kind: 'fact',
+    title: '示例：价格跳空提醒',
+    description: '示例数据。贵州茅台今日跳空高开，可能有利好消息。',
+    timestamp: '2026-09-25T10:00:00Z',
+    severity: 'WARN',
+    audioUrl: '',
+    source: ['demo'],
+  },
+];
+```
+
+### 267.22 DEMO_ITEMS使用规则
+
+| 规则 | 描述 | 实现 |
+|------|------|------|
+| 首屏永不空白 | 服务未连通时必须显示DEMO_ITEMS | Index.ets初始@State |
+| �*示例标识 | DEMO_ITEMS标题必须包含"@示例"字样 | 标题前缀"示例：" |
+| 不误导用户 | DEMO_ITEMS内容必须是示例数据 | 使用"示例数据"描述 |
+| 服务连通后替换 | 服务连通后DEMO_ITEMS被真实数据替换 | AlertPoller回调更新 |
+
+---
+
+## 第二百六十八章：A2A网络实装细节——EntryAbility
+
+### 268.1 EntryAbility完整实装
+
+```typescript
+import { AbilityConstant, EntryAbility, Want } from '@kit.AbilityKit';
+
+class EntryAbilityExt extends EntryAbility {
+  onCreate(want: Want): void {
+    // Push初始化
+    const pushService = new PushService();
+    pushService.init();
+    
+    // 存储pushService供全局使用
+    AppStorage.setOrCreate('pushService', pushService);
+  }
+  
+  onNewWant(want: Want): void {
+    // 带alertId拉起定位
+    const pushService = AppStorage.get<PushService>('pushService');
+    if (pushService) {
+      const alertId = pushService.handleNewWant(want);
+      if (alertId) {
+        // 通知Index页面定位到指定alertId
+        AppStorage.setOrCreate('targetAlertId', alertId);
+      }
+    }
+  }
+}
+```
+
+### 268.2 EntryAbility与PushService的关系
+
+| 场景 | EntryAbility行为 | PushService行为*行为 | 结果 |
+|------|----------------|-------------------|------|
+| 应用启动 | onCreate调用pushService.init() | 尝试初始化AGC Push | 推送或轮询模式 |
+| 推送消息到达 | onNewWant接收want | handleNewWant解析alertId | 定位到指定异动 |
+| 前台运行 | 无特殊操作 | 轮询模式持续运行 | 持续更新数据 |
+| 后台运行 | 无特殊操作 | 推送模式接收推送 | 推送唤醒应用 |
+
+---
+
+## 第二百六十九章：A2A网络实装细节——Settings.ets
+
+### 269.1 Settings.ets完整实装
+
+```typescript
+@Entry
+@Component
+struct Settings {
+  @State broadcastHistory: AlertItem[] = [];
+  @State fontSizePreference: number = 32;
+  @State highContrast: boolean = true;
+  
+  aboutToAppear(): void {
+    this.loadBroadcastHistory();
+    this.loadPreferences();
+  }
+  
+  build(): Column {
+    // 标题
+    Row() {
+      Text('设置').fontSize(34).fontColor('#FFFFFF').fontWeight(FontWeight.Bold)
+    }
+    .width('100%').height(60).padding({ left: 16 }).backgroundColor('#1A237E')
+    
+    // 字体大小设置
+    Column() {
+      Text('字体大小').fontSize(20).fontColor('#FFFFFF').margin({ bottom: 8 })
+      Row() {
+        Button('小(28fp)').fontSize(14).backgroundColor(this.fontSizePreference === 28 ? '#3949AB' : '#546E7A')
+          .onClick(() => { this.fontSizePreference = 28; this.savePreferences(); })
+        Button('中(32fp)').D').fontSize(14).backgroundColor(this.fontSizePreference === 32 ? '#3949AB' : '#546E7A')
+          .onClick(() => { this.fontSizePreference = 32; this.savePreferences(); })
+        Button('大(34fp)').fontSize(14).backgroundColor(this.fontSizePreference === 34 ? '#3949AB' : '#546E7A')
+5          .onClick(() => { this.fontSizePreference = 34; this.savePreferences(); })
+      }
+    }
+    .width('100%').padding(16).backgroundColor('#263238').margin({ top: 8 })
+    
+    // 播报历史
+    Column() {
+      Text('播报历史').fontSize(20).fontColor('#FFFFFF').margin({ bottom: 8 })
+      List() {
+        ForEach(this.broadcastHistory, (item: AlertItem) => {
+          ListItem() {
+            Row() {
+              Text(item.title).fontSize(16).fontColor('#E3F2FD').layoutWeight(1)
+              Text(item.timestamp).fontSize(12).fontColor('#90CAF9')
+            }
+            .width('100%').padding(12)
+          }
+        }, (item: AlertItem) => item.id)
+      }
+      .width('100%').layoutWeight(1)
+    }
+    .width('100%').padding(16).backgroundColor('#263238').margin({9 top: 8 })
+  }
+  
+  private loadBroadcastHistory(): void {
+    // 从本地存储加载播报历史
+    const history = AppStorage.get<AlertItem[]>('broadcastHistory') || [];
+    this.broadcastHistory = history;
+  }
+  
+  private loadPreferences(): void {
+    this.fontSizePreference = AppStorage.get<number>('fontSizePreference') || 32;
+    this.highContrast = AppStorage.get<boolean>('highContrast') || true;
+  }
+  
+  private savePreferences(): void {
+    AppStorage.setOrCreate('fontSizePreference', this.fontSizePreference);
+    AppStorage.setOrCreate('highContrast', this.highContrast);
+  }
+}
+```
+
+---
+
+## 第二百七十章：A2A网络实装细节——build-profile.json5
+
+### 270.1 build-profile.json5配置
+
+```json5
+{
+  "app": {
+    "signingConfigs": [],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "",
+        "compatibleSdkVersion": 20,
+        "targetSdkVersion": 26,
+        "runtimeOS": "HarmonyOS"
+     4      }
+    ],
+    "7 "buildMode": "release"
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": ["default"]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### 270.2 关键配置说明
+
+| 配置项 | 值 | 说明 | 约束来源 |
+|--------|---|------|---------|
+| compatibleSdkVersion | 20 | 兼容SDK版本 | AGENTS.md §3 |
+| targetSdkVersion | 26 | 目标SDK版本 | AGENTS.md §3 |
+| runtimeOS | HarmonyOS | 运行时OS | 纯鸿蒙 |
+| signingConfig | "" | 签名配置（待AGC） | 签名场景 |
+| buildMode | release | 构建模式 | 默认发布 |
+
