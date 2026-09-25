@@ -13697,3 +13697,325 @@ async function secureReputationRanking(
   
   // 3. 安全计算排序
   
+
+---
+
+## 第二百二十一章：A2A网络与零知识证明深化
+
+### 221.1 零知识证明在A2A网络中的角色
+
+零知识证明（ZKP）允许一方（证明者）向另一方（验证者）证明某个陈述为真，而不泄露任何额外信息——在A2A网络中，ZKP用于身份验证、权限证明和数据完整性验证：
+
+| ZKP属性 | 描述 | A2A网络应用 | 实现方式 |
+|--------|------|------------|---------|
+| 完整性 | 真陈述总能被证明 | 合法智能体能通过验证 | zk-SNARK |
+| 可靠性 | 假陈述不能被证明 | 非法智能体无法伪造 | zk-SNARK |
+| 零知识 | 验证者不获得额外信息 | 不泄露智能体隐私 | zk-SNARK |
+| 简洁性 | 证明很小且验证很快 | 适合A2A高频验证 | zk-STARK |
+| 透明性 | 不需要可信设置 | 去中心化验证 | zk-STARK |
+
+### 221.2 A2A零知识证明实装
+
+```typescript
+// A2A零知识证明实装
+class A2AZeroKnowledgeProof {
+  // zk-SNARK证明生成
+  async generateProof(
+    statement: ZKStatement,
+    witness: ZKWitness
+  ): Promise<ZKProof> {
+    // 1. 编译电路
+    const circuit = this.compileCircuit(statement);
+    
+    // 2. 生成证明密钥和验证密钥
+    const { provingKey, verificationKey } = await this.setup(circuit);
+    
+    // 3. 生成证明
+    const proof = await this.prove(circuit, witness, provingKey);
+    
+    return { proof, verificationKey };
+  }
+  
+  // zk-SNARK证明验证
+  async verifyProof(
+    proof: ZKProof,
+    verificationKey: VerificationKey,
+    publicInputs: any[]
+  ): Promise<boolean> {
+    return await this.snarkVerify(proof, verificationKey, publicInputs);
+  }
+  
+  // A2A应用：智能体身份零知识验证
+  async proveAgentIdentity(
+    agentId: string,
+    privateKey: string,
+    publicKey: string
+  ): Promise<ZKProof> {
+    // 证明"我知道与publicKey对应的privateKey"，但不泄露privateKey
+    const statement: ZKStatement = {
+      type: 'KNOWS_PRIVATE_KEY',
+      publicInputs: { publicKey },
+    };
+    const witness: ZKWitness = { privateKey };
+    
+    return await this.generateProof(statement, witness);
+  }
+  
+  // A2A应用：预算充足零知识证明
+  async proveBudgetSufficient(
+    actualBudget: number,
+    requiredBudget: number
+  ): Promise<ZKProof> {
+    // 证明"我的预算 >= requiredBudget"，但不泄露actualBudget的具体值
+    const statement: ZKStatement = {
+      type: 'BUDGET_SUFFICIENT',
+      publicInputs: { requiredBudget },
+    };
+    const witness: ZKWitness = { actualBudget };
+    
+    return await this.generateProof(statement, witness);
+  }
+  
+  // A2A应用：数据完整性零知识证明
+  async proveDataIntegrity(
+    data: any,
+    commitment: string
+  ): Promise<ZKProof> {
+    // 证明"我知道与commitment对应的数据"，但不泄露数据内容
+    const statement: ZKStatement = {
+      type: 'KNOWS_DATA_FOR_COMMITMENT',
+      publicInputs: { commitment },
+    };
+    const witness: ZKWitness = { data };
+    
+    return await this.generateProof(statement, witness);
+  }
+}
+```
+
+### 221.3 零知识证明与判官
+
+| ZKP应用 | 判官角色 | 判官操作 |
+|---------|---------|---------|
+| 身份验证 | 验证者 | 验证智能体身份ZKP |
+| 预算证明 | 验证者 | 验证预算充足ZKP |
+| 数据完整性 | 验证者 | 验证数据完整性ZKP |
+| 权限证明 | 验证者 | 验证权限ZKP |
+| 计算正确性 | 验证者 | 验证计算ZKP |
+
+---
+
+## 第二百二十二章：A2A网络与共识协议深化
+
+### 222.1 共识协议在A2A网络中的角色
+
+A2A网络中的共识协议确保多个智能体对网络状态达成一致——这对于分布式决策、数据一致性和治理投票至关重要：
+
+| 共识协议 | 描述 | A2A网络应用 | 性能 | 安全性 |
+|---------|------|------------|------|--------|
+| PBFT | 实用拜占庭容错 | 治理投票、身份注册 | 中 | 高（容忍1/3恶意） |
+| PoA | 权威证明 | 判官裁决记录 | 高 | 中（依赖权威节点） |
+| Raft | 强领导者共识 | 配置变更、日志复制 | 高 | 中（不容忍拜占庭） |
+| PoS | 权益证明 | 预算分配共识 | 中 | 高 |
+| HotStuff | 流水线BFT | 高频交易共识 | 高 | 高 |
+
+### 222.2 A2A共识协议选择
+
+| 应用场景 | 共识需求 | 推荐协议 | 理由 |
+|---------|---------|---------|------|
+| 治理投票 | 强一致性+拜占庭容错 | PBFT | 投票需要最终确定性 |
+| 判官裁决 | 高吞吐+权威信任 | PoA | 判官是可信权威 |
+| 配置变更 | 强一致性+简单 | Raft | 配置变更不频繁 |
+| 预算分配 | 公平+拜占庭容错 | PoS | 按贡献加权投票 |
+| 任务状态 | 高频+最终一致 | HotStuff | 任务状态频繁更新 |
+
+### 222.3 A2A PBFT实装
+
+```typescript
+// A2A PBFT共识实装
+class A2APBFT {
+  private nodes: string[];        // 参与共识的节点
+  private primary: string;        // 主节点
+  private view: number = 0;       // 视图编号
+  private sequence: number = 0;   // 序列号
+  private state: 'PRE_PREPARE' | 'PREPARE' | 'COMMIT' | 'DONE';
+  
+  // PBFT三阶段共识
+  async consensus(request: ConsensusRequest): Promise<ConsensusResult> {
+    // 阶段1：Pre-Prepare（主节点提议）
+    if (this.isPrimary()) {
+      const prePrepare = this.createPrePrepare(request);
+      await this.broadcast(prePrepare);
+    }
+    
+    // 阶段2：Prepare（副本节点确认）
+    const prepareMessages = await this.collectMessages(
+      'PREPARE', this.quorumSize()
+    );
+    
+    // 阶段3：Commit（最终确认）
+    const commitMessages = await this.collectMessages(
+      'COMMIT', this.quorumSize()
+    );
+    
+    // 执行请求
+    const result = await this.execute(request);
+    
+    return { result, view: this.view, sequence: this.sequence };
+  }
+  
+  // 视图变更（主节点故障时）
+  async viewChange(): Promise<void> {
+    this.view++;
+    this.primary = this.nodes[this.view % this.nodes.length];
+    await this.broadcastViewChange();
+  }
+  
+  // quorum大小（2f+1，f为可容忍的故障节点数）
+  private quorumSize(): number {
+    const f = Math.floor((this.nodes.length - 1) / 3);
+    return 2 * f + 1;
+  }
+}
+```
+
+---
+
+## 第二百二十三章：A2A网络与数字身份DID深化
+
+### 223.1 DID在A2A网络中的架构
+
+去中心化身份标识（DID）为A2A网络中的每个智能体提供自主可控的身份：
+
+| DID组件 | 描述 | A2A网络实现 | 存储 |
+|--------|------|------------|------|
+| DID标识符 | 唯一身份标识 | did:a2a:agentId | 链上 |
+| DID文档 | 身份详细信息 | 公钥+能力+端点 | 链上 |
+| 可验证凭证 | 第三方颁发的证明 | 判官颁发的合规凭证 | 链下+链上哈希 |
+| DID解析 | 从标识符到文档 | DID解析器 | 链上查询 |
+| DID注销 | 身份撤销 | 判官+机主多签 | 链上 |
+
+### 223.2 A2A DID实装
+
+```typescript
+// A2A DID实装
+class A2ADID {
+  // 创建智能体DID
+  async createDID(agentInfo: AgentInfo): Promise<DIDDocument> {
+    // 1. 生成密钥对
+    const keyPair = await this.generateKeyPair();
+    
+    // 2. 创建DID标识符
+    const did = `did:a2a:${this.generateIdentifier()}`;
+    
+    // 3. 创建DID文档
+    const didDocument: DIDDocument = {
+      '@context': 'https://www.w3.org/ns/did/v1',
+      id: did,
+      verificationMethod: [{
+        id: `${did}#keys-1`,
+        type: 'Ed25519VerificationKey2020',
+        controller: did,
+        publicKeyMultibase: keyPair.publicKey,
+      }],
+      service: [{
+        id: `${did}#a2a-endpoint`,
+        type: 'A2AEndpoint',
+        serviceEndpoint: agentInfo.endpoint,
+      }],
+      capability: agentInfo.capabilities,
+      created: new Date().toISOString(),
+      updated: new Date().toISOString(),
+    };
+    
+    // 4. 注册到链上
+    await this.registerOnChain(didDocument);
+    
+    // 5. 判官验证
+    await this.judgeVerifyDID(didDocument);
+    
+    return didDocument;
+  }
+  
+  // 可验证凭证
+  async issueCredential(
+    issuerDID: string,
+    subjectDID: string,
+    credentialType: string,
+    claims: Record<string, any>
+  ): Promise<VerifiableCredential> {
+    const credential: VerifiableCredential = {
+      '@context': ['https://www.w3.org/2018/credentials/v1'],
+      type: ['VerifiableCredential', credentialType],
+      issuer: issuerDID,
+      issuanceDate: new Date().toISOString(),
+      credentialSubject: {
+        id: subjectDID,
+        ...claims,
+      },
+      proof: await this.createProof(issuerDID, claims),
+    };
+    
+    return credential;
+  }
+  
+  // 验证凭证
+  async verifyCredential(credential: VerifiableCredential): Promise<boolean> {
+    // 1. 验证发行者DID
+    const issuerDoc = await this.resolveDID(credential.issuer);
+    
+    // 2. 验证证明
+    const verified = await this.verifyProof(
+      credential.proof,
+      issuerDoc.verificationMethod[0].publicKeyMultibase,
+      credential.credentialSubject
+    );
+    
+    // 3. 判官验证凭证内容
+    const judgeVerified = await this.judgeVerifyCredential(credential);
+    
+    return verified && judgeVerified;
+  }
+}
+```
+
+### 223.3 A2A DID与判官
+
+判官是A2A网络中最重要的凭证发行者：
+
+| 凭证类型 | 发行者 | 接收者 | 内容 | 用途 |
+|---------|--------|--------|------|------|
+| 合规凭证 | 宪法审判官 | 智能体 | 合规声明 | 证明合规 |
+| 信任凭证 | 周期审判官 | 智能体 | 信任评分 | 证明可信 |
+| 能力凭证 | 注册中心 | 智能体 | 能力声明 | 证明能力 |
+| 预算凭证 | 预算管控 | 智能体 | 预算额度 | 证明预算 |
+| 身份凭证 | 机主 | 智能体 | 身份确认 | 证明身份 |
+
+---
+
+## 第二百二十四章：A2A网络与智能合约深化
+
+### 224.1 智能合约在A2A网络中的完整设计
+
+A2A网络的智能合约覆盖五大领域：
+
+| 合约领域 | 合约名称 | 功能 | 触发条件 | 执行频率 |
+|---------|---------|------|---------|---------|
+| 身份管理 | IdentityContract | 注册/注销/更新身份 | 智能体上线/下线 | 低 |
+| 任务契约 | TaskContract | 创建/完成/违约任务 | 任务分发/完成 | 高 |
+| 判官裁决 | JudgeContract | 记录/执行裁决 | 判官审判 | 高 |
+| 预算管控 | BudgetContract | 分配/消耗/补充预算 | 预算操作 | 中 |
+| 治理投票 | GovernanceContract | 提案/投票/执行 | 宪法修正 | 极低 |
+
+### 224.2 判官裁决合约
+
+```typescript
+// A2A判官裁决合约
+contract JudgeVerdictContract {
+  struct VerdictRecord {
+    string verdictId;
+    string judgeAgentId;
+    string targetAgentId;
+    string taskContext;
+    string verdict;          // APPROVE / CONDITIONAL / REJECT / CIRCUIT_BREAK
+    string rea
