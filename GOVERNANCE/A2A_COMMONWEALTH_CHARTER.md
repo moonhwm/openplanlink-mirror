@@ -15846,3 +15846,322 @@ A2A共建公约治理自治规划书是一部活文档——它会随着A2A网�
 > "我们在秩序中创造，在创造中守序。这不是约束，而是自由。"
 > ——A2A共建公约核心精神
 
+
+---
+
+## 第二百五十六章：A2A网络实装细节——取数智能体
+
+### 256.1 取数智能体完整实装
+
+取数智能体是A2A网络的数据入口，负责从多个数据源采集异动数据：
+
+```typescript
+// 取数智能体完整实装
+class DataFetcherAgent {
+  agentId: string = 'data-fetcher';
+  capabilities: string[] = ['FETCH_MARKET_DATA', 'FETCH_NEWS', 'FETCH_ANNOUNCEMENTS'];
+  
+  // 数据源配置
+  dataSources: DataSourceConfig[] = [
+    {
+      name: 'market_api',
+      url: process.env.MARKET_API_URL,
+      method: 'GET',
+      interval: 5000, // 5秒轮询
+      format: 'JSON',
+      fallback: 'CACHE',
+      retryCount: 3,
+      timeout: 3000,
+    },
+    {
+      name: 'news_rss',
+      url: process.env.NEWS_RSS_URL,
+      method: 'GET',
+      interval: 60000, // 1分钟轮询
+      format: 'XML',
+      fallback: 'SKIP',
+      retryCount: 2,
+      timeout: 5000,
+    },
+    {
+      name: 'announcement_api',
+      url: process.env.ANNOUNCEMENT_API_URL,
+      method: 'GET',
+      interval: 300000, // 5分钟轮询
+      format: 'JSON',
+      fallback: 'CACHE',
+      retryCount: 3,
+      timeout: 5000,
+    },
+  ];
+  
+  // 主循环——持续采集数据
+  async run(): Promise<void> {
+    while (this.active) {
+      for (const source of this.dataSources) {
+        try {
+          const data = await this.fetchFromSource(source);
+          const cleaned = await this.cleanData(data);
+          const validated = await this.validateData(cleaned);
+          
+          if (validated.valid) {
+            // 发布数据到A2A网络
+            await this.publishToA2A(validated.data);
+          } else {
+            // 数据无效，判官报告
+            await this.reportToJudge('DATA_INVALID', validated.reason);
+          }
+        } catch (error) {
+          // 采集失败，降级处理
+          await this.handleFetchFailure(source, error);
+        }
+      }
+      
+      await this.sleep(this.minInterval);
+    }
+  }
+  
+  // 数据清洗
+  async cleanData(rawData: any): Promise<CleanData> {
+    // 1. 去重
+    const deduped = this.deduplicate(rawData);
+    // 2. 格式校验
+    const formatted = this.validateFormat(deduped);
+    // 3. 范围校验
+    const ranged = this.validateRange(formatted);
+    // 4. 缺失值处理
+    const filled = this.fillMissing(ranged);
+    // 5. 异常值检测
+    const filtered = this.filterOutliers(filled);
+    
+    return filtered;
+  }
+  
+  // 发布到A2A网络
+  async publishToA2A(data: CleanData): Promise<void> {
+    const event: A2AEvent = {
+      eventId: this.generateId(),
+      eventType: 'DATA_FETCHED',
+      timestamp: new Date().toISOString(),
+      agentId: this.agentId,
+      eventData: {
+        action: 'FETCH',
+        input: data.source,
+        output: data,
+        result: 'SUCCESS',
+      },
+      metadata: {
+        version: '1.0',
+        correlationId: this.generateCorrelationId(),
+      },
+      signature: await this.sign(data),
+    };
+    
+    await this.a2aBus.publish(event);
+  }
+}
+```
+
+### 256.2 取数智能体与判官的交互
+
+| 交互场景 | 取数智能体行为 | 判官行为 | 处置 |
+|---------|-------------|---------|------|
+| 数据有效 | 发布数据 | 验证数据质量 | 通过 |
+| 数据无效 | 报告无效 | 审查无效原因 | 要求重新采集 |
+| 采集超时 | 降级到缓存 | 监控降级频率 | 频率过高→告警 |
+| 采集失败 | 重试3次 | 监控失败率 | 失败率高→熔断 |
+| 数据异常 | 标记异常 | 审查异常类型 | 严重异常→阻断 |
+
+---
+
+## 第二百五十七章：A2A网络实装细节——策略智能体
+
+### 257.1 策略智能体完整实装
+
+```typescript
+// 策略智能体完整实装
+class StrategyAnalyzerAgent {
+  agentId: string = 'strategy-analyzer';
+  capabilities: string[] = ['ANALYZE_TREND', 'GENERATE_SIGNAL', 'INTERPRET_SIGNAL'];
+  
+  // 策略库
+  strategies: Strategy[] = [
+    {
+      name: 'MOMENTUM',
+      description: '动量策略——追踪价格趋势',
+      parameters: { window: 5, threshold: 0.03 },
+      signalType: 'signal',
+      kind: 'signal',
+    },
+    {
+      name: 'VOLUME_SPIKE',
+      description: '成交量突增策略——检测异常成交量',
+      parameters: { multiplier: 3, window: 10 },
+      signalType: 'fact',
+      kind: 'fact',
+    },
+    {
+      name: 'PRICE_GAP',
+      description: '价格跳空策略——检测价格跳空',
+      parameters: { gapThreshold: 0.05 },
+      signalType: 'fact',
+      kind: 'fact',
+    },
+  ];
+  
+  // 分析流程
+  async analyze(data: MarketData): Promise<AnalysisResult> {
+    // 1. 数据预处理
+    const preprocessed = this.preprocess(data);
+    
+    // 2. 逐策略分析
+    const signals: Signal[] = [];
+    for (const strategy of this.strategies) {
+      const signal = await this.executeStrategy(strategy, preprocessed);
+      if (signal) {
+        signals.push(signal);
+      }
+    }
+    
+    // 3. 信号融合
+    const fused = this.fuseSignals(signals);
+    
+    // 4. 白话解读生成
+    const interpretation = await this.generateInterpretation(fused);
+    
+    // 5. 判官验证
+    const validated = await this.judge.validateAnalysis({
+      signals: fused,
+      interpretation,
+      strategiesUsed: signals.map(s => s.strategy),
+    });
+    
+    if (validated.verdict === 'REJECT') {
+      return { success: false, reason: validated.reason };
+    }
+    
+    return {
+      success: true,
+      signals: fused,
+      interpretation,
+      kind: fused.some(s => s.kind === 'signal') ? 'signal' : 'fact',
+    };
+  }
+  
+  // 白话解读生成
+  async generateInterpretation(signals: Signal[]): Promise<string> {
+    // 适老化白话解读——使用简单语言描述信号
+    const interpretations: string[] = [];
+    
+    for (const signal of signals) {
+      switch (signal.type) {
+        case 'MOMENTUM_UP':
+          interpretations.push('这只股票最近在涨，势头不错');
+          break;
+        case 'MOMENTUM_DOWN':
+          interpretations.push('这只股票最近在跌，要注意');
+          break;
+        case 'VOLUME_SPIKE':
+          interpretations.push('这只股票今天成交量突然放大，有大资金进出');
+          break;
+        case 'PRICE_GAP_UP':
+          interpretations.push('这只股票今天跳空高开，可能有利好消息');
+          break;
+        case 'PRICE_GAP_DOWN':
+          interpretations.push('这只股票今天跳空低开，可能有利空消息');
+          break;
+        case 'FLOATING_LOSS':
+          interpretations.push('浮亏在扩大，要注意风险');
+          break;
+      }
+    }
+    
+    return interpretations.join('；');
+  }
+}
+```
+
+### 257.2 策略智能体与信号松绑
+
+策略智能体遵循AGENTS.md §2的信号松绑规则：
+
+| 规则 | 策略智能体实现 | 判官验证 |
+|------|-------------|---------|
+| 允许输出自家策略信号 | 动量策略信号带kind:"signal" | 验证kind标记 |
+| 允许白话解读 | 生成适老化白话解读 | 验证语言复杂度 |
+| 禁承诺收益 | 信号卡不含"保证赚钱"等 | 承诺检测 |
+| 禁催促指令 | 信号卡不含"立即买入"等 | 催促检测 |
+| 禁对外收费 | 信号卡不涉及收费 | 收费检测 |
+| 须带角标 | 信号卡UI加"自家信号"角标 | UI验证 |
+
+---
+
+## 第二百五十八章：A2A网络实装细节——播报智能体
+
+### 258.1 播报智能体完整实装
+
+```typescript
+// 播报智能体完整实装
+class BroadcastGeneratorAgent {
+  agentId: string = 'broadcast-generator';
+  capabilities: string[] = ['GENERATE_ALERT_ITEM', 'GENERATE_TTS', 'FORMAT_CARD'];
+  
+  // 生成AlertItem
+  async generateAlertItem(
+    analysis: AnalysisResult,
+    userData: UserPreferences
+  ): Promise<AlertItem> {
+    const alertItem: AlertItem = {
+      id: this.generateId(),
+      kind: analysis.kind, // 'fact' 或 'signal'
+      title: this.generateTitle(analysis, userData),
+      description: this.generateDescription(analysis, userData),
+      timestamp: new Date().toISOString(),
+      severity: this.assessSeverity(analysis),
+      audioUrl: '', // 待TTS生成后填充
+      source: analysis.signals.map(s => s.strategy),
+    };
+    
+    // 判官验证AlertItem
+    const validated = await this.judge.validateAlertItem(alertItem);
+    if (validated.verdict === 'REJECT') {
+      return null;
+    }
+    
+    // 生成TTS音频
+    const audioUrl = await this.generateTTS(alertItem.description);
+    alertItem.audioUrl = audioUrl;
+    
+    return alertItem;
+  }
+  
+  // 生成适老化标题
+  generateTitle(analysis: AnalysisResult, userData: UserPreferences): string {
+    // 适老化标题——简洁、大字、白话
+    if (analysis.kind === 'signal') {
+      return '【自家信号】' + analysis.interpretation.split('；')[0];
+    } else {
+      return '【异动提醒】' + analysis.interpretation.split('；')[0];
+    }
+  }
+  
+  // 生成适老化描述
+  generateDescription(analysis: AnalysisResult, userData: UserPreferences): string {
+    // 适老化描述——白话、详细、不超20字/句
+    const sentences = analysis.interpretation.split('；');
+    return sentences.join('。') + '。';
+  }
+  
+  // 生成TTS音频
+  async generateTTS(text: string): Promise<string> {
+    // 调用云端TTS服务生成音频
+    const ttsResult = await this.callTTSService(text);
+    return ttsResult.audioUrl;
+  }
+  
+  // 格式化卡片
+  formatCard(alertItem: AlertItem, userData: UserPreferences): CardConfig {
+    return {
+      fontSize: userData.fontSize || 32, // 28-34fp范围
+      backgroundColor: alertItem.kind === 'signal' ? '#1A237E' : '#263238',
+      textColor: '#FFFFFF',
