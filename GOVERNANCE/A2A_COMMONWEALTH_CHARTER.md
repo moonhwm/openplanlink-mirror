@@ -16165,3 +16165,298 @@ class BroadcastGeneratorAgent {
       fontSize: userData.fontSize || 32, // 28-34fp范围
       backgroundColor: alertItem.kind === 'signal' ? '#1A237E' : '#263238',
       textColor: '#FFFFFF',
+      cornerBadge: alertItem.kind === 'signal' ? '自家信号' : null,
+      audioButton: true,
+      maxLineLength: 20,
+    };
+  }
+}
+```
+
+---
+
+## 第二百六十一章：A2A网络实装细节——任务分发云函数
+
+### 261.1 任务分发云函数完整实装
+
+```typescript
+class A2ATaskDispatchCloudFunction {
+  async dispatch(taskRequest: TaskRequest): Promise<DispatchResult> {
+    const duplicate = await this.checkDuplicate(taskRequest);
+    if (duplicate) {
+      return { success: false, reason: '重复任务', existingTaskId: duplicate };
+    }
+    
+    const task: A2ATask = {
+      taskId: this.generateId(),
+      type: taskRequest.type,
+      status: 'PENDING',
+      priority: taskRequest.priority || 'NORMAL',
+      assignedAgent: null,
+      createdAt: new Date().toISOString(),
+      deadline: taskRequest.deadline,
+      payload: taskRequest.payload,
+      retryCount: 0,
+      maxRetries: 3,
+    };
+    
+    const preTrial = await this.judge.preTrial(task);
+    if (preTrial.verdict === 'REJECT') {
+      task.status = 'REJECTED';
+      await this.saveTask(task);
+      return { success: false, reason: preTrial.reason };
+    }
+    
+    const candidates = await this.registry.discover(taskRequest.requiredCapability);
+    const selected = this.selectBestAgent(candidates, task);
+    
+    if (!selected) {
+      task.status = 'NO_AGENT_AVAILABLE';
+      await this.saveTask(task);
+      return { success: false, reason: '无可用智能体' };
+    }
+    
+    task.assignedAgent = selected.agentId;
+    task.status = 'DISPATCHED';
+    await this.saveTask(task);
+    await this.sendTaskToAgent(selected, task);
+    
+    return { success: true, taskId: task.taskId, assignedAgent: selected.agentId };
+  }
+  
+  selectBestAgent(candidates: AgentRecord[], task: A2ATask): AgentRecord | null {
+    if (candidates.length === 0) return null;
+    const scored = candidates.map(c => ({ agent: c, score: this.computeAgentScore(c, task) }));
+    scored.sort((a, b) => b.score - a.score);
+    return scored[0].agent;
+  }
+  
+  computeAgentScore(agent: AgentRecord, task: A2ATask): number {
+    let score = 0;
+    score += agent.trustScore * 0.3;
+    const budgetRatio = agent.budgetRemaining / agent.budgetAllocation;
+    score += budgetRatio * 0.2;
+    const responseSpeed = this.getResponseSpeed(agent.agentId);
+    score += responseSpeed * 0.2;
+    const loadLevel = 1 - this.getLoadLevel(agent.agentId);
+    score += loadLevel * 0.15;
+    const capabilityMatch = this.getCapabilityMatch(agent, task);
+    score += capabilityMatch * 0.15;
+    return score;
+  }
+}
+```
+
+---
+
+## 第二百六十二章：A2A网络实装细节——端侧Index.ets
+
+### 262.1 Index.ets主界面
+
+```typescript
+@Entry
+@Component
+struct Index {
+  @State alertItems: AlertItem[] = DEMO_ITEMS;
+  @State isRefreshing: boolean = false;
+  @State lastRefreshTime: string = '';
+  private poller: AlertPoller = new AlertPoller();
+  
+  aboutToAppear(): void {
+    this.poller.start((items: AlertItem[]) => {
+      if (items.length > 0) {
+        this.alertItems = items;
+        this.lastRefreshTime = this.formatTime(new Date());
+      }
+    });
+  }
+  
+  aboutToDisappear(): void {
+    this.poller.stop();
+  }
+  
+  build(): Column {
+    Row() {
+      Text('铃语').fontSize(34).fontColor('#FFFFFF').fontWeight(FontWeight.Bold)
+      Text('股票异动播报').fontSize(20).fontColor('#B0BEC5').margin({ left: 8 })
+    }
+    .width('100%').height(60).padding({ left: 16, right: 16 }).backgroundColor('#1A237E')
+    
+    Row() {
+      Text('更新时间: ' + this.lastRefreshTime).fontSize(14).fontColor('#90CAF9')
+    }
+    .width('100%').padding({ left: 16, top: 8, bottom: 8 }).backgroundColor('#1A237E')
+    
+    List() {
+      ForEach(this.alertItems, (item: AlertItem) => {
+        ListItem() { this.AlertCard(item) }
+      }, (item: AlertItem) => item.id)
+    }
+    .width('100%').layoutWeight(1).divider({ strokeWidth: 1, color: '#37474F' })
+  }
+  
+  @Builder
+  AlertCard(item: AlertItem): Column {
+    Column() {
+      Row() {
+        if (item.kind === 'signal') {
+          Text('自家信号').fontSize(12).fontColor('#FFEB3B')
+            .backgroundColor('#BF360C').padding({ left: 4, right: 4, top: 2, bottom: 2 })
+            .borderRadius(4).margin({ right: 8 })
+        }
+        Text(item.title).fontSize(28).fontColor('#FFFFFF').fontWeight(FontWeight.Medium).layoutWeight(1)
+        Button() { Image($r('app.media.ic_play')).width(24).height(24) }
+          .width(40).height(40).backgroundColor('#3949AB').borderRadius(20)
+          .onClick(() => { this.playAudio(item.audioUrl); })
+      }
+      .width('100%').padding({ left: 16, right: 16, top: 12, bottom: 8 })
+      
+      Text(item.description).fontSize(20).fontColor('#E3F2FD')
+        .width('100%').padding({ left: 16, right: 16, bottom: 12 }).maxLines(3)
+    }
+    .width('100%')
+    .backgroundColor(item.kind === 'signal' ? '#1A237E' : '#263238')
+    .borderRadius(8).margin({ left: 12, right: 12, top: 8, bottom: 8 })
+  }
+  
+  private playAudio(audioUrl: string): void {
+    const player = new AudioPlayer();
+    player.play(audioUrl);
+  }
+  
+  private formatTime(date: Date): string {
+    const h = date.getHours().toString().padStart(2, '0');
+    const m = date.getMinutes().toString().padStart(2, '0');
+    return h + ':' + m;
+  }
+}
+```
+
+---
+
+## 第二百六十三章：A2A网络实装细节——AlertPoller轮询
+
+### 263.1 AlertPoller完整实装
+
+```typescript
+class AlertPoller {
+  private timer: number = -1;
+  private interval: number = 5000;
+  private feedUrl: string = '';
+  private isRunning: boolean = false;
+  
+  start(callback: (items: AlertItem[]) => void): void {
+    if (this.isRunning) return;
+    this.isRunning = true;
+    this.poll(callback);
+    this.timer = setInterval(() => { this.poll(callback); }, this.interval);
+  }
+  
+  stop(): void {
+    this.isRunning = false;
+    if (this.timer !== -1) { clearInterval(this.timer); this.timer = -1; }
+  }
+  
+  private async poll(callback: (items: AlertItem[]) => void): Promise<void> {
+    try {
+      const response = await fetch(this.feedUrl, { method: 'GET', timeout: 3000 });
+      if (response.ok) {
+        const data = await response.json();
+        const items = this.parseAlertFeed(data);
+        callback(items);
+      }
+    } catch (error) {
+      console.warn('轮询失败: ' + error.message);
+    }
+  }
+  
+  private parseAlertFeed(feed: AlertFeed): AlertItem[] {
+    return feed.items.map(item => ({
+      id: item.id,
+      kind: item.kind || 'fact',
+      title: item.title,
+      description: item.description,
+      timestamp: item.timestamp,
+      severity: item.severity,
+      audioUrl: item.audioUrl,
+      source: item.source || [],
+    }));
+  }
+}
+```
+
+---
+
+## 第二百六十四章：A2A网络实装细节——AudioPlayer
+
+### 264.1 AudioPlayer完整实装
+
+```typescript
+class AudioPlayer {
+  private avPlayer: AVPlayer | null = null;
+  private isPlaying: boolean = false;
+  
+  async play(audioUrl: string): Promise<void> {
+    if (this.isPlaying) { await this.stop(); }
+    this.avPlayer = new AVPlayer();
+    this.avPlayer.url = audioUrl;
+    this.avPlayer.on('stateChange', (state: string) => {
+      if (state === 'prepared') { this.avPlayer!.play(); this.isPlaying = true; }
+      else if (state === 'completed') { this.isPlaying = false; this.avPlayer = null; }
+      else if (state === 'error') { this.isPlaying = false; this.avPlayer = null; }
+    });
+    this.avPlayer.prepare();
+  }
+  
+  async stop(): Promise<void> {
+    if (this.avPlayer) { this.avPlayer.stop(); this.avPlayer = null; this.isPlaying = false; }
+  }
+  
+  async pause(): Promise<void> {
+    if (this.avPlayer && this.isPlaying) { this.avPlayer.pause(); this.isPlaying = false; }
+  }
+  
+  async resume(): Promise<void> {
+    if (this.avPlayer && !this.isPlaying) { this.avPlayer.play(); this.isPlaying = true; }
+  }
+}
+```
+
+---
+
+## 第二百六十五章：A2A网络实装细节——PushService占位封装
+
+### 265.1 PushService完整实装
+
+```typescript
+class PushService {
+  private isAGCConfigured: boolean = false;
+  private pushToken: string = '';
+  
+  async init(): Promise<void> {
+    try {
+      const pushService = new AGCPushService();
+      this.pushToken = await pushService.getToken();
+      this.isAGCConfigured = true;
+    } catch (error) {
+      this.isAGCConfigured = false;
+    }
+  }
+  
+  async onMessageReceived(callback: (alertId: string) => void): Promise<void> {
+    if (this.isAGCConfigured) {
+      const pushService = new AGCPushService();
+      pushService.onMessageReceived((message: PushMessage) => {
+        const alertId = message.extra?.alertId;
+        if (alertId) { callback(alertId); }
+      });
+    }
+  }
+  
+  async handleNewWant(want: Want): Promise<string | null> {
+    const alertId = want.parameters?.alertId as string;
+    if (alertId) { return alertId; }
+    return null;
+  }
+}
+```
