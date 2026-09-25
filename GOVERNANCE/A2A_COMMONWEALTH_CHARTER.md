@@ -16723,3 +16723,294 @@ struct Settings {
 | signingConfig | "" | 签名配置（待AGC） | 签名场景 |
 | buildMode | release | 构建模式 | 默认发布 |
 
+
+---
+
+## 第二百七十一章：A2A网络实装细节——broadcast-a2a云函数
+
+### 271.1 broadcast-a2a云函数完整实装
+
+```typescript
+// broadcast-a2a云函数——A2A网络的主入口
+const config = require('./config');
+
+class BroadcastA2AFunction {
+  async main(event: CloudFunctionEvent): Promise<CloudFunctionResult> {
+    const { action, data } = event;
+    
+    switch (action) {
+      case 'GENERATE_ALERT':
+        return await this.generateAlert(data);
+      case 'FETCH_FEED':
+        return await this.fetchFeed(data);
+      case 'REFRESH':
+        return await this.refresh(data);
+      default:
+        return { success: false, error: 'Unknown action: ' + action };
+    }
+  }
+  
+  async generateAlert(request: GenerateRequest): Promise<GenerateResult> {
+    // 1. 取数智能体采集数据
+    const marketData = await this.callAgent('data-fetcher', 'FETCH_MARKET_DATA', request);
+    
+    // 2. 策略智能体分析
+    const analysis = await this.callAgent('strategy-analyzer', 'ANALYZE_TREND', marketData);
+    
+    // 3. 播报智能体生成AlertItem
+    const alertItem = await this.callAgent('broadcast-generator', 'GENERATE_ALERT_ITEM', analysis);
+    
+    // 4. 判官验证
+    const verdict = await this.callJudge('POST_TRIAL', alertItem);
+    
+    if (verdict.verdict === 'APPROVE') {
+      // 5. 生成TTS音频
+      const audioUrl = await this.generateTTS(alertItem.description);
+      alertItem.audioUrl = audioUrl;
+      
+      // 6. 构建AlertFeed
+      const feed: AlertFeed = {
+        version: '1.0',
+        generatedAt: new Date().toISOString(),
+        items: [alertItem],
+        meta: { totalItems: 1, dataSource: 'A2A', nextUpdate: '' },
+      };
+      
+      return { success: true, feed };
+    } else {
+      return { success: false, reason: verdict.reason };
+    }
+  }
+  
+  async callAgent(agentId: string, action: string, input: any): Promise<any> {
+    // 通过A2A注册中心查找智能体
+    const agent = await this.registry.discoverAgent(agentId);
+    if (!agent) {
+      throw new Error('Agent not found: ' + agentId);
+    }
+    
+    // 通过A2A协议调用智能体
+    const response = await fetch(agent.endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action, input }),
+    });
+    
+    return await response.json();
+  }
+  
+  async callJudge(action: string, data: any): Promise<JudgeVerdict> {
+    const response = await fetch(config.JUDGE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action, data }),
+    });
+    return await response.json();
+  }
+}
+```
+
+### 271.2 config.js配置
+
+```typescript
+// config.js——KIMI_ENABLED总开关+参数集中管理
+module.exports = {
+  // KIMI总开关——彻底停用
+  KIMI_ENABLED: false,
+  
+  // A2A网络配置
+  A2A_REGISTRY_ENDPOINT: process.env.A2A_REGISTRY_ENDPOINT || '',
+  JUDGE_ENDPOINT: process.env.JUDGE_ENDPOINT || '',
+  
+  // 数据源配置
+  MARKET_API_URL: process.env.MARKET_API_URL || '',
+  NEWS_RSS_URL: process.env.NEWS_RSS_URL || '',
+  ANNOUNCEMENT_API_URL: process.env.ANNOUNCEMENT_API_URL || '',
+  
+  // TTS配置
+  TTS_API_URL: process.env.TTS_API_URL || '',
+  TTS_API_KEY: process.env.TTS_API_KEY || '',
+  
+  // LLM配置（判官使用）
+  LLM_PROVIDER: process.env.LLM_PROVIDER || 'DEEPSEEK',
+  LLM_API_KEY: process.env.LLM_API_KEY || '',
+  
+  // 预算配置
+  DEFAULT_BUDGET_ALLOCATION: 10000,
+  BUDGET_ALERT_THRESHOLD: 0.8,
+  BUDGET_CUTOFF_THRESHOLD: 0.95,
+  
+  // 判官配置
+  JUDGE_QUALITY_THRESHOLD: 0.7,
+  JUDGE_COMPLIANCE_THRESHOLD: 1.0,
+  JUDGE_BUDGET_THRESHOLD: 0.8,
+  
+  // 适老化配置
+  FONT_SIZE_MIN: 28,
+  FONT_SIZE_MAX: 34,
+  MAX_SENTENCE_LENGTH: 20,
+  FORBIDDEN_CHARTS: true,
+  FORBIDDEN_URGENCY: true,
+  FORBIDDEN_PROMISE: true,
+};
+```
+
+---
+
+## 第二百七十二章：A2A网络实装细节——a2a-judge云函数
+
+### 272.1 a2a-judge云函数完整实装
+
+```typescript
+// a2a-judge云函数——判官自动化
+const config = require('../broadcast-a2a/config');
+
+class A2AJudgeFunction {
+  async main(event: CloudFunctionEvent): Promise<CloudFunctionResult> {
+    const { action, data } = event;
+    
+    switch (action) {
+      case 'PRE_TRIAL':
+        return await this.preTrial(data);
+      case 'POST_TRIAL':
+        return await this.postTrial(data);
+      case 'PERIODIC_REVIEW':
+        return await this.periodicReview(data);
+      case 'CONSTITUTIONAL_CHECK':
+        return await this.constitutionalCheck(data);
+      default:
+        return { verdict: 'REJECT', reason: 'Unknown action' };
+    }
+  }
+  
+  async preTrial(task: A2ATask): Promise<TrialResult> {
+    // 1. 合规检查
+    if (!this.checkCompliance(task)) {
+      return { verdict: 'REJECT', reason: '合规检查失败' };
+    }
+    
+    // 2. 预算检查
+    const budget = await this.checkBudget(task.assignedAgent);
+    if (!budget.sufficient) {
+      return { verdict: 'REJECT', reason: '预算不足' };
+    }
+    
+    // 3. 信任评分检查
+    const trust = await this.getTrustScore(task.assignedAgent);
+    if (trust < 0.3) {
+      return { verdict: 'REJECT', reason: '信任评分过低' };
+    }
+    
+    return { verdict: 'APPROVE', reason: '预审判通过' };
+  }
+  
+  async postTrial(output: AgentOutput): Promise<TrialResult> {
+    // 1. 适老化审查
+    const accessibility = this.checkAccessibility(output);
+    if (!accessibility.passed) {
+      return { verdict: 'REJECT', reason: accessibility.reason };
+    }
+    
+    // 2. 内容合规审查
+    const compliance = this.checkContentCompliance(output);
+    if (!compliance.passed) {
+      return { verdict: 'REJECT', reason: compliance.reason };
+    }
+    
+    // 3. 质量评估
+    const quality = this.assessQuality(output);
+    if (quality < config.JUDGE_QUALITY_THRESHOLD) {
+      return { verdict: 'REJECT', reason: '质量不达标' };
+    }
+    
+    return { verdict: 'APPROVE', reason: '结果审判通过', quality };
+  }
+  
+  checkAccessibility(output: AgentOutput): ComplianceResult {
+    // 字体大小检查
+    if (output.fontSize && (output.fontSize < config.FONT_SIZE_MIN || output.fontSize > config.FONT_SIZE_MAX)) {
+      return { passed: false, reason: '字体大小不在' + config.FONT_SIZE_MIN + '-' + config.FONT_SIZE_MAX + 'fp范围' };
+    }
+    
+    // 图表检查
+    if (output.containsChart && config.FORBIDDEN_CHARTS) {
+      return { passed: false, reason: '包含禁止的图表组件' };
+    }
+    
+    // 催促检查
+    if (config.FORBIDDEN_URGENCY && this.containsUrgency(output.content)) {
+      return { passed: false, reason: '包含催促性指令' };
+    }
+    
+    // 承诺检查
+    if (config.FORBIDDEN_PROMISE && this.containsPromise(output.content)) {
+      return { passed: false, reason: '包含收益承诺' };
+    }
+    
+    // 句长检查
+    if (this.maxSentenceLength(output.content) > config.MAX_SENTENCE_LENGTH) {
+      return { passed: false, reason: '句子长度超过' + config.MAX_SENTENCE_LENGTH + '字' };
+    }
+    
+    return { passed: true };
+  }
+  
+  containsUrgency(content: string): boolean {
+    const urgencyPatterns = ['立即买入', '马上卖出', '满仓', '赶紧', '不要犹豫', '立刻'];
+    return urgencyPatterns.some(p => content.includes(p));
+  }
+  
+  containsPromise(content: string): boolean {
+    const promisePatterns = ['保证赚钱', '稳赚不赔', '保本', '一定盈利', '承诺收益'];
+    return promisePatterns.some(p => content.includes(p));
+  }
+}
+```
+
+---
+
+## 第二百七十三章：A2A网络实装细节——daily-trend-scan云函数
+
+### 273.1 daily-trend-scan云函数完整实装
+
+```typescript
+// daily-trend-scan云函数——每日追新扫描
+class DailyTrendScanFunction {
+  async main(event: CloudFunctionEvent): Promise<CloudFunctionResult> {
+    // 1. 获取今日异动列表
+    const trends = await this.scanTrends();
+    
+    // 2. 逐条生成AlertItem
+    const alertItems: AlertItem[] = [];
+    for (const trend of trends) {
+      const alertItem = await this.generateAlertFromTrend(trend);
+      if (alertItem) {
+        alertItems.push(alertItem);
+      }
+    }
+    
+    // 3. 构建AlertFeed
+    const feed: AlertFeed = {
+      version: '1.0',
+      generatedAt: new Date().toISOString(),
+      items: alertItems,
+      meta: {
+        totalItems: alertItems.length,
+        dataSource: 'DAILY_SCAN',
+        nextUpdate: this.nextUpdateTime(),
+      },
+    };
+    
+    // 4. 存储到数据库
+    await this.storeFeed(feed);
+    
+    return { success: true, feed };
+  }
+  
+  async scanTrends(): Promise<Trend[]> {
+    // 调用取数智能体扫描异动
+    const marketData = await this.callAgent('data-fetcher', 'SCAN_TRENDS', {});
+    
+    // 筛选显著异动
+    return marketData.filter((d: any) => 
+      d.changePercent > 0.03 || d.changePercent < -0.03
