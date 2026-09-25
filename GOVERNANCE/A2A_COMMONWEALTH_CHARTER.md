@@ -17014,3 +17014,239 @@ class DailyTrendScanFunction {
     // 筛选显著异动
     return marketData.filter((d: any) => 
       d.changePercent > 0.03 || d.changePercent < -0.03
+
+---
+
+## 第二百七十六章：A2A网络实装细节——CloudBase部署配置
+
+### 276.1 CloudBase云函数部署清单
+
+| 云函数名称 | 功能 | 内存 | 超时 | 触发方式 | 依赖 |
+|-----------|------|------|------|---------|------|
+| broadcast-a2a | 主入口，生成AlertFeed | 512MB | 10s | HTTP | a2a-registry, a2a-judge |
+| a2a-judge | 判官自动化 | 256MB | 5s | HTTP/事件 | - |
+| a2a-registry | 注册/心跳/熔断/预算 | 256MB | 3s | HTTP | - |
+| a2a-task-dispatch | 任务分发/状态机/去重 | 256MB | 5s | HTTP | a2a-registry, a2a-judge |
+| daily-trend-scan | 每日追新扫描 | 512MB | 10s | Timer | broadcast-a2a |
+
+### 276.2 CloudBase数据库集合
+
+| 集合名 | 用途 | 索引 | 保留期 | 读写频率 |
+|--------|------|------|--------|---------|
+| a2a_agents | 智能体注册信息 | agentId(唯一) | 永久 | 高 |
+| a2a_tasks | 任务记录 | taskId(唯一), status | 30天 | 高 |
+| a2a_events | 事件日志 | eventId(唯一), timestamp | 90天 | 中 |
+| a2a_verdicts | 判官裁决记录 | verdictId(唯一) | 90天 | 中 |
+| alert_feed | AlertFeed缓存 | generatedAt | 7天 | 高 |
+| device_twin | 设备数字孪生 | deviceId | 30天 | 中 |
+
+### 276.3 CloudBase Timer触发器配置
+
+| 触发器名称 | 关联函数 | Cron表达式 | 说明 |
+|-----------|---------|-----------|------|
+| daily-scan-trigger | daily-trend-scan | 0 9 * * * | 每天9点扫描 |
+| heartbeat-check | a2a-registry | */5 * * * * | 每5分钟检查心跳 |
+| budget-check | a2a-registry | 0 * * * * | 每小时检查预算 |
+| periodic-review | a2a-judge | 0 * * * * | 每小时周期审判 |
+| constitutional-check | a2a-judge | 0 0 * * * | 每天宪法审查 |
+
+---
+
+## 第二百七十七章：A2A网络实装细节——端侧项目结构
+
+### 277.1 端侧项目目录结构
+
+```
+harmony-app/
+  entry/
+    src/
+      main/
+        ets/
+          pages/
+            Index.ets          # 主界面卡片流
+            Settings.ets       # 设置页
+          model/
+            AlertItem.ets      # AlertItem数据契约
+          service/
+            AlertPoller.ets    # 5秒前台轮询
+            AudioPlayer.ets    # AVPlayer播报
+            PushService.ets    # Push占位封装
+          ability/
+            EntryAbility.ets   # Push初始化+onNewWant
+          common/
+            Constants.ets      # 常量定义
+            DEMO_ITEMS.ets     # 示例数据
+        resources/
+          base/
+            media/
+              ic_play.png      # 播放图标
+              ic_refresh.png   # 刷新图标
+            element/
+              string.json      # 字符串资源
+              color.json       # 颜色资源
+    module.json5               # 模块配置
+  build-profile.json5          # 构建配置
+  oh-package.json5             # 包配置
+```
+
+### 277.2 关键文件职责
+
+| 文件 | 职责 | 依赖 | 约束 |
+|------|------|------|------|
+| Index.ets | 主界面卡片流+下拉刷新 | AlertPoller, AudioPlayer | 28-34fp, 禁图表 |
+| Settings.ets | 设置页+播报历史 | AppStorage | 适老化设置 |
+| AlertItem.ets | 数据契约定义 | 无 | A2A网络核心契约 |
+| AlertPoller.ets | 5秒轮询兜底 | fetch API | 首屏永不空白 |
+| AudioPlayer.ets | AVPlayer播报 | AVPlayer | 点卡即听 |
+| PushService.ets | Push占位封装 | AGC Push | 降级轮询 |
+| EntryAbility.ets | Push初始化 | PushService | onNewWant定位 |
+
+---
+
+## 第二百七十八章：A2A网络实装细节——LLM凭据注入
+
+### 278.1 LLM凭据配置
+
+判官云函数需要LLM凭据来执行智能审判。当前支持两种LLM提供商：
+
+| 提供商 | 环境变量 | 用途 | 状态 |
+|--------|---------|------|------|
+| DeepSeek | DEEPSEEK_API_KEY | 判官智能审判 | 待机主注入 |
+| 盘古 | PANGU_API_KEY | 备用LLM | 待机主注入 |
+
+###B 278.2 凭据注入步骤
+
+1. 在CloudBase控制台找到a2a-judge云函数
+2. 进入函数配置页面
+3. 在环境变量中添加：
+   - DEEPSEEK_API_KEY=sk-xxxxxxxxxxxx
+   - PANGU_API_KEY=xxxxxxxxxxxx
+4. 保存配置并重新部署云函数
+5. 测试判官功能是否正常
+
+### 278.3 凭据安全
+
+| 安全措施 | 描述 | 实现方式 |
+|---------|------|---------|
+| 凭据隔离 | LLM凭据只在判官云函数中使用 | 环境变量隔离 |
+| 凭据轮换 | 定期更换API密钥 | 90天轮换 |
+| 凭据审计 | 记录凭据使用情况 | 使用日志 |
+| 凭据撤销 | 泄露时及时撤销 | 立即更新环境变量 |
+
+---
+
+## 第二百七十九章：A2A网络实装细节——签名配置
+
+### 279.1 签名配置步骤
+
+| 步骤 | 操作 | 说明 | 状态 |
+|------|------|------|------|
+| 1 | 在AGC控制台创建项目 | 创建harmony-app项目 | 待机主操作 |
+| 2 | 在AGC创建应用 | 创建铃语应用 | 待机主操作 |
+| 3 | 申请调试证书 | 生成.p12和.cer文件 | 待机主操作 |
+| 4 | 申请发布证书 | 生成.p7b文件 | 待机主操作 |
+| 5 | 配置build-profile.json5 | 添加signingConfigs | 待证书材料 |
+| 6 | 构建签名HAP | hmosBuild release | 待配置完成 |
+| 7 | 安装到设备 | hmosRun | 待签名HAP |
+
+### 279.2 build-profile.json5签名配置模板
+
+```json5
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "debug-signing",
+        "type": "HarmonyOS",
+        "material": {
+          "storePassword": "encrypted_password",
+          "certpath": "path/to/debug.cer",
+          "keyAlias": "debug-key",
+          "keyPassword": "encrypted_password",
+          "profile": "path/to/debug.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "path/to/debug.p12"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "debug-signing",
+        "compatibleSdkVersion": 20,
+        "targetSdkVersion": 26,
+        "runtimeOS": "HarmonyOS"
+      }
+    ]
+  }
+}
+```
+
+### 279.3 未签名HAP的替代方案
+
+在签名材料未到位前，可以构建未签名HAP安装到模拟器：
+
+| 方案 | 说明 | 适用场景 | 限制 |
+|------|------|---------|------|
+| 未签名HAP | 移除signingConfig配置 | 模拟器测试 | 不能安装到真机 |
+| 调试签名 | 使用自动生成的调试证书 | 真机调试 | 需要DevEco Studio |
+| 发布签名 | 使用正式证书 | 正式发布 | 需要AGC证书材料 |
+
+---
+
+## 第二百八十0章：A2A网络实装细节——运维监控配置
+
+### 280.1 CloudBase监控配置
+
+| 监控项 | 监控方式 | 告警阈值 | 通知方式 | 频率 |
+|--------|---------|---------|---------|------|
+| 云函数错误率 | CloudBase监控 | >5% | 邮件+短信 | 实时 |
+| 云函数延迟 | CloudBase监控 | >3s | 邮件 | 实时 |
+| 数据库读写延迟 | CloudBase监控 | >500ms | 邮件 | 实时 |
+| 心跳失败率 | 自定义监控 | >10% | 邮件+短信 | 5分钟 |
+| 预算消耗率 | 自定义监控 | >80% | 邮件 | 1小时 |
+| 判官驳回率 | 自定义监控 | >20% | 邮件 | 1小时 |
+| 端侧崩溃率 | 端侧上报 | >0.1% | 邮件+短信 | 实时 |
+
+### 280.2 端侧监控上报
+
+```typescript
+// 端侧监控上报
+class MonitorReporter {
+  async reportCrash(crashInfo: CrashInfo): Promise<void> {
+    await fetch(config.MONITOR_ENDPOINT, {
+      method: 'POST',
+      body: JSON.stringify({
+        type: 'CRASH',
+        deviceId: this.getDeviceId(),
+        appVersion: this.getAppVersion(),
+        crashInfo,
+        timestamp: new Date().toISOString(),
+      }),
+    });
+  }
+  
+  async reportPerformance(metrics: PerformanceMetrics): Promise<void> {
+    await fetch(config.MONITOR_ENDPOINT, {
+      method: 'POST',
+      body: JSON.stringify({
+        type: 'PERFORMANCE',
+        deviceId: this.getDeviceId(),
+        metrics,
+        timestamp: new Date().toISOString(),
+      }),
+    });
+  }
+}
+```
+
+### 280.3 运维告警处置
+
+| 告警级别 | 响应时间 | 处置方式 | 升级条件 |
+|---------|---------|---------|---------|
+| INFO | 无需响应 | 记录日志 | - |
+| LOW | 1小时内 | 自动处理 | 未处理→MEDIUM |
+| MEDIUM | 15分钟内 | 人工+自动 | 未处理→HIGH |
+| HIGH | 5分钟内 | 人工紧急 | 未处理→CRITICAL |
+| CRITICAL | 立即 | 人工+机主通知 | - |
+
