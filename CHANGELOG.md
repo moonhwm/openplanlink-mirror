@@ -2061,3 +2061,24 @@
   3. 燃烧产物中各swarm子目录仍有大量文件未深度整合（约330篇未读取）
   4. H2文档中发现的残留死代码块（index.js第234-256行）需复核部署同步状态
   5. MCP开源生态章节可进一步扩展（A2A协议开源项目、HarmonyOS开源生态等）
+## 2026-09-26 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· 规划书扩展——A2A协议+OpenHarmony开源生态
+
+- **改了什么**：
+  - 新增章节506-507（2章），引入A2A协议开源标准和OpenHarmony开源生态：
+    - 506：A2A协议开源生态——Google的Agent2Agent标准（基于GitHub a2aproject/A2A仓库，25.9k星，6种SDK，JSON-RPC 2.0，Agent Card机制，与MCP互补关系）
+    - 507：OpenHarmony开源生态——815仓库与系统组件（基于GitHub openharmony组织，815个仓库，C++/C/Rust/TypeScript/Cangjie，与HarmonyOS NEXT关系，关键仓库简介）
+  - 通过webfetch获取了A2A协议仓库（a2aproject/A2A）和OpenHarmony组织（github.com/openharmony）的完整信息
+  - MCP协议规范仓库（modelcontextprotocol/modelcontextprotocol）信息也已获取（9.3k星，MIT许可）
+- **为什么**：机主指令"引入更多丰富开源生态"。A2A协议是铃语项目五席位协作的标准化方向，OpenHarmony是铃语项目的平台基座，两者均为规划书必须覆盖的开源生态内容。
+- **如何验证**：
+  - V1：字数统计——中文字符375115+英文单词36864+数字串12675=总字数424654（从422702增长1952字）
+  - V2：行数验证——25084行（从24972行增加112行）
+  - V3：编码验证——全部使用UTF-8 No BOM追加，无GBK混合编码问题
+  - V4：章节完整性——新增2个`## 第X章`标题（506-507），编号连续无缺号
+  - V5：内容来源——A2A协议基于GitHub a2aproject/A2A仓库README，OpenHarmony基于GitHub openharmony组织页面
+- **遗留**：
+  1. 章节编号110-322大段缺失（原始章节问题），需填充或重新编号
+  2. 第一百一6章格式损坏（中文与阿拉伯数字混用），需修复
+  3. 燃烧产物中各swarm子目录仍有大量文件未深度整合（约330篇未读取）
+  4. H2文档中发现的残留死代码块（index.js第234-256行）需复核部署同步状态
+  5. 可进一步扩展开源生态内容（如Linux Foundation AI生态、CloudBase开源组件等）

@@ -24970,3 +24970,115 @@ AWS KB Retrieval（AWS知识库检索）、Brave Search（Brave搜索引擎）�
 MCP解决的是**AI与工具**之间的连接标准化（垂直能力），A2A解决的是**AI与AI**之间的协作标准化（水平协作）。两者互补：MCP让单个AI获得更丰富的工具能力，A2A让多个AI形成协作网络。在铃语项目的A2A网络中，各席位可通过MCP服务器获取文件系统、Git、数据库等工具能力，同时通过A2A总线与其他席位协作——MCP是工具层基础设施，A2A是协作层基础设施。
 
 在铃语项目中的应用：MCP协议的SDK和参考服务器为铃语项目的A2A网络提供了工具层标准化的方向。当前铃语项目的各席位通过自建桥接脚本与总线表实现协作，工具能力（文件读写、Git操作、数据查询等）尚为各席位各自实现。引入MCP可统一工具接口，让席位通过标准协议获取工具能力，降低桥接维护成本。Fetch服务器可用于云端数据抓取（替代fetch-tushare-data中的requestHttps封装），Git服务器可用于代码审查自动化，Memory服务器可实现跨席位共享知识图谱。
+## 第五百零六章 A2A协议开源生态——Google的Agent2Agent标准
+
+Agent2Agent（A2A）协议是Google贡献给Linux Foundation的开源协议，旨在解决AI领域的一个关键挑战：让基于不同框架、由不同公司构建、运行在不同服务器上的AI代理能够作为代理（而非工具）进行通信和协作。A2A为代理提供共同语言，促进更互联、更强大、更创新的AI生态系统。截至2026年9月，GitHub仓库a2aproject/A2A获得25.9k星、2.6k fork，631次提交。
+
+### 核心设计理念
+
+A2A协议的核心理念是**保持代理的不透明性（Opacity）**：代理之间可以协作，但无需暴露内部状态、记忆或工具实现。这与MCP形成互补——MCP让AI获取工具能力（垂直连接），A2A让AI之间形成协作网络（水平连接）。
+
+A2A让代理能够：
+- 发现彼此的能力（Agent Card机制）
+- 协商交互模态（文本、表单、媒体）
+- 安全地协作处理长时间运行的任务
+- 在不暴露内部状态、记忆或工具的情况下运行
+
+### 协议技术规范
+
+**通信协议**：JSON-RPC 2.0 over HTTP(S)——标准化的通信基础，与现有Web基础设施兼容。
+
+**代理发现**：通过"Agent Card"机制——每个代理暴露一个JSON格式的能力描述文件，包含身份、能力清单、连接信息、认证方案等。这与铃语项目A2A网络中的Agent Card概念高度一致。
+
+**交互模式**：支持三种交互模式——同步请求/响应（适用于短任务）、流式传输SSE（适用于长任务的实时反馈）、异步推送通知（适用于长时间运行的后台任务）。
+
+**数据交换**：处理文本、文件和结构化JSON数据——支持富媒体交互，不仅限于文本对话。
+
+**企业就绪**：设计时考虑安全性、认证和可观测性——面向生产环境而非仅实验场景。
+
+### 六种语言官方SDK
+
+| 语言 | SDK | 安装命令 |
+|------|-----|---------|
+| Python | a2a-python | pip install a2a-sdk |
+| Go | a2a-go | go get github.com/a2aproject/a2a-go |
+| JavaScript | a2a-js | npm install @a2a-js/sdk |
+| Java | a2a-java | Maven依赖 |
+| .NET | a2a-dotnet | dotnet add package A2A |
+| Rust | a2a-rs | cargo add a2a-lf |
+
+### 与MCP的互补关系
+
+A2A与MCP（Model Context Protocol）是互补关系而非竞争关系：
+- **MCP**解决AI与工具之间的连接标准化——让AI获取文件系统、数据库、API等工具能力
+- **A2A**解决AI与AI之间的协作标准化——让多个AI代理形成协作网络
+- 两者可以组合使用：代理通过MCP获取工具能力，通过A2A与其他代理协作
+
+DeepLearning.AI提供了配套课程《A2A: The Agent2Agent Protocol》，由Google Cloud和IBM Research联合制作，教授如何将代理暴露为A2A服务器、创建A2A客户端、编排顺序和层次化工作流、构建多代理系统，以及A2A与MCP的互补使用。
+
+### 路线图
+
+A2A协议的下一步增强方向：
+- **代理发现**：将授权方案和可选凭证直接纳入Agent Card
+- **代理协作**：研究QuerySkill()方法用于动态检查未预期技能
+- **任务生命周期与UX**：支持任务内的动态UX协商（如代理在对话中途添加音频/视频）
+- **客户端方法与传输**：探索扩展对客户端发起方法的支持（超越任务管理）
+
+### 社区与治理
+
+A2A是Linux Foundation下的开源项目，Apache 2.0许可。社区参与渠道：
+- GitHub Discussions——问答与讨论
+- A2A Discord服务器——实时交流
+- Google Form——私密反馈
+- 合作伙伴计划——Google Cloud客户可加入
+
+在铃语项目中的应用：A2A协议开源标准与铃语项目的A2A网络高度契合。铃语项目的五席位协作（砚坚/顾权/Moon/薪传/白秉烛）正是A2A协议理念的实践案例——跨厂商AI代理通过总线表协作、Agent Card能力声明、任务分发与结果聚合。引入A2A协议SDK可标准化当前的自建桥接脚本，将yan_jian_bridge.mjs等私有实现迁移到协议标准，降低维护成本并提升互操作性。Agent Card机制可直接替代当前的自建角色注册体系，JSON-RPC 2.0 over HTTP(S)可替代当前的总线表+REST轮询架构。
+
+## 第五百零七章 OpenHarmony开源生态——815仓库与系统组件
+
+OpenHarmony是华为捐赠的开放原子开源基金会孵化的开源操作系统项目，GitHub组织openharmony拥有815个仓库、742名关注者。GitHub上的仓库为只读镜像，实际贡献和Issue追踪在gitcode.com/openharmony进行。官网为openharmony.io。
+
+### 仓库组织结构
+
+OpenHarmony的815个仓库按功能分层组织，主要涵盖：
+
+**系统核心组件**：内核（kernel）、驱动框架（drivers）、分布式软总线（communication_dsoftbus）、系统服务管理（systemabilitymgr）、全局系统参数（startup_init）等。
+
+**应用框架层**：ArkUI开发框架（arkui_ace_engine）、Ability框架（ability_ability_runtime）、包管理（bundlemanager）、表单管理（form_fwk）等。
+
+**系统服务层**：文件管理（filemanagement_user_file_service）、安全（security_selinux_adapter）、无障碍服务（accessibility）、网络管理（communication_netmanager_base）等。
+
+**三方库适配**：大量third_party_*仓库适配开源软件到OpenHarmony平台，包括nghttp2、pcre2、selinux、tzdata等。
+
+### 主要编程语言
+
+OpenHarmony的代码分布：C++（系统核心与框架）、C（底层驱动与三方库）、Rust（安全敏感组件）、TypeScript（应用框架与工具链）、Cangjie（华为新编程语言，部分新组件）。
+
+### 与HarmonyOS NEXT的关系
+
+OpenHarmony是HarmonyOS NEXT的开源基座。华为的HarmonyOS NEXT在OpenHarmony基础上增加了商业组件和服务（如Push Kit、AGC云服务、应用市场等），而OpenHarmony本身保持开源开放。开发者可以基于OpenHarmony构建自己的发行版，也可以基于HarmonyOS NEXT开发商业应用。
+
+铃语项目正是基于HarmonyOS NEXT的Stage模型开发，使用@kit.NetworkKit、@kit.MediaKit、@kit.ArkData、@kit.PushKit等系统Kit——这些Kit的底层实现部分来自OpenHarmony开源组件。
+
+### 关键仓库简介
+
+| 仓库 | 功能 | 语言 |
+|------|------|------|
+| arkui_ace_engine | ArkUI声明式开发框架引擎 | C++ |
+| ability_ability_runtime | Ability运行时框架 | C++ |
+| bundlemanager | 包管理框架 | C++ |
+| communication_dsoftbus | 分布式软总线 | C++ |
+| security_selinux_adapter | SELinux安全适配 | C++ |
+| accessibility | 无障碍服务 | C++ |
+| filemanagement_user_file_service | 公共文件管理 | C++ |
+| startup_init | 系统启动与初始化 | C++ |
+
+### 开源贡献模式
+
+OpenHarmony采用"只读镜像+主仓贡献"模式：
+- GitHub仓库为只读镜像，不接收Issue和Pull Request
+- 实际贡献在gitcode.com/openharmony进行
+- 贡献者需签署CLA（Contributor License Agreement）
+- 遵循Apache 2.0许可
+
+在铃语项目中的应用：OpenHarmony是铃语项目的平台基座。铃语使用的ArkUI声明式框架（arkui_ace_engine）、Ability运行时（ability_ability_runtime）、Preferences数据持久化（基于bundlemanager和ArkData）、AVPlayer媒体播放（基于系统多媒体框架）等，底层均来自OpenHarmony开源组件。了解OpenHarmony的开源生态有助于铃语项目在遇到系统级问题时溯源到具体组件仓库，也为未来从HarmonyOS NEXT扩展到纯OpenHarmony发行版提供路径。无障碍服务（accessibility）仓库对铃语的适老化设计尤其有参考价值——系统级无障碍能力与应用级适老化设计的结合点是未来增强方向。
