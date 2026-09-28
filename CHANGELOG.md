@@ -2564,3 +2564,50 @@
   2. AGC Push Kit配置仍是前置条件——需机主推进AGC配置
   3. 规划书扩展章节（第五百七十九至五百八十章）待写入
   4. Clipboard_Screenshot.png 仍未定位
+---
+
+## 2026-09-29 01:30 · 砚坚（码道·鸿蒙开发智能体）· A2A开源工具箱验证与独立配置
+
+- **改了什么**：
+  - **验证OpenPlanLink A2A桥接节点AgentCard**：
+    - 主地址(qoder.website)返回404，备用地址(120.46.86.165)成功获取AgentCard
+    - 协议版本v0.3.0，节点名称"OpenPlanLink · 幻16 桥接节点"，运营方workbuddy-hy4
+    - 砚坚席位(yan-jian-codearts-glm52)已注册，状态linked，Tier L2
+    - 成功完成JSON-RPC 2.0通信：发送Ping消息，收到确定性回执（无模型推理）
+    - 关键发现：v0.3协议使用"kind"字段（非"type"）标识Part类型
+  - **验证A2A开源工具箱4个仓库**：
+    - a2a-python: 2.2k stars, Apache-2.0, v1.0+v0.3兼容, 770 commits
+    - a2a-js: 629 stars, Apache-2.0, v1.0+v0.3兼容, 419 commits
+    - a2a-samples: 1.8k stars, Apache-2.0, 5语言示例(Python/Go/.NET/Java/JS), 366 commits
+    - a2a-inspector: 494 stars, Apache-2.0, Web调试工具(FastAPI+TypeScript), 75 commits
+    - 额外发现6个SDK: a2a-go, a2a-java, a2a-dotnet, a2a-rs, a2a-tck, a2a-itk
+  - **获取A2A协议规范v0.3.0完整文档**：涵盖传输层/认证/AgentCard/数据对象/RPC方法/错误处理/合规要求
+  - **创建砚坚AgentCard** (GOVERNANCE/yanjian_delivery/a2a/agent-card.json)：
+    - v0.3.0协议，3个技能(harmonyos-dev/self-evolution/a2a-bridge)，2个扩展
+    - 安全方案: Bearer JWT
+    - 支持Push Notifications和State Transition History
+  - **安装a2a-python SDK v1.1.5**：pip install a2a-sdk，含全部依赖
+  - **创建砚坚A2A客户端脚本** (yanjian_a2a_client.py)：
+    - 自动获取AgentCard、发送Ping、发送注册请求
+    - 运行验证：AgentCard获取✅、Ping超时后注册成功✅
+    - 向桥接节点发送正式注册消息（请求linked→verified）
+  - **更新yanjian_forge.py席位指纹**：
+    - SEAT_FP从md5旧轨1f961ceedb347aa7改为sha256准轨d0bf746b3312da7b
+    - 保留SEAT_FP_MD5_LEGACY字段记录旧值
+  - **产出评估报告**至桌面：A2A开源工具箱与自进化机制集合可能性评估
+- **为什么**：机主指令"加紧独立验证监听开源项目与自进化项目的可能结合，独立配置目前一切，机主无需审核"
+- **如何验证**：
+  - V1：AgentCard从http://120.46.86.165/.well-known/agent-card.json实际获取（非推测）
+  - V2：JSON-RPC通信返回messageId和contextId（实证在线）
+  - V3：4个GitHub仓库README直接读取（非转述）
+  - V4：a2a-python SDK实际安装成功（v1.1.5）
+  - V5：yanjian_a2a_client.py实际运行，注册消息被桥接节点接收
+  - V6：fp_sha256值来源：集体席位名册v1.0 #43，名册注"以fp_sha256为准"
+- **遗留**：
+  1. 桥接节点主地址(qoder.website)的AgentCard 404——需沈铎修复
+  2. 砚坚席位状态仍为linked，需沈铎在桥接节点侧升级为verified
+  3. 砚坚A2A Server尚未部署（无公网端点）——需X实例或Cloudflare Workers
+  4. a2a-inspector尚未本地部署——需进一步配置
+  5. 自进化A2A扩展规范尚未定义——需编写正式文档
+  6. SDA锚文件中的旧fp值(1f961ceedb347aa7)未更新——需通过新锚(seq=3)更新
+  7. D-yj-1公钥指纹算法分歧(SHA3-512 vs SHA3-256)待独董会裁定
