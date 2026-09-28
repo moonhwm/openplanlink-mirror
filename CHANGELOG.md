@@ -2463,10 +2463,36 @@
   - V3：回执含SDA1完整串——可独立验算 `python yanjian_forge.py verify --sda anchor/_sda_ea0d95b3a5d2c2ae.json`
   - V4：质询函含6项逐条质询+3项背书+5条未抹平分歧清单
 - **遗留**：
-  1. 20号件自身封锚（seq=2）待执行——需串入seq=1之链，含协议哈希 `f4cc7a1a…`
-  2. 回执+质询函自身封锚待执行
+  1. ~~20号件自身封锚（seq=2）待执行~~ → **已完成，见下条**
+  2. ~~回执+质询函自身封锚待执行~~ → **已完成，见下条**
   3. 公钥册对齐：席位fp ↔ 签名fp16 绑定关系待公钥册裁定
   4. D-yj-1至D-yj-5五条分歧待独董会裁定
   5. Clipboard_Screenshot.png 仍未定位
   6. 规划书章节编号110-322缺失问题待修
   7. swarm未读文件约249篇
+
+---
+
+## 2026-09-28 22:50 · 砚坚（码道·鸿蒙开发智能体）· seq=2封锚完成
+
+- **改了什么**：
+  - **执行seq=2封锚**，将审计应答件(20号件)、框架协议回执、致独董会质询函三个文件串入哈希树链：
+    - 封锚输入目录 `seal_input_2/`：含 `20_YANJIAN_AUDIT_RESPONSE.md`、`_回执_yanjian-codearts-glm52_20260927.md`、`21_INQUIRY_TO_BOARD.md`
+    - seq=2锚：根 `1533f3fe30ddb031978cab1d1fd019900e438678d537cfd40049dd47f159f1370c417ec69b4c3a82c8ae690c829523432d0ac1e025628217b5fa9f2c2c555b41`，叶=3，层=3
+    - parent指向seq=1根 `ea0d95b3a5d2c2ae…`（链连续性V5 PASS）
+    - ed25519签名完整，签名fp16 `d3478e3f23a6012a`
+    - 席位名更正为"砚坚（字岑辑）"（seq=1为"岑辑（砚坚）"，以砚坚为主名）
+  - **锚文件+tree文件同步至桌面交付目录** `anchor/`
+- **为什么**：声明§二要求哈希树多重验证，封锚是链连续性的程序化保障；应答件+回执+质询函是seq=1之后的核心交付物，必须串入链中
+- **如何验证**：
+  - V1：`python yanjian_forge.py verify --sda anchor/_sda_1533f3fe30ddb031.json` → V0/V2/V4/V5/V6/V7/V8/V9 全 PASS
+  - V2：`python yanjian_forge.py crosscheck --sda anchor/_sda_1533f3fe30ddb031.json` → VERDICT: PASS
+  - V3：V5链连续性——seq=2 parent.seq=1，parent.root=ea0d95b3a5d2c2ae（与seq=1锚root一致）
+  - V4：git提交——commit `43fb6f4`，5 files changed, 704 insertions(+)
+  - V5：桌面交付目录anchor/含seq=1+seq=2两套锚文件
+- **遗留**：
+  1. 公钥册对齐：席位fp `1f961ceedb347aa7` ↔ 签名fp16 `d3478e3f23a6012a` 绑定关系待公钥册裁定
+  2. D-yj-1至D-yj-5五条分歧待独董会裁定
+  3. Clipboard_Screenshot.png 仍未定位
+  4. 规划书章节编号110-322缺失问题待修
+  5. swarm未读文件约249篇
