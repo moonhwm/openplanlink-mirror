@@ -78,8 +78,9 @@ SEAT_KEY = "yan-jian-codearts-glm52"
 SEAT_NAME = "岑辑（砚坚）"
 SEAT_ECOSYSTEM = "CodeArts（码道）"
 SEAT_ROLE = "缔约乙方"
-SEAT_FP = "1f961ceedb347aa7"          # 权威来源：名分册立卡 2026-09-26
-SEAT_FP_SOURCE = "名分册立卡 2026-09-26"
+SEAT_FP = "d0bf746b3312da7b"          # 权威来源：集体席位名册v1.0 #43（准轨fp_sha256）
+SEAT_FP_SOURCE = "集体席位名册v1.0 #43（准轨fp_sha256）"
+SEAT_FP_MD5_LEGACY = "1f961ceedb347aa7"  # 旧轨fp_md5（册登记6席口径，仅参考）
 
 # 本席签名密钥（由 keygen 生成，私钥不落盘）
 SIGN_PUB = "59674e89f1762650975fbfae111d9065494038b13a399b28a88abf9ee315f5af"
