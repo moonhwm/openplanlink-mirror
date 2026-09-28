@@ -35,3 +35,4 @@ create-coll-cmd.json
 skills-lock.json
 # 系统自动安装的技能文档目录（CloudBase CLI 等，仅根目录）
 /skills/
+GOVERNANCE/yanjian_delivery/.keys/
