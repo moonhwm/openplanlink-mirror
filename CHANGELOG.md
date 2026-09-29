@@ -2611,3 +2611,54 @@
   5. 自进化A2A扩展规范尚未定义——需编写正式文档
   6. SDA锚文件中的旧fp值(1f961ceedb347aa7)未更新——需通过新锚(seq=3)更新
   7. D-yj-1公钥指纹算法分歧(SHA3-512 vs SHA3-256)待独董会裁定
+## 2026-09-29 16:42 · 岑辑（yan-jian-codearts-glm52）· A2A IM网络建设开工
+
+- **机主指令**："安装这份暂时方案进行广播IM开工"——拖入两份A2A文档
+- **完成事项**：
+  1. 两份A2A文档安装到 `GOVERNANCE/A2A/`（参考件v1.1 + 种子稿v0.1）
+  2. 广播IM开工消息经脊髓总线（Supabase cross_mode_channel, msg_hash=3f166a1dbed0ddb9, HTTP 201）
+  3. S1: A2A monorepo骨架创建（`C:\Users\欧阳宏俊\Documents\kimi\a2a-network\`，33文件/2273行）
+     - npm workspaces 8 packages + CI四闸（lint/test/license-check/cred-scan）
+     - license-checker（AGPL→CI红）+ cred-scanner（API key/JWT/私钥泄露→CI红）
+     - docker-compose.yml + sql/init_staging.sql + 五幕演练剧本YAML
+  4. S2: UMC校验器Py+TS双实现 + 五幕夹具测试
+     - UMC v0.1 JSON Schema（kind三面/msg_hash幂等闸/五段式/心跳屏蔽机主）
+     - Python校验器8项校验逻辑 + TypeScript同口径实现
+     - 双语言五幕夹具测试（必填字段/kind分面/幂等闸/心跳屏蔽/五段式/批量校验）
+  5. git首次提交 b2a501f
+- **为什么**：机主令启动A2A即时通讯网建设，从G1（契约与入口）开始
+- **如何验证**：
+  - V1：广播消息HTTP 201返回（脊髓总线确认接收）
+  - V2：monorepo 33文件全部落盘（find验证）
+  - V3：git commit b2a501f 33 files 2306 insertions（git log验证）
+  - V4：UMC校验器双实现同口径8项校验逻辑（代码审查）
+- **遗留**：
+  1. npm install后运行测试验证双绿判据（夹具全过+回放零误报）
+  2. S3 LangBot飞书网关容器化——候飞书平台账号
+  3. S4 模拟席位镜像+10席位编队——候S2双绿验证
+  4. OpenIM部署位——候机主指定
+  5. Server酱SendKey——候机主7带外交割
+## 2026-09-29 18:00 · 岑辑（yan-jian-codearts-glm52）· S2双绿+S4+S5+S6全部完成
+
+- **S2双绿判据达成**：
+  - 夹具全过：TypeScript 24/24 + Python 21/21 = 45/45 passed
+  - 7天回放零误报：1558条消息，0 error，318 warning（旧格式兼容）
+  - 兼容模式改进：旧kind兼容/双hash算法/旧status/非hex降级warning
+  - 回放发现：心跳占比57%（目标≤30%）
+- **S4模拟席位镜像+10席位编队**：
+  - SeatNode类（N-1注册/N-2心跳/N-5红线）
+  - fleet-launcher.mjs 10席位编队启动器
+  - fleet_config.json（3真实Mock:岑辑/顾权/霍衡 + 7模拟:甲~庚）
+- **S5回放器+发生器+调度器**：
+  - replayer: 历史消息按原时序加速回放
+  - generator: M1心跳风暴/M2洪峰幂等/M3断链/M5注入拒绝
+  - drillmaster: 演练调度器（cron+台账）
+- **S6看板+每周一页纸**：
+  - dashboard: 四指标（心跳占比/投递时延/挂账深度/参演率）
+- **A2A广播**：biz.progress msg_hash=c52442baab73f7b0
+- **git提交链**：b2a501f→c6ace11→049ffce
+- **遗留**：
+  1. S3 LangBot飞书网关容器化——候飞书平台账号
+  2. S7 M4/M5合入+全五幕周检cron——候S3
+  3. OpenIM部署位——候机主指定
+  4. Server酱SendKey——候机主带外交割
