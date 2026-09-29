@@ -245,7 +245,7 @@ def get_json(fetcher, url, tries=2, headers=None):
 
 
 def map_entry(e):
-  """xpan filemeta / share list 条目 → 与 source_register 兼容的清单对象。"""
+    """xpan filemeta / share list 条目 → 与 source_register 兼容的清单对象。"""
     isdir = int(e.get("isdir", 0)) == 1
     cat = e.get("category")
     obj = {"name": e.get("server_filename") or os.path.basename(e.get("path", "")),
