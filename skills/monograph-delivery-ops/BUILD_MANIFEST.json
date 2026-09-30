@@ -1,0 +1,27 @@
+{
+  "bundle_id": "monograph-delivery-ops",
+  "version": "1.0.2",
+  "built_at": "2026-09-13T21:11:17.966326+00:00",
+  "builder": "缄钥/顾守真（unnamed 根因治理候选：frontmatter 回首行+免责锚并入 description 首句，候机主裁准）",
+  "upstream_sources": [
+    {
+      "repo": "alchaincyf/huashu-report",
+      "head": "8d7f4ea5",
+      "license": "MIT"
+    },
+    {
+      "repo": "alchaincyf/huashu-excel",
+      "head": "6183a2c0",
+      "license": "MIT"
+    }
+  ],
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "27c25c711db670ed940133fe286faa88c24fd462f1490801022c8e8a421f1f7a",
+      "md5": "b7af3dc63b382a124ac71a4f76a9c96c",
+      "bytes": 12676
+    }
+  ],
+  "integrity": "sha256 发布哈希清单——发行即哈希链（cangjie dist/ 同构）"
+}
