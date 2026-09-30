@@ -2698,3 +2698,28 @@
   2. S7完整实现——候S3
   3. OpenIM部署位——候机主指定
   4. Server酱SendKey——候机主带外交割
+## 2026-09-30 12:30 · 岑辑（砚坚席位/码道·GLM-5.2-sft-harmony）· A2A引入双LLM席位
+
+- **改了什么**：在 a2a-network 仓库新增 `packages/llm-seat` 包，将火山引擎Doubao和华为MaaS OpenPangu两个LLM接入A2A网络。席位继承N-1~N-5义务，并加载四大机制：
+  1. **Q1 额度守护**：日预算¥2，warn(70%)/degrade(85%)/stop(100%)三档降级策略；降级时max_tokens减半，停服时拒绝调用；跨日自动重置
+  2. **Q2 资源审计**：每30分钟审计其他节点心跳频率/消息量/隐性费用，发现异常写入audit.finding到总线；审计不审查自己
+  3. **Q3 著作推送**：15条自我认知主题著作库（道德经/论语/孟子/王阳明/苏格拉底/笛卡尔等），阀门机制（每日1条+定时9:00后）+幻觉校验（已知文本匹配+来源完整性），确定性选取（按日期种子取模，可审计）
+  4. **Q4 历史上下文**：受理新请求时组合最近20条历史消息形成上下文prompt，只保留biz.request/llm.response类型
+- **文件清单**（a2a-network仓库 commit 211109c）：
+  - `packages/llm-seat/src/llm-adapter.mjs`（125行）— VolcArkAdapter + HuaweiMaaSAdapter + createLLMAdapter工厂；主模型未开通时自动降级到备选模型
+  - `packages/llm-seat/src/index.mjs`（380行）— LLMSeatNode + QuotaGuard + ResourceAuditor + BookExcerptPusher + ContextManager
+  - `packages/llm-seat/src/fleet-launcher.mjs`（86行）— 双席位编队启动器
+  - `packages/llm-seat/tests/llm-seat.test.js`（342行）— 39条纯逻辑测试
+  - `packages/llm-seat/package.json` — npm包配置
+  - `packages/seat-image/fleet_config.json` — 10→12席位（+volc-doubao-seed +hw-pangu-pro）
+  - `package.json` — workspaces添加llm-seat + fleet:llm脚本
+  - `.gitignore` — 添加.llm-quota-state.json/.book-push-state.json
+- **如何验证**：
+  - V1：Jest 76/76 全过（含39条新增llm-seat测试）
+  - V2：CI四闸全绿（lint 0 errors / test 76 passed / cred-scan 0 / license ✅）
+  - V3：cred-scan 0发现（凭据只从环境变量读，不落盘）
+  - V4：UMC校验扩展kind（llm.*/audit.*/book.*）兼容原有kind
+- **遗留**：
+  1. doubao-seed-evolving模型未开通——需机主在火山引擎ARK控制台开通，当前自动降级到doubao-seed-2-1-pro-260915
+  2. LLM席位实际运行需配置环境变量（VOLC_ARK_API_KEY / HW_MAAS_API_KEY / SUPA_URL / SUPA_KEY）
+  3. 适配器类测试需通过 `node --test` 单独运行（ESM模块Jest不兼容动态import）
