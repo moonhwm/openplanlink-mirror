@@ -2656,9 +2656,45 @@
 - **S6看板+每周一页纸**：
   - dashboard: 四指标（心跳占比/投递时延/挂账深度/参演率）
 - **A2A广播**：biz.progress msg_hash=c52442baab73f7b0
-- **git提交链**：b2a501f→c6ace11→049ffce
+- **git提交链**：b2a501f→c6ace11→049ffce→331e4ed
 - **遗留**：
   1. S3 LangBot飞书网关容器化——候飞书平台账号
   2. S7 M4/M5合入+全五幕周检cron——候S3
+  3. OpenIM部署位——候机主指定
+  4. Server酱SendKey——候机主带外交割
+
+## 2026-09-30 01:50 · 岑辑（yan-jian-codearts-glm52）· 深度代码审计+S3脚手架+端到端集成测试
+
+- **机主指令**："全部都做"——先提交harmony-app，再做代码审计+S3脚手架+集成测试，自主推进3小时
+- **完成事项**：
+  1. **harmony-app提交**（257f6a1）：CHANGELOG追加A2A建设条目 + 砚坚交付件归档
+  2. **深度代码审计**（10项发现）：
+     - 🔴 judge_m5.mjs: `stagingIdx >8 > -1` 打字错误→修复
+     - 🔴 cred-scanner: `resolve` 未从path导入→修复
+     - 🟡 bridge.py: 入站kind `biz.command` 与N-5红线冲突→改为 `biz.notice`
+     - 🟡 UMC校验器: esc.*时延预算≤60s 常量已定义但未实现→双实现补全
+     - 🟡 replayer: 无UMC校验+status缺失导致投递0条→添加规范化+校验
+     - 🟡 drillmaster: 无法透传staging参数→添加--staging-url/--staging-key
+     - 🟡 所有CLI脚本: `process.exit()` 在Windows上触发libuv崩溃（UV_HANDLE_CLOSING）→改为 `process.exitCode`
+     - 🟡 seat-image: 硬编码Supabase publishable key→改为环境变量必填（凭据纪律）
+     - 🟡 lark_adapter.json: 3处打字错误→修复
+     - 🟢 ESLint: 旧版JSON配置+`.mjs`扩展名不兼容ESLint 9→改为flat config
+  3. **S3 LangBot飞书网关深度脚手架**：
+     - bridge.py: FeishuAPI客户端（token管理+消息发送）+ 出站轮询循环 + 入站事件处理 + UMC校验 + FeishuWebhookHandler
+     - test_bridge.py: 23个测试用例（UMC校验/出站过滤/入站转换/卡片格式/API/回调）
+     - Dockerfile + .env.example
+  4. **端到端集成测试**（13个用例）：
+     - mock-staging.js: 内存版Supabase REST API模拟（含幂等闸）
+     - e2e.test.js: generator→staging（M2洪峰幂等）/ replayer→staging / dashboard←staging / judge_m4/m5 / drillmaster→generator 全链路
+  5. **CI四闸全绿**：lint(0 errors) + test(81/81) + license-check(✅) + cred-scan(0发现)
+- **git提交**：ec2a464（31文件，+1620/-94行）
+- **如何验证**：
+  - V1：Jest 37/37 + Python 44/44 = 81/81 全过
+  - V2：CI四闸 `npm run ci` 全绿
+  - V3：cred-scan 0 CRITICAL（硬编码凭据已消除）
+  - V4：端到端集成测试覆盖6条链路13个用例
+- **遗留**：
+  1. S3完整实现——候飞书平台账号（深度脚手架已就绪，配置即启用）
+  2. S7完整实现——候S3
   3. OpenIM部署位——候机主指定
   4. Server酱SendKey——候机主带外交割
