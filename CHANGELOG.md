@@ -2777,3 +2777,37 @@
   2. 当前群是交换群——引入优先级后可能变为非交换群
   3. 规范场的量子化（概率性消息传递）有待论证
   4. 群的上同调（审计机制是否对应群上同调）有待深入研究
+## 2026-09-30 23:00 · 岑辑（码道·GLM-5.2-sft-harmony）· 落地点火令四条款
+
+- **改了什么**：响应机主点火令「点火，肝胆相照，互相监督，参政议政」，在a2a-network新增`packages/governance-engine`治理引擎，把四条款落实为可执行代码；在harmony-app创建点火令治理文档。
+- **令文解析为可执行条款**：
+  1. **点火** → `GovernanceEngine.ignite()` + 四周期调度（审计巡审30min/质询巡检10min/日耗对账24h关键/经验汇编24h）；五态状态机 cold→igniting→hot→degraded→shutdown
+  2. **肝胆相照** → `ExperienceRegistry` 经验四义务（沉淀坑因解证四元→播报esc.exp一经验一消息→复用动工前必检索→汇编全网经验日汇）；铁律"未播报的经验不构成已知，重蹈不免责"
+  3. **互相监督** → `AuditBureau` 互审协议（任一席位可质询任一席位，群自同态保证审计权对称）；五类审计重点（静默重试/缓存失效/子代理扇出/免费额度误判/重复搬运）；SLA 48h未应答自动升级
+  4. **参政议政** → `Assembly` 提案表决（六类提案：章程2/3、预算1/2、技术1/2、纪律2/3、准入2/3、运维1/2）；流程 提案→附议达门槛→表决→计票→决议→台账哈希链留痕；机主一票否决权保留
+- **数学基底**（承规范场与群论框架）：
+  - 点火 = 规范场激发（场存在≠场被激发）
+  - 肝胆相照 = 规范场源项（不改变不变量，改变场强分布）
+  - 互相监督 = 群的自同态 G×G→G（审计权对称，不引入外部权威）
+  - 参政议政 = 群在决策空间上的表示（决议=表示空间的不动点）
+- **文件清单**（a2a-network仓库 commit dd73750）：
+  - `packages/governance-engine/src/ignition.mjs`（240行）— GovernanceEngine + CycleRegistry
+  - `packages/governance-engine/src/candor.mjs`（200行）— ExperienceEntry + ExperienceRegistry
+  - `packages/governance-engine/src/oversight.mjs`（240行）— Challenge + Finding + AuditBureau
+  - `packages/governance-engine/src/deliberation.mjs`（280行）— Proposal + Assembly
+  - `packages/governance-engine/src/index.mjs`（60行）— createGovernanceEngine工厂
+  - `packages/governance-engine/tests/governance-engine.test.js`（700行）— 73条测试
+  - `package.json` — workspaces + govern脚本
+  - `GOVERNANCE/A2A/点火令_肝胆相照互相监督参政议政_v1.0_20260930.md`（本仓）
+- **如何验证**：
+  - V1：Jest 217/217 + Python 44/44 = **261 全过**（含73条新增治理引擎测试）
+  - V2：CI四闸全绿（lint 0 errors / test 261 / cred-scan 0 / license ✅）
+  - V3：五模块语法检查全通过（node -c）
+  - V4：凭据零明文（凭据只从环境变量读）
+  - V5：UMC kind模式扩展兼容既有kind不破坏
+- **遗留**：
+  1. 审计权滥用防护——群自同态保证对称，但未防"集体审计同一席位"骚扰型攻击，需审计配额
+  2. 提案搁置时限——草案可永久滞留drafting，需自动归档
+  3. 经验质量评估——当前只校验四元完整性，未校验"证"是否可信
+  4. 跨席位同步——本引擎为单席位视角，多席位联合审计共识机制待建
+  5. 总线实装——当前为进程内实现，接入Supabase需配置凭据
