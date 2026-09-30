@@ -2752,3 +2752,28 @@
   2. 两个端点均未下发CORS头——浏览器直连可能被拦
   3. CSV凭据安全建议——建议轮换AK/SK、挪出同步盘或加密存储
   4. table-1788257812608.csv用途待确认
+## 2026-09-30 22:00 · 岑辑（砚坚席位/码道·GLM-5.2-sft-harmony）· 引入规范场与群论框架
+
+- **改了什么**：响应机主指令"干脆引入规范场和群论吧"，在a2a-network仓库新增`packages/gauge-field`包，将规范场论和群论引入A2A网络，为现有经验性堆叠的机制提供统一数学基础。同时在harmony-app的GOVERNANCE/A2A/目录创建理论框架文档。
+- **理论框架**（`GOVERNANCE/A2A/规范场与群论框架_v1.0_20260930.md`=）：
+  - 群论映射：席位集合=规范群，消息传递=群操作，UMC校验=群同态保持性，密钥轮换=群自同构
+  - 规范场映射：总线=规范场，消息=规范玻色子，UMC契约=规范不变量，校验失败=对称性破缺
+  - 身份验证映射：claim=群元素生成，cosign=子群签名，absence=补集证明，rotate=群自同构，revoke=群元素移除
+- **实现代码**（a2a-network仓库 commit 2f8c7ff）：
+  - `packages/gauge-field/src/group-theory.mjs`（278行）— SeatGroup/GroupAction/GroupHomomorphism/createHashHomomorphism
+  - `packages/gauge-field/src/gauge-field.mjs`（200行）— MessageField/GaugeTransform/GaugeInvariant/SymmetryBreaking/FieldStrengthObserver
+  - `packages/gauge-field/src/identity-gauge.mjs`（250行）— ClaimProtocol/CoSignProtocol/AbsenceProof/RotateProtocol/RevokeProtocol/WatchProtocol/BindDocProtocol/AnchorProtocol/ConsistencyProtocol
+  - `packages/gauge-field/src/index.mjs`（175行）— GaugeFieldNetwork集成入口
+  - `packages/gauge-field/tests/gauge-field.test.js`（523行）— 68条纯逻辑测试
+  - `packages/gauge-field/package.json`
+  - `package.json` — workspaces添加gauge-field
+- **如何验证**：
+  - V1：Jest 144/144全过（含68条新增gauge-field测试）
+  - V2：CI四闸全绿（lint 0 errors / test 144 / cred-scan 0 / license ✅）
+  - V3：所有源文件语法1语法检查通过（node -c）
+  - V4：群公理四条全部有对应测试（封闭性/结合律/单位元/逆元）
+- **遗留**：
+  1. absence证明的实现为简单版本——群论中补集证明的开放问题
+  2. 当前群是交换群——引入优先级后可能变为非交换群
+  3. 规范场的量子化（概率性消息传递）有待论证
+  4. 群的上同调（审计机制是否对应群上同调）有待深入研究
