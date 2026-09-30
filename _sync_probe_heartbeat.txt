@@ -1,3 +1,0 @@
-sync-lane write-channel probe
-ts: 2026-09-30T23:30+08:00
-note: 退化门后首次小探针；落地验证后按处置规程删除。
