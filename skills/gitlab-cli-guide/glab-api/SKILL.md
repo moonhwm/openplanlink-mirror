@@ -104,7 +104,7 @@ description: 直接调用 GitLab REST API，用于其他 glab 命令未涵盖的
       }
     }
     '                                                                               
-                                                                                                
+                                                                                    
     $ glab api graphql --paginate -f query='
     query($endCursor: String) {
       project(fullPath: "gitlab-org/graphql-sandbox") {
