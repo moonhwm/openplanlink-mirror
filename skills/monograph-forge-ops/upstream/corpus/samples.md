@@ -8,7 +8,7 @@
 
 - **开放许可（11份）**——CC BY / CC BY-NC / CC BY-ND / OGL。这类你可以自由使用，包括再分发，署名即可
 - **保留所有权利（17份）**——版权方明确保留再分发权
-- **未声明许可（15份）**——公开发布但没有使用条款，按版权法默认仍是保留版权
+- **未声明许可（15份）**——公开发布但没有给出使用条款，按版权法默认仍是保留版权
 
 标 ᵃ 的 2 份是后来补入的，未进入量化解剖（`anatomy.json` 覆盖 41 份）。
 
@@ -47,7 +47,7 @@
 | 16 | 2026-03-16 | World Economic Forum × Accenture | [Organizational Transformation in the Age of AI (White Paper)](https://www.weforum.org/publications/organizational-transformation-in-the-age-of-ai-how-organizations-maximize-ais-potential/) | 43 | 保留所有权利 |  |
 | 17 | 2026-03-24 | RAND Corporation | [Artificial General Intelligence Forecasting and Scenario Analysis: State of the Field, Methodological Gaps, and Strategic Implications](https://www.rand.org/pubs/research_reports/RRA4692-1.html) | 75 | 保留所有权利 |  |
 | 18 | 2026-04-01 | IMF | [Global Economic and Financial Implications of Artificial Intelligence: Lessons from a Scenario-Planning Exercise (IMF Note 2026/002)](https://www.elibrary.imf.org/view/journals/068/2026/002/article-A001-en.xml) | 27 | 保留所有权利 |  |
-| 19 | 2026-06-01 | Bank of America Institute | [Adaptability is the new job security: AI and the future of work（适应力是新的工作保障）](https://institute.bankofamerica.com/transformation/ai-and-future-of-work.html) | 10 | 保留所有权利 |  |
+| 19 | 2026-05-01 | Bank of America Institute | [Adaptability is the new job security: AI and the future of work（适应力是新的工作保障）](https://institute.bankofamerica.com/transformation/ai-and-future-of-work.html) | 10 | 保留所有权利 |  |
 | 20 | 2026-05-11 | J.P. Morgan Private Bank | [2026 Mid-Year Outlook: Promise and Pressure（承诺与压力）](https://privatebank.jpmorgan.com/nam/en/insights/latest-and-featured/mid-year-outlook) | 70 | 保留所有权利 |  |
 | 21 | 2026-06-01 | KPMG | [KPMG Global AI Quarterly Pulse Survey: Q2 2026](https://kpmg.com/xx/en/our-insights/ai-and-technology/ai-pulse.html) | 27 | 保留所有权利 |  |
 | 22 | 2026-06-12 | CNAS | [Red Lines: Understanding the National Security Risks of China's Advanced AI](https://www.cnas.org/publications/reports/red-lines) | 38 | 保留所有权利 |  |
