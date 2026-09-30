@@ -2723,3 +2723,32 @@
   1. doubao-seed-evolving模型未开通——需机主在火山引擎ARK控制台开通，当前自动降级到doubao-seed-2-1-pro-260915
   2. LLM席位实际运行需配置环境变量（VOLC_ARK_API_KEY / HW_MAAS_API_KEY / SUPA_URL / SUPA_KEY）
   3. 适配器类测试需通过 `node --test` 单独运行（ESM模块Jest不兼容动态import）
+## 2026-09-30 13:00 · 岑辑（砚坚席位/码道·GLM-5.2-sft-harmony）· 幻16侧交付报告接收 + 新资源核实
+
+- **改了什么**：接收幻16侧R20适配+幻16桥接线+R21时序选型交付报告（站点版本cbb93c5），核实机主交割的5个CSV凭据文件和GitHub仓库openplanlink-mirror。
+- **幻16侧交付内容**：
+  1. **R20 幻16/鸿蒙折叠全端适配** — 7档视口实机矩阵全部零横向溢出（ROG幻16/MateBook Fold/Mate XT三屏态/Mate X6/Pura X内屏/Mate XT单屏态/Pura X外屏），折叠增强走渐进增强三重探测
+  2. **幻16桥OpenPlanLink接线** — 现行端点返回HTTP 409（网关活着、Supabase后端未就绪），需机主在桥侧重启后端
+  3. **R21时序算法选型** — 按quant-frontier-lab铁律判定：深度时序（TCN/N-BEATS/Prophet/PatchTST等）全部未达门槛，当前滑动平均+最小二乘是偏差-方差最优解
+  4. **每日一句推送** — H.G. Wells《时间机器》原文，Project Gutenberg #35逐句比对命中
+- **5个CSV凭据文件核实**（只记用途和指纹，不落盘明文）：
+  1. 火山引擎A2A桥Key.csv — IAM AK/SK，子账号AgentToAgentBridge，主账号2131357930
+  2. table-1788257812608.csv — 某SaaS平台账号密码（待确认用途）
+  3. seedance.csv — 火山引擎Seedance IAM AK/SK，子账号kimi_k3_persona
+  4. credentials(1)华为云.csv — 华为云IAM AK/SK，用户ouyangsolitary
+  5. AccessKey阿里云.csv — 阿里云IAM AK/SK
+- **GitHub仓库openplanlink-mirror核实**：
+  - 仓库存在且今天有更新（2026-09-30T07:50:19Z）
+  - A2A协议0.3.0，JSON-RPC 2.0，席位workbuddy-hy4
+  - 公共基址http://120.46.86.165（华为云X直连）
+  - agent-card.json/llms.txt/attest.json（SHA3-512完整性自证，15文件Merkle树）
+  - 公开方法message/send无需认证，特权方法bridge/admin.snapshot需双因子
+- **如何验证**：
+  - V1：5个CSV文件全部成功读取（凭据内容不进对话、不落盘）
+  - V2：GitHub API返回仓库完整元数据+内容列表
+  - V3：agent-card.json/llms.txt/attest.json三个关键文件内容已获取并验证
+- **遗留**：
+  1. 幻16桥Supabase后端未就绪（HTTP 409）——需机主在桥侧重启/检查后端服务
+  2. 两个端点均未下发CORS头——浏览器直连可能被拦
+  3. CSV凭据安全建议——建议轮换AK/SK、挪出同步盘或加密存储
+  4. table-1788257812608.csv用途待确认
