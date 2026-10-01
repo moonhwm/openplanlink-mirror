@@ -45,7 +45,7 @@ def report(im, name, glyph=False):
             from rapidocr_onnxruntime import RapidOCR
             res, _ = RapidOCR()(name)
             hs = [max(pt[1] for pt in box) - min(pt[1] for pt in box)
-                  for box, txt, _ in (res or []) if any('一' <= c <= '鿿' for c in txt)]
+                  for box, txt, _ in (res or []) if any('\x5cu4e00' <= c <= '\x5cu9fff' for c in txt)]
             if hs:
                 hs.sort()
                 print(f"  [glyph] 汉字行高中位数≈{hs[len(hs)//2]}px（n={len(hs)}，RapidOCR框高粗测±20%）")
@@ -69,7 +69,7 @@ def parse_box(a, w, h):
         print(f"  ⚠ box 越界已裁剪：({x0},{y0},{x1},{y1}) → ({cx0},{cy0},{cx1},{cy1})")
     if cx1 - cx0 < 2 or cy1 - cy0 < 2:
         p_exit(f"--box 有效区域过小：({cx0},{cy0},{cx1},{cy1})")
-    return cx0, cy0, x1, y1 if False else (cx0, cy0, cx1, cy1)
+    return cx0, cy0, cx1, cy1
 
 def p_exit(msg):
     print(f"[错误] {msg}", file=sys.stderr); sys.exit(2)
