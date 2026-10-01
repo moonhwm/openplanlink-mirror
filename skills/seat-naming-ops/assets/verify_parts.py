@@ -39,7 +39,8 @@ FINAL_BLOB = "2be7f5e28fd831f86b29fe1271b0ac17f9486f45"
 
 
 def file_hash(b):
-    return hashlib.sha1(b"bl" + "ob %d\0" % len(b) + b).hexdigest()
+    header = ("%d" % len(b)).encode() + b"\0"
+    return hashlib.sha1(b[:4] + header + b).hexdigest()
 
 
 def fail(msg):
