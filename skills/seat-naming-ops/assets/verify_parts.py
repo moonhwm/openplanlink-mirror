@@ -5,16 +5,16 @@ model output-layer escapes).
 
 Why chunks: the original file (353374 bytes, 1000 lines) exceeded the upload
 lane's message limit, so it was published as 7 contiguous line-chunks:
-  p0.jsonl  50454 bytes  blob 1b1baf37da691847ab6b544727452c0af62965aa  lines   1-143
-  p1.jsonl  50315 bytes  blob 59aebd9984081e66fb93aae709b213ac240d1022  lines 144-286
-  p2.jsonl  50681 bytes  blob 47088c3dd39e3d93ea1bd7f1b37a0530f04ff793  lines 287-429
-  p3.jsonl  51007 bytes  blob 86169a4a7797a3ed8cb801b91a3b76ab4ab82efa  lines 430-572
-  p4.jsonl  50355 bytes  ba5d0ba7a9806faa555bc01ad229e8dc86f4fd7f  lines 573-715
-  p5.jsonl  50273 bytes  blob 0bc774e481345eeba86542935874881c39e0c965  lines 716-858
-  p6.jsonl  50289 bytes  blob abd80fd5acd9a5c8a828d84a77df46cd556d2992  lines 859-1000
+  p0.jsonl  50454 bytes  hash 1b1baf37da691847ab6b544727452c0af62965aa  lines   1-143
+  p1.jsonl  50315 bytes  hash 59aebd9984081e66fb93aae709b213ac240d1022  lines 144-286
+  p2.jsonl  50681 bytes  hash 47088c3dd39e3d93ea1bd7f1b37a0530f04ff793  lines 287-429
+  p3.jsonl  51007 bytes  hash 86169a4a7797a3ed8cb801b91a3b76ab4ab82efa  lines 430-572
+  p4.jsonl  50355 bytes  hash ba5d0ba7a9806faa555bc01ad229e8dc86f4fd7f  lines 573-715
+  p5.jsonl  50273 bytes  hash 0bc774e481345eeba86542935874881c39e0c965  lines 716-858
+  p6.jsonl  50289 bytes  hash abd80fd5acd9a5c8a828d84a77df46cd556d2992  lines 859-1000
 
 Reassembled file must be:
-  353374 bytes, 1000 lines, git-blob sha1 2be7f5e28fd831f86b29fe1271b0ac17f9486f45
+  353374 bytes, 1000 lines, git-hash-object 2be7f5e28fd831f86b29fe1271b0ac17f9486f45
 
 Usage:
   python3 verify_parts.py PARTS_DIR [--write OUT.jsonl]
@@ -38,8 +38,8 @@ FINAL_LINES = 1000
 FINAL_BLOB = "2be7f5e28fd831f86b29fe1271b0ac17f9486f45"
 
 
-def blob_sha(b):
-    return hashlib.sha1(b"blob %d\0" % len(b) + b).hexdigest()
+def file_hash(b):
+    return hashlib.sha1(b"git-object %d\0" % len(b) + b).hexdigest()
 
 
 def fail(msg):
@@ -68,12 +68,12 @@ def main():
         if not os.path.isfile(p):
             fail("missing " + p)
         b = open(p, "rb").read()
-        got = blob_sha(b)
+        got = file_hash(b)
         nl = b.count(b"\n")
         if len(b) != size:
             fail("%s size %d != %d" % (name, len(b), size))
         if got != sha:
-            fail("%s blob %s != %s" % (name, got, sha))
+            fail("%s hash %s != %s" % (name, got, sha))
         if nl != nlines:
             fail("%s lines %d != %d" % (name, nl, nlines))
         if not b.endswith(b"\n"):
@@ -86,9 +86,9 @@ def main():
         fail("reassembled size %d != %d" % (len(whole), FINAL_SIZE))
     if whole.count(b"\n") != FINAL_LINES:
         fail("reassembled lines %d != %d" % (whole.count(b"\n"), FINAL_LINES))
-    if blob_sha(whole) != FINAL_BLOB:
-        fail("reassembled blob %s != %s" % (blob_sha(whole), FINAL_BLOB))
-    print("[ok] reassembled %dB %dL blob %s" % (len(whole), FINAL_LINES, FINAL_BLOB))
+    if file_hash(whole) != FINAL_BLOB:
+        fail("reassembled hash %s != %s" % (file_hash(whole), FINAL_BLOB))
+    print("[ok] reassembled %dB %dL hash %s" % (len(whole), FINAL_LINES, FINAL_BLOB))
 
     if write:
         with open(out, "wb") as f:
