@@ -52,7 +52,7 @@ def chapters_smuggle_violations(seed, corpus, poem_names):
     viol = []
     for e in seed:
         note = re.sub(r"「[^「」]*」", "", e.get("chapters", ""))
-        for run in re.findall(r"[一-鿿]{4,}", note):
+        for run in re.findall(r"[\u4e00-\u9fff]{4,}", note):
             if any(run in pn or pn in run for pn in poem_names):
                 continue  # 篇目名豁免
             hit = next((run[i:i + 4] for i in range(len(run) - 3) if run[i:i + 4] in corpus), None)
