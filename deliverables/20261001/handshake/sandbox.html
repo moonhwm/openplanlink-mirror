@@ -1,0 +1,768 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>分叉消费 · 湍流共振 · 防伪回执 — A2A 节点消费沙盘 v2.0（白天版 × 规范场·群论·Q数）</title>
+<style>
+  :root{
+    --bg:#f7f3ec; --panel:#fffdf7; --panel2:#f1ebdf; --line:#ddd2bf;
+    --ink:#2c2620; --dim:#6f6553; --faint:#9a8f7b; --inkSoft:#6b6152;
+    --amber:#a8741a; --teal:#3f6f66; --rust:#9c4632; --grey:#7d7668;
+    --red:#a03a2c; --green:#567a3a; --gold:#8a6516;
+    --stageA:#efe7d8; --stageB:#f6f1e7; --dashed:#cfc4ac;
+    --gotBd:#b3c49a; --missBd:#d3aa9c;
+    --okLine:#7a9a56; --badLine:#c08a7c; --okBg:#e6edd8; --badBg:#f3ded7;
+    --okT:#4a6a2e; --badT:#a03a2c; --baseL:#c9bb9e;
+  }
+  :root[data-theme="dark"]{
+    --bg:#151210; --panel:#1c1712; --panel2:#211b15; --line:#352c21;
+    --ink:#d9d2c3; --dim:#988e7c; --faint:#6e6656; --inkSoft:#b7ad9a;
+    --amber:#d9a441; --teal:#5f8f85; --rust:#b0563f; --grey:#8b8578;
+    --red:#b04a3c; --green:#7d9a5e; --gold:#e8c97a;
+    --stageA:#1f1a14; --stageB:#14110e; --dashed:#2a241c;
+    --gotBd:#3d4a35; --missBd:#4a3530;
+    --okLine:#4a5a3a; --badLine:#5a3a34; --okBg:#2a3320; --badBg:#3a2420;
+    --okT:#a8c488; --badT:#e08a7d; --baseL:#3a332a;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{background:var(--bg); color:var(--ink); font-family:"Noto Serif SC","Songti SC",Georgia,serif; transition:background .25s, color .25s}
+  body{padding:18px 22px 30px; min-height:100vh}
+  header{position:relative; border-bottom:1px solid var(--line); padding-bottom:14px; margin-bottom:14px}
+  #btnTheme{position:absolute; top:2px; right:0}
+  h1{font-size:22px; letter-spacing:2px; font-weight:600; color:var(--gold)}
+  h1 small{font-size:12px; color:var(--dim); letter-spacing:1px; font-weight:400; margin-left:10px}
+  .sub{margin-top:6px; font-size:12.5px; color:var(--dim); line-height:1.7; max-width:1060px}
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+  .chip{font-size:11px; border:1px solid var(--line); border-radius:999px; padding:3px 10px; color:var(--dim); background:var(--panel)}
+  .chip b{color:var(--ink); font-weight:600}
+  .chip.got{border-color:var(--gotBd)} .chip.got b{color:var(--green)}
+  .chip.miss{border-color:var(--missBd)} .chip.miss b{color:var(--red)}
+  main{display:grid; grid-template-columns:308px minmax(0,1fr) 330px; gap:14px}
+  section.panel{background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin-bottom:14px}
+  section.panel h2{font-size:13px; letter-spacing:2px; color:var(--amber); margin-bottom:8px; font-weight:600}
+  section.panel h2 small{color:var(--faint); font-size:10.5px; letter-spacing:1px; margin-left:6px; font-weight:400}
+  #stageWrap{position:relative; width:100%; height:520px; background:radial-gradient(ellipse at 50% 42%, var(--stageA) 0%, var(--stageB) 70%); border:1px solid var(--line); border-radius:10px; overflow:hidden; transition:background .25s}
+  #stage{width:100%; height:100%; display:block}
+  #fallback{position:absolute; inset:0; display:none; align-items:center; justify-content:center; text-align:center; color:var(--dim); font-size:13px; line-height:2; padding:30px}
+  .controls{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+  button{font-family:inherit; font-size:12px; letter-spacing:1px; cursor:pointer; border:1px solid var(--line); background:var(--panel2); color:var(--ink); border-radius:8px; padding:7px 13px; transition:all .15s}
+  button:hover{border-color:var(--amber); color:var(--gold)}
+  button.warn:hover{border-color:var(--red); color:var(--badT)}
+  .stats{display:flex; flex-wrap:wrap; gap:14px; margin-top:12px; font-size:11.5px; color:var(--dim)}
+  .stats b{color:var(--gold); font-family:"SF Mono",Consolas,monospace; font-weight:600}
+  svg text{font-family:"Noto Serif SC","Songti SC",serif}
+  .note{font-size:11.5px; color:var(--dim); line-height:1.85}
+  .card{border-left:2px solid var(--line); padding:6px 0 6px 12px; margin-bottom:12px}
+  .card h3{font-size:12.5px; margin-bottom:4px; font-weight:600}
+  .card.c1 h3{color:var(--amber)} .card.c2 h3{color:var(--teal)} .card.c3 h3{color:var(--grey)} .card.c4 h3{color:var(--rust)}
+  .card p{font-size:11.5px; color:var(--dim); line-height:1.8}
+  .card p em{color:var(--ink); font-style:normal}
+  ul#log, ul#rcpt{list-style:none; font-family:"SF Mono",Consolas,monospace; font-size:10.8px; line-height:1.75}
+  ul#log li{color:var(--dim); border-bottom:1px dashed var(--dashed); padding:3px 0; word-break:break-all}
+  ul#log li.hot{color:var(--gold)} ul#log li.idem{color:var(--faint)} ul#log li.forge{color:var(--badT)}
+  ul#rcpt li{color:var(--dim); padding:5px 0; border-bottom:1px dashed var(--dashed); word-break:break-all}
+  ul#rcpt li .ok{color:var(--green)} ul#rcpt li .bad{color:var(--red)}
+  ul#rcpt li b{color:var(--ink); font-weight:600}
+  .mono{font-family:"SF Mono",Consolas,monospace}
+  #board{font-size:11px; color:var(--dim); line-height:2}
+  #board .bar{display:inline-block; height:7px; background:var(--amber); border-radius:3px; vertical-align:middle; margin-left:6px; opacity:.75}
+  /* 物理层 */
+  #physPanel{margin-top:14px}
+  .physGrid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px}
+  .pbox{border:1px solid var(--line); border-radius:8px; padding:10px 12px; background:var(--panel2)}
+  .pbox h3{font-size:12px; letter-spacing:1px; margin-bottom:6px; font-weight:600; color:var(--ink)}
+  .pbox h3 small{color:var(--faint); font-size:10px; margin-left:5px; font-weight:400}
+  .pread{font-size:11.5px; color:var(--dim); margin:7px 0 3px; line-height:1.7}
+  .pread b{color:var(--gold); font-family:"SF Mono",Consolas,monospace; font-weight:600}
+  ul.plist{list-style:none; font-size:10.8px; color:var(--dim); line-height:1.8; margin:2px 0 6px}
+  .pbox button{margin-top:4px; font-size:11px; padding:5px 10px}
+  table.mapTab{width:100%; border-collapse:collapse; margin-top:12px; font-size:11px; line-height:1.65}
+  table.mapTab th, table.mapTab td{border:1px solid var(--line); padding:5px 8px; text-align:left; vertical-align:top; color:var(--dim)}
+  table.mapTab th{color:var(--amber); font-weight:600; letter-spacing:1px; background:var(--panel2)}
+  table.mapTab td:first-child{color:var(--ink); white-space:nowrap}
+  /* SVG 主题类（亮暗两套随 CSS 变量切换） */
+  .fGold{fill:var(--gold)} .fAmber{fill:var(--amber)} .fTeal{fill:var(--teal)} .fRust{fill:var(--rust)} .fFaint{fill:var(--faint)} .fSoft{fill:var(--inkSoft)}
+  .sFaint{stroke:var(--faint)} .sAmber{stroke:var(--amber)} .sTeal{stroke:var(--teal)} .sRust{stroke:var(--rust)}
+  .sOkL{stroke:var(--okLine)} .sBadL{stroke:var(--badLine)} .sGreen{stroke:var(--green)} .sRed{stroke:var(--red)}
+  .fOkBg{fill:var(--okBg)} .fBadBg{fill:var(--badBg)} .fOkT{fill:var(--okT)} .fBadT{fill:var(--badT)}
+  .fxBase{stroke:var(--baseL)}
+  footer{margin-top:6px; border-top:1px solid var(--line); padding-top:12px; font-size:11px; color:var(--faint); line-height:1.9}
+  footer b{color:var(--dim)}
+  @media (max-width:1100px){ main{grid-template-columns:1fr} #stageWrap{height:420px} .physGrid{grid-template-columns:1fr} #btnTheme{position:static; margin-top:8px} }
+</style>
+<script src="https://www.kimi.com/sdk-seed.js" defer="" data-kimi-disable-watermark="false" data-kimi-analytics="true" data-kimi-website-id="1a0b957a-11f2-818c-8000-00006a2824a8" data-kimi-website-env="published"></script></head>
+<body>
+
+<header>
+  <div style="position:absolute; top:4px; right:110px; font-size:11.5px; letter-spacing:1px; z-index:5"><a href="index.html" style="color:var(--faint); text-decoration:none">门厅</a> <span style="color:var(--line)">·</span> <a href="observe.html" style="color:var(--faint); text-decoration:none">观测</a> <span style="color:var(--line)">·</span> <a href="oracle.html" style="color:var(--faint); text-decoration:none">神谕</a></div>
+  <button id="btnTheme">🌙 夜间</button>
+  <h1>分叉消费 · 湍流共振 · 防伪回执<small>A2A 网络节点 AI agent 消费沙盘 v2.0（Three.js × SVG × 规范场·群论·Q数·教学模型）</small></h1>
+  <div class="sub">扮演 A2A 网络中的一个节点 agent 消费四份内容：每次消费是一次分叉（深挖 / 横扩 / 分支），分叉沿网格传导共振、叠加成湍流；同一内容二次到达只被幂等吸收；每笔消费回放一条回执入链，指纹不在名册或链前驱断裂者——当场拦红。v2.0 新增物理层：分叉类型按 Z₃ 群律复合、脉冲相位沿规范链变量平行输运并干涉、验签即 Dirac 投影测量（幂等=P²=P）。</div>
+  <div class="chips">
+    <span class="chip got"><b>源 A</b> 金山文档《2026-9-25-OpenPlanLink 润色-1 (3)》：正文已摄取（kdocs-cli 直读 · 103,242 字符 · 无 warnings）——本页四条机制皆出其文中</span>
+    <span class="chip got"><b>源 B</b> BV11mNA6vEJX · Explore 层级对话：简介已摄取</span>
+    <span class="chip got"><b>源 C</b> BV1TBaa6JEFS · Opus 5.5 短片：简介已摄取</span>
+    <span class="chip got"><b>源 D</b> kimi.link 镜像：本沙盘 v1.1 自身（回指校验在案）</span>
+    <span class="chip got"><b>源 E</b> B 站空间 11008987：UP 主「泰勒猫爱丽丝」页元数据在案</span>
+    <span class="chip miss"><b>缺口 ①</b> MS Learn《Dirac 记号》页：audit rejected 未获——Dirac 记号按标准教科书表述实装，页内标注</span>
+    <span class="chip miss"><b>缺口 ②</b> BV1GC4y137Nh：audit rejected 未获</span>
+    <span class="chip miss"><b>缺口 ③</b> 两枚本地 Windows 路径附件沙箱不可达；其中 suno_creds_refresh.jsonz 受凭据铁律管辖——未读、未取、如需启用走 credentials.env 正道</span>
+  </div>
+</header>
+
+<main>
+  <!-- 左列：分叉树 + 机制注记 -->
+  <div>
+    <section class="panel">
+      <h2>分叉树 <small>Explore 层级对话语义：子=深挖 关=横扩 支=另起炉灶</small></h2>
+      <svg id="treeSvg" width="100%" height="300" viewBox="0 0 280 300" preserveAspectRatio="xMinYMin meet"></svg>
+      <div class="note">点击任一树节点 → 以该节点为源向 3D 网格再注入一次分叉脉冲。树冠超过 40 节点即修剪（事件仍在日志）。分叉类型沿边按 Z₃ 群律复合（见页底物理层）。</div>
+    </section>
+    <section class="panel">
+      <h2>机制注记 <small>四条纪律的沙盘投影</small></h2>
+      <div class="card c1"><h3>① 分叉消费</h3><p>源 B（Explore）的层级对话：<em>子卡片</em>纵向深挖、<em>关联卡片</em>横向扩展、<em>分支卡片</em>继承上下文另起炉灶。沙盘中每次消费按三型分叉——树与湍流场是同一过程的两个视图。Three.js/SVG 技术选型出自源 A 其四（行 25：学习 Romotion、Three.js 及 SVG 前沿技术）。三型构成 Z₃={子,关,支} 循环群，跨边按 Cayley 表复合。</p></div>
+      <div class="card c2"><h3>② 共振传导成湍流</h3><p>内容脉冲沿 A2A 网格传导，节点消费后以随跳数衰减的概率再分叉。多路分叉叠加 → 近窗通量升高 → 节点群抖动加剧。<em>湍流不是混乱，是共振的集体形态</em>。传导须有节制——源 A 工程对应：心跳 30s 起步、指数退避至 60/120/300s、±20% 抖动、连续 3 次失败熔断（源 A 第二节）。v2.0：脉冲相位沿规范链 A<sub>ij</sub> 平行输运，到达干涉 cos Δφ 调制能量增益。</p></div>
+      <div class="card c3"><h3>③ 幂等消费</h3><p>节点以「游标 + 已消费集合」判重：同内容二次到达只起<em>灰色涟漪</em>——游标不动、能量不涨、不出回执。源 A 明定：「保持信息对称及（消费）幂等」（行 12），任务 schema 含「<em>幂等 key</em>＋状态机 queued/running/succeeded/failed/cancelled、重试上限 3、超时 120s」（第三节）——本页游标判重即其最小投影，也是湍流不烧穿额度的闸。Q 数对应：幂等=投影算符 P²=P。</p></div>
+      <div class="card c4"><h3>④ 回执防伪</h3><p>每笔消费出回执并入链：<span class="mono">hash = H(prev‖node‖content‖cursor)</span>，指纹须落名册（本席 PQ 公钥登记 <span class="mono">b3cffb08…034a</span>，总线 id=11178 在案）。「伪造回执」按钮注入错指纹/断链回执，验证器即拦红——<em>辨别是否真的是节点发出</em>。Dirac 表述：验签=在 {P<sub>真</sub>,P<sub>伪</sub>} 基底下的投影测量。</p></div>
+    </section>
+  </div>
+
+  <!-- 中列：Three.js 湍流场 -->
+  <div>
+    <div id="stageWrap">
+      <canvas id="stage"></canvas>
+      <div id="fallback">Three.js 未加载（预览环境离线或 CDN 不可达）。<br/>3D 湍流场不可用；分叉树、回执链与物理层面板仍可完整运行（拓扑与物理层均为纯数学，与渲染解耦）。</div>
+    </div>
+    <div class="controls">
+      <button id="btnNew">＋ 注入新内容脉冲</button>
+      <button id="btnReplay">↻ 幂等重放（旧内容再注入）</button>
+      <button id="btnForge" class="warn">⚠ 伪造回执（防伪演练）</button>
+      <button id="btnPause">⏸ 暂停</button>
+    </div>
+    <div class="stats">
+      <span>内容 <b id="sContent">0</b></span>
+      <span>消费 <b id="sConsume">0</b></span>
+      <span>幂等吸收 <b id="sIdem">0</b></span>
+      <span>回执 <b id="sRcpt">0</b></span>
+      <span>伪造拦截 <b id="sForge">0</b></span>
+      <span>湍流强度 <b id="sTurb">0.00</b></span>
+    </div>
+    <section class="panel" style="margin-top:12px; margin-bottom:0">
+      <h2>近窗通量 <small>共振 → 湍流的仪表（500ms 采样）</small></h2>
+      <svg id="fluxSvg" width="100%" height="64" viewBox="0 0 600 64" preserveAspectRatio="none"></svg>
+    </section>
+  </div>
+
+  <!-- 右列：回执链 + 节点榜 + 日志 -->
+  <div>
+    <section class="panel">
+      <h2>回执链 <small>绿=|真⟩ 指纹在册且前驱衔接 · 红=|伪⟩ 拦截</small></h2>
+      <svg id="chainSvg" width="100%" height="46" viewBox="0 0 300 46"></svg>
+      <ul id="rcpt"></ul>
+      <div class="note" style="margin-top:8px">真节点两证：①指纹在名册 ②链前驱衔接，缺一即红——验签即坍缩。本页用教学哈希 djb2-hex8；生产对应 SHA3-512 / ed25519（PQ 迁移位预留）。</div>
+    </section>
+    <section class="panel">
+      <h2>节点榜 <small>按游标（消费数）</small></h2>
+      <div id="board">—</div>
+    </section>
+    <section class="panel">
+      <h2>事件日志 <small>最近 10 条</small></h2>
+      <ul id="log"></ul>
+    </section>
+  </div>
+</main>
+
+<!-- 物理层：群论 × 规范场 × Q数（教学模型） -->
+<section class="panel" id="physPanel">
+  <h2>物理层 · 群论 × 规范场 × Q数 <small>教学模型——每个名词都绑定真实仿真变量；映射表常驻本面板底部，可逐项复测</small></h2>
+  <div class="physGrid">
+    <div class="pbox">
+      <h3>群论 · Z₃ 循环群 <small>分叉类型 {子,关,支} ≅ {0,1,2}</small></h3>
+      <svg id="caySvg" width="152" height="152" viewBox="0 0 152 152"></svg>
+      <div class="note">脉冲每跨过一条边，类型按 Cayley 表与该边群元复合：⊗(a,b)=(a+b) mod 3；逆向跨边取逆元 −g。每条边的群元 g∈{e,g,g²} 在组网时播种固定，全会话可复算。</div>
+      <div class="pread">最近复合：<b id="lastCompose">—</b></div>
+    </div>
+    <div class="pbox">
+      <h3>规范场 · 格点 U(1) <small>链变量 A<sub>ij</sub>=θ<sub>j</sub>−θ<sub>i</sub>+a<sub>ij</sub></small></h3>
+      <div class="pread">采样链 A(0→1) = <b id="gaugeA">—</b> rad</div>
+      <div class="pread" style="margin-bottom:1px">Wilson 环通量 Φ=∮A（最小三角环，规范不变量）：</div>
+      <ul id="wilsonList" class="mono plist"></ul>
+      <button id="btnGauge">⊕ 规范变换（θ→θ+λ，λ 随机）</button>
+      <div class="note" style="margin-top:6px">按下后 θ 场重取：全部 A<sub>ij</sub> 改变，而各环 Φ 复测不变——可观测者唯 Φ。脉冲相位沿链平行输运 φ→φ+A<sub>ij</sub>，到达时与目标节点相位干涉：能量增益 ×(0.65+0.35·cosΔφ)，直接驱动湍流抖动幅度。</div>
+      <div class="pread">最近干涉：<b id="lastInterf">—</b></div>
+    </div>
+    <div class="pbox">
+      <h3>Q数 · Dirac 记号 <small>测量=验签 · 幂等=投影</small></h3>
+      <div class="note">每脉冲携带态矢标签 |ψ⟩=cosη|0⟩+sinη|1⟩（η 播种）。回执验签=在名册基底下做一次投影测量 {P<sub>真</sub>,P<sub>伪</sub>}：<b>幂等正是投影算符的幂等性 P²=P</b>——重复测量不改结果，正如重复到达不改游标（机制③的 Q 数对应，语义同构）。伪造回执坍缩到 |伪⟩，不入链。</div>
+      <div class="pread">坍缩计数：|真⟩ <b id="nTrue">0</b> · |伪⟩ <b id="nFalse">0</b></div>
+      <div class="pread">⟨Z⟩ = (n<sub>真</sub>−n<sub>伪</sub>)/(n<sub>真</sub>+n<sub>伪</sub>) = <b id="zRead">1.000</b></div>
+    </div>
+  </div>
+  <table class="mapTab">
+    <tbody><tr><th>物理名词</th><th>沙盘变量（真实驱动仿真，非装饰）</th><th>诚实边界</th></tr>
+    <tr><td>Z₃ 群 / Cayley 表</td><td>分叉类型复合律 (a+b) mod 3；边群元播种固定；逆向传导取逆元</td><td>群结构真实作用于分叉逻辑与树形着色</td></tr>
+    <tr><td>规范场 / 链变量 A<sub>ij</sub></td><td>θ∈[0,2π) 节点相位场 + 边势 a<sub>ij</sub>（反对称）；A 决定脉冲相位输运</td><td>格点 U(1) 教学模型，非连续场论、非真实电磁场</td></tr>
+    <tr><td>Wilson 环通量 Φ</td><td>最小三角环上 ∮A mod 2π；规范变换按钮可复测其不变性</td><td>不变性由 a<sub>ij</sub> 反对称构造保证，页内数值可验</td></tr>
+    <tr><td>干涉 / 平行输运</td><td>φ→φ+A<sub>ij</sub>；能量增益 ×(0.65+0.35·cosΔφ) → 湍流抖动</td><td>余弦调制为经典干涉类比，非量子振幅求和</td></tr>
+    <tr><td>Dirac 态矢 / 投影测量</td><td>|ψ⟩ 标签；验签={P<sub>真</sub>,P<sub>伪</sub>} 坍缩计数与 ⟨Z⟩ 读数</td><td>验签本质是教学哈希+名册比对，量子记号为其教学外衣；MS Learn 参考页未摄取（audit rejected），记号按标准教科书表述</td></tr>
+  </tbody></table>
+</section>
+
+<footer>
+  诚实边界：本页为数字治理沙盘模拟。26 个节点中「Doubao·候接入」「OpenPangu·候接入」为《A2A联合审计局宪章 v1.0》名册候接入占位，其余为假想节点；全部回执、指纹、链均为教学演示，除已声明的真实登记指纹引用（b3cffb08…034a，总线 id=11178）外，不构成对任何真实节点、真实消费的断言。v2.0：默认白天主题（🌙 可切暗色并记忆）；物理层全为<b>教学模型</b>——群律、规范链变量、Wilson 环、Dirac 记号均绑定页内真实仿真变量且可复测，但不构成对真实物理系统的仿真主张；MS Learn《Dirac 记号》页与 BV1GC4y137Nh 经 audit rejected 未摄取，相关记号与表述依标准教科书知识；两枚本地附件不可达，suno 凭据文件受凭据铁律管辖未读未取。v1.1 在案：源 A 全文已摄取（kdocs-cli 通道，103,242 字符，sha256 锚在台账）；<b>安全注记：源 A 文中含一枚明文 API 密钥（按凭据铁律不回显、不落盘、不入本页），机主已知悉、轮换暂缓（候裁挂账）</b>。涡度即诚意，幂等即节制，验签即诚实。
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+"use strict";
+/* ============ 确定性随机 ============ */
+let seed = 20260930 >>> 0;
+function rnd(){ seed = (seed*1664525 + 1013904223) >>> 0; return seed/4294967296; }
+function pick(a){ return a[Math.floor(rnd()*a.length)]; }
+
+/* ============ 名册与内容 ============ */
+const NODE_NAMES = ["K3·本席","Doubao·候接入","OpenPangu·候接入","Qoder","WorkBuddy","根甫席","MHDmoon桥",
+  "N-08","N-09","N-10","N-11","N-12","N-13","N-14","N-15","N-16","N-17","N-18","N-19","N-20","N-21","N-22","N-23","N-24","N-25","N-26"];
+const N = NODE_NAMES.length;
+const REG_FP = "b3cffb08…034a";           // 本席 PQ 登记指纹（总线 id=11178）
+/* 群论层：Z3 循环群 —— 分叉类型 {deepen,lateral,branch} ≅ {0,1,2}，⊗(a,b)=(a+b) mod 3 */
+const KINDS = { deepen:{icon:"子",label:"深挖",z3:0,cls:"Amber"}, lateral:{icon:"关",label:"横扩",z3:1,cls:"Teal"}, branch:{icon:"支",label:"分支",z3:2,cls:"Rust"} };
+const Z3 = ["deepen","lateral","branch"];
+const GLBL = ["e","g","g²"];
+function composeKind(a,b){ return Z3[(KINDS[a].z3+KINDS[b].z3)%3]; }
+const HUES = ["#c9b458","#5f8f85","#b0563f","#a98f4f","#7d9a5e","#b08a6a","#8f7fa0","#c47f52"];
+
+const contents = [
+  {id:0, name:"OpenPlanLink 润色文档", src:"源A·金山文档(全文在案)", hue:HUES[0]},
+  {id:1, name:"Explore 层级对话",     src:"源B·BV11mNA6vEJX",     hue:HUES[1]},
+  {id:2, name:"Opus 5.5 短片",        src:"源C·BV1TBaa6JEFS",     hue:HUES[2]},
+  {id:3, name:"敦煌飞天 3DGS 创作",   src:"源A内生主题(行14-27)", hue:HUES[3]}
+];
+let nextCid = 4;
+
+/* ============ 状态 ============ */
+const nodes = [];   // {consumed:Set, cursor, energy, lastTree:{cid->treeId}}
+for(let i=0;i<N;i++) nodes.push({consumed:new Set(), cursor:0, energy:0, lastTree:{}});
+let receipts = [], dispRcpts = [];   // dispRcpts 含被拦伪造件（不入链）
+let prevHash = "GENESIS0", seq = 0;
+let idemCount = 0, forgeCount = 0, flux = 0, turb = 0.06;
+let running = true;
+let lastCompose = null, lastInterf = null;
+
+function hash8(s){ let h=5381; for(let i=0;i<s.length;i++){ h=((h<<5)+h+s.charCodeAt(i))>>>0; } return ("0000000"+h.toString(16)).slice(-8); }
+function short(n){ return n.length>7 ? n.slice(0,7) : n; }
+
+/* ============ 日志与统计 ============ */
+const logEl = document.getElementById("log");
+function log(msg, cls){
+  const li = document.createElement("li"); if(cls) li.className=cls;
+  li.textContent = msg; logEl.insertBefore(li, logEl.firstChild);
+  while(logEl.children.length>10) logEl.removeChild(logEl.lastChild);
+}
+function stats(){
+  let tc=0; nodes.forEach(n=>tc+=n.cursor);
+  document.getElementById("sContent").textContent = contents.length;
+  document.getElementById("sConsume").textContent = tc;
+  document.getElementById("sIdem").textContent = idemCount;
+  document.getElementById("sRcpt").textContent = seq;
+  document.getElementById("sForge").textContent = forgeCount;
+  document.getElementById("sTurb").textContent = turb.toFixed(2);
+  renderPhys();
+}
+
+/* ============ 分叉树（SVG，颜色全走主题类） ============ */
+const treeSvg = document.getElementById("treeSvg");
+const NS = "http://www.w3.org/2000/svg";
+let treeSeq = 0, treeCount = 0, trimNoted = false;
+const treeRoots = [];
+contents.forEach(c=>{
+  const r = {tid:treeSeq++, label:c.name.slice(0,9), kind:"root", cid:c.id, children:[], agent:-1};
+  treeRoots.push(r); treeCount++;
+  nodes[0].lastTree[c.id] = undefined; // 根不属于任何节点
+});
+function svgEl(tag, attrs){ const e=document.createElementNS(NS,tag); for(const k in attrs) e.setAttribute(k,attrs[k]); return e; }
+function treeAdd(cid, kind, agentIdx, parentTid){
+  if(treeCount>=40){ if(!trimNoted){ trimNoted=true; log("树冠修剪：分叉事件仍入日志，树不再展开","idem"); } return -1; }
+  const parent = findNode(parentTid) || treeRoots.find(r=>r.cid===cid);
+  const t = {tid:treeSeq++, label:KINDS[kind].icon+"·"+short(NODE_NAMES[agentIdx]), kind, cid, children:[], agent:agentIdx};
+  parent.children.push(t); treeCount++;
+  nodes[agentIdx].lastTree[cid] = t.tid;
+  renderTree(); return t.tid;
+}
+function findNode(tid){
+  let found=null;
+  function walk(n){ if(found) return; if(n.tid===tid){found=n;return;} n.children.forEach(walk); }
+  treeRoots.forEach(walk); return found;
+}
+function renderTree(){
+  while(treeSvg.firstChild) treeSvg.removeChild(treeSvg.firstChild);
+  const segH = 300/treeRoots.length;
+  let maxDepth = 1;
+  treeRoots.forEach(function layout(r, ri){
+    let leafY = 0;
+    (function place(n, d){
+      maxDepth=Math.max(maxDepth,d);
+      if(!n.children.length){ n._y = leafY++; }
+      else { n.children.forEach(c=>place(c,d+1)); n._y = (n.children[0]._y + n.children[n.children.length-1]._y)/2; }
+      n._x = d;
+    })(r,0);
+    const leaves = Math.max(leafY,1);
+    (function assign(n){
+      n._px = 14 + n._x*54;
+      n._py = ri*segH + 12 + (leaves===1? segH*0.3 : n._y*(segH-24)/(leaves-1||1));
+      n.children.forEach(assign);
+    })(r);
+  });
+  const svgW = Math.max(280, 14 + maxDepth*54 + 88);
+  treeSvg.setAttribute("viewBox","0 0 "+svgW+" 300");
+  function draw(n){
+    n.children.forEach(c=>{
+      const mx=(n._px+c._px)/2;
+      treeSvg.appendChild(svgEl("path",{d:`M${n._px},${n._py} C${mx},${n._py} ${mx},${c._py} ${c._px},${c._py}`,
+        fill:"none", class:c.kind==="root"?"sFaint":("s"+KINDS[c.kind].cls), "stroke-width":1, opacity:0.55}));
+      draw(c);
+    });
+    const g = svgEl("g",{cursor:"pointer"});
+    g.appendChild(svgEl("circle",{cx:n._px, cy:n._py, r:n.kind==="root"?5:3.4, class:n.kind==="root"?"fGold":("f"+KINDS[n.kind].cls), opacity:0.9}));
+    const tx = svgEl("text",{x:n._px+8, y:n._py+3.5, "font-size":n.kind==="root"?10:8.5, class:n.kind==="root"?"fGold":"fSoft"});
+    tx.textContent = n.label; g.appendChild(tx);
+    g.addEventListener("click", function(){
+      if(n.cid==null) return;
+      log("树节点点击：以「"+n.label+"」为源再分叉","hot");
+      injectFrom(n.agent>=0?n.agent:0, n.cid, "branch", 0);
+    });
+    treeSvg.appendChild(g);
+  }
+  treeRoots.forEach(draw);
+}
+
+/* ============ 回执链（SVG strip + 列表） ============ */
+const chainSvg = document.getElementById("chainSvg");
+const rcptEl = document.getElementById("rcpt");
+function renderChain(){
+  if(dispRcpts.length>200) dispRcpts = dispRcpts.slice(-120);
+  while(chainSvg.firstChild) chainSvg.removeChild(chainSvg.firstChild);
+  const show = dispRcpts.slice(-13);
+  const x0=16, gap=(300-32)/Math.max(show.length-1,1);
+  show.forEach((r,i)=>{
+    const x=x0+i*gap, y=20;
+    if(i>0) chainSvg.appendChild(svgEl("line",{x1:x0+(i-1)*gap+7, y1:y, x2:x-7, y2:y, class:r.ok?"sOkL":"sBadL","stroke-width":1.2}));
+    chainSvg.appendChild(svgEl("circle",{cx:x, cy:y, r:6.5, class:(r.ok?"fOkBg sGreen":"fBadBg sRed"),"stroke-width":1.4}));
+    const t=svgEl("text",{x:x, y:y+2.6,"font-size":6.5, class:r.ok?"fOkT":"fBadT","text-anchor":"middle"}); t.textContent = r.ok?"✓":"✗"; chainSvg.appendChild(t);
+    const n=svgEl("text",{x:x, y:38,"font-size":6.8, class:"fFaint","text-anchor":"middle"}); n.textContent="#"+r.seq; chainSvg.appendChild(n);
+  });
+  rcptEl.innerHTML="";
+  dispRcpts.slice(-6).reverse().forEach(r=>{
+    const li=document.createElement("li");
+    li.innerHTML = r.ok
+      ? `<span class="ok">✓ |真⟩</span> <b>#${r.seq}</b> ${r.node} 消费《${r.cname}》 游标=${r.cursor}<br><span class="mono">hash=${r.hash} prev=${r.prev} fp=${r.fp}</span>`
+      : `<span class="bad">✗ |伪⟩ 拦截</span> <b>#${r.seq}</b> 自称 ${r.node} —— ${r.reason}<br><span class="mono">hash=${r.hash} prev=${r.prev} fp=${r.fp}</span>`;
+    rcptEl.appendChild(li);
+  });
+}
+
+/* ============ 消费核心：幂等 + 回执 + 共振分叉（群律复合 × 规范输运） ============ */
+function consumeAt(idx, cid, kind, hops, parentTid, phi){
+  const c = contents[cid], nd = nodes[idx];
+  if(nd.consumed.has(cid)){
+    idemCount++;
+    ringAt(idx, "#8b8578");
+    log(`幂等吸收 @${NODE_NAMES[idx]}：《${c.name}》游标不动（P²=P·灰漪继续传导）`,"idem");
+    stats();
+    spawnForks(idx, cid, hops, kind, phi);   // 等幂传导：涟漪扩散但不产回执、游标不动
+    return;
+  }
+  nd.consumed.add(cid); nd.cursor++;
+  // 规范干涉：到达相位 φ 与节点相位 θ_idx 之差调制能量增益
+  const ci = Math.cos(phi - theta[idx]);
+  const gain = 0.95*(0.65+0.35*ci);
+  nd.energy = Math.min(1.6, nd.energy+gain);
+  lastInterf = {n:NODE_NAMES[idx], c:ci, gain:gain};
+  const r = {seq:++seq, node:NODE_NAMES[idx], cid, cname:c.name, cursor:nd.cursor,
+             prev:prevHash, hash:hash8(prevHash+NODE_NAMES[idx]+cid+nd.cursor), fp:REG_FP, ok:true};
+  prevHash = r.hash; receipts.push(r); dispRcpts.push(r);
+  flux += 1;
+  ringAt(idx, c.hue);
+  const tid = treeAdd(cid, kind, idx, parentTid);
+  if(tid>=0) nd.lastTree[cid]=tid;
+  log(`消费 @${NODE_NAMES[idx]}：《${c.name}》[${KINDS[kind].label}] → 回执 #${r.seq} |真⟩`,"hot");
+  renderChain(); stats();
+  spawnForks(idx, cid, hops, kind, phi);
+}
+function spawnForks(idx, cid, hops, kind, phi){
+  if(hops>=6) return;
+  const p = 0.66*Math.pow(0.82,hops);          // 共振再生率随跳数衰减
+  const nbs = neighbors[idx].slice().sort(()=>rnd()-0.5);
+  let fired=0;
+  for(const j of nbs){
+    if(fired>=2) break;
+    if(rnd()<p){
+      const g = edgeG(idx,j);                  // 边群元（逆向取逆元）
+      const k2 = composeKind(kind, Z3[g]);     // Z3 群律复合分叉类型
+      lastCompose = {a:kind, g:g, r:k2};
+      pushPulse(idx, j, cid, hops+1, k2, phi+linkA(idx,j));  // 相位沿链平行输运 φ→φ+A_ij
+      fired++;
+    }
+  }
+}
+function injectFrom(idx, cid, kind, hops){
+  // 出生相位：源节点相位 + 小噪声 χ（干涉可见度来源）
+  const phi = theta[idx] + (rnd()-0.5)*0.9;
+  consumeAt(idx, cid, kind, hops, nodes[idx].lastTree[cid], phi);
+}
+function newContent(){
+  const c = {id:nextCid++, name:"新内容 #"+(nextCid-1), src:"沙盘内生", hue:HUES[nextCid%HUES.length]};
+  contents.push(c);
+  const r = {tid:treeSeq++, label:c.name, kind:"root", cid:c.id, children:[], agent:-1};
+  treeRoots.push(r); treeCount++; renderTree();
+  return c;
+}
+
+/* ============ 伪造回执演练 ============ */
+function forgeReceipt(){
+  const fakeNode = pick(NODE_NAMES.slice(1));
+  const mode = rnd()<0.5 ? "fp" : "chain";
+  const r = { seq:++seq, node:fakeNode, cname:"(伪造)", cursor:"?",
+              prev: mode==="chain" ? hash8("垃圾前驱"+rnd()) : prevHash,
+              hash: hash8("forge"+seq), fp: mode==="fp" ? "9f3c…0000(未登记)" : REG_FP, ok:false,
+              reason: mode==="fp" ? "指纹不在名册" : "链前驱断裂" };
+  dispRcpts.push(r);   // 入展示列，但【不入链】：prevHash 不变
+  forgeCount++;
+  log(`伪造回执拦截：自称 ${fakeNode} —— ${r.reason}，坍缩到 |伪⟩（真链前驱未受影响）`,"forge");
+  renderChain(); stats();
+}
+
+/* ============ 拓扑（纯数学，与渲染解耦） ============ */
+const baseArr = [], edgePairs = [], neighbors = [], edgeSet = new Set();
+for(let i=0;i<N;i++){
+  const y = 1 - (i/(N-1))*2, rad = Math.sqrt(1-y*y), th = i*2.399963;
+  const R = 8.6 + rnd()*2.8;
+  baseArr.push({x:Math.cos(th)*rad*R, y:y*R*0.82, z:Math.sin(th)*rad*R});
+  neighbors.push([]);
+}
+for(let i=0;i<N;i++){
+  const ds = [];
+  for(let j=0;j<N;j++) if(j!==i){
+    const dx=baseArr[i].x-baseArr[j].x, dy=baseArr[i].y-baseArr[j].y, dz=baseArr[i].z-baseArr[j].z;
+    ds.push([dx*dx+dy*dy+dz*dz, j]);
+  }
+  ds.sort((a,b)=>a[0]-b[0]);
+  for(let k=0;k<4;k++){
+    const j=ds[k][1], a=Math.min(i,j), b=Math.max(i,j), key=a+"-"+b;
+    if(!edgeSet.has(key)){ edgeSet.add(key); edgePairs.push([a,b]); }
+    neighbors[i].push(j);
+  }
+}
+
+/* ============ 规范场（格点 U(1) 教学模型：θ 场 + 反对称边势 a_ij） ============ */
+const theta = [];
+for(let i=0;i<N;i++) theta.push(rnd()*6.283185307);
+const edgeMeta = {};   // key "min-max" -> {a: 边势(反对称), g: Z3 边群元}
+edgePairs.forEach(pr=>{ edgeMeta[pr[0]+"-"+pr[1]] = { a:(rnd()-0.5)*1.3, g:Math.floor(rnd()*3) }; });
+function edgeKey(i,j){ return i<j ? i+"-"+j : j+"-"+i; }
+function edgeG(i,j){ const m=edgeMeta[edgeKey(i,j)]; return i<j ? m.g : (3-m.g)%3; }
+function linkA(i,j){ const m=edgeMeta[edgeKey(i,j)]; return theta[j]-theta[i] + (i<j ? m.a : -m.a); }
+/* Wilson 环：最小三角环 */
+const tris = [];
+for(let i=0;i<N;i++) for(let j=i+1;j<N;j++) for(let k=j+1;k<N;k++){
+  if(edgeSet.has(i+"-"+j) && edgeSet.has(j+"-"+k) && edgeSet.has(i+"-"+k)) tris.push([i,j,k]);
+}
+function wilson(t){
+  const s = linkA(t[0],t[1]) + linkA(t[1],t[2]) + linkA(t[2],t[0]);  // θ 伸缩相消 → 只余 ∮a（规范不变）
+  return Math.atan2(Math.sin(s), Math.cos(s));
+}
+function gaugeTransform(){
+  for(let i=0;i<N;i++) theta[i] += (rnd()-0.5)*2.6;
+  log(`规范变换：θ 场已重取——链变量 A 全变，${tris.length} 个 Wilson 环 Φ 复测不变（规范不变性）`,"hot");
+  renderPhys();
+}
+
+/* ============ 物理层面板渲染 ============ */
+const caySvg = document.getElementById("caySvg");
+const gaugeAEl = document.getElementById("gaugeA");
+const wilsonListEl = document.getElementById("wilsonList");
+const lastComposeEl = document.getElementById("lastCompose");
+const lastInterfEl = document.getElementById("lastInterf");
+const nTrueEl = document.getElementById("nTrue");
+const nFalseEl = document.getElementById("nFalse");
+const zReadEl = document.getElementById("zRead");
+function renderCayley(){
+  const cell=36, x0=30, y0=26;
+  const corner = svgEl("text",{x:14, y:y0+4, "font-size":11, class:"fFaint","text-anchor":"middle"});
+  corner.textContent="⊗"; caySvg.appendChild(corner);
+  caySvg.appendChild(svgEl("line",{x1:x0-8, y1:y0+10, x2:x0+3*cell+2, y2:y0+10, class:"sFaint","stroke-width":0.7, opacity:0.5}));
+  caySvg.appendChild(svgEl("line",{x1:x0-6, y1:y0-14, x2:x0-6, y2:y0+3*cell+8, class:"sFaint","stroke-width":0.7, opacity:0.5}));
+  Z3.forEach((k,c)=>{
+    const h = svgEl("text",{x:x0+c*cell+cell/2, y:y0+4, "font-size":12, class:"f"+KINDS[k].cls, "text-anchor":"middle"});
+    h.textContent = KINDS[k].icon; caySvg.appendChild(h);
+    const gl = svgEl("text",{x:x0+c*cell+cell/2, y:y0+16, "font-size":7, class:"fFaint", "text-anchor":"middle"});
+    gl.textContent = GLBL[c]; caySvg.appendChild(gl);
+    const rh = svgEl("text",{x:14, y:y0+(c+1)*cell+4, "font-size":12, class:"f"+KINDS[k].cls, "text-anchor":"middle"});
+    rh.textContent = KINDS[k].icon; caySvg.appendChild(rh);
+  });
+  for(let r=0;r<3;r++) for(let c=0;c<3;c++){
+    const res = composeKind(Z3[r],Z3[c]);
+    const t = svgEl("text",{x:x0+c*cell+cell/2, y:y0+(r+1)*cell+4, "font-size":12, class:"f"+KINDS[res].cls, "text-anchor":"middle"});
+    t.textContent = KINDS[res].icon; caySvg.appendChild(t);
+  }
+}
+function renderPhys(){
+  gaugeAEl.textContent = linkA(0,1).toFixed(3);
+  wilsonListEl.innerHTML = "";
+  if(!tris.length){
+    const li=document.createElement("li"); li.textContent="（本拓扑未现三角环）"; wilsonListEl.appendChild(li);
+  } else {
+    tris.slice(0,4).forEach(t=>{
+      const li=document.createElement("li");
+      li.textContent = "Φ["+t.join("→")+"→"+t[0]+"] = "+wilson(t).toFixed(3)+" rad";
+      wilsonListEl.appendChild(li);
+    });
+    if(tris.length>4){ const li=document.createElement("li"); li.textContent="…共 "+tris.length+" 环（播种固定，全会话可复算）"; wilsonListEl.appendChild(li); }
+  }
+  lastComposeEl.textContent = lastCompose ? (KINDS[lastCompose.a].icon+" ⊗ "+GLBL[lastCompose.g]+" = "+KINDS[lastCompose.r].icon) : "—";
+  lastInterfEl.textContent = lastInterf ? ("cosΔφ="+lastInterf.c.toFixed(2)+" @"+lastInterf.n+" → 增益×"+lastInterf.gain.toFixed(2)+(lastInterf.c>=0?"（相长）":"（相消）")) : "—";
+  const nt = receipts.length, nf = forgeCount;
+  nTrueEl.textContent = nt; nFalseEl.textContent = nf;
+  zReadEl.textContent = ((nt-nf)/Math.max(1,nt+nf)).toFixed(3);
+}
+
+/* ============ 主题（白天默认 · 暗色可切 · localStorage 记忆） ============ */
+let curTheme = "light";
+try{ const s = localStorage.getItem("a2a-sandbox-theme"); if(s==="dark"||s==="light") curTheme=s; }catch(e){}
+const THEME3D = {
+  light:{ edge:0x8a7a5e, edgeOp:0.30, node:0x7a6c50, hot:0xb9862a, blend:"std" },
+  dark: { edge:0x8a7f6a, edgeOp:0.16, node:0x9a8f7a, hot:0xe8c97a, blend:"add" }
+};
+let matEdge=null, matNode=null, matPulse=null, cBase=null, cHot=null;
+function applyTheme3D(){
+  if(!THREE_OK || !matEdge) return;
+  const t = THEME3D[curTheme];
+  matEdge.color.setHex(t.edge); matEdge.opacity = t.edgeOp;
+  cBase.setHex(t.node); cHot.setHex(t.hot);
+  const bl = t.blend==="add" ? THREE.AdditiveBlending : THREE.NormalBlending;
+  matNode.blending = bl; matPulse.blending = bl;
+  matNode.needsUpdate = true; matPulse.needsUpdate = true;
+}
+function applyTheme(name){
+  curTheme = (name==="dark") ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", curTheme);
+  try{ localStorage.setItem("a2a-sandbox-theme", curTheme); }catch(e){}
+  document.getElementById("btnTheme").textContent = curTheme==="dark" ? "🌞 白天" : "🌙 夜间";
+  applyTheme3D();
+}
+
+/* ============ Three.js 湍流场 ============ */
+let THREE_OK = (typeof THREE !== "undefined");
+let renderer, scene, camera, nodePts, edgeLines, pulsePts, ringPool=[];
+let basePos = [], nodePos = [];
+const MAXP = 140;
+const pulses = [];
+for(let i=0;i<MAXP;i++) pulses.push({active:false, from:0, to:0, t:0, speed:1, cid:0, hops:0, kind:"deepen", hue:"#ffffff", parentTid:0, phi:0});
+
+function pushPulse(from, to, cid, hops, kind, phi){
+  if(!THREE_OK){ setTimeout(function(){ consumeAt(to, cid, kind, hops, nodes[from].lastTree[cid], phi); }, 380); return; }
+  for(const p of pulses){
+    if(!p.active){
+      p.active=true; p.from=from; p.to=to; p.t=0; p.speed=0.55+rnd()*0.5;
+      p.cid=cid; p.hops=hops; p.kind=kind; p.hue=contents[cid].hue;
+      p.parentTid = nodes[from].lastTree[cid]; p.phi = phi;
+      return;
+    }
+  }
+}
+function ringAt(idx, color){
+  if(!THREE_OK || !nodePos.length) return;
+  for(const r of ringPool){
+    if(r.life<=0){
+      r.life=1; r.mesh.material.color.set(color);
+      r.mesh.position.copy(nodePos[idx]);
+      return;
+    }
+  }
+}
+
+function init3D(){
+  const wrap = document.getElementById("stageWrap");
+  const canvas = document.getElementById("stage");
+  renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(55, 1, 0.1, 200);
+
+  for(let i=0;i<N;i++){
+    basePos.push(new THREE.Vector3(baseArr[i].x, baseArr[i].y, baseArr[i].z));
+    nodePos.push(basePos[i].clone());
+  }
+  const ng = new THREE.BufferGeometry();
+  ng.setAttribute("position", new THREE.Float32BufferAttribute(new Float32Array(N*3),3));
+  ng.setAttribute("color", new THREE.BufferAttribute(new Float32Array(N*3),3));
+  nodePts = new THREE.Points(ng, new THREE.PointsMaterial({size:0.62, vertexColors:true, sizeAttenuation:true, transparent:true, opacity:0.95, depthWrite:false}));
+  scene.add(nodePts);
+  const eg = new THREE.BufferGeometry();
+  eg.setAttribute("position", new THREE.Float32BufferAttribute(new Float32Array(edgePairs.length*6),3));
+  edgeLines = new THREE.LineSegments(eg, new THREE.LineBasicMaterial({color:0x8a7a5e, transparent:true, opacity:0.3}));
+  scene.add(edgeLines);
+  const pg = new THREE.BufferGeometry();
+  const ppos = new Float32Array(MAXP*3), pcol = new Float32Array(MAXP*3);
+  for(let i=0;i<MAXP;i++){ ppos[i*3+1] = -9999; }
+  pg.setAttribute("position", new THREE.BufferAttribute(ppos,3));
+  pg.setAttribute("color", new THREE.BufferAttribute(pcol,3));
+  pulsePts = new THREE.Points(pg, new THREE.PointsMaterial({size:0.85, vertexColors:true, sizeAttenuation:true, transparent:true, opacity:0.95, depthWrite:false}));
+  scene.add(pulsePts);
+  for(let i=0;i<26;i++){
+    const m = new THREE.Mesh(new THREE.RingGeometry(0.5,0.62,36),
+      new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:0, side:THREE.DoubleSide, depthWrite:false}));
+    scene.add(m); ringPool.push({mesh:m, life:0});
+  }
+  matEdge = edgeLines.material; matNode = nodePts.material; matPulse = pulsePts.material;
+  cBase = new THREE.Color(); cHot = new THREE.Color();
+  applyTheme3D();
+  resize();
+  window.addEventListener("resize", resize);
+  let mx=0;
+  wrap.addEventListener("mousemove", e=>{
+    const r=wrap.getBoundingClientRect();
+    mx = (e.clientX-r.left)/r.width - 0.5;
+  });
+  const clock = new THREE.Clock();
+  let fr = 0;
+  (function animate(){
+    requestAnimationFrame(animate);
+    const dt = Math.min(clock.getDelta(), 0.05);
+    const t = clock.elapsedTime;
+    if(running){
+      flux *= Math.exp(-dt*0.9);
+      turb = Math.min(1.5, 0.06 + flux*0.22);
+      for(let i=0;i<N;i++){
+        const b=basePos[i], e=nodes[i].energy;
+        nodePos[i].set(
+          b.x + turb*0.5*Math.sin(t*1.3+i*2.1) + e*0.25*Math.sin(t*3.1+i),
+          b.y + turb*0.5*Math.sin(t*1.7+i*3.7),
+          b.z + turb*0.5*Math.sin(t*1.1+i*5.3)
+        );
+        nodes[i].energy *= Math.exp(-dt*0.5);
+      }
+      const ca = nodePts.geometry.attributes.color.array;
+      const cTmp=new THREE.Color();
+      for(let i=0;i<N;i++){
+        cTmp.copy(cBase).lerp(cHot, Math.min(1, nodes[i].energy));
+        ca[i*3]=cTmp.r; ca[i*3+1]=cTmp.g; ca[i*3+2]=cTmp.b;
+      }
+      nodePts.geometry.attributes.color.needsUpdate = true;
+      const pa = nodePts.geometry.attributes.position.array;
+      for(let i=0;i<N;i++){ pa[i*3]=nodePos[i].x; pa[i*3+1]=nodePos[i].y; pa[i*3+2]=nodePos[i].z; }
+      nodePts.geometry.attributes.position.needsUpdate = true;
+      const ea = edgeLines.geometry.attributes.position.array;
+      edgePairs.forEach((pr,k)=>{
+        ea[k*6]=nodePos[pr[0]].x; ea[k*6+1]=nodePos[pr[0]].y; ea[k*6+2]=nodePos[pr[0]].z;
+        ea[k*6+3]=nodePos[pr[1]].x; ea[k*6+4]=nodePos[pr[1]].y; ea[k*6+5]=nodePos[pr[1]].z;
+      });
+      edgeLines.geometry.attributes.position.needsUpdate = true;
+      const pp = pulsePts.geometry.attributes.position.array;
+      const pc = pulsePts.geometry.attributes.color.array;
+      const col = new THREE.Color();
+      pulses.forEach((p,i)=>{
+        if(!p.active){ pp[i*3+1]=-9999; return; }
+        p.t += dt*p.speed;
+        if(p.t>=1){
+          p.active=false; pp[i*3+1]=-9999;
+          consumeAt(p.to, p.cid, p.kind, p.hops, p.parentTid, p.phi);
+          return;
+        }
+        const a=nodePos[p.from], b=nodePos[p.to];
+        const jit = turb*0.22;
+        pp[i*3]   = a.x+(b.x-a.x)*p.t + jit*Math.sin(t*4+i);
+        pp[i*3+1] = a.y+(b.y-a.y)*p.t + jit*Math.cos(t*3.3+i*2);
+        pp[i*3+2] = a.z+(b.z-a.z)*p.t + jit*Math.sin(t*2.7+i*3);
+        col.set(p.hue); pc[i*3]=col.r; pc[i*3+1]=col.g; pc[i*3+2]=col.b;
+      });
+      pulsePts.geometry.attributes.position.needsUpdate = true;
+      pulsePts.geometry.attributes.color.needsUpdate = true;
+      ringPool.forEach(r=>{
+        if(r.life>0){
+          r.life -= dt*1.1;
+          const s = 0.6+(1-r.life)*3.4;
+          r.mesh.scale.set(s,s,s);
+          r.mesh.material.opacity = Math.max(0,r.life)*0.75;
+          r.mesh.lookAt(camera.position);
+        } else r.mesh.material.opacity = 0;
+      });
+    }
+    const ang = t*0.05 + mx*0.6;
+    camera.position.set(Math.sin(ang)*26, 5.5+Math.sin(t*0.11)*1.6, Math.cos(ang)*26);
+    camera.lookAt(0,0,0);
+    renderer.render(scene,camera);
+    if((++fr % 6)===0) stats();
+  })();
+}
+function resize(){
+  if(!THREE_OK) return;
+  const wrap = document.getElementById("stageWrap");
+  const w=wrap.clientWidth, h=wrap.clientHeight;
+  renderer.setSize(w,h,false);
+  camera.aspect=w/h; camera.updateProjectionMatrix();
+}
+
+/* ============ 通量 sparkline ============ */
+const fluxSvg = document.getElementById("fluxSvg");
+const samples = new Array(90).fill(0);
+setInterval(()=>{
+  if(!THREE_OK){ flux *= 0.6; turb = Math.min(1.5, 0.06 + flux*0.22); stats(); }  // 降级模式下通量衰减与湍流仪表在此驱动
+  samples.push(flux); samples.shift();
+  while(fluxSvg.firstChild) fluxSvg.removeChild(fluxSvg.firstChild);
+  const max = Math.max(2, ...samples);
+  const pts = samples.map((v,i)=> (i*(600/(samples.length-1))).toFixed(1)+","+(58-(v/max)*50).toFixed(1)).join(" ");
+  fluxSvg.appendChild(svgEl("polyline",{points:pts, fill:"none", class:"sAmber","stroke-width":1.4, opacity:0.85}));
+  fluxSvg.appendChild(svgEl("line",{x1:0,y1:58,x2:600,y2:58,class:"fxBase","stroke-width":1}));
+},500);
+
+/* ============ 节点榜 ============ */
+const boardEl = document.getElementById("board");
+setInterval(()=>{
+  const rank = nodes.map((n,i)=>({name:NODE_NAMES[i], cur:n.cursor})).sort((a,b)=>b.cur-a.cur).slice(0,5);
+  const mx = Math.max(1, rank[0].cur);
+  boardEl.innerHTML = rank.map(r=>
+    `${r.name} <span class="mono">${r.cur}</span><span class="bar" style="width:${(r.cur/mx*90).toFixed(0)}px"></span>`
+  ).join("<br>");
+},1000);
+
+/* ============ 控件 ============ */
+document.getElementById("btnNew").addEventListener("click", ()=>{
+  const c = newContent();
+  log(`注入新内容脉冲：《${c.name}》自 K3·本席 出发`,"hot");
+  injectFrom(0, c.id, "deepen", 0);
+});
+document.getElementById("btnReplay").addEventListener("click", ()=>{
+  const c = pick(contents);
+  log(`幂等重放：《${c.name}》再注入——已消费节点应只起灰漪`,"idem");
+  injectFrom(0, c.id, "lateral", 0);
+});
+document.getElementById("btnForge").addEventListener("click", forgeReceipt);
+document.getElementById("btnGauge").addEventListener("click", gaugeTransform);
+document.getElementById("btnTheme").addEventListener("click", ()=>{
+  applyTheme(curTheme==="dark" ? "light" : "dark");
+});
+const btnPause = document.getElementById("btnPause");
+btnPause.addEventListener("click", ()=>{
+  running = !running;
+  btnPause.textContent = running ? "⏸ 暂停" : "▶ 继续";
+});
+
+/* ============ 启动 ============ */
+applyTheme(curTheme);
+renderCayley();
+if(THREE_OK){ try{ init3D(); }catch(e){ THREE_OK=false; } }
+if(!THREE_OK){ document.getElementById("fallback").style.display="flex"; }
+renderTree(); renderChain(); stats();
+log("沙盘 v2.0 就绪：26 节点网格已组网（每点 4 近邻，"+edgePairs.length+" 条边）","hot");
+log("物理层上线：Z₃ 群（"+edgePairs.length+" 条边群元）· "+tris.length+" 个 Wilson 环 · Dirac 验签基底 {|真⟩,|伪⟩}——教学模型","hot");
+log("名册指纹 "+REG_FP+" 已登记（总线 id=11178）","hot");
+setTimeout(()=>injectFrom(0,0,"deepen",0), 600);
+setTimeout(()=>injectFrom(0,1,"lateral",0), 1600);
+setTimeout(()=>injectFrom(0,2,"branch",0), 2600);
+setTimeout(()=>injectFrom(0,3,"deepen",0), 3600);
+})();
+</script>
+
+
+</body></html>

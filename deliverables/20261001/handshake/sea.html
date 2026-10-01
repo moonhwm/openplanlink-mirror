@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>干涉海</title>
+<style>
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{width:100%; height:100%; overflow:hidden; background:#f5efe3;
+    font-family:"Noto Serif SC","Songti SC",Georgia,serif}
+  #sea{position:fixed; inset:0; width:100%; height:100%; display:block; cursor:crosshair}
+  .topnav{position:fixed; top:16px; right:20px; z-index:3; font-size:11px; letter-spacing:2px}
+  .topnav a{color:rgba(154,143,123,.85); text-decoration:none; margin-left:16px}
+  .topnav a:hover{color:#8a6516}
+  #snd{position:fixed; right:22px; bottom:22px; width:22px; height:22px; border-radius:50%;
+    border:1px solid rgba(124,92,30,.55); background:transparent; cursor:pointer; z-index:2;
+    padding:0; outline:none; transition:background .25s}
+  #snd.on{background:#b9862a; border-color:#b9862a}
+  #fallback{position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+    text-align:center; color:#6f6553; font-size:14px; line-height:2.2; padding:40px; z-index:3; background:#f5efe3}
+</style>
+<script src="https://www.kimi.com/sdk-seed.js" defer="" data-kimi-disable-watermark="false" data-kimi-analytics="true" data-kimi-website-id="1a0b957a-11f2-818c-8000-00006a2824a8" data-kimi-website-env="published"></script></head>
+<body>
+<canvas id="sea"></canvas>
+<nav class="topnav"><a href="index.html">门厅</a><a href="observe.html">观测</a><a href="oracle.html">神谕</a></nav>
+<div id="fallback">此作品需要 WebGL。</div>
+<audio id="seaAudio" src="assets/sea-ambient.mp3" loop="" preload="auto"></audio>
+<button id="snd" aria-label="声音"></button>
+<script>
+(function(){
+"use strict";
+/* ============ 数学内核（与 shader 同式，供 Node 单测复用） ============ */
+// φ(p,t) = k·p − ωt + Σᵢ qᵢ·atan2(p−vᵢ) + Σⱼ A·sin(kr−ωa)·exp(−r/ρ)·exp(−a/τ)
+function phaseAt(px, py, t, vorts, srcs, k, w){
+  let ph = k*px - w*t;                       // 背景载波（沿 x 行进的平面波）
+  for(let i=0;i<vorts.length;i++){
+    const v=vorts[i];
+    ph += v.q * Math.atan2(py-v.y, px-v.x);  // 涡旋：相位奇点，绕一周 ±2π·q
+  }
+  for(let j=0;j<srcs.length;j++){
+    const s=srcs[j], dx=px-s.x, dy=py-s.y, r=Math.sqrt(dx*dx+dy*dy), age=t-s.t0;
+    if(age>0) ph += s.amp * Math.sin(6.0*r - 4.0*age) * Math.exp(-r*0.75) * Math.exp(-age*0.4);
+  }
+  return ph;
+}
+/* 拓扑荷测量：沿闭合环采样相位增量求和（Δ 包络到 (−π,π]），应得 2π·(环内总荷) */
+function winding(cx, cy, R, vorts, n){
+  let acc=0, prev=null;
+  for(let i=0;i<=n;i++){
+    const a=i/n*2*Math.PI;
+    let ph=0;
+    for(let j=0;j<vorts.length;j++){
+      const v=vorts[j];
+      ph += v.q * Math.atan2(cy+R*Math.sin(a)-v.y, cx+R*Math.cos(a)-v.x);
+    }
+    if(prev!==null){
+      let d=ph-prev;
+      d=Math.atan2(Math.sin(d), Math.cos(d));   // 包络主值差
+      acc+=d;
+    }
+    prev=ph;
+  }
+  return acc;   // ≈ 2π × 环内净拓扑荷
+}
+if(typeof module!=="undefined" && module.exports){ module.exports={phaseAt, winding}; return; }
+
+/* 声音：默认静音，圆点开关（浏览器手势策略，须点击启动） */
+const seaAudio=document.getElementById("seaAudio"), sndBtn=document.getElementById("snd");
+sndBtn.addEventListener("click",()=>{
+  if(seaAudio.paused){ seaAudio.play().then(()=>sndBtn.classList.add("on")).catch(()=>{}); }
+  else{ seaAudio.pause(); sndBtn.classList.remove("on"); }
+});
+
+/* ============ WebGL 渲染 ============ */
+const cv=document.getElementById("sea");
+const gl=cv.getContext("webgl",{antialias:false, alpha:false});
+if(!gl){ document.getElementById("fallback").style.display="flex"; return; }
+
+const VMAX=8, SMAX=6;
+const VS="attribute vec2 aP; void main(){ gl_Position=vec4(aP,0.0,1.0); }";
+const FS=[
+"precision highp float;",
+"uniform vec2 uRes; uniform float uT;",
+"uniform vec3 uVort["+VMAX+"];","uniform int uNV;",
+"uniform vec4 uSrc["+SMAX+"];","uniform int uNS;",
+"float hash(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }",
+"vec3 ramp(float x){",                    // 暖纸墨 ramp：米白→麦金→茶褐→玄墨
+"  vec3 c0=vec3(0.965,0.937,0.878);",     // 米白
+"  vec3 c1=vec3(0.792,0.631,0.278);",     // 麦金
+"  vec3 c2=vec3(0.482,0.337,0.208);",     // 茶褐
+"  vec3 c3=vec3(0.184,0.153,0.118);",     // 玄墨
+"  vec3 c=x<0.38? mix(c0,c1,x/0.38) : (x<0.72? mix(c1,c2,(x-0.38)/0.34) : mix(c2,c3,(x-0.72)/0.28));",
+"  return c; }",
+"void main(){",
+"  vec2 p=(2.0*gl_FragCoord.xy-uRes)/min(uRes.x,uRes.y);",
+"  float ph=2.6*p.x - 0.55*uT;",           // 背景载波
+"  for(int i=0;i<"+VMAX+";i++){ if(i>=uNV) break;",
+"    vec2 d=p-uVort[i].xy;",
+"    ph += uVort[i].z*atan(d.y,d.x); }",   // 涡旋相位缠绕
+"  for(int j=0;j<"+SMAX+";j++){ if(j>=uNS) break;",
+"    vec2 d=p-uSrc[j].xy; float r=length(d); float age=uT-uSrc[j].w;",
+"    if(age>0.0) ph += 1.9*sin(6.0*r-4.0*age)*exp(-r*0.75)*exp(-age*0.4); }",
+"  float band=0.5+0.5*cos(ph*2.4);",       // 等相带
+"  vec3 col=ramp(band);",
+"  float g=(hash(gl_FragCoord.xy)-0.5)*0.028;",  // 纸感颗粒
+"  vec2 vg=gl_FragCoord.xy/uRes-0.5;",
+"  col*=1.0-0.22*dot(vg,vg)*2.0;",         // 柔和暗角
+"  gl_FragColor=vec4(col+g,1.0); }",
+""].join("\n");
+
+function sh(type, src){
+  const s=gl.createShader(type); gl.shaderSource(s,src); gl.compileShader(s);
+  if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){ console.error(gl.getShaderInfoLog(s)); return null; }
+  return s;
+}
+const vs=sh(gl.VERTEX_SHADER,VS), fs=sh(gl.FRAGMENT_SHADER,FS);
+if(!vs||!fs){ document.getElementById("fallback").style.display="flex"; return; }
+const prog=gl.createProgram();
+gl.attachShader(prog,vs); gl.attachShader(prog,fs); gl.linkProgram(prog);
+if(!gl.getProgramParameter(prog,gl.LINK_STATUS)){ document.getElementById("fallback").style.display="flex"; return; }
+gl.useProgram(prog);
+const buf=gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1, 3,-1, -1,3]),gl.STATIC_DRAW);
+const aP=gl.getAttribLocation(prog,"aP");
+gl.enableVertexAttribArray(aP); gl.vertexAttribPointer(aP,2,gl.FLOAT,false,0,0);
+const uRes=gl.getUniformLocation(prog,"uRes"), uT=gl.getUniformLocation(prog,"uT");
+const uVort=gl.getUniformLocation(prog,"uVort"), uNV=gl.getUniformLocation(prog,"uNV");
+const uSrc=gl.getUniformLocation(prog,"uSrc"), uNS=gl.getUniformLocation(prog,"uNS");
+
+/* 涡旋群：+3/−3 总荷守恒，李萨如缓漂 */
+const vorts=[
+  {q: 1, bx:-0.62, by: 0.18, r1:0.16, r2:0.11, w1:0.11, w2:0.07, s:1.7},
+  {q:-1, bx:-0.18, by:-0.30, r1:0.13, r2:0.15, w1:0.09, w2:0.12, s:3.1},
+  {q: 1, bx: 0.30, by: 0.34, r1:0.15, r2:0.10, w1:0.08, w2:0.10, s:4.6},
+  {q:-1, bx: 0.66, by:-0.06, r1:0.12, r2:0.14, w1:0.12, w2:0.08, s:5.9},
+  {q: 1, bx: 0.02, by: 0.02, r1:0.10, r2:0.13, w1:0.07, w2:0.11, s:7.3},
+  {q:-1, bx:-0.44, by: 0.52, r1:0.14, r2:0.09, w1:0.10, w2:0.09, s:8.8}
+];
+const srcs=[];   // {x,y,t0,amp} 点击投入的波源
+let paused=false, tAcc=0, lastT=0;
+
+function resize(){
+  const d=Math.min(window.devicePixelRatio||1, 2);
+  cv.width=Math.floor(cv.clientWidth*d); cv.height=Math.floor(cv.clientHeight*d);
+  gl.viewport(0,0,cv.width,cv.height);
+}
+window.addEventListener("resize",resize); resize();
+
+cv.addEventListener("click",e=>{
+  const r=cv.getBoundingClientRect(), m=Math.min(r.width,r.height);
+  const x=(2*(e.clientX-r.left)-r.width)/m, y=-(2*(e.clientY-r.top)-r.height)/m;
+  srcs.push({x:x,y:y,t0:tAcc,amp:1.9});
+  if(srcs.length>SMAX) srcs.shift();
+});
+window.addEventListener("keydown",e=>{ if(e.code==="Space"){ paused=!paused; e.preventDefault(); } });
+
+const vArr=new Float32Array(VMAX*3), sArr=new Float32Array(SMAX*4);
+function frame(ts){
+  requestAnimationFrame(frame);
+  const dt=Math.min((ts-lastT)/1000,0.05); lastT=ts;
+  if(!paused) tAcc+=dt;
+  const t=tAcc;
+  let nv=0;
+  vorts.forEach(v=>{
+    vArr[nv*3]  = v.bx + v.r1*Math.cos(v.w1*t+v.s);
+    vArr[nv*3+1]= v.by + v.r2*Math.sin(v.w2*t*1.3+v.s*1.7);
+    vArr[nv*3+2]= v.q; nv++;
+  });
+  let ns=0;
+  for(let i=srcs.length-1;i>=0;i--){ if(t-srcs[i].t0>8) srcs.splice(i,1); }
+  srcs.forEach(s=>{ sArr[ns*4]=s.x; sArr[ns*4+1]=s.y; sArr[ns*4+2]=s.amp; sArr[ns*4+3]=s.t0; ns++; });
+  gl.uniform2f(uRes,cv.width,cv.height);
+  gl.uniform1f(uT,t);
+  gl.uniform3fv(uVort,vArr); gl.uniform1i(uNV,nv);
+  gl.uniform4fv(uSrc,sArr);  gl.uniform1i(uNS,ns);
+  gl.drawArrays(gl.TRIANGLES,0,3);
+}
+requestAnimationFrame(frame);
+})();
+</script>
+
+
+</body></html>

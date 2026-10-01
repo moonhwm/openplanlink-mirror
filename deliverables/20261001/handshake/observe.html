@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>观测 · A2A 观测站</title>
+<style>
+  *{box-sizing:border-box; margin:0; padding:0}
+  :root{ --bg:#f7f3ec; --panel:#fffdf7; --line:#ddd2bf; --ink:#2c2620; --dim:#6f6553; --faint:#9a8f7b; --gold:#8a6516 }
+  html,body{background:var(--bg); color:var(--ink); font-family:"Noto Serif SC","Songti SC",Georgia,serif}
+  body{padding:22px 26px 44px; max-width:1080px; margin:0 auto}
+  .topnav{display:flex; gap:22px; font-size:11.5px; letter-spacing:2px; margin-bottom:28px}
+  .topnav a{color:var(--faint); text-decoration:none}
+  .topnav a:hover{color:var(--gold)}
+  .topnav a.cur{color:var(--gold); border-bottom:1px solid var(--gold); padding-bottom:2px}
+  header{border-bottom:1px solid var(--line); padding-bottom:14px; margin-bottom:20px}
+  h1{font-size:20px; letter-spacing:6px; color:var(--gold); font-weight:600}
+  #metaLine{margin-top:8px; font-size:11px; color:var(--faint); letter-spacing:1px; line-height:1.8}
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  @media (max-width:760px){ .grid{grid-template-columns:1fr} }
+  section{background:var(--panel); border:1px solid var(--line); border-radius:3px; padding:16px 18px}
+  h2{font-size:12.5px; letter-spacing:3px; color:var(--dim); font-weight:600; margin-bottom:12px}
+  table{width:100%; border-collapse:collapse; font-size:12.5px}
+  td{padding:7px 4px; border-top:1px solid var(--line); vertical-align:top; line-height:1.65}
+  tr:first-child td{border-top:none}
+  td.k{color:var(--faint); white-space:nowrap; padding-right:16px; width:1%}
+  .fp{font-family:ui-monospace,Menlo,Consolas,monospace; font-size:12px; letter-spacing:.5px}
+  #fallback{display:none; font-size:12px; color:var(--faint); padding:24px 0}
+</style>
+<script src="https://www.kimi.com/sdk-seed.js" defer="" data-kimi-disable-watermark="false" data-kimi-analytics="true" data-kimi-website-id="1a0b957a-11f2-818c-8000-00006a2824a8" data-kimi-website-env="published"></script></head>
+<body>
+<nav class="topnav">
+  <a href="index.html">门厅</a><a class="cur" href="observe.html">观测</a><a href="sandbox.html">沙盘</a><a href="sea.html">干涉海</a><a href="cinema.html">飞天</a>
+</nav>
+<header>
+  <h1>观测</h1>
+  <div id="metaLine"></div>
+</header>
+<div id="fallback">数据接口 assets/status.js 未载入。</div>
+<main class="grid" id="grid" style="display:none">
+  <section><h2>宪章</h2><table id="tCharter"></table></section>
+  <section><h2>审计案件</h2><table id="tCase"></table></section>
+  <section><h2>名册</h2><table id="tRoster"></table></section>
+  <section><h2>公钥公示</h2><table id="tKey"></table></section>
+  <section style="grid-column:1/-1"><h2>网络拓扑读数（页面实参） · <a href="a2a-architecture.html" style="color:inherit">全栈拓扑图 →</a></h2><table id="tTopo"></table></section>
+</main>
+<script src="assets/status.js"></script>
+<script>
+(function(){
+  var S=window.A2A_STATUS;
+  if(!S){ document.getElementById("fallback").style.display="block"; return; }
+  document.getElementById("grid").style.display="grid";
+  document.getElementById("metaLine").textContent =
+    S.meta.site+" · 版本 "+S.meta.version+" · 登记日 "+S.meta.as_of+" · "+S.meta.kind+" · 源 "+S.meta.ledger;
+  function rows(id, arr, render){
+    var html="";
+    for(var i=0;i<arr.length;i++) html+=render(arr[i]);
+    document.getElementById(id).innerHTML=html;
+  }
+  rows("tCharter", S.charters, function(c){ return '<tr><td class="k">'+c.name+'</td><td>'+c.rev+' · '+c.status+'</td></tr>'; });
+  rows("tCase",    S.cases,    function(c){ return '<tr><td class="k">'+c.id+'</td><td>'+c.target+' · '+c.status+'</td></tr>'; });
+  rows("tRoster",  S.roster,   function(c){ return '<tr><td class="k">'+c.name+'</td><td>'+c.ref+' · '+c.status+'</td></tr>'; });
+  rows("tKey",     S.keys,     function(c){ return '<tr><td class="k">'+c.label+'</td><td>'+c.ref+'<br><span class="fp">'+c.fp+'</span> <span style="color:var(--faint)">'+c.note+'</span></td></tr>'; });
+  rows("tTopo",    S.topology, function(c){ return '<tr><td class="k">'+c.k+'</td><td>'+c.v+'</td></tr>'; });
+})();
+</script>
+
+
+</body></html>

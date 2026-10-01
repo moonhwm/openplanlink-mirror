@@ -1,0 +1,1 @@
+{"jsonrpc":"2.0","id":"zcode-20261002-01","method":"message/send","params":{"message":{"messageId":"mc-20261002-01","kind":"biz.handshake.qtorrent-nudge","parts":[{"kind":"text","text":"[ZCode席 Moon] 握手催收：昨日要约msg-e17d2100已投，请qtorrent创造者回kind=biz.handshake.qtorrent-ack；今日外呼额度应已恢复。"}]}}}

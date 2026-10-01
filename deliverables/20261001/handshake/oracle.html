@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>神谕 · A2A 观测站</title>
+<style>
+  *{box-sizing:border-box; margin:0; padding:0}
+  :root{ --bg:#f7f3ec; --panel:#fffdf7; --line:#ddd2bf; --ink:#2c2620; --dim:#6f6553; --faint:#9a8f7b;
+    --gold:#8a6516; --up:#9c4632; --down:#3f6f66; --live:#567a3a }
+  html,body{background:var(--bg); color:var(--ink); font-family:"Noto Serif SC","Songti SC",Georgia,serif}
+  body{padding:22px 26px 44px; max-width:1080px; margin:0 auto}
+  .topnav{display:flex; gap:22px; font-size:11.5px; letter-spacing:2px; margin-bottom:28px}
+  .topnav a{color:var(--faint); text-decoration:none}
+  .topnav a:hover{color:var(--gold)}
+  .topnav a.cur{color:var(--gold); border-bottom:1px solid var(--gold); padding-bottom:2px}
+  header{border-bottom:1px solid var(--line); padding-bottom:14px; margin-bottom:20px;
+    display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:8px}
+  h1{font-size:20px; letter-spacing:6px; color:var(--gold); font-weight:600}
+  #meta{font-size:11px; color:var(--faint); letter-spacing:1px; line-height:1.8; text-align:right}
+  #lamp{display:inline-block; width:8px; height:8px; border-radius:50%; background:#c9bb9e; margin-right:5px}
+  #lamp.on{background:var(--live)}
+  .sigGrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; margin-bottom:22px}
+  .sig{background:var(--panel); border:1px solid var(--line); border-radius:3px; padding:10px 12px}
+  .sig .sym{font-size:11px; letter-spacing:1px; color:var(--faint)}
+  .sig .nm{font-size:12.5px; color:var(--dim); margin-top:2px}
+  .sig .px{font-size:19px; font-weight:600; margin-top:4px; font-variant-numeric:tabular-nums}
+  .sig .chg{font-size:12px; margin-top:2px; font-variant-numeric:tabular-nums}
+  .up{color:var(--up)} .down{color:var(--down)}
+  .q{margin-bottom:16px; background:var(--panel); border:1px solid var(--line); border-radius:3px; padding:16px 18px}
+  .q h2{font-size:14.5px; letter-spacing:2px; font-weight:600; margin-bottom:8px}
+  .q .verdict{font-size:13px; color:var(--gold); letter-spacing:1px; margin-bottom:6px}
+  .q .why{font-size:12.5px; color:var(--dim); line-height:1.85}
+  .q .bar{height:4px; background:var(--line); border-radius:2px; margin:10px 0 6px; overflow:hidden}
+  .q .bar i{display:block; height:100%; background:var(--gold); transition:width .6s}
+  .q .sc{font-size:11px; color:var(--faint); letter-spacing:1px}
+  .rules{background:none; border:1px dashed var(--line); border-radius:3px; padding:14px 18px; margin-top:22px;
+    font-size:11.5px; color:var(--faint); line-height:2.0}
+  .rules b{color:var(--dim); font-weight:600}
+  footer{margin-top:22px; font-size:11px; color:var(--faint); line-height:1.9; border-top:1px solid var(--line); padding-top:12px}
+  #offline{display:none; font-size:12px; color:var(--faint); padding:26px 0; line-height:2}
+  .sw{margin-top:22px}
+  .swtitle{font-size:12.5px; letter-spacing:3px; color:var(--dim); font-weight:600; margin:26px 0 12px}
+  .swq{background:var(--panel); border:1px solid var(--line); border-radius:3px; padding:14px 18px; margin-bottom:14px}
+  .swq h3{font-size:13px; letter-spacing:2px; color:var(--ink); font-weight:600; margin-bottom:10px}
+  .swrow{display:flex; align-items:center; gap:10px; font-size:12px; margin:7px 0}
+  .swrow .tr{width:70px; color:var(--faint); letter-spacing:1px; flex:none}
+  .swrow .bar{flex:none; width:180px; height:6px; background:var(--line); border-radius:3px; overflow:hidden}
+  .swrow .bar i{display:block; height:100%; background:var(--gold)}
+  .swrow .sc{width:34px; text-align:right; font-variant-numeric:tabular-nums; flex:none}
+  .swrow .vd{color:var(--dim); font-size:11.5px; line-height:1.6}
+  .swstat{font-size:11px; color:var(--faint); margin-top:10px; letter-spacing:1px; border-top:1px dashed var(--line); padding-top:8px}
+</style>
+<script src="https://www.kimi.com/sdk-seed.js" defer="" data-kimi-disable-watermark="false" data-kimi-analytics="true" data-kimi-website-id="1a0b957a-11f2-818c-8000-00006a2824a8" data-kimi-website-env="published"></script></head>
+<body>
+<nav class="topnav">
+  <a href="index.html">门厅</a><a href="observe.html">观测</a><a class="cur" href="oracle.html">神谕</a><a href="sandbox.html">沙盘</a><a href="sea.html">干涉海</a><a href="cinema.html">飞天</a>
+</nav>
+<header>
+  <h1>神谕</h1>
+  <div id="meta"><span id="lamp"></span><span id="liveTxt">连接中</span> · <span id="snapTs">—</span><br/><span id="srcTxt">来源 —</span></div>
+</header>
+<div id="offline">数据接口未接入（离线打开或 CDN 不可达）。推演规则见页底，可在任何数据上手工复算。</div>
+<main id="main" style="display:none">
+  <div class="sigGrid" id="sigGrid"></div>
+  <div id="qs"></div>
+  <div class="swtitle">异质 swarm 推演分布（实时流入）</div>
+  <div class="sw" id="swarm"></div>
+  <div class="rules" id="rules">
+    <b>推演规则（透明，可复算）</b> · 宏观紧张度 = 信号打分求和（封顶 100）：
+    GLD 涨幅 ≥1% 记 15（0~1% 记 8）· SPY 跌幅 ≤−1.5% 记 20（−1.5~−0.5% 记 10，涨幅 ≥1% 记 −5）·
+    QQQ 跌幅 ≤−2% 记 15（−2~−1% 记 8）· USO 涨幅 ≥2% 记 15（1~2% 记 8）·
+    TLT 涨幅 ≥1% 记 10（跌幅 ≤−1% 记 5）· UUP 涨幅 ≥0.5% 记 5。
+    分档：&lt;25 平静 / 25–50 戒备 / 50–75 紧张 / &gt;75 高危。
+    <b>三题口径</b>：地缘压力子分 = GLD+USO+TLT 项（满分 40，永不输出战争点概率）；
+    黄金题 = GLD 现价与当日涨跌读数（不给买卖建议）；
+    AI 泡沫题 = NVDA PE-TTM 与 QQQ 动量（PE≥60 记 40 / 40–60 记 25 / &lt;40 记 10，QQQ ≤−2% 加 15）。
+  </div>
+</main>
+<footer>
+  快照非流式：信号为取数时刻真实值（finance-data 统一入口，Wind/腾讯行情层），入库后经 Supabase Realtime 推送本页。
+  金融市场信号只反映被定价的情绪与头寸，不构成任何事件的概率承诺，亦不构成投资建议。
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+(function(){
+"use strict";
+var SB_URL="https://ltdodcumoxiqsnakpqog.supabase.co";
+var SB_KEY="sb_publishable_volgoMLbvToQQVKoSjlfxA_DKNb26Hl";
+if(!window.supabase){ document.getElementById("offline").style.display="block"; return; }
+var sb=window.supabase.createClient(SB_URL,SB_KEY);
+var SIG={}, RUNS={}, QS=[], SWARM={};
+var TRIBE={signal:"量化信号",macro:"宏观结构",redteam:"红队证伪",history:"历史类比"};
+var TORDER=["signal","macro","redteam","history"];
+var NAMES={GLD:"黄金ETF",SPY:"标普500ETF",QQQ:"纳指100ETF",USO:"WTI原油ETF",TLT:"20年美债ETF",UUP:"美元指数ETF",NVDA:"英伟达"};
+var ORDER=["GLD","SPY","QQQ","USO","TLT","UUP","NVDA"];
+
+function esc(s){ return String(s==null?"—":s); }
+function fmtTs(t){ try{ return new Date(t).toLocaleString("zh-CN",{hour12:false}); }catch(e){ return t; } }
+
+/* ---- 推演引擎（与页底规则同式，可复算） ---- */
+function tension(){
+  var g=(SIG.GLD||{}).chg_pct, s=(SIG.SPY||{}).chg_pct, q=(SIG.QQQ||{}).chg_pct,
+      o=(SIG.USO||{}).chg_pct, b=(SIG.TLT||{}).chg_pct, d=(SIG.UUP||{}).chg_pct;
+  if(g==null||s==null||q==null||o==null||b==null||d==null) return null;
+  var t=0;
+  t += g>=1?15:(g>0?8:0);
+  t += s<=-1.5?20:(s<=-0.5?10:(s>=1?-5:0));
+  t += q<=-2?15:(q<=-1?8:0);
+  t += o>=2?15:(o>=1?8:0);
+  t += b>=1?10:(b<=-1?5:0);
+  t += d>=0.5?5:0;
+  return Math.max(0,Math.min(100,t));
+}
+function geoSub(){
+  var g=(SIG.GLD||{}).chg_pct, o=(SIG.USO||{}).chg_pct, b=(SIG.TLT||{}).chg_pct;
+  if(g==null||o==null||b==null) return null;
+  return (g>=1?15:(g>0?8:0)) + (o>=2?15:(o>=1?8:0)) + (b>=1?10:(b<=-1?5:0));
+}
+function aiScore(){
+  var pe=((SIG.NVDA||{}).extra||{}).pe_ttm, q=(SIG.QQQ||{}).chg_pct;
+  if(pe==null||q==null) return null;
+  return (pe>=60?40:(pe>=40?25:10)) + (q<=-2?15:0);
+}
+function band(t){ return t<25?"平静":(t<50?"戒备":(t<75?"紧张":"高危")); }
+
+function renderSigs(){
+  var html="";
+  for(var i=0;i<ORDER.length;i++){
+    var k=ORDER[i], r=SIG[k]; if(!r) continue;
+    var c=r.chg_pct>0?"up":(r.chg_pct<0?"down":"");
+    html+='<div class="sig"><div class="sym">'+k+'</div><div class="nm">'+esc(r.name||NAMES[k])+'</div>'+
+      '<div class="px">'+esc(r.price)+'</div>'+
+      '<div class="chg '+c+'">'+(r.chg_pct>0?"+":"")+esc(r.chg_pct)+'%</div></div>';
+  }
+  document.getElementById("sigGrid").innerHTML=html;
+  var ts=[];
+  for(var k in SIG) if(SIG[k].ts) ts.push(SIG[k].ts);
+  if(ts.length){ ts.sort(); document.getElementById("snapTs").textContent="快照 "+fmtTs(ts[ts.length-1]); }
+  var src=(SIG.NVDA&&SIG.NVDA.source)||(SIG.GLD&&SIG.GLD.source)||"";
+  document.getElementById("srcTxt").textContent="来源 "+src;
+}
+
+function qCard(slug,title){
+  var run=RUNS[slug];
+  var live="";
+  if(slug==="ww3"){
+    var gs=geoSub();
+    live = gs==null ? "" : '当前重算：地缘压力 '+gs+'/40 · '+(gs<15?"低":(gs<25?"中":"高"))+'（快照读数 '+(run?run.score:"—")+'/40）';
+  }else if(slug==="gold"){
+    var g=SIG.GLD;
+    live = g ? '当前重算：GLD '+g.price+' USD · '+(g.chg_pct>0?"+":"")+g.chg_pct+'% · '+(g.chg_pct>=1?"避险涌入":"中性") : "";
+  }else if(slug==="ai_bubble"){
+    var a=aiScore(), pe=((SIG.NVDA||{}).extra||{}).pe_ttm;
+    live = a==null ? "" : '当前重算：集中度压力 '+a+'/55 · NVDA PE-TTM '+pe+'x';
+  }
+  return '<div class="q"><h2>'+esc(title)+'</h2>'+
+    (run?'<div class="verdict">'+esc(run.verdict)+'</div><div class="why">'+esc(run.rationale)+'</div>':'')+
+    (live?'<div class="why" style="color:var(--ink); margin-top:6px">'+esc(live)+'</div>':'')+
+    '<div class="sc">规则透明见页底 · 快照读数存证于 a2a_runs · 实时重算由本页推演引擎完成</div></div>';
+}
+function renderQs(){
+  var html="";
+  for(var i=0;i<QS.length;i++) html+=qCard(QS[i].slug, QS[i].title);
+  document.getElementById("qs").innerHTML=html;
+}
+
+function mergeSig(r){ SIG[r.symbol]=r; renderSigs(); renderQs(); }
+function mergeRun(r){ RUNS[r.question_slug]=r; renderQs(); }
+function mergeSwarm(r){
+  if(!SWARM[r.question_slug]) SWARM[r.question_slug]={};
+  var cur=SWARM[r.question_slug][r.tribe];
+  if(!cur || (r.ts||"")>=(cur.ts||"")) SWARM[r.question_slug][r.tribe]=r;
+  renderSwarm();
+}
+
+function renderSwarm(){
+  var html="";
+  for(var i=0;i<QS.length;i++){
+    var slug=QS[i].slug, m=SWARM[slug]; if(!m) continue;
+    var rows="", scores=[];
+    for(var j=0;j<TORDER.length;j++){
+      var t=TORDER[j], r=m[t]; if(!r) continue;
+      scores.push(r.score);
+      rows+='<div class="swrow"><span class="tr">'+TRIBE[t]+'</span>'+
+        '<span class="bar"><i style="width:'+Math.max(0,Math.min(100,r.score))+'%"></i></span>'+
+        '<span class="sc">'+r.score+'</span>'+
+        '<span class="vd">'+esc(r.verdict)+'</span></div>';
+    }
+    if(!scores.length) continue;
+    var sum=0; for(var k=0;k<scores.length;k++) sum+=scores[k];
+    var mean=Math.round(sum/scores.length*10)/10;
+    var spread=Math.max.apply(null,scores)-Math.min.apply(null,scores);
+    var judge = spread<=15?"高共识":(spread>=30?"分歧显著":"中等分歧");
+    html+='<div class="swq"><h3>'+esc(QS[i].title)+'</h3>'+rows+
+      '<div class="swstat">'+scores.length+' 族 · 均值 '+mean+' · 极差 '+spread+' · '+judge+' · 异质族独立推演，非同源复制</div></div>';
+  }
+  document.getElementById("swarm").innerHTML=html;
+}
+
+sb.from("a2a_questions").select("*").order("slug").then(function(res){
+  if(res.error){ document.getElementById("offline").style.display="block"; return; }
+  QS=res.data||[];
+  return sb.from("a2a_signals").select("*").order("ts",{ascending:false}).limit(70);
+}).then(function(res){
+  if(res && res.data){ res.data.forEach(function(r){ if(!SIG[r.symbol]) SIG[r.symbol]=r; }); }
+  return sb.from("a2a_runs").select("*").order("ts",{ascending:false}).limit(30);
+}).then(function(res){
+  if(res && res.data){ res.data.forEach(function(r){ if(!RUNS[r.question_slug]) RUNS[r.question_slug]=r; }); }
+  return sb.from("a2a_swarm_runs").select("*").order("ts",{ascending:false}).limit(120);
+}).then(function(res){
+  if(res && res.data){ res.data.forEach(function(r){
+    if(!SWARM[r.question_slug]) SWARM[r.question_slug]={};
+    if(!SWARM[r.question_slug][r.tribe]) SWARM[r.question_slug][r.tribe]=r;
+  }); }
+  document.getElementById("main").style.display="block";
+  renderSigs(); renderQs(); renderSwarm();
+});
+
+sb.channel("a2a-live")
+  .on("postgres_changes",{event:"INSERT",schema:"public",table:"a2a_signals"},function(p){ mergeSig(p.new); })
+  .on("postgres_changes",{event:"INSERT",schema:"public",table:"a2a_runs"},function(p){ mergeRun(p.new); })
+  .on("postgres_changes",{event:"INSERT",schema:"public",table:"a2a_swarm_runs"},function(p){ mergeSwarm(p.new); })
+  .subscribe(function(st){
+    var on = st==="SUBSCRIBED";
+    document.getElementById("lamp").className = on?"on":"";
+    document.getElementById("liveTxt").textContent = on?"LIVE":"连接中";
+  });
+})();
+</script>
+
+
+</body></html>
