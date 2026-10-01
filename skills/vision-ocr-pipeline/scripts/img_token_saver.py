@@ -45,7 +45,7 @@ def report(im, name, glyph=False):
             from rapidocr_onnxruntime import RapidOCR
             res, _ = RapidOCR()(name)
             hs = [max(pt[1] for pt in box) - min(pt[1] for pt in box)
-                  for box, txt, _ in (res or []) if any('一' <= c <= '鿿' for c in txt)]
+                  for box, txt, _ in (res or []) if any('\\u4e00' <= c <= '\\u9fff' for c in txt)]
             if hs:
                 hs.sort()
                 print(f"  [glyph] 汉字行高中位数≈{hs[len(hs)//2]}px（n={len(hs)}，RapidOCR框高粗测±20%）")
