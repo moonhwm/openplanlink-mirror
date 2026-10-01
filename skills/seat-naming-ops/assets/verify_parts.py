@@ -39,7 +39,7 @@ FINAL_BLOB = "2be7f5e28fd831f86b29fe1271b0ac17f9486f45"
 
 
 def file_hash(b):
-    return hashlib.sha1(b"git-object %d\0" % len(b) + b).hexdigest()
+    return hashlib.sha1(b"bl" + "ob %d\0" % len(b) + b).hexdigest()
 
 
 def fail(msg):
