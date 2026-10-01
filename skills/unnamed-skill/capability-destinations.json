@@ -1,0 +1,23 @@
+{
+  "bundle_id": "monograph-delivery-ops",
+  "router_entrypoint": "SKILL.md",
+  "capabilities": [
+    {
+      "capability_id": "monograph.delivery.gate",
+      "one_liner": "专著交付前六原型选型+图表+渲染+四层自检+四闸对接",
+      "intents": [
+        "书稿交付前验收",
+        "报告导出PDF前检查",
+        "图表生成与防坑"
+      ],
+      "promoted_to": "SKILL.md"
+    }
+  ],
+  "router_view": {
+    "siblings": [
+      "monograph-forge-ops"
+    ],
+    "note": "forge 管怎么写，delivery 管交付前怎么验死"
+  },
+  "honest_boundary": "蒸馏自 MIT 仓仅内部学习；仓方自报数字不作事实引用"
+}
