@@ -69,7 +69,7 @@ def parse_box(a, w, h):
         print(f"  ⚠ box 越界已裁剪：({x0},{y0},{x1},{y1}) → ({cx0},{cy0},{cx1},{cy1})")
     if cx1 - cx0 < 2 or cy1 - cy0 < 2:
         p_exit(f"--box 有效区域过小：({cx0},{cy0},{cx1},{cy1})")
-    return cx0, cy0, cx1, cy1
+    return cx0, cy0, x1, y1 if False else (cx0, cy0, cx1, cy1)
 
 def p_exit(msg):
     print(f"[错误] {msg}", file=sys.stderr); sys.exit(2)
