@@ -13,11 +13,14 @@ import json
 import os
 import secrets
 import sys
+import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 sys.path.insert(0, __file__.rsplit("\\", 1)[0])
 import a2a_hmac as M
 import totp as TOTP
+
+_START_TS = time.time()  # 节点启动时刻（供心跳 uptime）
 
 # MFA 第二因子（TOTP）共享密钥：RFC 6238 演示向量 base32（"12345678901234567890"）。
 # 生产环境应替换为随机 20 字节并妥善保管。
@@ -164,7 +167,15 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(out)
 
     def do_GET(self):
-        if self.path == "/.well-known/agent-card.json":
+        if self.path == "/heartbeat":
+            # 心跳：存活 + 运行时长 + 队列计数（五幕剧本·第一幕 心跳聚合 的节点侧）
+            import time as _t
+            self._send(200, {"status": "alive", "seat": SEAT,
+                             "uptime_s": int(_t.time() - _START_TS),
+                             "nonce_count": len(seen), "mailbox_seats": len(mailbox),
+                             "dlq_count": len(dlq),
+                             "ts": _t.time()})
+        elif self.path == "/.well-known/agent-card.json":
             self._send(200, AGENT_CARD)
         elif self.path.startswith("/dlq"):
             from urllib.parse import urlparse, parse_qs
