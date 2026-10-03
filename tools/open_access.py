@@ -1,0 +1,75 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""open_access.py —— 开放获取资源检索适配器（跨库 + 格式归一化）。
+
+依"部署建议：优先对接开放获取资源 + 跨库检索与格式归一化"，封装三个免凭据公共源：
+OpenLibrary（图书）/ Gutendex（古腾堡公版书）/ arXiv（论文）。纯标准库，Windows 直跑。
+统一输出 {source, title, author, year, url, kind}，供上层 A2A 端口插件调用。
+"""
+import json
+import urllib.parse
+import urllib.request
+
+
+def _get_json(url, timeout=15):
+    req = urllib.request.Request(url, headers={"User-Agent": "OpenPlanLink-A2A/0.1 (open-access adapter)"})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return json.loads(r.read().decode("utf-8"))
+
+
+def search_openlibrary(q, limit=5):
+    url = "https://openlibrary.org/search.json?" + urllib.parse.urlencode({"q": q, "limit": limit})
+    out = []
+    for d in _get_json(url).get("docs", [])[:limit]:
+        out.append({"source": "openlibrary", "title": d.get("title", ""),
+                    "author": (d.get("author_name") or [""])[0],
+                    "year": (d.get("first_publish_year")),
+                    "url": "https://openlibrary.org" + (d.get("key") or ""), "kind": "book"})
+    return out
+
+
+def search_gutenberg(q, limit=5):
+    url = "https://gutendex.com/books?" + urllib.parse.urlencode({"search": q})
+    out = []
+    for d in _get_json(url).get("results", [])[:limit]:
+        out.append({"source": "gutenberg", "title": d.get("title", ""),
+                    "author": (d.get("authors") or [{}])[0].get("name", ""),
+                    "year": None, "url": d.get("formats", {}).get("text/plain; charset=utf-8") or "",
+                    "kind": "public-domain-book"})
+    return out
+
+
+def search_arxiv(q, limit=5):
+    import xml.etree.ElementTree as ET
+    url = "http://export.arxiv.org/api/query?" + urllib.parse.urlencode(
+        {"search_query": "all:" + q, "max_results": limit})
+    req = urllib.request.Request(url, headers={"User-Agent": "OpenPlanLink-A2A/0.1"})
+    with urllib.request.urlopen(req, timeout=15) as r:
+        root = ET.fromstring(r.read().decode("utf-8"))
+    out = []
+    ns = {"a": "http://www.w3.org/2005/Atom"}
+    for e in root.findall("a:entry", ns)[:limit]:
+        out.append({"source": "arxiv", "title": e.findtext("a:title", "", ns).strip(),
+                    "author": (e.find("a:author/a:name", ns).text if e.find("a:author/a:name", ns) is not None else ""),
+                    "year": e.findtext("a:published", "", ns)[:4],
+                    "url": e.findtext("a:id", "", ns), "kind": "paper"})
+    return out
+
+
+def unified_search(q, limit=5):
+    """跨库检索 + 格式归一化：三源结果合并为统一结构。"""
+    rows = []
+    for fn in (search_openlibrary, search_gutenberg, search_arxiv):
+        try:
+            rows += fn(q, limit)
+        except Exception as e:
+            rows.append({"source": fn.__name__, "title": "(检索失败)", "author": "", "year": None,
+                         "url": "", "kind": "error", "error": str(e)[:80]})
+    return rows
+
+
+if __name__ == "__main__":
+    q = "a2a agent"
+    print("══ 统一检索『%s』══" % q)
+    for r in unified_search(q, 3):
+        print("  [%s] %s ｜ %s ｜ %s" % (r["kind"], r["title"][:40], (r["author"] or "")[:20], r["url"][:50]))
