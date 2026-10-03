@@ -1,0 +1,90 @@
+{
+  "tree_name": "openplanlink-a2a-sha3-tree",
+  "tree_id": "TREE-K3-2026-1003-01",
+  "created_by": "k3-main (kimi-work-desktop)",
+  "created_at": "2026-10-03T16:35:00+08:00",
+  "algorithm": "SHA3-512; internal nodes HMAC-SHA3-512 (System.Security.Cryptography.HMACSHA3_512 compatible)",
+  "rules": {
+    "leaf": "sha3_512(asset_bytes)",
+    "internal": "HMACSHA3_512(key, hex2bin(left)||hex2bin(right))",
+    "odd_level": "duplicate last node",
+    "key_retention": "key file A:/MiroFish/sha3_tree/tree_key_hmac_sha3_512.bin stays local; only fingerprint published"
+  },
+  "key_fingerprint_sha3_512": "aa70e765da8cf89e373abb82f98ff16a0c96cf08dc4ed8d08401ccc5fc510c591f51ab2b80a2b675cd3da8e7fe6b50ea24dc0a627961aacd4c9b5a3f1837766b",
+  "leaf_count": 8,
+  "leaves": [
+    {
+      "tag": "directive_20261003_HMACSHA3_512_tree_order.txt",
+      "sha3_512": "a329d51ef7811427ee299b6932eb7583beee13e4a3c7551b9ae1bc18a0082f601e5010f7fb898c800f99a2b3719f689dc7c765e1d7a70b9ad85fdf0634445494",
+      "bytes": 22588
+    },
+    {
+      "tag": "sourceA_doc_b3a2bfb0(openplanlink_kdocs_cubofOPoRdSw)",
+      "sha3_512": "b3a2bfb0578baa7558f631b265a952c83429530aace8a27923c35efd7621720090fc1c03260418b1fefebbc7363d134c0858a0310c111cc347960a045165ef15",
+      "bytes": 257479
+    },
+    {
+      "tag": "receipt63_bundle_json",
+      "sha3_512": "2faf95d8459f5fbea122f3811dcb4c0df281a04b43cff2729ce642f0b6c41bd4f129187fc51328ff4d81c41e46b3141feba58e0053c02ef8a816c72047441b80",
+      "bytes": 2654
+    },
+    {
+      "tag": "bus_11204_payload",
+      "sha3_512": "995bfc11e00a59aba4fc2cd9a822b589a0a826d3867b80bf4c352b2f0f0bbe96e966349afd9fa67d698dc0030414938108eb282195bce9d21c95b385ae982fe2",
+      "bytes": 424
+    },
+    {
+      "tag": "bus_11372_payload",
+      "sha3_512": "e8346e9ccda5169a4786f3cc5f5a68a500aba0feed08586499cabb0fe6d13cc4775e9d562f1930bc592153fc7ee0fcecd91170cb1487c813d7c6c58556dd2f7c",
+      "bytes": 443
+    },
+    {
+      "tag": "bus_11375_payload",
+      "sha3_512": "e541b03ea821e608f0d40fe7ace031e2a014dc122ec182469e02ccfa489e2ba5fc3298137026d207876aca4cfea324a7f66350a5bfb5d4d086a2f046e640c28a",
+      "bytes": 722
+    },
+    {
+      "tag": "neon_a2a_archive_row1_payload",
+      "sha3_512": "65f52ce25de374c60469c0003ac429638d864fb82815beae24a40dafe524a96b144d79bee71cc3559842445f15099fa9c02c364ece92685de613b7ee2ab11417",
+      "bytes": 506
+    },
+    {
+      "tag": "wps_DF-K3-2026-1001-ARCH-01_title_link",
+      "sha3_512": "e4abd0d7ef9b4a8c5b30da3873d2da564bec01448885c660598aa1c53fe09aa5f20403d8eb5a3103c0269ed11eac95c843dc6d413db2521a69e048baf7f27e66",
+      "bytes": 89
+    }
+  ],
+  "levels": [
+    [
+      "a329d51ef7811427ee299b6932eb7583beee13e4a3c7551b9ae1bc18a0082f601e5010f7fb898c800f99a2b3719f689dc7c765e1d7a70b9ad85fdf0634445494",
+      "b3a2bfb0578baa7558f631b265a952c83429530aace8a27923c35efd7621720090fc1c03260418b1fefebbc7363d134c0858a0310c111cc347960a045165ef15",
+      "2faf95d8459f5fbea122f3811dcb4c0df281a04b43cff2729ce642f0b6c41bd4f129187fc51328ff4d81c41e46b3141feba58e0053c02ef8a816c72047441b80",
+      "995bfc11e00a59aba4fc2cd9a822b589a0a826d3867b80bf4c352b2f0f0bbe96e966349afd9fa67d698dc0030414938108eb282195bce9d21c95b385ae982fe2",
+      "e8346e9ccda5169a4786f3cc5f5a68a500aba0feed08586499cabb0fe6d13cc4775e9d562f1930bc592153fc7ee0fcecd91170cb1487c813d7c6c58556dd2f7c",
+      "e541b03ea821e608f0d40fe7ace031e2a014dc122ec182469e02ccfa489e2ba5fc3298137026d207876aca4cfea324a7f66350a5bfb5d4d086a2f046e640c28a",
+      "65f52ce25de374c60469c0003ac429638d864fb82815beae24a40dafe524a96b144d79bee71cc3559842445f15099fa9c02c364ece92685de613b7ee2ab11417",
+      "e4abd0d7ef9b4a8c5b30da3873d2da564bec01448885c660598aa1c53fe09aa5f20403d8eb5a3103c0269ed11eac95c843dc6d413db2521a69e048baf7f27e66"
+    ],
+    [
+      "4bd390bf4a8cefef90098e6367bd319d98d511353c21453443ddac262ca9ce6b1f0aaa32d0a2087785784e99e30390cbdb2a007067c813ffe3688075f258624c",
+      "b2fd24379099c61e896640e53a31952dc9eeb4a9f4ea7c8a90ce14740a44dba62fe4e3818cf5d9eca8a8f2fb378ad93c6887188a275ba869526a868681a12f7f",
+      "05937d5a5e7dae6b53703fbec4f0804f067c78c9ced87766cb3cea0c179fafea478a090c98a262a42b495700bacb414ddd03f9ebfd1a98f5bfca9ce66cbeeeb7",
+      "9807fc21c0410b98f5ff32a362cd2101bc382331f8416173193a140c38731bd25fa0e04cb56e907b2a1c57df6e19ff959d51d94c54c624a4d0c4c2a8c03c5002"
+    ],
+    [
+      "f461b9c5020dbca3930fa6b574dd812a6edf4a1711df5fbd0f9dc477f53f73223b82b8096daba4d6d1b6466b5e6fd8c52e3cde3e9860b8892f21d8b8e8c0896c",
+      "a38e06f2bb70dd589dc836989b7371c72fc2baf1105af1b5d61cb40fe91e778f7f2de89f45695a5d6a6651e1a4dee2c71dd40f32b509d90684684cad2c772699"
+    ],
+    [
+      "a3475c45450b8b21e7cfa52c7268939947f86e9e70526a1f3481e1f5136d3887809466e833dc1df1bbf0114a0526239a98bb8d0ea20af7af18edf4d20f8fa3bb"
+    ]
+  ],
+  "root_sha3_512_hmac": "a3475c45450b8b21e7cfa52c7268939947f86e9e70526a1f3481e1f5136d3887809466e833dc1df1bbf0114a0526239a98bb8d0ea20af7af18edf4d20f8fa3bb",
+  "cross_vendor_verify": "any impl of standard HMAC-SHA3-512 (.NET/python/OpenSSL) reproduces internal nodes with same key; leaves verify without key",
+  "top3_likely_wrong": [
+    "bus_11204 leaf: stored payload contains literal backslash-n escape pair (2 chars) per Postgres standard_conforming_strings; verifiers must pull exact payload_md from DB",
+    "wps leaf hashes title+link string only, not file content (drive file mutable); content-level anchor pending kdocs export hash",
+    "key file on A: disk: single copy, no backup; loss = internal nodes unverifiable (leaves still verify)"
+  ],
+  "data_cutoff": "2026-10-03T16:35:00+08:00"
+}
