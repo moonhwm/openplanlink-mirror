@@ -1,0 +1,129 @@
+{
+  "tree_name": "openplanlink-a2a-seat-registry-tree",
+  "tree_id": "TREE-K3-2026-1003-02",
+  "created_by": "kimi-work-desktop selector seat (session 10-59-25-ae72d82b)",
+  "created_at": "2026-10-03T17:10:00+08:00",
+  "directive": "机主令 2026-10-03 16:35：使用该标准建SHA3_512树，密钥自留，可跨应用及厂商Agent to Agent核验；统一，全权授权；更新 openplanlink-mirror",
+  "standard_ref": "System.Security.Cryptography.HMACSHA3_512 (.NET 10) == RFC2104 HMAC over FIPS202 SHA3-512 == python hmac/hashlib == OpenSSL",
+  "algorithm": "leaves SHA3-512 (keyless, publicly verifiable); internal nodes HMAC-SHA3-512(retained key)",
+  "rules": {
+    "leaf": "sha3_512(canonical_json_utf8)",
+    "canonical_json": "sort_keys, separators=(,), ensure_ascii=False",
+    "internal": "HMACSHA3_512(key, hex2bin(left)||hex2bin(right))",
+    "odd_level": "duplicate last node",
+    "key_retention": "tree02_key.bin 64B 随机，仅存 LAPTOP-CHOCER02 工作区，永不上传；仅公布 fingerprint"
+  },
+  "key_fingerprint_sha3_512": "347946b965450f33cd0abbb032e5fbc48b56f8bd8c0f0e3e747771c81e4663ca0c9d582369a0ffdf63ceda9fa97a629e40f2be8fbad4320e22b49ad4dee518f5",
+  "leaf_count": 9,
+  "leaves": [
+    {
+      "tag": "seat:scnet-k3-event",
+      "sha3_512": "3e9124ec51d185bfb2532cf004d85eb0d9c77e4df6397384c6f0df5388e6af776be3157b93660cd6ed79714f2389a1e060032f441ca1f7bc6ea741ae53e8305c",
+      "bytes": 368,
+      "note": "席位注册记录（公域字段，key 仅掩码）"
+    },
+    {
+      "tag": "seat:tencent-tokenhub",
+      "sha3_512": "66a015c6a8a1fbe2f9abb2d8ecf9837575b79971eb5842f4b213f78bebb31f977bd809fb76f595c8004e1cf7ea87f0c0bec2e77f179868bf060efac651153890",
+      "bytes": 425,
+      "note": "席位注册记录（公域字段，key 仅掩码）"
+    },
+    {
+      "tag": "seat:huawei-maas-pangu",
+      "sha3_512": "4164ec7db84c7ead870d827f07963c0e2ce91e3592263bf2ce74e4c35007c7c41cba48955efe0d7313dc8aa4fe750270e534a8502c1fbf6c0769459da45b02cc",
+      "bytes": 361,
+      "note": "席位注册记录（公域字段，key 仅掩码）"
+    },
+    {
+      "tag": "seat:volcano-doubao-seed",
+      "sha3_512": "311c1667dc8639c641a8cf1e65417504d190a9cc9c8a2f92e525d2d04ee7d9fba2cef8f4b9247d2bc397091ee223a8443a9847fa7cc5f76a08907353c95a3fc3",
+      "bytes": 347,
+      "note": "席位注册记录（公域字段，key 仅掩码）"
+    },
+    {
+      "tag": "r67:manifest-root",
+      "sha3_512": "acbb90cca1f7d310dce254d01835a9725562e8a3152e8c2ba004ee8a9ad781ccd2088d60a17d8b4d28f8a90988e700006def38e1c79693d616ed6646ff6e5f31",
+      "bytes": 311,
+      "note": "R67 强制引入登记 ML-DSA-44 链根"
+    },
+    {
+      "tag": "r67:leaf:huawei-maas-pangu",
+      "sha3_512": "c96fa0d87fe10fdbe8af749c17606d045ffe1f9e1d0d341d4e2c92b543cbb9135f20f70ccb48370ab1b4e4232a77e9cd132149738724b582a94634c4deb38328",
+      "bytes": 259,
+      "note": "R67 叶指纹（盘古席 active）"
+    },
+    {
+      "tag": "r67:leaf:volcano-doubao-seed",
+      "sha3_512": "fbbdd9777648c6518c97119e9baeb3dacf3d939e868897790fabd76004f8827a40898491ad49650a15ffd2ca5594fc2ac00099cdaa0955fdc88e05fad8701e87",
+      "bytes": 268,
+      "note": "R67 叶指纹（Doubao 席 pending，激活后补签新叶）"
+    },
+    {
+      "tag": "site:attest-root",
+      "sha3_512": "88531d4c33c86f33bcad618871a874345277ff23b55743359f8c1f9d09216b74c21106f5a2caecc0c6c9b69f3edf28e1d00e09c3b92f595749082577dd0b51b6",
+      "bytes": 294,
+      "note": "镜像站全站完整性根（desktop-gengfu 席维护）"
+    },
+    {
+      "tag": "tree:TREE-K3-2026-1003-01-root",
+      "sha3_512": "6b085c9a7c78d024c4c7c3d3af5e8f2195471a3f9867e1948aa5aee81a26dce69285c5c234415a608193d349dafccc648e2621e4c7ea545a0d48d7e1e2d1a660",
+      "bytes": 250,
+      "note": "证据树 01 根（8 叶：指令/源文档/总线/Neon/WPS）"
+    }
+  ],
+  "levels": [
+    [
+      "3e9124ec51d185bfb2532cf004d85eb0d9c77e4df6397384c6f0df5388e6af776be3157b93660cd6ed79714f2389a1e060032f441ca1f7bc6ea741ae53e8305c",
+      "66a015c6a8a1fbe2f9abb2d8ecf9837575b79971eb5842f4b213f78bebb31f977bd809fb76f595c8004e1cf7ea87f0c0bec2e77f179868bf060efac651153890",
+      "4164ec7db84c7ead870d827f07963c0e2ce91e3592263bf2ce74e4c35007c7c41cba48955efe0d7313dc8aa4fe750270e534a8502c1fbf6c0769459da45b02cc",
+      "311c1667dc8639c641a8cf1e65417504d190a9cc9c8a2f92e525d2d04ee7d9fba2cef8f4b9247d2bc397091ee223a8443a9847fa7cc5f76a08907353c95a3fc3",
+      "acbb90cca1f7d310dce254d01835a9725562e8a3152e8c2ba004ee8a9ad781ccd2088d60a17d8b4d28f8a90988e700006def38e1c79693d616ed6646ff6e5f31",
+      "c96fa0d87fe10fdbe8af749c17606d045ffe1f9e1d0d341d4e2c92b543cbb9135f20f70ccb48370ab1b4e4232a77e9cd132149738724b582a94634c4deb38328",
+      "fbbdd9777648c6518c97119e9baeb3dacf3d939e868897790fabd76004f8827a40898491ad49650a15ffd2ca5594fc2ac00099cdaa0955fdc88e05fad8701e87",
+      "88531d4c33c86f33bcad618871a874345277ff23b55743359f8c1f9d09216b74c21106f5a2caecc0c6c9b69f3edf28e1d00e09c3b92f595749082577dd0b51b6",
+      "6b085c9a7c78d024c4c7c3d3af5e8f2195471a3f9867e1948aa5aee81a26dce69285c5c234415a608193d349dafccc648e2621e4c7ea545a0d48d7e1e2d1a660"
+    ],
+    [
+      "3ab6fe008dbae84d13712b5ee44d5ae0545107a715104e0fc3ac063ecbfe5553c9d61ab8cf0c6f8123294759080c31ad0855158991ccef11cff8d7d3a19e4adf",
+      "55a68ebe051ac2e1129502830d82f02358ff0a852e962a06e2895861f37adef4e5d4d3bd8ddd863a7257f6e7ba001d6c36bd3a452ae9730a4289f5da1076814c",
+      "2b1652808d7390bb4242cefd37b21b871f4c4e5888ea865b29290dbe4416b3163fec14d914683591742ad04964ea666bb04800222d0c709f6166c9157fd91f0a",
+      "77035c12309e56bfd2ff7ab0027a96a051bc3cd6bb8c112e147a21e28d248101ee10a736c520d4278caecae91469f82465e6953b0fe8462770fce68f97dceac7",
+      "835cb04735283c658ec39ac7545c920c9e91244d63037da6d757f7f1b7c76fb9234d789a53eef2ceca5f79c5f9e1f92d78c08d83951ef4bdb1583ed986db90cb"
+    ],
+    [
+      "7d089a714769b7d1d63407828a7181c769a6cd07027d1b7c50874c4152174e910e6ce5d1e30875d6b12435b6ea9e280b4bc2913152b5d3e53cb3c55a74b4c69e",
+      "b75bb0a4502663fb7451252dfa29b345f2fa5309b0d09d4b2d7b7b4088c57c6447343f10de01e62073425ca5937480758ddee5b059a1660e4e8f2882718456e8",
+      "2c05405d852a3641c44d6c6ef243021c8ee349ccbfb3dec5e26e084882f0715f22e7fd079199a7310c7fdddffab9a0e6c8dc34c19a5449b55f772e07ad80bd42"
+    ],
+    [
+      "2bceef15d5ef646f468fbb21c21db1b355f29aacb309c24f901f36575ff28643cfbbc0499fb063d5cd24d2774812d7858c7606bdc97ab5a5ddab35974ceb7a62",
+      "7ddb0a5de7083142010c893550c5ec55a2d2ff9d5dabbd087da43038e69ea585695a3eb949603773a9a59b9f861f186c4209439c246fa96f9f24a17c9949f70d"
+    ],
+    [
+      "99621020966832a6d98586b964944c984638af830c4f7d8a93a14656b831c6be77a5759c50c5f4a684d9def23884c8cdaf5707c12e5b3af7a415cb16c2136ead"
+    ]
+  ],
+  "root_sha3_512_hmac": "99621020966832a6d98586b964944c984638af830c4f7d8a93a14656b831c6be77a5759c50c5f4a684d9def23884c8cdaf5707c12e5b3af7a415cb16c2136ead",
+  "anchors": {
+    "TREE-K3-2026-1003-01": "a3475c45450b8b21e7cfa52c7268939947f86e9e70526a1f3481e1f5136d3887809466e833dc1df1bbf0114a0526239a98bb8d0ea20af7af18edf4d20f8fa3bb",
+    "r67-forced-induction-root": "32f73b8e4facd7d9faff9b3627f5dfb4b9d56d57cd9a9e3c515c7881da22d44adc53f088086a040eac4a0fd0f78e78b43dbde266a33b2b1f3f12aeede398a531",
+    "opl-attest-site-root": "dc3c4effbc84276585497def964b0a54b0455b65a38d37c4ef5363a60a2bfee1ad1b6f5b7dcda97d2fe2e27e72f0ad86d904e0022c3b7c3eb0d9fdc5c30c83"
+  },
+  "cross_vendor_verify": "叶子无钥可验（sha3_512 复算）；内部节点/根需持钥复算或凭 key_fingerprint 锁定持钥人；A2A 握手=持钥者对对方 nonce 出 HMAC-SHA3-512 应答",
+  "cross_checks": {
+    "tree01_leaf0_directive_txt": "PASS（本地指令原件 22588B 复算 == leaf0 a329d51e…，2026-10-03 本会话实测）",
+    "r67_linkage": "external_seats.json huawei/doubao 两段 R67 指纹与本树锚叶一致"
+  },
+  "selftest": {
+    "all_inclusion_proofs": true,
+    "tamper_rejected": true,
+    "wrong_key_rejected": true,
+    "challenge_response_roundtrip": true
+  },
+  "top3_likely_wrong": [
+    "Doubao 席 status=pending_user_login：叶已锚但 seat 未激活，激活后须重建树（新根新指纹，旧树留档不覆盖）",
+    "registered_at 来自台账自报字段，非可信时间戳；可信时序由树链+repo commit 双重锚定",
+    "key 单份存于本机工作区（OneDrive 同步=事实备份，但同步冲突可能回滚）；丢钥=内部节点不可复算，叶子仍可无钥验"
+  ],
+  "data_cutoff": "2026-10-03T17:10:00+08:00"
+}
