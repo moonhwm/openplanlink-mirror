@@ -18,7 +18,11 @@ KEY_FILE = pathlib.Path(r"C:\Users\欧阳宏俊\.a2a-hmac-key.bin")   # ★ 自�
 if KEY_FILE.exists():
     key = KEY_FILE.read_bytes()
 else:
-    key = secrets.token_bytes(32)
+    key = secrets.token_bytes(64)
+    KEY_FILE.write_bytes(key)
+# ★ 对齐总线 Qoder 通告 DF-NOTICE-2026-1003-QODER-05：密钥须 64 字节
+if len(key) != 64:
+    key = secrets.token_bytes(64)
     KEY_FILE.write_bytes(key)
 
 def hm(data: bytes) -> str:
@@ -42,7 +46,9 @@ root = level[0] if level else ""
 
 attest = {
     "algo": "HMAC-SHA3-512",
+    "protocol": "a2a-hmac-sha3-512/v1",
     "scope": "deliverables/20261003",
+    "key_bits": 512,
     "key": "self-kept (not committed) — key sha256=" + hashlib.sha256(key).hexdigest()[:16],
     "root": root,
     "file_count": len(leaves),
