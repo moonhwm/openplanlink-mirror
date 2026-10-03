@@ -56,11 +56,18 @@ results.append(ok)
 print("  篡改正文   code=%s 拒绝=%s（%s）" % (code, ok, data.get("error", {}).get("message")))
 
 body3 = rpc_body("seat/hello", {"msg": "hi3"})
-env3 = M.build_envelope(SENDER, "someone-else", body3, KEY, KEY_ID)  # 发往别的席位
+env3 = M.build_envelope(SENDER, "workbuddy-hy4", body3, KEY, KEY_ID)  # 发往已知席位
 code, data = post(env3, body3)
-ok = (code == 200 and data.get("queued") is True)  # 中转模式：排队待取，非节点拒绝
+ok = (code == 200 and data.get("queued") is True)
 results.append(ok)
-print("  中转别的席位 code=%s queued=%s" % (code, data.get("queued")))
+print("  中转已知席位 code=%s queued=%s" % (code, data.get("queued")))
+
+body4 = rpc_body("seat/hello", {"msg": "hi4"})
+env4 = M.build_envelope(SENDER, "unknown-seat", body4, KEY, KEY_ID)  # 发往未知席位
+code, data = post(env4, body4)
+ok = (code == 404)
+results.append(ok)
+print("  未知席位   code=%s 拒绝=%s（%s）" % (code, ok, data.get("error", {}).get("message")))
 
 bad = results.count(False)
 print("★ VERDICT=" + ("PASS" if bad == 0 else "BAD"))

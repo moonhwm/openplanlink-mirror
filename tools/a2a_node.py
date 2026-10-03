@@ -30,6 +30,26 @@ NONCE_FILE = r"C:\Users\欧阳宏俊\.a2a-node-nonces.json"
 MAILBOX_FILE = r"C:\Users\欧阳宏俊\.a2a-node-mailbox.json"
 seen = set()
 mailbox = {}
+# 席位注册表：中转前校验目标合法；未知席位拒绝
+SEATS = {"cairn-dsh", "workbuddy-hy4", "a2a-node-local", "shoucang-seat", "zcode-moon", "kimi-seat"}
+
+AGENT_CARD = {
+    "protocolVersion": "0.3.0",
+    "name": "A2A 本地节点 · cairn-dsh（石敢当）",
+    "description": "最小 A2A JSON-RPC 节点：HMAC-SHA3-512 认证、席位信箱路由、nonce/信箱持久化。127.0.0.1:4173",
+    "url": "http://127.0.0.1:4173",
+    "preferredTransport": "JSONRPC",
+    "version": "0.1.0",
+    "provider": {"organization": "cairn-dsh / 石敢当", "url": "http://127.0.0.1:4173"},
+    "capabilities": {"streaming": False, "pushNotifications": False, "stateTransitionHistory": False},
+    "defaultInputModes": ["application/json"],
+    "defaultOutputModes": ["application/json"],
+    "skills": [
+        {"id": "a2a-hmac-echo", "name": "HMAC Echo + Mailbox",
+         "description": "HMAC-SHA3-512 认证的消息回显与席位信箱路由",
+         "tags": ["a2a", "hmac", "mailbox"], "inputModes": ["application/json"], "outputModes": ["application/json"]}
+    ],
+}
 
 
 def _load_state():
@@ -69,7 +89,9 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(out)
 
     def do_GET(self):
-        if self.path.startswith("/mailbox/"):
+        if self.path == "/.well-known/agent-card.json":
+            self._send(200, AGENT_CARD)
+        elif self.path.startswith("/mailbox/"):
             seat = self.path.split("/")[-1]
             self._send(200, {"messages": mailbox.get(seat, [])})
         else:
@@ -95,6 +117,10 @@ class Handler(BaseHTTPRequestHandler):
                 resp_env = M.build_envelope(SEAT, envelope["sender_id"], resp_bytes, KEY, KEY_ID)
                 self._send(200, {"envelope": resp_env, "body_b64": base64.b64encode(resp_bytes).decode("ascii")})
             else:
+                if envelope["recipient_id"] not in SEATS:
+                    self._send(404, {"jsonrpc": "2.0", "id": None,
+                                     "error": {"code": -32602, "message": "未知席位: %s" % envelope["recipient_id"]}})
+                    return
                 mailbox.setdefault(envelope["recipient_id"], []).append(
                     {"envelope": envelope, "body_b64": base64.b64encode(body).decode("ascii")})
                 self._send(200, {"queued": True, "recipient": envelope["recipient_id"]})
