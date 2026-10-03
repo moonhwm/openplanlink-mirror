@@ -41,18 +41,23 @@ SEATS = {"cairn-dsh", "workbuddy-hy4", "a2a-node-local", "shoucang-seat", "zcode
 AGENT_CARD = {
     "protocolVersion": "0.3.0",
     "name": "A2A 本地节点 · cairn-dsh（石敢当）",
-    "description": "最小 A2A JSON-RPC 节点：HMAC-SHA3-512 认证、席位信箱路由、nonce/信箱持久化。127.0.0.1:4173",
+    "description": "最小 A2A JSON-RPC 节点：HMAC-SHA3-512 认证、席位信箱路由、nonce/信箱持久化、MFA(TOTP) 双因子。127.0.0.1:4173",
     "url": "http://127.0.0.1:4173",
     "preferredTransport": "JSONRPC",
-    "version": "0.1.0",
+    "version": "0.2.0",
+    "license": "AGPL-3.0",
     "provider": {"organization": "cairn-dsh / 石敢当", "url": "http://127.0.0.1:4173"},
     "capabilities": {"streaming": False, "pushNotifications": False, "stateTransitionHistory": False},
+    "securitySchemes": {
+        "hmac-sha3-512": {"type": "hmac", "in": "envelope", "description": "A2A 消息包络认证（第一因子，a2a-hmac-sha3-512/v1）"},
+        "totp": {"type": "totp", "in": "query", "description": "信箱读取 TOTP（第二因子，RFC 6238，?totp=<6位>）"},
+    },
     "defaultInputModes": ["application/json"],
     "defaultOutputModes": ["application/json"],
     "skills": [
         {"id": "a2a-hmac-echo", "name": "HMAC Echo + Mailbox",
-         "description": "HMAC-SHA3-512 认证的消息回显与席位信箱路由",
-         "tags": ["a2a", "hmac", "mailbox"], "inputModes": ["application/json"], "outputModes": ["application/json"]}
+         "description": "HMAC-SHA3-512 认证的消息回显与席位信箱路由（信箱读取需 TOTP 第二因子）",
+         "tags": ["a2a", "hmac", "mailbox", "mfa"], "inputModes": ["application/json"], "outputModes": ["application/json"]}
     ],
 }
 
