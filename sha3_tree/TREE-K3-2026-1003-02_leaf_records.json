@@ -1,0 +1,42 @@
+{
+  "tree_id": "TREE-K3-2026-1003-02",
+  "canonical_json": "sort_keys, separators=(,), ensure_ascii=False, utf-8",
+  "records": [
+    {
+      "tag": "seat:scnet-k3-event",
+      "canonical_b64": "eyJlbmRwb2ludCI6Imh0dHBzOi8vYXBpLnNjbmV0LmNuL2FwaS9sbG0vdjEiLCJrZXlfbWFza2VkIjoic2stdHAtTeKApk1UQT0iLCJwcm90b2NvbCI6Im9wZW5haS1jb21wYXRpYmxlIiwicHJvdmlkZXIiOiLotoXnrpfkupLogZTnvZEgU0NOZXQgTWFhUyIsInJlZ2lzdGVyZWRfYXQiOiIyMDI2LTA5LTMwVDAxOjIwOjAwKzA4OjAwIiwicm9sZSI6IuWIpOWumOWboiBNb29uc2hvdCDooYDnu5/lpJbmj7QgLyDmibnph4/nh4Png6flpJbmsaDvvIjku44gS2ltaSDotKbmiLflkajmnJ/phY3pop3ljbjovb3vvIkiLCJzZWF0X2lkIjoic2NuZXQtazMtZXZlbnQiLCJzdGF0dXMiOiJhY3RpdmUiLCJ0eXBlIjoiYTJhLXNlYXQtcmVnaXN0cmF0aW9uIn0="
+    },
+    {
+      "tag": "seat:tencent-tokenhub",
+      "canonical_b64": "eyJlbmRwb2ludCI6Imh0dHBzOi8vdG9rZW5odWIudGVuY2VudG1hYXMuY29tL3YxIiwia2V5X21hc2tlZCI6InNrLWZl4oCmMWdKTCIsInByb3RvY29sIjoib3BlbmFpLWNvbXBhdGlibGUgLyBhbnRocm9waWMtY29tcGF0aWJsZSIsInByb3ZpZGVyIjoi6IW+6K6v5LqRIFRva2VuSHVi77yI5bm/5bee77yJIiwicmVnaXN0ZXJlZF9hdCI6IjIwMjYtMDktMzBUMTE6NDU6MDArMDg6MDAiLCJyb2xlIjoi5Yik5a6Y5Zui5Li75Yqb5byC6LSo5oCn5rGg77yIR0xNL0RlZXBTZWVrL+a3t+WFgy9NaW5pTWF4IOS4gCBrZXkg6YCa6LCD77yJKyDlkJHph4/mr5Tlr7nlvJXmk44gKyDlhY3otLnlsYIgTDAg5Li75YqbIiwic2VhdF9pZCI6InRlbmNlbnQtdG9rZW5odWIiLCJzdGF0dXMiOiJhY3RpdmUiLCJ0eXBlIjoiYTJhLXNlYXQtcmVnaXN0cmF0aW9uIn0="
+    },
+    {
+      "tag": "seat:huawei-maas-pangu",
+      "canonical_b64": "eyJlbmRwb2ludCI6Imh0dHBzOi8vYXBpLm1vZGVsYXJ0cy1tYWFzLmNvbS92MSIsImtleV9tYXNrZWQiOiI4WEZU4oCmcndOQSIsInByb3RvY29sIjoib3BlbmFpLWNvbXBhdGlibGUiLCJwcm92aWRlciI6IuWNjuS4uuS6kSBNb2RlbEFydHMgTWFhUyIsInJlZ2lzdGVyZWRfYXQiOiIyMDI2LTA5LTMwVDExOjU1OjAwKzA4OjAwIiwicm9sZSI6IuW8uuWItuijgeWIpC/liKTlrpjlm6Llm73kuqflvILotKjmgKfplJrvvIjljY7kuLrnm5jlj6TooYDnu5/vvIkrIHF3ZW4vYmdlIOihpeWFheaxoCIsInNlYXRfaWQiOiJodWF3ZWktbWFhcy1wYW5ndSIsInN0YXR1cyI6ImFjdGl2ZSIsInR5cGUiOiJhMmEtc2VhdC1yZWdpc3RyYXRpb24ifQ=="
+    },
+    {
+      "tag": "seat:volcano-doubao-seed",
+      "canonical_b64": "eyJlbmRwb2ludCI6Imh0dHBzOi8vYXJrLmNuLWJlaWppbmcudm9sY2VzLmNvbS9hcGkvdjMiLCJrZXlfbWFza2VkIjpudWxsLCJwcm90b2NvbCI6Im9wZW5haS1jb21wYXRpYmxlIiwicHJvdmlkZXIiOiLngavlsbHlvJXmk47mlrnoiJ/vvIjlrZfoioLot7PliqjvvIkiLCJyZWdpc3RlcmVkX2F0IjpudWxsLCJyb2xlIjoi5Yik5a6Y5Zui5a2X6IqC6KGA57uf5aSW5o+077yI5by65Yi25byV5YWl55uu5qCH77yM5YCZ5py65Li75omr56CB77yJIiwic2VhdF9pZCI6InZvbGNhbm8tZG91YmFvLXNlZWQiLCJzdGF0dXMiOiJQRU5ESU5HX1VTRVJfTE9HSU4iLCJ0eXBlIjoiYTJhLXNlYXQtcmVnaXN0cmF0aW9uIn0="
+    },
+    {
+      "tag": "r67:manifest-root",
+      "canonical_b64": "eyJhbGciOiJtbF9kc2FfNDQiLCJleGVyY2lzZV9pZCI6ImZvcmNlZC1pbmR1Y3Rpb24tanVkZ2UtcGFuZWwtcjEiLCJyZWdpc3RyYXJfZmluZ2VycHJpbnQiOiIyMWNlZWI3YzhhMTAwZjdjNzNjZmUwMjk2ZTU0Y2IyNiIsInJvb3QiOiIzMmY3M2I4ZTRmYWNkN2Q5ZmFmZjliMzYyN2Y1ZGZiNGI5ZDU2ZDU3Y2Q5YTllM2M1MTVjNzg4MWRhMjJkNDRhZGM1M2YwODgwODZhMDQwZWFjNGEwZmQwZjc4ZTc4YjQzZGJkZTI2NmEzM2IyYjFmM2YxMmFlZWRlMzk4YTUzMSIsInNlYWxlZF9hdCI6MTc5MDc0MTAyNi43MjgsInR5cGUiOiJyNjctYW5jaG9yIn0="
+    },
+    {
+      "tag": "r67:leaf:huawei-maas-pangu",
+      "canonical_b64": "eyJsZWFmIjoiMjM3MTc4YTY2Y2RiYmU0YjU5MjIyMDA3N2JiOWVhYzk2MTVkOTM4NzNlOWUyODc4OTdmM2MyMDMyNmE3ZDE1ZTI1YzNjMWYzYjVjNDEyZmMyZjIzZjhhM2Y1Zjk1MzEwNzc0YjI0YzNhZWYxNDZhNTBiODVlYzcyZjM0OGJjZGQiLCJzZWF0IjoiaHVhd2VpLW1hYXMtcGFuZ3Uvb3BlbnBhbmd1LTIuMC1wcm8iLCJzaWdfZGlnZXN0IjoiM2VkZDM1ZDhkNjc2ZjU1MiIsInN0YXR1cyI6ImFjdGl2ZSIsInR5cGUiOiJyNjctbGVhZi1hbmNob3IifQ=="
+    },
+    {
+      "tag": "r67:leaf:volcano-doubao-seed",
+      "canonical_b64": "eyJsZWFmIjoiODg2NTE2Y2NkNTJhMzc2NWRhMzVlZjMyZTExYzA4YmE3NmNkNDdhZTcwNmUxZGZmMWFmYTVhYzVlODk5YTEwYTEwNDI4NGIwZmJjZGRlNmQyOWU0NzliY2YzNjE4ZTU1Yzc2YmRlNzk0N2EzMWNhYWRlNDAwZGY4M2NjYjA5OGUiLCJzZWF0Ijoidm9sY2Fuby1hcmsvZG91YmFvLXNlZWQtZXZvbHZpbmciLCJzaWdfZGlnZXN0IjoiMDU3ZTVlYzhjOWYyZjdjMSIsInN0YXR1cyI6InBlbmRpbmdfdXNlcl9sb2dpbiIsInR5cGUiOiJyNjctbGVhZi1hbmNob3IifQ=="
+    },
+    {
+      "tag": "site:attest-root",
+      "canonical_b64": "eyJtZXJrbGVfcm9vdCI6ImRjM2M0ZWZmYmM4NDI3NjU4NTQ5N2RlZjk2NGIwYTU0YjA0NTViNjVhMzhkMzdjNGVmNTM2M2E2MGEyYmZlZTFhZDFiNmY1YjdkY2RhOTdkMmZlMmUyN2U3MmYwYWQ4NmQ5MDRlMDAyMmMzYjdjM2ViMGQ5ZmRjNWMzMGM4MyIsInNjaGVtYSI6Im9wbC1hdHRlc3QvMSIsInNpZ19hbGciOiJlZDI1NTE5K3NoYTMtNTEyIiwic2l0ZSI6Im1vb25od20vb3BlbnBsYW5saW5rLW1pcnJvciIsInRzIjoiMjAyNi0wOS0yOFQwNDoxNDowMi40MDdaIiwidHlwZSI6InNpdGUtYXR0ZXN0LWFuY2hvciJ9"
+    },
+    {
+      "tag": "tree:TREE-K3-2026-1003-01-root",
+      "canonical_b64": "eyJjcmVhdGVkX2J5IjoiazMtbWFpbiAoa2ltaS13b3JrLWRlc2t0b3ApIiwicm9vdF9zaGEzXzUxMl9obWFjIjoiYTM0NzVjNDU0NTBiOGIyMWU3Y2ZhNTJjNzI2ODkzOTk0N2Y4NmU5ZTcwNTI2YTFmMzQ4MWUxZjUxMzZkMzg4NzgwOTQ2NmU4MzNkYzFkZjFiYmYwMTE0YTA1MjYyMzlhOThiYjhkMGVhMjBhZjdhZjE4ZWRmNGQyMGY4ZmEzYmIiLCJ0cmVlX2lkIjoiVFJFRS1LMy0yMDI2LTEwMDMtMDEiLCJ0eXBlIjoidHJlZS1hbmNob3IifQ=="
+    }
+  ]
+}

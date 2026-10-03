@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-03T08:48:14.604Z",
+  "generated_at": "2026-10-03T08:52:34.905Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 713,
-  "merkle_root_sha3_512": "2865eb1514ec0e10913fca09a3b91d9e07233df696a9d4941181c3f0cc954a9725c44013b9479780dd8c33eace7ce6d51d1ef48d920b07ef647cdcfb34073279",
-  "hmac_sha3_512": "53a5b446e6091828d1fd78cb3c47f2f42b03f367e16fe5721a6e3d78cf7cdd6482fe6123b3bbe7c5c8c852dd9bd14b5455d256fc598c2720c618cf75b64947b8",
+  "file_count": 719,
+  "merkle_root_sha3_512": "de36d7cbc3f9e15b9a18bfd2a50ff34496447d03b9efa0090e4f48a4c2eb13d548b531f21f2b8c9bcb257b45b8f6b0c5a6ffbad945f69db93c2c2852001f864d",
+  "hmac_sha3_512": "3caa9542b5cfc119a8e90048ae14d88cf52ca4304939ac2a970b6baf95c032e1af7c90d42c014c317eb6703c20bda8ad18e88391661a68027e2a2a9d1ca2892b",
   "files": [
     {
       "path": ".nojekyll",
@@ -31,9 +31,9 @@
     },
     {
       "path": "HANDSHAKE_LOG.md",
-      "size": 4356,
-      "content_sha3_512": "40e9c58791b38033621e331bcb0a5d0cb3759abd1e95ff106fba322338438614e50b46d1c2b2879f15b36a35873084fe264ab5613f1fdf4b3bebcc8fcf5a29d4",
-      "leaf_sha3_512": "54d49fb3b24d1ba756fcc6f6febf0ada3853088f3ea08b5c4162e9e143afed0572be73899d50c380dcfbd9a4b65b7d10817e224604547f5cbe64f2fb1affcfa2"
+      "size": 5987,
+      "content_sha3_512": "7093d7eb868eb2cf8dc2129e1a60cd713b0d1700f5c4112587a67f58f5fe64b40ce6026de90e628cc3281e7606f2edce11c22fdf5ec08948bf226ff10db5e096",
+      "leaf_sha3_512": "898427c9c54617843424f06b6f8250319bd2399b075183c8da3956b91c3bae7c7dc8f245cedc373bb0916ad1d10be270887cab40ace135c9e0d2d8c6b4cc4472"
     },
     {
       "path": "LICENSE",
@@ -274,6 +274,42 @@
       "size": 3226,
       "content_sha3_512": "05ad1a7be773f6fb4c9d5762e0e4646b9ab70fed12e70ad0cac5aa5a84a61856fa1572e0d64ca9e870188f2c90436b18526723e8c6ec731cf8873582f0273a41",
       "leaf_sha3_512": "7dbd0bf7bbac996384be730abb7f95bb9fb8a7c650b3d8cccdd15d7d8e170daefed4184593b8d0ef21028f328d1c484c79c1b21fcd554c58b9502123df9afd67"
+    },
+    {
+      "path": "sha3_tree/README.md",
+      "size": 2112,
+      "content_sha3_512": "a6e840bdd7451f95efb136d12634e607c6f3852b8870ba7075a65b5e8ee70e7149c0e5966b6e612b2c931a77cf662c5010cc4a4b5c92d34450431b35c87b3657",
+      "leaf_sha3_512": "56a24e4f1889bf64fb1f6ef2a25b81f763896ea9dcc23255ecb6ff4ce8503d270d952decf1c163b5ceb2b86972d0b7f366dd31f4b1e3a37c25097c90b80499db"
+    },
+    {
+      "path": "sha3_tree/TREE-K3-2026-1003-01_manifest.json",
+      "size": 5543,
+      "content_sha3_512": "525afab9b6da3899f81e207e1322e7f5b1b46fbdfbd96f14418c599af2956062411cfb703040dee9ed3701686549a1ad90f7278dc6fa09088cd448ff865b5ac9",
+      "leaf_sha3_512": "61741082eeb15bba0212e4b61e0089fa2b43f0e4ac6e71cca75a2b2a0416c9560244e5fffe4e9b40356320c1697c1170019543674c6afde482c1d9e8afe19958"
+    },
+    {
+      "path": "sha3_tree/TREE-K3-2026-1003-02_leaf_records.json",
+      "size": 4702,
+      "content_sha3_512": "e90c63b3737cc61c6cf529bd9e053a362a2010571cde777f78c28a391baaec528505559dbd72b8ff74c9063cb8289ccb32fc43e9ed53371571161f343578587b",
+      "leaf_sha3_512": "9d04cb72132f896ac8415523885d2614621d7de5284f84dd8ff86aff3b955a5b8f4637b1a84ebe05c846743cd9a77d4e4f3b52f1780d84d3ab873db851ae1590"
+    },
+    {
+      "path": "sha3_tree/TREE-K3-2026-1003-02_manifest.json",
+      "size": 8443,
+      "content_sha3_512": "3dc54b9d829bf5e9f061d25a205001b7421b63e91d13a01dcb7b9e2b69509ca5e0bdcc41430ce252ab04569777b035f58c6a8d8e8028d6f8bcd4c1e4900faa00",
+      "leaf_sha3_512": "a6307a8a4cef9d521c6540ef9bd6952d59515a02059bad0cb89f4ff638d86c57e356904c2859be231b9ffe47c57b1fc905855c040f615c5d2f8cea572dd51f73"
+    },
+    {
+      "path": "sha3_tree/VERIFY.md",
+      "size": 2969,
+      "content_sha3_512": "8fbfa6ceb52be9b37891b999787585596c1929fa6bf21096bca8318f1339787c07db4ba643eed11b4b9d3311e83a637d486c5491343f84263ce80f7900f92e97",
+      "leaf_sha3_512": "b38631903ff43721bfffceba22ab4bffa03b0ac8875a27fb7c2436dd8500384361c80f466b59f3ad79fd738220dd15b3328b86be263d94a1c39535aee6eefa37"
+    },
+    {
+      "path": "sha3_tree/verify_tree.py",
+      "size": 5138,
+      "content_sha3_512": "c7e1d6f3128959d7a5cb5322e4b0aa67d42944b4dfa591dd3f03ebeba4840e3c0087525a384ae5767c1ad468a54e40971d5f1dce031efab845b7bbb3067460b3",
+      "leaf_sha3_512": "902cc7bf36c38ab21ae0a1e68fdb1716368a07dbbe1dcfb88b00bb9184995544745a200448993d61549f5bcc6473fda5d820e674b032961cc364367ec4b85c22"
     },
     {
       "path": "skills/README.md",
