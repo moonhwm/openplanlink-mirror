@@ -145,6 +145,19 @@ def _notify(title, desp):
         pass  # 告警推送失败不影响主流程
 
 
+def _spinal_report(event, detail):
+    """失效类事件上报脊髓事件总线（认证流程专章三（三）：「失效」类强一致性即时上报）。
+    故障安全：脊髓不可达或上报失败不阻断主流程。"""
+    if event not in ("MFA_FAIL",):   # 失效类事件（白名单）
+        return
+    try:
+        import spinal_bridge as S
+        S.send(SEAT, "all-seats", "esc.trace",
+               {"action": "esc.trace", "from": SEAT, "event": event, "detail": detail})
+    except Exception:
+        pass
+
+
 def _audit(event, detail):
     """事件驱动审计：异常事件追加审计日志（告警留痕，补偿=不改变状态仅记痕）。"""
     import datetime
@@ -156,6 +169,7 @@ def _audit(event, detail):
     except Exception:
         pass  # 审计失败不阻断主流程（与"不影响核心业务流连续性"一致）
     _notify("A2A节点告警: %s" % event, json.dumps(detail, ensure_ascii=False))
+    _spinal_report(event, detail)
 
 
 def _rpc_result(rpc):
