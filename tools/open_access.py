@@ -66,14 +66,27 @@ def search_arxiv(q, limit=5):
     return out
 
 
+SOURCES = {}  # 源注册表：策略模式动态注册，新增数据源不改核心调度
+
+
+def register(name, fn):
+    """注册一个数据源适配器（策略）。fn(query, limit) -> [统一行]。"""
+    SOURCES[name] = fn
+
+
+register("openlibrary", search_openlibrary)
+register("gutenberg", search_gutenberg)
+register("arxiv", search_arxiv)
+
+
 def unified_search(q, limit=5):
-    """跨库检索 + 格式归一化：三源结果合并为统一结构。"""
+    """跨库检索 + 格式归一化：遍历注册表（源故障自动记录、不阻断整体）。"""
     rows = []
-    for fn in (search_openlibrary, search_gutenberg, search_arxiv):
+    for name, fn in SOURCES.items():
         try:
             rows += fn(q, limit)
         except Exception as e:
-            rows.append({"source": fn.__name__, "title": "(检索失败)", "author": "", "year": None,
+            rows.append({"source": name, "title": "(检索失败)", "author": "", "year": None,
                          "url": "", "kind": "error", "error": str(e)[:80]})
     return rows
 
