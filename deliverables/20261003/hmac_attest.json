@@ -1,57 +1,19 @@
 {
-  "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-03T10:12:32.137Z",
-  "tree_algorithm": "sha3-512",
-  "mac_algorithm": "hmac-sha3-512",
-  "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
-  "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
-  "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
-  "key_id": "opl-a2a-2026q4",
-  "file_count": 7,
-  "merkle_root_sha3_512": "613587c3dedd07ec6b0857789316d360a6e57c87476e5052710d5f08f159428b63bb5137d98ca64c0c4c31d4edd838995f22ec1efc6990fa2c97ed21532be4cb",
-  "hmac_sha3_512": "1e01904cc7da68df856c9978fb6e7383df6b77c151d92b07944c401b70135f40eedbbfe31c6495db6a0dd52293cdb2177e81284483f96a0af9112bf264b2726f",
-  "files": [
-    {
-      "path": "2026-9-25-OpenPlanLink 润色-1 (3).docx",
-      "size": 2598724,
-      "content_sha3_512": "bf1f56bbb8214680fbb6ee0a6c9e39f3795fbcda2c96a88ce5053bfb96e0c4d95234fc5cabf37c64a21ceaeba115f78a49b87cf986c5b8b2e0270c6d4cd60d45",
-      "leaf_sha3_512": "c93ed0363c53768871667dc141ca3405318389eb2498c4ba77c6dd4c5d9bb10b9dad57e43f2d1b149bb676912ceb28b549f07016f0a262b887889b8844f1ffad"
-    },
-    {
-      "path": "A2A统一认证方案_HMAC-SHA3-512_DF-NOTICE-2026-1003-QODER-05.otl",
-      "size": 4274,
-      "content_sha3_512": "c2423cec0460c03dc114fbedd958b9f5c8bc761c4ce25a9ffd08149fc59cb7dbd732bfed0662254e0de1ba360c7b42daaaab006143a3bce18b2d2b2933225771",
-      "leaf_sha3_512": "ab980a621034f68f83b87855e4024818f1eb6c7e0ee57376416774f9b125e323360e654adddfe8288be44628253e88cdb29b0b2dd98683f56060e2b25d1f94fb"
-    },
-    {
-      "path": "INDEX.md",
-      "size": 1749,
-      "content_sha3_512": "80e45cc728677fdd689428804e59de1901529b79b09bc84577eee2168ea74fcab44f5a52d0657b1a112b0ed5b67702098f63c413efd1cbb2802f4b909f8231d9",
-      "leaf_sha3_512": "65b06a92ef288deb19cd21fc2a7571dd9d50ac3565f6572a619ec3990c6155900280b972f32dab571f7af848c6adb9cfcfc18aedceef8efc33790067b264ae4b"
-    },
-    {
-      "path": "OpenPlanLink_交付包_20261002_v1.1.zip",
-      "size": 68528,
-      "content_sha3_512": "fcb7d538a1dee73a37820dc7a1a4a9c6325f21763be9c952527964f40c353b3e3a318af7cf6a2284ba74fc8b8a383d0f75f698f821a94b44c4bab628ca8feaa1",
-      "leaf_sha3_512": "b8d8f35a08c6e3019c6a213bf8cb9863c46f0d9b53e7ebbff539a4ceb66929e9e4fb9225083ee37920885c54c303cbe699b632aaea84a66241e98bfab3d7fd56"
-    },
-    {
-      "path": "POINTER.md",
-      "size": 849,
-      "content_sha3_512": "64a85b7b68338b02b276bbfc57a3eeeb3bfb5c70a315ba0d0d388ed2e402531f9c5a8724f2f3b13c9530e278d5f92332c725ca595b29c0cd64d3cc96840d4f40",
-      "leaf_sha3_512": "a8cdf3ad27ff45ed133274d1becbec5dfd43a47ab78c176ec689fd244ecbc3734cf977ec7ebafccc13ddb60a466090715d66d97a1afeeb619c882653938e190f"
-    },
-    {
-      "path": "k3-main/gitcode_mining_2026-10-03.md",
-      "size": 3498,
-      "content_sha3_512": "1fadf535ba914b4c5a809d21fb8ff05204cb9c242d583d3341fec2f94510b997f483dfa2698f8c7500494cba903230b4cfd504b12cd2749b18b67835d184b015",
-      "leaf_sha3_512": "546aa31254c510127dadb8f1c49f59c1c9af77c131f429c8efffc93099d46f774e04aa184e99120cfa8a9b8d88853dce54bc064dd421f729e853a968c5b8109b"
-    },
-    {
-      "path": "k3-main/ima_channel_report_2026-10-03.md",
-      "size": 2580,
-      "content_sha3_512": "4309c905b4c4c1ce106fed3be3c57db267957f8245b7546bbc295e6396eccf6ebcb4067a106c860160b8b00b5206da619780928b37f091bf2e9c90822ed1d7f0",
-      "leaf_sha3_512": "5464639d8c52533cf737593a3997e13a0ec9279b2b1fe626c7c2f97844c77ce8c598e331f4ebe7c93cc980bf7babc66427f728ec549172ac62d6aa98f88e2447"
-    }
-  ]
+  "algo": "HMAC-SHA3-512",
+  "protocol": "a2a-hmac-sha3-512/v1",
+  "scope": "deliverables/20261003",
+  "key_bits": 512,
+  "key": "self-kept (not committed) — key sha256=02e06b305b0840ec",
+  "root": "e86c6490e0ff7269e8744294415b9ceca1ce2240aac1708a9f4b32bb7b0c9754b7d7e8397393d5e76d4445a6c4a2d00d93d3f7f6397c405120eaf9213097909a",
+  "file_count": 8,
+  "files": {
+    "2026-9-25-OpenPlanLink 润色-1 (3).docx": "816adcbe8dfe7e83d9cf5b0fbcc8724761f0ac2081dc9928f9675b280be5c723a6222e86aefbcd953ec187a7c2eaa23c6edeab2e236c67b83b51a7646bd7bf5f",
+    "A2A统一认证方案_HMAC-SHA3-512_DF-NOTICE-2026-1003-QODER-05.otl": "7e355635e1693754a14017c789fc4cfc0c1d225f133f5d8fcd918e1aa1863044a57d9737402caad147167f735ff777529754c867b5a45b17c1bd76595aa1658a",
+    "INDEX.md": "d6cc3272e85598ffc042ef80e7114d5bb1428952cfaa89d975656ca2ee38a2d135f90107f644737d75f3c02a1475b5eeb2cb6566f75b6b2ec53a53d7c9cea843",
+    "OpenPlanLink_交付包_20261002_v1.1.zip": "000343ce0afb68397a9691037a40045fde53390185aa8beba70c7a94fcc8746b5597f774e62d736c91693a87fb67332b74f6b6505568c14645786dd941be4091",
+    "POINTER.md": "d687e89770b316a6f2aae113f8ff217cead74cefdc873ee37d93590aae88ed61724c6be1a17fe25af55a70aac62e89c760f0b2878c8c08ae3c4c5f2d39f30f05",
+    "k3-main/gitcode_mining_2026-10-03.md": "2b30a61d2d5444470e43bb78705b270502ab7f905e8dd48622adebe76a5fd0d1f3d608dba6f7d1969c5a19803f64bf203407d5c1a49186b49a0d20b19ac04d31",
+    "k3-main/ima_channel_report_2026-10-03.md": "0d2092764b5fd2b8728ae57ec08f2cfc40d19956efd74bd629a61b08bd1c6190f63807788ad28d4995a58d9cba90698190721fa601a0dddd8e1656705bf08f33",
+    "情况报告_A2A网络同步与HMAC统一认证_石敢当席_20261003.md": "3d038dfc15bbc27a31ef25e273d4e4d351733d2f658bd381b20d5515f09e723d77a7e2fa7776b51d2f55dd491a91aebbd5472b7b2ab63fb21a395e575a43fee5"
+  }
 }
