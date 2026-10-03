@@ -33,9 +33,11 @@ KEY_ID = "opl-a2a-2026q4"
 SEAT = "a2a-node-local"
 NONCE_FILE = r"C:\Users\欧阳宏俊\.a2a-node-nonces.json"
 MAILBOX_FILE = r"C:\Users\欧阳宏俊\.a2a-node-mailbox.json"
+DLQ_FILE = r"C:\Users\欧阳宏俊\.a2a-node-dlq.json"
 AUDIT_FILE = r"C:\Users\欧阳宏俊\.a2a-node-audit.jsonl"
 seen = set()
 mailbox = {}
+dlq = []  # 死信队列：投递失败的消息（未知席位等），可重试，不丢失
 # 席位注册表：中转前校验目标合法；未知席位拒绝
 SEATS = {"cairn-dsh", "workbuddy-hy4", "a2a-node-local", "shoucang-seat", "zcode-moon", "kimi-seat"}
 
@@ -73,7 +75,7 @@ AGENT_CARD = {
 
 
 def _load_state():
-    global seen, mailbox
+    global seen, mailbox, dlq
     if os.path.exists(NONCE_FILE):
         try:
             seen = set(json.load(open(NONCE_FILE, encoding="utf-8")))
@@ -84,6 +86,11 @@ def _load_state():
             mailbox = json.load(open(MAILBOX_FILE, encoding="utf-8"))
         except Exception:
             mailbox = {}
+    if os.path.exists(DLQ_FILE):
+        try:
+            dlq = json.load(open(DLQ_FILE, encoding="utf-8"))
+        except Exception:
+            dlq = []
 
 
 def _atomic_json(path, obj):
@@ -97,6 +104,7 @@ def _atomic_json(path, obj):
 def _save_state():
     _atomic_json(NONCE_FILE, list(seen))
     _atomic_json(MAILBOX_FILE, mailbox)
+    _atomic_json(DLQ_FILE, dlq)
 
 
 def _audit(event, detail):
@@ -131,6 +139,15 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path == "/.well-known/agent-card.json":
             self._send(200, AGENT_CARD)
+        elif self.path.startswith("/dlq"):
+            from urllib.parse import urlparse, parse_qs
+            q = parse_qs(urlparse(self.path).query)
+            code = (q.get("totp") or [""])[0]
+            if not TOTP.verify(TOTP_SECRET, code):
+                _audit("MFA_FAIL", {"path": self.path, "ip": self.client_address[0]})
+                self._send(401, {"error": "TOTP 失败（第二因子缺失/错误）"})
+                return
+            self._send(200, {"dlq": dlq, "count": len(dlq)})
         elif self.path.startswith("/mailbox/"):
             # MFA：取信箱需 TOTP 第二因子（?totp=<6位口令>）
             from urllib.parse import urlparse, parse_qs
@@ -169,6 +186,10 @@ class Handler(BaseHTTPRequestHandler):
             else:
                 if envelope["recipient_id"] not in SEATS:
                     _audit("UNKNOWN_SEAT", {"recipient": envelope["recipient_id"], "sender": envelope.get("sender_id")})
+                    # 死信队列：未知席位消息入 DLQ（不丢失，可重试），而非仅 404 丢弃
+                    dlq.append({"envelope": envelope, "body_b64": base64.b64encode(body).decode("ascii"),
+                                "reason": "未知席位", "ts": envelope.get("timestamp")})
+                    _save_state()
                     self._send(404, {"jsonrpc": "2.0", "id": None,
                                      "error": {"code": -32602, "message": "未知席位: %s" % envelope["recipient_id"]}})
                     return
