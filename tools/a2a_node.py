@@ -1,0 +1,111 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""a2a_node.py —— 最小 A2A JSON-RPC 节点（127.0.0.1:4173），HMAC-SHA3-512 认证 + 席位信箱。
+
+线格式：POST /  body = {"envelope": {…}, "body_b64": "<JSON-RPC 请求的 base64>"}
+  · 若 recipient == 节点自身 → 处理并返回 HMAC 包络响应（回显）
+  · 若 recipient == 其它席位 → 验证后存入该席位信箱，返回 queued
+GET /               → 节点状态
+GET /mailbox/<seat> → 取该席位待收消息（含 envelope + body_b64）
+"""
+import base64
+import json
+import os
+import secrets
+import sys
+from http.server import BaseHTTPRequestHandler, HTTPServer
+
+sys.path.insert(0, __file__.rsplit("\\", 1)[0])
+import a2a_hmac as M
+
+HOST = "127.0.0.1"
+PORT = 4173
+KEY_FILE = r"C:\Users\欧阳宏俊\.a2a-hmac-key.bin"
+KEY = open(KEY_FILE, "rb").read()
+if len(KEY) != 64:
+    raise SystemExit("密钥文件须为 64 字节")
+KEY_ID = "opl-a2a-2026q4"
+SEAT = "a2a-node-local"
+NONCE_FILE = r"C:\Users\欧阳宏俊\.a2a-node-nonces.json"
+MAILBOX_FILE = r"C:\Users\欧阳宏俊\.a2a-node-mailbox.json"
+seen = set()
+mailbox = {}
+
+
+def _load_state():
+    global seen, mailbox
+    if os.path.exists(NONCE_FILE):
+        try:
+            seen = set(json.load(open(NONCE_FILE, encoding="utf-8")))
+        except Exception:
+            seen = set()
+    if os.path.exists(MAILBOX_FILE):
+        try:
+            mailbox = json.load(open(MAILBOX_FILE, encoding="utf-8"))
+        except Exception:
+            mailbox = {}
+
+
+def _save_state():
+    json.dump(list(seen), open(NONCE_FILE, "w", encoding="utf-8"))
+    json.dump(mailbox, open(MAILBOX_FILE, "w", encoding="utf-8"), ensure_ascii=False)
+
+
+def _rpc_result(rpc):
+    return {"jsonrpc": "2.0", "id": rpc.get("id"),
+            "result": {"echo_method": rpc.get("method"), "echo_params": rpc.get("params"), "node": SEAT}}
+
+
+class Handler(BaseHTTPRequestHandler):
+    def log_message(self, *a):
+        pass
+
+    def _send(self, code, obj):
+        out = json.dumps(obj, ensure_ascii=False, sort_keys=True).encode("utf-8")
+        self.send_response(code)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(out)))
+        self.end_headers()
+        self.wfile.write(out)
+
+    def do_GET(self):
+        if self.path.startswith("/mailbox/"):
+            seat = self.path.split("/")[-1]
+            self._send(200, {"messages": mailbox.get(seat, [])})
+        else:
+            self._send(200, {"status": "up", "seat": SEAT, "protocol": "a2a-hmac-sha3-512/v1"})
+
+    def do_POST(self):
+        try:
+            n = int(self.headers.get("Content-Length", 0))
+            req = json.loads(self.rfile.read(n).decode("utf-8"))
+            envelope = req["envelope"]
+            body = base64.b64decode(req["body_b64"])
+
+            ok, reason = M.verify_envelope(envelope, KEY, KEY_ID, envelope.get("recipient_id"), body=body, seen_nonces=seen)
+            # 注意：节点只验证"发给自己或经自己中转"的消息；中转消息按 recipient 存箱
+            if not ok:
+                self._send(401, {"jsonrpc": "2.0", "id": None, "error": {"code": -32000, "message": reason}})
+                return
+
+            if envelope["recipient_id"] == SEAT:
+                rpc = json.loads(body.decode("utf-8"))
+                result = _rpc_result(rpc)
+                resp_bytes = json.dumps(result, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+                resp_env = M.build_envelope(SEAT, envelope["sender_id"], resp_bytes, KEY, KEY_ID)
+                self._send(200, {"envelope": resp_env, "body_b64": base64.b64encode(resp_bytes).decode("ascii")})
+            else:
+                mailbox.setdefault(envelope["recipient_id"], []).append(
+                    {"envelope": envelope, "body_b64": base64.b64encode(body).decode("ascii")})
+                self._send(200, {"queued": True, "recipient": envelope["recipient_id"]})
+            _save_state()  # nonce 与信箱一并落盘
+        except Exception as e:
+            self._send(400, {"jsonrpc": "2.0", "id": None, "error": {"code": -32700, "message": "parse error: %s" % e}})
+
+
+if __name__ == "__main__":
+    _load_state()
+    srv = HTTPServer((HOST, PORT), Handler)
+    print("A2A node on http://%s:%d  (seat=%s, nonce=%d, mailbox=%d)" %
+          (HOST, PORT, SEAT, len(seen), len(mailbox)), flush=True)
+    srv.serve_forever()
