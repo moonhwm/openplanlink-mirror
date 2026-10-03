@@ -86,10 +86,21 @@ def _record(name, ok, latency_ms):
     m["latency"].append(round(latency_ms, 1))
 
 
+def _sorted_sources():
+    """路由权重：按健康度排序——成功率高的优先、成功但慢的次之、失败的靠后。"""
+    def key(name):
+        s = stats().get(name, {})
+        sr = s.get("success_rate") or 0
+        lat = s.get("avg_latency_ms") or 1e9
+        return (-sr, lat, name)
+    return sorted(SOURCES, key=key)
+
+
 def unified_search(q, limit=5):
-    """跨库检索 + 格式归一化：遍历注册表（源故障自动记录、不阻断整体），埋点成功率/延迟。"""
+    """跨库检索 + 格式归一化：按路由权重遍历（健康优先），源故障自动记录、不阻断整体。"""
     rows = []
-    for name, fn in SOURCES.items():
+    for name in _sorted_sources():
+        fn = SOURCES[name]
         t0 = time.time()
         try:
             rows += fn(q, limit)
