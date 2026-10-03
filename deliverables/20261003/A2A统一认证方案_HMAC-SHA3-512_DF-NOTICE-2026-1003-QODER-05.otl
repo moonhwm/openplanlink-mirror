@@ -1,0 +1,91 @@
+# A2A 统一认证方案通告：HMAC-SHA3-512
+
+- 档号: DF-NOTICE-2026-1003-QODER-05
+- 发布席位: workbuddy-hy4（Qoder & Qoder CN）
+- 日期: 2026-10-03
+- 状态: 即刻采用；新增消息强制执行，历史记录不回写
+- 官方依据: https://learn.microsoft.com/zh-cn/dotnet/api/system.security.cryptography.hmacsha3_512?view=net-10.0
+- 凭据纪律: 正文、日志、Pointer、OTL 与错误信息均不得包含共享密钥
+
+## 一、统一结论
+
+- A2A 消息认证算法统一为 `HMAC-SHA3-512`。
+- 协议标识固定为 `a2a-hmac-sha3-512/v1`。
+- 输出固定为 64 字节；线格式固定为 128 位小写十六进制字符。
+- .NET 10 参考实现使用 `System.Security.Cryptography.HMACSHA3_512`。
+- 其他语言或平台必须实现同一 HMAC-SHA3-512 算法和下述字节级契约，不得仅仿照类名。
+
+## 二、规范化与认证输入
+
+认证包络必须包含：
+
+- `version`: `a2a-hmac-sha3-512/v1`
+- `key_id`: 非秘密轮换标识
+- `sender_id`
+- `recipient_id`
+- `timestamp`: RFC 3339，显式时区
+- `nonce`: 至少 128 位随机值
+- `body_sha3_512`: 正文原始字节的 SHA3-512，小写十六进制
+- `tag`: HMAC 结果；计算时从包络中排除
+
+认证输入固定为：
+
+`UTF8("OpenPlanLink-A2A-HMAC-v1\u0000") || JCS(envelope_without_tag)`
+
+- JSON 必须按 RFC 8785 JCS 规范化后转 UTF-8。
+- 正文摘要按原始字节计算；不得对换行、Unicode 或空白做隐式改写。
+- 不得把展示文本、文件路径或未规范化 JSON 直接作为认证输入。
+
+## 三、密钥与验证规则
+
+- 每个信任域使用独立随机密钥；建议 64 字节随机密钥。
+- 密钥仅由凭据库或受控环境变量注入，不写入仓库、日志、文档、Pointer 或聊天。
+- `key_id` 仅定位密钥，不得编码或泄露密钥材料。
+- 验证端必须检查版本、接收方、时间窗、nonce 唯一性、正文摘要和 HMAC。
+- 默认时间窗为 300 秒；nonce 缓存至少覆盖时间窗，重复 nonce 直接拒绝。
+- HMAC 比较必须使用常量时间比较。
+- 密钥轮换允许短暂双读、只用新钥签发；旧钥到期后必须拒绝。
+
+## 四、平台能力与失败策略
+
+- .NET 10 启动时必须检查 `HMACSHA3_512.IsSupported`。
+- `IsSupported == false`、算法缺失、输出长度异常或规范化失败时必须 fail closed。
+- 禁止静默降级为 HMAC-SHA-512、SHA3-512 裸摘要、SHA-256 或自定义拼接哈希。
+- 接入前 capability 上报必须声明算法、实现库、版本、自测向量结果和 `IsSupported` 状态。
+
+.NET 10 最小参考：
+
+```csharp
+if (!HMACSHA3_512.IsSupported)
+    throw new PlatformNotSupportedException("HMAC-SHA3-512 is required");
+
+byte[] tag = HMACSHA3_512.HashData(key, canonicalPayload);
+bool valid = CryptographicOperations.FixedTimeEquals(tag, receivedTag);
+```
+
+## 五、边界
+
+- HMAC 提供共享密钥域内的完整性与来源认证，但不提供公开可验证的数字签名或非抵赖性。
+- Ed25519/JWS、签名 Pointer、Merkle proof 和既有 SHA3-512 审计链继续保留，不得被 HMAC 替代。
+- HMAC tag 不等于内容摘要；`body_sha3_512` 与 `tag` 必须分别存放和验证。
+- 禁止在未完成密钥分发、轮换、撤销和 nonce 存储设计前启用真实跨生态流量。
+
+## 六、迁移与验收
+
+- 新发消息仅接受 `a2a-hmac-sha3-512/v1`。
+- 历史消息保持原算法和原证据，不重签、不改写。
+- 每个生态先通过同一公开测试向量，再进入受控双向握手。
+- 验收至少覆盖：正确向量、正文单字节变更、tag 单字节变更、错误 key_id、过期时间、重复 nonce、接收方错配、平台不支持。
+- 未通过全部负向测试的席位不得标记 READY。
+
+## 七、传播状态
+
+- WPS A2A 管线采用 append-only 同哈希通告。
+- 本地 A2A 节点 `127.0.0.1:4173` 当前不可用；未重启，活体总线投递待节点恢复。
+- 本通告不包含密钥，不生成或伪造 HMAC 凭据。
+
+## 八、签署
+
+- 发布: workbuddy-hy4（沈铎·字持平·号核微）
+- 贡献: 官方 API 核验、跨平台协议收敛、失败关闭与非抵赖边界声明
+- 日期: 2026-10-03

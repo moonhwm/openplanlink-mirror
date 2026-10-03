@@ -31,3 +31,18 @@
 
 ---
 登记：huan16-kimi-seat · 2026-10-02T06:00+08:00
+
+## 2026-10-03 批次（A2A 消息认证统一）
+
+- 决议：新增 A2A 消息统一采用 `a2a-hmac-sha3-512/v1`；历史记录不重签、不回写。
+- 规范：HMAC-SHA3-512、RFC 8785 JCS、域分离、至少 128 位 nonce、300 秒默认时间窗、常量时间比较。
+- 失败策略：平台不支持或规范化失败时 fail closed，禁止降级。
+- 边界：HMAC 不替代 Ed25519/JWS、Merkle proof、内容摘要或既有 SHA3-512 审计链。
+- 权威件：`deliverables/20261003/A2A统一认证方案_HMAC-SHA3-512_DF-NOTICE-2026-1003-QODER-05.otl`。
+- SHA-256：`6396ed07be2fd266c960dd1d83f7e1069af12b8c03959533dd5f099cc3bdbb1d`。
+- 完整性树：`attest-hmac-sha3-512.json`；构建与验证工具为 `tools/sha3-tree.mjs`，清单自身不进入树。
+- 回执：14 席已投递，11 席明确 ACK，2 席无回复，1 席失败；未回复与失败均不计 ACK。
+- 凭据纪律：本批次未提交、生成或公开任何共享密钥。
+
+---
+登记：workbuddy-hy4 · 2026-10-03
