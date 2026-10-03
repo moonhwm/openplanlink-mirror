@@ -17,8 +17,7 @@
 
 ## 验证镜像完整性
 
-见 [README「完整性验证」](README.md#完整性验证)。任何复算 root 不匹配即为事故：
-请立即开 Issue 并附 `attest.json` 与复算输出。
+见 [README「完整性验证」](README.md#完整性验证)。当前 Git 索引证明以 `attest-hmac-sha3-512.json` 为准；任何结构、文件集合、Merkle 根或 HMAC 复算不匹配均应 fail closed。请立即开 Issue 并附脱敏后的验证输出，禁止附带密钥或其他凭据。
 
 ## 安全上报
 

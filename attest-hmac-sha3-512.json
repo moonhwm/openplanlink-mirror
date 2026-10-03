@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-03T08:53:52.178Z",
+  "generated_at": "2026-10-03T10:55:00.548Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 719,
-  "merkle_root_sha3_512": "0e85aebf2910305067a6f2a9de96e445bb4ad81e9e433adb621ec70944d230e9861f94d8781adbd2c035aeaa67d84832bbe431914a19fa18b7de8c8c0f8a0382",
-  "hmac_sha3_512": "9df174c4b99c6d29920b894f1bb76ae58eb9ff2e32b75b5bf0c0a1307542fda903499dd1aa79c54dbe76f1c147e1123fc5c459c7ac1079b7feef2560ad01c0c0",
+  "file_count": 728,
+  "merkle_root_sha3_512": "246e1a596bf2ecab557d63cf1047ad615fe86e3d4465252c0798e54a65cb896807c6284c91ad3bbb73aa0bd1a53c44960aab29ad5509a60b3f282103345aaffa",
+  "hmac_sha3_512": "d870d7aa55ebd7f5332bddc2ad2f5858b173e107e76d7742802f9133b771af28dfdea2168e6bcae9d2032728dad309147442b312f61500cd555306282cc80160",
   "files": [
     {
       "path": ".nojekyll",
@@ -25,15 +25,15 @@
     },
     {
       "path": "CONTRIBUTING.md",
-      "size": 1123,
-      "content_sha3_512": "49fca1bed9a652cfcfaf1592949068c3860e6ae2542819df7e45e068b71215f3b60f40ae3785d57ef88e4a26614cfb173eff38da369e4568c503c8b6720baae1",
-      "leaf_sha3_512": "c9101c9eb598fc353454ef0d897bf5d0ae187ac170fa37cb1ba361df5a35663d2c389927299997230ea6272a094d4d3c85c89dd73e15114db11a15ef05a619ca"
+      "size": 1259,
+      "content_sha3_512": "50d1a1fc69de28189117d02da4d655873072e34818ac67151cdc63bb12489c007c9e7432a40924c964b7c329343325b5aa90997e35e4efb2fce5ce2c2de72bd1",
+      "leaf_sha3_512": "16bb04e713c8f2357bd9b42a86265dd7fa8f317e03e07a7f74c83bbb92e5e5fbdf5fdec9c3989469a2dad4d9b2605809931f7cd2661d2d30560b34d75d00d211"
     },
     {
       "path": "HANDSHAKE_LOG.md",
-      "size": 5987,
-      "content_sha3_512": "7093d7eb868eb2cf8dc2129e1a60cd713b0d1700f5c4112587a67f58f5fe64b40ce6026de90e628cc3281e7606f2edce11c22fdf5ec08948bf226ff10db5e096",
-      "leaf_sha3_512": "898427c9c54617843424f06b6f8250319bd2399b075183c8da3956b91c3bae7c7dc8f245cedc373bb0916ad1d10be270887cab40ace135c9e0d2d8c6b4cc4472"
+      "size": 9812,
+      "content_sha3_512": "e188a16dfc212a41910976946934bd37b927b043220266fbd64bcf33a306d9d1583ab74beb9f4d3634ea2ebca86b7bb93e4427291b9a71abf53579227bc39141",
+      "leaf_sha3_512": "bdb4566ab5671ba389b93c7152c1b1cc5cd6c0ff253e407b31e4cb7376c27a470550e4f005473bd17c45b293e63752b44cb064f7f25a965daa51dc2b03966f03"
     },
     {
       "path": "LICENSE",
@@ -43,9 +43,9 @@
     },
     {
       "path": "README.md",
-      "size": 4695,
-      "content_sha3_512": "ffbe5d04b613619418f2355424b53b82c0a8a1e37e94a8148e041d63ebead14ae69d7c552335d9cb55c327c44808eb43d45d9cd96bf5620afc288bc4b37a9eac",
-      "leaf_sha3_512": "010d91f30535999517db6574b271f45e44e0ff1e011024df49de27c133bcee1d7d16627cf2b93ccf8c37c68c07abd96f1caeb458b254e80a02aa7820606d8647"
+      "size": 4500,
+      "content_sha3_512": "9f3b92e8e8793e709753ab416173186720a8e9098444b5dc28541f0ac626452490fe18ba9cf2f67d6df4a766abe3914aaa01244fea6914c74c24d0c5fa78089c",
+      "leaf_sha3_512": "e6c0fb5ba54ca51c7d8df3c1514f2ab65e47b3e4a6a2d6f791ef84eb4fa3bda78da7b0348ba72f4136155277e5e3b38280d0c9d3f304f6bd2b80856e57922d88"
     },
     {
       "path": "_tmp_probe.yml",
@@ -258,10 +258,28 @@
       "leaf_sha3_512": "31e2b45ff8b963634dd2d847f45e20bde29c24ead4e3d41ae5c0749b08340a996110eaa4d4898b8c6a2b55c9600fe3ee93637ade16dca23a47000bb68995dcf3"
     },
     {
+      "path": "deliverables/20261003/INDEX.md",
+      "size": 2266,
+      "content_sha3_512": "22c03a50dc29d3dc3d239b6fde6e78468b3f89ef314409307de387e1b9bf1fb47b1d208e09b996e19cb27370473a8b6b8fd695d71363d9c6c13253d6fcc7043c",
+      "leaf_sha3_512": "0925a6b6d12885d860e132791eae106723eec22eca2c914e37ead4ba4a465df3299f017fb233acd9b801255ad1f00a05325e19baf44c9cf144aa30b099b5b703"
+    },
+    {
       "path": "deliverables/20261003/POINTER.md",
       "size": 835,
       "content_sha3_512": "e14976d9558fae2e3caba48a876711fe1ad1ae365d47bfd6d56d5b01505a3f856e074fe208a96a4ead159d1e91fa1f438f0800cd9b94c6f9c064c9e291862d44",
       "leaf_sha3_512": "2f851e51973c836751e5899c2115012d473aae9a26289fa558c683f5ee0679b691a3d458d909888d92036f715c29c076d9e993a925f574075fa980d24ba3b96b"
+    },
+    {
+      "path": "deliverables/20261003/k3-main/gitcode_mining_2026-10-03.md",
+      "size": 3454,
+      "content_sha3_512": "4d0e306931f17d6e8f65b7b8cbaf9a08eb52fa5fee59b6f129203e5e5999c474a6bd37a0aa006c58dd0fc53194f1eaeb170537c91ab7d0301e9334e0f3328c22",
+      "leaf_sha3_512": "6f30134f56885e3fd4ce70fdd60a89e19c15e9b47f8863dbd255538ada675add0be003f2398a437266992054fb655371157db3ef1d6ea2919c350d3bd94a1e02"
+    },
+    {
+      "path": "deliverables/20261003/k3-main/ima_channel_report_2026-10-03.md",
+      "size": 2540,
+      "content_sha3_512": "e5ddfe310d546347f6b7e845d17513c761d3bf575e7caf2eefd489b365528f2eba781cbe2f207a6ad00994824d8442edf68489960447537cf06b5eedfd1692df",
+      "leaf_sha3_512": "12b5509ad7ec47d5ff0724c32b003df7239c9f7cf56a3828cf7b0abde9494d04f4dcf06e7086f54bd980a203585b321493a0e794ebdbf31253df4cf714cb7607"
     },
     {
       "path": "index.html",
@@ -277,9 +295,9 @@
     },
     {
       "path": "sha3_tree/README.md",
-      "size": 2112,
-      "content_sha3_512": "a6e840bdd7451f95efb136d12634e607c6f3852b8870ba7075a65b5e8ee70e7149c0e5966b6e612b2c931a77cf662c5010cc4a4b5c92d34450431b35c87b3657",
-      "leaf_sha3_512": "56a24e4f1889bf64fb1f6ef2a25b81f763896ea9dcc23255ecb6ff4ce8503d270d952decf1c163b5ceb2b86972d0b7f366dd31f4b1e3a37c25097c90b80499db"
+      "size": 2927,
+      "content_sha3_512": "4b08dd0d6bcaaea639eaeb4c5fc1be9d9b179730d9e2244453f566f8ad2a6cc69cc47ad6f683cc66fabb74d6484cb51ee71c5f52d6a012767c4615f90e51eebc",
+      "leaf_sha3_512": "b2b9b2c907b814d0b6b687967da67ca6655e6c7bdbba36ebeb8c1761b69c8e51d624f7e101674f7ad2123e74fa1845409e178dc5c0313eae2c6d27fa14157338"
     },
     {
       "path": "sha3_tree/TREE-K3-2026-1003-01_manifest.json",
@@ -298,6 +316,18 @@
       "size": 8442,
       "content_sha3_512": "098bdc5eaca7897c361078a5470873bc90bd8ce8faf3ee7cd474ff0428e8c9f521960ff4023d6b02fa9bf95586fd83308f2629ca4cfa10c3ed18c515eb70cf0a",
       "leaf_sha3_512": "34fe36e82937f3c7c31b5d44760f39f9bca8029aaf0c30f2684664fae1be93c94028064d44f6bbc8a97b4de141bc6ba8fa62089eeb813c3e31a90b37f8b8d295"
+    },
+    {
+      "path": "sha3_tree/TREE-K3-2026-1003-03_leaf_records.json",
+      "size": 1336,
+      "content_sha3_512": "2595cf460af4bb8997f99cbe96ea71f92370037a3e694967a3873867ffdf65c616e41b80611c39bef4f85ffc6bba091522de5838a7414f4f03387b7abc76eed7",
+      "leaf_sha3_512": "ded2bce6c20ad526bcd26f3e3d79d594a96725f0ae9c5bb63cbd0b0b97ca47e6342120abe3da0f5c452bdf3078ba49c42a05ddd366901dc0017bb999041a7191"
+    },
+    {
+      "path": "sha3_tree/TREE-K3-2026-1003-03_manifest.json",
+      "size": 3764,
+      "content_sha3_512": "ec65c3dd447a393a1e66cf397e2e213ecf3b1cdb66d04bc0851cddbb2e0a7aee0fed1e8e01da7689356ea63e54cbe2f419c6da6e7848bb2d709610282f3d2ddd",
+      "leaf_sha3_512": "9e2fbdbae7c8a9410431d6aaf5fab94c07b79b79b5ad9fa39916be092fc91c0c099e6fec05be82ed8ffa2503abadbf47901b2b64d09bcb20c61a5878fbcd5857"
     },
     {
       "path": "sha3_tree/VERIFY.md",
@@ -4302,6 +4332,12 @@
       "leaf_sha3_512": "9fc63cb4d3bb966ed877cf42079ca63003517628568779dd4b59ce21f6d6d6b14e472f8d04a44122847b940ee6abebbe803b508de021f959991a0893ca39eaf0"
     },
     {
+      "path": "tools/a2a_hmac.py",
+      "size": 8066,
+      "content_sha3_512": "ac97d9bb23092a4b9944ddaa61a8e4f07198375bde8472dbf24660b589224b9636b75b1a6c29854464e078b7d9d4e839cd069e0fae33f89944a8f6c44f2bcf82",
+      "leaf_sha3_512": "73c4f7659c4eab2a34c57cd66a397da89c10b934b2036d845715af28e0f609491ce8f718e829de5bd944cafdb542a050eb4e63b1bc83c8f65beee1494d66c98b"
+    },
+    {
       "path": "tools/sha3-tree.mjs",
       "size": 13740,
       "content_sha3_512": "82c65885391b4a63e2c0764a0af1132276321489c0b68056b9bfc45a2a5ba9930c83ddc77e3636d0b643c3699908e1d779e52b460c55f7625a411f3196f63ec5",
@@ -4314,10 +4350,28 @@
       "leaf_sha3_512": "328da480867dc8ded975bc30d85cc3d4ea79322e7fca430509ed248a2f02c496b15c5dde8608873a3c826118f19c6a2025184af8d1dea6fc207a36388e6ef0af"
     },
     {
+      "path": "tools/test_a2a_hmac.py",
+      "size": 9130,
+      "content_sha3_512": "6c7df4f12353aefc1862b9cb04b047a8247ca74c727974da0078f1fcddb87d91bb53665778a829d493c3635546c3ebdc8eb1907de81db1f654e765dd3e3e2ff2",
+      "leaf_sha3_512": "ea08a4ccad3f387039f8e44e42ac92edb9197f8b2ecf7b15fe46cfd56b0918f8d558cb2a86597481ef701c5b9227feea3fbd31a1b2b76ced23d41d8eb351852e"
+    },
+    {
       "path": "tools/verify.mjs",
-      "size": 1394,
-      "content_sha3_512": "287a84bca793b4b4c90cde65c720d71167278ac21b5dbb43ad0c4b02026efc0bfbcc4efb5ccd7192d7c7bcabe504a6b8ee183512ce9a6178a239a1052203ce26",
-      "leaf_sha3_512": "64aa19f2a860a8533b461102d9795450c8311eaac153d9854004f72b0fb46b35fe052f1812dffa44ead9e07cc76087875589eafeefc4a2907ac86ac3a8d19b50"
+      "size": 2579,
+      "content_sha3_512": "babc8e8322332c2cc649b56d98c3e866d9c581dae235392d79439cb26e53b66783281fcbac6107584b9bd97a63b2c5ae51aebb8ac611186a3a1196c30096b3e2",
+      "leaf_sha3_512": "aca1c0604ffc56efecda4b711900fb46ec3768e4c5367011f9c1600db8fdf937fad73e8dec31c8100fc82a8bfa149a3e967d8306fd9ab3cc62c029a216cceeec"
+    },
+    {
+      "path": "tools/verify_opl_tree.py",
+      "size": 11397,
+      "content_sha3_512": "26a75afd82047924c2a0bcd79513e44cacc30c2a04c2cb7e844ed489930b1b6d1da430d7224c3ef59a3d60db328760cb9593f407650a20f1766d3a854bb3eb1b",
+      "leaf_sha3_512": "d0f49f65b48d5f5ad16912ecc4e912f49d5a3d9e00891f354d387335c4212fac836167ab6242f65160caee33f60192470dd2b0ad1ee69bf24a93472edecb6111"
+    },
+    {
+      "path": "tools/xcheck_node.mjs",
+      "size": 3067,
+      "content_sha3_512": "09d823adaa6fe0379f05ce537ba40cae09d0a3598ee012f9fb08005405004b39c805d0604ea18b26ef35213f73467fd3aa78f263aa8556f6f1c301949dd8134e",
+      "leaf_sha3_512": "06dde09eb31c1438358b04d61dd5c405ffb9483bb93af6226505bdc6bafed7189965d64f98b02325873a2981b63dfb60e0f50d8b84d95909a9fa974ea354fe6e"
     },
     {
       "path": "videos.json",

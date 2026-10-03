@@ -1,183 +1,232 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""a2a_hmac.py —— A2A 消息认证 HMAC-SHA3-512（对齐总线 Qoder DF-NOTICE-2026-1003-QODER-05）。
+"""A2A message authentication using HMAC-SHA3-512."""
 
-契约：
-  - 算法 HMAC-SHA3-512；协议标识 a2a-hmac-sha3-512/v1；输出 64 字节 = 128 位小写 hex。
-  - 认证输入 = UTF8("OpenPlanLink-A2A-HMAC-v1\\u0000") || JCS(无 tag 包络)。
-  - JSON 按 RFC 8785 JCS 规范化；正文摘要按原始字节 SHA3-512。
-  - 密钥 64 字节；HMAC 比较用常量时间；时间窗默认 300 秒；nonce 至少 128 位。
-"""
 import hashlib
 import hmac
+import json
+import os
+import re
 import secrets
-import decimal
+import sqlite3
 from datetime import datetime, timezone
 
 VERSION = "a2a-hmac-sha3-512/v1"
 DOMAIN_PREFIX = b"OpenPlanLink-A2A-HMAC-v1\x00"
 DEFAULT_WINDOW = 300
 KEY_BYTES = 64
+TAGLESS_FIELDS = frozenset({
+    "version",
+    "key_id",
+    "sender_id",
+    "recipient_id",
+    "timestamp",
+    "nonce",
+    "body_sha3_512",
+})
+FULL_FIELDS = TAGLESS_FIELDS | {"tag"}
+IDENTIFIER = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:@/-]{0,127}$")
+LOWER_HEX_128 = re.compile(r"^[0-9a-f]{128}$")
+NONCE_HEX = re.compile(r"^[0-9a-f]{32,256}$")
+RFC3339 = re.compile(
+    r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$"
+)
 
 
-# ---------- RFC 8785 JCS ----------
-def jcs(obj):
-    """RFC 8785 JSON Canonicalization Scheme。"""
-    if obj is None:
-        return "null"
-    if obj is True:
-        return "true"
-    if obj is False:
-        return "false"
-    if isinstance(obj, (int, float)) and not isinstance(obj, bool):
-        return _jcs_number(obj)
-    if isinstance(obj, str):
-        return _jcs_string(obj)
-    if isinstance(obj, list):
-        return "[" + ",".join(jcs(v) for v in obj) + "]"
-    if isinstance(obj, dict):
-        keys = sorted(obj.keys())
-        return "{" + ",".join(_jcs_string(k) + ":" + jcs(obj[k]) for k in keys) + "}"
-    raise TypeError("JCS 不支持类型: %r" % type(obj))
-
-
-def _jcs_string(s):
-    out = ['"']
-    for ch in s:
-        o = ord(ch)
-        if ch == '"':
-            out.append('\\"')
-        elif ch == '\\':
-            out.append('\\\\')
-        elif ch == '\b':
-            out.append('\\b')
-        elif ch == '\t':
-            out.append('\\t')
-        elif ch == '\n':
-            out.append('\\n')
-        elif ch == '\f':
-            out.append('\\f')
-        elif ch == '\r':
-            out.append('\\r')
-        elif o < 0x20:
-            out.append('\\u%04x' % o)
-        else:
-            out.append(ch)
-    out.append('"')
-    return "".join(out)
-
-
-def _jcs_number(n):
-    """RFC 8785 数字规范化：无前导/尾随零、无小数点尾零、无科学计数法、-0→0。"""
-    if isinstance(n, bool):
-        return "true" if n else "false"
-    if isinstance(n, int):
-        return str(n)
-    if isinstance(n, float):
-        if n != n or n in (float("inf"), float("-inf")):
-            raise ValueError("JCS 不允许 NaN/Infinity")
-        if n == 0.0:
-            return "0"
-        d = decimal.Decimal(repr(n)).normalize()
-        s = format(d, "f")
-        if "." in s:
-            s = s.rstrip("0").rstrip(".")
-        return s
-    raise TypeError("JCS 数字不支持类型: %r" % type(n))
-
-
-# ---------- 摘要与时间 ----------
 def sha3_512_hex(data: bytes) -> str:
+    if not isinstance(data, bytes):
+        raise TypeError("正文必须是原始 bytes")
     return hashlib.sha3_512(data).hexdigest()
 
 
 def now_rfc3339() -> str:
-    return datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
+    return datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
 
 
-def parse_ts(s: str) -> datetime:
-    # RFC 3339 允许 "Z" 或 "+08:00"；统一成 fromisoformat 能吃的形式
-    if s.endswith(("Z", "z")):
-        s = s[:-1] + "+00:00"
-    return datetime.fromisoformat(s)
+def parse_ts(value: str) -> datetime:
+    if not isinstance(value, str) or not RFC3339.fullmatch(value):
+        raise ValueError("timestamp 必须是带显式时区的 RFC 3339")
+    normalized = value[:-1] + "+00:00" if value.endswith("Z") else value
+    parsed = datetime.fromisoformat(normalized)
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        raise ValueError("timestamp 缺少时区")
+    return parsed
 
 
-# ---------- 建 / 验 ----------
-def _auth_input(env_without_tag: dict) -> bytes:
-    return DOMAIN_PREFIX + jcs(env_without_tag).encode("utf-8")
+def _validate_key(key: bytes) -> None:
+    if not isinstance(key, bytes) or len(key) != KEY_BYTES:
+        raise ValueError(f"HMAC 密钥必须是 {KEY_BYTES} 字节")
 
 
-def compute_tag(env_without_tag: dict, key: bytes) -> str:
-    return hmac.new(key, _auth_input(env_without_tag), hashlib.sha3_512).hexdigest()
+def _validate_identifier(value: str, field: str) -> None:
+    if not isinstance(value, str) or not IDENTIFIER.fullmatch(value):
+        raise ValueError(f"{field} 格式非法")
 
 
-def build_envelope(sender_id: str, recipient_id: str, body: bytes, key: bytes, key_id: str) -> dict:
-    if len(key) != KEY_BYTES:
-        raise ValueError("HMAC 密钥必须 %d 字节" % KEY_BYTES)
-    env = {
+def _validate_tagless_envelope(envelope: dict) -> None:
+    if not isinstance(envelope, dict) or set(envelope) != TAGLESS_FIELDS:
+        raise ValueError("包络字段集合不匹配")
+    if any(not isinstance(value, str) for value in envelope.values()):
+        raise ValueError("包络字段必须全部为字符串")
+    if envelope["version"] != VERSION:
+        raise ValueError("version 不匹配")
+    for field in ("key_id", "sender_id", "recipient_id"):
+        _validate_identifier(envelope[field], field)
+    parse_ts(envelope["timestamp"])
+    if not NONCE_HEX.fullmatch(envelope["nonce"]):
+        raise ValueError("nonce 必须是至少 128 位的小写十六进制")
+    if not LOWER_HEX_128.fullmatch(envelope["body_sha3_512"]):
+        raise ValueError("正文摘要格式非法")
+
+
+def canonicalize_envelope(envelope: dict) -> bytes:
+    _validate_tagless_envelope(envelope)
+    return json.dumps(
+        envelope,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+        allow_nan=False,
+    ).encode("utf-8")
+
+
+def compute_tag(envelope_without_tag: dict, key: bytes) -> str:
+    _validate_key(key)
+    authenticated = DOMAIN_PREFIX + canonicalize_envelope(envelope_without_tag)
+    return hmac.new(key, authenticated, hashlib.sha3_512).hexdigest()
+
+
+class ReplayCache:
+    def __init__(self, database_path):
+        try:
+            path = os.fspath(database_path)
+        except TypeError as error:
+            raise ValueError("nonce 缓存路径非法") from error
+        if not isinstance(path, str) or not path or path == ":memory:" or path.startswith("file:"):
+            raise ValueError("nonce 缓存必须使用持久 SQLite 文件")
+        self._database_path = path
+        connection = self._connect()
+        try:
+            connection.execute(
+                "CREATE TABLE IF NOT EXISTS replay_nonces "
+                "(nonce TEXT PRIMARY KEY, expires_at REAL NOT NULL)"
+            )
+        finally:
+            connection.close()
+
+    def _connect(self):
+        connection = sqlite3.connect(self._database_path, timeout=5, isolation_level=None)
+        connection.execute("PRAGMA busy_timeout = 5000")
+        return connection
+
+    def claim(self, nonce: str, checked_at: datetime, message_timestamp: datetime) -> bool:
+        current = checked_at.timestamp()
+        expires_at = message_timestamp.timestamp() + DEFAULT_WINDOW
+        connection = self._connect()
+        try:
+            connection.execute("BEGIN IMMEDIATE")
+            connection.execute("DELETE FROM replay_nonces WHERE expires_at < ?", (current,))
+            cursor = connection.execute(
+                "INSERT OR IGNORE INTO replay_nonces (nonce, expires_at) VALUES (?, ?)",
+                (nonce, expires_at),
+            )
+            connection.commit()
+            return cursor.rowcount == 1
+        except Exception:
+            connection.rollback()
+            raise
+        finally:
+            connection.close()
+
+
+def build_envelope(
+    sender_id: str,
+    recipient_id: str,
+    body: bytes,
+    key: bytes,
+    key_id: str,
+    *,
+    timestamp: str | None = None,
+    nonce: str | None = None,
+) -> dict:
+    _validate_key(key)
+    envelope = {
         "version": VERSION,
         "key_id": key_id,
         "sender_id": sender_id,
         "recipient_id": recipient_id,
-        "timestamp": now_rfc3339(),
-        "nonce": secrets.token_hex(16),  # 128 位
+        "timestamp": timestamp or now_rfc3339(),
+        "nonce": nonce or secrets.token_hex(16),
         "body_sha3_512": sha3_512_hex(body),
     }
-    env["tag"] = compute_tag(env, key)
-    return env
+    envelope["tag"] = compute_tag(envelope, key)
+    return envelope
 
 
-def verify_envelope(env: dict, key: bytes, key_id: str, recipient_id: str,
-                    body=None, now=None, seen_nonces=None, window=DEFAULT_WINDOW):
-    """返回 (ok, reason)。失败关闭：任一检查不过即 False，不做静默降级。"""
-    if now is None:
-        now = datetime.now(timezone.utc).astimezone()
-    seen = seen_nonces if seen_nonces is not None else set()
-
-    if env.get("version") != VERSION:
-        return False, "version 不匹配"
-    if env.get("recipient_id") != recipient_id:
-        return False, "接收方错配"
-    if env.get("key_id") != key_id:
-        return False, "错误 key_id"
+def verify_envelope(
+    envelope: dict,
+    key: bytes,
+    key_id: str,
+    sender_id: str,
+    recipient_id: str,
+    body: bytes,
+    replay_cache: ReplayCache,
+    *,
+    now: datetime | None = None,
+    window: int = DEFAULT_WINDOW,
+):
+    """Return ``(ok, reason)`` and reject every malformed or unverifiable input."""
     try:
-        ts = parse_ts(env.get("timestamp", ""))
-    except Exception:
-        return False, "timestamp 解析失败"
-    if abs((now - ts).total_seconds()) > window:
-        return False, "时间窗超界"
-    nonce = env.get("nonce", "")
-    if len(nonce) < 32:  # 128 位 = 32 个 hex 字符
-        return False, "nonce 太短"
-    if nonce in seen:
-        return False, "重复 nonce"
-    if body is not None:
-        if env.get("body_sha3_512") != sha3_512_hex(body):
+        _validate_key(key)
+        if not isinstance(body, bytes):
+            raise ValueError("正文必须是原始 bytes")
+        if not isinstance(envelope, dict) or set(envelope) != FULL_FIELDS:
+            return False, "包络字段集合不匹配"
+        if not isinstance(replay_cache, ReplayCache):
+            return False, "nonce 缓存缺失"
+        if window != DEFAULT_WINDOW or isinstance(window, bool):
+            return False, "时间窗必须固定为 300 秒"
+        if envelope.get("version") != VERSION:
+            return False, "version 不匹配"
+        if envelope.get("sender_id") != sender_id:
+            return False, "发送方错配"
+        if envelope.get("recipient_id") != recipient_id:
+            return False, "接收方错配"
+        if envelope.get("key_id") != key_id:
+            return False, "错误 key_id"
+
+        tagless = {field: envelope[field] for field in TAGLESS_FIELDS}
+        _validate_tagless_envelope(tagless)
+        tag = envelope["tag"]
+        if not isinstance(tag, str) or not LOWER_HEX_128.fullmatch(tag):
+            return False, "tag 格式非法"
+
+        checked_at = now or datetime.now(timezone.utc)
+        if checked_at.tzinfo is None or checked_at.utcoffset() is None:
+            return False, "当前时间缺少时区"
+        timestamp = parse_ts(envelope["timestamp"])
+        if abs((checked_at - timestamp).total_seconds()) > window:
+            return False, "时间窗超界"
+
+        body_digest = sha3_512_hex(body)
+        if not hmac.compare_digest(envelope["body_sha3_512"], body_digest):
             return False, "正文摘要不匹配"
-    env_no_tag = {k: v for k, v in env.items() if k != "tag"}
-    expected = compute_tag(env_no_tag, key)
-    if not hmac.compare_digest(expected, env.get("tag", "")):
-        return False, "tag 不匹配"
-    seen.add(nonce)
-    return True, "ok"
+        expected = compute_tag(tagless, key)
+        if not hmac.compare_digest(expected, tag):
+            return False, "tag 不匹配"
+        try:
+            claimed = replay_cache.claim(envelope["nonce"], checked_at, timestamp)
+        except sqlite3.Error:
+            return False, "nonce 缓存不可用"
+        if not claimed:
+            return False, "重复 nonce"
+        return True, "ok"
+    except (KeyError, TypeError, ValueError, OverflowError):
+        return False, "包络格式非法"
 
 
 def platform_supported() -> bool:
-    """对应 .NET 的 HMACSHA3_512.IsSupported。Python：sha3_512 存在即可用。"""
     try:
-        hashlib.sha3_512(b"x")
-        return True
+        return len(hashlib.sha3_512(b"x").digest()) == 64
     except Exception:
         return False
-
-
-if __name__ == "__main__":
-    import json
-    import sys
-    sys.stdout.reconfigure(encoding="utf-8")
-    print("platform_supported =", platform_supported())
-    k = secrets.token_bytes(KEY_BYTES)
-    e = build_envelope("cairn-dsh", "workbuddy-hy4", b"hello", k, "k-20261003-1")
-    print(json.dumps(e, ensure_ascii=False, indent=2))
-    ok, r = verify_envelope(e, k, "k-20261003-1", "workbuddy-hy4", body=b"hello")
-    print("verify =", ok, r)

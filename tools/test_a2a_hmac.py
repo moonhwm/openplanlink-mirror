@@ -1,150 +1,252 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""test_a2a_hmac.py —— a2a_hmac 正/负向验收向量（对齐 Qoder DF-NOTICE 第六节"验收"）。
 
-覆盖：正确向量、正文单字节变更、tag 单字节变更、错误 key_id、过期时间、
-重复 nonce、接收方错配、平台不支持。未通过全部负向测试的席位不得标 READY。
-"""
-import hashlib
+import copy
+from concurrent.futures import ThreadPoolExecutor
+import pathlib
 import secrets
 import sys
+import tempfile
+import unittest
 from datetime import datetime, timedelta, timezone
 
-sys.path.insert(0, __file__.rsplit("\\", 1)[0])
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import a2a_hmac as M
 
-sys.stdout.reconfigure(encoding="utf-8")
-
-KEY = secrets.token_bytes(64)
-KEY_ID = "k-20261003-test"
+KEY = bytes(range(64))
+KEY_ID = "k-test-1"
 SENDER = "cairn-dsh"
-RECIP = "workbuddy-hy4"
-BODY = b"OpenPlanLink A2A handshake payload"
-
-results = []
-
-
-# ⓪ JCS 规范化（RFC 8785）——先验规范本身
-print("⓪ JCS 规范化（RFC 8785）")
-def jcs_eq(name, obj, expect):
-    got = M.jcs(obj)
-    good = (got == expect)
-    results.append(good)
-    print("  %s %-20s got=%s 期望=%s" % ("✅" if good else "★", name, got, expect))
-
-jcs_eq("键排序", {"b": 1, "a": 2}, '{"a":2,"b":1}')
-jcs_eq("无空白", {"a": 1}, '{"a":1}')
-jcs_eq("引号转义", {"a": 'x"y'}, '{"a":"x\\"y"}')
-jcs_eq("反斜杠转义", {"a": "x\\y"}, '{"a":"x\\\\y"}')
-jcs_eq("控制字符", {"a": "\u0001"}, '{"a":"\\u0001"}')
-jcs_eq("换行制表", {"a": "\n\t"}, '{"a":"\\n\\t"}')
-jcs_eq("中文原样", {"a": "石敢当"}, '{"a":"石敢当"}')
-jcs_eq("整数浮点", {"a": 1.0}, '{"a":1}')
-jcs_eq("负零", {"a": -0.0}, '{"a":0}')
-jcs_eq("小数", {"a": 1.5}, '{"a":1.5}')
-jcs_eq("尾零去除", {"a": 1.50}, '{"a":1.5}')
-jcs_eq("大数展开", {"a": 1e30}, '{"a":1000000000000000000000000000000}')
-jcs_eq("嵌套数组", [1, "a", True, None], '[1,"a",true,null]')
+RECIPIENT = "workbuddy-hy4"
+BODY = b"hello"
+TIMESTAMP = "2026-10-03T18:00:00+08:00"
+NONCE = "0123456789abcdef0123456789abcdef"
+NOW = datetime.fromisoformat(TIMESTAMP)
+EXPECTED_BODY_HASH = "75d527c368f2efe848ecf6b073a36767800805e9eef2b1857d5f984f036eb6df891d75f72d9b154518c1cd58835286d1da9a38deba3de98b5a53e5ed78a84976"
+EXPECTED_TAG = "53d0d652af398f630eab41787fd4086300dc0ee298d5527aea4574f0679aefd42e27c4ac46cf11f6554b9251727f065ac41c41c5d0e58c8d9435b297c3f5f09a"
+CACHE_DIRECTORY = tempfile.TemporaryDirectory()
 
 
-def check(name, expect_ok, ok, reason):
-    good = (ok == expect_ok)
-    results.append(good)
-    print("  %s %-22s 期望=%s 实测=%s%s" % (
-        "✅" if good else "★", name, expect_ok, ok,
-        ("  reason=" + reason) if reason else ""))
+def replay_cache(path=None):
+    database = path or pathlib.Path(CACHE_DIRECTORY.name, f"{secrets.token_hex(12)}.sqlite3")
+    return M.ReplayCache(database)
 
 
-def fresh(seen):
-    return dict(seen)
+def envelope():
+    return M.build_envelope(
+        SENDER,
+        RECIPIENT,
+        BODY,
+        KEY,
+        KEY_ID,
+        timestamp=TIMESTAMP,
+        nonce=NONCE,
+    )
 
 
-# 0. 平台支持
-print("① 平台能力")
-supp = M.platform_supported()
-results.append(supp)
-print("  %s 平台支持 HMAC-SHA3-512 = %s" % ("✅" if supp else "★", supp))
+def verify(value, *, body=BODY, key=KEY, key_id=KEY_ID, sender=SENDER,
+           recipient=RECIPIENT, cache=None, now=NOW, window=300):
+    return M.verify_envelope(
+        value,
+        key,
+        key_id,
+        sender,
+        recipient,
+        body,
+        cache if cache is not None else replay_cache(),
+        now=now,
+        window=window,
+    )
 
-# 1. 正确向量
-print("② 正向")
-env = M.build_envelope(SENDER, RECIP, BODY, KEY, KEY_ID)
-ok, r = M.verify_envelope(env, KEY, KEY_ID, RECIP, body=BODY)
-check("正确向量", True, ok, r)
 
-# 2. 正文单字节变更
-env2 = M.build_envelope(SENDER, RECIP, BODY, KEY, KEY_ID)
-tampered_body = b"OpenPlanLink A2A handshake payload!"  # 末字节变化
-ok, r = M.verify_envelope(env2, KEY, KEY_ID, RECIP, body=tampered_body)
-check("正文单字节变更", False, ok, r)
+class A2AHmacTests(unittest.TestCase):
+    def test_platform_support(self):
+        self.assertTrue(M.platform_supported())
 
-# 3. tag 单字节变更
-env3 = M.build_envelope(SENDER, RECIP, BODY, KEY, KEY_ID)
-tag = env3["tag"]
-flip = "0" if tag[0] != "0" else "1"
-env3["tag"] = flip + tag[1:]
-ok, r = M.verify_envelope(env3, KEY, KEY_ID, RECIP, body=BODY)
-check("tag 单字节变更", False, ok, r)
+    def test_public_vector(self):
+        value = envelope()
+        self.assertEqual(value["body_sha3_512"], EXPECTED_BODY_HASH)
+        self.assertEqual(value["tag"], EXPECTED_TAG)
 
-# 4. 错误 key_id
-env4 = M.build_envelope(SENDER, RECIP, BODY, KEY, KEY_ID)
-ok, r = M.verify_envelope(env4, KEY, "k-WRONG", RECIP, body=BODY)
-check("错误 key_id", False, ok, r)
+    def test_canonical_envelope(self):
+        value = envelope()
+        value.pop("tag")
+        self.assertEqual(
+            M.canonicalize_envelope(value).decode(),
+            '{"body_sha3_512":"' + EXPECTED_BODY_HASH + '","key_id":"k-test-1",'
+            '"nonce":"0123456789abcdef0123456789abcdef","recipient_id":"workbuddy-hy4",'
+            '"sender_id":"cairn-dsh","timestamp":"2026-10-03T18:00:00+08:00",'
+            '"version":"a2a-hmac-sha3-512/v1"}',
+        )
 
-# 5. 过期时间（正确 tag，但时间戳已超窗）
-env5 = M.build_envelope(SENDER, RECIP, BODY, KEY, KEY_ID)
-old = datetime.now(timezone.utc).astimezone() - timedelta(seconds=400)
-env5["timestamp"] = old.isoformat(timespec="seconds")
-env5["tag"] = M.compute_tag({k: v for k, v in env5.items() if k != "tag"}, KEY)
-ok, r = M.verify_envelope(env5, KEY, KEY_ID, RECIP, body=BODY)
-check("过期时间", False, ok, r)
+    def test_valid_envelope(self):
+        self.assertEqual(verify(envelope()), (True, "ok"))
 
-# 6. 重复 nonce
-env6 = M.build_envelope(SENDER, RECIP, BODY, KEY, KEY_ID)
-seen = set()
-ok1, _ = M.verify_envelope(env6, KEY, KEY_ID, RECIP, body=BODY, seen_nonces=seen)
-ok2, r2 = M.verify_envelope(env6, KEY, KEY_ID, RECIP, body=BODY, seen_nonces=seen)
-good = (ok1 is True and ok2 is False)
-results.append(good)
-print("  %s 重复 nonce              期望=先True后False 实测=%s,%s%s" % (
-    "✅" if good else "★", ok1, ok2, ("  reason=" + r2) if not ok2 else ""))
+    def test_replay_rejected(self):
+        cache = replay_cache()
+        self.assertEqual(verify(envelope(), cache=cache), (True, "ok"))
+        self.assertEqual(verify(envelope(), cache=cache), (False, "重复 nonce"))
 
-# 7. 接收方错配
-env7 = M.build_envelope(SENDER, RECIP, BODY, KEY, KEY_ID)
-ok, r = M.verify_envelope(env7, KEY, KEY_ID, "someone-else", body=BODY)
-check("接收方错配", False, ok, r)
+    def test_replay_rejected_after_cache_reopen(self):
+        path = pathlib.Path(CACHE_DIRECTORY.name, f"{secrets.token_hex(12)}.sqlite3")
+        self.assertEqual(verify(envelope(), cache=replay_cache(path)), (True, "ok"))
+        self.assertEqual(verify(envelope(), cache=replay_cache(path)), (False, "重复 nonce"))
 
-# 8. nonce 太短
-env8 = M.build_envelope(SENDER, RECIP, BODY, KEY, KEY_ID)
-env8["nonce"] = "abcd"
-env8["tag"] = M.compute_tag({k: v for k, v in env8.items() if k != "tag"}, KEY)
-ok, r = M.verify_envelope(env8, KEY, KEY_ID, RECIP, body=BODY)
-check("nonce 太短", False, ok, r)
+    def test_future_timestamp_nonce_retained_for_full_acceptance_period(self):
+        future = NOW + timedelta(seconds=M.DEFAULT_WINDOW)
+        value = M.build_envelope(
+            SENDER,
+            RECIPIENT,
+            BODY,
+            KEY,
+            KEY_ID,
+            timestamp=future.isoformat(),
+            nonce=NONCE,
+        )
+        cache = replay_cache()
+        self.assertEqual(verify(value, cache=cache, now=NOW), (True, "ok"))
+        self.assertEqual(
+            verify(value, cache=cache, now=NOW + timedelta(seconds=M.DEFAULT_WINDOW + 1)),
+            (False, "重复 nonce"),
+        )
 
-# 9. 版本不匹配
-env9 = M.build_envelope(SENDER, RECIP, BODY, KEY, KEY_ID)
-env9["version"] = "a2a-hmac-sha3-256/v1"
-env9["tag"] = M.compute_tag({k: v for k, v in env9.items() if k != "tag"}, KEY)
-ok, r = M.verify_envelope(env9, KEY, KEY_ID, RECIP, body=BODY)
-check("版本不匹配", False, ok, r)
+    def test_concurrent_replay_claim_is_atomic(self):
+        path = pathlib.Path(CACHE_DIRECTORY.name, f"{secrets.token_hex(12)}.sqlite3")
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            results = list(executor.map(
+                lambda _: verify(envelope(), cache=replay_cache(path)),
+                range(2),
+            ))
+        self.assertEqual(results.count((True, "ok")), 1)
+        self.assertEqual(results.count((False, "重复 nonce")), 1)
 
-# 10. Z 时区时间戳（RFC 3339 合法，应通过）
-env10 = M.build_envelope(SENDER, RECIP, BODY, KEY, KEY_ID)
-from datetime import timezone as _tz
-env10["timestamp"] = datetime.now(_tz.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
-env10["tag"] = M.compute_tag({k: v for k, v in env10.items() if k != "tag"}, KEY)
-ok, r = M.verify_envelope(env10, KEY, KEY_ID, RECIP, body=BODY)
-check("Z 时区时间戳", True, ok, r)
+    def test_memory_only_replay_cache_rejected(self):
+        with self.assertRaises(ValueError):
+            M.ReplayCache(":memory:")
 
-# 11. 畸形时间戳（应干净拒绝，不抛异常）
-env11 = M.build_envelope(SENDER, RECIP, BODY, KEY, KEY_ID)
-env11["timestamp"] = "not-a-timestamp"
-env11["tag"] = M.compute_tag({k: v for k, v in env11.items() if k != "tag"}, KEY)
-ok, r = M.verify_envelope(env11, KEY, KEY_ID, RECIP, body=BODY)
-check("畸形时间戳", False, ok, r)
+    def test_missing_replay_cache_rejected(self):
+        value = envelope()
+        result = M.verify_envelope(value, KEY, KEY_ID, SENDER, RECIPIENT, BODY, None, now=NOW)
+        self.assertEqual(result, (False, "nonce 缓存缺失"))
 
-print()
-print("════ 结果 ════")
-bad = results.count(False)
-print("  共 %d 项 ｜ ★ 失败 %d 项" % (len(results), bad))
-print("★ VERDICT=" + ("PASS" if bad == 0 else "BAD"))
-sys.exit(0 if bad == 0 else 1)
+    def test_body_tamper_rejected(self):
+        self.assertEqual(verify(envelope(), body=b"hellO"), (False, "正文摘要不匹配"))
+
+    def test_body_is_mandatory_bytes(self):
+        self.assertEqual(verify(envelope(), body=None), (False, "包络格式非法"))
+
+    def test_tag_tamper_rejected(self):
+        value = envelope()
+        value["tag"] = ("0" if value["tag"][0] != "0" else "1") + value["tag"][1:]
+        self.assertEqual(verify(value), (False, "tag 不匹配"))
+
+    def test_bad_tag_type_rejected(self):
+        value = envelope()
+        value["tag"] = None
+        self.assertEqual(verify(value), (False, "tag 格式非法"))
+
+    def test_wrong_key_id_rejected(self):
+        self.assertEqual(verify(envelope(), key_id="wrong"), (False, "错误 key_id"))
+
+    def test_wrong_sender_rejected(self):
+        self.assertEqual(verify(envelope(), sender="other"), (False, "发送方错配"))
+
+    def test_wrong_recipient_rejected(self):
+        self.assertEqual(verify(envelope(), recipient="other"), (False, "接收方错配"))
+
+    def test_short_key_rejected(self):
+        self.assertEqual(verify(envelope(), key=b"x"), (False, "包络格式非法"))
+
+    def test_stale_timestamp_rejected(self):
+        self.assertEqual(
+            verify(envelope(), now=NOW + timedelta(seconds=301)),
+            (False, "时间窗超界"),
+        )
+
+    def test_future_timestamp_rejected(self):
+        self.assertEqual(
+            verify(envelope(), now=NOW - timedelta(seconds=301)),
+            (False, "时间窗超界"),
+        )
+
+    def test_naive_now_rejected(self):
+        self.assertEqual(
+            verify(envelope(), now=datetime(2026, 10, 3, 18, 0, 0)),
+            (False, "当前时间缺少时区"),
+        )
+
+    def test_naive_timestamp_rejected(self):
+        value = envelope()
+        value["timestamp"] = "2026-10-03T18:00:00"
+        self.assertEqual(verify(value), (False, "包络格式非法"))
+
+    def test_z_timestamp_accepted(self):
+        value = M.build_envelope(
+            SENDER,
+            RECIPIENT,
+            BODY,
+            KEY,
+            KEY_ID,
+            timestamp="2026-10-03T10:00:00Z",
+            nonce=NONCE,
+        )
+        self.assertEqual(verify(value), (True, "ok"))
+
+    def test_short_nonce_rejected(self):
+        value = envelope()
+        value["nonce"] = "abcd"
+        self.assertEqual(verify(value), (False, "包络格式非法"))
+
+    def test_non_hex_nonce_rejected(self):
+        value = envelope()
+        value["nonce"] = "z" * 32
+        self.assertEqual(verify(value), (False, "包络格式非法"))
+
+    def test_wrong_version_rejected(self):
+        value = envelope()
+        value["version"] = "a2a-hmac-sha3-256/v1"
+        self.assertEqual(verify(value), (False, "version 不匹配"))
+
+    def test_missing_field_rejected(self):
+        value = envelope()
+        value.pop("sender_id")
+        self.assertEqual(verify(value), (False, "包络字段集合不匹配"))
+
+    def test_extra_field_rejected(self):
+        value = envelope()
+        value["extra"] = "unexpected"
+        self.assertEqual(verify(value), (False, "包络字段集合不匹配"))
+
+    def test_non_default_window_rejected(self):
+        for window in (0, 299, 301, True):
+            with self.subTest(window=window):
+                self.assertEqual(
+                    verify(envelope(), window=window),
+                    (False, "时间窗必须固定为 300 秒"),
+                )
+
+    def test_bad_tag_does_not_poison_cache(self):
+        cache = replay_cache()
+        bad = copy.deepcopy(envelope())
+        bad["tag"] = "0" * 128
+        self.assertEqual(verify(bad, cache=cache), (False, "tag 不匹配"))
+        self.assertEqual(verify(envelope(), cache=cache), (True, "ok"))
+
+    def test_identifier_rejected(self):
+        with self.assertRaises(ValueError):
+            M.build_envelope("含空格", RECIPIENT, BODY, KEY, KEY_ID)
+
+    def test_random_nonce_has_128_bits(self):
+        value = M.build_envelope(SENDER, RECIPIENT, BODY, secrets.token_bytes(64), KEY_ID)
+        self.assertRegex(value["nonce"], r"^[0-9a-f]{32}$")
+
+    def test_non_string_envelope_value_rejected(self):
+        value = envelope()
+        value["sender_id"] = 1
+        self.assertEqual(verify(value), (False, "发送方错配"))
+
+
+if __name__ == "__main__":
+    suite = unittest.defaultTestLoader.loadTestsFromTestCase(A2AHmacTests)
+    result = unittest.TextTestRunner(verbosity=2).run(suite)
+    print(f"VERDICT={'PASS' if result.wasSuccessful() else 'BAD'} tests={result.testsRun}")
+    raise SystemExit(0 if result.wasSuccessful() else 1)

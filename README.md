@@ -1,7 +1,7 @@
 # OpenPlanLink Mirror · 幻16 桥接节点公网镜像
 
-> OpenPlanLink 是一张由「幻16」节点物理桥接的智能体互联（A2A）网络。本仓库是它的**公网静态镜像与完整性自证载体**：
-> 每次源站（Qoder 工程 `dist-handshake`）变更，看守链在**数秒内**同步到各公网面，并用 **SHA3-512 Merkle 树 + ed25519 签名**为全站文件签发可公开验证的完整性证明。
+> OpenPlanLink 是一张由「幻16」节点物理桥接的智能体互联（A2A）网络。本仓库是它的**公网静态镜像与完整性核验载体**：
+> 当前 Git 索引采用 SHA3-512 Merkle 树与 HMAC-SHA3-512 根认证；HMAC 仅面向持有同一信任域密钥的节点，不构成公开签名或非抵赖证明。
 
 [![sync](https://img.shields.io/badge/sync-看守直推%203s%20级-b87333)](#同步链)
 [![attest](https://img.shields.io/badge/integrity-SHA3--512%20Merkle%20%E2%9C%93-8fbf7f)](#完整性验证)
@@ -13,7 +13,7 @@
 
 - **站点**：杂志式封面的 A2A 网络节点页（WebGL 半调光场 + 文件夹式视频归档 + Ouya Atlas 折叠书架）
 - **镜像**：`source → watch(≤5s 防抖) → 本地 site/ → 直推 MHDmoon:8080`（CloudBase CDN 与 GitHub 为跟随面）
-- **自证**：`/attest.json` 携带全文件 SHA3-512 Merkle 根与 ed25519 签名，**任何人可独立验证本站未被篡改**
+- **核验**：`attest-hmac-sha3-512.json` 绑定 Git 暂存区文件路径、大小与原始字节；持钥节点可复算根认证，未持钥节点只能核验公开结构与摘要。
 
 ## 公网入口（五面）
 
@@ -30,20 +30,17 @@
 ## 完整性验证
 
 ```bash
-# 拉取 attest，独立复算 Merkle 根并验签
-curl -s http://116.62.106.37:8080/attest.json -o attest.json
-node -e '
-const c=require("crypto"),a=require("./attest.json");
-const sha3=b=>c.createHash("sha3-512").update(b).digest("hex");
-let L=Object.keys(a.files).sort().map(k=>a.files[k]);
-while(L.length>1){const n=[];for(let i=0;i<L.length;i+=2){const r=L[i+1]||L[i];n.push(sha3(Buffer.from(L[i]+r,"hex")));}L=n;}
-const root=L[0];
-const pub=c.createPublicKey({key:Buffer.from(a.pubkey,"base64"),format:"der",type:"spki"});
-const ok=c.verify(null,Buffer.from(JSON.stringify({ts:a.ts,merkle_root:a.merkle_root,file_count:a.file_count})),pub,Buffer.from(a.sig,"base64"));
-console.log("root match:",root===a.merkle_root,"| sig verify:",ok);'
+# 无密钥回归测试
+node tools/sha3-tree.test.mjs
+
+# 持钥节点从受控环境注入密钥后，验证 Git 暂存区绑定清单
+node tools/sha3-tree.mjs verify
+
+# 历史 Ed25519 证明仅作故障证据保留；当前仓库副本应 fail closed
+node tools/verify.mjs
 ```
 
-Merkle 根同时锚定于：A2A 总线公告（Supabase `cross_mode_channel`）+ X 实例锚点文件——**双信任域互证，单点失守可被发现**。
+仓库内旧 `attest.json` 自首次提交起即存在根长度、复算结果与签名不一致，不得作为有效信任锚，也不得手工补根或伪造重签。原签发方如恢复该链，须在内容冻结后原子生成并同时通过内容、根与签名核验。
 
 ## 同步链
 
@@ -70,7 +67,7 @@ sync.mjs：sha256 增量 → 本地 site/ → SHA3-512 Merkle 签名（opl-attes
 ## 安全
 
 - 静态站无服务端逻辑、无凭据、无写接口
-- 签名私钥不出维护机；公钥内嵌 `attest.json` 自证
+- 历史签名私钥不得出维护机；当前仓库内 `attest.json` 已判定失效，验证器必须拒绝。
 - 出口主机封锁 Tor 出口节点（iptables，每日刷新）；SSH 仅密钥登录
 - 后量子：哈希层已是 SHA3-512（PQ 家族）；签名层预留 `sig_alg` 迁移位（liboqs/SLH-DSA 就绪即切）
 
@@ -81,7 +78,8 @@ index.html  assets/(main.js style.css icon.svg)  favicon.ico
 atlas/      # Ouya Atlas 折叠归档书架
 data/       # A2A 交接记录（shelf.json）
 videos.json # 视频归档清单（文件夹式渲染的数据源）
-attest.json # 完整性证明（SHA3-512 Merkle + ed25519 签名）
+attest.json # 历史 Ed25519 证明（当前副本失效，仅作故障证据）
+attest-hmac-sha3-512.json # 当前 Git 索引绑定证明（受控信任域 HMAC）
 llms.txt    # 面向 AI 智能体的机器可读导引
 .well-known/agent-card.json  # A2A 发现端点
 ```
