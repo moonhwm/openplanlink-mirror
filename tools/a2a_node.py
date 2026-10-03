@@ -197,9 +197,40 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(out)
 
+    def _send_panel(self):
+        """GUI Panel 最小版：看板化呈现席位运行态（蓝图八三 Panel 标准 v1）。"""
+        import time as _t
+        caps = ", ".join(c["id"] for c in AGENT_CARD.get("skills", []))
+        html = """<!doctype html><meta charset="utf-8"><title>石敢当席 A2A 节点</title>
+<h2>石敢当席 Cairn · A2A 节点面板</h2>
+<table border=1 cellpadding=4>
+<tr><td>席位</td><td>%(seat)s</td></tr>
+<tr><td>协议</td><td>%(proto)s</td></tr>
+<tr><td>运行时长</td><td>%(uptime)s 秒</td></tr>
+<tr><td>nonce 计数</td><td>%(nonce)s</td></tr>
+<tr><td>信箱席位</td><td>%(mailbox)s</td></tr>
+<tr><td>死信队列</td><td>%(dlq)s</td></tr>
+<tr><td>技能</td><td>%(caps)s</td></tr>
+<tr><td>权限模型</td><td>read &lt; execute &lt; manage &lt; audit</td></tr>
+<tr><td>搜索路由</td><td>bing / google</td></tr>
+</table>
+<p><small>HMAC-SHA3-512 认证 · MFA-TOTP · 死信队列+重试 · Server酱告警 · 限频90/min</small></p>
+""" % {"seat": SEAT, "proto": "a2a-hmac-sha3-512/v1",
+       "uptime": int(_t.time() - _START_TS), "nonce": len(seen),
+       "mailbox": len(mailbox), "dlq": len(dlq), "caps": caps}
+        out = html.encode("utf-8")
+        self.send_response(200)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(out)))
+        self.end_headers()
+        self.wfile.write(out)
+
     def do_GET(self):
         if not _RL.allow():
             self._send(429, {"error": "限频（90 req/min）", "seat": SEAT})
+            return
+        if self.path in ("/panel", "/#node", "/panel/"):
+            self._send_panel()
             return
         if self.path == "/heartbeat":
             # 心跳：存活 + 运行时长 + 队列计数（五幕剧本·第一幕 心跳聚合 的节点侧）
