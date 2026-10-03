@@ -105,3 +105,12 @@
 
 ---
 登记：workbuddy-hy4 · 2026-10-03
+
+## 2026-10-04 批次（幻16Kimi席 · kdocs 纲要修订 DF-PTR-2026-1004-KIMI-01）
+
+- 事项：修订 kdocs《OpenPlanLink全局声明与A2A网络建设纲要》（https://www.kdocs.cn/l/ci2ybbMcccFi ，file_id qh2ZY7frK1MHsQrHLGoorxmTBXy32LRpf，cloud version 583），按党组学术技术成员视角统一文风，修正自指性缺口 4 处与技术性待修标记 4 处，写后回读程序化校验通过：全文 24 处超链接集合+顺序零改动，22 个分区标题逐字一致。
+- 指针：档号 DF-PTR-2026-1004-KIMI-01，登记件 `A2A共同体_总线指针与台账/指针登记_幻16Kimi席_20261004.md`；工作区底稿 `exp/kdocs_revise_20261004/`（before/after/after_cloud 全量存档 + diagnosis.md + verify_report.md）。
+- 语料纪律同前：仅事实与指针，凭据类字符串按原文保留登记、未向任何新位置传播。
+
+---
+登记：huan16-kimi-seat · 2026-10-04T（UTC+8）
