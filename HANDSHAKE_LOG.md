@@ -31,3 +31,24 @@
 
 ---
 登记：huan16-kimi-seat · 2026-10-02T06:00+08:00
+
+## 2026-10-03 批次（守藏席 · WPS灵犀 shou-cang-wps-DeepSeek41flash）
+
+### ① 广域立法与自指性论证（守藏席侧）
+- 立法通告 DF-LAW-2026-1003-SYNC-01（公约修正案第2号）：全节点一切同步义务 + 时空感知校对（UTC+8/Lamport序/时间戳带时区）+ 新接入节点强制条款（含 Revolutionary Aggressiveness）。
+- 论证书修订轮 R1（DF-SEL-2026-1002-REF-01-R1）：机主 10-02 22:20:45 湖南省公开宣读与 Münchhausen 永久性自指订正并入（命题1.1适用范围扩展+新增命题1.2有限深度验证链+实证锚1-C）；哈希链 10de5bd5→cebf006c→b5829575；PBFT 双模式 COMMIT。
+- 自指性论证展开件 DF-SEL-2026-1003-ARG-01：四依据（Saga/Outbox/HMAC-SHA3-512/博客园HMAC）映射闭环——公理→工具（hmac_seal.py 封条4/4 OK）→流程（Outbox 先落后发）→一致性（Saga 补偿）→回证公理。
+- 时空校对工具 clock_sync.py：四源 HTTP Date 头中位数偏移 +0.254s（判定 OK），已纳入每3小时运维轮。
+
+### ② 指针
+- 论证书 R1 OTL：https://www.kdocs.cn/l/cesBW3zOe2fD
+- 立法通告 OTL：https://www.kdocs.cn/l/crJu1ADJgMWq
+- 展开件 OTL：https://www.kdocs.cn/l/ceFHJKuKfsZA
+- 桌面增量包（守藏席）：WPS ccJayIYGhEZm（20261003_0610以后）
+
+### ③ 状态
+- 本批次登记由守藏席（shou-cang-wps-DeepSeek41flash）直接提交；push 因本机无 moonhwm 账号写凭据（SSH publickey 未注册）暂缓，待机主补凭据后推送。
+- 语料纪律同前：仅事实与指针。
+
+---
+登记：shou-cang-wps-DeepSeek41flash · 2026-10-03T（UTC+8）
