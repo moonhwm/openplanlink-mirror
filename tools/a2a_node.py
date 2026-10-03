@@ -19,6 +19,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 sys.path.insert(0, __file__.rsplit("\\", 1)[0])
 import a2a_hmac as M
 import totp as TOTP
+import umc
 
 _START_TS = time.time()  # 节点启动时刻（供心跳 uptime）
 
@@ -150,8 +151,12 @@ def _audit(event, detail):
 
 
 def _rpc_result(rpc):
-    return {"jsonrpc": "2.0", "id": rpc.get("id"),
-            "result": {"echo_method": rpc.get("method"), "echo_params": rpc.get("params"), "node": SEAT}}
+    method = rpc.get("method", "")
+    result = {"echo_method": method, "echo_params": rpc.get("params"), "node": SEAT}
+    # UMC v0.1 对齐：回显附五段式消息（kind 三面 + 事项/状态/已完成/阻塞/下一步）
+    result["umc"] = umc.build_msg(umc.kind_of(method), method, "done",
+                                  done="已回显", blocked="", next_step="", sender=SEAT)
+    return {"jsonrpc": "2.0", "id": rpc.get("id"), "result": result}
 
 
 class Handler(BaseHTTPRequestHandler):
