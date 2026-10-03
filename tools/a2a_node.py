@@ -20,8 +20,10 @@ sys.path.insert(0, __file__.rsplit("\\", 1)[0])
 import a2a_hmac as M
 import totp as TOTP
 import umc
+import proto
 
 _START_TS = time.time()  # 节点启动时刻（供心跳 uptime）
+_RL = proto.RateLimiter()  # 限频：90 req/min（A2A 协议基座）
 
 # MFA 第二因子（TOTP）共享密钥：RFC 6238 演示向量 base32（"12345678901234567890"）。
 # 生产环境应替换为随机 20 字节并妥善保管。
@@ -172,6 +174,9 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(out)
 
     def do_GET(self):
+        if not _RL.allow():
+            self._send(429, {"error": "限频（90 req/min）", "seat": SEAT})
+            return
         if self.path == "/heartbeat":
             # 心跳：存活 + 运行时长 + 队列计数（五幕剧本·第一幕 心跳聚合 的节点侧）
             import time as _t
@@ -206,6 +211,9 @@ class Handler(BaseHTTPRequestHandler):
             self._send(200, {"status": "up", "seat": SEAT, "protocol": "a2a-hmac-sha3-512/v1"})
 
     def do_POST(self):
+        if not _RL.allow():
+            self._send(429, {"error": "限频（90 req/min）", "seat": SEAT})
+            return
         if self.path.startswith("/dlq/retry"):
             # 重试策略：TOTP 第二因子保护；对死信重投（接收方现已知→投递，仍未知→保留）
             from urllib.parse import urlparse, parse_qs
