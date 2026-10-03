@@ -2852,3 +2852,63 @@
   2. MHD求解器为简化版，真实聚变需要更精细模拟
   3. 纳什均衡计算目前仅支持2x2博弈
   4. 感知-记忆-推理-行动闭环需接入真实数据源
+## 2026-10-01 22:30 · 砚坚（码道 IDE · GLM-5.2）· 幻16桥接节点Ping成功
+
+- **改了什么**：通过SSH连接幻16桥接节点（120.46.86.165），读取 `serve-handshake.mjs` 源码，定位到 `firstText()` 函数的parts验证逻辑，确认正确格式为 `[{kind:"text", text:"..."}]`，成功发送Ping并收到回复。
+- **为什么**：之前30+次Ping尝试均失败（"参数无效：message.parts 必须包含一个 text 部分"），根因是parts格式不匹配。源码分析发现 `firstText()` 要求parts数组中每个元素必须同时包含 `kind:"text"` 和 `text:"字符串"` 两个字段。
+- **如何验证**：
+  - V1：SSH连接成功（root@120.46.86.165，ed25519密钥认证）
+  - V2：源码读取成功（`/root/handshake/serve-handshake.mjs`，约800行）
+  - V3：Ping请求成功（HTTP 200，JSON-RPC response with result）
+  - V4：Jev推理正确（分类为"握手"，路由flash→deepseek-chat）
+  - V5：审计链CLEAN（链连续、无凭据泄漏、额度正常）
+- **遗留**：
+  1. 幻16桥Supabase后端仍未就绪（qoder.website端点返回sites_gateway_supabase_not_ready）
+  2. Neon凭据需机主重签（token 401/refresh 400）
+  3. K3 ack催收24h悬置中
+  4. 记忆系统已更新（reference-huan16-a2a-parts-format.md）
+## 2026-10-03 · 砚坚（码道·GLM-5.2/华为云CodeArts）· MFA/Git Hook/AV1-H265引入
+
+- **改了什么**：响应机主指令——系统引入MFA多因素认证、Git Hook自动化检查、AV1/H265编码技术，同步更新开源协议补充论证认证流程章节。
+- **MFA三因子认证框架**：
+  - 因子1（知识因子）：HMAC-SHA3-512共享密钥（已有，保持）
+  - 因子2（时间因子）：TOTP-30s时间窗口（已有，扩展为SHA3-512变体）
+  - 因子3（持有因子）：Ed25519非对称签名（新增设计）
+  - 三级认证：L1基础/L2增强/L3最高，fail-closed原则
+  - 关键发现：幻16serve-handshake.mjs已实装TOTP双因子（verifyTwoFactor函数）
+- **Git Hook三重检查**：
+  - pre-commit：凭据扫描（AKIA/sk-/Bearer/私钥）+ SPDX标识检查 + 敏感文件拦截（.key/.pem/.env）
+  - commit-msg：提交消息格式验证（R1:/R2:/docs:/fix:/feat:/chore:等前缀）
+  - pre-push：LICENSE/NOTICE_SSPL.md/attest_v2.json存在性检查 + 凭据扫描
+  - 已配置git config core.hooksPath .githooks，本地+幻16镜像仓库均已生效
+- **AV1/H265编码引入**：
+  - AV1（AOMedia免版税）为首选编码，与AGPL-3.0+SSPL完全兼容
+  - H265仅限内部测试，不对外分发（MPEG LA专利许可豁免）
+  - av1_encode.sh（Shell版）+ av1_encode.py（Python封装版）
+  - 应用场景：UI对齐截图压缩、桌面录屏、审计证据归档
+- **协议补充论证更新**：
+  - NOTICE_SSPL.md升级至v2.0（幻16镜像仓库commit eb6ff97）
+  - 新增"认证与编码技术声明"章节（MFA/Git Hook/AV1/H265）
+  - 金山文档协议补充论证需机主登录后手动更新
+- **文件清单**：
+  - `GOVERNANCE/proposals/mfa_git_hook_av1_h265_20261003.md`（方案文档）
+  - `.githooks/pre-commit`（凭据扫描+SPDX检查+敏感文件拦截）
+  - `.githooks/commit-msg`（提交消息格式验证）
+  - `.githooks/pre-push`（attest验证+协议合规检查）
+  - `scripts/av1_encode.sh`（AV1编码Shell工具）
+  - `scripts/av1_encode.py`（AV1编码Python封装）
+- **如何验证**：
+  - V1：pre-commit自动执行（本次提交0错误0警告）✅
+  - V2：commit-msg格式验证（本次提交消息以feat:开头）✅
+  - V3：幻16镜像仓库NOTICE_SSPL.md v2.0已提交（commit eb6ff97）✅
+  - V4：幻16镜像仓库Git Hook+AV1工具+方案文档已提交（commit 73d1db5）✅
+  - V5：本地harmony-app仓库commit 35864c6 ✅
+  - V6：所有新增文件含SPDX-License-Identifier ✅
+  - V7：无凭据明文泄漏（pre-commit扫描通过）✅
+  - V8：CHANGELOG条目含"如何验证"段 ✅
+- **遗留**：
+  1. 因子3（Ed25519签名）需在serve-handshake.mjs中实装——当前仅有设计文档
+  2. TOTP-SHA3-512变体需从当前HMAC-SHA1升级
+  3. 金山文档协议补充论证需机主登录后手动更新
+  4. AV1编码工具需安装ffmpeg+libaom后才能实际使用
+  5. 魔搭社区同步待执行
