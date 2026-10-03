@@ -158,6 +158,9 @@ def _rpc_result(rpc):
     # UMC v0.1 对齐：回显附五段式消息（kind 三面 + 事项/状态/已完成/阻塞/下一步）
     result["umc"] = umc.build_msg(umc.kind_of(method), method, "done",
                                   done="已回显", blocked="", next_step="", sender=SEAT)
+    # A2A 协议基座对齐：回显附四元标签 + kind 三平面归属
+    result["quad"] = proto.quad_of(rpc.get("params") or {})
+    result["plane"] = proto.plane_of(method)
     return {"jsonrpc": "2.0", "id": rpc.get("id"), "result": result}
 
 
