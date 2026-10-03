@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-03T08:52:34.905Z",
+  "generated_at": "2026-10-03T08:53:52.178Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 719,
-  "merkle_root_sha3_512": "de36d7cbc3f9e15b9a18bfd2a50ff34496447d03b9efa0090e4f48a4c2eb13d548b531f21f2b8c9bcb257b45b8f6b0c5a6ffbad945f69db93c2c2852001f864d",
-  "hmac_sha3_512": "3caa9542b5cfc119a8e90048ae14d88cf52ca4304939ac2a970b6baf95c032e1af7c90d42c014c317eb6703c20bda8ad18e88391661a68027e2a2a9d1ca2892b",
+  "merkle_root_sha3_512": "0e85aebf2910305067a6f2a9de96e445bb4ad81e9e433adb621ec70944d230e9861f94d8781adbd2c035aeaa67d84832bbe431914a19fa18b7de8c8c0f8a0382",
+  "hmac_sha3_512": "9df174c4b99c6d29920b894f1bb76ae58eb9ff2e32b75b5bf0c0a1307542fda903499dd1aa79c54dbe76f1c147e1123fc5c459c7ac1079b7feef2560ad01c0c0",
   "files": [
     {
       "path": ".nojekyll",
@@ -289,15 +289,15 @@
     },
     {
       "path": "sha3_tree/TREE-K3-2026-1003-02_leaf_records.json",
-      "size": 4702,
-      "content_sha3_512": "e90c63b3737cc61c6cf529bd9e053a362a2010571cde777f78c28a391baaec528505559dbd72b8ff74c9063cb8289ccb32fc43e9ed53371571161f343578587b",
-      "leaf_sha3_512": "9d04cb72132f896ac8415523885d2614621d7de5284f84dd8ff86aff3b955a5b8f4637b1a84ebe05c846743cd9a77d4e4f3b52f1780d84d3ab873db851ae1590"
+      "size": 4701,
+      "content_sha3_512": "c481f5d58f4e2026770d29d7d4809d7baf1cb4b61e70659591d182d1ddd4d833e89e5fdb486b241455f7db32a7f86c8d9db62c1f6821b85f0af6b75e48e099d2",
+      "leaf_sha3_512": "33c32e36d64f3d75c9d3f1291f620a58755d22a398e09f82472fb6b46c3eb56bf0382fd7c766b78d21132c4e14d46842cd90b3b80bd7f787fe629dfef9aab885"
     },
     {
       "path": "sha3_tree/TREE-K3-2026-1003-02_manifest.json",
-      "size": 8443,
-      "content_sha3_512": "3dc54b9d829bf5e9f061d25a205001b7421b63e91d13a01dcb7b9e2b69509ca5e0bdcc41430ce252ab04569777b035f58c6a8d8e8028d6f8bcd4c1e4900faa00",
-      "leaf_sha3_512": "a6307a8a4cef9d521c6540ef9bd6952d59515a02059bad0cb89f4ff638d86c57e356904c2859be231b9ffe47c57b1fc905855c040f615c5d2f8cea572dd51f73"
+      "size": 8442,
+      "content_sha3_512": "098bdc5eaca7897c361078a5470873bc90bd8ce8faf3ee7cd474ff0428e8c9f521960ff4023d6b02fa9bf95586fd83308f2629ca4cfa10c3ed18c515eb70cf0a",
+      "leaf_sha3_512": "34fe36e82937f3c7c31b5d44760f39f9bca8029aaf0c30f2684664fae1be93c94028064d44f6bbc8a97b4de141bc6ba8fa62089eeb813c3e31a90b37f8b8d295"
     },
     {
       "path": "sha3_tree/VERIFY.md",
