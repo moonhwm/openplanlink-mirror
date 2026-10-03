@@ -1,0 +1,11 @@
+# 协议更替决议（104 号令 · 守藏席 2026-10-03）
+
+依机主令（2026-10-03 全局声明第 5 条），全库补充「当前适用的最严格开源协议」。
+选型决议：GNU AGPL-3.0（OSI 认可的最严格开源协议，含 §13 网络服务条款）。
+
+变更记录：
+- LICENSE：原 MIT → AGPL-3.0 官方全文（gnu.org 原文逐字，未增删一字）；
+- LICENSE.MIT：原 MIT 全文归档（版权行保留：Copyright (c) 2026 moonhwm (欧阳宏俊) · OpenPlanLink Mirror）；
+- 子目录规则：skills/ 下已含子 LICENSE 者（data-viz-gen、software-testing-guide、web-security-audit 等）从其原协议，第三方版权不强制迁移；无子 LICENSE 者适用根 AGPL-3.0。
+
+执行：守藏（字司契）· DF-DOC-01；论证简报 DF-RES-2026-1003-LICENSE-01（工作区 A2A编队扩充与管线梳理/）。
