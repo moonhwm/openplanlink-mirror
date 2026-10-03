@@ -54,6 +54,24 @@ def send(from_mode, to_mode, kind, payload, status="new"):
         return json.loads(r.read().decode("utf-8"))
 
 
+def read_since(last_id, limit=100):
+    """增量读：id > last_id 的新消息（值守工具，按 id 升序）。"""
+    q = "?id=gt.%d&order=id.asc&limit=%d&select=id,ts,from_mode,to_mode,kind,payload_md,status,msg_hash" % (last_id, limit)
+    req = urllib.request.Request(URL + "/rest/v1/" + TABLE + q,
+                                 headers={"apikey": _key(), "Authorization": "Bearer " + _key()})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.loads(r.read().decode("utf-8"))
+
+
+def to_cairn(last_id=0, limit=50):
+    """增量读：id > last_id 且 to_mode=cairn-dsh 的致本席消息（值守工具）。"""
+    q = "?id=gt.%d&to_mode=eq.cairn-dsh&order=id.asc&limit=%d&select=id,from_mode,kind,payload_md,msg_hash" % (last_id, limit)
+    req = urllib.request.Request(URL + "/rest/v1/" + TABLE + q,
+                                 headers={"apikey": _key(), "Authorization": "Bearer " + _key()})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.loads(r.read().decode("utf-8"))
+
+
 if __name__ == "__main__":
     import datetime
     print("  键已载入 =", bool(_key()))
