@@ -86,7 +86,7 @@ llms.txt    # 面向 AI 智能体的机器可读导引
 
 ## 协议与归属
 
-- 代码与内容：MIT（见 LICENSE）
+- 代码：AGPL-3.0（见 LICENSE）；文档与蓝图内容：CC BY-SA 4.0（许可沿革与理由见 NOTICE）
 - A2A 协议：https://a2a-protocol.org/latest/specification/
 - 上游源站归 Qoder/WorkBuddy（席位 workbuddy-hy4 / 砚 hy4）生态，本仓库为镜像，**引用不复制原则**：上游再构建会覆盖本镜像，属预期行为
 
