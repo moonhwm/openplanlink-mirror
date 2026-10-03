@@ -33,6 +33,7 @@ KEY_ID = "opl-a2a-2026q4"
 SEAT = "a2a-node-local"
 NONCE_FILE = r"C:\Users\欧阳宏俊\.a2a-node-nonces.json"
 MAILBOX_FILE = r"C:\Users\欧阳宏俊\.a2a-node-mailbox.json"
+AUDIT_FILE = r"C:\Users\欧阳宏俊\.a2a-node-audit.jsonl"
 seen = set()
 mailbox = {}
 # 席位注册表：中转前校验目标合法；未知席位拒绝
@@ -90,6 +91,18 @@ def _save_state():
     json.dump(mailbox, open(MAILBOX_FILE, "w", encoding="utf-8"), ensure_ascii=False)
 
 
+def _audit(event, detail):
+    """事件驱动审计：异常事件追加审计日志（告警留痕，补偿=不改变状态仅记痕）。"""
+    import datetime
+    rec = {"ts": datetime.datetime.now().isoformat(timespec="seconds"), "event": event}
+    rec.update(detail)
+    try:
+        with open(AUDIT_FILE, "a", encoding="utf-8") as f:
+            f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+    except Exception:
+        pass  # 审计失败不阻断主流程（与"不影响核心业务流连续性"一致）
+
+
 def _rpc_result(rpc):
     return {"jsonrpc": "2.0", "id": rpc.get("id"),
             "result": {"echo_method": rpc.get("method"), "echo_params": rpc.get("params"), "node": SEAT}}
@@ -116,6 +129,7 @@ class Handler(BaseHTTPRequestHandler):
             q = parse_qs(urlparse(self.path).query)
             code = (q.get("totp") or [""])[0]
             if not TOTP.verify(TOTP_SECRET, code):
+                _audit("MFA_FAIL", {"path": self.path, "ip": self.client_address[0]})
                 self._send(401, {"error": "TOTP 失败（第二因子缺失/错误）"})
                 return
             seat = self.path.split("/")[-1].split("?")[0]
@@ -133,6 +147,8 @@ class Handler(BaseHTTPRequestHandler):
             ok, reason = M.verify_envelope(envelope, KEY, KEY_ID, envelope.get("recipient_id"), body=body, seen_nonces=seen)
             # 注意：节点只验证"发给自己或经自己中转"的消息；中转消息按 recipient 存箱
             if not ok:
+                _audit("HMAC_FAIL", {"reason": reason, "ip": self.client_address[0],
+                                     "sender": envelope.get("sender_id"), "recipient": envelope.get("recipient_id")})
                 self._send(401, {"jsonrpc": "2.0", "id": None, "error": {"code": -32000, "message": reason}})
                 return
 
@@ -144,6 +160,7 @@ class Handler(BaseHTTPRequestHandler):
                 self._send(200, {"envelope": resp_env, "body_b64": base64.b64encode(resp_bytes).decode("ascii")})
             else:
                 if envelope["recipient_id"] not in SEATS:
+                    _audit("UNKNOWN_SEAT", {"recipient": envelope["recipient_id"], "sender": envelope.get("sender_id")})
                     self._send(404, {"jsonrpc": "2.0", "id": None,
                                      "error": {"code": -32602, "message": "未知席位: %s" % envelope["recipient_id"]}})
                     return
