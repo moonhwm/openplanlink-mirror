@@ -147,13 +147,14 @@ def _notify(title, desp):
 
 def _spinal_report(event, detail):
     """失效类事件上报脊髓事件总线（认证流程专章三（三）：「失效」类强一致性即时上报）。
+    以脊髓注册席 cairn-dsh 为 from_mode（区别于节点本地席 a2a-node-local）。
     故障安全：脊髓不可达或上报失败不阻断主流程。"""
     if event not in ("MFA_FAIL",):   # 失效类事件（白名单）
         return
     try:
         import spinal_bridge as S
-        S.send(SEAT, "all-seats", "esc.trace",
-               {"action": "esc.trace", "from": SEAT, "event": event, "detail": detail})
+        S.send("cairn-dsh", "all-seats", "esc.trace",
+               {"action": "esc.trace", "from": "cairn-dsh", "event": event, "detail": detail})
     except Exception:
         pass
 
