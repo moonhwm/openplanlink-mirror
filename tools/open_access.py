@@ -67,6 +67,7 @@ def search_arxiv(q, limit=5):
 
 
 SOURCES = {}  # 源注册表：策略模式动态注册，新增数据源不改核心调度
+METRICS = {}  # 可观测性：每源 {ok, fail, latency_ms[]}
 
 
 def register(name, fn):
@@ -79,16 +80,37 @@ register("gutenberg", search_gutenberg)
 register("arxiv", search_arxiv)
 
 
+def _record(name, ok, latency_ms):
+    m = METRICS.setdefault(name, {"ok": 0, "fail": 0, "latency": []})
+    m["ok" if ok else "fail"] += 1
+    m["latency"].append(round(latency_ms, 1))
+
+
 def unified_search(q, limit=5):
-    """跨库检索 + 格式归一化：遍历注册表（源故障自动记录、不阻断整体）。"""
+    """跨库检索 + 格式归一化：遍历注册表（源故障自动记录、不阻断整体），埋点成功率/延迟。"""
     rows = []
     for name, fn in SOURCES.items():
+        t0 = time.time()
         try:
             rows += fn(q, limit)
+            _record(name, True, (time.time() - t0) * 1000)
         except Exception as e:
+            _record(name, False, (time.time() - t0) * 1000)
             rows.append({"source": name, "title": "(检索失败)", "author": "", "year": None,
                          "url": "", "kind": "error", "error": str(e)[:80]})
     return rows
+
+
+def stats():
+    """各源健康度：成功率 + 平均延迟，供路由权重调整。"""
+    out = {}
+    for name, m in METRICS.items():
+        total = m["ok"] + m["fail"]
+        lat = m["latency"]
+        out[name] = {"success_rate": round(m["ok"] / total, 3) if total else None,
+                     "avg_latency_ms": round(sum(lat) / len(lat), 1) if lat else None,
+                     "ok": m["ok"], "fail": m["fail"]}
+    return out
 
 
 if __name__ == "__main__":
