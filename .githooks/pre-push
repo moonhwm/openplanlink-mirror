@@ -1,0 +1,18 @@
+#!/bin/sh
+# 守藏席 2026-10-03 部署：预推送门禁（协议一致性 + 凭据扫描）
+set -e
+# 1) LICENSE/NOTICE 存在性（AGPL-3.0 分层组合在库声明）
+git rev-parse --verify HEAD >/dev/null 2>&1
+if ! git cat-file -e HEAD:LICENSE 2>/dev/null; then
+  echo "[hook:pre-push] 阻断：缺失 LICENSE，拒绝推送" >&2; exit 1
+fi
+if ! git cat-file -e HEAD:NOTICE 2>/dev/null; then
+  echo "[hook:pre-push] 阻断：缺失 NOTICE，拒绝推送" >&2; exit 1
+fi
+# 2) 凭据扫描（推送全量差异）
+CRED_PATTERNS='BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|password[[:space:]]*=[[:space:]]*"[^"]+"|api[_-]?key[[:space:]]*=[[:space:]]*[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}'
+HITS=$(git log --oneline origin/main..HEAD --name-only --pretty=format: 2>/dev/null | grep -v '^\.githooks/' | sort -u | while read f; do git show "HEAD:$f" 2>/dev/null; done | grep -E "$CRED_PATTERNS" | head -5)
+if [ -n "$HITS" ]; then
+  echo "[hook:pre-push] 阻断：推送范围检出疑似凭据模式" >&2; exit 1
+fi
+exit 0

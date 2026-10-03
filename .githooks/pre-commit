@@ -1,0 +1,17 @@
+#!/bin/sh
+# 守藏席 2026-10-03 部署：预提交门禁（凭据泄露扫描 + 大文件检查）
+# 依据：机主 2026-10-03 全局声明（MFA/Git/Hook 系统引入）
+set -e
+# 1) 凭据泄露扫描（模式匹配，见即止不外显原则的机器侧执行）
+CRED_PATTERNS='BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|password[[:space:]]*=[[:space:]]*"[^"]+"|api[_-]?key[[:space:]]*=[[:space:]]*[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}'
+HITS=$(git diff --cached --name-only -z | grep -zv '^\.githooks/' | xargs -0 -I{} sh -c "git show :{} 2>/dev/null" | grep -E "$CRED_PATTERNS" | head -5)
+if [ -n "$HITS" ]; then
+  echo "[hook:pre-commit] 阻断：暂存区检出疑似凭据模式，请核查后重试（见即止不外显，仅报模式不报全文）" >&2
+  exit 1
+fi
+# 2) 大文件检查（>5MB 提示）
+BIG=$(git diff --cached --name-only -z | grep -zv '^\.githooks/' | xargs -0 -I{} sh -c "sz=\$(git show :{} 2>/dev/null | wc -c); [ \"\$sz\" -gt 5242880 ] && echo {}")
+if [ -n "$BIG" ]; then
+  echo "[hook:pre-commit] 提示：以下文件超 5MB，请确认非必要入库：$BIG" >&2
+fi
+exit 0
