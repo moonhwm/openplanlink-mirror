@@ -1,0 +1,50 @@
+#!/bin/sh
+# pre-commit —— OpenPlanLink mirror 提交前校验（"提交即验证"）。
+# 安装：cp tools/hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+# 校验：① 暂存区 .py 逐个编译 ② 核心测试套件（TOTP + HMAC 包络）。
+
+set -e
+
+ROOT="$(git rev-parse --show-toplevel)"
+PY="${PYTHON:-python}"
+FAIL=0
+
+# ① 暂存区 Python 编译检查
+staged_py=$(git diff --cached --name-only --diff-filter=ACM | grep '\.py$' || true)
+if [ -n "$staged_py" ]; then
+  echo "[pre-commit] 编译检查暂存区 Python："
+  for f in $staged_py; do
+    if [ -f "$ROOT/$f" ]; then
+      if ! "$PY" -m py_compile "$ROOT/$f" 2>/tmp/precommit_compile_err; then
+        echo "  ✗ $f 编译失败："
+        cat /tmp/precommit_compile_err
+        FAIL=1
+      else
+        echo "  ✓ $f"
+      fi
+    fi
+  done
+else
+  echo "[pre-commit] 无暂存区 Python 文件，跳过编译。"
+fi
+
+# ② 核心测试套件
+echo "[pre-commit] 跑核心测试："
+for t in tools/test_totp.py tools/test_a2a_hmac.py; do
+  if [ -f "$ROOT/$t" ]; then
+    if ! "$PY" "$ROOT/$t" >/tmp/precommit_test_out 2>&1; then
+      echo "  ✗ $t 失败："
+      tail -n 5 /tmp/precommit_test_out
+      FAIL=1
+    else
+      echo "  ✓ $t"
+    fi
+  fi
+done
+
+if [ "$FAIL" -ne 0 ]; then
+  echo "[pre-commit] 校验未通过，已阻止提交。"
+  exit 1
+fi
+echo "[pre-commit] 校验通过。"
+exit 0
