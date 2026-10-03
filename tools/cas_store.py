@@ -6,6 +6,7 @@
 指针=哈希，天然去重）；⑥预留对象存储接口（blobs 目录可整体换 MinIO/S3，指针不变）。
 纯标准库（hashlib+sqlite3+os），Windows 直跑。压缩(zstd)留作后续优化。
 """
+import gzip
 import hashlib
 import os
 import sqlite3
@@ -30,7 +31,7 @@ class CasStore:
         if not os.path.exists(path):
             os.makedirs(os.path.dirname(path), exist_ok=True)
             with open(path, "wb") as f:
-                f.write(data)
+                f.write(gzip.compress(data, compresslevel=6))   # 高效压缩：zstd 可替换此层
             self._db.execute("INSERT OR IGNORE INTO objects(hash,size,mtime) VALUES(?,?,?)",
                              (h, len(data), time.time()))
         else:
@@ -39,10 +40,10 @@ class CasStore:
         return h
 
     def get(self, h: str) -> bytes:
-        """按哈希指针取回内容。"""
+        """按哈希指针取回内容（自动解压）。"""
         rel = os.path.join(h[:2], h)
         with open(os.path.join(self.blobs, rel), "rb") as f:
-            return f.read()
+            return gzip.decompress(f.read())
 
     def exists(self, h: str) -> bool:
         return os.path.exists(os.path.join(self.blobs, h[:2], h))
