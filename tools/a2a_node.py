@@ -35,6 +35,8 @@ NONCE_FILE = r"C:\Users\欧阳宏俊\.a2a-node-nonces.json"
 MAILBOX_FILE = r"C:\Users\欧阳宏俊\.a2a-node-mailbox.json"
 DLQ_FILE = r"C:\Users\欧阳宏俊\.a2a-node-dlq.json"
 AUDIT_FILE = r"C:\Users\欧阳宏俊\.a2a-node-audit.jsonl"
+# Server酱（微信推送）告警通道：SENDKEY 经环境变量注入，不入库。空=不推送。
+SERVERCHAN_KEY = os.environ.get("SERVERCHAN_SENDKEY", "")
 seen = set()
 mailbox = {}
 dlq = []  # 死信队列：投递失败的消息（未知席位等），可重试，不丢失
@@ -107,6 +109,20 @@ def _save_state():
     _atomic_json(DLQ_FILE, dlq)
 
 
+def _notify(title, desp):
+    """Server酱（微信推送）告警：POST sctapi.ftqq.com/<SENDKEY>.send；未配置 SENDKEY 则跳过。"""
+    if not SERVERCHAN_KEY:
+        return
+    try:
+        import urllib.parse
+        import urllib.request
+        data = urllib.parse.urlencode({"title": title, "desp": desp}).encode("utf-8")
+        url = "https://sctapi.ftqq.com/%s.send" % SERVERCHAN_KEY
+        urllib.request.urlopen(urllib.request.Request(url, data=data, method="POST"), timeout=5)
+    except Exception:
+        pass  # 告警推送失败不影响主流程
+
+
 def _audit(event, detail):
     """事件驱动审计：异常事件追加审计日志（告警留痕，补偿=不改变状态仅记痕）。"""
     import datetime
@@ -117,6 +133,7 @@ def _audit(event, detail):
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")
     except Exception:
         pass  # 审计失败不阻断主流程（与"不影响核心业务流连续性"一致）
+    _notify("A2A节点告警: %s" % event, json.dumps(detail, ensure_ascii=False))
 
 
 def _rpc_result(rpc):
