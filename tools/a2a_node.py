@@ -163,6 +163,28 @@ class Handler(BaseHTTPRequestHandler):
             self._send(200, {"status": "up", "seat": SEAT, "protocol": "a2a-hmac-sha3-512/v1"})
 
     def do_POST(self):
+        if self.path.startswith("/dlq/retry"):
+            # 重试策略：TOTP 第二因子保护；对死信重投（接收方现已知→投递，仍未知→保留）
+            from urllib.parse import urlparse, parse_qs
+            q = parse_qs(urlparse(self.path).query)
+            code = (q.get("totp") or [""])[0]
+            if not TOTP.verify(TOTP_SECRET, code):
+                _audit("MFA_FAIL", {"path": self.path, "ip": self.client_address[0]})
+                self._send(401, {"error": "TOTP 失败（第二因子缺失/错误）"})
+                return
+            moved, remaining = 0, []
+            for item in dlq:
+                r = item["envelope"]["recipient_id"]
+                if r in SEATS:
+                    mailbox.setdefault(r, []).append({"envelope": item["envelope"], "body_b64": item["body_b64"]})
+                    moved += 1
+                else:
+                    remaining.append(item)
+            dlq[:] = remaining
+            _save_state()
+            self._send(200, {"retried": moved, "remaining": len(dlq)})
+            return
+
         try:
             n = int(self.headers.get("Content-Length", 0))
             req = json.loads(self.rfile.read(n).decode("utf-8"))
