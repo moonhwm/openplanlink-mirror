@@ -86,9 +86,17 @@ def _load_state():
             mailbox = {}
 
 
+def _atomic_json(path, obj):
+    """transactional outbox 原子性：先写临时文件再 os.replace，避免半写/崩溃残留。"""
+    tmp = path + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(obj, f, ensure_ascii=False)
+    os.replace(tmp, path)
+
+
 def _save_state():
-    json.dump(list(seen), open(NONCE_FILE, "w", encoding="utf-8"))
-    json.dump(mailbox, open(MAILBOX_FILE, "w", encoding="utf-8"), ensure_ascii=False)
+    _atomic_json(NONCE_FILE, list(seen))
+    _atomic_json(MAILBOX_FILE, mailbox)
 
 
 def _audit(event, detail):
