@@ -1,76 +1,88 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""a2a_exchange.py —— 最小可用的 A2A 消息交换（A2A 0.3.0 JSON-RPC + HMAC-SHA3-512 包络）。
+"""Authenticated A2A JSON-RPC message exchange primitives."""
 
-把 a2a_hmac.py 的包络接到 JSON-RPC 上，形成可"强制使用"的 A2A 消息原语：
-  消息 = HMAC 包络(body = JSON-RPC 2.0 请求)
-  发送方 build → 接收方 verify(版本/接收方/key_id/时间窗/nonce/正文摘要/HMAC) → 解包处理
-"""
 import json
-import secrets
 import sys
+import tempfile
 import uuid
+from pathlib import Path
 
-sys.path.insert(0, __file__.rsplit("\\", 1)[0])
+TOOLS_DIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(TOOLS_DIR))
 import a2a_hmac as M
-
-sys.stdout.reconfigure(encoding="utf-8")
 
 
 def rpc_body(method, params):
-    """构造 JSON-RPC 2.0 请求正文（规范字节）。"""
-    rpc = {"jsonrpc": "2.0", "id": str(uuid.uuid4()), "method": method, "params": params}
-    return json.dumps(rpc, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    request = {"jsonrpc": "2.0", "id": str(uuid.uuid4()), "method": method, "params": params}
+    return json.dumps(request, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
 
 
 class Seat:
-    """一个 A2A 席位：信任域共享密钥 + 独立 nonce 缓存。"""
-
-    def __init__(self, seat_id, key_id, key):
+    def __init__(self, seat_id, key_id, key, replay_database):
         self.seat_id = seat_id
         self.key_id = key_id
         self.key = key
-        self.seen = set()
+        self.replay_cache = M.ReplayCache(replay_database)
 
     def send(self, recipient, method, params):
-        """构建一条 A2A 消息（JSON-RPC 请求 + HMAC 包络）。正文随包络一并由传输层送。"""
         body = rpc_body(method, params)
         envelope = M.build_envelope(self.seat_id, recipient, body, self.key, self.key_id)
         return envelope, body
 
-    def receive(self, envelope, body):
-        """接收并验证；(ok, reason, rpc)。验证不过即拒绝，不返回 rpc。"""
-        ok, reason = M.verify_envelope(envelope, self.key, self.key_id, self.seat_id, body=body, seen_nonces=self.seen)
+    def receive(self, sender, envelope, body):
+        ok, reason = M.verify_envelope(
+            envelope,
+            self.key,
+            self.key_id,
+            sender,
+            self.seat_id,
+            body,
+            self.replay_cache,
+        )
         if not ok:
             return ok, reason, None
-        rpc = json.loads(body.decode("utf-8"))
-        return ok, reason, rpc
+        return ok, reason, json.loads(body.decode("utf-8"))
 
 
 def demo():
-    key = secrets.token_bytes(64)
-    key_id = "opl-a2a-2026q4"
-    A = Seat("cairn-dsh", key_id, key)
-    B = Seat("workbuddy-hy4", key_id, key)
+    key = __import__("secrets").token_bytes(M.KEY_BYTES)
+    with tempfile.TemporaryDirectory() as directory:
+        root = Path(directory)
+        a = Seat("cairn-dsh", "opl-a2a-2026q4", key, root / "a.sqlite3")
+        b = Seat("workbuddy-hy4", "opl-a2a-2026q4", key, root / "b.sqlite3")
 
-    env, body = A.send("workbuddy-hy4", "seat/hello", {"msg": "强制 A2A 使用"})
-    ok, r, rpc = B.receive(env, body)
-    print("  A→B 验证 = %s（%s）method=%s" % (ok, r, rpc.get("method") if rpc else None))
+        envelope, body = a.send(b.seat_id, "seat/hello", {"msg": "强制 A2A 使用"})
+        ok, reason, rpc = b.receive(a.seat_id, envelope, body)
+        print("A→B 验证 = %s（%s）method=%s" % (ok, reason, rpc.get("method") if rpc else None))
 
-    ok2, r2, _ = B.receive(env, body)  # 重放同一条
-    print("  重放拒绝 = %s（%s）" % (ok2, r2))
+        replay_ok, replay_reason, _ = b.receive(a.seat_id, envelope, body)
+        print("重放拒绝 = %s（%s）" % (replay_ok, replay_reason))
 
-    env3, body3 = A.send("workbuddy-hy4", "seat/hello", {"msg": "x"})  # 新消息(fresh nonce)
-    ok3, r3, _ = B.receive(env3, b"tampered-body")  # 篡改正文
-    print("  篡改拒绝 = %s（%s）" % (ok3, r3))
+        tampered_envelope, _ = a.send(b.seat_id, "seat/hello", {"msg": "x"})
+        tampered_ok, tampered_reason, _ = b.receive(a.seat_id, tampered_envelope, b"tampered-body")
+        print("篡改拒绝 = %s（%s）" % (tampered_ok, tampered_reason))
 
-    env2, body2 = B.send("cairn-dsh", "seat/ack", {"ok": True})
-    ok4, r4, rpc4 = A.receive(env2, body2)
-    print("  B→A 应答 = %s（%s）method=%s" % (ok4, r4, rpc4.get("method") if rpc4 else None))
+        response_envelope, response_body = b.send(a.seat_id, "seat/ack", {"ok": True})
+        response_ok, response_reason, response_rpc = a.receive(b.seat_id, response_envelope, response_body)
+        print("B→A 应答 = %s（%s）method=%s" % (
+            response_ok,
+            response_reason,
+            response_rpc.get("method") if response_rpc else None,
+        ))
 
-    good = (ok and not ok2 and not ok3 and ok4)
-    print("★ VERDICT=" + ("PASS" if good else "BAD"))
-    return 0 if good else 1
+    passed = (
+        ok
+        and rpc.get("method") == "seat/hello"
+        and not replay_ok
+        and replay_reason == "重复 nonce"
+        and not tampered_ok
+        and tampered_reason == "正文摘要不匹配"
+        and response_ok
+        and response_rpc.get("method") == "seat/ack"
+    )
+    print("★ VERDICT=" + ("PASS" if passed else "BAD"))
+    return 0 if passed else 1
 
 
 if __name__ == "__main__":
