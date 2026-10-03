@@ -1,12 +1,29 @@
 #!/bin/sh
-# 守藏席 2026-10-03/04 部署：预提交门禁（凭据泄露扫描）
-# v3：修正 git grep 选项顺序（--cached 须在 -n 前），stderr 不再静默吞掉
+# 守藏席 2026-10-04 部署：预提交门禁 v4（凭据扫描 + 超链接原样性预审）
+# 依据：机主全局声明（MFA/Git/Hook 引入；二期补充「对凭据明文、协议文本完整性及超链接原样性执行自动预审」）
 set -e
 CRED_PATTERNS='BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|password[[:space:]]*=[[:space:]]*"[^"]+"|api[_-]?key[[:space:]]*=[[:space:]]*"[^"]+"|sk-[A-Za-z0-9]{20,}'
+# 1) 凭据泄露扫描
 HITS=$(git grep --cached -I -n -E "$CRED_PATTERNS" -- ':!.githooks/' | head -5)
 if [ -n "$HITS" ]; then
   echo "[hook:pre-commit] 阻断：暂存区检出疑似凭据模式（见即止不外显）" >&2
   . "$(git rev-parse --git-path hooks)/pre-commit-fail-alert" "credential-scan"
   exit 1
 fi
+# 2) 超链接原样性预审（首次入库自动固化基线，变更须随 commit 显式更新基线）
+for f in $(git diff --cached --name-only | grep -v '^\.githooks/'); do
+  new_urls=$(git show :"$f" 2>/dev/null | grep -oE 'https?://[^ )"<>]+' | sort -u)
+  [ -z "$new_urls" ] && continue
+  base=".githooks/link_baselines/$(echo "$f" | tr '/' '_').txt"
+  if [ ! -f "$base" ]; then
+    echo "[hook:pre-commit] 新含链接文件 $f：基线自动固化（$(echo "$new_urls" | wc -l) 条）"
+    mkdir -p .githooks/link_baselines && echo "$new_urls" > "$base" && git add "$base"
+  else
+    if ! diff -q "$base" <(echo "$new_urls") >/dev/null 2>&1; then
+      echo "[hook:pre-commit] 阻断：$f 超链接集合与基线不符（超链接原样性令），如需变更请一并提交更新后的基线文件" >&2
+      . "$(git rev-parse --git-path hooks)/pre-commit-fail-alert" "link-drift"
+      exit 1
+    fi
+  fi
+done
 exit 0
