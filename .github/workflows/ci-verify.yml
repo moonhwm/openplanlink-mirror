@@ -1,0 +1,38 @@
+name: CI 校验阶段（发布门禁）
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 安装 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 编译检查（暂存/全部 tools/*.py）
+        run: python -m py_compile tools/*.py
+
+      - name: MFA（TOTP）测试
+        run: python tools/test_totp.py
+
+      - name: HMAC 包络测试
+        run: python tools/test_a2a_hmac.py
+
+      - name: 树验证（无钥，如 manifest 存在）
+        run: |
+          if [ -f attest-hmac-sha3-512.json ]; then
+            python tools/verify_opl_tree.py attest-hmac-sha3-512.json
+          else
+            echo "（无 manifest，跳过树验证）"
+          fi
+
+      - name: 校验结论
+        run: echo "★ CI 校验阶段通过（MFA/HMAC/编译全绿）——发布门禁放行"
