@@ -21,6 +21,7 @@ import a2a_hmac as M
 import totp as TOTP
 import umc
 import proto
+import perm
 
 _START_TS = time.time()  # 节点启动时刻（供心跳 uptime）
 _RL = proto.RateLimiter()  # 限频：90 req/min（A2A 协议基座）
@@ -81,6 +82,11 @@ AGENT_CARD = {
         "secondary": "302.ai",
         "optional": "national-supercomputing",
         "note": "异质模型基线：硅基流动主力(OpenAI兼容+200模型)、302.AI补闭源、国家超算定向国产大模型"
+    },
+    "x-permission-model": {
+        "levels": ["read", "execute", "manage", "audit"],
+        "note": "权限四级（认证流程专章第三章一）：信箱/agent-card/heartbeat=只读、消息发送=执行、死信重试=管理、死信/审计日志=审计；高危(管理/审计)要求即时因子",
+        "endpoints": {"%s %s" % (m, p): v for (m, p), v in perm.ENDPOINT_PERMS.items()}
     },
     "defaultInputModes": ["application/json"],
     "defaultOutputModes": ["application/json"],
