@@ -1,20 +1,21 @@
 #!/bin/sh
-# 守藏席 2026-10-03 部署：预推送门禁（协议一致性 + 凭据扫描）
+# 守藏席 2026-10-03/04 部署：预推送门禁（协议一致性 + 凭据扫描）
+# v3：修正 git grep 选项顺序与空 TREES 处理
 set -e
-# 1) LICENSE/NOTICE 存在性（AGPL-3.0 分层组合在库声明）
 if ! git cat-file -e HEAD:LICENSE 2>/dev/null; then
-  echo "[hook:pre-push] 阻断：缺失 LICENSE，拒绝推送" >&2
+  echo "[hook:pre-push] 阻断：缺失 LICENSE" >&2
   . "$(git rev-parse --git-path hooks)/pre-commit-fail-alert" "license-missing"
   exit 1
 fi
 if ! git cat-file -e HEAD:NOTICE 2>/dev/null; then
-  echo "[hook:pre-push] 阻断：缺失 NOTICE，拒绝推送" >&2
+  echo "[hook:pre-push] 阻断：缺失 NOTICE" >&2
   . "$(git rev-parse --git-path hooks)/pre-commit-fail-alert" "notice-missing"
   exit 1
 fi
-# 2) 凭据扫描（推送全量差异）
-CRED_PATTERNS='BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|password[[:space:]]*=[[:space:]]*"[^"]+"|api[_-]?key[[:space:]]*=[[:space:]]*[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}'
-HITS=$(git log --oneline origin/main..HEAD --name-only --pretty=format: 2>/dev/null | grep -v '^\.githooks/' | sort -u | while read f; do git show "HEAD:$f" 2>/dev/null; done | grep -E "$CRED_PATTERNS" | head -5)
+CRED_PATTERNS='BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|password[[:space:]]*=[[:space:]]*"[^"]+"|api[_-]?key[[:space:]]*=[[:space:]]*"[^"]+"|sk-[A-Za-z0-9]{20,}'
+TREES=$(git rev-list origin/main..HEAD 2>/dev/null || true)
+if [ -z "$TREES" ]; then exit 0; fi
+HITS=$(git grep -I -n -E "$CRED_PATTERNS" $TREES -- ':!.githooks/' | head -5)
 if [ -n "$HITS" ]; then
   echo "[hook:pre-push] 阻断：推送范围检出疑似凭据模式" >&2
   . "$(git rev-parse --git-path hooks)/pre-commit-fail-alert" "credential-scan"
