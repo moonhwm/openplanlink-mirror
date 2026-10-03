@@ -70,6 +70,12 @@ AGENT_CARD = {
         "defaultEngines": ["bing", "google"],
         "note": "华为生态适配：Bing 与 Google 固化为 A2A 网络指定搜索路由引擎及默认外部搜索入口"
     },
+    "x-heterogeneous-models": {
+        "primary": "siliconflow",
+        "secondary": "302.ai",
+        "optional": "national-supercomputing",
+        "note": "异质模型基线：硅基流动主力(OpenAI兼容+200模型)、302.AI补闭源、国家超算定向国产大模型"
+    },
     "defaultInputModes": ["application/json"],
     "defaultOutputModes": ["application/json"],
     "skills": [
