@@ -7,6 +7,7 @@ CRED_PATTERNS='BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|password[[:space:]]*=[[:sp
 HITS=$(git diff --cached --name-only -z | grep -zv '^\.githooks/' | xargs -0 -I{} sh -c "git show :{} 2>/dev/null" | grep -E "$CRED_PATTERNS" | head -5)
 if [ -n "$HITS" ]; then
   echo "[hook:pre-commit] 阻断：暂存区检出疑似凭据模式，请核查后重试（见即止不外显，仅报模式不报全文）" >&2
+  . "$(git rev-parse --git-path hooks)/pre-commit-fail-alert" "credential-scan"
   exit 1
 fi
 # 2) 大文件检查（>5MB 提示）

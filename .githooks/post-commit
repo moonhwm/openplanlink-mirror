@@ -1,0 +1,9 @@
+#!/bin/sh
+# 守藏席 2026-10-03 部署：提交审计日志（事件驱动·异常处理与补偿机制）
+# 依据：机主 2026-10-03 全局声明（MFA 验证失败/Git 钩子校验未通过须自动回滚并记录审计日志）
+AUDIT_LOG="$HOME/.githooks-audit.log"
+HASH=$(git rev-parse --short HEAD 2>/dev/null)
+BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+FILES=$(git show --stat --oneline HEAD 2>/dev/null | wc -l)
+echo "$(date '+%Y-%m-%d %H:%M:%S') [post-commit] branch=$BRANCH commit=$HASH files_changed=$FILES result=OK" >> "$AUDIT_LOG"
+exit 0

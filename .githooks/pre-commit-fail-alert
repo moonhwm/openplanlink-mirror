@@ -1,0 +1,5 @@
+#!/bin/sh
+# 守藏席 2026-10-03 部署：钩子拦截即审计（由 pre-commit/pre-push 失败时调用）
+# 用法：在 pre-commit / pre-push 的 exit 1 前执行: . "$(git rev-parse --git-path hooks)/pre-commit-fail-alert" "原因"
+AUDIT_LOG="$HOME/.githooks-audit.log"
+echo "$(date '+%Y-%m-%d %H:%M:%S') [hook-block] reason=$1 result=ROLLBACK" >> "$AUDIT_LOG"
