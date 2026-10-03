@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-03T10:55:00.548Z",
+  "generated_at": "2026-10-03T11:06:02.479Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 728,
-  "merkle_root_sha3_512": "246e1a596bf2ecab557d63cf1047ad615fe86e3d4465252c0798e54a65cb896807c6284c91ad3bbb73aa0bd1a53c44960aab29ad5509a60b3f282103345aaffa",
-  "hmac_sha3_512": "d870d7aa55ebd7f5332bddc2ad2f5858b173e107e76d7742802f9133b771af28dfdea2168e6bcae9d2032728dad309147442b312f61500cd555306282cc80160",
+  "file_count": 729,
+  "merkle_root_sha3_512": "68b765b258d53a14579980b101c994751cee88d39bae93ba8ea9971565c0e6725ba73aef1609bad410af8006e882d7d7b2a8fe316a6f9bed83599e37705e7660",
+  "hmac_sha3_512": "deed4fbf4c041afb48cc216e372b9831b212887900a9d9e89f5de5717a69de90ba2810389084d931ea0f1b8d5a3dba3c2e1e58f2dc57fe54d8f4ac714ca4ea86",
   "files": [
     {
       "path": ".nojekyll",
@@ -259,9 +259,9 @@
     },
     {
       "path": "deliverables/20261003/INDEX.md",
-      "size": 2266,
-      "content_sha3_512": "22c03a50dc29d3dc3d239b6fde6e78468b3f89ef314409307de387e1b9bf1fb47b1d208e09b996e19cb27370473a8b6b8fd695d71363d9c6c13253d6fcc7043c",
-      "leaf_sha3_512": "0925a6b6d12885d860e132791eae106723eec22eca2c914e37ead4ba4a465df3299f017fb233acd9b801255ad1f00a05325e19baf44c9cf144aa30b099b5b703"
+      "size": 3626,
+      "content_sha3_512": "56316b0ba782e4a946d7df52f65ede64e26a0223b534eb10d8a56becc1af79ad084a1f9aa03a1acb87e01f45e674f4c7ad079c9b527366604298ced58c9335b9",
+      "leaf_sha3_512": "e1319ffb420e245c03636667e4e76a839a76f3ea63f66f5087336d594fe6b21742e245594e66f3b52ceaf43a9400eb602ec131afce337e6f7c2794edabf52601"
     },
     {
       "path": "deliverables/20261003/POINTER.md",
@@ -280,6 +280,12 @@
       "size": 2540,
       "content_sha3_512": "e5ddfe310d546347f6b7e845d17513c761d3bf575e7caf2eefd489b365528f2eba781cbe2f207a6ad00994824d8442edf68489960447537cf06b5eedfd1692df",
       "leaf_sha3_512": "12b5509ad7ec47d5ff0724c32b003df7239c9f7cf56a3828cf7b0abde9494d04f4dcf06e7086f54bd980a203585b321493a0e794ebdbf31253df4cf714cb7607"
+    },
+    {
+      "path": "deliverables/20261003/情况报告_A2A网络同步与HMAC统一认证_石敢当席_20261003.md",
+      "size": 3840,
+      "content_sha3_512": "81734e53614aa4d50e42c996f6176a2bee0e17c60df84bd0fad9ee40f754d67a081776a1bcd7ecc1eab6a95668ca9f297af4e6bd51dd603dd56f77857be54fe1",
+      "leaf_sha3_512": "7303f55ce6dfadf125b75a9e106a2741747e50aae82ef674d8205965b9b519dea437ea7e289163e8e3d9d77b93b72ce1c828aac1b998031dc45ae26ac9452f0e"
     },
     {
       "path": "index.html",
