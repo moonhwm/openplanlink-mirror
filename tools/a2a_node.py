@@ -46,6 +46,15 @@ AGENT_CARD = {
     "preferredTransport": "JSONRPC",
     "version": "0.2.0",
     "license": "AGPL-3.0",
+    "x-licenses": {
+        "code": "AGPL-3.0-only",
+        "documentation": "CC-BY-SA-4.0"
+    },
+    "x-agpl-source-offer": {
+        "correspondingSourceUrl": "https://github.com/moonhwm/openplanlink-mirror",
+        "offer": "Corresponding source of the network-interacting version is offered at the above repository under AGPL-3.0-only; see LICENSE and NOTICE there.",
+        "section": "AGPL-3.0 section 13"
+    },
     "provider": {"organization": "cairn-dsh / 石敢当", "url": "http://127.0.0.1:4173"},
     "capabilities": {"streaming": False, "pushNotifications": False, "stateTransitionHistory": False},
     "securitySchemes": {
