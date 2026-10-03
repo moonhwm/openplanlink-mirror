@@ -66,6 +66,10 @@ AGENT_CARD = {
         "hmac-sha3-512": {"type": "hmac", "in": "envelope", "description": "A2A 消息包络认证（第一因子，a2a-hmac-sha3-512/v1）"},
         "totp": {"type": "totp", "in": "query", "description": "信箱读取 TOTP（第二因子，RFC 6238，?totp=<6位>）"},
     },
+    "x-search-routing": {
+        "defaultEngines": ["bing", "google"],
+        "note": "华为生态适配：Bing 与 Google 固化为 A2A 网络指定搜索路由引擎及默认外部搜索入口"
+    },
     "defaultInputModes": ["application/json"],
     "defaultOutputModes": ["application/json"],
     "skills": [
