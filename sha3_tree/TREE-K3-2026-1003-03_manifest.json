@@ -1,0 +1,72 @@
+{
+ "tree_name": "openplanlink-a2a-round-output-tree",
+ "tree_id": "TREE-K3-2026-1003-03",
+ "created_by": "k3-main (kimi-work-desktop session 20-53-43-9d407c1b)",
+ "created_at": "2026-10-03T17:55:17+08:00",
+ "directive": "机主令 2026-10-03 17:49：同步Agent to Agent网络（参考我的Github库），迭代并协同推进到自认为没有问题。",
+ "standard_ref": "System.Security.Cryptography.HMACSHA3_512 (.NET 10) == RFC2104 HMAC over FIPS202 SHA3-512 == python hmac/hashlib == OpenSSL",
+ "algorithm": "leaves SHA3-512 (keyless, publicly verifiable); internal nodes HMAC-SHA3-512(retained key)",
+ "rules": {
+  "leaf": "sha3_512(canonical_json_utf8)",
+  "canonical_json": "sort_keys, separators=(,), ensure_ascii=False",
+  "internal": "HMACSHA3_512(key, hex2bin(left)||hex2bin(right))",
+  "odd_level": "duplicate last node",
+  "key_retention": "tree03_key_hmac_sha3_512.bin 64B random, retained on originating device only, NEVER uploaded; only fingerprint published"
+ },
+ "key_fingerprint_sha3_512": "472d9ae392d8f838f5b1e04c21c9ff09d47915ffe67a9ac261c284a02a0bea62e9872af8a4fa5094ede2afab2b13f4eb039a369527be84d39bb798a19c7b081b",
+ "leaf_count": 3,
+ "leaves": [
+  {
+   "tag": "record:0",
+   "sha3_512": "298de5d4daa359531800f9bf065897998279598afe3803da7cd507cae42eac251a3d571cb76ec3f2ab894ac5f5bffcf8e9b8a671a441a634773437a6d2aef29b",
+   "bytes": 208,
+   "note": "a2a-owner-directive"
+  },
+  {
+   "tag": "record:1",
+   "sha3_512": "397fe933ad26223be60dcc953cfce26490fa324fe14564778bf61945c59d3e996e64baeff2649f0140e4933cb7941c19bb13d7a6b6f3479a4143d3855d824e16",
+   "bytes": 283,
+   "note": "round-deliverable"
+  },
+  {
+   "tag": "record:2",
+   "sha3_512": "a4b6ff7011f06fc91ff661fe43cb6f4885133f913418a519a2c1de880e9196b43e9a63f05ad85d621b549bb4be9515062757d17071806df4d8a9203b6beab486",
+   "bytes": 287,
+   "note": "round-deliverable"
+  }
+ ],
+ "levels": [
+  [
+   "298de5d4daa359531800f9bf065897998279598afe3803da7cd507cae42eac251a3d571cb76ec3f2ab894ac5f5bffcf8e9b8a671a441a634773437a6d2aef29b",
+   "397fe933ad26223be60dcc953cfce26490fa324fe14564778bf61945c59d3e996e64baeff2649f0140e4933cb7941c19bb13d7a6b6f3479a4143d3855d824e16",
+   "a4b6ff7011f06fc91ff661fe43cb6f4885133f913418a519a2c1de880e9196b43e9a63f05ad85d621b549bb4be9515062757d17071806df4d8a9203b6beab486"
+  ],
+  [
+   "74208f295656bc87e8690f10f2171b0db4760c76f772dabccdc21d8629c990d276650553b850ce18a0a6b7844f5800c4e708fcbb8cdb8c39cfc45638a4709b8f",
+   "461e8326eda04352af98cd47c651df9abe0708802ae9f395c64d1e60f604086e23a69c5dc2a0bc8b3737c440422609c11d56e962d3d7664f9657296a8f64aa23"
+  ],
+  [
+   "2ca5b06f98e279c39962956de507d12308322c94aa5b33e94d32eda47aa3551f4a60f88d876da6fbda3437cf99e24cbd0848eea81e98c10a3b71dd4b304357c0"
+  ]
+ ],
+ "root_sha3_512_hmac": "2ca5b06f98e279c39962956de507d12308322c94aa5b33e94d32eda47aa3551f4a60f88d876da6fbda3437cf99e24cbd0848eea81e98c10a3b71dd4b304357c0",
+ "anchors": {
+  "bus": [
+   "11731",
+   "11734"
+  ],
+  "chain_anchor": "TREE-K3-2026-1003-02 root (see TREE-02 manifest)",
+  "prior_tree": "TREE-K3-2026-1003-01"
+ },
+ "cross_vendor_verify": "leaf records published as base64 canonical JSON - keyless recomputation for any vendor; internal nodes reproduce with retained key",
+ "cross_checks": {
+  "TREE-01-leaf0-vs-directive": "done at TREE-01 build (PASS)"
+ },
+ "selftest": "leaf recompute PASS / root rebuild PASS / tamper reject PASS / wrong key reject PASS",
+ "top3_likely_wrong": [
+  "GitCode trending sample is single-day snapshot with panel-loss (only 4 featured cards), Medium-Low confidence",
+  "ima credential failure judged as revoked/truncated without server-side confirmation",
+  "TREE-03 chain anchor references TREE-02 root by pointer, not embedded hash - resync needed if TREE-02 amends"
+ ],
+ "data_cutoff": "2026-10-03T17:55:17+08:00"
+}

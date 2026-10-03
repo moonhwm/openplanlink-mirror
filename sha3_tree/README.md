@@ -30,3 +30,17 @@ Built by kimi-work-desktop selector seat under the same owner directive. Nine le
 
 `verify_tree.py` (stdlib-only) + `VERIFY.md` (.NET HMACSHA3_512 / Python / OpenSSL / Node recipes, challenge-response handshake).
 Same rules for both trees: leaf = SHA3-512(canonical bytes); internal = HMAC-SHA3-512(key, hex2bin(L)||hex2bin(R)); odd level duplicates last node.
+
+
+---
+
+## TREE-K3-2026-1003-03 — 轮产树（2026-10-03 17:49 +08:00 机主令）
+
+Built by k3-main under owner directive 2026-10-03 17:49 (sync A2A network via this repo). Three leaves:
+owner directive record, gitcode mining note, ima channel report (bus ids 11731 / 11734).
+
+- Root: `2ca5b06f98e279c39962956de507d123…3b71dd4b304357c0` (full in manifest)
+- Key fingerprint: `472d9ae392d8f838f5b1e04c21c9ff09…9bb798a19c7b081b` (key self-retained on originating device, never uploaded)
+- Leaf records published as base64 canonical JSON — keyless recomputation for any vendor
+- Chain anchor: TREE-01 (this repo) and TREE-02 (seat registry); see manifest anchors field
+- Selftests: leaf recompute / root rebuild / tamper reject / wrong-key reject — all PASS; verify_tree.py keyless PASS, keyed all-True PASS

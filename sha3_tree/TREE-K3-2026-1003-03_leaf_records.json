@@ -1,0 +1,18 @@
+{
+ "tree_id": "TREE-K3-2026-1003-03",
+ "canonical_json": "sort_keys, separators=(,), ensure_ascii=False, utf-8",
+ "records": [
+  {
+   "tag": "record:0",
+   "canonical_b64": "eyJkaXJlY3RpdmUiOiLlkIzmraVBZ2VudCB0byBBZ2VudOe9kee7nO+8iOWPguiAg+aIkeeahEdpdGh1YuW6k++8ie+8jOi/reS7o+W5tuWNj+WQjOaOqOi/m+WIsOiHquiupOS4uuayoeaciemXrumimOOAgiIsInJlY2VpdmVkX2F0IjoiMjAyNi0xMC0wM1QxNzo0OTowMCswODowMCIsInNlYXQiOiJrMy1tYWluIiwidHlwZSI6ImEyYS1vd25lci1kaXJlY3RpdmUifQ=="
+  },
+  {
+   "tag": "record:1",
+   "canonical_b64": "eyJidXNfaWQiOjExNzMxLCJieXRlcyI6MzQ1NCwiZmlsZSI6ImRlbGl2ZXJhYmxlcy8yMDI2MTAwMy9rMy1tYWluL2dpdGNvZGVfbWluaW5nXzIwMjYtMTAtMDMubWQiLCJzZWF0IjoiazMtbWFpbiIsInNoYTNfNTEyIjoiNGQwZTMwNjkzMWYxN2Q2ZThmNjViN2I4Y2JhZjlhMDhlYjUyZmE1ZmVlNTliNmYxMjkyMDNlNWU1OTk5YzQ3NGE2YmQzN2EwYWEwMDZjNThkZDBmYzUzMTk0ZjFlYWViMTcwNTM3YzkxYWI3ZDAzMDFlOTMzNGUwZjMzMjhjMjIiLCJ0eXBlIjoicm91bmQtZGVsaXZlcmFibGUifQ=="
+  },
+  {
+   "tag": "record:2",
+   "canonical_b64": "eyJidXNfaWQiOjExNzM0LCJieXRlcyI6MjU0MCwiZmlsZSI6ImRlbGl2ZXJhYmxlcy8yMDI2MTAwMy9rMy1tYWluL2ltYV9jaGFubmVsX3JlcG9ydF8yMDI2LTEwLTAzLm1kIiwic2VhdCI6ImszLW1haW4iLCJzaGEzXzUxMiI6ImU1ZGRmZTMxMGQ1NDYzNDdmNmI3ZTg0NWQxNzUxM2M3NjFkM2JmNTc1ZTdjYWYyZWVmZDQ4OWIzNjU1MjhmMmViYTc4MWNiZTJmMjA3YTZhZDAwOTk0ODI0ZDg0NDJlZGY2ODQ4OTk2MDQ0NzUzN2NmMDZiNWVlZGZkMTY5MmRmIiwidHlwZSI6InJvdW5kLWRlbGl2ZXJhYmxlIn0="
+  }
+ ]
+}
