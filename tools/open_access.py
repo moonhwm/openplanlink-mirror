@@ -7,14 +7,24 @@ OpenLibrary（图书）/ Gutendex（古腾堡公版书）/ arXiv（论文）。�
 统一输出 {source, title, author, year, url, kind}，供上层 A2A 端口插件调用。
 """
 import json
+import time
 import urllib.parse
 import urllib.request
 
 
-def _get_json(url, timeout=15):
-    req = urllib.request.Request(url, headers={"User-Agent": "OpenPlanLink-A2A/0.1 (open-access adapter)"})
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return json.loads(r.read().decode("utf-8"))
+def _get_json(url, timeout=15, retries=2, backoff=1.0):
+    """请求 + 重试（异常回退：重试 N 次、指数退避，仍失败则抛出，由上层捕获切换源）。"""
+    last = None
+    for i in range(retries + 1):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "OpenPlanLink-A2A/0.1 (open-access adapter)"})
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return json.loads(r.read().decode("utf-8"))
+        except Exception as e:
+            last = e
+            if i < retries:
+                time.sleep(backoff * (2 ** i))
+    raise last
 
 
 def search_openlibrary(q, limit=5):
