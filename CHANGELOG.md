@@ -3062,3 +3062,45 @@
   7. GitHub push须机主将公钥添加到GitHub
   8. HarmonyOS 7 IM GUI看板开发待启动
   9. Cordis插件框架待研究引入
+---
+
+## 2026-10-05T22:45 砚坚席——Server酱微信IM方案+事件驱动ICRF方案+Cordis框架研究
+
+- **谁**：砚坚（码道·GLM-5.2/华为云CodeArts）
+- **何时**：2026-10-05T22:45 CST
+- **改了什么**：
+  - 新增 GOVERNANCE/proposals/serverchan_wechat_im_20261005.md — Server酱接入微信IM智慧互联方案设计
+    - 推送模块（serverchan_push.py）设计：分类频率控制（CRITICAL/WARNING/INFO/DEBUG）
+    - 回调服务设计：机主微信回复→幻16回调→指令队列→砚坚席解析
+    - 消息模板：告警/状态汇报/协商通知3类标准化模板
+    - Server酱API已测试可用（pushid=46622419，SUCCESS）
+  - 新增 GOVERNANCE/proposals/event_driven_icrf_20261005.md — 事件驱动架构信息等幂消费共振场方案设计
+    - 事件总线核心（publish/consume/get_pending）：事件ID+消费日志实现等幂保证
+    - 共振发散与收敛聚合：黏菌混合策略映射（多路探索→信息素反馈→最优路径涌现）
+    - 5种事件类型体系（negotiation/state_change/alert/heartbeat/consensus）
+    - 共识聚合器：圆桌/MoA/陪审团三型收敛规则
+    - 事件持久化与重放：支持审计的核心需求
+  - 新增 GOVERNANCE/proposals/cordis_research_20261005.md — Cordis插件框架研究引入
+    - Cordis（9002★，TypeScript）= 时空可组合性元框架
+    - 论文arXiv:2608.25512：时间可组合性（可逆效应）+空间可组合性（反应式协效应）
+    - 5种事件分发模式（emit/parallel/serial/bail/waterfall）直接映射ICRF
+    - Fiber状态模型（PENDING/LOADING/ACTIVE/DISPOSING/DISPOSED）映射IM GUI席位状态
+    - 引入策略：概念借鉴，不引入代码依赖（纯ArkTS零三方约束）
+- **为什么**：机主指令要求"最可以同步类似黏菌混合策略聚合发散检索"，事件驱动ICRF是黏菌策略的形式化实现；Server酱通道是A2A IM GUI的轻量级先行实现；Cordis为自进化方案提供形式化理论基础
+- **如何验证**：
+  - V1：Server酱API测试成功（pushid=46622419） ✅
+  - V2：ICRF方案包含等幂保证三要素（事件ID+消费日志+幂等操作） ✅
+  - V3：ICRF方案包含黏菌策略映射表（5项对应） ✅
+  - V4：Cordis研究包含5种事件分发模式与A2A映射 ✅
+  - V5：Cordis引入策略为概念借鉴不引入代码依赖 ✅
+  - V6：所有超链接原样保留未改动 ✅
+  - V7：越窗如实报（指令窗08:00已过期，按继续推进原则执行） ✅
+  - V8：API密钥不落盘不入档 ✅
+- **遗留**：
+  1. Server酱回调URL须机主在后台手动配置
+  2. 事件总线部署位置须与A2A网络协商
+  3. Cordis论文全文精读待补
+  4. 302.AI和国家超算互联网端点格式待确认（须机主提供）
+  5. 4件wpsonline文件正文未获取（须机主登录kdocs.cn手动导出）
+  6. 符号链接创建须机主以管理员身份手动执行
+  7. GitHub push须机主将公钥添加到GitHub
