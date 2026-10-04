@@ -3018,3 +3018,47 @@
   2. 协商结果须主权人确认后方可实施
   3. K1/K3/K5须补充操作规程/权限验证/冲突预防
   4. K4审计排程脚本待按优化频率编写
+---
+
+## 2026-10-05T22:20 砚坚席——K1/K3/K5补充规程+K4审计排程+参考研究+IM GUI架构设计
+
+- **谁**：砚坚（码道·GLM-5.2/华为云CodeArts）
+- **何时**：2026-10-05T22:20 CST
+- **改了什么**：
+  - 新增 GOVERNANCE/proposals/k1_k3_k5_supplementary_20261005.md — K1/K3/K5补充操作规程（156行）
+    - K1补充：eid registry操作规程（注册/查询/注销/冲突处理4流程）
+    - K3补充：跨席位图索引权限验证（3级权限模型+验证流程）
+    - K5补充：跨席位冗余冲突预防（3类冲突场景+预防机制）
+  - 新增 scripts/k4_audit_schedule.py — K4常态化审计排程脚本
+    - 凭据扫描6h / 哈希链验证24h / 根值核验24h / 协议覆盖48h
+    - dry-run测试通过，支持--once单次执行模式
+  - 新增 GOVERNANCE/proposals/reference_research_20261005.md — 参考资源研究摘要
+    - Microsoft SkillOpt研究（Rollout→Reflect→Edit→Gate循环）
+    - Star-Office-UI研究（像素风AI办公看板，6状态可视化）
+    - 对A2A自进化和HarmonyOS IM GUI的启示提炼
+  - 新增 GOVERNANCE/proposals/hmos7_a2a_im_gui_20261005.md — HarmonyOS 7 A2A IM GUI网络架构设计
+    - 5层架构：感知层→协议层→状态层→渲染层→审计层
+    - 状态映射模型（6状态：idle/thinking/acting/waiting/syncing/error）
+    - 行为轨迹审计（决策日志+操作日志+通信日志）
+    - ArkUI原生实现路线图
+  - 新增 GOVERNANCE/audit_logs/ — K4审计日志输出目录
+- **为什么**：A2A协商结果要求补充操作规程/权限验证/冲突预防，K4须按优化频率编写排程脚本，IM GUI须有架构设计文档指导后续开发
+- **如何验证**：
+  - V1：K1/K3/K5补充规程文档156行，包含4+3+3个流程/模型/场景 ✅
+  - V2：K4审计排程脚本dry-run测试通过 ✅
+  - V3：参考研究文档包含SkillOpt+Star-Office-UI两项研究及启示 ✅
+  - V4：IM GUI架构设计包含5层架构+状态映射+审计+路线图 ✅
+  - V5：所有超链接原样保留未改动 ✅
+  - V6：越窗如实报（指令窗08:00已过期，按继续推进原则执行） ✅
+  - V7：API密钥不落盘不入档 ✅
+  - V8：4件明文凭据文件禁止外发规则遵守 ✅
+- **遗留**：
+  1. 302.AI和国家超算互联网端点格式待确认（须机主提供）
+  2. 4件wpsonline文件正文未获取（须机主登录kdocs.cn手动导出）
+  3. 符号链接创建须机主以管理员身份手动执行
+  4. Server酱接入微信IM智慧互联方案待编写
+  5. 事件驱动架构（信息等幂消费共振场）方案待编写
+  6. A2A相关文件上传幻16须分批执行
+  7. GitHub push须机主将公钥添加到GitHub
+  8. HarmonyOS 7 IM GUI看板开发待启动
+  9. Cordis插件框架待研究引入
