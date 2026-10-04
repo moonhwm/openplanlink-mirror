@@ -42,10 +42,10 @@ def _save_skill(text):
 def reflect(rollouts, current_skill):
     """优化器：用硅基流动模型分析成败、提出结构化编辑建议（add/delete/replace）。"""
     prompt = (
-        "你是技能优化器。当前技能文档：\n" + current_skill[:2000] +
-        "\n\n打样记录（成败）：\n" + json.dumps(rollouts, ensure_ascii=False)[:2000] +
-        "\n\n提出最多%d处有界编辑，每处形如 {\"op\":\"add|delete|replace\",\"target\":\"...\",\"replacement\":\"...\",\"reason\":\"...\"}，"
-        "只返回 JSON 数组。" % EDIT_BUDGET)
+        "你是技能优化器。当前技能文档（每条是可执行规则）：\n" + current_skill[:2000] +
+        "\n\n打样记录（成功/失败）：\n" + json.dumps(rollouts, ensure_ascii=False)[:2000] +
+        "\n\n只做" + str(EDIT_BUDGET) + "处以内编辑改进可执行规则：失败任务→replace 其对应规则；缺规则→add 一条可执行规则（禁止把打样记录当 add 内容）。"
+        "每处形如 {\"op\":\"replace|add\",\"target\":\"...\",\"replacement\":\"...\",\"reason\":\"...\"}，只返回 JSON 数组。")
     r = HM.chat("Qwen/Qwen2.5-7B-Instruct", prompt, max_tokens=512)
     if "error" in r:
         return []
