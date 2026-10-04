@@ -55,6 +55,13 @@ class KnowledgeDigest:
         h = hashlib.sha256(text.encode("utf-8")).hexdigest()
         return h in self.by_hash
 
+    def store_to_cas(self, store):
+        """把知识碎片写入 CAS 指针化存储（blobs 去重 + gzip），返回 {hash: 指针}。"""
+        out = {}
+        for h, rec in self.by_hash.items():
+            out[h] = store.put(rec["text"].encode("utf-8"))  # CasStore.put 返回哈希指针
+        return out
+
 
 if __name__ == "__main__":
     import tempfile
