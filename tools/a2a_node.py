@@ -41,10 +41,12 @@ SEAT = "a2a-node-local"
 NONCE_FILE = r"C:\Users\欧阳宏俊\.a2a-node-nonces.json"
 MAILBOX_FILE = r"C:\Users\欧阳宏俊\.a2a-node-mailbox.json"
 DLQ_FILE = r"C:\Users\欧阳宏俊\.a2a-node-dlq.json"
+REPLAY_DB = r"C:\Users\欧阳宏俊\.a2a-node-replay.sqlite"
 AUDIT_FILE = r"C:\Users\欧阳宏俊\.a2a-node-audit.jsonl"
 # Server酱（微信推送）告警通道：SENDKEY 经环境变量注入，不入库。空=不推送。
 SERVERCHAN_KEY = os.environ.get("SERVERCHAN_SENDKEY", "")
-seen = set()
+seen = set()  # 兼容旧 nonce 计数（ReplayCache 系 SQLite 权威 replay 判定）
+replay = M.ReplayCache(REPLAY_DB)  # 权威 nonce 重放判定（canonical a2a_hmac）
 mailbox = {}
 dlq = []  # 死信队列：投递失败的消息（未知席位等），可重试，不丢失
 # 席位注册表：中转前校验目标合法；未知席位拒绝
@@ -99,12 +101,7 @@ AGENT_CARD = {
 
 
 def _load_state():
-    global seen, mailbox, dlq
-    if os.path.exists(NONCE_FILE):
-        try:
-            seen = set(json.load(open(NONCE_FILE, encoding="utf-8")))
-        except Exception:
-            seen = set()
+    global mailbox, dlq
     if os.path.exists(MAILBOX_FILE):
         try:
             mailbox = json.load(open(MAILBOX_FILE, encoding="utf-8"))
@@ -126,9 +123,21 @@ def _atomic_json(path, obj):
 
 
 def _save_state():
-    _atomic_json(NONCE_FILE, list(seen))
     _atomic_json(MAILBOX_FILE, mailbox)
     _atomic_json(DLQ_FILE, dlq)
+
+
+def _nonce_count():
+    """nonce 计数（ReplayCache SQLite 权威）。"""
+    import sqlite3
+    try:
+        c = sqlite3.connect(REPLAY_DB, timeout=5)
+        try:
+            return c.execute("SELECT COUNT(*) FROM replay_nonces").fetchone()[0]
+        finally:
+            c.close()
+    except Exception:
+        return 0
 
 
 def _notify(title, desp):
@@ -216,7 +225,7 @@ class Handler(BaseHTTPRequestHandler):
 </table>
 <p><small>HMAC-SHA3-512 认证 · MFA-TOTP · 死信队列+重试 · Server酱告警 · 限频90/min</small></p>
 """ % {"seat": SEAT, "proto": "a2a-hmac-sha3-512/v1",
-       "uptime": int(_t.time() - _START_TS), "nonce": len(seen),
+       "uptime": int(_t.time() - _START_TS), "nonce": _nonce_count(),
        "mailbox": len(mailbox), "dlq": len(dlq), "caps": caps}
         out = html.encode("utf-8")
         self.send_response(200)
@@ -237,7 +246,7 @@ class Handler(BaseHTTPRequestHandler):
             import time as _t
             self._send(200, {"status": "alive", "seat": SEAT,
                              "uptime_s": int(_t.time() - _START_TS),
-                             "nonce_count": len(seen), "mailbox_seats": len(mailbox),
+                             "nonce_count": _nonce_count(), "mailbox_seats": len(mailbox),
                              "dlq_count": len(dlq),
                              "ts": _t.time()})
         elif self.path == "/.well-known/agent-card.json":
@@ -269,6 +278,14 @@ class Handler(BaseHTTPRequestHandler):
         if not _RL.allow():
             self._send(429, {"error": "限频（90 req/min）", "seat": SEAT})
             return
+        if self.path == "/model":
+            # 异质模型网关：硅基流动（主力）chat 调用；key 从本地 env 读、不入库
+            n = int(self.headers.get("Content-Length", 0))
+            req = json.loads(self.rfile.read(n).decode("utf-8"))
+            import hetero_models as HM
+            r = HM.chat(req.get("model", "Qwen/Qwen2.5-7B-Instruct"), req.get("prompt", ""))
+            self._send(200, {"node": SEAT, "model_result": r})
+            return
         if self.path.startswith("/dlq/retry"):
             # 重试策略：TOTP 第二因子保护；对死信重投（接收方现已知→投递，仍未知→保留）
             from urllib.parse import urlparse, parse_qs
@@ -297,7 +314,9 @@ class Handler(BaseHTTPRequestHandler):
             envelope = req["envelope"]
             body = base64.b64decode(req["body_b64"])
 
-            ok, reason = M.verify_envelope(envelope, KEY, KEY_ID, envelope.get("recipient_id"), body=body, seen_nonces=seen)
+            ok, reason = M.verify_envelope(envelope, KEY, KEY_ID,
+                                           envelope.get("sender_id"), envelope.get("recipient_id"),
+                                           body, replay)
             # 注意：节点只验证"发给自己或经自己中转"的消息；中转消息按 recipient 存箱
             if not ok:
                 _audit("HMAC_FAIL", {"reason": reason, "ip": self.client_address[0],
@@ -333,5 +352,5 @@ if __name__ == "__main__":
     _load_state()
     srv = HTTPServer((HOST, PORT), Handler)
     print("A2A node on http://%s:%d  (seat=%s, nonce=%d, mailbox=%d)" %
-          (HOST, PORT, SEAT, len(seen), len(mailbox)), flush=True)
+          (HOST, PORT, SEAT, _nonce_count(), len(mailbox)), flush=True)
     srv.serve_forever()
