@@ -26,6 +26,12 @@ jobs:
       - name: HMAC 包络测试
         run: python tools/test_a2a_hmac.py
 
+      - name: SDD 规范门（规范↔实现一致性）
+        run: python tools/sdd_gate.py
+
+      - name: AGP 兼容矩阵校验
+        run: python tools/agp_matrix.py
+
       - name: 树验证（无钥，如 manifest 存在）
         run: |
           if [ -f attest-hmac-sha3-512.json ]; then

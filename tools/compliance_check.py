@@ -21,7 +21,30 @@ LICENSES = {
     "SSPL-1.0": {"copyleft": "强", "网络条款": "是(服务提供商)", "关键词": ["Server Side Public", "SSPL"]},
     "MIT": {"copyleft": "无", "网络条款": "否", "关键词": ["MIT License", "permission is hereby granted"]},
     "Apache-2.0": {"copyleft": "弱(专利)", "网络条款": "否", "关键词": ["Apache License", "Version 2.0"]},
+    "CC-BY-SA-4.0": {"copyleft": "中(相同方式共享)", "网络条款": "否", "关键词": ["CC BY-SA", "Creative Commons", "Attribution-ShareAlike"]},
+    "ODbL-1.0": {"copyleft": "中(数据集)", "网络条款": "否", "关键词": ["Open Data Commons", "ODbL", "Database Contents"]},
 }
+
+# 开源协议五层组合（全局声明口径）：工件类别 → 适用层
+LICENSE_LAYERS = {
+    "code": "AGPL-3.0",            # 软件代码（适配器、脚本、工具链、机检件）
+    "server-stack": "SSPL-1.0",    # 服务栈敏感组件（source-available 强约束，不笼统称开源）
+    "docs": "CC-BY-SA-4.0",        # 文档与蓝图附件
+    "dataset": "ODbL-1.0",         # 数据集
+    "governance": "不进许可体系",    # 治理文本：主权人保留终审权
+}
+
+
+def license_layer(artifact_kind):
+    """工件类别 → 适用许可层（五层组合）。"""
+    return LICENSE_LAYERS.get(artifact_kind, "未分类(须人工核)")
+
+
+def gpl3_ineligible_note(network_served=True):
+    """GPL-3.0 网络服务场景判定：凡经网络提供调用之组件不适格（SaaS 漏洞），须落 AGPL-3.0/SSPL-1.0。"""
+    if network_served:
+        return "GPL-3.0 不适格（网络服务场景 SaaS 漏洞），须落 AGPL-3.0 或 SSPL-1.0 层"
+    return "非网络服务场景，GPL-3.0 可核"
 
 
 def check_terms(text):
