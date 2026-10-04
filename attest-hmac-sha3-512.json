@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-04T04:21:57.786Z",
+  "generated_at": "2026-10-04T19:39:17.829Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 775,
-  "merkle_root_sha3_512": "c8c8093ee673fc6cd27d085c4eb98285a6633d2079ee8c6457ab1ac3ff8cc5f11dc3b5310b182eb7c1bbdcfe55d69936d6433ea7e51db80bf45d96779fe555c2",
-  "hmac_sha3_512": "93f90a1b73e2a334f5322ec5bcc5eaf8606299898017c1692f4d20c130a555c30c8a51039af3be797d4cd09debfefac3974fbfad7d4b1b0345412bf02998d42b",
+  "file_count": 832,
+  "merkle_root_sha3_512": "65624fb2c64b76b1726369e451c0edd05112ad37daf97f22931b347ef7f42b427d368011f31a1bde676e2d52d54c0bfeac725121ee0846ccddfc333bb687596d",
+  "hmac_sha3_512": "1858cde0450c20a7adc88fd9a1cefb90e2b1fcbf2fcda67ec0b379c5e3536f0cf53ebb989fdaa8cec78773be7c7d293d1e20e83ac64f854c825ec51d594b6f3b",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -49,9 +49,9 @@
     },
     {
       "path": ".github/workflows/ci-verify.yml",
-      "size": 972,
-      "content_sha3_512": "d1e10906494df19144b7c05c68952a453c40d31d8ef3007605f2f1dff5ea53bc1eaf0a21928a078c42236534f3612581decbf39ac3ab9fb1c35f023027cd1b68",
-      "leaf_sha3_512": "0b19bdfcf487093d2fabf76cb6b841ec7165037e183311ae0a57bdf9c09af909d17b50a72a527a6860cb121473992e4c0b21eb979cf5c2608517e664a260b82c"
+      "size": 1147,
+      "content_sha3_512": "902c3757259b37be39fb4c88f8bc1b9c80f9942b4986a417b72ca136bd83e3a165fd8516f4eec143ca8c894900d559db612087cfbd0ec90c8b1129c3739bba56",
+      "leaf_sha3_512": "9c28dc3742575daf7d2f0ff81143cbc78fc3b93fd2077184ecfa207401259b8b1361f2598e3690f86452035b227d51b1610b1b06debde2111f76317ef69937cb"
     },
     {
       "path": ".nojekyll",
@@ -4428,6 +4428,90 @@
       "leaf_sha3_512": "9fc63cb4d3bb966ed877cf42079ca63003517628568779dd4b59ce21f6d6d6b14e472f8d04a44122847b940ee6abebbe803b508de021f959991a0893ca39eaf0"
     },
     {
+      "path": "tools/__pycache__/a2a_client.cpython-312.pyc",
+      "size": 3390,
+      "content_sha3_512": "d21a63a056e1d91638bb337f1fc6f3b69974324dfd414bc0c0ee502c3de26aec5cffa868391214ba07663815c4e51e4d5fbaa76dcc3f8849cba4cf8ae27fce2f",
+      "leaf_sha3_512": "1953c03129f920d8a94be4ae359e894a81e9acbecfc947e087b231d312c13f9d3abe6c32b40527bd114eecb4a433dce69ff45a0ad1beecfcf221dd8f1426c27d"
+    },
+    {
+      "path": "tools/__pycache__/a2a_hmac.cpython-312.pyc",
+      "size": 12059,
+      "content_sha3_512": "48aa4af81816a0aedbdda1f93272ff169e63ef95d99e5c4fc4946ed8bfa72a7df1e23b36ebc583d4f6c0addedc5a1bb12c9d36a1e62633bb28952002bfe75776",
+      "leaf_sha3_512": "1d8407f6e1bfaf26c1a55cfe4c6d1ca589268ef96f6a545668286a34df1fd581bab8e54f2dffcd26fcd7154fe3ca9963881c9dae3a169846b1143cd60b3bc1e7"
+    },
+    {
+      "path": "tools/__pycache__/a2a_node.cpython-312.pyc",
+      "size": 22003,
+      "content_sha3_512": "1ad137e6265686e5819bd53406cc93b637e41f2f17c394c3286b76ac1f0defc50627065dca69f8087407b26da026c18bc105aa4509e41d1bb510c495399e553e",
+      "leaf_sha3_512": "fe6642c049b7dc5a8c5e3887f7de3eabcad5ef1ff50be823810fecd63dc18bd41a31eef1280a9c706b5c5e8a07c3e81f7368619e7a388294672cad944296a73b"
+    },
+    {
+      "path": "tools/__pycache__/a2a_send_remote.cpython-312.pyc",
+      "size": 1844,
+      "content_sha3_512": "6c07f4fb058c0f648631f6892786600ea7924232d0724849d831073331eebb3736ad28134cbc33bf6ee957b0879c13195970e315a7a9dd05cfe5c74705410412",
+      "leaf_sha3_512": "4868684c2f0d6eb75651daea0fe0dafef08509fbf854305962e4ef0bace74e9c093e8f20f783c8e699b155362b59b66f1e41db33142b6995b47d28e29143ff69"
+    },
+    {
+      "path": "tools/__pycache__/build_opl_tree.cpython-312.pyc",
+      "size": 6423,
+      "content_sha3_512": "5c4e0fc505dea3e7e8f4d1e50e57c2c431318168e9f31a3729c83e6e5ca4b3afd54e964e1dffa306ff30bf00e4bd6f6118603c99c2506548a534186c7d664783",
+      "leaf_sha3_512": "08010116b8482eba599d7b4c8138821452f0a62c6ff65863036a54852e7d97823b85f95aedde4005a0397ead990923027424038ba0532fbf03bdfef97d213aa2"
+    },
+    {
+      "path": "tools/__pycache__/compliance_check.cpython-312.pyc",
+      "size": 4248,
+      "content_sha3_512": "0906f0d65f21f50262fdd86fa6ea33456ed60a7a2a85f088728a6e1fc926b03a4069faa05eec40aea05f0e9679a7dcf6b677229e088e7f2b0f4f30bab0e78fb8",
+      "leaf_sha3_512": "60fe256b041a65df447d80c815d94dfe20f1ea80f05dc1a1115a4b94eeb5d0add13be8a486551993077698be059cd956d707834da318654d4f275dcd863a4f92"
+    },
+    {
+      "path": "tools/__pycache__/event_driven.cpython-312.pyc",
+      "size": 4100,
+      "content_sha3_512": "9d7e15212f6e0623426e497684b47449728f5ac25d6c8bf7ad87ee22eec8b2ad13c6748778b812ee93257d5b41575100bcc92421f49c521ad19dd44cd8eeb1c3",
+      "leaf_sha3_512": "05e419ab865d7b62b91bd87f2487092d35b854d36d573c1de72954c65c4f57e0c9be7d9dcd90cc02bff33af94e4e58eebce56f6384f1b31a5025997ad847629a"
+    },
+    {
+      "path": "tools/__pycache__/hetero_models.cpython-312.pyc",
+      "size": 4397,
+      "content_sha3_512": "4807547c33d35f79121a587491fbe543f1851242d8cb549312a3cfc0a45bfe4bb93b2beb7398d700d402036da3842a9cd67dfa8433e33e1476712d26ed9b8feb",
+      "leaf_sha3_512": "da964af24a749cfc41a4560164e1a368e1d36885b709d9460ce5737e45f3fdc89ba148a3e1eeba8361126eac197215e4058d8615b689e21ea83ed0531ea94e8a"
+    },
+    {
+      "path": "tools/__pycache__/mkled.cpython-312.pyc",
+      "size": 7683,
+      "content_sha3_512": "341b699ed9d677584714e7a75b6dc57962d7523bb804fa55bca1a6d9ee22057a8200d5a36cfbe33381678e73d4a859a37f9eb9f89f6d2131092fb745456d2cb7",
+      "leaf_sha3_512": "83416f3a447fb1b2d2d015ee571d2ca63cfe32c664a72f1c318febecc33db527eac8ecbca78a3eb74b019431ef68282dc93cede86e835bf1451e3af1e7bebef3"
+    },
+    {
+      "path": "tools/__pycache__/read_docx.cpython-312.pyc",
+      "size": 3891,
+      "content_sha3_512": "8a2fca1c721d7abf915015d25b59b5a43279586f6ec25b1a56717cca046ce2c16ebd0f0940853564d6f02d93e529d716eb7a8356085160b5472342fa4b192c6f",
+      "leaf_sha3_512": "37a849f629529a2b20a5713c772db5fd16d88a1276a97b3a922bdba3ac411d6badf93d3a1291addf22c6a86c2831d3c2a5ad23f1f51fe144b55470ab470f7318"
+    },
+    {
+      "path": "tools/__pycache__/skill_evolve.cpython-312.pyc",
+      "size": 6651,
+      "content_sha3_512": "7d8525977ea39e0854fa254bc7a2987a93eae2a144b116050326873ad1861e41c6814686b378d64afbf74aa916be55b0295eabeacd80a8d449776dd5cd39e84f",
+      "leaf_sha3_512": "905f4fa239e3afb0e4919ada7693f0b4a818dc631c4e1d05a9cf7d16b98da312bb0ffc7fcafd8b71921280e497a5c547b7e9e85f613e34c26ae41f6a745963a2"
+    },
+    {
+      "path": "tools/__pycache__/test_a2a_hmac.cpython-312.pyc",
+      "size": 17286,
+      "content_sha3_512": "055bc61fe3ae349580973df64b2a200dfef9c94b0d2ab0ef70bce5be81fd9ba533e0af1dae9aae738cb8d222443fdcbbfb275546a07a895a544f0646c8c687f6",
+      "leaf_sha3_512": "2269f9be33376d65eea99ba1ee05d1907f8a94ebd2e9dc50c1a616789f4c1e170c9cd179f008ea864626e8b6a777cb0833d537a9d5642dc5d61ac0db882b81cd"
+    },
+    {
+      "path": "tools/__pycache__/totp.cpython-312.pyc",
+      "size": 3483,
+      "content_sha3_512": "52a3b84f746c0ad21deabe8e577c9f26a2462aaaf90b75038e85c607dbd2674b89c0be36f21c96f5723aeb1b95e7faa386b6ff6d93563b031aa48108b5ae32e1",
+      "leaf_sha3_512": "19f44d1e8688d69ab01dcf032bbee857a2029bb6d95d7f3daed801591ea9a4ee0520662e55b96f5c00d3b184b7d15d006c27a7eeb7267e8df71c458a30b8926e"
+    },
+    {
+      "path": "tools/__pycache__/verify_opl_tree.cpython-312.pyc",
+      "size": 3184,
+      "content_sha3_512": "ec1716285af78f26e35c76962be84977ee6e342462f20bfc073c4fbf6d8c974c28d43ddf5ecb20bd92f10d194f7b9da2efcb2cdfbde21a98b36707c4d3eee6a0",
+      "leaf_sha3_512": "7a4d477a7a02bb93585c61be77fc0106eacad82b0b6ee9045ac66c3c0479ba2f4aaa97d04b709421f234ee6f7ff13b40552dfa5ae940833c2034c5bf1a9620ae"
+    },
+    {
       "path": "tools/a2a_client.py",
       "size": 3148,
       "content_sha3_512": "4e807b41d6c0aba3884b7e8ecfbf8a09dd3e7bc86d553abaaf60b5849b3b57b7acce88a5307064ed338a72f11e3b43f91a6677a8b1877a0728b23b599a347bd1",
@@ -4453,15 +4537,21 @@
     },
     {
       "path": "tools/a2a_node.py",
-      "size": 16200,
-      "content_sha3_512": "632165327078391c7ddb2a8b595eb6fb2f745fdd0d791d2b87799e004c994a89cac394e06415eb44f510ada1223513a0b32dd009725df03774c79619c1c95425",
-      "leaf_sha3_512": "8288a10f46b8d6408eba71469202a4c1b5fefa3da26f1a9046e08aec0f031fe7bc17e5cb585d43b42f0eb9cde43ca188f49e18a9f0cbe17f5ee826f2949cc1a2"
+      "size": 17128,
+      "content_sha3_512": "c63147a9976744cd22812e71259f73cf175a2f8641a58f649f0dd1da010bbf4329ef571218f2edef5120873915e5627763359c07e79a72421b150437b26e3267",
+      "leaf_sha3_512": "600429a992f7c6f9438deb147eb8b92a562551701067ce2bc6f64cc60b1093d4be50d5dc6a4a1acc021b88d21e927262d7e24af5de9de5ad8e58ed6827fd8606"
     },
     {
       "path": "tools/a2a_send_remote.py",
       "size": 4836,
       "content_sha3_512": "23d0ac5c4e12c0f8704d8ff760195c1228be8d7a030ea5c7e34586709c8e2d689078e7e2f1e7d1e5f7b013344052cf391495358b892c204e83ed13013a522b22",
       "leaf_sha3_512": "0b436b195fa2431a075755203b190b3a977ee0f68942647758ca8ca99adeb86572ece98ff5692cf8ee9bcac9b74c002dddd028e5d1bdaebe58253cac86f0ded3"
+    },
+    {
+      "path": "tools/agp_matrix.py",
+      "size": 3964,
+      "content_sha3_512": "def5b09246a2de3e88a725bb2e4ca8922bba7bf1923b26bc08985349742a9a9e280b6faa988f9c79bf6b6fdce1f28fd42dbe7505d13fb3508dd4de1e901a1253",
+      "leaf_sha3_512": "43c3f6aa990d2a1578ea5908c8839449cb20914bf9e81b45c4cfb883ee564344d41e04f45515ef35fab87761fd81d48b7d86a5c050f39ac35ee351c547de3cab"
     },
     {
       "path": "tools/build_opl_tree.py",
@@ -4477,9 +4567,21 @@
     },
     {
       "path": "tools/compensate.py",
-      "size": 2049,
-      "content_sha3_512": "a0b4180c6e95250fc6ef5d771eb497e2206f2cee3141823a83959e3aa694d613bad169182d8813ca54cf8863a6fdd9ddebe4c21e8ada119e74908c591a8ddf66",
-      "leaf_sha3_512": "90a912362f1a9c8efccfef89eba00f9715113cd9396a1203cdbfd459c182ca385a8786028c8158579259f25ee067e2ca316ee3917cd807667b026af967916948"
+      "size": 4393,
+      "content_sha3_512": "02dd9e3c0126c23e66ddd9fe81f671c00b124e49b82c136a750966d066ede2af44c07f33f923677be52c087be62e358d72286efeb02bcadfcd2c654f482a8f9f",
+      "leaf_sha3_512": "37ae414ba8c818955909e5abff3891aabde0fb05c02958cc31330e4942d34076185b9a013e0023db5a309c4393cba75b5505d4ec85d7bb16a5af097a09aa4ef2"
+    },
+    {
+      "path": "tools/compliance_check.py",
+      "size": 4600,
+      "content_sha3_512": "3db29163ba75c6c211be6af609c0031fbac4a40c9ec66b31790f98026d6c8f9c3427ccf8ee315e582e1414db995e3fae2bfda756a3b8d66caba967d4d3444ac7",
+      "leaf_sha3_512": "b0ae3e0826b3e3139c171a1870ff9aebcae022b98a32c138a16b707a22d5bd51809a298a759b318ecb9ecd5487405eccb00b90c64d89d38b9c859246e144a15e"
+    },
+    {
+      "path": "tools/event_driven.py",
+      "size": 4810,
+      "content_sha3_512": "66b33eddcb801492efab18c5b34d70787618b1167ccfabc42c1baed3ac88b319eded63dd880aed8c164d36ec0bf3721b12dd372764ef472eccff0be2092e1578",
+      "leaf_sha3_512": "714cc97123fc59c01448202f990775c8fea685a05074fdfe7fa2edd099bda1207413008bf2308d96ca4bfbe9b733fbdc8ec48d101baee814fcd9c02085ab3b93"
     },
     {
       "path": "tools/gitcode_search.py",
@@ -4492,6 +4594,12 @@
       "size": 1444,
       "content_sha3_512": "bb629c1f6f594664c3a0a9115e9586b459d1455ce44cc661a0e156a53aa8721985fd1756fa3f467884b43dc5d499cd8aa2abfda98d62985dc77e62caffbc5530",
       "leaf_sha3_512": "0e7dfc307c44b78516a77823dd310c1bfe3b5067643d4a88c33ed054bc1a96e54eb60fbcb8d72a9953c5592f1b7f4b65cfb552edcc7af620ab3975cf0269a4ed"
+    },
+    {
+      "path": "tools/hetero_models.py",
+      "size": 2864,
+      "content_sha3_512": "6a37cb9bd05f5ce08b8492edb2fcb77f2be3285f5179690e1a6742492e2d651ee86b49ad6525c582ff019567f673c439e978e6e7c05be66e90afa625e2f22bf3",
+      "leaf_sha3_512": "666769829e3c2db363e8f233f8980d5dd1c9a3eaee11d06086cacf0491f9e76734afbef08ad4b01574c98f7bfeb0fcf2b9aa0f300680da887000fea8bf279ee8"
     },
     {
       "path": "tools/hooks/pre-commit",
@@ -4554,6 +4662,12 @@
       "leaf_sha3_512": "f4acb6e3350ae8ad052955e966e9211a3265c2733f1c6bffd306185a0bd037dd73937c225bdb8d454b1d04556b094921d353a4931a5c3efb9bbcd457b211f06d"
     },
     {
+      "path": "tools/sdd_gate.py",
+      "size": 3366,
+      "content_sha3_512": "42701acc02bc29291dc37234810a1f52822d83bce75357424f4f8cf3549353142948d23e3b13638fa9c3f0ade81f026c5a5e55709e1fd81f6e4193c77adb32a5",
+      "leaf_sha3_512": "1c161ad039b851332d159add03b5aab76a2f2e7f166a0161fb0d2a33448b0c73a23f9cf42eae8bde83d6894ef2c200d697ba118d9891a79f537991bf3a234e05"
+    },
+    {
       "path": "tools/sha3-tree.mjs",
       "size": 13740,
       "content_sha3_512": "82c65885391b4a63e2c0764a0af1132276321489c0b68056b9bfc45a2a5ba9930c83ddc77e3636d0b643c3699908e1d779e52b460c55f7625a411f3196f63ec5",
@@ -4564,6 +4678,12 @@
       "size": 7962,
       "content_sha3_512": "ffdb0f63482ad2100f7b5fa79fc3d37830ba90e08292b90f1316f3023619cec4f10ee029082489518f93ca6710ed39c66cfbf494f24d0c88a27f36c4fa80395b",
       "leaf_sha3_512": "328da480867dc8ded975bc30d85cc3d4ea79322e7fca430509ed248a2f02c496b15c5dde8608873a3c826118f19c6a2025184af8d1dea6fc207a36388e6ef0af"
+    },
+    {
+      "path": "tools/skill_evolve.py",
+      "size": 4588,
+      "content_sha3_512": "9d123baffaa8d14c35f15f6ecacdade6f69b1345c545fc9031e0478155f7b3454c8692384d98831749964e45759e6a53df9f42597199322b305052376e899041",
+      "leaf_sha3_512": "24938a5693b0dd05011202fbb070c30f880e273b8c4c3e533f07a14858fff9aaab02bc0ab957e8aa5d9d86b1e61457b0a4d5a08139ee9f8590079710d305ae13"
     },
     {
       "path": "tools/slime_mold.py",
@@ -4578,10 +4698,202 @@
       "leaf_sha3_512": "169fc265993644eb33b44be118948b6b86e34d77be3760d6fed328720de333fbe707d4ba3795347380d690572738113f2a2a54a2c0a22cc047f71bfa5666b534"
     },
     {
+      "path": "tools/spec/spec-a2a_client.md",
+      "size": 193,
+      "content_sha3_512": "e306af1a89c880da6f7edfda41c710d3ecf496593a3867815476e6f8afb6fd2b23faf57e936246d7d1a54963853be0f353ea2e72f34291311e16a62008ee641a",
+      "leaf_sha3_512": "23d1cc1a5a9c95b5f5e7f58ffee62e4e765c7dcb72ff3193356884deef272d7e7b975513ae6b18524ef2524bf3aa8f50f198014762db7170860b3c4b336a08cc"
+    },
+    {
+      "path": "tools/spec/spec-a2a_exchange.md",
+      "size": 217,
+      "content_sha3_512": "ce344f76290dbfae0a3a943e35de0b4635a062bc12fb79fe7deb899f91a786f9314248ad9fe97d56bcd25b668958a4022cb6291ebd9abdba148353b9249cd374",
+      "leaf_sha3_512": "e33217c6458dba1f0753f4c36d66ae694f294baafacc92505d2d90e570cb766dee6c491e4ba5900add2f3f232c63bf895181e409e1a2909b103408884b14d109"
+    },
+    {
+      "path": "tools/spec/spec-a2a_hmac.md",
+      "size": 389,
+      "content_sha3_512": "0dc5c13957b8741884ee41f97d73b2d77cf01d93e4937edb2745fda67c1b156e4995f47c7a12d77ae0527ec1946d89f43dd16b31b2c1a407e33230097f20aa63",
+      "leaf_sha3_512": "32479d195b7c41559e2028fc4aea6489d360b733218c5add81ebdd50f17456f9fc561d33cf5c7ae4091dc57ecc93ebf27dd7362cb3326a6b67b16c6d991e37fa"
+    },
+    {
+      "path": "tools/spec/spec-a2a_multiseat_demo.md",
+      "size": 211,
+      "content_sha3_512": "bbd3b29403a035a343cb7a22ec2cc18365d6ddb4eebbc3e1361a24699b4989b5312e98c099e0e4feb96ec65c1d5866c6eef86a912e7dd39ee502c1760bcd9ec1",
+      "leaf_sha3_512": "d4f397ad7e69d58d651a7f26c3ad135751a3cd671af9a4fabe8724367cb52fcde9548806d5f4d0447b538acf2afde90897de389ab50c1f30cacc72bc38b298d4"
+    },
+    {
+      "path": "tools/spec/spec-a2a_node.md",
+      "size": 501,
+      "content_sha3_512": "9bd917f077e375b58c76451dfc2e374aae6e24143bde9c8f1c1374f1c83a0065d9f6943f2f8654be675b1bb3ad005cf8c8bf39beaca815308c4bb487a718bc3d",
+      "leaf_sha3_512": "b75889d4592436bf0193f63eea4a9485489126878be14899aafdc27fd2b780ead19de15d72a7ccd3c1aab16bd2dd20b5177ef45c60625631ae8282aacacaf4e8"
+    },
+    {
+      "path": "tools/spec/spec-a2a_send_remote.md",
+      "size": 219,
+      "content_sha3_512": "0c6c581e9d57688d56bc153c2d1b60612f2077c4e44f9f3dd64cf7a8f724b94db6b762c40430fb84f97d6c7cd20c8a8de18302235fb922433f2d5be8f466f041",
+      "leaf_sha3_512": "e0c0f1dcab5c7924cab2e8a3600c2d66d168c1c2e7ee914bf87930fa40f40d9590234847a074853174a3fca007f45db2412eb2aea56a7a91ef66465bfde93723"
+    },
+    {
+      "path": "tools/spec/spec-agp_matrix.md",
+      "size": 301,
+      "content_sha3_512": "efb8d7dce34e8f976b83df59711099d1b34bcf69913b09b7c5607c92489c62c539a1ccf9e06614e3ee79662579d2184851bc5ecc90ed61dd6ef1b4cd2684e4a0",
+      "leaf_sha3_512": "f95149b560ffff70406df75b3d6a24138d06d4b30dfb513a07f95776d037040e3111bc79696f92194c8343afdc3f9bb38fe466ad3e74405428237f1648f04deb"
+    },
+    {
+      "path": "tools/spec/spec-cas_store.md",
+      "size": 284,
+      "content_sha3_512": "d7e13485ffe86670b15d40cf7775f4528f6176c3f5b3b47c179f22c5ebb05197b22e9c2c141aa708a0aef7106eb4abb46a9b83a8388cb99161514dfad56e5623",
+      "leaf_sha3_512": "75f0fdbbe8e6a0f9abd5e3d681e0f5a9fdbb8fd0aa6983e82b9f4dc6aea5f1255de4f65007b1568d23ec6ecf41b666a6eb2c6d3cb2591ef6d13ad57defd048da"
+    },
+    {
+      "path": "tools/spec/spec-compensate.md",
+      "size": 281,
+      "content_sha3_512": "45f0b75ce7e0ce48fac8d79708045156f1b9234e8e425c6e71a60a8c7da124b4847d5af34b958939f7f01a760879d0191a9a6d186b1e354a7485f33e2a970c11",
+      "leaf_sha3_512": "a1f1741a1432d7c408f98cb359ce6dacd10a898fcc53f9c268adf12de6dea272507f13a5ec407ad7e54d6ab098432d62345a50e7a50cb5061fd44651c46e3d3b"
+    },
+    {
+      "path": "tools/spec/spec-compliance_check.md",
+      "size": 361,
+      "content_sha3_512": "9d8905bc9aaca299cb68a2e909281853fb36b525196a70b5d41d64f4de22bd3e4f2e20a39c3821c5a0fce5497651a62ff024f8a4c37f3a16dd816c750699fb32",
+      "leaf_sha3_512": "15efe2ff55a1e5bae6d6b076d2bcb9d433355ead3c539a2c0afbc6d606e4b56755092c61f087b15de7f4ba879d61a226341b3a16b2fa8e4dbf79bcda60fd8d32"
+    },
+    {
+      "path": "tools/spec/spec-event_driven.md",
+      "size": 349,
+      "content_sha3_512": "304ec0b624cfc027f92aecbbaa5c5121b90025a906c601899c4c0fd97293e488c584768343d1ef83cf34aef679de768cbce4fdae36b26ae9c5a4c577488cbb41",
+      "leaf_sha3_512": "d89721b1d9cd4cf3ad195d9e17eca73da2002ffb9b774f3b8387e7d0b21f0b06e2a5293c15d90730693571dcff42f7d86f25c753ceb80f75352a4a15a527e1ce"
+    },
+    {
+      "path": "tools/spec/spec-gitcode_search.md",
+      "size": 205,
+      "content_sha3_512": "0d18006b2685faff1a39330c40ef51e2060c2c47f42ec830fee82dd338022ea678f27220aa6bb314878f5e22da0cfca374e6e83d0e80043d09e7158d8acb03a6",
+      "leaf_sha3_512": "e5ed9f7fd2711cd0bb1036eec19c564e694d6fc1be7aa3e15e18b7e7e6c984be3a68f1f64442eb54a981005f1a0a357cada44172ad6d4c6e7fa906bd00bd529b"
+    },
+    {
+      "path": "tools/spec/spec-heartbeat_daemon.md",
+      "size": 194,
+      "content_sha3_512": "b1792f481de2b7041845add50170910a9872ba76262df9716fdd56a8c6c801c49ad60031747beacd4d26cb6452869ac98acb5acd04054210c6d27fc3d153d3db",
+      "leaf_sha3_512": "3a3fe0297b626ffd596ed0fa3d08637e10702f72ba7f4b9c26e0c5ee20f012a35ef6f7417388d00a4f18dadfd8169866e4d83163cf2fbad3a34e4c3b0d822b76"
+    },
+    {
+      "path": "tools/spec/spec-hetero_models.md",
+      "size": 252,
+      "content_sha3_512": "94b1e3811e0ef52a585e2f7a217f95219964ed7bfe750a4c315e675508b2cde592458190bd51f70e7a40f0040a8a9ece5f9bed62049a9dd0226d3fa9e4087c00",
+      "leaf_sha3_512": "f12b23efcc30698d9f48ba54000d4a7244f61b4fb002333ba948fcceb41dc98fba92cdcbadad8f3501bc40b99d1e60184353a21e086326e6944e4c11e644b8c7"
+    },
+    {
+      "path": "tools/spec/spec-knowledge_digest.md",
+      "size": 222,
+      "content_sha3_512": "80a88fdc34cd7e31cc702946652ad113aad79be7d990dbd5da702bbb82bfbe5f2f1d53f817aae1c038dd35ba61e68a3bbca9a3d0cea671fa91f1cee381d279eb",
+      "leaf_sha3_512": "6b99c8516426ae3f6f40267adf13288fddb7203786ce3a411d7b159a7ca47421a007c8e8d87873339c7883ba91856a5c55b90e9650d7ff85306aa77443c0fdf2"
+    },
+    {
+      "path": "tools/spec/spec-live_state_loop.md",
+      "size": 204,
+      "content_sha3_512": "2ee09e58dd00a8237629cce52567b866333a688a236e6ec03d43cb6e29f1a33a8dc8e68a1a59aededd5388cb713117f31bd73de5d7dd7efcf94077096c5fafe0",
+      "leaf_sha3_512": "25a4982ce81cdde9d11e710127b215dc5c4ff12a73be4acb30667bba2338f1c505ba47f5f7e7e9e89056d5ff364571926e39b816533ef5521d2b161a3f2b81b1"
+    },
+    {
+      "path": "tools/spec/spec-media_validate.md",
+      "size": 275,
+      "content_sha3_512": "c2b3b41c694c3a5e4bd9d03eb90114889e56e30067be1ade7c98dfb2430e3c526578cddbb9e58c4ff927e631a83fea93d3e3c912f40d31f5a6c950644860c878",
+      "leaf_sha3_512": "b4b2ac458212a43b6b6c7e949d23e15a353840ac1dc14cc429af563878f341b9c2458db23db15e17455b04d6d198c35392ca97c5e2052467f863eca15d952403"
+    },
+    {
+      "path": "tools/spec/spec-mkled.md",
+      "size": 211,
+      "content_sha3_512": "91736a7877443b58db67f58aee712b59510460fe6698abc23b4988763078f626feaf831851bd5f109450c3d7be8c6636c18e3e2695194c490bb33d0348e46342",
+      "leaf_sha3_512": "11f1f0a3b2cb41d7a4416ad286f1c44e0eaf87988185436e2cefc6f48d68725b7ac81435ce91795d8afb67d2fb0446b56b35d9fdc72cde0545322b3fad807596"
+    },
+    {
+      "path": "tools/spec/spec-open_access.md",
+      "size": 327,
+      "content_sha3_512": "ecbe3394ee3bf76c4857e0900bbf6fccdf072628d9b8f29245d4ae8ca0949a52d7d261e6a345ea6cc6e3fec2f402d805397401cce1c143c9d03c0a3db2e46a00",
+      "leaf_sha3_512": "91acd4c1408739b7f522a292657d6f8638b77cae62caae1e1cf1d418e121452592bfa5053269aee6c888e201a15989654ef119bc5c5d3ef397a8f724a0deee22"
+    },
+    {
+      "path": "tools/spec/spec-perm.md",
+      "size": 220,
+      "content_sha3_512": "5676b02a7f9bc8677d15bfab3fa3bf653297caa23fc89a469a4b8dcb670019c0ec35d9e2452ffeb22b780caa861e293cba6c955e10cd05aa7873dc856b2e6889",
+      "leaf_sha3_512": "9933856c6ca8e976decfaaf335d6fbe9640cdd54a0d2d12fbc49c5933a01d476883e0e8373a83918759f9ee6b0af3f09cbe2e33be2e3765eca5d390d2ac3e119"
+    },
+    {
+      "path": "tools/spec/spec-proto.md",
+      "size": 298,
+      "content_sha3_512": "e5bfa64b1bf140b7dad3352c737daa4f67ef873a49e6bed886e9c94bef7b72b91bb4762dada4d95c7806322efaa635e465cb787ec7819db02683d3072893a360",
+      "leaf_sha3_512": "25cc4a40c3ff8d81e79be43265f93be3cd5bc2d3824d7f422ae085910476b5ef5f67cda25ca63c9050f3b7066d1705292d00302dfcc59cecbfc6203390b14b0e"
+    },
+    {
+      "path": "tools/spec/spec-quota_wall.md",
+      "size": 232,
+      "content_sha3_512": "85c486a35b2017079c3e465b7cebba5d7eae6c5e6b89618c0ec134045e60cf390bb3d23718535997c526f9f5bfda41bf4c75f20629b22259c7a1173f323f9f18",
+      "leaf_sha3_512": "772d36d9e6534b28414af79dde08064decea2ac00d3c993230e0e5596ba3ff4dce9ef3d3a0d01bd8ab4b91d28a7bdd2af7f76bfaaa1dd5e4d2cc201f67bb945c"
+    },
+    {
+      "path": "tools/spec/spec-skill_evolve.md",
+      "size": 323,
+      "content_sha3_512": "6d38c37c37d733d884abb8a5a391fccfff069af86e110d9d01dd32209befed288858b66a1096dd649aa5410d4249bd7cc346957805c3ed2e8b95d1bb2ac84352",
+      "leaf_sha3_512": "a8d17c5d44601e6e9e40d58f8a6572b1e1dc005d06a875aa38a652abf05d12f436c5a03470a46d96a2def3f92ab74186f3aa1a38b74c53378d445d73f58605a7"
+    },
+    {
+      "path": "tools/spec/spec-slime_mold.md",
+      "size": 253,
+      "content_sha3_512": "764a0393299b6a5fb49449548860b77ba024c86b81b13189f99fda649d453002fdaef08ab1fe712b3ebfd591cbd1eb29a2c9d2c7189f125d062572c856109e81",
+      "leaf_sha3_512": "8cfd8c5f065a7998c246b6f4a5d8519a4a73cf47fc78e0d4f014d94f89c2f79ad03c0ddf831d8fa6e9d7f8d4634a42417cf8f678e794c6b2278b938abe9edcf7"
+    },
+    {
+      "path": "tools/spec/spec-slime_search.md",
+      "size": 232,
+      "content_sha3_512": "0010d15c14b11eda13ba40c9211e4af6d8fadf52005241d36a9882eb5f81bf714e33f81461ebe5487beb79ba9cd09bd0fe7de2cb5d0938d3b3890ebcc41b0e97",
+      "leaf_sha3_512": "6a87e1da9468bc2ad60b0b8a9d98e797e490956c72f6a707cb551a3efacd375942cdd55fcb353bd6db3cf8c7031af4014ed447bf23e85023868260c874438f76"
+    },
+    {
+      "path": "tools/spec/spec-spinal_bridge.md",
+      "size": 339,
+      "content_sha3_512": "eb943c3501a6c51d8d62f5657a27b64ebb40403154218a8842c2bcec474c6c592633aeeceb21d3bb212944911feb31e4c8f48cf3c0bd94593950c0a8ba714155",
+      "leaf_sha3_512": "fa00df785a3661cbc9d961fa8d63c6a57b402fe7cb22ab8298404f03965f830ae8ca8d26d816d024bfe39875df28a8b68a1753909ab39b27505e9017a094ac61"
+    },
+    {
+      "path": "tools/spec/spec-supply_chain.md",
+      "size": 342,
+      "content_sha3_512": "fa8a43d083a6038f4f2e1021274d67e5e4662e291490a609a8902e4f3c7718f28463b709cdac7a7c26a7c77d2e13b74b703f798cab0e2f136232d66f2bce6701",
+      "leaf_sha3_512": "0bdc7bda1bcb440dc433a13c4f915dc2829dc60c7baf1277973dd500aa62ca4c96853515b77229851fe87111ab8ca1fb7029b1110a33dfa9db11702c7a39bf2b"
+    },
+    {
+      "path": "tools/spec/spec-task_state.md",
+      "size": 215,
+      "content_sha3_512": "4f2b5ea8ae6b9bbe1503a01dc2d2fbb1e68a9213b2d25de96a5db8ba613ccc92cac9068d9c12db5e7fd0456cafb23d70af6b4098cd905594f05b7ae8ac0a6f64",
+      "leaf_sha3_512": "1efb31f1c2daa4ecae1d198670818706ab39a5e216482d87f914df3afbbb6ae8c779d96df9cebcb4ff7f9c70009bebbde9f7c46e279b04f1102ae290beed9f5e"
+    },
+    {
+      "path": "tools/spec/spec-topology.md",
+      "size": 228,
+      "content_sha3_512": "9ba48ff105b24c9632a748f5710d657ce7511a35aa8d514681d9ef6b1bb9cc5d0f19a935141423ac458d011bd3f5727b0868caf434f7b0369768bb97d7abe970",
+      "leaf_sha3_512": "9697821b3a4d30df01c3bdc4a0639ced4aed5947609fc332637a9e512b526b9651fc98a1c370fd44c9855cdd2c710544b59087058e63384ff7b7118e4f59db9b"
+    },
+    {
+      "path": "tools/spec/spec-totp.md",
+      "size": 239,
+      "content_sha3_512": "a39ad3f963bf894f0a226cca09cbef0f200f6d03d9066689193023721fd63f7a80cac89510027d4db668e6867992c3a0a956cb36b01916d4c3b2dae79880c097",
+      "leaf_sha3_512": "a17ad99a9d25ab1254512160d8665b743cfdac40082f631c5e8f801028e4b74dd4b5b11cd9143c972af72a5660bd64c856a0e378db90aec5749882e600812667"
+    },
+    {
+      "path": "tools/spec/spec-umc.md",
+      "size": 215,
+      "content_sha3_512": "4e729ad1004df46148c2973fb36432eb96865e0eecc200a412019bf3f795c481f1782297bc6bb496b3ca40828c977954411b785cbe47175ca2e6365aad732265",
+      "leaf_sha3_512": "970326e9202dbf203729a0f3e9c9645e41fdff03898a1d451fae2905dd4621ae92a8fa06243b8719c187364cdcd4bcb376431f2cd4ed8e71c3fbcf6b51824075"
+    },
+    {
       "path": "tools/spinal_bridge.py",
       "size": 4216,
       "content_sha3_512": "c82d83b0378e91799d4e162e66cd565acbaef6caab5faa2b7a4b23a646bf40a26049496c048e34ff5ab35d1bb5cc77bc4faaa01fe503828d746d96ca360fe0cc",
       "leaf_sha3_512": "15225e00ff35d36cc54732bd79beabf263ba6be7471f3aac174906ddf8163cdaa540aad8535cbfcebf7b760edd392ac73d608fbdb1598f7c6b574664425de2e2"
+    },
+    {
+      "path": "tools/supply_chain.py",
+      "size": 3946,
+      "content_sha3_512": "f2f348d944470d501c85f636f1a279ba0630e3a4002d66687322e590f9497a62fe627db16c36b70fe6114110095491c6f91ec53f138ccd85fc718f73e633f335",
+      "leaf_sha3_512": "12d718bde438d9b57ea6a2ef1e51b0ec85cf8ba380e18ce7f8f43b60655b233738dcd31bc6a790e4e0aba7106b50828a407346198209c92d524322746eaf93fc"
     },
     {
       "path": "tools/task_state.py",
@@ -4600,6 +4912,36 @@
       "size": 13624,
       "content_sha3_512": "735e17493e54150a4e3694c44066fd42c5260a8161dfacfb178f6e12e321c41624ea70be27284ba37c901c3b41a6e9b1f0f54c927e200600a76522068af1ba6d",
       "leaf_sha3_512": "dcce09b26e5ee3810b4aff967bbe1ccacf360ca8191fa5398b31cdd934950f0270a3f2294bd00be51f82b50d110b1ebcaf4eec5e824e547ef0d27a3049cf6079"
+    },
+    {
+      "path": "tools/test_agp_matrix.py",
+      "size": 1441,
+      "content_sha3_512": "e10cf0aca74021a6a6a8febf5e0c5c9a33b86ebef6e51526ee118aaf173ad1f415c7b82b515bff31b6c4438a3b20c440a4e28ff9acc2509d6ccfa54f91469982",
+      "leaf_sha3_512": "16a87ed81cb45843ad9f7583135ff91dc160bc2e4613ca32347ba00ef74916b6650b140e7ba334510354a456f9a4036fe542213308cf9a7b94c7997b3875b088"
+    },
+    {
+      "path": "tools/test_compliance_layer.py",
+      "size": 1732,
+      "content_sha3_512": "28fec204561b7b6c87c4941d3e5901091a4442fa5b328fdea109212136e73a418306c9115d6d3382766c1ed2e449e394f3567f41985467ceb2441f266c43de6d",
+      "leaf_sha3_512": "77acba06fafc8d2764b86c8fe1d73ba42a083242963beb3a9464b93ebacd686c8b68a5ce95a7a1b56be3b99aef10b362056e9007db68f9bb7f48fd9e81e306c1"
+    },
+    {
+      "path": "tools/test_event_compensate.py",
+      "size": 2261,
+      "content_sha3_512": "1bc57153d9419ed5341008d79854c80b687de8abc4256624d13d55e57ad295637958a64b15e8e20e0bdf8516bf3ebd3ef4087d34d148876bc125d36cd87e259b",
+      "leaf_sha3_512": "575d9d96a1f8cb0570fe834c0e62065a68363fc4311cbbb7b91bc2d8b1e93aab904880ae001e48a8e08f6f1198d3ac751293a8a7c393afc595f82da00a60f67e"
+    },
+    {
+      "path": "tools/test_sdd_gate.py",
+      "size": 1188,
+      "content_sha3_512": "8cb9c461f1aaea65febfd0345053e404bda97fd6d5fd109ec382683a654496148523bc04211213d60e23096f9462b4e8dc0723f9797c105f53303ab209bcb750",
+      "leaf_sha3_512": "cca3bbee8f6eab4e7e1734d1873fdc5eb8c5b3f93a62492fc8cd784d51095476b719552bcb150dbe26e0df0e8e4aa7019ef7c24d68f8e304143e305037b654e9"
+    },
+    {
+      "path": "tools/test_supply_chain.py",
+      "size": 2352,
+      "content_sha3_512": "6a1c1c855dfa0758ed950f3ace3d9385459661a452f54714edc7dbe92ada6d1e5b3dd8f3fdc2a218d5ada3c6d9b03d13c9c93d18b340bad3d185e7601b2e449b",
+      "leaf_sha3_512": "36acbf4c84a44c78120388a6af33f6f0778e4f819051c77eb0db74bd931f5646ed1a15b3d2c1f5fb42fc0d058d121471d6b6032b68d51b8835cd5d3998b8827f"
     },
     {
       "path": "tools/test_totp.py",
