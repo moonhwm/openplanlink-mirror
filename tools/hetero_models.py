@@ -15,7 +15,7 @@ KEY_FILE = r"C:\Users\欧阳宏俊\.hetero-model-keys.env"
 PLATFORMS = {
     "siliconflow": {"base": "https://api.siliconflow.cn/v1", "role": "主力（OpenAI兼容+200模型+免费兜底）"},
     "302.ai": {"base": "https://api.302.ai/v1", "role": "补闭源（GPT/Claude/Gemini 聚合）"},
-    "national-supercomputing": {"base": "https://api.scnet.cn", "role": "定向国产（非标准OpenAI网关）"},
+    "national-supercomputing": {"base": "https://api.scnet.cn/api/llm/v1", "role": "定向国产（OpenAI协议、DeepSeek-R1蒸馏，端点 api/llm/v1）"},
 }
 
 
