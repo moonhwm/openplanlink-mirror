@@ -7,6 +7,8 @@
 纯标准库，Windows 直跑。
 """
 import hashlib
+import json
+import os
 
 DOMAINS = ("philosophy", "science", "art")
 
@@ -26,6 +28,24 @@ class KnowledgeDigest:
                 self.by_domain[domain][h] = True
         return h, is_new
 
+    def save(self, path):
+        """持久化（原子写）：跨重启等幂不丢。"""
+        tmp = path + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(self.by_hash, f, ensure_ascii=False)
+        os.replace(tmp, path)
+
+    def load(self, path):
+        """载入持久化知识。"""
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as f:
+                self.by_hash = json.load(f)
+            self.by_domain = {d: {} for d in DOMAINS}
+            for h, rec in self.by_hash.items():
+                d = rec.get("domain")
+                if d in self.by_domain:
+                    self.by_domain[d][h] = True
+
     def count(self, domain=None):
         if domain is None:
             return len(self.by_hash)
@@ -37,11 +57,19 @@ class KnowledgeDigest:
 
 
 if __name__ == "__main__":
+    import tempfile
+    p = os.path.join(tempfile.gettempdir(), "kd_demo.json")
     kd = KnowledgeDigest()
-    h1, new1 = kd.ingest("philosophy", "自我不是凝固不变的本质，而是在时间性中不断生成的动态结构")
-    h2, new2 = kd.ingest("philosophy", "自我不是凝固不变的本质，而是在时间性中不断生成的动态结构")  # 重复
-    h3, new3 = kd.ingest("science", "能量守恒定律")
-    h4, new4 = kd.ingest("art", "留白是中国画的意境")
-    print("  首次哲学 =", new1, "｜ 重复哲学 =", new2, "（幂等去重）")
-    print("  总计 =", kd.count(), "（4次ingest但3份唯一）｜ 哲学 =", kd.count("philosophy"))
-    print("  重复命中 has() =", kd.has("能量守恒定律"))
+    kd.ingest("philosophy", "自我不是凝固不变的本质，而是在时间性中不断生成的动态结构")
+    kd.ingest("science", "能量守恒定律")
+    kd.ingest("art", "留白是中国画的意境")
+    kd.save(p)
+    kd2 = KnowledgeDigest()
+    kd2.load(p)
+    print("  持久化前 count =", kd.count(), "｜ 载入后 count =", kd2.count(), "（跨重启不丢）")
+    print("  载入后 has('能量守恒定律') =", kd2.has("能量守恒定律"))
+    h, is_new = kd2.ingest("science", "能量守恒定律")   # 载入后再重复
+    print("  载入后重复ingest is_new =", is_new, "（持久化后仍幂等）")
+    if os.path.exists(p):
+        os.remove(p)
+
