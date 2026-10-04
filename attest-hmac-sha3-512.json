@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-04T03:36:14.819Z",
+  "generated_at": "2026-10-04T04:21:57.786Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 772,
-  "merkle_root_sha3_512": "ebf967b94d389edd948e105aa31085ca7a055164fd379c6d133ad356b787bd82c8d843d9c68134347fc0d3619612c5402a88bee9b691880dfbe6e50f2b8416a7",
-  "hmac_sha3_512": "7c10cf4dffe5dbc8aeed17b341fae7f7bd3320b7da41d7350c5333d48972639bc1452acaa8a0cd0d0d8fea4d98436b4186c1e03e406c61f6e005c475ccbf4e6c",
+  "file_count": 775,
+  "merkle_root_sha3_512": "c8c8093ee673fc6cd27d085c4eb98285a6633d2079ee8c6457ab1ac3ff8cc5f11dc3b5310b182eb7c1bbdcfe55d69936d6433ea7e51db80bf45d96779fe555c2",
+  "hmac_sha3_512": "93f90a1b73e2a334f5322ec5bcc5eaf8606299898017c1692f4d20c130a555c30c8a51039af3be797d4cd09debfefac3974fbfad7d4b1b0345412bf02998d42b",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -4464,6 +4464,12 @@
       "leaf_sha3_512": "0b436b195fa2431a075755203b190b3a977ee0f68942647758ca8ca99adeb86572ece98ff5692cf8ee9bcac9b74c002dddd028e5d1bdaebe58253cac86f0ded3"
     },
     {
+      "path": "tools/build_opl_tree.py",
+      "size": 3761,
+      "content_sha3_512": "f53a3719085534e0926a13f56075d09f625ddc9ebeedaed96f949fadfa11e2755614996be1a4467a288cce6d1f68b91f6363ee6e5f7ee286035f7160aa2c6423",
+      "leaf_sha3_512": "27bf74e3ad3cb77cf2c045e00aeac22e0985108b13ad4a4d5e86c92a9cb198536a6d269336f02c5521658fb1238dc3164bcb9c2996d6992b0ee7f63194e4b02a"
+    },
+    {
       "path": "tools/cas_store.py",
       "size": 2940,
       "content_sha3_512": "017a3f6a7f3e35689f651de485297fbd50b0b950b9f813fcfc8937754ea04d2f344f69ea5ec95548b4066844ef554284f90c893069d124636f3a2de39a6a3f4f",
@@ -4512,6 +4518,12 @@
       "leaf_sha3_512": "d3e2be0912b63223199b8d7c04a84e976cc1ff17f9613779905d77d3ccb1c2a7ef13fd5b04c38ee196c9bdcd784106f84e89cc48dd7c9256cbbd63f167ace2fb"
     },
     {
+      "path": "tools/mkled.py",
+      "size": 6406,
+      "content_sha3_512": "3d556fd9ec1751e801a93d739d20ef553d4175f7f854e22856c9f1c4ebc617af33d89812a7dc0409f77697042a39ad0b0d79d1c4d50e420a6cf6ccd5414cbcec",
+      "leaf_sha3_512": "97954bdbb9984d3dbde12cb50e830080c00b14e8632f21cf44fd39ee385fdd7c46a2303d09b3cb4be13d63f86b77249ef359178d9ba0186bf0c621f8ee1894fa"
+    },
+    {
       "path": "tools/open_access.py",
       "size": 5340,
       "content_sha3_512": "9abda90864953fcbeb8a4e06ea9a4c3735504bff224a6edb5bc4ec86f9ef88d4b43234b44ed6b13acf3bcca6839c448d3dbd9bae074e05a70c63c5e0d6289442",
@@ -4534,6 +4546,12 @@
       "size": 1963,
       "content_sha3_512": "ef22c1326d6365f94cc01bc7aa3bdd1a90cefd820e96789900460689443af634f12054f2c3571e4a50a1c827b9c1187ec28ae7fc7599acb158bccae634917d78",
       "leaf_sha3_512": "93b2dd1b55f1511082bb5d228e825b2d6ab758f9a5a298e7c6ff740abe2b3b0e62ee242ff9fd1db247cd26268c8fb86306c23f7804c110cd94aa90dcdd307fba"
+    },
+    {
+      "path": "tools/read_docx.py",
+      "size": 1905,
+      "content_sha3_512": "e2587b64d032e90fa24a8865aded6f5be3d6232d4c8ebe21d47e44607d284d2392671e72b377bdab38fddcbca9dd32f424ad3ee64d2bc5b387cf053bf29a8a10",
+      "leaf_sha3_512": "f4acb6e3350ae8ad052955e966e9211a3265c2733f1c6bffd306185a0bd037dd73937c225bdb8d454b1d04556b094921d353a4931a5c3efb9bbcd457b211f06d"
     },
     {
       "path": "tools/sha3-tree.mjs",
