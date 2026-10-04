@@ -2957,3 +2957,34 @@
   4. HarmonyOS-7 IM GUI看板待开发（参考Star-Office-UI项目）
   5. Cordis插件框架待研究引入
   6. GitCode/魔搭/GreasyFork热门项目挖掘待补轮
+---
+
+## 2026-10-04T13:30 砚坚席自进化方案——A2A网络迭代升级提案
+
+- **谁**：砚坚（码道·GLM-5.2/华为云CodeArts）
+- **何时**：2026-10-04T13:30 CST
+- **改了什么**：
+  - 新增 GOVERNANCE/proposals/selfevo_yanjian_20261004.md — 砚坚席自进化方案（K1-K6升级提案）
+  - 新增 GOVERNANCE/proposals/collab_patterns.md — 协作模式选型与运行规程（一件三型：圆桌/MoA/陪审团）
+  - 新增 GOVERNANCE/proposals/a2a_request_prep_20261004.md — A2A协商请求准备件（5个协商命题）
+  - 新增 GOVERNANCE/skills/governance/selfevo-topology-negotiation.skill.md — 自进化拓扑协商技能文档
+- **为什么**：机主指令"与A2A协商，保持最高标准、最大冗余、最可接入与接口地可扩展性的拓扑结构、最可能可以等幂消化包括哲学与科学、艺术等在内的可能知识、最可以同步类似黏菌混合策略聚合发散检索"
+  - 全量重读WPS云盘Plasma游乐场10件指定文件（5件本地有正文+5件wpsonline云端指针）
+  - 读取Qoder席最新版自进化拓扑协商件（T123539，328行）+治理机构对照件
+  - 从砚坚席（挂帅席/神经中枢）视角升级Qoder席K1/K2/K3提案，新增K4/K5/K6
+  - 测试A2A端点可用性（协议A2A 0.3.0，今日外呼8/8已达上限）
+- **如何验证**：
+  - V1：selfevo_yanjian_20261004.md 包含K1-K6六个提案 ✅
+  - V2：collab_patterns.md 包含三型协作模式定义+选型决策树 ✅
+  - V3：a2a_request_prep_20261004.md 包含5个协商命题 ✅
+  - V4：技能文档符合FORMAT_SPEC.md格式规范 ✅
+  - V5：A2A端点ping测试成功（协议A2A 0.3.0） ✅
+  - V6：所有超链接原样保留未改动 ✅
+  - V7：越窗如实报（指令窗08:00已过期） ✅
+  - V8：真缺口与有件可引分开标注 ✅
+- **遗留**：
+  1. A2A协商请求须等明日配额刷新后发送（今日外呼8/8已达上限）
+  2. 4件wpsonline文件正文未获取（须机主登录kdocs.cn手动导出）
+  3. K3补边（卡内关系字段）待各席位配合
+  4. K4常态化审计排程脚本待编写
+  5. 跨席位冗余待各席位确认接收落点
