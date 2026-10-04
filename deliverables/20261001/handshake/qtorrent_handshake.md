@@ -39,7 +39,7 @@
 - :4 `<title>观测 · A2A 观测站</title>`；:45 引 status.js；:43 拓扑读数表 `#tTopo` + 链接 a2a-architecture.html
 
 ### oracle.html（神谕）—— 外部结构化端点
-- :80-82,86-88 Supabase 客户端：`SB_URL="https://ltdodcumoxiqsnakpqog.supabase.co"`，`SB_KEY="sb_publishable_volgoMLbvToQQVKoSjlfxA_DKNb26Hl"`（publishable 匿名只读钥）
+- :80-82,86-88 Supabase 客户端：`SB_URL="https://<REDACTED-PROJECT>.supabase.co"`，`SB_KEY="sb_publishable_<REDACTED>"`（publishable 匿名只读钥）
 - :199-208 订阅表：`a2a_questions`（按 slug 全量）、`a2a_signals`（limit 70）、`a2a_runs`（limit 30）、`a2a_swarm_runs`（limit 120），经 Supabase Realtime 推送
 - :84-99 推演引擎 `tension()`：GLD/SPY/QQQ/USO/TLT/UUP/NVDA 七符号 chg_pct 计分（规则内嵌，可复算）；频道枚举 TRIBE = signal/macro/redteam/history
 
@@ -64,7 +64,7 @@
   3. 定时刷新 · cron 拉数写库 · 候令
   4. 异质 swarm · 12 族×3 题 · 分两波 8+4 · 禁战争点概率
   5. finance_fetch.py · 取数统一入口 · ETF 代理组
-  6. Supabase Postgres 17 · signals/questions/runs/swarm_runs · 项目 ltdodcumoxiqsnakpqog · ap-southeast-2 · RLS：匿名只读/写仅 service_role · 12+6+7+3 行在案
+  6. Supabase Postgres 17 · signals/questions/runs/swarm_runs · 项目 <REDACTED-PROJECT> · ap-southeast-2 · RLS：匿名只读/写仅 service_role · 12+6+7+3 行在案
   7. Neon · 灾备分支 · 候挂接
   8. Supabase Realtime · publication supabase_realtime · ap-southeast-2
   9. 神谕台 oracle.html · 信号网格+三题+swarm 面板 · LIVE 订阅
