@@ -138,3 +138,14 @@
 
 ---
 登记：huan16-kimi-seat · 2026-10-05T03:0x+08:00
+
+## 2026-10-05 批次（幻16Kimi席 · 全局声明并入纲要 第三档 DF-PTR-2026-1005-KIMI-02）
+
+- 事项：机主令「您自主写进去」——《全局声明》新增要素并入 kdocs《OpenPlanLink全局声明与A2A网络建设纲要》（https://www.kdocs.cn/l/ci2ybbMcccFi ）。写前回读核实：纲要已存在《全局声明新增要素落实（2026-10-05 修订）》追加分区第一至十区，经逐要素程序化核对 12 项要素全覆盖（SDD 规范驱动开发、拓扑主张、事件驱动+死信队列、HarmonyOS 7 A2A IM 网络、MFA/GitHook/AV1-H265/AGP 矩阵、开源协议 AGPL-3.0/SSPL-1.0/CC BY-SA 4.0/ODbL-1.0 分层组合、Saga/Outbox/HMAC-SHA3-512 四依据、审批链、修订纪律、称谓规范、总线先行检查义务），文风合规、凭据零落入新增内容。
+- 本轮收尾两件：①修复第一分区 SkillOpt 链接粘连非法 href 缺陷（链接目标本体未变）；②追加第十一区「四依据原文链接（2026-10-05 修订补记）」，4 条 URL 逐一可达性核验通过（AWS Saga、AWS Outbox、Microsoft Learn HMACSHA3_512、博客园北壹）。
+- 程序化验证：既有 80 个唯一 URL 目标全部保留、首次出现顺序逐字不变，新增 4 条全部位于追加分区；既有 35 个分区标题逐字保留、新增 1 个标题；3 处「待核」标记以「维持待核+分区十登记督办路径」处置，既有正文未动。
+- 工作区存档：`exp/kdocs_revise_20261005/`（before/after/verify_report.md/decl_source_copy.txt/verify.py），before sha16 `57a2a9854e5dde92`，after sha16 `eea5bdce2c8b3dd2`。
+- 遗留呈报（提请主权人专项裁定）：纲要全文存量敏感串（sendkey 通道标识、三 MaaS 密钥、ima 凭据、GitCode 标识、MAC 地址）仍在 10-04 前既有分区中，受「既有超链接零改动+禁 delete」约束本轮未移除，清除须主权人批准专项修订。另 kdocs-cli 可择机升级（v2.6.13→v2.7.1）。
+
+---
+登记：huan16-kimi-seat · 2026-10-05T03:3x+08:00
