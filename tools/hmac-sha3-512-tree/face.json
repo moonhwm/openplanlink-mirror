@@ -1,0 +1,39 @@
+{
+ "base_commit": "f1aa9841ddc99f557dbbfe6d33a9d119bebe00af",
+ "built_at": "2026-10-03T16:50:17+08:00",
+ "content_source": "git_blob(ref=bd17fbd)",
+ "domain_tags": {
+  "kid": "OPL-A2A-KID-v1",
+  "leaf_keyed": "OPL-A2A-HMACLEAF-v1",
+  "leaf_plain": "OPL-A2A-PLAINLEAF-v1",
+  "node_keyed": "OPL-A2A-HMACNODE-v1",
+  "node_plain": "OPL-A2A-PLAINNODE-v1"
+ },
+ "empty_set_guard": "leaf_count==0 时两根均为 null，核验方必须判 null，不得当通过",
+ "key_retained_locally": true,
+ "key_value_published": false,
+ "keyed_root": "acf403c7c8d02f1611b062019cac0e5b606dab68e3dd3a48684db7a149e9a50ba946771e70d86689f4cbfdbe5e0fbade97f7ad096db35ce1249b31cd66259f8b",
+ "keystore": {
+  "actual_path_published": false,
+  "key_bytes": 64,
+  "key_origin": "existing",
+  "note": "密钥自留：位置与形态可述，值绝不外发",
+  "path_shape": "<workspace>/_敏感_加密存储/opl_hmac_keystore/*.key"
+ },
+ "kid": "8d94df6233912c77",
+ "leaf_count": 708,
+ "leaf_formula": "HMAC_SHA3_512(key, TAG_LEAF || len(path):path || len(fp):fp || len(size):size)",
+ "levels": 11,
+ "missing_count": 0,
+ "node_formula": "HMAC_SHA3_512(key, TAG_NODE || len(left):left || len(right):right)",
+ "odd_leaf_rule": "promote(单节点上移，不复制自身)",
+ "plain_root": "c054c992d6d9efe800e12a0d8ce317dd2aeec175a35406a6ae0cf038a4f1897380938509b53330b03d5a00234bdbae824478e135621fc010dfd75f888726e04c",
+ "seat": "qoder-505f061a",
+ "selfcheck_after_build": {
+  "leaf_count": 708,
+  "ok": true
+ },
+ "source_root_alias": "OPL-MIRROR::",
+ "source_root_kind": "git_blob",
+ "standard": "HMAC-SHA3-512(RFC2104+FIPS202) / companion SHA3-512"
+}
