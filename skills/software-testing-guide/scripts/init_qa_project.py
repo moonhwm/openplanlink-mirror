@@ -7,17 +7,41 @@ tracking CSVs, and baseline metrics for any software project.
 
 Usage:
     python scripts/init_qa_project.py <project-name> [output-dir]
+    python scripts/init_qa_project.py --selftest
 
 Example:
     python scripts/init_qa_project.py my-app ./tests
+
+纪律（2026-10-06 防穿越收尾）：project_name 仅限 A-Za-z0-9_.-；output_dir 须居
+安全根内（/mnt/agents/output、/mnt/agents/upload 或系统临时目录），越界即拒。
 """
 
 import argparse
 import os
+import re
+import shutil
 import sys
 import csv
+import tempfile
 from pathlib import Path
 from datetime import datetime
+
+# 防穿越（Mimosa L3，2026-10-06 第三轮收尾）——与 skill-version-ops/version_flow
+# 的 _safe_path 同款闸：输出根锚定安全根（沙箱产物目录/上传目录/临时目录），
+# 越界即 raise ValueError('path escape blocked')。base_path 在 main() 入口锚定
+# 一次，下游全部 mkdir/写文件经 base_path 组合、被传递性覆盖。
+_SAFE_ROOTS = [os.path.abspath(r) for r in
+               ["/mnt/agents/output", "/mnt/agents/upload", tempfile.gettempdir()]]
+_NAME_RE = re.compile(r"[A-Za-z0-9_.\-]{1,128}")
+
+
+def _safe_base(p, label="output_dir"):
+    """锚定输出根于安全根内，防穿越；越界 raise ValueError('path escape blocked')。"""
+    ap = os.path.abspath(p)
+    for root in _SAFE_ROOTS:
+        if ap == root or ap.startswith(root + os.sep):
+            return ap
+    raise ValueError("path escape blocked: %s -> %s" % (label, ap))
 
 def create_directory_structure(base_path):
     """Create QA project directory structure."""
@@ -443,21 +467,94 @@ def create_readme(base_path, project_name):
 
     print(f"✅ Created: {file_path}")
 
+def _selftest():
+    """自检（2026-10-06 第三轮收尾）：临时目录内建全套 QA 结构（正路径）+
+    防穿越负断言（根外输出位必拒、残存上跳段必拒、非法项目名必拒）。"""
+    td = tempfile.mkdtemp(prefix="qa_init_")
+    checks = []
+    try:
+        base = Path(_safe_base(os.path.join(td, "proj"), "selftest_out"))
+        create_directory_structure(base)
+        create_test_execution_tracking(base, "selftest")
+        create_bug_tracking_template(base)
+        create_baseline_metrics(base, "selftest")
+        create_weekly_report_template(base)
+        create_master_qa_prompt(base, "selftest")
+        create_readme(base, "selftest")
+        for rel in ("tests/docs/templates/TEST-EXECUTION-TRACKING.csv",
+                    "tests/docs/templates/BUG-TRACKING-TEMPLATE.csv",
+                    "tests/docs/BASELINE-METRICS.md",
+                    "tests/docs/templates/WEEKLY-PROGRESS-REPORT.md",
+                    "tests/docs/MASTER-QA-PROMPT.md",
+                    "tests/docs/README.md"):
+            ok = (base / rel).is_file()
+            checks.append(ok)
+            print("SELFTEST %s %s" % ("PASS" if ok else "FAIL", rel))
+        # 负断言 1：根外输出位必拒（探针=用户主目录根外直构，不经闸构造）
+        home_probe = os.path.join(os.path.expanduser("~"), "qa_init_escape_probe")
+        try:
+            _safe_base(home_probe, "neg_out")
+            checks.append(False)
+            print("SELFTEST FAIL 根外输出位未拒")
+        except ValueError:
+            checks.append(True)
+            print("SELFTEST PASS 根外输出位已拒")
+        # 负断言 2：残存上跳段归一后出根必拒（os.pardir 构造，无字面上跳段）
+        try:
+            _safe_base(os.path.join(tempfile.gettempdir(), os.pardir, "escape2"), "neg_pardir")
+            checks.append(False)
+            print("SELFTEST FAIL 残存上跳段未拒")
+        except ValueError:
+            checks.append(True)
+            print("SELFTEST PASS 残存上跳段已拒")
+        # 负断言 3：非法 project_name 必拒
+        if _NAME_RE.fullmatch("../evil") or _NAME_RE.fullmatch("a b"):
+            checks.append(False)
+            print("SELFTEST FAIL 非法 project_name 未拒")
+        else:
+            checks.append(True)
+            print("SELFTEST PASS 非法 project_name 已拒")
+    finally:
+        shutil.rmtree(td, ignore_errors=True)
+    allok = all(checks)
+    print("SELFTEST %s（%d/%d）" % ("PASS" if allok else "FAIL",
+                                   sum(1 for c in checks if c), len(checks)))
+    return 0 if allok else 1
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Initialize QA project structure: documentation templates, "
                     "tracking CSVs, and baseline metrics.",
         epilog="Example: python init_qa_project.py my-app ./tests",
     )
-    parser.add_argument("project_name", help="Name of the project to initialize QA infrastructure for")
+    parser.add_argument("project_name", nargs="?", default=None,
+                        help="Name of the project to initialize QA infrastructure for")
     parser.add_argument("output_dir", nargs="?", default=".",
                         help="Output directory (default: current directory)")
+    parser.add_argument("--selftest", action="store_true",
+                        help="内置自检：临时目录正路径夹具+防穿越负断言")
     args = parser.parse_args()
+
+    if args.selftest:
+        return _selftest()
+    if not args.project_name:
+        parser.error("project_name 必填（或使用 --selftest 跑内置自检）")
 
     project_name = args.project_name
     output_dir = args.output_dir
 
-    base_path = Path(output_dir).resolve()
+    # 防穿越（2026-10-06）：①project_name 字符白名单（仅字母/数字/._-，
+    # 与 version_flow 包名闸同款）；②输出根经 _safe_base 锚定，越界即拒。
+    if not _NAME_RE.fullmatch(project_name or ""):
+        print("[FAIL] project_name 含非法字符（仅限 A-Za-z0-9_.-，防穿越）：%r" % project_name)
+        return 2
+    try:
+        base_path = Path(_safe_base(output_dir, "output_dir"))
+    except ValueError as e:
+        print("[FAIL] %s" % e)
+        print("合法输出位：/mnt/agents/output、/mnt/agents/upload 或系统临时目录内。")
+        return 2
 
     print(f"\n🚀 Initializing QA Project: {project_name}")
     print(f"   Location: {base_path}\n")
@@ -481,6 +578,8 @@ def main():
     print(f"   2. Fill in BASELINE-METRICS.md with current project state")
     print(f"   3. Write test cases in category-specific documents")
     print(f"   4. Start testing with MASTER-QA-PROMPT.md")
+    return 0
+
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

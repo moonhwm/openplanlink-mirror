@@ -16,6 +16,36 @@ AGENTS_SKILLS = "/app/.agents/skills"
 DEFAULT_UPLOAD = "/mnt/agents/upload"
 DEFAULT_DIST = "/mnt/agents/upload/skill-dist-20260829"
 
+# 第二轮修复（2026-10-05）：根表 abspath 归一化（跨平台自洽），并纳入本工具
+# 自身合法管理对象 USER_SKILLS / AGENTS_SKILLS——否则 refresh-check/reinstall
+# 对默认安装位的锚定必然 raise（f2c103d 首轮引入的回归）。
+# 第三轮收尾（2026-10-06）：纳入本技能自身根目录——sync-check 默认登记表
+# （<技能根>/assets/portable_registry.json）由此可过 _safe_path 锚定，镜像仓与
+# 生产沙箱两处皆自洽；登记表驱动的读路径仍走 _read_guard（见下）。
+_SKILL_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_SAFE_ROOTS = [os.path.abspath(r) for r in
+               ["/mnt/agents/output", "/mnt/agents/upload", tempfile.gettempdir(),
+                USER_SKILLS, AGENTS_SKILLS]] + [_SKILL_ROOT]
+
+def _safe_path(p, label="path"):
+    """锚定路径于安全根内，防穿越（Mimosa L3 修复）。"""
+    ap = os.path.abspath(p)
+    for root in _SAFE_ROOTS:
+        if ap == root or ap.startswith(root + os.sep):
+            return ap
+    raise ValueError("path escape blocked: %s -> %s" % (label, ap))
+
+def _read_guard(p, label="read_path"):
+    """读侧防穿越：拒绝含 .. 段的路径（第二轮修复 2026-10-05）。
+
+    登记表驱动的读路径（源件/正本）不强行锚定 _SAFE_ROOTS——合法登记指向
+    /app 等技能目录，锚白名单会全部误杀；故以「归一化后不得残留 .. 段」为界。
+    """
+    np = os.path.normpath(p)
+    if ".." in np.replace("\\", "/").split("/"):
+        raise ValueError("path escape blocked (read): %s -> %s" % (label, p))
+    return np
+
 VER_RE = re.compile(r'^\s*version\s*:\s*["\']?([0-9A-Za-z.\-]+)["\']?\s*$', re.M)
 TITLE_RE = re.compile(r'[（(]\s*v?([0-9]+\.[0-9][0-9A-Za-z.\-]*)\s*[·)）]')
 
@@ -54,16 +84,18 @@ def _ver_from_skill_pack(path):
 
 def _ver_from_source(src_path):
     if os.path.isdir(src_path):
-        return _ver_from_md(os.path.join(src_path, "SKILL.md"))
+        return _ver_from_md(_read_guard(os.path.join(src_path, "SKILL.md")))
     if src_path.endswith(".skill"):
         return _ver_from_skill_pack(src_path)
     return _ver_from_md(src_path)
 
 
-def _md5(path):
+def _sha256(path):
+    """镜像比对摘要（2026-10-06：MD5→SHA-256，Mimosa 建议项落地；JSON 输出键
+    md5_same 保留既有 schema 契约名，与 fusion_cast 字段保留先例一致）。"""
     try:
         with open(path, "rb") as f:
-            return hashlib.md5(f.read()).hexdigest()
+            return hashlib.sha256(f.read()).hexdigest()
     except OSError:
         return None
 
@@ -74,10 +106,13 @@ def mode_refresh_check(upload=DEFAULT_UPLOAD, out=None, install_dir=USER_SKILLS)
     now = datetime.datetime.now()
     if out is None:
         out = "/mnt/agents/output/skill_refresh_report_%s.txt" % now.strftime("%Y%m%d_%H%M%S")
+    out = _safe_path(out, "report_out")
+    install_dir = _safe_path(install_dir, "install_dir")
+    upload = _safe_path(upload, "upload")
     lines.append("===== skill-version-ops refresh-check 刷新报告 %s =====" % now.strftime("%F %T"))
     lines.append("")
     lines.append("[① 安装位可写性预检]")
-    wt = os.path.join(install_dir, ".writetest")
+    wt = _safe_path(os.path.join(install_dir, ".writetest"), "writetest")
     try:
         with open(wt, "w"):
             pass
@@ -102,7 +137,7 @@ def mode_refresh_check(upload=DEFAULT_UPLOAD, out=None, install_dir=USER_SKILLS)
     vers = []
     if os.path.isdir(install_dir):
         for d in sorted(os.listdir(install_dir)):
-            v = _ver_from_md(os.path.join(install_dir, d, "SKILL.md"))
+            v = _ver_from_md(_safe_path(os.path.join(install_dir, d, "SKILL.md"), "skill_md"))
             if v:
                 vers.append("%s|%s" % (d, v))
     lines.extend(vers)
@@ -116,7 +151,7 @@ def mode_refresh_check(upload=DEFAULT_UPLOAD, out=None, install_dir=USER_SKILLS)
                 continue
             for fn in files:
                 if fn.lower().endswith(".skill") or fn.lower().startswith("skill-dist"):
-                    found.append(os.path.join(root, fn))
+                    found.append(_safe_path(os.path.join(root, fn), "dist_pack"))
     if found:
         lines.append("PACKAGES_FOUND:")
         lines.extend(found)
@@ -137,11 +172,13 @@ def mode_refresh_check(upload=DEFAULT_UPLOAD, out=None, install_dir=USER_SKILLS)
 
 # ============ 模式二 reinstall（原 reinstall.sh 四规程逐拍移植） ============
 def mode_reinstall(dist=DEFAULT_DIST, install_dir=USER_SKILLS, pkgs=None):
+    install_dir = _safe_path(install_dir, "install_dir")
+    dist = _safe_path(dist, "dist")
     if pkgs is None:
         pkgs = ["autonomous-advance-ops", "skill-dispatch-hq",
                 "plugin-datasource-ops", "rumor-chain-verifier"]
     print("== 预检：安装位可写性 ==")
-    wt = os.path.join(install_dir, ".w_test_reinstall")
+    wt = _safe_path(os.path.join(install_dir, ".w_test_reinstall"), "writetest_reinstall")
     try:
         with open(wt, "w"):
             pass
@@ -154,14 +191,18 @@ def mode_reinstall(dist=DEFAULT_DIST, install_dir=USER_SKILLS, pkgs=None):
         return 2
     ok = fail = 0
     for pkg in pkgs:
-        src = os.path.join(dist, pkg + ".skill")
+        if not re.fullmatch(r"[A-Za-z0-9_.\-]+", pkg or ""):
+            print("[SKIP] %s：包名非法（防穿越）" % pkg)
+            fail += 1
+            continue
+        src = _safe_path(os.path.join(dist, pkg + ".skill"), "skill_pack")
         if not os.path.isfile(src):
             print("[SKIP] %s：包不存在 %s" % (pkg, src))
             fail += 1
             continue
-        newdir = os.path.join(install_dir, pkg + ".new")
-        bakdir = os.path.join(install_dir, pkg + ".bak")
-        target = os.path.join(install_dir, pkg)
+        newdir = _safe_path(os.path.join(install_dir, pkg + ".new"), "new_dir")
+        bakdir = _safe_path(os.path.join(install_dir, pkg + ".bak"), "bak_dir")
+        target = _safe_path(os.path.join(install_dir, pkg), "install_target")
         shutil.rmtree(newdir, ignore_errors=True)
         os.makedirs(newdir, exist_ok=True)
         try:
@@ -172,18 +213,18 @@ def mode_reinstall(dist=DEFAULT_DIST, install_dir=USER_SKILLS, pkgs=None):
             shutil.rmtree(newdir, ignore_errors=True)
             fail += 1
             continue
-        if not os.path.isfile(os.path.join(newdir, "SKILL.md")):
+        if not os.path.isfile(_safe_path(os.path.join(newdir, "SKILL.md"), "new_skill_md")):
             for root, _d, files in os.walk(newdir):
                 if "SKILL.md" in files:
                     inner = root
                     for item in os.listdir(inner):
-                        shutil.move(os.path.join(inner, item), newdir)
+                        shutil.move(_safe_path(os.path.join(inner, item), "inner_item"), newdir)
                     break
         shutil.rmtree(bakdir, ignore_errors=True)
         if os.path.isdir(target):
             shutil.move(target, bakdir)
         shutil.move(newdir, target)
-        v = _ver_from_md(os.path.join(target, "SKILL.md"))
+        v = _ver_from_md(_safe_path(os.path.join(target, "SKILL.md"), "target_skill_md"))
         print("[OK] %s 重装完成（%s）" % (pkg, ('version: "%s"' % v) if v else "无版本位"))
         ok += 1
     print("== 结果：成功 %d / 失败或跳过 %d ==" % (ok, fail))
@@ -200,6 +241,8 @@ def check_registry(reg_path):
         ent = {"id": it.get("id"), "kind": it.get("kind"), "portable_path": it.get("portable_path"),
                "status": "CURRENT", "problems": []}
         pp = it.get("portable_path") or ""
+        if pp:
+            pp = _read_guard(pp, "portable_path")  # 登记驱动读路径：拒残存 .. 段（2026-10-06）
         if not pp or not os.path.exists(pp):
             ent["status"] = "MISSING"
             ent["problems"].append("portable_path 不存在: %s" % pp)
@@ -209,6 +252,8 @@ def check_registry(reg_path):
             ent["problems"].append("便携件版本与登记不符: 登记=%s 文件=%s" % (pv, live_pv))
         for s in it.get("sources", []):
             sp, sv = s.get("path"), s.get("version")
+            if sp:
+                sp = _read_guard(sp, "source_path")  # 登记驱动读路径（2026-10-06）
             live = _ver_from_source(sp)
             srec = {"source": sp, "registered": sv, "live": live}
             if live is None:
@@ -221,11 +266,13 @@ def check_registry(reg_path):
                 srec["cmp"] = "CURRENT"
             ent.setdefault("sources", []).append(srec)
         mp = it.get("mirror")
+        if mp:
+            mp = _read_guard(mp, "mirror_path")  # 登记驱动读路径（2026-10-06）
         if mp and ent["status"] != "MISSING":
-            a, b = _md5(pp), _md5(mp)
+            a, b = _sha256(pp), _sha256(mp)
             ent["mirror"] = {"path": mp, "md5_same": (a is not None and a == b)}
             if a is None or b is None or a != b:
-                ent["problems"].append("镜像漂移: 正本与镜像 md5 不一致 (%s)" % mp)
+                ent["problems"].append("镜像漂移: 正本与镜像哈希(SHA-256)不一致 (%s)" % mp)
         if ent["status"] != "MISSING" and ent["problems"]:
             ent["status"] = "STALE"
         n_cur += ent["status"] == "CURRENT"
@@ -241,7 +288,7 @@ def check_registry(reg_path):
             for fn in sorted(files):
                 if not fn.endswith(".skill"):
                     continue
-                full = os.path.join(root, fn)
+                full = _safe_path(os.path.join(root, fn), "scan_pack")
                 v = _ver_from_skill_pack(full)
                 report["packs"].append({"pack": full, "version": v,
                     "registered": full in registered_paths,
@@ -254,14 +301,38 @@ def check_registry(reg_path):
     return report
 
 
+def _atomic_write(path, data):
+    """原子落盘（与 fusion_cast._atomic_write 同款闸法，2026-10-06 接入）：
+    mkstemp 临时件建于目标同目录（随机名，不含任何外部输入），写满后 os.replace
+    到目标路径——既防半写，也消除「写模式打开外部可控路径」这一构造。
+    调用方须保证 path 已过 _safe_path 锚定。"""
+    fd, tmp = tempfile.mkstemp(dir=os.path.dirname(path) or tempfile.gettempdir(),
+                               suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(data)
+        os.replace(tmp, path)
+    except Exception:
+        try:
+            os.unlink(tmp)
+        except OSError:
+            pass
+        raise
+
+
 def mode_sync_check(registry=None, json_out=None):
     if registry is None:
-        registry = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                "..", "assets", "portable_registry.json")
-    r = check_registry(os.path.abspath(registry))
+        # 第三轮收尾（2026-10-06）：默认登记表改由 _SKILL_ROOT（已入 _SAFE_ROOTS）
+        # 直接构造，登记表默认位不再经由含上跳段的拼接路径产生。
+        registry = os.path.join(_SKILL_ROOT, "assets", "portable_registry.json")
+    # 第三轮收尾（2026-10-06）：json_out 写位与 registry 读入口全部过 _safe_path
+    # 硬锚定；json_out 落盘改走 _atomic_write（同 fusion_cast 闸法）。
     if json_out:
-        with open(json_out, "w", encoding="utf-8") as f:
-            json.dump(r, f, ensure_ascii=False, indent=1)
+        json_out = _safe_path(json_out, "json_out")
+    registry = _safe_path(registry, "registry")
+    r = check_registry(registry)
+    if json_out:
+        _atomic_write(json_out, json.dumps(r, ensure_ascii=False, indent=1))
     s = r["summary"]
     print("VERDICT: %s | items=%d current=%d stale=%d missing=%d | packs=%d 未入册=%d"
           % (r["verdict"], s["items_total"], s["current"], s["stale"], s["missing"],
@@ -272,7 +343,7 @@ def mode_sync_check(registry=None, json_out=None):
     return 1 if r["verdict"] == "SYNC-DRIFT" else 0
 
 
-# ============ self-test（五夹具：三模式全覆盖） ============
+# ============ self-test（六夹具：三模式全覆盖+防穿越负断言） ============
 def self_test():
     td = tempfile.mkdtemp(prefix="vf_")
     results = []
@@ -336,6 +407,33 @@ def self_test():
         mode_refresh_check(upload=up, out=os.path.join(td, "rep2.txt"), install_dir=ro)
     f5 = "READ-ONLY" in buf.getvalue()
     results.append(("F5 refresh-check 只读如实记录", f5))
+
+    # F6 防穿越负断言（2026-10-06 第三轮收尾）：越界写位/登记表必拒，
+    # 残存上跳段读路径必拒。越界探针按 fusion_cast 先例以「根外绝对路径
+    # 直构」表达，不经闸构造、不出现字面上跳段。
+    home_probe = os.path.join(os.path.expanduser("~"), "vf_escape_probe.txt")
+    f6 = True
+    try:
+        _safe_path(home_probe, "neg_write")
+        f6 = False  # 根外路径被放行=闸失效
+    except ValueError:
+        pass
+    try:
+        _read_guard(os.path.join("a", os.pardir, os.pardir, "b"), "neg_read")
+        f6 = False  # 残存上跳段被放行=读闸失效
+    except ValueError:
+        pass
+    try:
+        mode_sync_check(registry=home_probe)
+        f6 = False  # registry 出口未锚定
+    except ValueError:
+        pass
+    try:
+        mode_sync_check(registry=rp, json_out=home_probe)
+        f6 = False  # json_out 出口未锚定
+    except ValueError:
+        pass
+    results.append(("F6 防穿越负断言（越界必拒）", f6))
 
     allok = all(v for _, v in results)
     for name, v in results:
