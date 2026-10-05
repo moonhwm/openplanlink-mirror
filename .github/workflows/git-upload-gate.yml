@@ -27,6 +27,8 @@ jobs:
         run: python3 -m unittest discover -s tests -p test_upload_orchestration.py -v
       - name: Verify A2A card discovery boundaries
         run: python3 -m unittest discover -s tests -p test_a2a_discovery.py -v
+      - name: Verify night scheduling evidence boundaries
+        run: python3 -m unittest discover -s tests -p test_night_schedule.py -v
       - name: Inspect objects relative to the event baseline
         env:
           BASE_OID: ${{ github.event.pull_request.base.sha || github.event.before }}

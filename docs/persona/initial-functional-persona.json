@@ -117,6 +117,12 @@
       "engine_generation_round": null,
       "new_information_score": 1,
       "new_fact": "重新核验 WPS 元数据版本 61、ima 项目计数 3991，完成只读节点发现，新增迁移审计范围"
+    },
+    {
+      "review_round": 4,
+      "engine_generation_round": null,
+      "new_information_score": 1,
+      "new_fact": "重新核验 WPS 元数据版本 64、ima 项目计数 3992；4173 当前拒绝连接。夜间排期已校验规则有效期和云样本绑定，实际云执行、Kimi 产品加载及独立签收继续待核"
     }
   ],
   "historical_escape_count": "未取得既往全局账本，不能宣称归零",

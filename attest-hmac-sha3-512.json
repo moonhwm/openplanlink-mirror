@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T21:18:46.176Z",
+  "generated_at": "2026-10-05T22:43:05.870Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 864,
-  "merkle_root_sha3_512": "c1588b1797643db2972731b5b491f70dbe4cc3f8222fe6fb8ec38c39de8742bba444bdff40c1b262ea4659aa4640450eea64f0f91c2f3b31ea1acc58a81a411e",
-  "hmac_sha3_512": "c24dea26a0b477ca200d91090d24a4301dce7ea67897e48fd89299c9639e01117795247ed491dbcff5c02c8a7e887d157858c6eff83df2480a3d113aaafa2ead",
+  "file_count": 874,
+  "merkle_root_sha3_512": "3b5bf1c44b24a86c52e93e562cae1920fbe8f97cf19c6dc7f1ff891a07bc1e0b2aa8737bf12022417a390bafebdc3bb6bfaacc7e570143d7c59d49976936b030",
+  "hmac_sha3_512": "0fbd963a596675fea34d86a37de2914b022565f9b28d690a72753ef576b0515f5b8f167712cbf684ce3650f13f9c78df0e91ddcc719390c0f1f065c9ac968811",
   "files": [
     {
       "path": ".gitattributes",
@@ -61,9 +61,9 @@
     },
     {
       "path": ".github/workflows/git-upload-gate.yml",
-      "size": 1586,
-      "content_sha3_512": "8c5dbd52115008056252ed311afc7ac5384780d5be4be7aa14e196604fa490eb366dc070186e92403ca4e1592b2fa9980a3068edc5f60435c3e8534c89b57fbc",
-      "leaf_sha3_512": "691254be3fd81b860cf9c979a4790263e18a78b42d6f260c884013d83ba504e3c0195c62abe14ffdf5f3160abd652e54d3d1fa3e5a9468f81e1149bcf774900d"
+      "size": 1724,
+      "content_sha3_512": "748f2da614d578ebf4d52128d40da968891ea2083e99c040fb5f855e956574061776ee79506ec49c3677847bede4056ea31dd532f85bfbe37ba3f05166a2b09b",
+      "leaf_sha3_512": "a434db86870a0c76a962783f4fb9ca2867413339aa75ad45fdc471072b6d69798b16cae4937c4bd4337c6cac89b3534c4ca3faa02fb42bf913786b2d06333677"
     },
     {
       "path": ".gitignore",
@@ -403,27 +403,33 @@
     },
     {
       "path": "docs/cloud_connections_experience_20261006.md",
-      "size": 3608,
-      "content_sha3_512": "1bcbe53f4724b4c8517a9dd2ce424afe35cb2b84d6a9121cda7eb07508bcfbd85e13610c51cf8c61ba337307c89c3a92189f057bdc56c354812a0fc979b640d8",
-      "leaf_sha3_512": "9d255c542119d9a64bd6e84a23adfe22ae78260fedf94fba7ab7e08743c68d5c7434ae21a36dfbf85cc11960ce61d6a67fc4811b37da7ab37644693f0bb0f080"
+      "size": 5606,
+      "content_sha3_512": "e27240b86008956bd03be5b72af4c0444e3870a61d287b1d12db41ef5496a588a9a4ebc2d959e8805d9ead7feeeebb4cef707fbaac2231f49aad06471f161259",
+      "leaf_sha3_512": "ad9ab1ed8eee495cdc0d23d4fa811128e4941ae0b188b741e9ed9d7c9bd8a921b798250aa280651da6b184533a194eceec073e3574201bb1a6d7fd43cddced2c"
     },
     {
       "path": "docs/cloud_connections_status_20261006.json",
-      "size": 3266,
-      "content_sha3_512": "ef6603b009b9a785a31676d8648189275293160452d3aabb167ef00846abfaacdc77dba70ead29861f98f8fe4903f89aba8667a5c0867fbcc137f3779e3dbb75",
-      "leaf_sha3_512": "d982ef342da69b39437af0575b1171cae4c7ce3a861c82e9dc6c65ea6ff9317e3e7338ff9548d1596a91a158db21c8413438eb4f60466ef0146b1e70c7ee0e24"
+      "size": 5312,
+      "content_sha3_512": "94dabd896991ad17f3476fac072c1cc4978262df4ec6a58075e6061acda71ac3e64b14f3be417453a5b167d061e6c609e21c40326a616361ab7dd05e422e9802",
+      "leaf_sha3_512": "8933f5960832f0ee383746840807abb6b230f2fca83fce96c82d8e5801cda12220ee7fcdc76adde3a19f1040c47bb0e7bceb4d0051ef10410f33f709017969b8"
+    },
+    {
+      "path": "docs/night_scheduling_experience_20261006.md",
+      "size": 7052,
+      "content_sha3_512": "be5d5b30b99d31908b1326917eb0c4c886a84d78eab8328abc48daaa75cf78547362773f50940af262fbc534e9d5f6f1dfe1145f4a5ab5e6d7b85b417980ee0d",
+      "leaf_sha3_512": "45ba0b2ebbfa37f82233be2ec615517eba6a59920bf851a9e9668d23efa68a577185537777c81d681fc709f9cf7d5ebad4c5081c5827e9f17117cfb4749532e7"
     },
     {
       "path": "docs/persona/initial-functional-persona.json",
-      "size": 4137,
-      "content_sha3_512": "30c8cd74476c0b74eaf19dd9afa2b49d9228c98aa7d531099827d1dbc167b5d91246b41a26a9eba3b9ad4e3b306acf81eaf170f38dd60c8837755121cd33201c",
-      "leaf_sha3_512": "c7bf485367f69657b73dd39f3a3e211cd0ba868ac7179b003f907bf94d02cf4265fc7608fbc076084a8fb19ddaaeb2c9b7582e3b055df3f3b8890fdf270c0d02"
+      "size": 4476,
+      "content_sha3_512": "c9badb3eb892c277de2a327a236865c4d503663d25d279dc747949e22e9325c8c1463e62ade49e26d6ed2c38483e679ecb4463f61fc53e83bf4d37359a2657a9",
+      "leaf_sha3_512": "03235e726d5760d9faa2a25414eb7018e74b4a16aa32e32a81d86c6863e8f74cafac68351791061c95229c31f4a3a07aedf13143e15014955118b88f29fef8a8"
     },
     {
       "path": "docs/persona/initial-functional-persona.md",
-      "size": 3868,
-      "content_sha3_512": "aa616524811358d480e9b8e9fb8cc57fe1149aaa38e5289504cda39d1c8345c58c8476f412c808ac829353c6e960dd3d860ed1082d57c137830d2a46aaee7a1e",
-      "leaf_sha3_512": "ab98afadf82baa15b79df4a32a82ef8321517f7b6740f68ac7766819de89ab8945c7b0646f93fbaed15435451f419d4ef1255b5d7f1058685a954b143a080ef5"
+      "size": 4375,
+      "content_sha3_512": "cb6e34fa7508c9c083b555ccd958b38a6abf78fc0155d0f0564b92abad7b0b838aec76cad9d54819e559a437f6a94260524e82a3ed90b262b0a0bd84565f2d5e",
+      "leaf_sha3_512": "9312e76e5ac38d7d28fe583f0ad51b4067b350a2edffb74bb17a8dfe471446055b3f647a8cc9eb8ff4e58ed32da993dfda098e00e409c479a7fb55c30382706c"
     },
     {
       "path": "index.html",
@@ -3030,6 +3036,24 @@
       "leaf_sha3_512": "84aadd72efb0be60a6d5f2f2f495dff4b72fb61114be5420e0b3bc3012606e4f9f0062c67bae14447fcc941db3e0ce222e1cd821b092c15303c8fac50d44f5a7"
     },
     {
+      "path": "skills/opl-kimi-preflight-candidate/SKILL.md",
+      "size": 2028,
+      "content_sha3_512": "8677e2f25956d3d5d47d7b6cd7b6f979ec808672fe4e02fa90c80de3fe0c242961caa48fcd85756fe1d10129ea49c73d366349f8c2d44a2cc5560e7b08d9c903",
+      "leaf_sha3_512": "b685a15e4d509e75e34f99d581f218af43781e9e12b467192ec7f3c2e6c789953c26ce216df017d191a97fb48df234acb9c38193b3b8ef545569981514380d01"
+    },
+    {
+      "path": "skills/opl-kimi-preflight-candidate/references/review-basis.md",
+      "size": 2233,
+      "content_sha3_512": "4d6a54b62ddfc7904b095df204d3df32623c71ddef5b7b759bbc4980d0a32efa4ff14fb48881e741bfef3d81649e79402a117fe971041d63b3d5ec8105e37c0a",
+      "leaf_sha3_512": "972a9d9dfaae2ecb0c14d014b8cd3fc62f757b539a1309bc238c11f456fd22f891b7774457c41c2e05d977a95a1afd7b5fb1da73ee20788dae004f30f048be9d"
+    },
+    {
+      "path": "skills/opl-kimi-preflight-candidate/scripts/preflight.py",
+      "size": 11829,
+      "content_sha3_512": "e27f50b91206c10c08f1ed0f5a1a3634b8ec41980229a1503451338b4b3f8b23e70a38ca2a65f4652a64ae7da49445056bd217834852607faa57f4f79c2626ab",
+      "leaf_sha3_512": "31a7cb23205c78cb7b67369197e211cd40fb048d61ce1431ea1e71721eeed04ba83237b3024949a8a9ee9d38d8acbd7bbd38290a006e9069d0114d5b8d2243fd"
+    },
+    {
       "path": "skills/output-verdict-gate/SKILL.md",
       "size": 8888,
       "content_sha3_512": "c5cdd5cb2daa1a57dae5007927d1868ed4b2157aa566b31f2c1b86a905100ac38b18e611e47cdfbe9636a9fd7a2b6d630101166692714325cf918e473d54e2fc",
@@ -4602,6 +4626,30 @@
       "leaf_sha3_512": "de14761e8c01e99519beb3f063700fe6b0341bb67e0efd757d5c29c8427c725f7fc5ccefa2513f14a4caef751047c06c2eee6a100bd390986a5f1bd49092b0e9"
     },
     {
+      "path": "specs/013-night-scheduling/plan.md",
+      "size": 1577,
+      "content_sha3_512": "58966321412407535f446096894f356fed9388df4b41668c4a5a1fa330f80ac556ee44cc41e08f103489d31d48aaee677ac22d4f573dd48c567401d6dd643bc3",
+      "leaf_sha3_512": "ed6b461d5cbe2a87804afd6e58b941808e704a179213758259d6cfb2b3ec6665f7d973bf8bd75d0c7230bf87a82315efd389819d3e2de4f2ad058601b670ab53"
+    },
+    {
+      "path": "specs/013-night-scheduling/spec.md",
+      "size": 6418,
+      "content_sha3_512": "d6bc8b4390af17ac687b813c405c8bf18af29991eecf0439306669d67b8ec5f016c2aca7effde9edb87c397164fd7bd248347ada83b4d0dcb93f7aec8ea14ad5",
+      "leaf_sha3_512": "d16f6492f69e1dcd838715691dbc54a26dc1fb9718cd2782f1f1dbc3f7f5891fb6a1b7316984e036e33c64965b8c707686d4b8cc3cf028ed36b868c1db729f2b"
+    },
+    {
+      "path": "specs/013-night-scheduling/tasks.md",
+      "size": 1247,
+      "content_sha3_512": "b61e8ae0208c64b87e466ad93ed880e9e4223fd3a83bcb257f6ef9ed85dde1d7dcfa1aca86c32319466a08ef5d81e89e223b8f1418ee4233b1480a2f3a2bc3de",
+      "leaf_sha3_512": "fd5f3950ca9a5a4e105af0002d8b3eaf1e1b6d0722f07258654fc7ebcee6a98d861a67522bf2dd38e715b3c55626f7f633a58a6d573c5cb167b68dcd34a0708b"
+    },
+    {
+      "path": "specs/013-night-scheduling/verification.md",
+      "size": 5568,
+      "content_sha3_512": "e1c42c101d1c53bfbbd116c5a76794f1049ab9d3f6b0fab038fef40240d3e5e890a6c7a05c3b0222658809c3de2750f3a4e78c045fbf9e282069841a8a8fece3",
+      "leaf_sha3_512": "4554e893a38ef52a7631d04013edae8c1c9eaf81810088aa6d771acd2898da3725874822c2233aefeb1ce343b7c8483d934881387a942e9a59f5c85dbee7d759"
+    },
+    {
       "path": "tests/test_a2a_discovery.py",
       "size": 6435,
       "content_sha3_512": "8574a46eda42276c970e0ddcb0be9c7fbb71e5aeb518fbe0147b239ade5e597d83ae9993fb56788d689f40e415daa79e8a2e7a6dfa1cda8411e07db4b8be2684",
@@ -4618,6 +4666,12 @@
       "size": 13463,
       "content_sha3_512": "a1d7c55fa61aa59edbb6a8f76c7f0bb64e49f05402ea8552f2caecc118a905ab87acff2cd7ad18f7f1795bf502d54dcbdd81ed1599fb3b1cf11ab47bffe29647",
       "leaf_sha3_512": "4fd0feb27a35f64066a9f997b049d39306f5add5f1cae54bd8e0b37c421c71ea0fa6128480849f64167121f312e9f512d36a0146ae592f5545dd2a8fdb27b946"
+    },
+    {
+      "path": "tests/test_night_schedule.py",
+      "size": 31775,
+      "content_sha3_512": "a3e47580dd35883bb134df1ff351eec4a93742512eaef3bdd8a06fd238b2840400538dd8bb3345a46722351eb1ae79c0d008becc7aec0d6db15ea4838e0e1fda",
+      "leaf_sha3_512": "dc8d4a769a23f6b07dc852092b54610612aa0643a47fa141d723113ca4117c3121bf7cc7703c3bc2081c4fca677cda3cca0828134f35d23084f03e262abecc5c"
     },
     {
       "path": "tests/test_upload_orchestration.py",
@@ -4810,6 +4864,12 @@
       "size": 6406,
       "content_sha3_512": "3d556fd9ec1751e801a93d739d20ef553d4175f7f854e22856c9f1c4ebc617af33d89812a7dc0409f77697042a39ad0b0d79d1c4d50e420a6cf6ccd5414cbcec",
       "leaf_sha3_512": "97954bdbb9984d3dbde12cb50e830080c00b14e8632f21cf44fd39ee385fdd7c46a2303d09b3cb4be13d63f86b77249ef359178d9ba0186bf0c621f8ee1894fa"
+    },
+    {
+      "path": "tools/night_schedule.py",
+      "size": 24110,
+      "content_sha3_512": "4523e84d9a072ebd9bc5ef3158cf9e6eedecf11e9bf95a37c90883b2ef743127598e400e50da06f28920a01ef3b76a3f6d4d6bb1b5b86733e7dcda23e9b95ad4",
+      "leaf_sha3_512": "cc0f4e23d48b479a1cf744fa9995ccee2b7c22f1d6a39e2cc47d54f79569789b29b9b23b30bdb7f76feb76480d5efb899b527c0c00ae8a5bf1e0a5837fde40a1"
     },
     {
       "path": "tools/open_access.py",

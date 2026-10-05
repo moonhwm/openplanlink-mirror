@@ -1,18 +1,24 @@
 {
   "schema": "openplanlink.cloud-integration-status/1",
-  "observed_at_utc": "2026-10-05 21:11:40 UTC",
+  "observed_at_utc": "2026-10-05T22:26:52+00:00",
+  "observation_round": "R9",
+  "observation_scope": "separate bounded provider reads and local probes; not one atomic snapshot",
   "providers": {
     "wps": {
       "configured": true,
       "read_verified": true,
       "tool_count": 37,
-      "document_metadata_version_observed": 61,
+      "document_metadata_version_observed": 64,
       "text_block_count": 878,
-      "characters": 22728,
+      "characters": 22971,
       "text_count_scope": "fresh redacted export; metadata version observed separately",
       "export_version_pinned": false,
       "native_import_verified": false,
-      "cloud_acl_history_verified": false
+      "cloud_acl_history_verified": false,
+      "previous_title_binding_matches": true,
+      "original_export_privately_encrypted_and_roundtrip_verified": true,
+      "previous_403_repaired": false,
+      "drive_and_parent_binding_verified": false
     },
     "supabase": {
       "configured": true,
@@ -30,7 +36,7 @@
       "adapter_version": "0.1.0",
       "tool_count": 5,
       "knowledge_bases": 2,
-      "project_content_count": 3991,
+      "project_content_count": 3992,
       "docx_paragraphs": 1214,
       "encrypted_source_roundtrip": true
     },
@@ -47,17 +53,30 @@
     }
   },
   "a2a": {
-    "agent_card_http": 200,
-    "health_http": 200,
-    "own_node_reply_hmac_verified": true,
-    "rpc_id_matches": true,
-    "peer_routes_returning_queued": 5,
-    "peer_queue_receipts_signed": false,
+    "agent_card_http": null,
+    "health_http": null,
+    "current_discovery_result": "discovery_failed",
+    "current_request_error": "ConnectionRefusedError",
+    "current_own_node_reply_hmac_verified": false,
+    "current_own_mailbox_query_completed": false,
+    "current_own_mailbox_acknowledgement_completed": false,
+    "own_mailbox_pending_reason": "service unavailable; existing normal MFA path still required",
+    "historical_observation": {
+      "round": "R7",
+      "agent_card_http": 200,
+      "health_http": 200,
+      "own_node_reply_hmac_verified": true,
+      "rpc_id_matches": true,
+      "peer_routes_returning_queued": 5,
+      "peer_queue_receipts_signed": false,
+      "does_not_prove_current_availability": true
+    },
     "independent_peer_acknowledgements_verified": 0,
     "process_started_or_modified": false,
     "readonly_discovery_implemented": true,
     "standard_methods_verified": false,
-    "card_signature_verified": false
+    "card_signature_verified": false,
+    "background_start_retried": false
   },
   "monitoring": {
     "automation_id": "openplanlink-a2a",
@@ -66,7 +85,9 @@
     "interval_minutes": 5,
     "notify_on_meaningful_change": true,
     "scheduled_trigger_received": true,
-    "queued_triggers_are_not_completed_checks": true
+    "queued_triggers_are_not_completed_checks": true,
+    "updated_prompt_durable_readback_verified": true,
+    "schedule_and_target_preserved": true
   },
   "huawei_x_efficiency": {
     "scope": "本轮助手发起并取得回执的云作业",
@@ -83,10 +104,15 @@
     "cost": null,
     "execution_receipt": null,
     "measurement_status": "未实测；待实际云端实例与授权配置引用",
-    "not_inferred_from_local_benchmarks": true
+    "not_inferred_from_local_benchmarks": true,
+    "koocli_version_verified": "7.2.12",
+    "profile_read_status": "unverified",
+    "profile_count": null,
+    "missing_profile_container_is_not_zero_profiles": true,
+    "cloud_authentication_verified": false
   },
   "publication_before_new_planning": {
-    "previous_published_commit": "6cf0b9279e828e9ac864a5c0a970013a63504d63",
+    "previous_published_commit": "411d47e36e794d9fd3984454fb7a4b0374c7777e",
     "pr_url": "https://github.com/moonhwm/openplanlink-mirror/pull/3",
     "previous_commit_gate_ci": "success"
   },
@@ -99,5 +125,27 @@
     "remote_node_desktop_snapshots_verified": 0,
     "configuration_baseline_updated_after_review": false
   },
-  "sensitive_originals_or_credentials_in_this_file": false
+  "night_scheduling": {
+    "spec": "013-night-scheduling",
+    "implementation_stage": "pure planning and external claim readiness",
+    "local_tests_passed": 48,
+    "rule_window_bjt": [
+      "2026-10-06T06:28:30+08:00",
+      "2026-10-07T06:28:30+08:00"
+    ],
+    "rule_window_is_provisional": true,
+    "cloud_samples_require_instance_scope_workload_and_units_binding": true,
+    "dispatch_authorized": false,
+    "cloud_jobs_dispatched": 0,
+    "final_version_independent_code_review_verified": true
+  },
+  "kimi_chat": {
+    "normal_browser_surface_available": false,
+    "official_entry_open_result": "queued",
+    "account_login_verified": false,
+    "skill_product_install_verified": false,
+    "local_skill_is_not_product_installation": true
+  },
+  "sensitive_originals_or_credentials_in_this_file": false,
+  "recorded_at_bjt": "2026-10-06T06:37:55.338515+08:00"
 }
