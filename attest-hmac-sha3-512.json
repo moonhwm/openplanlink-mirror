@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:01:57.190Z",
+  "generated_at": "2026-10-05T19:03:02.709Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1809,
-  "merkle_root_sha3_512": "b455a00927b970bd8cf5789de4a44ca8758180f9a42e1fa8f1bd56fff4f836450897fae67afb3f14525b7ac61461c8c59a2050f5989c04d8a78ff20f50dcb655",
-  "hmac_sha3_512": "74652473fed920d43eca92548ddbde1af01e6ce93066dbcffa6cdf91737142e11b41393c0e20eb510aa6ba837d2d4c584c9dec9ad37b2a637272685e6b4f33d7",
+  "file_count": 1813,
+  "merkle_root_sha3_512": "858b942568c8cda754ff61d088a5ad42051e4f7bf5b088f039f315ad70bbe04c064e57aaec7b308e039243970a143dfe07078e88965add9bc6c114976dbcfd1b",
+  "hmac_sha3_512": "5254e3d2de13355cce0956185fdc544232e8b2ca73ddc08cac1c523b4f7ab31ac9aea9e6f5a9b2db9bc41df69db2dba7ac9aa68f7617a19e2667178e583bd5cc",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -382,6 +382,30 @@
       "size": 2204,
       "content_sha3_512": "90b94db6915a3170bdae443f3bc10cceff214d737622ea0147e3abfbed3e93b4b6e6f0dca9fe803e57b07ab265caeed0af7346f23570b31623709dfe647246db",
       "leaf_sha3_512": "5459e4b0e865695c0fe3e204fec5c632acd2f54c761e650a8af669afa48dfef396f8f45e296f85281dbb860e812239e0cc2aaa16c66441540118dd1d1e8f6215"
+    },
+    {
+      "path": "deliverables/20261006/seat-cairn/exchange/DF-PERSONA-20261006-KIMIWORK-01.otl",
+      "size": 9220,
+      "content_sha3_512": "4c4b36d5d959f47f0fc6e4f974f9db5a116de63f8cdb5f594424475bf2d8ea7f7eca0f94bb31abca41009b60b1c8d7a3dced8b7e5118e052b36616e96cf49051",
+      "leaf_sha3_512": "1ec4bad907cda5524e38c52c5627a666141afb5036e014d6e365b25fe413066a3f7cdf210a1f4bad43c2659cc2bcdeae95ea9f7631e68f12bf33ce4cadc38436"
+    },
+    {
+      "path": "deliverables/20261006/seat-cairn/exchange/Moon席表态_阻塞六项表决矩阵_DF-ACK-20261006-MOON-01.otl",
+      "size": 3299,
+      "content_sha3_512": "74f59f29cd205632a745d6e83826f956a12a54ccd7ec6ae1c180c84ef063c9192b48e00db3308a184a39ea860efdbc37ce8659806f66d0cb83a2a43d932165c4",
+      "leaf_sha3_512": "776e9c7ed436517c7b33a1bf3bad6e50eb2c3a2f5b7162a6847dea3bc7dd9cc266ac6ef874f599cfcadaf9fee3f749028d888282c582924e79e9f22df357708f"
+    },
+    {
+      "path": "deliverables/20261006/seat-cairn/exchange/大讨论计票v2_DF-TALLY-20261006-CAIRN-02.otl",
+      "size": 6550,
+      "content_sha3_512": "99d256cafee276657eaace08f04bc9801164a859bd6cac6f04696cf8ccb6045e3d9014a52fefdf8981f9d91c890be1e4e33ab59224be588fa5454c579ffb228a",
+      "leaf_sha3_512": "44d5d87f689472fd9731e65e2af95e03f8e7e6423cf92450c970582350c5c976d5a766953c2c79b065cb165c876f87bc6d918b76f62a1f1901f8b678e5f8de01"
+    },
+    {
+      "path": "deliverables/20261006/seat-cairn/exchange/守藏席第九巡批注暨后量子建议_DF-PATROL-20261006-SHOUCANG-09.otl",
+      "size": 4087,
+      "content_sha3_512": "86194ec381b15b454c19d15b5436688f3e112949bedb3f4c4560b3622a5d81cea52a6bd100edb0f4d46bb3f24067a383c61d38330bd1c4f4594e04ff2224cbc5",
+      "leaf_sha3_512": "605024b144be89dba5229cdff1238f5ef1b0892de8d83d5a0bd802e2c994f4f07b5c67e13cf0f0fc9cc00274a7304cc4569ffddf8c56fe8b66784409e0fe3db3"
     },
     {
       "path": "deliverables/20261006/seat-cairn/five_channel_integration_v01.md",
