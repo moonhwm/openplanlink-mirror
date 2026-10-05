@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T20:00:23.952Z",
+  "generated_at": "2026-10-05T20:03:00.531Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1864,
-  "merkle_root_sha3_512": "bedd4bdbfa550bdb1d26b9a34994596f765e35e72adb92e368f381af3834c447cb01e52ba3ea008fab7c3d6ce9bb1bc9006465689d8be8111a3a25dddadd6e76",
-  "hmac_sha3_512": "ec68849e41afca360cf8f3a3d2e2f6cfa5d25666234c969b98a56dab56b847f9a255cbccd1f7a6dde8132b8a3cc18954f753e9c1b1bcf42ef8d67a23c895e6b5",
+  "file_count": 1865,
+  "merkle_root_sha3_512": "4db03650e9199eaec6ae182d27c3843314527ba4d3a43f0a29628529cbebc60ee703656b64a166a52bbeea5368a17287b3ca3fe48d287932ad1914146958785a",
+  "hmac_sha3_512": "6b324bd59505136b50c448a892a0885929a03c2b4d20c8692a2a4ca4497e34e513b9e9529c38a50a5bd2474e8d889c5d9f55280df4b1ff22f0ebc4c6c7a53de5",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -10840,6 +10840,12 @@
       "size": 7962,
       "content_sha3_512": "ffdb0f63482ad2100f7b5fa79fc3d37830ba90e08292b90f1316f3023619cec4f10ee029082489518f93ca6710ed39c66cfbf494f24d0c88a27f36c4fa80395b",
       "leaf_sha3_512": "328da480867dc8ded975bc30d85cc3d4ea79322e7fca430509ed248a2f02c496b15c5dde8608873a3c826118f19c6a2025184af8d1dea6fc207a36388e6ef0af"
+    },
+    {
+      "path": "tools/sig_coverage.mjs",
+      "size": 1106,
+      "content_sha3_512": "ccc26e7902f3deb2389f663b4afe1351ecbb2f1e9622063e45da46ee970178b71059d6072ae902d4ac31d35089b728fa1f873827b53579c55c0d59b8edc08953",
+      "leaf_sha3_512": "d2ea49379038698176c5e90ede3c864c87d69422ec707f158c6383d6ad78012246233316f271484b1eb4813faf2c03c50e092c934d75da719d266eab97d8ad77"
     },
     {
       "path": "tools/skill_evolve.py",
