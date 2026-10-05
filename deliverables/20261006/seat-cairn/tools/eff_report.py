@@ -187,7 +187,8 @@ def main():
     else:
         tips.append("工具可用率 100%，维持。")
     if not repo["aligned"]:
-        tips.append("双远端不一致 —— 立即执行 `python tools/push_gate.py` 并对齐。")
+        tips.append("双远端不一致 —— 先复读一次（origin/main 与 gitcode/main）：若刚执行过 push_gate，"
+                    "可能是双推在途的**瞬时假象**；复读仍不一致再执行 `python tools/push_gate.py` 对齐。")
     else:
         tips.append("双远端一致，维持；禁 force、每次改后重建树证。")
     if repo["dirty"]:
