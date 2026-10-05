@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:10:59.441Z",
+  "generated_at": "2026-10-05T19:11:29.201Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1826,
-  "merkle_root_sha3_512": "8a85c146fdfb2a167a3146a3ac8043093876c775bddea94d1c1b6ded7240d4390e3dccd8a1841a9a30a74a9ef40cf4e3e5cb78cb6585752e150bbb2096afbbaf",
-  "hmac_sha3_512": "0ce8564d8493a9c9c6491922e0c7363b110b1d7e5a25c159ea8daeded9dc78815498e724d0647b1e88fe2af77bfd1813e65576a6edf9d967f431eac999b0afd8",
+  "file_count": 1827,
+  "merkle_root_sha3_512": "478b3118b62204b5c757fc2c62cc0014c70d76c507eadff6b8c31c3a384dabb67386f07ea107e2140a58f49a8dcca465b9d9094da1ca4b6f87a2240b83fe8e1b",
+  "hmac_sha3_512": "8a102456f3c423469f569ca679528992559921bdde68aa70b312bcbc2344a968265c9f822e79e251ac573c89fc6d5fddaad86ee1cfa75cb3a4a22be1df9d1bb3",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -139,9 +139,9 @@
     },
     {
       "path": "STATUS.md",
-      "size": 739,
-      "content_sha3_512": "7c3630c37d007d9fcdb6b218df80584c6e717261311934dedb97b904f309f62809f26c583b45e710a483c25c82bccfd75e3337bbb46dca2ee80deff34f59130e",
-      "leaf_sha3_512": "71bbb3b4ac66aaac882672c58e1027599e119cbedf79585330bba1bfab84fa4704e15674865c78d6beab3daea89b37e0d361c5755d450b3ce37de28bd3878235"
+      "size": 645,
+      "content_sha3_512": "4c8edf70e739ade1f95b145b6cd70a3be416f296f7dd6ba6d4facc7b3f7ea1b62c9cde5ead5f8e3479c2e0a5b8bc1cbf8108e26e28ed4e5e8aac12fdb3896388",
+      "leaf_sha3_512": "e3bf3c7312d9bd4769ae7cd18396162f18d38b2dc9cd6eb5ef952378ecf24ca826280dc4e335277fab77f38a575d4703eaaf3562388a74e8db5b8705d264f15d"
     },
     {
       "path": "_tmp_probe.yml",
@@ -838,6 +838,12 @@
       "size": 3382,
       "content_sha3_512": "9a36bdcb9b75c87524b5e02ba08bd0d0c2b51d4a94744a534ca2c525e7779277e7c7b3b8fff4bc4f2433e4fe918c5f7e1f5e251203eb7bb00c76c1b5e365242c",
       "leaf_sha3_512": "6b1921f2ba85d31513638260595cf68cbfe6a8b87bb58dc7521ba8a9a6c9346f9cc7ae08c20d02ede7028e612c8e3b7cd1b7236dd5bbe8ea467a2d2abae30389"
+    },
+    {
+      "path": "skills-experience/k3-main/2026-10-06-k3-main-skill-experience-03.md",
+      "size": 3792,
+      "content_sha3_512": "27d1bbf3b919372e2d39a46da2446e806e76b941fb324618e103ab62f272804979bbcb756cac1c687f224bf202d154456639e0ca1f2c9100c04ccf4db6544bd1",
+      "leaf_sha3_512": "e9f2328dfb04a9ba6b517e047955d76e6918f8210c98f823cf785d6fb5031b039c4116f5208006d4250b993456f4bd684bffb364656f07ed9bb3274c10d4b929"
     },
     {
       "path": "skills-experience/k3-main/2026-10-06-k3-main-skill-experience.md",
