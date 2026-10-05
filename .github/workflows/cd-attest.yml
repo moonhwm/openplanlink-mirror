@@ -22,10 +22,11 @@ permissions:
   contents: write
 
 concurrency:
-  # 同一 ref 只保留最新一次：旧运行被顶掉时**不再回写陈旧 STATUS**（本轮实测教训：
-  # d10b5d5 的 CD 运行被新推送顶成 cancelled，若其仍回写会与最新件错位）。
+  # 不再取消：CD 已不写 main，取消只会让忙碌仓中的发布长期「饿死」
+  # （实测教训：8b999d8 的 CD 运行被后到的 d3be1f4a 顶成 cancelled，status 分支因此停滞）。
+  # 并发安全改由发布步的「线性追加 + 失败重取重试」保证。
   group: cd-attest-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   attest:
@@ -74,37 +75,50 @@ jobs:
           sys.exit(0 if ok else 1)
           PY
 
-      - name: 发布状态到独立 status 分支（不触碰 main，force-free）
+      - name: 发布状态到独立 status 分支（线性追加 + 竞态重试，force-free）
         run: |
-          set -e
+          set -u
           git config user.name "opl-cd-bot"
           git config user.email "cd-bot@openplanlink.local"
           # 生成件先移出工作树，避免切分支时被覆盖
-          mkdir -p /tmp/cdout
+          mkdir -p /tmp/cdout/status
           cp STATUS.md /tmp/cdout/STATUS.md
-          mkdir -p /tmp/cdout/status && cp status/index.html /tmp/cdout/status/index.html
-          # 取现有 status 分支作为线性基底（存在则追加，不存在则建孤立分支）
-          # 注意：用显式 refspec 写入跟踪引用，不依赖 checkout 配置的 refspec
-          # （actions/checkout 常只覆盖被检出分支，否则 show-ref 判空会误走 orphan → 非快进推送被拒）
-          if git ls-remote --exit-code --heads origin status >/dev/null 2>&1; then
-            git fetch origin refs/heads/status:refs/remotes/origin/status
-            git checkout -B status origin/status
-            echo "基于既有 origin/status 追加（线性、force-free）"
-          else
-            git checkout --orphan status
-            git rm -rf --cached . >/dev/null 2>&1 || true
-            echo "首次创建 status 分支（orphan）"
-          fi
-          mkdir -p status
-          cp /tmp/cdout/STATUS.md STATUS.md
-          cp /tmp/cdout/status/index.html status/index.html
-          git add -f STATUS.md status/index.html
-          if git diff --cached --quiet; then
-            echo "status 分支无变化，跳过提交"
-          else
+          cp status/index.html /tmp/cdout/status/index.html
+
+          ok=0
+          for attempt in 1 2 3; do
+            echo "--- 发布尝试 $attempt ---"
+            if git ls-remote --exit-code --heads origin status >/dev/null 2>&1; then
+              # 显式 refspec 写入跟踪引用，不依赖 checkout 配置的 refspec
+              git fetch origin refs/heads/status:refs/remotes/origin/status
+              git checkout -B status origin/status
+              echo "基于既有 origin/status 追加（线性、force-free）"
+            else
+              git checkout --orphan status
+              git rm -rf --cached . >/dev/null 2>&1 || true
+              echo "首次创建 status 分支（orphan）"
+            fi
+            mkdir -p status
+            cp /tmp/cdout/STATUS.md STATUS.md
+            cp /tmp/cdout/status/index.html status/index.html
+            git add -f STATUS.md status/index.html
+            if git diff --cached --quiet; then
+              echo "status 分支无变化（内容一致），无需提交"
+              ok=1
+              break
+            fi
             git commit -m "cd: 刷新交付状态（源提交 ${GITHUB_SHA}）[skip ci]"
-            git push origin HEAD:status
-            echo "★ 已发布到 origin/status（force-free）"
+            if git push origin HEAD:status; then
+              echo "★ 已发布到 origin/status（force-free）"
+              ok=1
+              break
+            fi
+            echo "推送被拒（并发），重新取基底后重试"
+            git checkout -q "$GITHUB_SHA" -- . 2>/dev/null || true
+          done
+          if [ "$ok" -ne 1 ]; then
+            echo "::error title=status 发布失败::三次尝试均未成功（并发或权限），status 分支保持上一次良好状态"
+            exit 1
           fi
 
       - name: 说明：main 与镜像远端不再被 CD 写入
