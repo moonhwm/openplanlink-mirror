@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:49:51.206Z",
+  "generated_at": "2026-10-05T19:50:07.033Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1855,
-  "merkle_root_sha3_512": "e92191529463484e0be1c1941ec1dba9c22cef18220f37f3a290cc3eae38b6a86121bbe0ebd8dc45497fff6bb34d3d00b969859c3e5a818ca33bb7a77e233f72",
-  "hmac_sha3_512": "23c7837b3c2ea47f2ca7495dd2382d7d661aa5ee84878d83d96d7413115e8097f85cd38dd93748eb8600b9d2802e8e19596513e8a14ff8898267015b4ec2c742",
+  "file_count": 1856,
+  "merkle_root_sha3_512": "fd5d03a2b6c1c10f520db56034ab2ec3030d7453bc9ffc8a726310c821c98b80705e3b25dcd2978f6e457b18dd6cbb9606115d03952a2c5f55c599a9b098985a",
+  "hmac_sha3_512": "bc4a1855c004238cd6861a9b3e88ef53852debf35e3ea89033cf8d5c864694dbaed68ccfbf0ff82aa164f5c4e644a70520abcfa2f21361a82ad9179b477cf419",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -484,6 +484,12 @@
       "size": 4087,
       "content_sha3_512": "86194ec381b15b454c19d15b5436688f3e112949bedb3f4c4560b3622a5d81cea52a6bd100edb0f4d46bb3f24067a383c61d38330bd1c4f4594e04ff2224cbc5",
       "leaf_sha3_512": "605024b144be89dba5229cdff1238f5ef1b0892de8d83d5a0bd802e2c994f4f07b5c67e13cf0f0fc9cc00274a7304cc4569ffddf8c56fe8b66784409e0fe3db3"
+    },
+    {
+      "path": "deliverables/20261006/seat-cairn/exchange/提交签名门禁现状观察_DF-SIG-20261006-CAIRN-01.otl",
+      "size": 4598,
+      "content_sha3_512": "de4dca3e4c24bf9b8d46d3a3050087263de7d1349611254b93b622c004cf18ad834a409a926f0c06fb408e7eb67198746a499e409587aadb71a41e8ee16ac850",
+      "leaf_sha3_512": "2f135141c24a58dd9258be82754d0e772dca5504c8967bbcebca21fe8878f4cb2c9ec70ab819109cdc06467575554e102acd10c636cf0e2c69090371f7851fac"
     },
     {
       "path": "deliverables/20261006/seat-cairn/exchange/桌面清点与跨席独立复核_DF-DESK-20261006-CAIRN-01.otl",
