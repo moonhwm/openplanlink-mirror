@@ -439,6 +439,189 @@
    "cls": "text",
    "bytes": 665,
    "sha12": "c504af9d58b1"
+  },
+  "favhub/data/folder-order.json": {
+   "cls": "text",
+   "bytes": 6680,
+   "sha12": "e49cef9e7f5c"
+  },
+  "favhub/data/folders.json": {
+   "cls": "text",
+   "bytes": 5749,
+   "sha12": "f89667cac182"
+  },
+  "favhub/folder.html": {
+   "cls": "text",
+   "bytes": 7736,
+   "sha12": "353986b9b0a4"
+  },
+  "favhub/index.html": {
+   "cls": "text",
+   "bytes": 22597,
+   "sha12": "de6dbbf9df13"
+  },
+  "favhub/js/ai.js": {
+   "cls": "text",
+   "bytes": 94208,
+   "sha12": "29d660653f56"
+  },
+  "favhub/js/folder.js": {
+   "cls": "text",
+   "bytes": 4792,
+   "sha12": "d1e4ef86f575"
+  },
+  "favhub/js/hub.js": {
+   "cls": "text",
+   "bytes": 16930,
+   "sha12": "8ccf62461800"
+  },
+  "favhub/js/intro.js": {
+   "cls": "text",
+   "bytes": 210740,
+   "sha12": "f068bbce7e2a"
+  },
+  "favhub/js/music.js": {
+   "cls": "text",
+   "bytes": 58310,
+   "sha12": "c6d52b2817a2"
+  },
+  "favhub/turbulence.html": {
+   "cls": "text",
+   "bytes": 32674,
+   "sha12": "6362f48e4f2e"
+  },
+  "gate/index.html": {
+   "cls": "text",
+   "bytes": 9267,
+   "sha12": "1fe8429ee38f"
+  },
+  "hall/hall-data.json": {
+   "cls": "text",
+   "bytes": 17027,
+   "sha12": "454c5cbbfa52"
+  },
+  "hall/index.html": {
+   "cls": "text",
+   "bytes": 8370,
+   "sha12": "fcf049b7cc09"
+  },
+  "index.html": {
+   "cls": "delta-skeleton",
+   "bytes": 3972777,
+   "note": "骨架+26负载重组; payloads 实体在 vault",
+   "sha12": "82e6e1699e52"
+  },
+  "js/liquid-glass.js": {
+   "cls": "text",
+   "bytes": 4023,
+   "sha12": "d934fe19e046"
+  },
+  "js/pagefade.js": {
+   "cls": "text",
+   "bytes": 4579,
+   "sha12": "c2e2e558eea4"
+  },
+  "lab/a2a-self-evolution.html": {
+   "cls": "text-deferred",
+   "bytes": 812602,
+   "note": "gzip率0.245, 待下轮分片入仓",
+   "sha12": "3bf0e56abfc9"
+  },
+  "lab/ai/index.html": {
+   "cls": "text",
+   "bytes": 27731,
+   "sha12": "c1fb2f74ea1d"
+  },
+  "lab/blackhole/index.html": {
+   "cls": "text",
+   "bytes": 25759,
+   "sha12": "2d9e22a34499"
+  },
+  "lab/cosmos/index.html": {
+   "cls": "text",
+   "bytes": 49028,
+   "sha12": "1e0a03f6cc28"
+  },
+  "lab/flow/index.html": {
+   "cls": "text-deferred",
+   "bytes": 810974,
+   "note": "gzip率0.245, 待下轮分片入仓",
+   "sha12": "0567d3dad40c"
+  },
+  "lab/flow/index.visual-check.json": {
+   "cls": "text",
+   "bytes": 12099,
+   "sha12": "dd8e28b04c96"
+  },
+  "lab/fluid/index.html": {
+   "cls": "text",
+   "bytes": 7594,
+   "sha12": "5be251086b7e"
+  },
+  "lab/fourier-market/fm-data.js": {
+   "cls": "text",
+   "bytes": 13094,
+   "sha12": "d7d2b96110ac"
+  },
+  "lab/fourier-market/fm.js": {
+   "cls": "text",
+   "bytes": 12240,
+   "sha12": "3dbeeccfb611"
+  },
+  "lab/fourier-market/index.html": {
+   "cls": "text",
+   "bytes": 8891,
+   "sha12": "50a11838ac43"
+  },
+  "lab/galaxy/index.html": {
+   "cls": "text",
+   "bytes": 39896,
+   "sha12": "174a17921247"
+  },
+  "lab/gauge/index.html": {
+   "cls": "text",
+   "bytes": 47549,
+   "sha12": "164e1e154963"
+  },
+  "lab/index.html": {
+   "cls": "text",
+   "bytes": 15206,
+   "sha12": "810eb65b62ef"
+  },
+  "lab/js/adaptive.js": {
+   "cls": "text",
+   "bytes": 2797,
+   "sha12": "cb9630065d0d"
+  },
+  "lab/solar/index.html": {
+   "cls": "text",
+   "bytes": 17861,
+   "sha12": "18dc773dbd20"
+  },
+  "lab/solar/solar.js": {
+   "cls": "text",
+   "bytes": 36264,
+   "sha12": "f6843ab5aafc"
+  },
+  "lab/vendor/fluid/dat.gui.min.js": {
+   "cls": "text",
+   "bytes": 50149,
+   "sha12": "2deabb4b4396"
+  },
+  "lab/vendor/fluid/script.js": {
+   "cls": "text",
+   "bytes": 51849,
+   "sha12": "db8f3cb137bb"
+  },
+  "lab/vendor/radiant-event-horizon.html": {
+   "cls": "text",
+   "bytes": 25728,
+   "sha12": "89fb7dd52a72"
+  },
+  "lab/vendor/unity-blackhole-raymarch.html": {
+   "cls": "text",
+   "bytes": 26985,
+   "sha12": "a8c0886d6d9d"
   }
  }
 }
