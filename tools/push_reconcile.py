@@ -121,11 +121,20 @@ def main():
                 if resolved and len(resolved) == len(conflicts):
                     run(["git", "-c", "user.name=reconcile-bot", "-c", "user.email=reconcile@a2a.local",
                          "commit", "--no-edit"], repo)
-                    print("  生成件冲突已按远端版解决并提交：%s（随后由 push_gate 重签覆盖）" % "、".join(resolved))
+                    print("  生成件冲突已按远端版解决并提交：%s（随后应由 push_gate 重签覆盖）" % "、".join(resolved))
                 else:
                     run(["git", "merge", "--abort"], repo)
                     print("  ★ 非生成件冲突，已中止合并；须人工处置（本工具不改史）")
                     return 4
+            # 合并成功后：本地已含各远端历史 → 各端均为可快进，按 --apply 一并补推
+            if a.apply:
+                for r in remotes:
+                    out4, err4, code4 = run(["git", "push", r, "HEAD:main"], repo)
+                    print("  %s 合并后补推 → %s" % (r, "OK" if code4 == 0 else "失败"))
+                    if code4 != 0:
+                        print("      stderr: %s" % (err4 or out4)[:300])
+            else:
+                print("  处置（未执行，缺 --apply）：`python tools/push_reconcile.py --merge --apply`")
         else:
             print("  处置：`python tools/push_reconcile.py --merge --apply`（合并合流，force-free）")
             print("        或 `python tools/push_gate.py`（fetch→rebase→重签→双推；遇生成件冲突会中止）。")
