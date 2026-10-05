@@ -84,12 +84,16 @@ jobs:
           cp STATUS.md /tmp/cdout/STATUS.md
           mkdir -p /tmp/cdout/status && cp status/index.html /tmp/cdout/status/index.html
           # 取现有 status 分支作为线性基底（存在则追加，不存在则建孤立分支）
-          git fetch origin status 2>/dev/null || true
-          if git show-ref --verify --quiet refs/remotes/origin/status; then
+          # 注意：用显式 refspec 写入跟踪引用，不依赖 checkout 配置的 refspec
+          # （actions/checkout 常只覆盖被检出分支，否则 show-ref 判空会误走 orphan → 非快进推送被拒）
+          if git ls-remote --exit-code --heads origin status >/dev/null 2>&1; then
+            git fetch origin refs/heads/status:refs/remotes/origin/status
             git checkout -B status origin/status
+            echo "基于既有 origin/status 追加（线性、force-free）"
           else
             git checkout --orphan status
             git rm -rf --cached . >/dev/null 2>&1 || true
+            echo "首次创建 status 分支（orphan）"
           fi
           mkdir -p status
           cp /tmp/cdout/STATUS.md STATUS.md
