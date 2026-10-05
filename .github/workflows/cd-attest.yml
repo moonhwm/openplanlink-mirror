@@ -1,0 +1,82 @@
+name: CD 交付证明与状态发布（attest → status）
+
+# 依据：
+#   主权人令「尽快开始基于 … CI/CD …」「相关成果实时上传 GitHub」
+#   守藏席 DF-PATROL-20261006-SHOUCANG-09 §三：CI 已成（ci-verify.yml），CD 待补
+#     建议串接：push → 构建 attest 哈希树 → 发布静态站
+#   本席 DF-EFF-20261006-CAIRN-01 §八 改进项
+#
+# 设计纪律（承 Trae 席 R5「SHA 固定」提案与 Moon 席「禁 force」共识）：
+#   1. 仅用仓库 CI 已在役且已钉扎的两个 Action（checkout / setup-python），不引入新依赖；
+#   2. 不上传大体积二进制：attest-cd.json 仅作运行期产物，落 STATUS.md（小件）入仓留痕；
+#   3. 自动提交带 [skip ci]，避免与 ci-verify 形成推送回环；
+#   4. 推送前 rebase，**全程不使用 force**；
+#   5. 无密钥环境亦可运行：未提供 OPL_TREE_KEY 时只出默克尔根并标「未签名」（不伪造 MAC）。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cd-attest-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  attest:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-actions[bot]'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4 pinned（Trae 席 R5 SHA 固定提案 2026-10-05）
+        with:
+          fetch-depth: 0
+
+      - name: 安装 Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5 pinned（Trae 席 R5 SHA 固定提案 2026-10-05）
+        with:
+          python-version: "3.12"
+
+      - name: 构建交付证明（SHA3-512 默克尔树）
+        env:
+          # 仓库机密可选：64 字节密钥的 hex；未配置则只出默克尔根（无签名）
+          OPL_TREE_KEY: ${{ secrets.OPL_TREE_KEY }}
+        run: |
+          python tools/cd_attest.py --root . --out attest-cd.json --status STATUS.md
+          echo "--- STATUS.md ---"
+          cat STATUS.md
+
+      - name: 写入运行摘要（便于审计追溯）
+        run: |
+          {
+            echo "## CD 交付证明"
+            echo ""
+            cat STATUS.md
+            echo ""
+            echo "产物：attest-cd.json（本运行期生成，不随仓提交；可用 tools/verify_opl_tree.py 复算）"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 一致性复核（file_count ↔ files 数组）
+        run: |
+          python - <<'PY'
+          import json, sys
+          d = json.load(open('attest-cd.json', encoding='utf-8'))
+          ok = d['file_count'] == len(d['files'])
+          print('file_count =', d['file_count'], 'len(files) =', len(d['files']), '一致 =', ok)
+          sys.exit(0 if ok else 1)
+          PY
+
+      - name: 提交 STATUS.md（带 [skip ci]，禁 force）
+        run: |
+          if [ -z "$(git status --porcelain STATUS.md)" ]; then
+            echo "STATUS.md 无变化，跳过提交"
+            exit 0
+          fi
+          git config user.name "opl-cd-bot"
+          git config user.email "cd-bot@openplanlink.local"
+          git add STATUS.md
+          git commit -m "cd: 刷新交付状态 STATUS.md [skip ci]"
+          git pull --rebase --autostash origin main
+          git push origin HEAD:main
