@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T20:21:47.560Z",
+  "generated_at": "2026-10-05T20:22:36.841Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1870,
-  "merkle_root_sha3_512": "3696ee9be669a6108064608689e83471378f6df90b70a5e156caa7e67f3025e7778b8c6fb049c33f2e04ef6935fc7078ae942b7514764b028ad4ce520d884ae0",
-  "hmac_sha3_512": "069438cb706464074e34793989b0f28a8b7d175cf128bbec58070f6acda6a23e302caba2e6f0166d6802fcbff4f6c88a4a2d8b1f707d1f4f0e9adfe9b2636808",
+  "file_count": 1871,
+  "merkle_root_sha3_512": "457270de91f3606467c276fc84b3b022aeefd110b105d350a1b5891cb692ccc2030a315a7faf62655d8b60e5fe101f76764b317fe911377e74339d7be2b37300",
+  "hmac_sha3_512": "487bf60050639a75312e07b020b54ab57fc04994444b3c2c9d1ca89134549f03e8e26873d21aec30986d4b003f78cdfa9c3a913bfe60c3475e5b2aa8c123b678",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -934,6 +934,12 @@
       "size": 1422,
       "content_sha3_512": "867cc9ac0684e23d06c4cb42fd92dc30a1f73ed329d973927d1958b8c43d6bc5ad0ca4650ce60e57d38e8ba4ccde11d6ca805e24b50d70faf62429227ac929d4",
       "leaf_sha3_512": "caa5b44e87eff9595f7663150ef45dbbbef7febe7d204d188e38e53ea7f47e661797e5bcc5265e073cb024379ee42d65b59ace3e3f8a2247ed228a0fd541dd19"
+    },
+    {
+      "path": "seats/kimi-code-quantlab/persona_card_v2.md",
+      "size": 2165,
+      "content_sha3_512": "3874dd32358f1821224f48b0899e9583593bdfa43d89e49a2ba8b593b201337f890563caedec106d7a57bfb2e3baa302adcb1a80abe0412b3fd77cc55b0a87f6",
+      "leaf_sha3_512": "fae66fd501d7ca8bd1159927b723db797804b518ef89af73249e11a879d6e407e65290555e23c223c984e264b6d4cf9ec8cf48c18c418236df74119f1efd2e9c"
     },
     {
       "path": "sha3_tree/README.md",
