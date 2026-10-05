@@ -1,0 +1,4599 @@
+{
+  "generated_at": "20261005T203924Z",
+  "host": "LAPTOP-CHOCER02",
+  "processes": [
+    {
+      "pid": 0,
+      "name": "System Idle Process",
+      "path": ""
+    },
+    {
+      "pid": 4,
+      "name": "System",
+      "path": ""
+    },
+    {
+      "pid": 288,
+      "name": "Secure System",
+      "path": ""
+    },
+    {
+      "pid": 328,
+      "name": "Registry",
+      "path": ""
+    },
+    {
+      "pid": 900,
+      "name": "smss.exe",
+      "path": ""
+    },
+    {
+      "pid": 1432,
+      "name": "csrss.exe",
+      "path": ""
+    },
+    {
+      "pid": 1540,
+      "name": "wininit.exe",
+      "path": ""
+    },
+    {
+      "pid": 1548,
+      "name": "csrss.exe",
+      "path": ""
+    },
+    {
+      "pid": 1616,
+      "name": "services.exe",
+      "path": ""
+    },
+    {
+      "pid": 1636,
+      "name": "LsaIso.exe",
+      "path": ""
+    },
+    {
+      "pid": 1644,
+      "name": "lsass.exe",
+      "path": ""
+    },
+    {
+      "pid": 1772,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 1784,
+      "name": "fontdrvhost.exe",
+      "path": ""
+    },
+    {
+      "pid": 1836,
+      "name": "WUDFHost.exe",
+      "path": ""
+    },
+    {
+      "pid": 1920,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 1972,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2044,
+      "name": "WUDFHost.exe",
+      "path": ""
+    },
+    {
+      "pid": 1384,
+      "name": "winlogon.exe",
+      "path": ""
+    },
+    {
+      "pid": 1672,
+      "name": "fontdrvhost.exe",
+      "path": ""
+    },
+    {
+      "pid": 856,
+      "name": "WUDFHost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2108,
+      "name": "dwm.exe",
+      "path": ""
+    },
+    {
+      "pid": 2144,
+      "name": "WUDFHost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2280,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2288,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2324,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2332,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2348,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2372,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2528,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2584,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2632,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2640,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2648,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2660,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2832,
+      "name": "IntelCpHDCPSvc.exe",
+      "path": ""
+    },
+    {
+      "pid": 2844,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2860,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2932,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2956,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2984,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2992,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 3036,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 3320,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 3360,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 3648,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 3768,
+      "name": "NVDisplay.Container.exe",
+      "path": ""
+    },
+    {
+      "pid": 3856,
+      "name": "AndrowsSvr.exe",
+      "path": ""
+    },
+    {
+      "pid": 3932,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 3956,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 3216,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 3068,
+      "name": "AsusCertService.exe",
+      "path": ""
+    },
+    {
+      "pid": 4004,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 2088,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 4104,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 4192,
+      "name": "Memory Compression",
+      "path": ""
+    },
+    {
+      "pid": 4256,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 4316,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 4324,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 4408,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 4440,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 4496,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 4536,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 4652,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 4700,
+      "name": "AsusOptimization.exe",
+      "path": ""
+    },
+    {
+      "pid": 4724,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 4864,
+      "name": "spoolsv.exe",
+      "path": ""
+    },
+    {
+      "pid": 4880,
+      "name": "AsusWiFiSmartConnect.exe",
+      "path": ""
+    },
+    {
+      "pid": 4932,
+      "name": "conhost.exe",
+      "path": ""
+    },
+    {
+      "pid": 5040,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 4132,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 5140,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 5188,
+      "name": "NgcIso.exe",
+      "path": ""
+    },
+    {
+      "pid": 5368,
+      "name": "ArmouryCrateControlInterface.exe",
+      "path": ""
+    },
+    {
+      "pid": 5380,
+      "name": "AsusAppService.exe",
+      "path": ""
+    },
+    {
+      "pid": 5388,
+      "name": "AsusPTPService.exe",
+      "path": ""
+    },
+    {
+      "pid": 5400,
+      "name": "AsusSwitch.exe",
+      "path": ""
+    },
+    {
+      "pid": 5412,
+      "name": "AsusSystemAnalysis.exe",
+      "path": ""
+    },
+    {
+      "pid": 5424,
+      "name": "ArmouryCrate.Service.exe",
+      "path": ""
+    },
+    {
+      "pid": 5432,
+      "name": "AsusSystemDiagnosis.exe",
+      "path": ""
+    },
+    {
+      "pid": 5448,
+      "name": "AsusSoftwareManager.exe",
+      "path": ""
+    },
+    {
+      "pid": 5468,
+      "name": "DAX3API.exe",
+      "path": ""
+    },
+    {
+      "pid": 5480,
+      "name": "FMService64.exe",
+      "path": ""
+    },
+    {
+      "pid": 5492,
+      "name": "GameInputRedistService.exe",
+      "path": ""
+    },
+    {
+      "pid": 5512,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 5504,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 5528,
+      "name": "service.exe",
+      "path": ""
+    },
+    {
+      "pid": 5544,
+      "name": "IntelAudioService.exe",
+      "path": ""
+    },
+    {
+      "pid": 5552,
+      "name": "OfficeClickToRun.exe",
+      "path": ""
+    },
+    {
+      "pid": 5564,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 5572,
+      "name": "ipfsvc.exe",
+      "path": ""
+    },
+    {
+      "pid": 5596,
+      "name": "AweSun.exe",
+      "path": ""
+    },
+    {
+      "pid": 5636,
+      "name": "servicehost.exe",
+      "path": ""
+    },
+    {
+      "pid": 5668,
+      "name": "MSOfficePLUSService.exe",
+      "path": ""
+    },
+    {
+      "pid": 5676,
+      "name": "mc-fw-host.exe",
+      "path": ""
+    },
+    {
+      "pid": 5692,
+      "name": "MpDefenderCoreService.exe",
+      "path": ""
+    },
+    {
+      "pid": 5716,
+      "name": "ROGLiveService.exe",
+      "path": ""
+    },
+    {
+      "pid": 5732,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 5740,
+      "name": "rustdesk.exe",
+      "path": ""
+    },
+    {
+      "pid": 5756,
+      "name": "RstMwService.exe",
+      "path": ""
+    },
+    {
+      "pid": 5784,
+      "name": "RtkAudUService64.exe",
+      "path": ""
+    },
+    {
+      "pid": 5840,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 5880,
+      "name": "ipf_uf.exe",
+      "path": ""
+    },
+    {
+      "pid": 5912,
+      "name": "WMIRegistrationService.exe",
+      "path": ""
+    },
+    {
+      "pid": 5924,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 5936,
+      "name": "NVDisplay.Container.exe",
+      "path": ""
+    },
+    {
+      "pid": 6012,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 6024,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 6048,
+      "name": "GameInputRedistService.exe",
+      "path": "C:\\Program Files\\Microsoft GameInput\\x64\\GameInputRedistService.exe"
+    },
+    {
+      "pid": 7044,
+      "name": "jhi_service.exe",
+      "path": ""
+    },
+    {
+      "pid": 7344,
+      "name": "AweSun.exe",
+      "path": ""
+    },
+    {
+      "pid": 7528,
+      "name": "awesun_guard.exe",
+      "path": ""
+    },
+    {
+      "pid": 7632,
+      "name": "rustdesk.exe",
+      "path": ""
+    },
+    {
+      "pid": 7888,
+      "name": "conhost.exe",
+      "path": ""
+    },
+    {
+      "pid": 8556,
+      "name": "WmiPrvSE.exe",
+      "path": ""
+    },
+    {
+      "pid": 8732,
+      "name": "WmiPrvSE.exe",
+      "path": ""
+    },
+    {
+      "pid": 9100,
+      "name": "AggregatorHost.exe",
+      "path": ""
+    },
+    {
+      "pid": 8536,
+      "name": "AsusOptimizationStartupTask.exe",
+      "path": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\asussci2.inf_amd64_197d319fab43e0fe\\ASUSOptimization\\AsusOptimizationStartupTask.exe"
+    },
+    {
+      "pid": 9340,
+      "name": "uihost.exe",
+      "path": "C:\\Program Files\\McAfee\\WebAdvisor\\UIHost.exe"
+    },
+    {
+      "pid": 10616,
+      "name": "unsecapp.exe",
+      "path": ""
+    },
+    {
+      "pid": 11220,
+      "name": "mc-fw-host.exe",
+      "path": ""
+    },
+    {
+      "pid": 10960,
+      "name": "ipf_helper.exe",
+      "path": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\ipf_cpu.inf_amd64_bef44694f882994d\\ipf_helper.exe"
+    },
+    {
+      "pid": 11532,
+      "name": "ArmouryCrate.UserSessionHelper.exe",
+      "path": ""
+    },
+    {
+      "pid": 11540,
+      "name": "conhost.exe",
+      "path": ""
+    },
+    {
+      "pid": 12000,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 12136,
+      "name": "MSPCManagerService.exe",
+      "path": ""
+    },
+    {
+      "pid": 12252,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 11712,
+      "name": "sihost.exe",
+      "path": "C:\\WINDOWS\\system32\\sihost.exe"
+    },
+    {
+      "pid": 6204,
+      "name": "svchost.exe",
+      "path": "C:\\WINDOWS\\system32\\svchost.exe"
+    },
+    {
+      "pid": 9292,
+      "name": "svchost.exe",
+      "path": "C:\\WINDOWS\\system32\\svchost.exe"
+    },
+    {
+      "pid": 12544,
+      "name": "svchost.exe",
+      "path": "C:\\WINDOWS\\system32\\svchost.exe"
+    },
+    {
+      "pid": 12588,
+      "name": "gamingservicesnet.exe",
+      "path": ""
+    },
+    {
+      "pid": 12596,
+      "name": "cowork-svc.exe",
+      "path": ""
+    },
+    {
+      "pid": 12604,
+      "name": "gamingservices.exe",
+      "path": ""
+    },
+    {
+      "pid": 12636,
+      "name": "wlanext.exe",
+      "path": ""
+    },
+    {
+      "pid": 12716,
+      "name": "svchost.exe",
+      "path": "C:\\WINDOWS\\system32\\svchost.exe"
+    },
+    {
+      "pid": 12836,
+      "name": "DAX3API.exe",
+      "path": ""
+    },
+    {
+      "pid": 12872,
+      "name": "codex-windows-sandbox-service.exe",
+      "path": ""
+    },
+    {
+      "pid": 12920,
+      "name": "AcPowerNotification.exe",
+      "path": ""
+    },
+    {
+      "pid": 12976,
+      "name": "taskhostw.exe",
+      "path": "C:\\WINDOWS\\system32\\taskhostw.exe"
+    },
+    {
+      "pid": 13020,
+      "name": "AsHotplugCtrl.exe",
+      "path": ""
+    },
+    {
+      "pid": 13040,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 13088,
+      "name": "ASUSSmartDisplayControl.exe",
+      "path": ""
+    },
+    {
+      "pid": 13180,
+      "name": "Intel_PIE_Service.exe",
+      "path": ""
+    },
+    {
+      "pid": 13416,
+      "name": "WUDFHost.exe",
+      "path": ""
+    },
+    {
+      "pid": 13492,
+      "name": "SearchIndexer.exe",
+      "path": ""
+    },
+    {
+      "pid": 14036,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 14304,
+      "name": "explorer.exe",
+      "path": "C:\\WINDOWS\\Explorer.EXE"
+    },
+    {
+      "pid": 13752,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 14032,
+      "name": "RtkAudUService64.exe",
+      "path": ""
+    },
+    {
+      "pid": 11968,
+      "name": "ShellHost.exe",
+      "path": "C:\\Windows\\System32\\ShellHost.exe"
+    },
+    {
+      "pid": 11776,
+      "name": "ShellHost.exe",
+      "path": "C:\\WINDOWS\\system32\\shellhost.exe"
+    },
+    {
+      "pid": 14928,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 14640,
+      "name": "CrossDeviceService.exe",
+      "path": "C:\\Program Files\\WindowsApps\\MicrosoftWindows.CrossDevice_1.26072.116.0_x64__cw5n1h2txyewy\\CrossDeviceService.exe"
+    },
+    {
+      "pid": 5360,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 14736,
+      "name": "svchost.exe",
+      "path": "C:\\WINDOWS\\system32\\svchost.exe"
+    },
+    {
+      "pid": 15720,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 15968,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 16108,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 15648,
+      "name": "crashpad_handler.exe",
+      "path": ""
+    },
+    {
+      "pid": 15844,
+      "name": "StartMenuExperienceHost.exe",
+      "path": "C:\\Windows\\SystemApps\\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\\StartMenuExperienceHost.exe"
+    },
+    {
+      "pid": 15728,
+      "name": "SearchHost.exe",
+      "path": "C:\\WINDOWS\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\SearchHost.exe"
+    },
+    {
+      "pid": 15556,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 16392,
+      "name": "WidgetBoard.exe",
+      "path": "C:\\Program Files\\WindowsApps\\MicrosoftWindows.Client.WebExperience_526.23000.0.0_x64__cw5n1h2txyewy\\WidgetBoard.exe"
+    },
+    {
+      "pid": 16448,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 16968,
+      "name": "RuntimeBroker.exe",
+      "path": "C:\\Windows\\System32\\RuntimeBroker.exe"
+    },
+    {
+      "pid": 17004,
+      "name": "svchost.exe",
+      "path": "C:\\WINDOWS\\system32\\svchost.exe"
+    },
+    {
+      "pid": 16776,
+      "name": "RuntimeBroker.exe",
+      "path": "C:\\Windows\\System32\\RuntimeBroker.exe"
+    },
+    {
+      "pid": 17416,
+      "name": "WidgetService.exe",
+      "path": "C:\\Program Files\\WindowsApps\\Microsoft.WidgetsPlatformRuntime_1.6.19.0_x64__8wekyb3d8bbwe\\WidgetService\\WidgetService.exe"
+    },
+    {
+      "pid": 16484,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 19436,
+      "name": "msedgewebview2.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\154.0.4258.53\\msedgewebview2.exe"
+    },
+    {
+      "pid": 18156,
+      "name": "msedgewebview2.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\154.0.4258.53\\msedgewebview2.exe"
+    },
+    {
+      "pid": 18104,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 19608,
+      "name": "ctfmon.exe",
+      "path": ""
+    },
+    {
+      "pid": 20268,
+      "name": "msedgewebview2.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\154.0.4258.53\\msedgewebview2.exe"
+    },
+    {
+      "pid": 20516,
+      "name": "msedgewebview2.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\154.0.4258.53\\msedgewebview2.exe"
+    },
+    {
+      "pid": 13560,
+      "name": "ChsIME.exe",
+      "path": ""
+    },
+    {
+      "pid": 21140,
+      "name": "msedgewebview2.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\154.0.4258.53\\msedgewebview2.exe"
+    },
+    {
+      "pid": 22084,
+      "name": "TextInputHost.exe",
+      "path": "C:\\WINDOWS\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\TextInputHost.exe"
+    },
+    {
+      "pid": 15316,
+      "name": "ChsIME.exe",
+      "path": ""
+    },
+    {
+      "pid": 15300,
+      "name": "MicrosoftStartFeedProvider.exe",
+      "path": "C:\\Program Files\\WindowsApps\\Microsoft.StartExperiencesApp_1.398.2.0_x64__8wekyb3d8bbwe\\MicrosoftStartFeedProvider\\MicrosoftStartFeedProvider.exe"
+    },
+    {
+      "pid": 14264,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 18596,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 23544,
+      "name": "GameInputSvc.exe",
+      "path": ""
+    },
+    {
+      "pid": 14968,
+      "name": "GameInputSvc.exe",
+      "path": ""
+    },
+    {
+      "pid": 22552,
+      "name": "ArmourySocketServer.exe",
+      "path": ""
+    },
+    {
+      "pid": 23748,
+      "name": "msedgewebview2.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\154.0.4258.53\\msedgewebview2.exe"
+    },
+    {
+      "pid": 23984,
+      "name": "PhoneExperienceHost.exe",
+      "path": "C:\\Program Files\\WindowsApps\\Microsoft.YourPhone_1.26072.253.0_x64__8wekyb3d8bbwe\\PhoneExperienceHost.exe"
+    },
+    {
+      "pid": 22040,
+      "name": "asus_framework.exe",
+      "path": ""
+    },
+    {
+      "pid": 10696,
+      "name": "asus_framework.exe",
+      "path": "C:\\Program Files (x86)\\ASUS\\ArmouryDevice\\asus_framework.exe"
+    },
+    {
+      "pid": 1804,
+      "name": "RtkAudUService64.exe",
+      "path": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\realtekservice.inf_amd64_b55ed36a9a78cc75\\RtkAudUService64.exe"
+    },
+    {
+      "pid": 3412,
+      "name": "asus_framework.exe",
+      "path": ""
+    },
+    {
+      "pid": 13828,
+      "name": "asus_framework.exe",
+      "path": ""
+    },
+    {
+      "pid": 4124,
+      "name": "ArmourySwAgent.exe",
+      "path": ""
+    },
+    {
+      "pid": 17572,
+      "name": "AweSun.exe",
+      "path": "A:\\AweSun\\flutter\\AweSun.exe"
+    },
+    {
+      "pid": 1796,
+      "name": "ShellExperienceHost.exe",
+      "path": "C:\\Windows\\SystemApps\\ShellExperienceHost_cw5n1h2txyewy\\ShellExperienceHost.exe"
+    },
+    {
+      "pid": 24984,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 17940,
+      "name": "WPS 灵犀.exe",
+      "path": "C:\\Program Files\\lingxi-desktop\\WPS 灵犀.exe"
+    },
+    {
+      "pid": 25272,
+      "name": "WPS 灵犀.exe",
+      "path": "C:\\Program Files\\lingxi-desktop\\WPS 灵犀.exe"
+    },
+    {
+      "pid": 22028,
+      "name": "WPS 灵犀.exe",
+      "path": "C:\\Program Files\\lingxi-desktop\\WPS 灵犀.exe"
+    },
+    {
+      "pid": 25124,
+      "name": "WPS 灵犀.exe",
+      "path": "C:\\Program Files\\lingxi-desktop\\WPS 灵犀.exe"
+    },
+    {
+      "pid": 12500,
+      "name": "WPS 灵犀.exe",
+      "path": "C:\\Program Files\\lingxi-desktop\\WPS 灵犀.exe"
+    },
+    {
+      "pid": 20420,
+      "name": "WPS 灵犀.exe",
+      "path": "C:\\Program Files\\lingxi-desktop\\WPS 灵犀.exe"
+    },
+    {
+      "pid": 26036,
+      "name": "lingxi.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Roaming\\WPS 灵犀\\app_server_link\\service\\lingxi.exe"
+    },
+    {
+      "pid": 26044,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 26584,
+      "name": "rustdesk.exe",
+      "path": "A:\\RustDesk\\rustdesk.exe"
+    },
+    {
+      "pid": 10612,
+      "name": "ctfmon.exe",
+      "path": ""
+    },
+    {
+      "pid": 26452,
+      "name": "AsusOSD.exe",
+      "path": ""
+    },
+    {
+      "pid": 15664,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 6212,
+      "name": "SecurityHealthService.exe",
+      "path": ""
+    },
+    {
+      "pid": 3000,
+      "name": "中核集团电子采购平台参与项目辅助工具.exe",
+      "path": ""
+    },
+    {
+      "pid": 9764,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 4344,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 3460,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 21348,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 25176,
+      "name": "RuntimeBroker.exe",
+      "path": "C:\\Windows\\System32\\RuntimeBroker.exe"
+    },
+    {
+      "pid": 22780,
+      "name": "AsusSoftwareManagerAgent.exe",
+      "path": ""
+    },
+    {
+      "pid": 24100,
+      "name": "Weixin.exe",
+      "path": "C:\\Program Files\\Tencent\\Weixin\\Weixin.exe"
+    },
+    {
+      "pid": 13668,
+      "name": "crashpad_handler.exe",
+      "path": "C:\\Program Files\\Tencent\\Weixin\\4.1.13.65\\crashpad_handler.exe"
+    },
+    {
+      "pid": 9724,
+      "name": "WeChatAppEx.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Roaming\\Tencent\\xwechat\\xplugin\\plugins\\RadiumWMPF\\25560\\extracted\\runtime\\WeChatAppEx.exe"
+    },
+    {
+      "pid": 14480,
+      "name": "WeChatAppEx.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Roaming\\Tencent\\xwechat\\xplugin\\plugins\\RadiumWMPF\\25560\\extracted\\runtime\\WeChatAppEx.exe"
+    },
+    {
+      "pid": 21568,
+      "name": "WeChatAppEx.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Roaming\\Tencent\\xwechat\\xplugin\\plugins\\RadiumWMPF\\25560\\extracted\\runtime\\WeChatAppEx.exe"
+    },
+    {
+      "pid": 14940,
+      "name": "Weixin.exe",
+      "path": "C:\\Program Files\\Tencent\\Weixin\\Weixin.exe"
+    },
+    {
+      "pid": 17612,
+      "name": "WeChatAppEx.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Roaming\\Tencent\\xwechat\\xplugin\\plugins\\RadiumWMPF\\25560\\extracted\\runtime\\WeChatAppEx.exe"
+    },
+    {
+      "pid": 12068,
+      "name": "Weixin.exe",
+      "path": "C:\\Program Files\\Tencent\\Weixin\\Weixin.exe"
+    },
+    {
+      "pid": 20776,
+      "name": "Weixin.exe",
+      "path": "C:\\Program Files\\Tencent\\Weixin\\Weixin.exe"
+    },
+    {
+      "pid": 18524,
+      "name": "Weixin.exe",
+      "path": "C:\\Program Files\\Tencent\\Weixin\\Weixin.exe"
+    },
+    {
+      "pid": 19824,
+      "name": "WeChatAppEx.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Roaming\\Tencent\\xwechat\\xplugin\\plugins\\RadiumWMPF\\25560\\extracted\\runtime\\WeChatAppEx.exe"
+    },
+    {
+      "pid": 1700,
+      "name": "WeChatAppEx.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Roaming\\Tencent\\xwechat\\xplugin\\plugins\\RadiumWMPF\\25560\\extracted\\runtime\\WeChatAppEx.exe"
+    },
+    {
+      "pid": 18820,
+      "name": "WeChatAppEx.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Roaming\\Tencent\\xwechat\\xplugin\\plugins\\RadiumWMPF\\25560\\extracted\\runtime\\WeChatAppEx.exe"
+    },
+    {
+      "pid": 3952,
+      "name": "ChatGPT.exe",
+      "path": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.930.4958.0_x64__2p2nqsd0c76g0\\app\\ChatGPT.exe"
+    },
+    {
+      "pid": 2192,
+      "name": "ChatGPT.exe",
+      "path": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.930.4958.0_x64__2p2nqsd0c76g0\\app\\ChatGPT.exe"
+    },
+    {
+      "pid": 13804,
+      "name": "ChatGPT.exe",
+      "path": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.930.4958.0_x64__2p2nqsd0c76g0\\app\\ChatGPT.exe"
+    },
+    {
+      "pid": 7052,
+      "name": "ChatGPT.exe",
+      "path": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.930.4958.0_x64__2p2nqsd0c76g0\\app\\ChatGPT.exe"
+    },
+    {
+      "pid": 10884,
+      "name": "ChatGPT.exe",
+      "path": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.930.4958.0_x64__2p2nqsd0c76g0\\app\\ChatGPT.exe"
+    },
+    {
+      "pid": 25008,
+      "name": "ChatGPT.exe",
+      "path": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.930.4958.0_x64__2p2nqsd0c76g0\\app\\ChatGPT.exe"
+    },
+    {
+      "pid": 21848,
+      "name": "ChatGPT.exe",
+      "path": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.930.4958.0_x64__2p2nqsd0c76g0\\app\\ChatGPT.exe"
+    },
+    {
+      "pid": 4568,
+      "name": "codex.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\OpenAI\\Codex\\bin\\f544b3844e0f14e9\\codex.exe"
+    },
+    {
+      "pid": 25652,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 18804,
+      "name": "ChatGPT.exe",
+      "path": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.930.4958.0_x64__2p2nqsd0c76g0\\app\\ChatGPT.exe"
+    },
+    {
+      "pid": 15560,
+      "name": "codex-computer-use-swift.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\OpenAI\\Codex\\runtimes\\cua_node\\7d8d3ac5ca9f6767\\bin\\node_modules\\@oai\\sky\\bin\\windows\\swift\\x64\\codex-computer-use-swift.exe"
+    },
+    {
+      "pid": 16592,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 23016,
+      "name": "wps.exe",
+      "path": "C:\\Program Files (x86)\\WPS Office\\12.1.0.28505\\office6\\wps.exe"
+    },
+    {
+      "pid": 6328,
+      "name": "wps.exe",
+      "path": "C:\\Program Files (x86)\\WPS Office\\12.1.0.28505\\office6\\wps.exe"
+    },
+    {
+      "pid": 13884,
+      "name": "promecefpluginhost.exe",
+      "path": "C:\\Program Files (x86)\\WPS Office\\12.1.0.28505\\office6\\promecefpluginhost.exe"
+    },
+    {
+      "pid": 8912,
+      "name": "promecefpluginhost.exe",
+      "path": "C:\\Program Files (x86)\\WPS Office\\12.1.0.28505\\office6\\promecefpluginhost.exe"
+    },
+    {
+      "pid": 22292,
+      "name": "wps.exe",
+      "path": "C:\\PROGRA~2\\WPSOFF~1\\1210~1.285\\office6\\wps.exe"
+    },
+    {
+      "pid": 19212,
+      "name": "wps.exe",
+      "path": "C:\\Program Files (x86)\\WPS Office\\12.1.0.28505\\office6\\wps.exe"
+    },
+    {
+      "pid": 14372,
+      "name": "ChatGPT.exe",
+      "path": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.930.4958.0_x64__2p2nqsd0c76g0\\app\\ChatGPT.exe"
+    },
+    {
+      "pid": 21884,
+      "name": "codex.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\OpenAI\\Codex\\bin\\f544b3844e0f14e9\\codex.exe"
+    },
+    {
+      "pid": 15820,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 5136,
+      "name": "wps.exe",
+      "path": "C:\\PROGRA~2\\WPSOFF~1\\1210~1.285\\office6\\wps.exe"
+    },
+    {
+      "pid": 17496,
+      "name": "wps.exe",
+      "path": "C:\\Program Files (x86)\\WPS Office\\12.1.0.28505\\office6\\wps.exe"
+    },
+    {
+      "pid": 27428,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 472,
+      "name": "node_repl.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\OpenAI\\Codex\\runtimes\\cua_node\\7d8d3ac5ca9f6767\\bin\\node_repl.exe"
+    },
+    {
+      "pid": 18668,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\OpenAI\\Codex\\runtimes\\cua_node\\7d8d3ac5ca9f6767\\bin\\node.exe"
+    },
+    {
+      "pid": 25044,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 26916,
+      "name": "cmd.exe",
+      "path": "C:\\Windows\\system32\\cmd.exe"
+    },
+    {
+      "pid": 28240,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 28244,
+      "name": "cmd.exe",
+      "path": "C:\\Windows\\system32\\cmd.exe"
+    },
+    {
+      "pid": 21376,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 3604,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 28584,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 13404,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 24400,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\OpenAI\\Codex\\runtimes\\cua_node\\7d8d3ac5ca9f6767\\bin\\node.exe"
+    },
+    {
+      "pid": 2168,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\OpenAI\\Codex\\runtimes\\cua_node\\7d8d3ac5ca9f6767\\bin\\node.exe"
+    },
+    {
+      "pid": 21700,
+      "name": "node_repl.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\OpenAI\\Codex\\runtimes\\cua_node\\7d8d3ac5ca9f6767\\bin\\node_repl.exe"
+    },
+    {
+      "pid": 4624,
+      "name": "AppActions.exe",
+      "path": "C:\\WINDOWS\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\AppActions.exe"
+    },
+    {
+      "pid": 14380,
+      "name": "ZCode.exe",
+      "path": "C:\\Program Files\\ZCode\\ZCode.exe"
+    },
+    {
+      "pid": 3556,
+      "name": "ZCode.exe",
+      "path": "C:\\Program Files\\ZCode\\ZCode.exe"
+    },
+    {
+      "pid": 28760,
+      "name": "Kimi.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Kimi\\Kimi.exe"
+    },
+    {
+      "pid": 17192,
+      "name": "ZCode.exe",
+      "path": "C:\\Program Files\\ZCode\\ZCode.exe"
+    },
+    {
+      "pid": 8452,
+      "name": "ZCode.exe",
+      "path": "C:\\Program Files\\ZCode\\ZCode.exe"
+    },
+    {
+      "pid": 28900,
+      "name": "ZCode.exe",
+      "path": "C:\\Program Files\\ZCode\\ZCode.exe"
+    },
+    {
+      "pid": 28120,
+      "name": "Kimi.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Kimi\\Kimi.exe"
+    },
+    {
+      "pid": 19252,
+      "name": "Kimi.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Kimi\\Kimi.exe"
+    },
+    {
+      "pid": 6320,
+      "name": "Kimi.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Kimi\\Kimi.exe"
+    },
+    {
+      "pid": 28448,
+      "name": "ZCode.exe",
+      "path": "C:\\Program Files\\ZCode\\ZCode.exe"
+    },
+    {
+      "pid": 17080,
+      "name": "kimi-webbridge.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.kimi-webbridge\\bin\\kimi-webbridge.exe"
+    },
+    {
+      "pid": 20104,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 29080,
+      "name": "Kimi.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Kimi\\Kimi.exe"
+    },
+    {
+      "pid": 16280,
+      "name": "Kimi.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Kimi\\Kimi.exe"
+    },
+    {
+      "pid": 29424,
+      "name": "ZCode.exe",
+      "path": "C:\\Program Files\\ZCode\\ZCode.exe"
+    },
+    {
+      "pid": 19448,
+      "name": "ZCode.exe",
+      "path": "C:\\Program Files\\ZCode\\ZCode.exe"
+    },
+    {
+      "pid": 7188,
+      "name": "Kimi.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Kimi\\Kimi.exe"
+    },
+    {
+      "pid": 26744,
+      "name": "ZCode.exe",
+      "path": "C:\\Program Files\\ZCode\\ZCode.exe"
+    },
+    {
+      "pid": 25616,
+      "name": "Kimi.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Kimi\\Kimi.exe"
+    },
+    {
+      "pid": 20224,
+      "name": "ZCode.exe",
+      "path": "C:\\Program Files\\ZCode\\ZCode.exe"
+    },
+    {
+      "pid": 22660,
+      "name": "Kimi.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Kimi\\Kimi.exe"
+    },
+    {
+      "pid": 29068,
+      "name": "Kimi.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Kimi\\Kimi.exe"
+    },
+    {
+      "pid": 29056,
+      "name": "Kimi.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Kimi\\Kimi.exe"
+    },
+    {
+      "pid": 30596,
+      "name": "ZCode.exe",
+      "path": "C:\\Program Files\\ZCode\\ZCode.exe"
+    },
+    {
+      "pid": 22784,
+      "name": "Kimi.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Kimi\\Kimi.exe"
+    },
+    {
+      "pid": 30168,
+      "name": "codex-code-mode-host.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\OpenAI\\Codex\\bin\\f544b3844e0f14e9\\codex-code-mode-host.exe"
+    },
+    {
+      "pid": 21840,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 29248,
+      "name": "ZCode.exe",
+      "path": "C:\\Program Files\\ZCode\\ZCode.exe"
+    },
+    {
+      "pid": 26620,
+      "name": "ZCode.exe",
+      "path": "C:\\Program Files\\ZCode\\ZCode.exe"
+    },
+    {
+      "pid": 17104,
+      "name": "ZCode.exe",
+      "path": "C:\\Program Files\\ZCode\\ZCode.exe"
+    },
+    {
+      "pid": 3968,
+      "name": "ZCode.exe",
+      "path": "C:\\Program Files\\ZCode\\ZCode.exe"
+    },
+    {
+      "pid": 8148,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 28136,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 31448,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 30772,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 3788,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 30900,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 31072,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 22472,
+      "name": "msedge.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+    },
+    {
+      "pid": 4736,
+      "name": "msedge.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+    },
+    {
+      "pid": 26224,
+      "name": "msedge.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+    },
+    {
+      "pid": 5168,
+      "name": "msedge.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+    },
+    {
+      "pid": 26216,
+      "name": "msedge.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+    },
+    {
+      "pid": 29620,
+      "name": "DeepSeek Harness.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\DeepSeek Harness\\DeepSeek Harness.exe"
+    },
+    {
+      "pid": 27824,
+      "name": "DeepSeek Harness.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\DeepSeek Harness\\DeepSeek Harness.exe"
+    },
+    {
+      "pid": 26300,
+      "name": "DeepSeek Harness.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\DeepSeek Harness\\DeepSeek Harness.exe"
+    },
+    {
+      "pid": 33348,
+      "name": "DeepSeek Harness.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\DeepSeek Harness\\DeepSeek Harness.exe"
+    },
+    {
+      "pid": 19116,
+      "name": "DeepSeek Harness.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\DeepSeek Harness\\DeepSeek Harness.exe"
+    },
+    {
+      "pid": 34068,
+      "name": "Cursor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+    },
+    {
+      "pid": 23404,
+      "name": "Cursor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+    },
+    {
+      "pid": 18300,
+      "name": "Cursor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+    },
+    {
+      "pid": 33124,
+      "name": "Cursor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+    },
+    {
+      "pid": 26212,
+      "name": "Cursor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+    },
+    {
+      "pid": 31628,
+      "name": "Cursor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+    },
+    {
+      "pid": 24692,
+      "name": "Cursor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+    },
+    {
+      "pid": 35372,
+      "name": "Cursor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+    },
+    {
+      "pid": 35632,
+      "name": "Cursor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+    },
+    {
+      "pid": 36636,
+      "name": "taskhostw.exe",
+      "path": ""
+    },
+    {
+      "pid": 33052,
+      "name": "Cursor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+    },
+    {
+      "pid": 34836,
+      "name": "Cursor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+    },
+    {
+      "pid": 37552,
+      "name": "DeepSeek Harness.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\DeepSeek Harness\\DeepSeek Harness.exe"
+    },
+    {
+      "pid": 35380,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
+    },
+    {
+      "pid": 36960,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 37296,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
+    },
+    {
+      "pid": 37344,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 37232,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
+    },
+    {
+      "pid": 36868,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 37824,
+      "name": "Cursor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+    },
+    {
+      "pid": 37476,
+      "name": "CodeSetup-stable-3.23.23.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Temp\\vscode-stable-user-x64-u5yb1j8s28l\\CodeSetup-stable-3.23.23.exe"
+    },
+    {
+      "pid": 36104,
+      "name": "CodeSetup-stable-3.23.23.tmp",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Temp\\is-L35K6.tmp\\CodeSetup-stable-3.23.23.tmp"
+    },
+    {
+      "pid": 34820,
+      "name": "Qoder.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder\\.qoder-versions\\0.4.3\\Qoder.exe"
+    },
+    {
+      "pid": 21692,
+      "name": "Qoder.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder\\.qoder-versions\\0.4.3\\Qoder.exe"
+    },
+    {
+      "pid": 22804,
+      "name": "Qoder.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder\\.qoder-versions\\0.4.3\\Qoder.exe"
+    },
+    {
+      "pid": 31740,
+      "name": "Qoder.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder\\.qoder-versions\\0.4.3\\Qoder.exe"
+    },
+    {
+      "pid": 15432,
+      "name": "Qoder.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder\\.qoder-versions\\0.4.3\\Qoder.exe"
+    },
+    {
+      "pid": 20876,
+      "name": "Qoder.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder\\.qoder-versions\\0.4.3\\Qoder.exe"
+    },
+    {
+      "pid": 20460,
+      "name": "Qoder.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder\\.qoder-versions\\0.4.3\\Qoder.exe"
+    },
+    {
+      "pid": 33876,
+      "name": "appshot_bare_modifier_monitor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder\\.qoder-versions\\0.4.3\\resources\\bin\\appshot_bare_modifier_monitor.exe"
+    },
+    {
+      "pid": 36900,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 20800,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 18972,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 19112,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 38864,
+      "name": "msedge.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+    },
+    {
+      "pid": 38252,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 38744,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 38304,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 17752,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 2384,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 37964,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 36604,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 24228,
+      "name": "Qoder.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder\\.qoder-versions\\0.4.3\\Qoder.exe"
+    },
+    {
+      "pid": 17228,
+      "name": "Qoder.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder\\.qoder-versions\\0.4.3\\Qoder.exe"
+    },
+    {
+      "pid": 38664,
+      "name": "uvx.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.local\\bin\\uvx.exe"
+    },
+    {
+      "pid": 37628,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 15680,
+      "name": "uv.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.local\\bin\\uv.exe"
+    },
+    {
+      "pid": 38908,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 21064,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 37312,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
+    },
+    {
+      "pid": 37576,
+      "name": "polardbx-zero-mcp.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\uv\\cache\\archive-v0\\5n0sU2fyyW5bud9v\\Scripts\\polardbx-zero-mcp.exe"
+    },
+    {
+      "pid": 17440,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\uv\\cache\\archive-v0\\5n0sU2fyyW5bud9v\\Scripts\\python.exe"
+    },
+    {
+      "pid": 28728,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\python.exe"
+    },
+    {
+      "pid": 27052,
+      "name": "Qoder.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder\\.qoder-versions\\0.4.3\\Qoder.exe"
+    },
+    {
+      "pid": 17736,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 14008,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 28208,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 16464,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 35328,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 38492,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 33996,
+      "name": "Qoder.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder\\.qoder-versions\\0.4.3\\Qoder.exe"
+    },
+    {
+      "pid": 38684,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 35612,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 9960,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 38948,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 33944,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 39036,
+      "name": "ZCode.exe",
+      "path": "C:\\Program Files\\ZCode\\ZCode.exe"
+    },
+    {
+      "pid": 37772,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 39200,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 36432,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 36804,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 32944,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 39068,
+      "name": "Qoder.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder\\.qoder-versions\\0.4.3\\Qoder.exe"
+    },
+    {
+      "pid": 38760,
+      "name": "Qoder.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder\\.qoder-versions\\0.4.3\\Qoder.exe"
+    },
+    {
+      "pid": 39300,
+      "name": "pwahelper.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\pwahelper.exe"
+    },
+    {
+      "pid": 14172,
+      "name": "msedge.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+    },
+    {
+      "pid": 34384,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 17548,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 4980,
+      "name": "xl_ext_chrome.exe",
+      "path": "C:\\Program Files (x86)\\Common Files\\Thunder Network\\bho\\xl_ext_chrome\\xl_ext_chrome.exe"
+    },
+    {
+      "pid": 39952,
+      "name": "msedge.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+    },
+    {
+      "pid": 7524,
+      "name": "RuntimeBroker.exe",
+      "path": "C:\\Windows\\System32\\RuntimeBroker.exe"
+    },
+    {
+      "pid": 38520,
+      "name": "node.exe",
+      "path": "c:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\resources\\app\\resources\\helpers\\node.exe"
+    },
+    {
+      "pid": 40268,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 33824,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 40880,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 32668,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 35076,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 39140,
+      "name": "node.exe",
+      "path": "c:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\resources\\app\\resources\\helpers\\node.exe"
+    },
+    {
+      "pid": 18196,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 39724,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 17480,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 40120,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 17140,
+      "name": "node.exe",
+      "path": "c:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\resources\\app\\resources\\helpers\\node.exe"
+    },
+    {
+      "pid": 37400,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 16840,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 39440,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 36940,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 40552,
+      "name": "node.exe",
+      "path": "c:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\resources\\app\\resources\\helpers\\node.exe"
+    },
+    {
+      "pid": 788,
+      "name": "uvx.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.local\\bin\\uvx.exe"
+    },
+    {
+      "pid": 16960,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 38836,
+      "name": "uv.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.local\\bin\\uv.exe"
+    },
+    {
+      "pid": 14496,
+      "name": "mcp-proxy-for-aws-cli.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\uv\\cache\\archive-v0\\41XssRian1-Yy3oi\\Scripts\\mcp-proxy-for-aws-cli.exe"
+    },
+    {
+      "pid": 40600,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\uv\\cache\\archive-v0\\41XssRian1-Yy3oi\\Scripts\\python.exe"
+    },
+    {
+      "pid": 30512,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\python.exe"
+    },
+    {
+      "pid": 37208,
+      "name": "uvx.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.local\\bin\\uvx.exe"
+    },
+    {
+      "pid": 19120,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 39864,
+      "name": "uv.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.local\\bin\\uv.exe"
+    },
+    {
+      "pid": 39184,
+      "name": "mcp-proxy-for-aws-cli.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\uv\\cache\\archive-v0\\41XssRian1-Yy3oi\\Scripts\\mcp-proxy-for-aws-cli.exe"
+    },
+    {
+      "pid": 33156,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\uv\\cache\\archive-v0\\41XssRian1-Yy3oi\\Scripts\\python.exe"
+    },
+    {
+      "pid": 4072,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\python.exe"
+    },
+    {
+      "pid": 33364,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 28428,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 37000,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 40480,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 37656,
+      "name": "node.exe",
+      "path": "c:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\resources\\app\\resources\\helpers\\node.exe"
+    },
+    {
+      "pid": 34556,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 33128,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 38412,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 37224,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 40956,
+      "name": "node.exe",
+      "path": "c:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\resources\\app\\resources\\helpers\\node.exe"
+    },
+    {
+      "pid": 40416,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 22172,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 7952,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 37360,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 18316,
+      "name": "node.exe",
+      "path": "c:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\resources\\app\\resources\\helpers\\node.exe"
+    },
+    {
+      "pid": 39428,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 38780,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 38672,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 40308,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 38560,
+      "name": "node.exe",
+      "path": "c:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\resources\\app\\resources\\helpers\\node.exe"
+    },
+    {
+      "pid": 39432,
+      "name": "codex.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\OpenAI\\Codex\\bin\\f544b3844e0f14e9\\codex.exe"
+    },
+    {
+      "pid": 28864,
+      "name": "ChatGPT.exe",
+      "path": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.930.4958.0_x64__2p2nqsd0c76g0\\app\\ChatGPT.exe"
+    },
+    {
+      "pid": 32052,
+      "name": "ChatGPT.exe",
+      "path": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.930.4958.0_x64__2p2nqsd0c76g0\\app\\ChatGPT.exe"
+    },
+    {
+      "pid": 38208,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 18588,
+      "name": "OpenConsole.exe",
+      "path": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\\OpenConsole.exe"
+    },
+    {
+      "pid": 29688,
+      "name": "WindowsTerminal.exe",
+      "path": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\\WindowsTerminal.exe"
+    },
+    {
+      "pid": 36208,
+      "name": "nohup.exe",
+      "path": "C:\\Program Files\\Git\\usr\\bin\\nohup.exe"
+    },
+    {
+      "pid": 40320,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
+    },
+    {
+      "pid": 41720,
+      "name": "RuntimeBroker.exe",
+      "path": "C:\\Windows\\System32\\RuntimeBroker.exe"
+    },
+    {
+      "pid": 39640,
+      "name": "wpscloudsvr.exe",
+      "path": "C:\\Program Files (x86)\\WPS Office\\12.1.0.28505\\office6\\wpscloudsvr.exe"
+    },
+    {
+      "pid": 36292,
+      "name": "FileCoAuth.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Microsoft\\OneDrive\\26.178.0913.0006\\FileCoAuth.exe"
+    },
+    {
+      "pid": 27504,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 34108,
+      "name": "OpenConsole.exe",
+      "path": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\\OpenConsole.exe"
+    },
+    {
+      "pid": 31732,
+      "name": "python.exe",
+      "path": ""
+    },
+    {
+      "pid": 28472,
+      "name": "Cursor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+    },
+    {
+      "pid": 40068,
+      "name": "wps365-cli.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.local\\bin\\wps365-cli.exe"
+    },
+    {
+      "pid": 38936,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 42004,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe"
+    },
+    {
+      "pid": 46456,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 24768,
+      "name": "wps.exe",
+      "path": "C:\\PROGRA~2\\WPSOFF~1\\1210~1.285\\office6\\wps.exe"
+    },
+    {
+      "pid": 46428,
+      "name": "msedge.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+    },
+    {
+      "pid": 39712,
+      "name": "msedge.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+    },
+    {
+      "pid": 28104,
+      "name": "Trae CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Trae CN\\Trae CN.exe"
+    },
+    {
+      "pid": 45016,
+      "name": "Trae CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Trae CN\\Trae CN.exe"
+    },
+    {
+      "pid": 36904,
+      "name": "Trae CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Trae CN\\Trae CN.exe"
+    },
+    {
+      "pid": 42052,
+      "name": "aha_doctor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Trae CN\\aha_doctor\\aha_doctor.exe"
+    },
+    {
+      "pid": 42384,
+      "name": "Trae CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Trae CN\\Trae CN.exe"
+    },
+    {
+      "pid": 39028,
+      "name": "Trae CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Trae CN\\Trae CN.exe"
+    },
+    {
+      "pid": 42692,
+      "name": "Trae CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Trae CN\\Trae CN.exe"
+    },
+    {
+      "pid": 37848,
+      "name": "Trae CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Trae CN\\Trae CN.exe"
+    },
+    {
+      "pid": 27080,
+      "name": "Trae CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Trae CN\\Trae CN.exe"
+    },
+    {
+      "pid": 47656,
+      "name": "Trae CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Trae CN\\Trae CN.exe"
+    },
+    {
+      "pid": 48532,
+      "name": "Trae CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Trae CN\\Trae CN.exe"
+    },
+    {
+      "pid": 48176,
+      "name": "Trae CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Trae CN\\Trae CN.exe"
+    },
+    {
+      "pid": 30428,
+      "name": "Trae CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Trae CN\\Trae CN.exe"
+    },
+    {
+      "pid": 41808,
+      "name": "Trae CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Trae CN\\Trae CN.exe"
+    },
+    {
+      "pid": 45524,
+      "name": "Trae CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Trae CN\\Trae CN.exe"
+    },
+    {
+      "pid": 42788,
+      "name": "Trae CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Trae CN\\Trae CN.exe"
+    },
+    {
+      "pid": 16548,
+      "name": "ZCode.exe",
+      "path": "C:\\Program Files\\ZCode\\ZCode.exe"
+    },
+    {
+      "pid": 46092,
+      "name": "codearts-agent.exe",
+      "path": "C:\\Program Files\\CodeArts Agent\\codearts-agent.exe"
+    },
+    {
+      "pid": 44724,
+      "name": "codearts-agent.exe",
+      "path": "C:\\Program Files\\CodeArts Agent\\codearts-agent.exe"
+    },
+    {
+      "pid": 17860,
+      "name": "codearts-agent.exe",
+      "path": "C:\\Program Files\\CodeArts Agent\\codearts-agent.exe"
+    },
+    {
+      "pid": 4796,
+      "name": "codearts-agent.exe",
+      "path": "C:\\Program Files\\CodeArts Agent\\codearts-agent.exe"
+    },
+    {
+      "pid": 44540,
+      "name": "codearts-agent.exe",
+      "path": "C:\\Program Files\\CodeArts Agent\\codearts-agent.exe"
+    },
+    {
+      "pid": 45884,
+      "name": "codearts-agent.exe",
+      "path": "C:\\Program Files\\CodeArts Agent\\codearts-agent.exe"
+    },
+    {
+      "pid": 43448,
+      "name": "ZCode.exe",
+      "path": "C:\\Program Files\\ZCode\\ZCode.exe"
+    },
+    {
+      "pid": 27204,
+      "name": "Xiaomi MiMo.exe",
+      "path": "C:\\Program Files\\Xiaomi MiMo\\Xiaomi MiMo.exe"
+    },
+    {
+      "pid": 48952,
+      "name": "Xiaomi MiMo.exe",
+      "path": "C:\\Program Files\\Xiaomi MiMo\\Xiaomi MiMo.exe"
+    },
+    {
+      "pid": 21164,
+      "name": "Xiaomi MiMo.exe",
+      "path": "C:\\Program Files\\Xiaomi MiMo\\Xiaomi MiMo.exe"
+    },
+    {
+      "pid": 12232,
+      "name": "codearts-agent.exe",
+      "path": "C:\\Program Files\\CodeArts Agent\\codearts-agent.exe"
+    },
+    {
+      "pid": 48540,
+      "name": "Xiaomi MiMo.exe",
+      "path": "C:\\Program Files\\Xiaomi MiMo\\Xiaomi MiMo.exe"
+    },
+    {
+      "pid": 19524,
+      "name": "codearts-agent.exe",
+      "path": "C:\\Program Files\\CodeArts Agent\\codearts-agent.exe"
+    },
+    {
+      "pid": 20472,
+      "name": "codearts-agent.exe",
+      "path": "C:\\Program Files\\CodeArts Agent\\codearts-agent.exe"
+    },
+    {
+      "pid": 41064,
+      "name": "Xiaomi MiMo.exe",
+      "path": "C:\\Program Files\\Xiaomi MiMo\\Xiaomi MiMo.exe"
+    },
+    {
+      "pid": 31924,
+      "name": "codearts-agent.exe",
+      "path": "C:\\Program Files\\CodeArts Agent\\codearts-agent.exe"
+    },
+    {
+      "pid": 37240,
+      "name": "codearts-agent.exe",
+      "path": "C:\\Program Files\\CodeArts Agent\\codearts-agent.exe"
+    },
+    {
+      "pid": 45112,
+      "name": "AgentKernel_Vscode_26_9_501_1_0_0-1151846206572736.exe",
+      "path": "c:\\Users\\欧阳宏俊\\.codeartsdoer\\CodeArts_Agent\\AgentKernel_Vscode_26_9_501_1_0_0-1151846206572736.exe"
+    },
+    {
+      "pid": 46000,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 39512,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 23508,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.codebase-cli\\0.2.52\\python\\python.exe"
+    },
+    {
+      "pid": 49448,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 49576,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 49188,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 49656,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 44808,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 49900,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 49696,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 49484,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 50012,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 49548,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 49220,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 49880,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 49668,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 47152,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 45024,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 52196,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 52220,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 49768,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 49888,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 50836,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 51324,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 51304,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 51380,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 51112,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 51476,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 51500,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 51576,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 51588,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 51748,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 51688,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 51736,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 50640,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 35028,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 51464,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 50484,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 50184,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 50480,
+      "name": "uvx.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.local\\bin\\uvx.exe"
+    },
+    {
+      "pid": 50584,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 50928,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 51908,
+      "name": "uv.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.local\\bin\\uv.exe"
+    },
+    {
+      "pid": 51636,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 52036,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 37696,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 50508,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 51144,
+      "name": "github-chat-mcp.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\uv\\cache\\archive-v0\\L3FRvesh74eCpNd7\\Scripts\\github-chat-mcp.exe"
+    },
+    {
+      "pid": 50812,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 50888,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 51152,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\uv\\cache\\archive-v0\\L3FRvesh74eCpNd7\\Scripts\\python.exe"
+    },
+    {
+      "pid": 51212,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 37308,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 50996,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\python.exe"
+    },
+    {
+      "pid": 43064,
+      "name": "node.exe",
+      "path": "A:\\cache\\npm\\_npx\\3060e0e7cda84e49\\node_modules\\node\\bin\\node.exe"
+    },
+    {
+      "pid": 49456,
+      "name": "uvx.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.local\\bin\\uvx.exe"
+    },
+    {
+      "pid": 52172,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 52164,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 48928,
+      "name": "uv.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.local\\bin\\uv.exe"
+    },
+    {
+      "pid": 46180,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 51740,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 34024,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 44116,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 532,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 49684,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 50772,
+      "name": "yfmcp.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\uv\\cache\\archive-v0\\ql88VB5MAiApzSIc\\Scripts\\yfmcp.exe"
+    },
+    {
+      "pid": 52032,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\uv\\cache\\archive-v0\\ql88VB5MAiApzSIc\\Scripts\\python.exe"
+    },
+    {
+      "pid": 49892,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\python.exe"
+    },
+    {
+      "pid": 52264,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 52312,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 52812,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 53148,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 53172,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 53232,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 53240,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 52476,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 52648,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 52572,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 11632,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 52236,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 52512,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 52300,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 52440,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 52764,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 53244,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 52424,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 53104,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 53064,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 53040,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 53280,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 53656,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 53744,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 53496,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 53928,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 53392,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 53252,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 53388,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 53924,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 46916,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 53328,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 54640,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 54352,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 44284,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 55068,
+      "name": "uvx.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.local\\bin\\uvx.exe"
+    },
+    {
+      "pid": 55120,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 55136,
+      "name": "uv.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.local\\bin\\uv.exe"
+    },
+    {
+      "pid": 53572,
+      "name": "mcp-server-fetch.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\uv\\cache\\archive-v0\\VFBsJfKchbIg-oER\\Scripts\\mcp-server-fetch.exe"
+    },
+    {
+      "pid": 47936,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\uv\\cache\\archive-v0\\VFBsJfKchbIg-oER\\Scripts\\python.exe"
+    },
+    {
+      "pid": 54516,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 54448,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\python.exe"
+    },
+    {
+      "pid": 54908,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 54224,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 53400,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 54188,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 53288,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 55140,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 54052,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 40060,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 54892,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 32188,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 17764,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 54312,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 55028,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 53948,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 54212,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 53536,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 43316,
+      "name": "Qoder CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder CN\\Qoder CN.exe"
+    },
+    {
+      "pid": 37800,
+      "name": "Qoder CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder CN\\Qoder CN.exe"
+    },
+    {
+      "pid": 25564,
+      "name": "Qoder CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder CN\\Qoder CN.exe"
+    },
+    {
+      "pid": 37732,
+      "name": "Qoder CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder CN\\Qoder CN.exe"
+    },
+    {
+      "pid": 38188,
+      "name": "Qoder CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder CN\\Qoder CN.exe"
+    },
+    {
+      "pid": 43624,
+      "name": "Qoder CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder CN\\Qoder CN.exe"
+    },
+    {
+      "pid": 55100,
+      "name": "Qoder CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder CN\\Qoder CN.exe"
+    },
+    {
+      "pid": 49592,
+      "name": "appshot_bare_modifier_monitor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder CN\\resources\\bin\\appshot_bare_modifier_monitor.exe"
+    },
+    {
+      "pid": 44604,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 35768,
+      "name": "Qoder CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder CN\\Qoder CN.exe"
+    },
+    {
+      "pid": 53752,
+      "name": "Qoder CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder CN\\Qoder CN.exe"
+    },
+    {
+      "pid": 38612,
+      "name": "Qoder CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder CN\\Qoder CN.exe"
+    },
+    {
+      "pid": 52844,
+      "name": "Kimi Code.exe",
+      "path": "C:\\Program Files\\Kimi Code\\Kimi Code.exe"
+    },
+    {
+      "pid": 45180,
+      "name": "Kimi Code.exe",
+      "path": "C:\\Program Files\\Kimi Code\\Kimi Code.exe"
+    },
+    {
+      "pid": 42096,
+      "name": "Kimi Code.exe",
+      "path": "C:\\Program Files\\Kimi Code\\Kimi Code.exe"
+    },
+    {
+      "pid": 52704,
+      "name": "Kimi Code.exe",
+      "path": "C:\\Program Files\\Kimi Code\\Kimi Code.exe"
+    },
+    {
+      "pid": 56208,
+      "name": "Kimi Code.exe",
+      "path": "C:\\Program Files\\Kimi Code\\Kimi Code.exe"
+    },
+    {
+      "pid": 54196,
+      "name": "ApplicationFrameHost.exe",
+      "path": "C:\\WINDOWS\\system32\\ApplicationFrameHost.exe"
+    },
+    {
+      "pid": 56316,
+      "name": "svchost.exe",
+      "path": "C:\\WINDOWS\\system32\\svchost.exe"
+    },
+    {
+      "pid": 52752,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 56488,
+      "name": "bash.exe",
+      "path": "C:\\Program Files\\Git\\usr\\bin\\bash.exe"
+    },
+    {
+      "pid": 52404,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
+    },
+    {
+      "pid": 21084,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 58436,
+      "name": "bash.exe",
+      "path": "C:\\Program Files\\Git\\usr\\bin\\bash.exe"
+    },
+    {
+      "pid": 58472,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 11108,
+      "name": "bash.exe",
+      "path": "C:\\Program Files\\Git\\bin\\bash.exe"
+    },
+    {
+      "pid": 54716,
+      "name": "bash.exe",
+      "path": "C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe"
+    },
+    {
+      "pid": 57392,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 49212,
+      "name": "bash.exe",
+      "path": "C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe"
+    },
+    {
+      "pid": 58132,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
+    },
+    {
+      "pid": 44076,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\OpenAI\\Codex\\runtimes\\cua_node\\7d8d3ac5ca9f6767\\bin\\node.exe"
+    },
+    {
+      "pid": 40576,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\OpenAI\\Codex\\runtimes\\cua_node\\7d8d3ac5ca9f6767\\bin\\node.exe"
+    },
+    {
+      "pid": 50024,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.dsh\\dsh-runtimes\\dsh-primary-runtime\\dependencies\\node\\bin\\node.exe"
+    },
+    {
+      "pid": 57328,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 5856,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.dsh\\dsh-runtimes\\dsh-primary-runtime\\dependencies\\node\\bin\\node.exe"
+    },
+    {
+      "pid": 57936,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.dsh\\dsh-runtimes\\dsh-primary-runtime\\dependencies\\node\\bin\\node.exe"
+    },
+    {
+      "pid": 57908,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 57964,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.dsh\\dsh-runtimes\\dsh-primary-runtime\\dependencies\\node\\bin\\node.exe"
+    },
+    {
+      "pid": 57740,
+      "name": "wps.exe",
+      "path": "C:\\PROGRA~2\\WPSOFF~1\\1210~1.285\\office6\\wps.exe"
+    },
+    {
+      "pid": 55652,
+      "name": "wps.exe",
+      "path": "C:\\PROGRA~2\\WPSOFF~1\\1210~1.285\\office6\\wps.exe"
+    },
+    {
+      "pid": 56896,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 41204,
+      "name": "codearts-agent.exe",
+      "path": "C:\\Program Files\\CodeArts Agent\\codearts-agent.exe"
+    },
+    {
+      "pid": 53424,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 59388,
+      "name": "bash.exe",
+      "path": "C:\\Program Files\\Git\\usr\\bin\\bash.exe"
+    },
+    {
+      "pid": 39032,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 55000,
+      "name": "CodeArtsSpace.exe",
+      "path": "C:\\Program Files\\CodeArtsSpace\\CodeArtsSpace.exe"
+    },
+    {
+      "pid": 53560,
+      "name": "CodeArtsSpace.exe",
+      "path": "C:\\Program Files\\CodeArtsSpace\\CodeArtsSpace.exe"
+    },
+    {
+      "pid": 55400,
+      "name": "CodeArtsSpace.exe",
+      "path": "C:\\Program Files\\CodeArtsSpace\\CodeArtsSpace.exe"
+    },
+    {
+      "pid": 39332,
+      "name": "CodeArtsSpace.exe",
+      "path": "C:\\Program Files\\CodeArtsSpace\\CodeArtsSpace.exe"
+    },
+    {
+      "pid": 35620,
+      "name": "agent-kernel.exe",
+      "path": "C:\\Program Files\\CodeArtsSpace\\resources\\bin\\agent-kernel.exe"
+    },
+    {
+      "pid": 45360,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 59160,
+      "name": "mc-neo-host.exe",
+      "path": ""
+    },
+    {
+      "pid": 59488,
+      "name": "agent-tool-host.exe",
+      "path": "c:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Trae CN\\resources\\app\\modules\\ai-agent\\bin\\agent-tool-host.exe"
+    },
+    {
+      "pid": 37792,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 58600,
+      "name": "Cursor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+    },
+    {
+      "pid": 58060,
+      "name": "Cursor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+    },
+    {
+      "pid": 55024,
+      "name": "Cursor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+    },
+    {
+      "pid": 59700,
+      "name": "git-bash.exe",
+      "path": "C:\\Program Files\\Git\\git-bash.exe"
+    },
+    {
+      "pid": 44868,
+      "name": "mintty.exe",
+      "path": "C:\\Program Files\\Git\\usr\\bin\\mintty.exe"
+    },
+    {
+      "pid": 45044,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 7704,
+      "name": "bash.exe",
+      "path": "C:\\Program Files\\Git\\usr\\bin\\bash.exe"
+    },
+    {
+      "pid": 53976,
+      "name": "cat.exe",
+      "path": "C:\\Program Files\\Git\\usr\\bin\\cat.exe"
+    },
+    {
+      "pid": 36412,
+      "name": "Cursor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+    },
+    {
+      "pid": 52092,
+      "name": "Cursor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+    },
+    {
+      "pid": 48324,
+      "name": "Cursor.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+    },
+    {
+      "pid": 43840,
+      "name": "WorkBuddy.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\WorkBuddy.exe"
+    },
+    {
+      "pid": 544,
+      "name": "WorkBuddy.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\WorkBuddy.exe"
+    },
+    {
+      "pid": 49700,
+      "name": "WorkBuddy.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\WorkBuddy.exe"
+    },
+    {
+      "pid": 53812,
+      "name": "sandbox-center.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\app.asar.unpacked\\cli\\vendor\\sandbox\\5.7.10\\sandbox-center.exe"
+    },
+    {
+      "pid": 55876,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 34060,
+      "name": "sandbox-cli-gc.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\app.asar.unpacked\\cli\\vendor\\sandbox\\5.7.10\\sandbox-cli-gc.exe"
+    },
+    {
+      "pid": 59044,
+      "name": "betterleaks.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\app.asar.unpacked\\cli\\vendor\\sandbox\\5.7.10\\betterleaks.exe"
+    },
+    {
+      "pid": 47888,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 58148,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 44620,
+      "name": "awesun-cli.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.awesun-cli\\awesun-cli.exe"
+    },
+    {
+      "pid": 55736,
+      "name": "WorkBuddy.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\WorkBuddy.exe"
+    },
+    {
+      "pid": 34084,
+      "name": "editor_sdk.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\app.asar.unpacked\\node_modules\\@tencent\\tencent-docs-ai-engine\\bin\\win32-x64\\editor_sdk.exe"
+    },
+    {
+      "pid": 54828,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 60096,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 39320,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 50924,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 42428,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 57592,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 17220,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 42644,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 51608,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 54848,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 28088,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 12176,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 32228,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 56460,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 28956,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 56384,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 60456,
+      "name": "updater.exe",
+      "path": ""
+    },
+    {
+      "pid": 61424,
+      "name": "AppInstallerPythonRedirector.exe",
+      "path": ""
+    },
+    {
+      "pid": 54796,
+      "name": "WorkBuddy.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\WorkBuddy.exe"
+    },
+    {
+      "pid": 59476,
+      "name": "sandbox-cli.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\app.asar.unpacked\\cli\\vendor\\sandbox\\5.7.10\\sandbox-cli.exe"
+    },
+    {
+      "pid": 61036,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 28932,
+      "name": "editor_sdk.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\app.asar.unpacked\\node_modules\\@tencent\\tencent-docs-ai-engine\\bin\\win32-x64\\editor_sdk.exe"
+    },
+    {
+      "pid": 41128,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 31528,
+      "name": "WorkBuddy.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\WorkBuddy.exe"
+    },
+    {
+      "pid": 55580,
+      "name": "AppInstallerPythonRedirector.exe",
+      "path": ""
+    },
+    {
+      "pid": 51412,
+      "name": "powershell.exe",
+      "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.EXE"
+    },
+    {
+      "pid": 47360,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 60264,
+      "name": "Kimi.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Kimi\\Kimi.exe"
+    },
+    {
+      "pid": 55924,
+      "name": "OpenConsole.exe",
+      "path": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\\OpenConsole.exe"
+    },
+    {
+      "pid": 61284,
+      "name": "WorkBuddy.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\WorkBuddy.exe"
+    },
+    {
+      "pid": 28648,
+      "name": "WorkBuddy.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\WorkBuddy.exe"
+    },
+    {
+      "pid": 52308,
+      "name": "WorkBuddy.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\WorkBuddy.exe"
+    },
+    {
+      "pid": 29252,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 44700,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 60756,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 55604,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 7840,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 59320,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 45500,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 32508,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 32444,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 44692,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 39452,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 61240,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 33716,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 2980,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 58764,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 33764,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 47692,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 46944,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 48100,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 51732,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 60908,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 32376,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 59416,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 61224,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 17188,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 32580,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 8616,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 59808,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 40008,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 32680,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 31300,
+      "name": "sandbox-cli.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\app.asar.unpacked\\cli\\vendor\\sandbox\\5.7.10\\sandbox-cli.exe"
+    },
+    {
+      "pid": 57724,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 60380,
+      "name": "sandbox-cli.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\app.asar.unpacked\\cli\\vendor\\sandbox\\5.7.10\\sandbox-cli.exe"
+    },
+    {
+      "pid": 6600,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 44268,
+      "name": "msedge.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+    },
+    {
+      "pid": 47264,
+      "name": "WorkBuddy.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\WorkBuddy.exe"
+    },
+    {
+      "pid": 60820,
+      "name": "WorkBuddy.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\WorkBuddy.exe"
+    },
+    {
+      "pid": 25372,
+      "name": "WorkBuddy.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\WorkBuddy.exe"
+    },
+    {
+      "pid": 24872,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 26476,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 51496,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 33760,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 29272,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 46656,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 25500,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 3144,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 6220,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 61428,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 28452,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 48192,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 47016,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 13980,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 32780,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 34928,
+      "name": "powershell.exe",
+      "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.EXE"
+    },
+    {
+      "pid": 56944,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 61236,
+      "name": "OpenConsole.exe",
+      "path": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\\OpenConsole.exe"
+    },
+    {
+      "pid": 57576,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 9324,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 9720,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 57608,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 54784,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 60072,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 33572,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 26348,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 55540,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 47004,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 30116,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 54612,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 43272,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 45140,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 21464,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 61228,
+      "name": "sandbox-cli.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\app.asar.unpacked\\cli\\vendor\\sandbox\\5.7.10\\sandbox-cli.exe"
+    },
+    {
+      "pid": 2888,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 60068,
+      "name": "AsusUpdateChecker.exe",
+      "path": ""
+    },
+    {
+      "pid": 62872,
+      "name": "sandbox-cli.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\app.asar.unpacked\\cli\\vendor\\sandbox\\5.7.10\\sandbox-cli.exe"
+    },
+    {
+      "pid": 63164,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 43728,
+      "name": "Qoder CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder CN\\Qoder CN.exe"
+    },
+    {
+      "pid": 22744,
+      "name": "WmiPrvSE.exe",
+      "path": ""
+    },
+    {
+      "pid": 54532,
+      "name": "Qoder CN.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Qoder CN\\Qoder CN.exe"
+    },
+    {
+      "pid": 45012,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 60796,
+      "name": "bash.exe",
+      "path": "C:\\Program Files\\Git\\usr\\bin\\bash.exe"
+    },
+    {
+      "pid": 53756,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
+    },
+    {
+      "pid": 5252,
+      "name": "WorkBuddy.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\WorkBuddy.exe"
+    },
+    {
+      "pid": 21492,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 61604,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 42040,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 35580,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 56312,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 61724,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 61936,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 59900,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 20144,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 56436,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 61980,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 61336,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 62744,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    {
+      "pid": 44060,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 53664,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\node\\versions\\24.14.0\\node.exe"
+    },
+    {
+      "pid": 40516,
+      "name": "sandbox-cli.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\app.asar.unpacked\\cli\\vendor\\sandbox\\5.7.10\\sandbox-cli.exe"
+    },
+    {
+      "pid": 35124,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 56904,
+      "name": "DeviceCensus.exe",
+      "path": ""
+    },
+    {
+      "pid": 19720,
+      "name": "identity_helper.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\155.0.4283.33\\identity_helper.exe"
+    },
+    {
+      "pid": 44220,
+      "name": "bash.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\PortableGit\\versions\\1.2.0\\bin\\bash.exe"
+    },
+    {
+      "pid": 29084,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 34856,
+      "name": "bash.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\vendor\\PortableGit\\bin\\..\\usr\\bin\\bash.exe"
+    },
+    {
+      "pid": 55728,
+      "name": "bash.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\vendor\\PortableGit\\bin\\..\\usr\\bin\\bash.exe"
+    },
+    {
+      "pid": 61396,
+      "name": "git.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\vendor\\PortableGit\\mingw64\\bin\\git.exe"
+    },
+    {
+      "pid": 29992,
+      "name": "tail.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\vendor\\PortableGit\\usr\\bin\\tail.exe"
+    },
+    {
+      "pid": 59800,
+      "name": "git.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\vendor\\PortableGit\\mingw64\\bin\\git.exe"
+    },
+    {
+      "pid": 63352,
+      "name": "git-remote-https.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\vendor\\PortableGit\\mingw64\\bin\\git-remote-https.exe"
+    },
+    {
+      "pid": 60636,
+      "name": "sh.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\vendor\\PortableGit\\usr\\bin\\sh.exe"
+    },
+    {
+      "pid": 31100,
+      "name": "git.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\vendor\\PortableGit\\mingw64\\bin\\git.exe"
+    },
+    {
+      "pid": 10924,
+      "name": "git-credential-helper-selector.exe",
+      "path": "C:\\Program Files\\WorkBuddy\\resources\\vendor\\PortableGit\\mingw64\\bin\\git-credential-helper-selector.exe"
+    },
+    {
+      "pid": 57264,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Roaming\\kimi-desktop\\daimon-share\\daimon\\runtime\\python\\.venv\\Scripts\\python.exe"
+    },
+    {
+      "pid": 59712,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 63232,
+      "name": "OpenConsole.exe",
+      "path": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\\OpenConsole.exe"
+    },
+    {
+      "pid": 62204,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Roaming\\kimi-desktop\\daimon-bundle\\runtime\\python\\cpython-3.12\\python.exe"
+    },
+    {
+      "pid": 12168,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 62720,
+      "name": "OpenConsole.exe",
+      "path": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\\OpenConsole.exe"
+    },
+    {
+      "pid": 28920,
+      "name": "bash.exe",
+      "path": "C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe"
+    },
+    {
+      "pid": 61844,
+      "name": "AsusUpdate.exe",
+      "path": ""
+    },
+    {
+      "pid": 12776,
+      "name": "cmd.exe",
+      "path": "C:\\WINDOWS\\system32\\cmd.EXE"
+    },
+    {
+      "pid": 48492,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 53420,
+      "name": "OpenConsole.exe",
+      "path": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\\OpenConsole.exe"
+    },
+    {
+      "pid": 62104,
+      "name": "backgroundTaskHost.exe",
+      "path": "C:\\WINDOWS\\system32\\backgroundTaskHost.exe"
+    },
+    {
+      "pid": 54608,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
+    },
+    {
+      "pid": 30424,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 26240,
+      "name": "backgroundTaskHost.exe",
+      "path": "C:\\WINDOWS\\system32\\backgroundTaskHost.exe"
+    },
+    {
+      "pid": 57548,
+      "name": "ChatGPT.exe",
+      "path": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.930.4958.0_x64__2p2nqsd0c76g0\\app\\ChatGPT.exe"
+    },
+    {
+      "pid": 8160,
+      "name": "backgroundTaskHost.exe",
+      "path": "C:\\WINDOWS\\system32\\backgroundTaskHost.exe"
+    },
+    {
+      "pid": 22732,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.workbuddy\\binaries\\python\\versions\\3.13.12\\python.exe"
+    },
+    {
+      "pid": 60708,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 58704,
+      "name": "OpenConsole.exe",
+      "path": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.24.11911.0_x64__8wekyb3d8bbwe\\OpenConsole.exe"
+    },
+    {
+      "pid": 31648,
+      "name": "svchost.exe",
+      "path": ""
+    },
+    {
+      "pid": 59360,
+      "name": "ChatGPT.exe",
+      "path": "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.930.4958.0_x64__2p2nqsd0c76g0\\app\\ChatGPT.exe"
+    },
+    {
+      "pid": 55868,
+      "name": "bash.exe",
+      "path": "C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe"
+    },
+    {
+      "pid": 48972,
+      "name": "backgroundTaskHost.exe",
+      "path": "C:\\WINDOWS\\system32\\backgroundTaskHost.exe"
+    },
+    {
+      "pid": 58488,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Roaming\\kimi-desktop\\daimon-share\\daimon\\runtime\\python\\.venv\\Scripts\\python.exe"
+    },
+    {
+      "pid": 46336,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 5212,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Roaming\\kimi-desktop\\daimon-bundle\\runtime\\python\\cpython-3.12\\python.exe"
+    },
+    {
+      "pid": 52448,
+      "name": "MicrosoftEdgeUpdate.exe",
+      "path": ""
+    },
+    {
+      "pid": 13600,
+      "name": "cmd.exe",
+      "path": "C:\\Windows\\system32\\cmd.exe"
+    },
+    {
+      "pid": 27152,
+      "name": "wps365-cli.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.local\\bin\\wps365-cli.exe"
+    },
+    {
+      "pid": 59212,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 45416,
+      "name": "node.exe",
+      "path": "C:\\Program Files\\nodejs\\node.exe"
+    },
+    {
+      "pid": 62968,
+      "name": "node_repl.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\OpenAI\\Codex\\runtimes\\cua_node\\7d8d3ac5ca9f6767\\bin\\node_repl.exe"
+    },
+    {
+      "pid": 12936,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\OpenAI\\Codex\\runtimes\\cua_node\\7d8d3ac5ca9f6767\\bin\\node.exe"
+    },
+    {
+      "pid": 796,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 29732,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 61920,
+      "name": "cmd.exe",
+      "path": "C:\\Windows\\system32\\cmd.exe"
+    },
+    {
+      "pid": 56264,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 62816,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe"
+    },
+    {
+      "pid": 60896,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 32260,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\OpenAI\\Codex\\runtimes\\cua_node\\7d8d3ac5ca9f6767\\bin\\node.exe"
+    },
+    {
+      "pid": 33916,
+      "name": "node.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\OpenAI\\Codex\\runtimes\\cua_node\\7d8d3ac5ca9f6767\\bin\\node.exe"
+    },
+    {
+      "pid": 22392,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 28944,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 56468,
+      "name": "node_repl.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\OpenAI\\Codex\\runtimes\\cua_node\\7d8d3ac5ca9f6767\\bin\\node_repl.exe"
+    },
+    {
+      "pid": 61764,
+      "name": "DeepSeek Harness.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\DeepSeek Harness\\DeepSeek Harness.exe"
+    },
+    {
+      "pid": 57172,
+      "name": "powershell.exe",
+      "path": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+    },
+    {
+      "pid": 61020,
+      "name": "conhost.exe",
+      "path": "C:\\WINDOWS\\system32\\conhost.exe"
+    },
+    {
+      "pid": 59748,
+      "name": "SearchProtocolHost.exe",
+      "path": ""
+    },
+    {
+      "pid": 57712,
+      "name": "msedge.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+    },
+    {
+      "pid": 59628,
+      "name": "msedge.exe",
+      "path": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+    },
+    {
+      "pid": 26484,
+      "name": "audiodg.exe",
+      "path": ""
+    },
+    {
+      "pid": 30976,
+      "name": "python.exe",
+      "path": "C:\\Users\\欧阳宏俊\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
+    },
+    {
+      "pid": 32708,
+      "name": "powershell.exe",
+      "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+    }
+  ],
+  "startup": [
+    {
+      "scope": "HKCU",
+      "entry": "OneDrive=\"C:\\Users\\欧阳宏俊\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe\" /background"
+    },
+    {
+      "scope": "HKCU",
+      "entry": "QQNT=\"C:\\Program Files\\Tencent\\QQNT\\QQ.exe\" /background"
+    },
+    {
+      "scope": "HKCU",
+      "entry": "BaiduYunDetect=\"C:\\Users\\Public\\baidu\\BaiduNetdisk\\YunDetectService.exe\""
+    },
+    {
+      "scope": "HKCU",
+      "entry": "Steam=\"C:\\Program Files (x86)\\Steam\\steam.exe\" -silent"
+    },
+    {
+      "scope": "HKCU",
+      "entry": "ZodAccess=C:\\Program Files\\ZodAccess\\zodaccess.exe"
+    },
+    {
+      "scope": "HKCU",
+      "entry": "Thunder=C:\\Thunder\\Program\\Thunder.exe -silent -StartType:AutoRun"
+    },
+    {
+      "scope": "HKCU",
+      "entry": "com.wps.lingxi=\"C:\\Program Files\\lingxi-desktop\\WPS 灵犀.exe\" --auto-launched"
+    },
+    {
+      "scope": "HKCU",
+      "entry": "electron.app.百度文库=A:\\wenku-pc\\百度文库.exe --auto-launch"
+    },
+    {
+      "scope": "HKCU",
+      "entry": "BaiduYunGuanjia=\"C:\\Users\\Public\\baidu\\BaiduNetdisk\\BaiduNetdisk.exe\" AutoRun"
+    },
+    {
+      "scope": "HKCU",
+      "entry": "MicrosoftEdgeAutoLaunch_79BD2BC0C5289E1D23B48404BCD450C8=\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --no-startup-window --win-session-start"
+    },
+    {
+      "scope": "HKCU",
+      "entry": "EpicGamesLauncher=\"C:\\Program Files\\Epic Games\\Launcher\\Portal\\Binaries\\Win64\\EpicGamesLauncher.exe\" -silent -launchcontext=boot"
+    },
+    {
+      "scope": "HKCU",
+      "entry": "网易邮箱大师=\"C:\\Program Files (x86)\\Netease\\MailMaster\\Application\\mailmaster.exe\" --auto-run"
+    },
+    {
+      "scope": "HKCU",
+      "entry": "MicrosoftEdgeAutoLaunch_3582C9030EF74977F886E1B08A5AA2C9=\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --no-startup-window --win-session-start"
+    },
+    {
+      "scope": "HKLM",
+      "entry": "SecurityHealth=C:\\WINDOWS\\system32\\SecurityHealthSystray.exe"
+    },
+    {
+      "scope": "HKLM",
+      "entry": "AweSun=\"A:\\AweSun\\AweSun.exe\" --cmd=autorun"
+    }
+  ],
+  "counts": {
+    "scheduled_tasks": 216,
+    "services": 315
+  },
+  "idle": {
+    "cpu_load_pct": 57.0,
+    "cpu_idle_pct": 43.0,
+    "mem_free_mb": 953.6,
+    "mem_total_mb": 16076.3,
+    "mem_idle_pct": 5.9
+  }
+}
