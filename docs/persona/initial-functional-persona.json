@@ -99,7 +99,7 @@
   "synchronization": {
     "lineage_json": "written",
     "governance_database": "pending_read_only_connection",
-    "blackboard_notice": "prepared_not_peer_acknowledged"
+    "blackboard_notice": "earlier_notice_queued;independent_peer_acknowledgement_pending"
   },
   "history": [
     {
@@ -111,6 +111,12 @@
       "round": 2,
       "new_information_score": 1,
       "new_fact": "新增当前 WPS 名称与版本观测、ima/本地资料差异及指针绑定证据"
+    },
+    {
+      "review_round": 3,
+      "engine_generation_round": null,
+      "new_information_score": 1,
+      "new_fact": "重新核验 WPS 元数据版本 61、ima 项目计数 3991，完成只读节点发现，新增迁移审计范围"
     }
   ],
   "historical_escape_count": "未取得既往全局账本，不能宣称归零",

@@ -1,14 +1,16 @@
 {
   "schema": "openplanlink.cloud-integration-status/1",
-  "observed_at_utc": "2026-10-05 19:01:30 UTC",
+  "observed_at_utc": "2026-10-05 21:11:40 UTC",
   "providers": {
     "wps": {
       "configured": true,
       "read_verified": true,
       "tool_count": 37,
-      "document_metadata_version_observed": 49,
-      "text_block_count": 842,
-      "characters": 22358,
+      "document_metadata_version_observed": 61,
+      "text_block_count": 878,
+      "characters": 22728,
+      "text_count_scope": "fresh redacted export; metadata version observed separately",
+      "export_version_pinned": false,
       "native_import_verified": false,
       "cloud_acl_history_verified": false
     },
@@ -28,7 +30,7 @@
       "adapter_version": "0.1.0",
       "tool_count": 5,
       "knowledge_bases": 2,
-      "project_content_count": 3989,
+      "project_content_count": 3991,
       "docx_paragraphs": 1214,
       "encrypted_source_roundtrip": true
     },
@@ -52,14 +54,19 @@
     "peer_routes_returning_queued": 5,
     "peer_queue_receipts_signed": false,
     "independent_peer_acknowledgements_verified": 0,
-    "process_started_or_modified": false
+    "process_started_or_modified": false,
+    "readonly_discovery_implemented": true,
+    "standard_methods_verified": false,
+    "card_signature_verified": false
   },
   "monitoring": {
     "automation_id": "openplanlink-a2a",
     "kind": "heartbeat",
     "status": "ACTIVE",
     "interval_minutes": 5,
-    "notify_on_meaningful_change": true
+    "notify_on_meaningful_change": true,
+    "scheduled_trigger_received": true,
+    "queued_triggers_are_not_completed_checks": true
   },
   "huawei_x_efficiency": {
     "scope": "本轮助手发起并取得回执的云作业",
@@ -69,6 +76,7 @@
     "profile_reference": null,
     "vcpu_count": null,
     "cpu_utilization_percent": null,
+    "peak_memory_bytes": null,
     "wall_time_seconds": null,
     "throughput": null,
     "queue_wait_seconds": null,
@@ -78,9 +86,18 @@
     "not_inferred_from_local_benchmarks": true
   },
   "publication_before_new_planning": {
-    "previous_published_commit": "0210012188bdaedde1388f9ee0f0db420c908306",
+    "previous_published_commit": "6cf0b9279e828e9ac864a5c0a970013a63504d63",
     "pr_url": "https://github.com/moonhwm/openplanlink-mirror/pull/3",
     "previous_commit_gate_ci": "success"
+  },
+  "migration_audit": {
+    "console_connection_verified": false,
+    "soc_connection_verified": false,
+    "approved_policy_baseline_received": false,
+    "responsibility_map_received": false,
+    "retention_rule_received": false,
+    "remote_node_desktop_snapshots_verified": 0,
+    "configuration_baseline_updated_after_review": false
   },
   "sensitive_originals_or_credentials_in_this_file": false
 }

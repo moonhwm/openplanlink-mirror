@@ -16,4 +16,8 @@ Neon 的只读参数是 readonly=true，Supabase 使用 read_only=true。二者�
 
 已配置当前对话的定期核查，每 5 分钟执行有界检查，状态未变时保持安静，出现有意义变化或需用户处理的新事项时通知。此为定期检查机制，不是连续流式监控。华为云 X 使用效能已列入汇报验收，当前未取得实际云端作业回执，耗时、CPU 利用率、吞吐量与费用均未实测。
 
+本轮接续重新读取：WPS 基本信息版本升至 61，新的正文导出可读；元数据和导出未固定为同一事务快照。ima 项目计数升至 3,991，两个 Supabase 项目仍返回健康状态，事务只读与既有 RLS 缺口再次核验。十件源资料中主 DOCX 字节变化，完整加密捕获与同快照预检通过。
+
+只读发现器已实现并取得回环实测，十项边界检查通过；标准方法调用和他席签收仍待取得。新的产学研协同与迁移追溯要求单独记录，主控台及 SOC 连接未核验，不以本地文件副本宣称已经同步。
+
 参考：[Supabase 官方 MCP](https://supabase.com/docs/guides/ai-tools/mcp)、[ima 官方 Agent 接入](https://ima.qq.com/agent-interface)、[Neon 官方 MCP 更新](https://neon.com/blog/give-your-agent-neon-tools)。

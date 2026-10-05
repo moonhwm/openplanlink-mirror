@@ -25,6 +25,8 @@ jobs:
           python3 -m unittest discover -s tests -p test_cos_upload_config.py -v
       - name: Verify delivery keys and multi-remote orchestration
         run: python3 -m unittest discover -s tests -p test_upload_orchestration.py -v
+      - name: Verify A2A card discovery boundaries
+        run: python3 -m unittest discover -s tests -p test_a2a_discovery.py -v
       - name: Inspect objects relative to the event baseline
         env:
           BASE_OID: ${{ github.event.pull_request.base.sha || github.event.before }}
