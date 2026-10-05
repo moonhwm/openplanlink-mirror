@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:24:36.877Z",
+  "generated_at": "2026-10-05T19:24:36.625Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 1845,
-  "merkle_root_sha3_512": "c5ebae1f7f78730446edf1af1ac1ae9d17cca6d8529adf19f33dd99fce84233c422a8d8d00d09836b4709c4beae0857d77a1d7ce64ca13aaafb367ba620d0dcd",
-  "hmac_sha3_512": "7903fd63f1881793175d04b839ebac4a06b0c65e52e3eaf8b5ba5ef17ba11cc60b3184d4c91503c2fe6481fc21641716f03a172e39975fc79a3fc8c8a896549c",
+  "merkle_root_sha3_512": "2f0068ae6744db5879c615ec435c57c2d96b397484987f61417bbc6b6a06a51e6794150ad00f8c69658f9f8d590f4100477e2ad51131e520e16276cf30d15362",
+  "hmac_sha3_512": "3372cc3e4e78cf00b47e7ddfcb361a012bf8fd008aedbd5651aad7822cdd27748971e06736bbff713d60007595302716969dece219dff5beef735b27b5d78fad",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -366,16 +366,28 @@
       "leaf_sha3_512": "864ccf28a3b2c12af06a274634fe22abbb74486354dae7ab1620be1f3d3683f9a516ac5c7fb5264cdffe158311c2675c04fbf4472f01639f0d3726dd4d02156f"
     },
     {
+      "path": "deliverables/20261003/A2A网络覆盖性终审结论_北京时间2300_石敢当席_20261003.otl",
+      "size": 7065,
+      "content_sha3_512": "28aa8a4b6412a1f907c795f3afbc3999fb7da18b0315834d8bd4940a413a42bc4997ac437af629b75e7e12501ff7fd747d1c204bb7a10fc26cb7dd1f43e1e84b",
+      "leaf_sha3_512": "e9c3afebd840c845ee2b80f0ac15cffc17ecf8746bf7e28d5142fbc3222613f7359923b57beec3062b5bde1f6882441b6ebc615bd809724997d4153831d40b7c"
+    },
+    {
       "path": "deliverables/20261003/INDEX.md",
-      "size": 3626,
-      "content_sha3_512": "56316b0ba782e4a946d7df52f65ede64e26a0223b534eb10d8a56becc1af79ad084a1f9aa03a1acb87e01f45e674f4c7ad079c9b527366604298ced58c9335b9",
-      "leaf_sha3_512": "e1319ffb420e245c03636667e4e76a839a76f3ea63f66f5087336d594fe6b21742e245594e66f3b52ceaf43a9400eb602ec131afce337e6f7c2794edabf52601"
+      "size": 4268,
+      "content_sha3_512": "76d90fe7d214f2e69767077fda24b599d882b0760030ab6a1d70f14cb98b916a326e065f0936799ce26efb45411324cca276d1b529888c6b4823e06831b677fb",
+      "leaf_sha3_512": "bf004471e28bbb85d66749eff5e0cbd093d8b4f91adff7c0655eed1e3a7d8a2544fd202037b30d8d2f41dbe8636c0d32cba79c1406cea59616622fc7d434606d"
     },
     {
       "path": "deliverables/20261003/POINTER.md",
       "size": 835,
       "content_sha3_512": "e14976d9558fae2e3caba48a876711fe1ad1ae365d47bfd6d56d5b01505a3f856e074fe208a96a4ead159d1e91fa1f438f0800cd9b94c6f9c064c9e291862d44",
       "leaf_sha3_512": "2f851e51973c836751e5899c2115012d473aae9a26289fa558c683f5ee0679b691a3d458d909888d92036f715c29c076d9e993a925f574075fa980d24ba3b96b"
+    },
+    {
+      "path": "deliverables/20261003/ima与A2A约束下开源协议补充论证_认证流程与复核队列_DF-SUPPLEMENT-2026-1003-QODER-06.otl",
+      "size": 11451,
+      "content_sha3_512": "964497508d54d977c18f59fc6f129862116d22cdc24ded54b7c81e473df137050012d3034a557b7025e9a2263f8f8130a0a931a021e0b5832c8c003fa3bec59e",
+      "leaf_sha3_512": "b006809010cbcf5a181bc6268d3f0e34e8659c9cfd0aca511537bcc139b5fcd920dad2fc78d99180c74986d83efe1d16cef87a06df18b193f5686f1e8704c43f"
     },
     {
       "path": "deliverables/20261003/k3-main/gitcode_mining_2026-10-03.md",
@@ -931,9 +943,9 @@
     },
     {
       "path": "skills/EXPERIENCE.md",
-      "size": 5052,
-      "content_sha3_512": "cc859994e6d2f15a3b1ab481d082fe070c66cb624f889ebe63eceb887d5e035625494fade0dd9d63589e86774bb99d4ecc8c195d3f640a01097b0873719462fe",
-      "leaf_sha3_512": "9ac6346be3400b6ca3f416c659c0791d717f657ff9a53a2b95dcaf01a5a676ce4ad8473cb93e02c1b386c6d61298985666d6e9ac53e10a2e5d76ffb3ae5951fa"
+      "size": 10935,
+      "content_sha3_512": "81ec54bc0249182ad8121e1456ad564ef5f98c062253c5ab09af4da2d276a8985ebf433310dbe1c799a5f781d7933bb8a06fed4d8195620a7d6b535c3a37a61d",
+      "leaf_sha3_512": "c56b836a44e157714c03ff4c81577eca50706d198ad358c1ac39a9865bd713a0f0c7d79fb4848b63bd1eec1a1ed6799c477a584c7be9626aef24378e1d3808d0"
     },
     {
       "path": "skills/README.md",
@@ -1261,9 +1273,9 @@
     },
     {
       "path": "skills/av-media-ops/SKILL.md",
-      "size": 4574,
-      "content_sha3_512": "5576db28f82d8248345e4d89f0d745d703a2d82bfc12ad98a2971ee9fd220feeccb533e3b78b30f758cb535f53dafb22e229dc4978e55fc05d58bf53ae656086",
-      "leaf_sha3_512": "95e24528bd9659c74aab75541fa63b16760c50f1d3adc45efb8c68208d2786beff739eae220cd6f54c42e8d4236e4983ac13918b1b1b4a6df67f110063680655"
+      "size": 5593,
+      "content_sha3_512": "adbd002b139ebe018cc36e5733a2066dcfe5aea2b7bdfc54db9b360b77d727c907ca0791c709559dfb3bedb8090b7924358e54491c594e5f92c8c3e0052d394b",
+      "leaf_sha3_512": "ceb85dd665067c29d65e5d5d96cb2cf267e6f6c4cee5420c0b1983e9f5d3193ed9e5e2e9e1ce442995cef08a6961ea3a14f617a52929b88fe21e928765963407"
     },
     {
       "path": "skills/av-media-ops/references/voice_variants.md",
@@ -1273,9 +1285,15 @@
     },
     {
       "path": "skills/av-media-ops/scripts/av_intake.py",
-      "size": 10846,
-      "content_sha3_512": "11f6f1a74078fefd83c61cfe78a5f0429b376c0820f20a3e5b1ecc1fd6a07cf499995e6045eda8ff608a6bae087d9642befeeb1d2caf215d887a22738784fa6d",
-      "leaf_sha3_512": "53b23aaa5eb63f82aad6c6c133331ef4d576a96f6d2fcd7e8e39afb4333b73434c3f033905a06d8d859cce20f50833a74159b653f4898433964eb72c40cd2805"
+      "size": 56033,
+      "content_sha3_512": "0dc4a7c951fb1bb8ac101b7dbfe49a3911c78642a5e5063fd170ea092010d3a26e148a06109a2fe8093e8246701d0c1e71fe093b6d045c874233f163ef8c1155",
+      "leaf_sha3_512": "e65916e81d1185e89d740aacee07025bae34f10ec4ea0e663ca8e1ba61ebb279a1b73f223aaaee752c8b28e50fbb00182dede4bda7705efeb7ab79e69bef05a7"
+    },
+    {
+      "path": "skills/av-media-ops/scripts/test_av_intake.py",
+      "size": 47333,
+      "content_sha3_512": "6868c1edeb08f008104533846f57b6e0eead551b3f79387d055a4cabe4989f0491be3cdea8a1cdffd23883c8c20ee2600486d664a9304f44e9ea213a46742966",
+      "leaf_sha3_512": "fc92a932940f654246484f924b6e1becbb9953146a3df1a182c2276ac1c7f63e225c77a79c3037dacdbbc65e4fa804f1a9c04805feb1e000056d5cc19585db88"
     },
     {
       "path": "skills/backup-delta-ops/SKILL.md",
@@ -10806,12 +10824,6 @@
       "leaf_sha3_512": "75f0fdbbe8e6a0f9abd5e3d681e0f5a9fdbb8fd0aa6983e82b9f4dc6aea5f1255de4f65007b1568d23ec6ecf41b666a6eb2c6d3cb2591ef6d13ad57defd048da"
     },
     {
-      "path": "tools/spec/spec-cd_attest.md",
-      "size": 1447,
-      "content_sha3_512": "5c4e2902ab2d73565c13b8abd34a9d79b73dc18c61e0193dbb0f0b5fc8cb925f703a3abb4f1c798825c545dfdeac24d3ba15e215cbafebe09e5c8179d4b24eae",
-      "leaf_sha3_512": "69e174a29eb568525b4f3c51f12b77ad5808cf6b984e7ed328b2c668edf4d65c11edf943e74aa2986bc60905468002ccb5286258b887e8d94d9c045b083c094a"
-    },
-    {
       "path": "tools/spec/spec-compensate.md",
       "size": 281,
       "content_sha3_512": "45f0b75ce7e0ce48fac8d79708045156f1b9234e8e425c6e71a60a8c7da124b4847d5af34b958939f7f01a760879d0191a9a6d186b1e354a7485f33e2a970c11",
@@ -10854,12 +10866,6 @@
       "leaf_sha3_512": "6b99c8516426ae3f6f40267adf13288fddb7203786ce3a411d7b159a7ca47421a007c8e8d87873339c7883ba91856a5c55b90e9650d7ff85306aa77443c0fdf2"
     },
     {
-      "path": "tools/spec/spec-license_match.md",
-      "size": 1430,
-      "content_sha3_512": "cc380090a305fe88b6830d2ffa55d0d7954c44a7e858af112b760b12803d0de264350f66d0818be68b6955278b7ee6c560760b2574a5191c4b2cc0b6de3c1920",
-      "leaf_sha3_512": "3a5c5dd35319e901c2e5bacfa677e4357d43e79254eb34b047e8653fa1198d320be68689f9abdf1a43f6970714efdce113633b5ac464e922240920cba54e5390"
-    },
-    {
       "path": "tools/spec/spec-live_state_loop.md",
       "size": 204,
       "content_sha3_512": "2ee09e58dd00a8237629cce52567b866333a688a236e6ec03d43cb6e29f1a33a8dc8e68a1a59aededd5388cb713117f31bd73de5d7dd7efcf94077096c5fafe0",
@@ -10894,12 +10900,6 @@
       "size": 298,
       "content_sha3_512": "e5bfa64b1bf140b7dad3352c737daa4f67ef873a49e6bed886e9c94bef7b72b91bb4762dada4d95c7806322efaa635e465cb787ec7819db02683d3072893a360",
       "leaf_sha3_512": "25cc4a40c3ff8d81e79be43265f93be3cd5bc2d3824d7f422ae085910476b5ef5f67cda25ca63c9050f3b7066d1705292d00302dfcc59cecbfc6203390b14b0e"
-    },
-    {
-      "path": "tools/spec/spec-push_reconcile.md",
-      "size": 1181,
-      "content_sha3_512": "68867b8ae3348a006a4da66a0fade3b03649f08131664ff74eb2578b49e4f76eeb3d47b7b3ea8085f220feff4795f68f378454b2917e52bee80945613bc6ebaa",
-      "leaf_sha3_512": "bbb48572631a26cbc15fa11ea17ec09ace3e056bf772f3ac7a01b0e20527dda397ba7aeb27d4ac98b6fd89e38a0924af8e4282eb6075f28a9e3d4e98bd1be137"
     },
     {
       "path": "tools/spec/spec-quota_wall.md",
