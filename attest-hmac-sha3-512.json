@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T20:22:36.841Z",
+  "generated_at": "2026-10-05T20:27:52.553Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1871,
-  "merkle_root_sha3_512": "457270de91f3606467c276fc84b3b022aeefd110b105d350a1b5891cb692ccc2030a315a7faf62655d8b60e5fe101f76764b317fe911377e74339d7be2b37300",
-  "hmac_sha3_512": "487bf60050639a75312e07b020b54ab57fc04994444b3c2c9d1ca89134549f03e8e26873d21aec30986d4b003f78cdfa9c3a913bfe60c3475e5b2aa8c123b678",
+  "file_count": 1872,
+  "merkle_root_sha3_512": "99040bbbe5e15ed59d060cd84fe0a0392d7c5c41be457384d2f6d436cced202be65f3194952c8994b2ac4d442254c616f40a5238ff3facf7c09ae625d35ac9c4",
+  "hmac_sha3_512": "16adb9056e9e45135f3e01c29fcdf372f2981b5e06f59123e9b43c2587cd212a18fb0c8e6024bf5f23b8f95b816b8863a50714d1f69c7bc580f5ba2d31610a6f",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -928,6 +928,12 @@
       "size": 5637,
       "content_sha3_512": "3898a3d143afe7b47ef87f91a37696307175ed636a5a22a378ce4ddcabed66bb790d44afd89bb77beb08ce99ebcfc20f91787cb553910e3723c315e220bc12ef",
       "leaf_sha3_512": "610494508abe91b1830fcf8487a40b87ae7ba0e1357c032092361f83c2e0c04fb79f2a96dab87655e28df9e8f699a58d6f6b96a770e6555a5c6ef4e1a6bc1590"
+    },
+    {
+      "path": "seats/k3-cloud-govdoc/persona_card_v1.md",
+      "size": 1322,
+      "content_sha3_512": "c8cea671affc728394a3b1dd75abd391048f430183bb5058ebe1e88a35909a2dcd18be7960fdc41daea2f3b899a517005c3123461a651a41435a334a84064540",
+      "leaf_sha3_512": "b0fa33c5ee7fa7a7753b083d790ec295057949ff505034923cfdaa2c53b22ca14d8a77f72b22a22ce2485e1c39d8c66962d13e749f59274b3cd59b92a5c8113a"
     },
     {
       "path": "seats/kimi-code-quantlab/persona_card_v1.md",
