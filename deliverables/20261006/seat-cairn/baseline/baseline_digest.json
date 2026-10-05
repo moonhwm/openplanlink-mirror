@@ -1,0 +1,83 @@
+{
+  "schema": "opl-desk-baseline-digest/1",
+  "digest_of": "desk_baseline.json",
+  "full_baseline_sha256": "343dc7144a980b3f4ca255eff297328c936f841c0d80c8d930654da761d47592",
+  "full_baseline_bytes": 121093,
+  "generated_at_baseline": "20261005T203815Z",
+  "digest_generated_at_utc": "2026-10-05T21:49:20Z",
+  "host": "LAPTOP-CHOCER02",
+  "counts": {
+    "scheduled_tasks": 216,
+    "services": 315,
+    "processes": 914,
+    "startup_items": 15
+  },
+  "idle": {
+    "cpu_load_pct": 39.0,
+    "cpu_idle_pct": 61.0,
+    "mem_free_mb": 854.0,
+    "mem_total_mb": 16076.3,
+    "mem_idle_pct": 5.3
+  },
+  "top_by_working_set": [
+    {
+      "name": "System Idle Process",
+      "instances": 1,
+      "ws_mb": 0.0
+    },
+    {
+      "name": "System",
+      "instances": 1,
+      "ws_mb": 0.0
+    },
+    {
+      "name": "Secure System",
+      "instances": 1,
+      "ws_mb": 0.0
+    },
+    {
+      "name": "Registry",
+      "instances": 1,
+      "ws_mb": 0.0
+    },
+    {
+      "name": "smss.exe",
+      "instances": 1,
+      "ws_mb": 0.0
+    },
+    {
+      "name": "csrss.exe",
+      "instances": 2,
+      "ws_mb": 0.0
+    },
+    {
+      "name": "wininit.exe",
+      "instances": 1,
+      "ws_mb": 0.0
+    },
+    {
+      "name": "services.exe",
+      "instances": 1,
+      "ws_mb": 0.0
+    },
+    {
+      "name": "LsaIso.exe",
+      "instances": 1,
+      "ws_mb": 0.0
+    },
+    {
+      "name": "lsass.exe",
+      "instances": 1,
+      "ws_mb": 0.0
+    }
+  ],
+  "redaction": {
+    "excluded": [
+      "进程 PID",
+      "可执行文件路径",
+      "自启动项命令行/键值内容"
+    ],
+    "reason": "公网仓外发审查：避免外发个人环境路径与命令行信息",
+    "anchor": "以 full_baseline_sha256 关联本机全量件，供审计时按需复核"
+  }
+}
