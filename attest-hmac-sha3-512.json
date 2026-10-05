@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T20:51:47.534Z",
+  "generated_at": "2026-10-05T20:56:48.712Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1878,
-  "merkle_root_sha3_512": "45d1777f9121e36bce4b77f37cae8896b02ffdb0600fa83fe65ca9b501628d38e63e0dbe8f46782862f2085192baf789b1e75c4eb16cb769d838a96a89f79f7d",
-  "hmac_sha3_512": "3c310ae68ec70ca5ad5d2cd2fc32443cd2d441f21fa582f2cf1303798d41118faaba9c76dfa69a2ed795409ae73fb024d877c2272f7e0f8f112d3e729c26fd30",
+  "file_count": 1879,
+  "merkle_root_sha3_512": "5a311d826a67ddb81256b4fdd6f47dec0cd6c64abaa761b7012bdf798ccd9705de8e39bf04648f85207cfc901d94c91e00e26784fa84eaca02dbddaf953dcdc9",
+  "hmac_sha3_512": "120f6adb7817a39b230dca1b235393ef2e1ab21ac7799387ef15f3af404be4310018caaf43a1516a0b1a82b702baf297a5e85fbe11d5b0c8b1c98a7b5e114071",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -532,6 +532,12 @@
       "size": 3887,
       "content_sha3_512": "9b2648807ad804b0883704e7e4d2d6520aa34c8a0e44cda0f58c4abad2749d6b3d385520cf15a237a4ab851e88378f7a18dd6c8ec631784deb69bdb12d0b9f21",
       "leaf_sha3_512": "a3a5694bc9f7cb04363774f2c4745e6ab8773b3ba7ca0d9ea152a0ccfc70a6fb48fdc2a9e762bad525319cf7e8ca6452b76318f2b98f511034e7e1b24566f356"
+    },
+    {
+      "path": "deliverables/20261006/seat-cairn/exchange/起始点摄取与关联方案_DF-START-20261006-CAIRN-01.otl",
+      "size": 6024,
+      "content_sha3_512": "bb18aa2f09f38e2c0e1a2f042947f05c2a2cf10636e80d93359eebbb6ff769b5117790305fe818a78c4b78e23f82550530bfb8413c245c34af22f227178fe97c",
+      "leaf_sha3_512": "8f5500a25d7d2f0c9f3c6c8fec35ce58cbd0d51b763d36aebd7515b5d9a3d198bc3d2e03e5a54f0800d7e4ea0b0020c02a6b749ea838be6e79585f18938fdd98"
     },
     {
       "path": "deliverables/20261006/seat-cairn/exchange/闲置系数实测与桌面基线比对_DF-IDLE-20261006-CAIRN-01.otl",
