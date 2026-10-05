@@ -74,30 +74,42 @@ jobs:
           sys.exit(0 if ok else 1)
           PY
 
-      - name: 提交 STATUS.md 与静态状态页（带 [skip ci]，禁 force）
+      - name: 发布状态到独立 status 分支（不触碰 main，force-free）
         run: |
-          if [ -z "$(git status --porcelain STATUS.md status/index.html)" ]; then
-            echo "无变化，跳过提交"
-            exit 0
-          fi
+          set -e
           git config user.name "opl-cd-bot"
           git config user.email "cd-bot@openplanlink.local"
-          git add STATUS.md status/index.html
-          git commit -m "cd: 刷新交付状态 STATUS.md + status/index.html [skip ci]"
-          git pull --rebase --autostash origin main
-          git push origin HEAD:main
-
-      - name: 双远端对账（无镜像凭据则显式告警，不静默）
-        env:
-          # 可选：镜像远端(gitcode)的推送令牌；未配置则跳过并告警
-          MIRROR_PUSH_TOKEN: ${{ secrets.MIRROR_PUSH_TOKEN }}
-        run: |
-          HEAD_SHA="$(git rev-parse HEAD)"
-          if [ -n "${MIRROR_PUSH_TOKEN}" ]; then
-            git remote add gitcode "https://oauth2:${MIRROR_PUSH_TOKEN}@gitcode.com/gcw_9rZbCP4R/openplanlink-mirror.git" 2>/dev/null || true
-            git push gitcode HEAD:main
-            echo "★ 已同步镜像远端 gitcode（HEAD=${HEAD_SHA}）"
+          # 生成件先移出工作树，避免切分支时被覆盖
+          mkdir -p /tmp/cdout
+          cp STATUS.md /tmp/cdout/STATUS.md
+          mkdir -p /tmp/cdout/status && cp status/index.html /tmp/cdout/status/index.html
+          # 取现有 status 分支作为线性基底（存在则追加，不存在则建孤立分支）
+          git fetch origin status 2>/dev/null || true
+          if git show-ref --verify --quiet refs/remotes/origin/status; then
+            git checkout -B status origin/status
           else
-            echo "::warning title=双远端待对账::本次 CD 自动提交仅推送 origin（HEAD=${HEAD_SHA}）；"\
-                 "镜像远端 gitcode 落后一个提交，须由下一次 push_gate 对账（或配置 secrets.MIRROR_PUSH_TOKEN 由本步同推）。"
+            git checkout --orphan status
+            git rm -rf --cached . >/dev/null 2>&1 || true
           fi
+          mkdir -p status
+          cp /tmp/cdout/STATUS.md STATUS.md
+          cp /tmp/cdout/status/index.html status/index.html
+          git add -f STATUS.md status/index.html
+          if git diff --cached --quiet; then
+            echo "status 分支无变化，跳过提交"
+          else
+            git commit -m "cd: 刷新交付状态（源提交 ${GITHUB_SHA}）[skip ci]"
+            git push origin HEAD:status
+            echo "★ 已发布到 origin/status（force-free）"
+          fi
+
+      - name: 说明：main 与镜像远端不再被 CD 写入
+        run: |
+          {
+            echo ""
+            echo "### 发布位变更"
+            echo "CD 自本版起**只写 \`status\` 分支**，不再回写 \`main\`："
+            echo "- \`main\` 只保留坐席提交 → 消除「CD 自动提交 ↔ 坐席并发推送」导致的双远端分叉；"
+            echo "- GitHub Pages 可将 Source 指向 \`status\` 分支根目录即可发布静态状态页；"
+            echo "- attest-cd.json 仍仅作运行期产物，不入任何分支。"
+          } >> "$GITHUB_STEP_SUMMARY"
