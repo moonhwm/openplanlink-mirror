@@ -12,9 +12,10 @@
 | `index-payloads-manifest.json` | 26 帧负载的 sha12/字节数/顺序（实体在本地 vault，未上仓） |
 | `tools/reassemble_index.py` | 骨架+负载 → 逐字节重组根页（验收：3,972,777 B / sha12 `82e6e1699e52`） |
 | `POINTERS.md` | 大文件与媒体指针策略 |
+| `media-manifest-b64/p00..p07` + `INDEX.json` | 媒体指针清单（1,786 行 relpath,bytes,sha12 → gzip → base64，36,704 字符）的 8×4,588 字符分片镜像；INDEX.json 载拼接契约与全链校验值（端到端已验：拼接==本地、gz sha256 匹配） |
 
 ## 诚实声明（务必读）
-- **媒体实体不在仓内**：1,786 件图像/音视频（4.26 GB，含 78 支 mp4 共 4.12 GB）仅以 sha12+字节数指针登记于 MANIFEST.json，实体存本地持久 vault。此仓单独不可复原整站。
+- **媒体实体不在仓内**：1,786 件图像/音视频（4.26 GB，含 78 支 mp4 共 4.12 GB）仅以 sha12+字节数指针登记（汇总清单见 MANIFEST.json；逐件明细 CSV 以 `media-manifest-b64/` 分片镜像在仓），实体存本地持久 vault。此仓单独不可复原整站。
 - `index.html` 经骨架差分入仓；完整字节重组需 vault 的 26 帧负载。本地端到端重组已于推送前验证通过（BYTE-EXACT OK）。
 - `favhub/assets/three.module.min.js` 为 three.js r160（MIT） vendor 件，按 npm `three@0.160.0/build/three.module.min.js` 指针复原。
 - `lab/a2a-self-evolution.html`、`lab/flow/index.html`（各约 0.8 MB）本轮指针登记，下轮分片入仓。
