@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# SPDX-License-Identifier: AGPL-3.0-only AND SSPL-1.0
 """
 K4常态化审计排程脚本
 档号: DF-A2AK4-20261005-YANJIAN-01

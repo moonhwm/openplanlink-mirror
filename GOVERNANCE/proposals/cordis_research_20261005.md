@@ -171,77 +171,10 @@ Cordis的Fiber状态模型（PENDING/LOADING/ACTIVE/DISPOSING/DISPOSED）直接�
 | V4 | 反应式协效应：依赖变更触发激活/停用 | 声明依赖→变更依赖→验证激活/停用 |
 | V5 | 概念借鉴不引入代码依赖 | 检查package.json/ohpm依赖列表 |
 
-## 六、论文与文档精读补充
+## 六、遗留事项
 
-### 6.1 论文元信息
-
-| 项目 | 内容 |
-|---|---|
-| **标题** | A Programming Paradigm for Spatiotemporal Composability |
-| **作者** | Yifan Shi (北京大学 & DeepSeek-AI), Wei Zhang (北京大学), Tianyi Cui (DeepSeek-AI) |
-| **提交日期** | 2026-08-26 |
-| **分类** | Programming Languages (cs.PL) |
-| **arXiv** | 2608.25512 |
-
-### 6.2 论文摘要精读
-
-论文摘要的核心论证链：
-
-1. **问题识别**：现代软件（从插件系统到自进化代理框架）越来越需要动态组合，但形式化基础不完善
-2. **两个正交维度**：
-   - **时间可组合性**（Temporal Composability）：组件移除时能完全撤销其副作用
-   - **空间可组合性**（Spatial Composability）：能声明并响应式管理组件间依赖
-3. **解决方案**：
-   - **可逆效应**（Revertible Effects）：每个上下文变换携带逆操作，运行时持有该逆操作 → 时间可组合性
-   - **反应式协效应**（Reactive Coeffects）：每个上下文变更根据组件协效应规范分类，驱动激活/停用 → 空间可组合性
-4. **统一**：将效应上下文和协效应上下文统一为单一上下文类型 → **上下文范式**（Context Paradigm）
-5. **实现**：Cordis元框架——核心库（效应追踪+协效应解析）+声明式组件加载器（配置调和+HMR）
-
-### 6.3 官方文档精读（cordis-primer）
-
-从 https://deepseek-harness.github.io/deepseek-harness/reference/cordis-primer 获取的核心内容：
-
-**五个核心概念**：
-
-1. **插件是实现Service的对象**——可以是带`inject`和`apply(ctx)`字段的函数，也可以是`Service`子类，生命周期由Cordis挂载到上下文
-2. **上下文是服务的容器**——一个服务占据稳定的`ctx.<key>`（如`ctx.tools`、`ctx.llm`、`ctx.sessions`），其他插件通过key查找服务而非导入实现
-3. **通过inject声明服务依赖**——插件声明所需服务后等待就绪才启动，加载顺序通过服务依赖表达而非手动编排
-4. **类型化事件用于通信**——5种分发模式（emit/waterfall/parallel/serial/bail）
-5. **注册是可逆的副作用**——通过`ctx.effect()`或`ctx.on()`安装，reload和teardown时按预期撤销
-
-**5种分发模式详细语义**：
-
-| 模式 | await? | 分发顺序 | 返回值? | 语义 |
-|---|---|---|---|---|
-| `emit` | 否 | 监听器按注册顺序观察 | 否 | 纯通知，监听者观察事件 |
-| `waterfall` | 否 | 监听器按注册顺序观察 | 是 | 瀑布式中间件，每个监听器可包装下游结果 |
-| `parallel` | 是 | 所有监听器并行观察 | 否 | 并行扇出，等待全部完成 |
-| `serial` | 是 | 监听器按注册顺序观察 | 是 | 按序执行，等待每个完成 |
-| `bail` | 否 | 按注册顺序，直到首个bail值 | 是 | 门禁拦截，首个非空返回终止 |
-
-**Waterfall语义详解**：
-- `ctx.waterfall`是环绕中间件，监听器接收`(...args, next)`
-- 调用`next()`执行下游监听器，下游返回值通过`next()`返回当前层
-- 不调用`next()`直接返回则短路——对单决策事件，短路是设计意图
-- 策略监听器拥有决策权时可不调用`next()`直接返回；标注/观察监听器必须委托
-
-**实践规则**：
-- 将行为封装为插件：工具流水线→`ctx.tools`，模型流式输出→`ctx.llm`，agent协调→`ctx.agents`
-- 拦截和策略优先使用事件；直接能力调用优先使用服务方法
-- 每个注册都应有对应的disposer（资源释放函数）
-
-### 6.4 对A2A治理实验的深化启示
-
-1. **Waterfall = 共识收敛的最佳模式**：A2A协商中的多席位意见聚合应采用waterfall模式——每个席位包装下游意见，最终收敛为单一决策
-2. **Bail = 门禁拦截的最佳模式**：MFA验证、钩子检查等应采用bail模式——第一个拒绝即终止
-3. **Parallel = 共振发散的最佳模式**：一个事件触发多席位并行响应应采用parallel模式
-4. **可逆效应 = 审计回滚的基础**：每个操作携带逆操作，使得任何变更都可以被精确回滚——这是K4审计排程的理论基础
-5. **反应式协效应 = 席位依赖管理**：席位声明其依赖（如"砚坚席需要事件总线才能运作"），当依赖变更时自动激活/停用
-
-## 七、遗留事项
-
-1. Cordis论文全文精读——PDF已下载（2.2MB），但当前模型不支持PDF输入，须通过其他方式提取全文
-2. Cordis的配置调和（configuration reconciliation）机制——官方文档提到Loader配置，须深入研究
-3. Cordis的isolate/intercept机制——与A2A席位隔离的映射关系
+1. Cordis论文（arXiv:2608.25512）全文精读——当前仅阅读了摘要
+2. Cordis的配置调和（configuration reconciliation）机制研究
+3. 与DeepSeek Harness的关系：Cordis是DeepSeek Harness的底层框架，须理解两者的分层关系
 4. 时空可组合性在分布式环境（幻16+本地）下的适用性验证
-5. Waterfall模式在事件总线ICRF中的具体实现——当前event_bus.py仅有原型，须细化
+5. Cordis的isolate/intercept机制与A2A席位隔离的映射

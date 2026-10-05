@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: AGPL-3.0-only AND SSPL-1.0
 """事件总线——信息等幂消费共振场核心组件
 部署位置：幻16 /root/incoming/openplanlink-mirror/GOVERNANCE/event_store/
 """

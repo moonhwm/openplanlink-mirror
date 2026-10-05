@@ -223,7 +223,6 @@ function getAuditResultColor(result: string): string {
   }
 }
 
-@Entry
 @Component
 struct A2ADashboard {
   @State seats: SeatInfo[] = MOCK_SEATS;
@@ -232,6 +231,7 @@ struct A2ADashboard {
   @State currentTab: number = 0; // 0=席位状态, 1=事件日志, 2=审计轨迹
   @State selectedSeat: string = '';
   @State isRefreshing: boolean = false;
+  private navStack: NavPathStack | null = null;
 
   // 构建席位状态卡片
   @Builder
@@ -446,13 +446,28 @@ struct A2ADashboard {
   }
 
   build() {
+    NavDestination() {
     Column() {
       // 标题栏
       Row() {
+        // 返回按钮
+        Text('← 返回')
+          .fontSize(16)
+          .fontWeight(FontWeight.Bold)
+          .fontColor('#4ECDC4')
+          .onClick(() => {
+            if (this.navStack) {
+              this.navStack.pop();
+            }
+          })
+          .padding({ left: 8, right: 8, top: 8, bottom: 8 })
+          .constraintSize({ minWidth: 48, minHeight: 48 })
+
         Text('A2A IM GUI 看板')
           .fontSize(20)
           .fontWeight(FontWeight.Bold)
           .fontColor('#E0E0E0')
+          .margin({ left: 8 })
 
         Blank()
 
@@ -596,5 +611,10 @@ struct A2ADashboard {
     .width('100%')
     .height('100%')
     .backgroundColor('#0F0F1A')
+    }
+    .hideTitleBar(true)
+    .onReady((context: NavDestinationContext) => {
+      this.navStack = context.pathStack
+    })
   }
 }

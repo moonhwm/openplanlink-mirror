@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: AGPL-3.0-only AND SSPL-1.0
 """Server酱推送模块——砚坚席微信IM智慧互联通道
 实装版本：将方案设计落地为可执行脚本
 """

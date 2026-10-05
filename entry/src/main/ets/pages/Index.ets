@@ -5,6 +5,7 @@ import { AlertPoller } from '../services/AlertPoller';
 import { AudioPlayer } from '../services/AudioPlayer';
 import { SettingsService, FontSizeLevel, ThemeMode, ThemeColors, PlayHistoryItem } from '../services/SettingsService';
 import { Settings } from './Settings';
+import { A2ADashboard } from './A2ADashboard';
 
 const TAG = 'StockPulse.Index';
 const DOMAIN = 0x0001;
@@ -375,6 +376,15 @@ struct Index {
                 .fontColor(this.theme.textSecondary)
             }
           }
+          // A2A看板入口按钮
+          Text('A2A')
+            .fontSize(this.statusSize)
+            .fontWeight(FontWeight.Bold)
+            .fontColor(this.theme.accentGold)
+            .padding({ left: 10, right: 10, top: 10, bottom: 10 })
+            .constraintSize({ minWidth: 48, minHeight: 48 })
+            .margin({ left: 8 })
+            .onClick(() => this.navStack.pushPath({ name: 'pages/A2ADashboard' }))
           // 设置入口按钮（热区 ≥48vp）
           Text('设置')
             .fontSize(this.statusSize)
@@ -382,7 +392,7 @@ struct Index {
             .fontColor(this.theme.accentGold)
             .padding({ left: 12, right: 12, top: 10, bottom: 10 })
             .constraintSize({ minWidth: 48, minHeight: 48 })
-            .margin({ left: 12 })
+            .margin({ left: 8 })
             .onClick(() => this.navStack.pushPath({ name: 'pages/Settings' }))
         }
         .width('100%')
@@ -507,6 +517,9 @@ struct Index {
     .navDestination((name: string) => {
       if (name === 'pages/Settings') {
         return Settings()
+      }
+      if (name === 'pages/A2ADashboard') {
+        return A2ADashboard()
       }
       return null
     })
