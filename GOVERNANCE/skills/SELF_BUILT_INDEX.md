@@ -52,6 +52,7 @@
 | 18 | TTS WebSocket连接诊断 | tts-websocket.md | 1.0.0 | 百炼TTS WebSocket连接问题 |
 | 30 | Fail-Open修复 | fail-open-fix.md | 1.0.0 | 合规/鉴权/降级逻辑 fail-open 漏洞修复 |
 | 31 | 契约同步检查 | contract-sync-check.md | 1.0.0 | 端侧interface与服务端JSON字段一致性检查 |
+| 32 | 幻16端点重启恢复 | huan16-endpoint-restart.md | 1.0.0 | 幻16A2A端点不可达时诊断并重启服务 |
 
 ### governance类（治理技能）
 
