@@ -46,6 +46,10 @@ class Git:
     def __init__(self, repo: Path):
         self.repo = repo
         self.env = os.environ.copy()
+        for name in ('GIT_DIR', 'GIT_WORK_TREE', 'GIT_COMMON_DIR', 'GIT_INDEX_FILE',
+                     'GIT_OBJECT_DIRECTORY', 'GIT_ALTERNATE_OBJECT_DIRECTORIES',
+                     'GIT_NAMESPACE', 'GIT_SHALLOW_FILE'):
+            self.env.pop(name, None)
         self.env.update(GIT_NO_REPLACE_OBJECTS="1", GIT_NO_LAZY_FETCH="1",
                         GIT_TERMINAL_PROMPT="0", GCM_INTERACTIVE="Never")
 

@@ -62,6 +62,27 @@ class RealGitTests(unittest.TestCase):
         self.assertEqual("pass", r["status"])
         self.assertGreater(r["scanned_objects"], 0)
 
+    def test_git_environment_cannot_redirect_selected_repository(self):
+        alternate = Path(self.temp.name) / 'alternate'
+        cloned = subprocess.run(['git', 'clone', str(self.repo), str(alternate)],
+                                env=self.env, capture_output=True, timeout=30)
+        self.assertEqual(cloned.returncode, 0)
+        (alternate / 'clean.txt').write_text('clean alternate')
+        for args in (['add', '--all'], ['commit', '-q', '-m', 'clean alternate']):
+            result = subprocess.run(['git', '-C', str(alternate), *args],
+                                    env=self.env, capture_output=True, timeout=30)
+            self.assertEqual(result.returncode, 0)
+        self.write('original.txt', SECRET)
+        self.commit('original credential')
+        environment = dict(self.env, GIT_DIR=str(alternate / '.git'),
+                           GIT_WORK_TREE=str(alternate))
+        result = subprocess.run([sys.executable, str(ROOT / 'tools/git_upload_gate.py'),
+                                 '--repo', str(self.repo), '--range', self.base, 'HEAD'],
+                                env=environment, capture_output=True, timeout=30)
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(json.loads(result.stdout)['status'], 'blocked_credentials')
+        self.assertFalse(SECRET.encode() in result.stdout, 'credential_echoed')
+
     def test_secret_deleted_in_later_commit_still_blocks(self):
         self.write("old.txt", SECRET)
         self.commit("credential introduced")

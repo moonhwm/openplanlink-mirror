@@ -1,102 +1,122 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-"""build_opl_tree.py —— 按 A2A 标准构式（tools/SHA3_TREE.md）为 deliverables 建 SHA3 树。
-
-字节契约（对齐 tools/sha3-tree.mjs）：
-  叶   = SHA3-512(0x00 || uint32be(path_len) || path || uint64be(size) || sha3_512(content))  无钥
-  父   = SHA3-512(0x01 || left || right)；奇数复制右项                                         无钥
-  根MAC= HMAC-SHA3-512(key, "OpenPlanLink-A2A-Merkle-v1\\0" || root || uint64be(count)
-              || uint16be(key_id_len) || key_id || uint16be(generated_at_len) || generated_at)
-密钥指纹 = sha3_512(key)（自留，不进树）
-"""
+"""Build a delivery-directory tree; Git index attestation uses sha3-tree.mjs."""
+import argparse
+from datetime import datetime, timezone
 import hashlib
 import hmac
 import json
-import pathlib
-import secrets
+import os
+from pathlib import Path
 import struct
 import sys
-from datetime import datetime, timezone
+import uuid
 
-sys.stdout.reconfigure(encoding="utf-8")
+from hmac_key_policy import KeyPolicyError, load_existing_key
 
-REPO = pathlib.Path(r"C:\Users\欧阳宏俊\openplanlink-mirror")
-DELIV = REPO / "deliverables" / "20261003"
-KEY_FILE = pathlib.Path(r"C:\Users\欧阳宏俊\.a2a-hmac-key.bin")
-KEY_ID = "opl-a2a-2026q4"
+OUTPUT = 'hmac_attest.json'
 
 
-def sha3(b):
-    return hashlib.sha3_512(b).digest()
-
-
-# 密钥（64 字节，自留）
-key = KEY_FILE.read_bytes() if KEY_FILE.exists() else secrets.token_bytes(64)
-if len(key) != 64:
-    key = secrets.token_bytes(64)
-KEY_FILE.write_bytes(key)
+def sha3(value):
+    return hashlib.sha3_512(value).digest()
 
 
 def leaf(path_utf8, size, content_digest_hex):
-    pb = path_utf8.encode("utf-8")
-    data = b"\x00" + struct.pack(">I", len(pb)) + pb + struct.pack(">Q", size) + bytes.fromhex(content_digest_hex)
-    return sha3(data).hex()
+    encoded = path_utf8.encode('utf-8')
+    value = b'\x00' + struct.pack('>I', len(encoded)) + encoded
+    value += struct.pack('>Q', size) + bytes.fromhex(content_digest_hex)
+    return sha3(value).hex()
 
 
-def merkle_root(leaf_hexes):
-    level = [bytes.fromhex(h) for h in leaf_hexes]
+def merkle_root(leaves):
+    level = [bytes.fromhex(value) for value in leaves]
     while len(level) > 1:
-        nxt = []
-        for i in range(0, len(level), 2):
-            right = level[i + 1] if i + 1 < len(level) else level[i]
-            nxt.append(sha3(b"\x01" + level[i] + right))
-        level = nxt
-    return level[0].hex() if level else ""
+        level = [sha3(b'\x01' + level[i] + (level[i + 1] if i + 1 < len(level) else level[i]))
+                 for i in range(0, len(level), 2)]
+    return level[0].hex() if level else ''
 
 
-files = sorted(p.relative_to(DELIV).as_posix() for p in DELIV.rglob("*") if p.is_file())
-files = [f for f in files if f != "hmac_attest.json"]  # 排除自身
+def build_manifest(directory, key, key_id, generated_at=None):
+    directory = Path(directory).resolve(strict=True)
+    if not directory.is_dir():
+        raise ValueError('delivery_directory_missing')
+    entries = []
+    paths = []
+    for path in directory.rglob('*'):
+        if path.is_symlink() or (hasattr(path, 'is_junction') and path.is_junction()):
+            raise ValueError('delivery_link_not_supported')
+        if path.is_file() and path.relative_to(directory).as_posix() != OUTPUT:
+            if not path.resolve().is_relative_to(directory):
+                raise ValueError('delivery_path_outside_directory')
+            paths.append(path)
+    for path in sorted(paths, key=lambda value: value.relative_to(directory).as_posix().encode('utf-8')):
+        before = path.stat()
+        content = path.read_bytes()
+        after = path.stat()
+        if before.st_size != after.st_size or before.st_mtime_ns != after.st_mtime_ns:
+            raise ValueError('delivery_changed_during_read')
+        relative = path.relative_to(directory).as_posix()
+        content_digest = sha3(content).hex()
+        entries.append({'path': relative, 'size': len(content),
+                        'content_sha3_512': content_digest,
+                        'leaf_sha3_512': leaf(relative, len(content), content_digest)})
+    if not entries:
+        raise ValueError('empty_delivery_directory')
+    root = merkle_root([item['leaf_sha3_512'] for item in entries])
+    stamp = generated_at or datetime.now(timezone.utc).isoformat(timespec='milliseconds').replace('+00:00', 'Z')
+    kid, when = key_id.encode('utf-8'), stamp.encode('utf-8')
+    message = b'OpenPlanLink-A2A-Merkle-v1\x00' + bytes.fromhex(root)
+    message += struct.pack('>Q', len(entries))
+    message += struct.pack('>H', len(kid)) + kid + struct.pack('>H', len(when)) + when
+    return {
+        'schema': 'opl-hmac-sha3-512-tree/1', 'generated_at': stamp,
+        'tree_algorithm': 'sha3-512', 'mac_algorithm': 'hmac-sha3-512',
+        'leaf_encoding': '0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)',
+        'node_encoding': '0x01 || left_digest || right_digest; duplicate odd right node',
+        'mac_encoding': 'UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8',
+        'key_id': key_id, 'file_count': len(entries), 'merkle_root_sha3_512': root,
+        'hmac_sha3_512': hmac.new(key, message, hashlib.sha3_512).hexdigest(), 'files': entries,
+    }
 
-entries = []
-for rel in files:
-    data = (DELIV / rel).read_bytes()
-    cd = sha3(data).hex()
-    lh = leaf(rel, len(data), cd)
-    entries.append({"path": rel, "size": len(data), "content_sha3_512": cd, "leaf_sha3_512": lh})
 
-root = merkle_root([e["leaf_sha3_512"] for e in entries])
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--repo', type=Path, default=Path(__file__).resolve().parents[1])
+    parser.add_argument('--directory', type=Path, default=Path('deliverables/20261003'))
+    parser.add_argument('--key-file', type=Path)
+    parser.add_argument('--key-id')
+    args = parser.parse_args(argv)
+    temporary = None
+    try:
+        root = args.repo.resolve(strict=True)
+        directory = (root / args.directory).resolve(strict=True)
+        if not directory.is_relative_to(root):
+            raise ValueError('delivery_path_outside_repo')
+        material = load_existing_key(args.key_file, args.key_id)
+        output = directory / OUTPUT
+        if output.is_symlink():
+            raise ValueError('manifest_link_not_supported')
+        prior = output.read_bytes() if output.exists() else None
+        manifest = build_manifest(directory, material.key, material.key_id)
+        material.verify_unchanged()
+        if (output.read_bytes() if output.exists() else None) != prior:
+            raise ValueError('manifest_changed_before_replace')
+        temporary = directory / (OUTPUT + '.tmp-' + uuid.uuid4().hex)
+        with temporary.open('x', encoding='utf-8') as stream:
+            stream.write(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
+        os.replace(temporary, output)
+        print(json.dumps({'status': 'built', 'file_count': manifest['file_count'],
+                          'scope': 'delivery_directory; not Git index attestation'}))
+        return 0
+    except KeyPolicyError as error:
+        print(json.dumps({'status': 'blocked', 'code': str(error)}))
+        return 1
+    except (OSError, ValueError, TypeError, OverflowError):
+        print('{"status":"blocked","code":"delivery_build_failed"}')
+        return 1
+    finally:
+        if temporary is not None and temporary.exists():
+            temporary.unlink()
 
-generated_at = datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
-kid = KEY_ID.encode("utf-8")
-gen = generated_at.encode("utf-8")
-mac_input = (
-    b"OpenPlanLink-A2A-Merkle-v1\x00"
-    + bytes.fromhex(root)
-    + struct.pack(">Q", len(entries))
-    + struct.pack(">H", len(kid)) + kid
-    + struct.pack(">H", len(gen)) + gen
-)
-mac = hmac.new(key, mac_input, hashlib.sha3_512).hexdigest()
 
-manifest = {
-    "schema": "opl-hmac-sha3-512-tree/1",
-    "generated_at": generated_at,
-    "tree_algorithm": "sha3-512",
-    "mac_algorithm": "hmac-sha3-512",
-    "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
-    "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
-    "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
-    "key_id": KEY_ID,
-    "file_count": len(entries),
-    "merkle_root_sha3_512": root,
-    "hmac_sha3_512": mac,
-    "files": entries,
-}
-out = DELIV / "hmac_attest.json"
-out.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
-print("★ 密钥指纹 sha3_512(key) 前16 =", sha3(key).hex()[:16])
-print("★ merkle_root =", root)
-print("★ hmac_sha3_512 =", mac)
-print("★ file_count =", len(entries))
-print("★ 已写 =", out.name)
+if __name__ == '__main__':
+    sys.stdout.reconfigure(encoding='utf-8')
+    raise SystemExit(main())
