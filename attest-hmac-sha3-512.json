@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T21:00:39.877Z",
+  "generated_at": "2026-10-05T21:17:38.840Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 1884,
-  "merkle_root_sha3_512": "9ac60de0b076ca31ef383810a6359e9de955947bef951c2e3aa2cb6f474903d5875f1234ebc64b09251c102101ae3ada1412ca344d80ec621ae0d831b216212a",
-  "hmac_sha3_512": "0b94cc5dd46b8a18a6d022330da0b29a25924793f391f94b8a66b6212b6c7440e5dae1414d2b314d419553e820ec1345e33cf8c1cbc7eed5c3458905b015a71a",
+  "merkle_root_sha3_512": "469396a911ce5944ed05c8e3a0b44a56fa0ed4b5f497d1b44c056d75232d37b2284cc9c0e284ba7bfe1c24ecd099ce42d5f6f65237c37c81c4f06629935e680c",
+  "hmac_sha3_512": "b8e73f7b75ec7b9e1d47b787b8f8ecbb52ffb270c17c2e616abb14aaf27ce4ae325e34de255453ea95af7825a5b695fb8928c7aca580a6cbf602f01b63d56e2f",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -10795,9 +10795,9 @@
     },
     {
       "path": "tools/commit_gate.sh",
-      "size": 1932,
-      "content_sha3_512": "46eeb75d3030a58680c9306fed2b01afdacbc3c5bee54c7d028f2ca761c053ee64934ac071c80839f7ea2a039ffe32995a5b86c3dc592a3dc1270a0a1b9eb326",
-      "leaf_sha3_512": "6d38e686dc2f65502296d1229729ef5f60ed8b6760eacd7bed58a654f8d2cc28e568e4cffcd5417f2df8118671fb8e01c23b871afeec2c06b50121d143a0e1d7"
+      "size": 2919,
+      "content_sha3_512": "ffb843a5590a78f9de73683f1ac0e83dd69b78cf720b3adeef026885bb0b716c1e9f042c17a10e982b6da13e220a7160915a3bec893feebc54f0bf9f34d1ae99",
+      "leaf_sha3_512": "993215148166d752cccdb9687bf0a79dc258e33eaeadf43d9dcb595a28a2f688fb8f0d8d01cbd129baaf4f1e619f637feba0439ab7fd2299ca23b2c6f41a792c"
     },
     {
       "path": "tools/compensate.py",
