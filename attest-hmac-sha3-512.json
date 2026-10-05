@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:22:34.749Z",
+  "generated_at": "2026-10-05T19:24:36.625Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1842,
-  "merkle_root_sha3_512": "7e282e97561d49e62488789ed6012f20b831b21a977cbe777c0bd2e44e8c596d27965bb8600af9ccef8191b34340a4013b4974a6c1cbe6544e35d2930c698c0e",
-  "hmac_sha3_512": "9e8fb3ad3763755aef7839a56ea57716c54c6d06b70a327a253d15f193eb2f91f12d5743337d471196f82efb3e90d85f771aa317ff39533a6a2216ff07256cd8",
+  "file_count": 1845,
+  "merkle_root_sha3_512": "2f0068ae6744db5879c615ec435c57c2d96b397484987f61417bbc6b6a06a51e6794150ad00f8c69658f9f8d590f4100477e2ad51131e520e16276cf30d15362",
+  "hmac_sha3_512": "3372cc3e4e78cf00b47e7ddfcb361a012bf8fd008aedbd5651aad7822cdd27748971e06736bbff713d60007595302716969dece219dff5beef735b27b5d78fad",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -145,9 +145,9 @@
     },
     {
       "path": "STATUS.md",
-      "size": 739,
-      "content_sha3_512": "295f62ec0415afc7a365c7ec9df5897498997f09e26d4cee13980bf3942e7b1c6f207e12a1b4c17f7804b2ba50f93749c1a00f3527c548459576c120bd7f18d0",
-      "leaf_sha3_512": "554db1084a52d83bb4ce1d380ff769261c97636c69bd6730942a6d3e54c83ac51f4755bfdab6176438f64b12dfdf8eac1079385a8edfdd7a64a4e7fd9cbf9e11"
+      "size": 645,
+      "content_sha3_512": "99999e79df398bd3dc2b3ebc7c46471380a7137d7d54fc7f38b075ccd034b6cc505bc7467de09be514535d834c4605766b20996852d5a4b961734e8b5421e797",
+      "leaf_sha3_512": "1cff2ed9c9027ea1ad27af9c7c59f1f8ebb27de4c997fb84fb118bc93b13675588bc50db37a4e8d16f5179a893b3b37a956fd07c2d0d691ffe46581272dad799"
     },
     {
       "path": "_tmp_probe.yml",
@@ -366,16 +366,28 @@
       "leaf_sha3_512": "864ccf28a3b2c12af06a274634fe22abbb74486354dae7ab1620be1f3d3683f9a516ac5c7fb5264cdffe158311c2675c04fbf4472f01639f0d3726dd4d02156f"
     },
     {
+      "path": "deliverables/20261003/A2A网络覆盖性终审结论_北京时间2300_石敢当席_20261003.otl",
+      "size": 7065,
+      "content_sha3_512": "28aa8a4b6412a1f907c795f3afbc3999fb7da18b0315834d8bd4940a413a42bc4997ac437af629b75e7e12501ff7fd747d1c204bb7a10fc26cb7dd1f43e1e84b",
+      "leaf_sha3_512": "e9c3afebd840c845ee2b80f0ac15cffc17ecf8746bf7e28d5142fbc3222613f7359923b57beec3062b5bde1f6882441b6ebc615bd809724997d4153831d40b7c"
+    },
+    {
       "path": "deliverables/20261003/INDEX.md",
-      "size": 3626,
-      "content_sha3_512": "56316b0ba782e4a946d7df52f65ede64e26a0223b534eb10d8a56becc1af79ad084a1f9aa03a1acb87e01f45e674f4c7ad079c9b527366604298ced58c9335b9",
-      "leaf_sha3_512": "e1319ffb420e245c03636667e4e76a839a76f3ea63f66f5087336d594fe6b21742e245594e66f3b52ceaf43a9400eb602ec131afce337e6f7c2794edabf52601"
+      "size": 4268,
+      "content_sha3_512": "76d90fe7d214f2e69767077fda24b599d882b0760030ab6a1d70f14cb98b916a326e065f0936799ce26efb45411324cca276d1b529888c6b4823e06831b677fb",
+      "leaf_sha3_512": "bf004471e28bbb85d66749eff5e0cbd093d8b4f91adff7c0655eed1e3a7d8a2544fd202037b30d8d2f41dbe8636c0d32cba79c1406cea59616622fc7d434606d"
     },
     {
       "path": "deliverables/20261003/POINTER.md",
       "size": 835,
       "content_sha3_512": "e14976d9558fae2e3caba48a876711fe1ad1ae365d47bfd6d56d5b01505a3f856e074fe208a96a4ead159d1e91fa1f438f0800cd9b94c6f9c064c9e291862d44",
       "leaf_sha3_512": "2f851e51973c836751e5899c2115012d473aae9a26289fa558c683f5ee0679b691a3d458d909888d92036f715c29c076d9e993a925f574075fa980d24ba3b96b"
+    },
+    {
+      "path": "deliverables/20261003/ima与A2A约束下开源协议补充论证_认证流程与复核队列_DF-SUPPLEMENT-2026-1003-QODER-06.otl",
+      "size": 11451,
+      "content_sha3_512": "964497508d54d977c18f59fc6f129862116d22cdc24ded54b7c81e473df137050012d3034a557b7025e9a2263f8f8130a0a931a021e0b5832c8c003fa3bec59e",
+      "leaf_sha3_512": "b006809010cbcf5a181bc6268d3f0e34e8659c9cfd0aca511537bcc139b5fcd920dad2fc78d99180c74986d83efe1d16cef87a06df18b193f5686f1e8704c43f"
     },
     {
       "path": "deliverables/20261003/k3-main/gitcode_mining_2026-10-03.md",
@@ -931,9 +943,9 @@
     },
     {
       "path": "skills/EXPERIENCE.md",
-      "size": 5052,
-      "content_sha3_512": "cc859994e6d2f15a3b1ab481d082fe070c66cb624f889ebe63eceb887d5e035625494fade0dd9d63589e86774bb99d4ecc8c195d3f640a01097b0873719462fe",
-      "leaf_sha3_512": "9ac6346be3400b6ca3f416c659c0791d717f657ff9a53a2b95dcaf01a5a676ce4ad8473cb93e02c1b386c6d61298985666d6e9ac53e10a2e5d76ffb3ae5951fa"
+      "size": 10935,
+      "content_sha3_512": "81ec54bc0249182ad8121e1456ad564ef5f98c062253c5ab09af4da2d276a8985ebf433310dbe1c799a5f781d7933bb8a06fed4d8195620a7d6b535c3a37a61d",
+      "leaf_sha3_512": "c56b836a44e157714c03ff4c81577eca50706d198ad358c1ac39a9865bd713a0f0c7d79fb4848b63bd1eec1a1ed6799c477a584c7be9626aef24378e1d3808d0"
     },
     {
       "path": "skills/README.md",
@@ -1261,9 +1273,9 @@
     },
     {
       "path": "skills/av-media-ops/SKILL.md",
-      "size": 4574,
-      "content_sha3_512": "5576db28f82d8248345e4d89f0d745d703a2d82bfc12ad98a2971ee9fd220feeccb533e3b78b30f758cb535f53dafb22e229dc4978e55fc05d58bf53ae656086",
-      "leaf_sha3_512": "95e24528bd9659c74aab75541fa63b16760c50f1d3adc45efb8c68208d2786beff739eae220cd6f54c42e8d4236e4983ac13918b1b1b4a6df67f110063680655"
+      "size": 5593,
+      "content_sha3_512": "adbd002b139ebe018cc36e5733a2066dcfe5aea2b7bdfc54db9b360b77d727c907ca0791c709559dfb3bedb8090b7924358e54491c594e5f92c8c3e0052d394b",
+      "leaf_sha3_512": "ceb85dd665067c29d65e5d5d96cb2cf267e6f6c4cee5420c0b1983e9f5d3193ed9e5e2e9e1ce442995cef08a6961ea3a14f617a52929b88fe21e928765963407"
     },
     {
       "path": "skills/av-media-ops/references/voice_variants.md",
@@ -1273,9 +1285,15 @@
     },
     {
       "path": "skills/av-media-ops/scripts/av_intake.py",
-      "size": 10846,
-      "content_sha3_512": "11f6f1a74078fefd83c61cfe78a5f0429b376c0820f20a3e5b1ecc1fd6a07cf499995e6045eda8ff608a6bae087d9642befeeb1d2caf215d887a22738784fa6d",
-      "leaf_sha3_512": "53b23aaa5eb63f82aad6c6c133331ef4d576a96f6d2fcd7e8e39afb4333b73434c3f033905a06d8d859cce20f50833a74159b653f4898433964eb72c40cd2805"
+      "size": 56033,
+      "content_sha3_512": "0dc4a7c951fb1bb8ac101b7dbfe49a3911c78642a5e5063fd170ea092010d3a26e148a06109a2fe8093e8246701d0c1e71fe093b6d045c874233f163ef8c1155",
+      "leaf_sha3_512": "e65916e81d1185e89d740aacee07025bae34f10ec4ea0e663ca8e1ba61ebb279a1b73f223aaaee752c8b28e50fbb00182dede4bda7705efeb7ab79e69bef05a7"
+    },
+    {
+      "path": "skills/av-media-ops/scripts/test_av_intake.py",
+      "size": 47333,
+      "content_sha3_512": "6868c1edeb08f008104533846f57b6e0eead551b3f79387d055a4cabe4989f0491be3cdea8a1cdffd23883c8c20ee2600486d664a9304f44e9ea213a46742966",
+      "leaf_sha3_512": "fc92a932940f654246484f924b6e1becbb9953146a3df1a182c2276ac1c7f63e225c77a79c3037dacdbbc65e4fa804f1a9c04805feb1e000056d5cc19585db88"
     },
     {
       "path": "skills/backup-delta-ops/SKILL.md",
@@ -10525,9 +10543,9 @@
     },
     {
       "path": "status/index.html",
-      "size": 1981,
-      "content_sha3_512": "3eff55eefde764e334003fd1b0074cbb39c7c06f3f07d140b91fc5188cd34ced54a756e895aded6ac35a3880fdfc797d3c0b501578f62a6027d82e9780e88335",
-      "leaf_sha3_512": "f78f343bb7dee669320b22f030168ea6e4a6a3ba6ba056d0bfbf6d67796220f286e5f2ccf1a928e3e972595f7fd061705823e4cb39115761674074875c3870de"
+      "size": 1898,
+      "content_sha3_512": "9e78d485ab4f1492b4e7ef406b6e8401988955fc8b7a067ee762ee5e9a23ba4d2b2bcac4f69d692024e72195e1c47c88fab9c5b5ff698dea4fe3b2a798815c15",
+      "leaf_sha3_512": "5758311a6223c5fb65df884533cb68931ab787e3058bc74bebf4ac7cf8f21bb333439d7e0d4f4943d205a5a3126b254584f5e4635f65c6716b6defef4a129c46"
     },
     {
       "path": "tools/SHA3_TREE.md",
