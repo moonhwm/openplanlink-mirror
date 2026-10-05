@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T12:27:39.878Z",
+  "generated_at": "2026-10-05T12:39:51.829Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 845,
-  "merkle_root_sha3_512": "c9d9c5db47390404a4480070e47418bb1af9035393e1692e22d4fa27a88bec93ce73406fbfaa4f5de12e8f997bda64c68c9f4b39cd877e2f60d24964eac3e19a",
-  "hmac_sha3_512": "2385b0fafcda0047720862bedcaccd1648f3bd987cbbcbcf8a49185707670d9a2b364b596de791d5058ae903fa3819fe89e9aa982c775bca07de6aadf054c6aa",
+  "merkle_root_sha3_512": "928327d95f11d7aabc3ec4fab1dbb7a918f591bf5b604e5fd87bdfaff876a43fcbacd931ceb9d49df2203a581345ffd26d6c0d88df2c6d21a88a878df01cd451",
+  "hmac_sha3_512": "8c89d445bbacd02ce89e0cdef60e5b7fe1b96c02db7e89050017c016f2743ab1b617cbdbf22b939d570db1130d82317498b90343224f603fcdd1b700620a6a43",
   "files": [
     {
       "path": ".gitattributes",
@@ -4543,9 +4543,9 @@
     },
     {
       "path": "tests/test_upload_orchestration.py",
-      "size": 17913,
-      "content_sha3_512": "1263e5a0544e3ec00556c3f0bd2d5e41260b39e3d2fb63dd4b69fe1187721835e2fd75389ddd4d0c58f11e200ab2d97a2bf2000d3b4fccd18a18b05257f047a5",
-      "leaf_sha3_512": "d6b309542ff250649f186e7b980d01dd16c1d937d0354294e668afd308d29edbf3b28f10a921942f818d1d355c78bcf922d3408c610645c5df45fc27c6c61b00"
+      "size": 17982,
+      "content_sha3_512": "55f0dafc57f377401e6b32f906ccdd3eaec17a7819dcaeb31fa893247803ddbdc2010583596fe89b7188761aee1459e5f7849286e5b422619c891ce19b20ec4d",
+      "leaf_sha3_512": "4d63c3da28740dcb30be4b8f44b7793dcaa9831fb4e92d11806c44765e2a41d390d0e67b5f91b9c6d847b3961aa1202a9557157e8ea1eb5bfdcf8e2d9eefe5e6"
     },
     {
       "path": "tools/SHA3_TREE.md",
@@ -4723,9 +4723,9 @@
     },
     {
       "path": "tools/push_gate.py",
-      "size": 13685,
-      "content_sha3_512": "3b8beac4b4bcd566e3cb100776e19d611c2c93660f34c1296bda3e89567d846ffe56a41d1318146ca3700c317d0a0d98a1ee36613cebb7660b32488d5fea4aa9",
-      "leaf_sha3_512": "5034f2bb82a178195637c690466c35f83ca03aff34e82ff9c976fe45cc464c7e2156b737130b260dc974f9d16c33fac4b606f66bb6a136b0e97e1903d849277c"
+      "size": 13847,
+      "content_sha3_512": "3c7ad4ecda5a05ce66749dab1fdac21abadd3f2651927a6b6c35d15642116004c843717d4ca0fe1e3cd5f8c1b971db6571dcd713f1ff8a25d5af0c5d6b8cd681",
+      "leaf_sha3_512": "4a95f781d8856b6f9658a4922720b83affbfee0498fdc38df63f788825ac8a6490a81b473b13b04cc2d53616e18a2c63737b44fe8401062bd90792e70e9e6a86"
     },
     {
       "path": "tools/quota_wall.py",

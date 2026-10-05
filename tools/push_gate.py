@@ -37,6 +37,7 @@ class Controller:
         self.requested_branch = branch
         self.key_file, self.key_id = key_file, key_id
         self.events = []
+        self.server_reference_hook_configured = False
         self.git_dir = None
         self.env = dict(os.environ)
         for name in ('GIT_DIR', 'GIT_WORK_TREE', 'GIT_COMMON_DIR', 'GIT_INDEX_FILE',
@@ -117,6 +118,7 @@ class Controller:
             raise PushGateError('controlled_hook_link_not_supported')
         hook.write_bytes(PRE_PUSH.encode('utf-8'))
         hook.chmod(0o755)
+        self.server_reference_hook_configured = True
         return directory, {'OPL_PUSH_GATE_PYTHON': sys.executable,
                            'OPL_PUSH_GATE_CHECKER': str(Path(git_upload_gate.__file__).resolve()),
                            'OPL_PUSH_GATE_REPO': str(self.repo),
@@ -236,7 +238,8 @@ class Controller:
         result.update(schema='openplanlink.push-orchestration/1', events=self.events,
                       recorded_at=datetime.now(timezone.utc).isoformat(),
                       force_push_used=False, distributed_atomicity=False,
-                      existing_pre_push_hook_preserved=True, actual_server_references_checked=True)
+                      existing_pre_push_hook_preserved=True,
+                      server_reference_hook_configured=self.server_reference_hook_configured)
         if self.git_dir is not None:
             journal = self.git_dir / 'opl-push-gate.jsonl'
             try:

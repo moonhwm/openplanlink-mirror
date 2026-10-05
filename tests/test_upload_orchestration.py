@@ -195,6 +195,7 @@ class PushOrchestrationTests(unittest.TestCase):
         result = self.controller(key_file=missing).gate()
         self.assertEqual(result['code'], 'key_source_unavailable')
         self.assertEqual(result['events'], [])
+        self.assertFalse(result['server_reference_hook_configured'])
         self.assertFalse(missing.exists())
         self.assertEqual(self.heads(), [self.base, self.base])
 
