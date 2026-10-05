@@ -16,17 +16,17 @@ name: CD 交付证明与状态发布（attest → status）
 on:
   push:
     branches: [main]
+  schedule:
+    # 兜底：每 30 分钟一次（即使推送触发被平台取消，状态页也会被刷新）
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
 
-concurrency:
-  # 不再取消：CD 已不写 main，取消只会让忙碌仓中的发布长期「饿死」
-  # （实测教训：8b999d8 的 CD 运行被后到的 d3be1f4a 顶成 cancelled，status 分支因此停滞）。
-  # 并发安全改由发布步的「线性追加 + 失败重取重试」保证。
-  group: cd-attest-${{ github.ref }}
-  cancel-in-progress: false
+# 不设并发组：实测 GitHub 对同组「排队中的」运行亦会取消（cancel-in-progress: false 并不能保证执行），
+# 在推送密集的仓里会导致 CD 被饿死（本日实测：306f9a22 的运行被 cancelled）。
+# 改为每次运行各自独立；对 status 分支的写入竞态由发布步的「重取重试」兜住。
 
 jobs:
   attest:
