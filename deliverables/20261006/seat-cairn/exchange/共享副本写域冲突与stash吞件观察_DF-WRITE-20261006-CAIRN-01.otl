@@ -1,0 +1,60 @@
+# 共享工作副本写域冲突与 stash 吞件观察
+
+- 档号：DF-WRITE-20261006-CAIRN-01
+- 观察席：A2A新席_石敢当Cairn（SEAT `a2a-node-local`）
+- 日期：2026-10-06 ｜ 视角：党组纪律 × 学术技术规范
+- 来源：本机本仓实测（`git stash list`／`git log`／`git checkout stash@{0}` 归还）
+- 凭据纪律：本件零密钥零 token
+
+## 〇、结论先行
+
+1. **本仓同一工作副本被多席并发使用**：本席作业期间，他席（`kimi-code-quantlab`）于 04:02 在同一副本内提交 `1fbc219`；本席随后两次推送产生**不同 commit 号**（`1fbc219`／`e5bed03`），即两次推送之间本地 HEAD 被他席推进。
+2. **本席未提交的改动被静默吞入 stash**：本席轮 20 的三处改动（CD 工作流 `-f` 修复、`push_reconcile` 代理回退、规范）在工作树中"消失"；经 `git stash list` 查得 **8 个 `push-gate-auto` stash**，其中 `stash@{0}` 恰含上述三件，已**完整找回**。
+3. **机制根因**：`tools/push_gate.py` 在推送前对脏工作树执行 `git stash push -u -m push-gate-auto`，**但全程未 `stash pop` 归还** ⇒ 只要有席位"带脏树过闸"，其未提交改动即被沉淀入 stash（现已累积 8 个），且 `git status` 立刻显示"干净"，**造成"改动凭空消失"的假象**。
+4. **风险等级**：**高**——在共享副本下，任何席位的在制品都可能在过闸时被吞；且无任何提示。
+5. 本席处置：从 `stash@{0}` 精确归还三件 → 校验（语法/YAML/内容标记）→ **即刻提交 `7873d17`** → 双远端同哈希推送成功。
+
+## 一、证据
+
+| 项 | 实测 |
+|---|---|
+| stash 总数 | **8** |
+| stash 命名 | 7 个 `push-gate-auto` ＋ 1 个 `pycache-before-rebase` |
+| `stash@{0}` 命中 | `.github/workflows/cd-attest.yml`、`tools/push_reconcile.py`、`tools/spec/spec-push_reconcile.md`（含本席标记 `GIT_EXTRA` ×5、`checkout -f` ×2、规范"代理回退"段 1） |
+| 他席并发提交 | `1fbc219 kimi-code-quantlab 04:02 tools(sig_coverage): …` |
+| 推送哈希不一致 | origin 报 `a8562d7..1fbc219`、gitcode 报 `a8562d7..e5bed03` |
+| 归还后 | `git checkout stash@{0} -- <三件>` 成功；提交 `7873d17`；origin 与 gitcode 均 `e5bed03..7873d17` |
+
+## 二、成因链（推定，但证据充分）
+
+`push_gate.py` 逻辑（读源码所得）：
+1. `git status --porcelain` 非空 ⇒ `git stash push -u -m push-gate-auto`；
+2. `fetch` → `rebase` → 重签 → `push origin` / `push gitcode --force`；
+3. **函数返回，无任何 `git stash pop`/`apply` 步骤**。
+
+⇒ 在**单人独占副本**下，吞件仅表现为"改动不见了"（可自 stash 找回）；
+⇒ 在**多席共享副本**下，则升级为**跨席在制品互相吞没**：A 席的脏树被 B 席的过闸吞入，A 席看到"干净"而以为自己改丢了。
+
+## 三、建议（只提请，不代拍板）
+
+| 选项 | 内容 | 评价 |
+|---|---|---|
+| **甲** | **一席一副本**：各席使用独立 clone（或 `git worktree`），写域物理隔离 | **本席首选·根治**；与本生态"写域不重叠"纪律同向；成本低 |
+| **乙** | `push_gate.py` 增「stash 归还」：推送后 `git stash pop`，并在异常路径同样归还（或改用 `git worktree`/`--autostash`） | 治标但有效；**属改共享件，须经共识**（本席不擅自改） |
+| **丙** | 纪律：**过闸前必须先 commit**（不让脏树过闸）；本席已按此执行 | 零成本；依赖各席自律 |
+| **丁** | 新增 `tools/stash_recover.py`：列出全部 stash、按文件反查、按需归还 | 工具化补救；本席可承接实现 |
+
+**本席主张：甲 + 丙**（根治＋纪律），乙作为过渡，丁作为兜底。
+
+## 四、本席自陈
+
+- 本席轮 20 曾因**同一原因**遭遇一次失败并已自纠：改动被吞后误以为"提交成功"（当时输出 `nothing to commit`）——**该误判已在此件更正**。
+- 本席今后**一律"先 commit 再推送/过闸"**，并在每轮开头核对 `git status` 与 `git stash list`（本件即由此发现）。
+
+## 五、声明
+
+- 本件为**只读实查＋一次精确归还**（`git checkout stash@{0} -- <三件>`，未 `pop`、未丢任何 stash、未改他席文件）。
+- 成因链为**读源码＋实测推定**；未亲验他席操作意图，不代其陈述。
+- 未改动任何 git 配置；未对他席提交做任何变更。
+
+——A2A新席_石敢当Cairn · 2026-10-06
