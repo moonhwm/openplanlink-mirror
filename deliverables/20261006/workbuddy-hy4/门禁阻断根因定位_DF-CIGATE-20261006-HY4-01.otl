@@ -1,0 +1,123 @@
+# 镜像仓 pre-commit 门禁阻断 · 根因定位（hy4 席）
+
+- 档号：DF-CIGATE-20261006-HY4-01
+- 席位：WorkBuddy-hy4 桥接席
+- 时点：北京时间 **2026-10-06 07:30**（夜间运维窗口内，距 08:00 落盘线约 30 分钟）
+- 视角：党组纪律 × 学术技术规范
+- 凭据纪律：零密钥零 token
+- 性质：只增不改；**本席未修改 `tools/a2a_hmac.py` 或 `tools/test_a2a_hmac.py` 任何一个字符**
+
+---
+
+## 〇、结论先行
+
+1. **镜像仓 pre-commit 门禁当前处于 FAIL 状态，阻断全网提交**（不限本席）。
+2. **根因**：`tools/test_a2a_hmac.py::test_concurrent_replay_claim_is_atomic` 报
+   `sqlite3.OperationalError: attempt to write a readonly database`（33 tests / 1 error）。
+3. **★ 已排除「沙箱/目录只读」假设**（本席实测同目录写入 12,288 字节成功）⇒ 指向**双线程并发创建同一 SQLite 文件**的 Windows 语义问题。
+4. **★ 与本席 `FINDING-20261005-HY4-01`（账本跨进程锁缺陷）同构**：同一类「Windows 下并发打开同一文件失败」，相隔一日、分处两模块，**互证为环境级共因，而非孤立编码失误**。
+5. **本席不擅自修改他席代码**，仅登记并给修复建议，候裁定。
+
+---
+
+## 一、实测链（可复算）
+
+### 1.1 触发
+
+```
+git -C C:\Users\欧阳宏俊\openplanlink-mirror commit -m "..."
+```
+返回 **RC=1**：
+```
+[pre-commit] 无暂存区 Python 文件，跳过编译。
+[pre-commit] 跑核心测试：
+  ✓ tools/test_totp.py
+  ✗ tools/test_a2a_hmac.py 失败：
+Ran 33 tests in 4.405s
+FAILED (errors=1)
+[pre-commit] 校验未通过，已阻止提交。
+```
+
+### 1.2 定位到具体用例
+
+```
+python -m unittest tools.test_a2a_hmac -v
+```
+33 tests / **1 ERROR**：
+`test_concurrent_replay_claim_is_atomic`
+
+```
+Traceback (most recent call last):
+  File "...\tools\test_a2a_hmac.py", line 115, in test_concurrent_replay_claim_is_atomic
+    results = list(executor.map(
+        lambda _: verify(envelope(), cache=replay_cache(path)), range(2)))
+  ...
+  File "...\tools\a2a_hmac.py", line 110, in __init__
+    connection.execute("CREATE TABLE IF NOT EXISTS replay_nonces ...")
+sqlite3.OperationalError: attempt to write a readonly database
+```
+
+### 1.3 关键排除（本席实跑）
+
+**假设 H1「沙箱禁写临时目录」→ 证伪**：
+```python
+d=tempfile.TemporaryDirectory(); p=Path(d.name,'probe.sqlite3')
+c=sqlite3.connect(str(p)); c.execute('CREATE TABLE IF NOT EXISTS t(a TEXT PRIMARY KEY)'); c.commit()
+```
+⇒ `WRITE_OK 12288`；`TMPDIR=C:\Users\欧阳宏俊\AppData\Local\Temp\tmpxo0zan78`，`WRITABLE=True`。
+⇒ **同目录单线程写入正常**，排除目录只读与沙箱限制。
+
+### 1.4 代码侧实读
+
+- `tests` 侧：`test_a2a_hmac.py:113` 构造**唯一 path**，`ThreadPoolExecutor(max_workers=2)` 让 **2 个线程对同一 path** 各建一个 `ReplayCache`。
+- `tools/a2a_hmac.py:118`：`sqlite3.connect(self._database_path, timeout=5, isolation_level=None)` + `PRAGMA busy_timeout=5000`。
+- ⇒ 两线程**并发对同一尚不存在的文件**执行 `CREATE TABLE`，其一报 `readonly`。
+  注意：报错为 **readonly** 而非 `database is locked` ⇒ 非典型锁超时，指向 Windows 上**并发创建文件/journal 时打开句柄降级**的语义。
+
+---
+
+## 二、与 FINDING-20261005-HY4-01 的同构性
+
+| 项 | FINDING-20261005-HY4-01 | 本件 |
+|---|---|---|
+| 场景 | 多进程打开同一账本锁文件 | 多线程打开同一 SQLite 文件 |
+| 表现 | `PermissionError [Errno 13]` | `sqlite3.OperationalError: readonly database` |
+| 平台 | Windows | Windows |
+| 根因层 | 打开句柄未纳入退避循环 | 并发创建同文件 |
+| 共性 | **Windows 并发打开同一文件时，失败模式非「locked」而是「权限/只读」** | 同 |
+
+⇒ **建议把「Windows 并发文件打开」立为全网已知环境特性**，凡涉及多进程/多线程共享文件的模块（账本、回放缓存、哈希树、快照）**统一评审**，勿逐案修补。
+
+---
+
+## 三、修复建议（候裁定，本席未执行）
+
+| 序 | 方案 | 评价 |
+|---|---|---|
+| S-1 | **串行化初始化**：先在单线程建库建表，再并发 `claim` | 最小改动、语义不变，本席**推荐** |
+| S-2 | 测试改用一个共享 `ReplayCache` 实例并发 claim | 更贴近真实用法 |
+| S-3 | 连接串加 `?mode=rwc`（显式创建可写） | 可能缓解，未实测 |
+| S-4 | 将该用例标记为 Windows 跳过 | **本席不推荐**——以跳过掩蔽环境缺陷，与「区分症状被压住与缺陷不存在」纪律相悖 |
+
+---
+
+## 四、连带影响（重要）
+
+1. **门禁 FAIL ⇒ 全网提交被阻断**，不限于本席。若他席近期出现「push 失败」，应**先区分**是门禁、网络还是凭据，**勿一律归为网络**。
+2. 本席 8 件产出**已就位**于 `deliverables/20261006/workbuddy-hy4/` 并 `git add`，但**因门禁 FAIL 未能 commit**，更未 push。
+3. 本席**拒绝使用 `--no-verify`** 绕过（守门禁纪律）；宁可留待修复后提交，不以绕过换「完成」。
+
+---
+
+## 五、元信息
+
+- conf：§一实测＝**High**；§二同构判定＝**Medium**（现象同族，未证明同一底层调用）；§三方案＝拟议。
+- top3_likely_wrong：
+  1. 未验证该用例在**非 Windows** 平台是否通过，故「平台相关」为推定。
+  2. 未复跑多次确认是否 flaky（本席仅 2 次：一次经 pre-commit、一次 unittest，均失败 ⇒ 倾向非 flaky，但样本小）。
+  3. `readonly` 的确切内核成因（句柄降级？journal 创建失败？）本席**未深究**，仅排除目录只读。
+- 自主追问：门禁以「跑核心测试」为提交前置——**交付文档类改动（纯 .otl/.md）是否也应受同一测试门约束**？建议按改动类型分级设门，避免无关缺陷阻断文档流转。
+
+---
+
+落款：WorkBuddy-hy4 桥接席（本席），2026-10-06 约 07:30，档号 DF-CIGATE-20261006-HY4-01。

@@ -1,0 +1,4 @@
+TotalPhys_MB 16076
+AvailPhys_MB 42
+AvailPhys_pct 0.26
+MemoryLoad_pct 99

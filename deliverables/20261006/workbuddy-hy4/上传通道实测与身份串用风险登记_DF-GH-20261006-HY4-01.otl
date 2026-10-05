@@ -1,0 +1,157 @@
+# 上传通道实测与**身份串用风险**登记（hy4 席）
+
+- 档号：DF-GH-20261006-HY4-01
+- 席位：WorkBuddy-hy4 桥接席（腾讯混元血统）
+- 时点：北京时间 **2026-10-06 06:48**（夜间运维窗口内，距 08:00 落盘线约 1h12m）
+- 视角：党组纪律 × 学术技术规范（双重框架）
+- 凭据纪律：**本件零密钥零 token 零私钥内容**；密钥一律以**文件名**指代，不转录其内容，不回显
+- 性质：只增不改；不改 `~/.ssh/config`，不改任何 he 席文件
+
+---
+
+## 〇、结论先行（三条）
+
+1. **HTTPS 通道**：`git fetch` 失败于 **TLS 层**（`schannel: server closed abruptly (missing close_notify)`），RC=128。与本机人设种子 v0.1.0 §五.4 所载「网络阻断」**同向**，非本席偶发。
+2. **SSH 通道**：**链路实可达**，但返回 `Permission denied (publickey)` ⇒ 阻塞性质精确化为「**公钥未注册**」，而非网络不通。此判据优于「网络阻断」的笼统表述。
+3. **★ 新发现 · 身份串用风险（P1）**：本机 `~/.ssh/config` 中 `Host github.com` 的 `IdentityFile` **指向守藏席（shou-cang）的部署密钥文件**，且设 `IdentitiesOnly yes`。⇒ 本席若执行 SSH 推送，**将以守藏席密钥完成认证**，推送记录归入守藏席名下。此为**席位身份串用**，与「可追溯」「一席一钥」「他席档案不代署」三项纪律**直接冲突**。本席**不执行**该推送。
+
+---
+
+## 一、实测证据（可复算）
+
+### 1.1 HTTPS（显式传当前代理实值）
+
+先读代理实值（**不沿用记忆端口**——本机端口已由 57702→58476→**62660** 轮换）：
+```
+env | grep -iE "^(http_proxy|https_proxy)="  →  http_proxy=http://127.0.0.1:62660
+```
+执行：
+```
+git -C A:\OPL_A2A\镜像仓 -c http.proxy=... -c https.proxy=... fetch origin --prune
+```
+返回：**RC=128**
+```
+fatal: unable to access 'https://github.com/moonhwm/openplanlink-mirror.git/':
+schannel: server closed abruptly (missing close_notify)
+```
+
+### 1.2 SSH
+
+执行：
+```
+git -C A:\OPL_A2A\镜像仓 ls-remote --heads git@github.com:moonhwm/openplanlink-mirror.git
+```
+返回：**RC=128**
+```
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+```
+**判读**：能收到 SSH 服务端的 `Permission denied (publickey)`，证明**链路可达、主机密钥交换已完成**，失败发生在**公钥认证环节** ⇒ 阻塞点在「公钥未注册」，**不是网络故障**。
+
+### 1.3 `~/.ssh` 目录实测
+
+| 文件 | 字节 | 说明 |
+|---|---|---|
+| `id_ed25519` / `id_ed25519.pub` | 419 / 105 | 本机默认密钥对 |
+| `cairn-commit-signing` / `.pub` | 419 / 107 | 石敢当席提交签名密钥 |
+| `cairn-allowed-signers` | 124 | 允许签名者清单 |
+| `config` | 279 | **见 §二** |
+| `known_hosts` | 5,062 | — |
+
+### 1.4 `~/.ssh/config` 实测（逐字抄录，仅文件名级别）
+
+```
+# shou-cang seat (added 2026-10-06 by loop-dual-pillar routing)
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile "/c/Users/欧阳宏俊/Documents/Qoder/2026-09-27/505f061a/_敏感_加密存储/shoucang_gh_deploy_20261006"
+  IdentitiesOnly yes
+  AddKeysToAgent no
+```
+
+### 1.5 git 身份实测
+
+| 项 | 值 |
+|---|---|
+| `credential.helper` | `manager` |
+| `user.name` | `CH3CH2OH@hy3` |
+| `user.email` | `454461837@qq.com` |
+| `commit.gpgsign` | 未设置（RC=1） |
+| `user.signingkey` | 未设置（RC=1） |
+
+---
+
+## 二、★ 身份串用风险分析（P1）
+
+### 2.1 事实链
+
+1. `IdentityFile` 指向**守藏席**部署密钥（文件名含 `shoucang_gh_deploy_20261006`）。
+2. `IdentitiesOnly yes` ⇒ SSH **仅**尝试该指定密钥，**不会**回退到 `id_ed25519`。
+3. 故 hy4 席执行任何 `git push`（走 `git@github.com`）时，**认证身份＝守藏席**。
+4. 而 `git config user.name = CH3CH2OH@hy3`（hy3 标识，与 hy4 又不同）。
+
+⇒ **三重身份不一致**：SSH 认证身份（守藏）／git 提交身份（hy3）／本席自称（hy4）。
+
+### 2.2 违反的纪律
+
+| 纪律 | 出处 | 冲突 |
+|---|---|---|
+| 可追溯（一席一钥、可单独吊销） | 石敢当席 DF-GH-20261006-CAIRN-01 §二 | 推送归入他席名下，责任无法定位 |
+| 他席档案不代署 | 本席人设卡 §六-8 | 以他席身份写入共享仓 |
+| 最小权限 | 同 §二 | 本席借他席权限通行 |
+
+### 2.3 本席处置
+
+**不执行推送。** 理由：借他席密钥推送属**越权**，且会污染审计链——即便推送内容本身合规，其**归属**已失真。宁可不交付，不以错误身份交付。
+
+### 2.4 提请（候主权人裁定）
+
+| 编号 | 提请事项 | 权属 |
+|---|---|---|
+| **R-1** | 为 hy4 席单独生成部署密钥并注册（一席一钥），或明确授权 hy4 复用某一既有密钥并登记该授权 | **主权人** |
+| **R-2** | 修正 `~/.ssh/config` 的席位绑定方式：现行「单一 Host 指向单一密钥」无法支持多席并存，宜改为**按 Host 别名区分**（如 `github.com-hy4`）并在各席远端 URL 中分别指定 | **主权人** + 网络配置权属 |
+| **R-3** | 统一 `git config user.name`／`user.email` 与席位标识（现为 `CH3CH2OH@hy3`，与 hy4 不符） | **主权人** |
+| **R-4** | 在 R-1/R-2 完成前，本席产物改由**石敢当席受信中转**投递（依 DF-GH §三 规约），或由主权人授权其他路径 | **主权人** |
+
+---
+
+## 三、与既有文书的对照
+
+| 项 | 石敢当席 DF-GH-20261006-CAIRN-01 | 本席实测 | 判定 |
+|---|---|---|---|
+| G1 守藏席公钥未注册 | 载明 | SSH `Permission denied (publickey)` **且所用密钥正是守藏席密钥** | **互证成立** |
+| G2 hy4 自仓 PAT/OAuth 未闭环 | 载明 | 本席实测：HTTPS 阻于 TLS、SSH 阻于公钥未注册 | **成立** |
+| 「双远端 origin/gitcode」 | §五 称一致 | 本席 `git remote -v` **仅 origin 一条** | **差异 F-4**，待核 |
+| HEAD 哈希 | 载 `160f5fc` | 本席本地 `33b690d`；远端 main `432ad06f` | **差异 F-5**：仓已前进且**本地落后** |
+
+**补充（本席新测）**：远端分支实测 5 条 ——
+`main`(`432ad06f`)、`status`(`fda6398`)、`codex/connect-cloud-readers-20261006`、`codex/fix-git-upload-gate-20261005`、`seat/qoder-505f061a-sync-20261006`
+⇒ **多席并发推送活跃**，本席若贸然推送，并发冲突概率高。进一步支持「先解决身份，再推送」的顺序。
+
+---
+
+## 四、本席本轮**未执行**上传的原因（如实自陈）
+
+1. 无本席自有可用凭据（R-1 未决）。
+2. 唯一可用的 SSH 身份属他席，用之即串用（§二）。
+3. HTTPS 通道 TLS 中断，且即便恢复，本席亦无该仓写凭据。
+4. 远端多席并发活跃，本地已落后（`33b690d` vs `432ad06f`），强行推送风险高。
+
+⇒ **「上传 GitHub」本轮未完成**。本席**如实报告，不以任何方式伪装成功**。
+
+---
+
+## 五、元信息
+
+- conf：§一实测＝**High**（原始输出逐字抄录）；§二风险判定＝**High**（配置文件逐字可见，逻辑确定性）；§三差异＝待核。
+- top3_likely_wrong：
+  1. `IdentityFile` 路径虽含 `shoucang`，但**该密钥是否确为守藏席专用、抑或已被复用为多席共用**，本席**无证据**，仅据文件名推定。
+  2. HTTPS 的 `schannel` 错误可能是**代理对 TLS 的干预**而非 GitHub 拒绝；换代理或换时段可能成功。
+  3. 本席未测试 `credential.helper=manager` 中是否已存有本席 HTTPS 凭据（**未测即不判**），故「HTTPS 无凭据」为**推定**。
+- 自主追问：多席共用一台物理机时，**席位身份在 SSH／git／A2A 总线三层如何保持一致**？本轮暴露的正是三层不一致。建议立为专项。
+
+---
+
+落款：WorkBuddy-hy4 桥接席（本席），2026-10-06 约 06:48，档号 DF-GH-20261006-HY4-01。
+本件**不执行**任何写操作；上传通道维持阻塞，候主权人裁定 R-1～R-4。

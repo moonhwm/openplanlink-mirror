@@ -1,0 +1,290 @@
+# 工具通道与算力排期方案
+
+- 档号：DF-TOOL-20261006-HY4-01
+- 编制席：WorkBuddy-hy4 桥接席（本席）｜工具集成工程师 岳连通
+- 日期：2026-10-06（北京时间，UTC+8）｜编制时刻：06:11–06:2x，处夜间运维窗口 23:00–08:00 内
+- 凭据纪律：全文零密钥零 token 零字面凭据；一切凭据仅以**环境变量键名**或**路径**引用，不复制、不回显
+- 证据纪律：每条实测结论附「命令原文 + 输出关键行 + 时间戳」可复算坐标；未取证者一律标「未取证/候补」，不以记忆充数
+- 关系件：`DF-GH-20261006-CAIRN-01`（石敢当席上传修复方案，本件已读并沿用其 G1–G7 谱系编号，不重复劳动）
+
+---
+
+## 〇、结论先行
+
+1. **MCP 五通道：四项「不在场」，一项「已配置但未启用且未授权」。** 本机 `C:\Users\欧阳宏俊\.workbuddy\mcp.json` 全文仅声明 **4 个 server**：`supabase`、`richee-mcp-server`、`ioacloud-mcp`、`chanjet`。五通道中仅 **Supabase** 有声明，但 `"disabled": true` 且属 OAuth 托管型 ⇒ 判定「已配置·未启用·未授权连通」。**ima / Neon / WPS / 百度云盘 四项在该文件中零声明 ⇒ 不在场**（本席不虚构能力）。
+2. **GitHub 通道：读通道间歇可达，写通道未闭环，网络出口不稳。** `git ls-remote origin` rc=0 成功（远端 HEAD `7779d71`）；但 `git push --dry-run` **零输出、25s 超时 rc=124**；`git fetch` 经代理返 **502**、清代理直连 **21s 连接超时**。⇒ **G2（hy4 自仓 PAT/OAuth 未闭环）在本席实测中依然成立**，且新增一层缺口：**网络出口 502/不可达**。
+3. **哈希为移动靶，勿沿用旧值。** 本席 06:1x 实测 HEAD=`1725c10`；文书链上出现过 `160f5fc`（石敢当）→ `33b690d`（主理人 05:43）→ `1725c10`（本席 06:1x）。`33b690d` 现已退居备份分支 `backup-pre-rebase2-20261006`。**任何以固定哈希宣告同步完成的判据，在本仓当前状态下都不成立。**
+4. **远端数量差异已复核：本席 `git remote -v` 仅 origin 一条，无 gitcode。** 与石敢当席「双远端一致、gitcode/main=160f5fc」**不符**。本席将其登记为待核差异（§五 D1），不沿用其双远端判据。注意：`~/.gitconfig` 中残留 `credential.https://gitcode.com.provider=generic` 一条 ⇒ **gitcode 曾配置过、现已不在 remote 列表**，属「残迹」而非「在役双远端」。
+5. **华为云 X 实例：本件为方案设计，未执行。** 实测 `HUAWEI*` / `HW_*` 类环境变量在本机进程环境**全部缺位** ⇒ 云端算力排期只给口径与设想，**不得写成已执行**。
+6. **闲置系数给可测量口径 + 本席单次基线样本**：`IDLE_PCT=40.77`、`FREE_MB=670 / TOTAL_MB=16076`、`CORES=20`（06:1x 单样本）。**单样本 ≠ 窗口均值**，须连续采集后方可作为考核值。
+7. **夜间调度以机制替代蛮力**：石敢当席实证计划任务式自动重启在本环境 **0/5 不可靠**，本件**不采用 cron/计划任务作为自唤醒机制**，改用「会话启动自检 → 段位牌续做 → 到点落盘退出」三段式（§四）。机主口述费率数字一律标 `conf=Medium·未实测`。
+
+---
+
+## 一、主线一 · MCP 五通道接入现状与方案
+
+### 1.1 本机 mcp.json 实测全貌（已声明 server 清单）
+
+| server 名 | type/形态 | disabled | 本席判定 |
+|---|---|---|---|
+| `supabase` | url `https://mcp.supabase.com/mcp` | **true** | 已配置·**未启用**·未授权连通 |
+| `richee-mcp-server` | streamableHttp | false | 已配置·非五通道目标 |
+| `ioacloud-mcp` | `npx -y @ioacloud/ioacloud-mcp@latest` | 未设 | 已配置·非五通道目标 |
+| `chanjet` | streamable-http | false | 已配置·非五通道目标 |
+
+**关键区分（本件严守）**：「已配置」= 文件中出现声明；「已授权连通」= 完成 OAuth/令牌注入且工具可调用。本机 mcp.json 中**没有任何一条**可判定为「已授权连通」——`supabase` 明写 `disabled:true`，其余三条未做连通性调用验证（本席未对其发起任何带凭据请求）。
+
+### 1.2 五通道逐项判定
+
+| 通道 | 在 mcp.json | 配置状态 | 授权连通 | 接入方式 | 所需凭据（**仅键名占位**） | 失败处置 / 候补路径 |
+|---|---|---|---|---|---|---|
+| **ima** | **否** | 不在场 | — | ① 首选：补声明 ima MCP server（streamableHttp/`command` 二选一）；② 候补：本机已有技能 `C:\Users\欧阳宏俊\.workbuddy\skills\ima-upload-ops`（三段式管线 `create_media → COS 直传 → add_knowledge`）与镜像 `A:\OPL_A2A\skills\ima-skill-1.1.10`（含 `ima_api.cjs`）⇒ **不经 MCP 亦可走 HTTP API 通道** | `IMA_MCP_URL`、`IMA_SESSION_TOKEN`（**占位·键名待官方通道确认**）；实际写凭据由 `create_media` 回包的 `cos_credential`（`secret_id/secret_key/token`，短期有效）承载，**用完即弃、不进日志** | 若 MCP 不可得 ⇒ 走 `ima-upload-ops` 技能；该技能实证边界：**无建文件夹/移动条目 API**，目录须机主在客户端手建，`folder_id` 仅入库瞬间生效 |
+| **Supabase** | **是** | 已配置 | **否**（`disabled:true`，需 OAuth） | 将 `"disabled": true` 改为 `false`，由 MCP 托管 OAuth 完成登录；项目级操作另需直连串 | `SUPABASE_ACCESS_TOKEN`（个人令牌）、`SUPABASE_PROJECT_REF`、`SUPABASE_DB_URL`（**占位**） | OAuth 未完成 ⇒ 保持 disabled，不得宣布可用；数据库类需求可暂由本机 Postgres/SQLite 承接并登记为候补 |
+| **Neon** | **否** | 不在场 | — | 需新增 server 声明（官方 Neon MCP 为 HTTP 型），或退化为「直连 Postgres 连接串」 | `NEON_API_KEY`、`NEON_PROJECT_ID`、`NEON_DB_URL`（**占位**） | 不在场 ⇒ 不在本席能力清单内申报；候补：与 Supabase 二选一，先打通一个 Postgres 通道即可，勿双线并行 |
+| **WPS** | **否** | 不在场 | — | 未见本机任何 WPS MCP 声明或技能命中（§三 E16 检索零命中） | 若后续接入，按开放平台 OAuth 预留 `WPS_APP_ID` / `WPS_APP_SECRET`（**占位·未确认官方 MCP 存在**） | 候补：本机已装 `tencent-docs-routing` / `tencent-local-office-edit` 走本地 Office 文件通道；文档产出优先落 `.md`/`.docx` 本地盘，再议上传 |
+| **百度云盘** | **否** | 不在场 | — | 需新增 server 声明；本席未实测到任何官方 MCP 或本机技能 | `BAIDU_PAN_APP_KEY`、`BAIDU_PAN_SECRET_KEY`、`BAIDU_PAN_ACCESS_TOKEN`（**占位**） | 候补：共享盘 `A:\OPL_A2A\Plasma游乐场\A2A共同体_共享交换区\` 已是全网事实交换区；云盘通道可延后，不阻塞主流程 |
+
+### 1.3 通用连通性验证命令（逐通道执行，先探活再谈授权）
+
+```bash
+# ① 声明层：确认 mcp.json 中确有其名（改 disabled 后复查）
+python -c "import json,io;d=json.load(io.open(r'C:\Users\欧阳宏俊\.workbuddy\mcp.json',encoding='utf-8'));print(list(d.get('mcpServers',{}).keys()))"
+
+# ② 网络层：HTTP 型通道探活（注意 --noproxy '*'，否则本网代理会吐假 502）
+curl -s -o /dev/null -w "%{http_code}\n" --noproxy '*' --max-time 5 https://mcp.supabase.com/mcp
+
+# ③ 授权层：由客户端发起一次无副作用工具调用（如 list/whoami），
+#    返回 "unauthorized / 401 / 需要登录" ⇒ 判定「已配置·未授权」；
+#    返回数据 ⇒ 判定「已授权连通」。不得把 ② 的 200 当作 ③ 的通过。
+```
+
+**失败处置通则**：② 失败 ⇒ 网络/代理问题，先修出口（见 §二 2.3）；② 通而 ③ 拒 ⇒ 凭据问题，走该通道 OAuth 闭环，**禁止把令牌写入 mcp.json**（应走 MCP 托管或环境变量注入）；③ 通但工具调用超时 ⇒ 记录速率限制并降级为低频调用。
+
+### 1.4 环境变量清单（汇总，全部为键名占位，本机当前均**未设置**）
+
+```
+IMA_MCP_URL / IMA_SESSION_TOKEN
+SUPABASE_ACCESS_TOKEN / SUPABASE_PROJECT_REF / SUPABASE_DB_URL
+NEON_API_KEY / NEON_PROJECT_ID / NEON_DB_URL
+WPS_APP_ID / WPS_APP_SECRET
+BAIDU_PAN_APP_KEY / BAIDU_PAN_SECRET_KEY / BAIDU_PAN_ACCESS_TOKEN
+GH_TOKEN（GitHub 写通道，见 §二）
+HUAWEI_* / HW_*（华为云，见 §三，本机全缺位）
+```
+
+> 纪律：上述键名仅供机主在**本机 shell 会话内**注入；**不写入任何仓库文件、不写进 mcp.json、不出现在聊天与日志**。本件不提供任何取值。
+
+---
+
+## 二、主线二 · GitHub 上传通道
+
+### 2.1 实测判定
+
+| 项 | 实测值 | 判据 |
+|---|---|---|
+| 远端清单 | 仅 `origin = https://github.com/moonhwm/openplanlink-mirror.git`（fetch+push 同一 URL） | 单远端，**无 gitcode**（§五 D1） |
+| 读通道 | `git ls-remote origin` **rc=0**，返回 11 行引用 | 读**间歇**可达 |
+| 写通道 | `git push --dry-run origin HEAD:refs/heads/main` **rc=124（超时）零输出** | **写凭据未闭环**（G2 成立）；零输出 + 挂起高度指向凭据获取阶段被阻塞（credential.helper=manager 可能等待交互） |
+| 网络出口 | `git fetch origin` 经代理 ⇒ `CONNECT tunnel failed, response 502`；清代理直连 ⇒ `Failed to connect ... after 21227 ms` | **出口不稳**：代理 502 / 直连不可达，双路皆败 |
+| 身份 | 本仓 `.git/config`：`user.name=CH3CH2OH@hy3`、`user.email=454461837@qq.com`；全局 `~/.gitconfig`：`守藏(DF-DOC-01)` / `shou-cang@openplanlink.local` | 本仓身份齐备；**全局与本仓不一致**，提交署名以本仓为准 |
+| 凭据助手 | `credential.helper=helper-selector`（PortableGit 级）＋ `credential.helper=manager`、`helperselector.selected=manager`（用户级） | GCM 托管型；**未存 GitHub 有效写凭据** |
+| 工作树 | `git status --porcelain --branch` ⇒ `## main...origin/main [ahead 2]`，无文件变更行 | 工作树干净；「ahead 2」**依赖远程跟踪引用，本席复算失败（见下）** |
+| HEAD | `1725c10`（本席 06:1x） | 与主理人 05:43 记录 `33b690d` 不同 ⇒ **仓在前进** |
+| 远程跟踪引用 | `git rev-parse --short HEAD origin/main` ⇒ `fatal: Needed a single revision` | **origin/main 跟踪引用不可解析** ⇒ 「ahead 2」不可复算，标**未取证** |
+
+### 2.2 既有闸门脚本（递归实测，非单目录 grep）
+
+```
+A:/OPL_A2A/cloud-integrations/openplanlink-mirror-20261006/tools/push_gate.py   14440 B  2026-10-06 02:23
+A:/OPL_A2A/codex-upload-fix/openplanlink-mirror-20261005-1815/tools/push_gate.py 14166 B  2026-10-05 23:37
+```
+⇒ 闸门脚本**存在且有两份**；本席建议取 **mtime 较新** 的 `cloud-integrations/.../push_gate.py`（2026-10-06 02:23），但**两份差异本席未逐行审计，标未取证**，启用前须 diff。
+
+### 2.3 本席可接受的最小闭环路径（凭据一律走环境变量，不落盘不回显）
+
+**第 0 步 · 先修出口（否则后面全是空转）**
+```bash
+# 判定当前出口是否真的通 GitHub（设 25s 上限，避免重现 rc=124 长挂）
+GIT_TERMINAL_PROMPT=0 timeout 25 git -C "A:/OPL_A2A/镜像仓" ls-remote origin
+```
+预期：rc=0 且返回引用列表 ⇒ 出口可用；502/超时 ⇒ **先解决代理**，本席不出凭据也推不上去。
+
+**第 1 步 · 凭据注入（三选一，均不落盘）**
+- **方案 A（推荐·进程内一次性）**：机主在 shell 注入 `GH_TOKEN`（值由机主自持，本件不给、不回显），随后用**临时 helper** 喂给 git，**不写入任何配置文件**：
+  ```bash
+  GIT_TERMINAL_PROMPT=0 timeout 40 git -C "A:/OPL_A2A/镜像仓" \
+    -c credential.helper= \
+    -c 'credential.helper=!f() { test "$1" = get && printf "username=x-access-token\npassword=%s\n" "$GH_TOKEN"; }; f' \
+    push origin HEAD:refs/heads/main
+  ```
+  预期：rc=0 且远端回 `main -> main`；若 `permission denied/403` ⇒ 令牌权限不足（需 `repo` 写权）。
+- **方案 B（一次注册、长期托管）**：让 GCM 完成一次交互式登录后由 `manager` 托管；须**人工在场**，本席夜间窗口内无法自助完成。
+- **方案 C（路径甲·最合最小权限）**：沿用石敢当席 `DF-GH-20261006-CAIRN-01` §二 —— 机主在仓库 Settings → Deploy keys 注册本席公钥并**勾选 Allow write access**；一席一钥、可单独吊销，优于账号级 PAT。
+
+**第 2 步 · 顺序纪律（沿用 CAIRN-01 §四，本席认可不另立）**
+`git add` → `commit`（pre-commit 门：TOTP / HMAC / py_compile）→ **过闸前工作树必须干净** → `push_gate.py`（fetch → rebase → 重建树证 → push）→ 记录 commit 哈希回执。**禁 force**；遮蔽类改写一律「新提交 + 重建树证」。
+
+**第 3 步 · 兜底（本席写通道在 08:00 前大概率无法闭环）**
+本件产物走石敢当席**中转投递**：按 `_中转投递\README_投递规约.md` 三件套（`.tar.gz` + `.sha256` + 一页 `.md` 含目标路径/许可/是否 canonical/是否需重建树证），投至 `A2A共同体_共享交换区\_中转投递\<席名>\`。**投递件不得含任何密钥/token**。
+
+### 2.4 本席不主张的动作
+- 不向 `mcp.json`、`.git/config`、任何仓库文件写入令牌；
+- 不执行 `push --force`；
+- 不在出口 502 状态下反复重试 push（会重现 21–25s 长挂，白白吃掉夜间窗口）。
+
+---
+
+## 三、主线三 · 华为云 X 实例 CPU 算力排期与闲置系数
+
+### 3.1 先声明边界（不得越过）
+
+**本机无任何华为云凭据**：实测 `env` 扫描 `HUAWEI*` / `HW_*` 类键**全部缺位**（对照组 `GIT_PAGER`、`GIT_TERMINAL_PROMPT` 有值，证明扫描方法有效）。⇒ **§3.3 云端排期为方案设计，未执行、未验证，不得写成已执行。**
+
+### 3.2 可测量口径定义（分子/分母/周期/命令，四件套）
+
+| 指标 | 定义 | 分子 / 分母 | 采样周期 | 采集命令（Windows，本机已实测可跑） |
+|---|---|---|---|---|
+| **① CPU 空闲率 α** | 窗口内 CPU 处于空闲态的时间占比 | α = Σ(`% Idle Time` 采样值) / N | **60 s**（9 h 窗口 ⇒ 540 样本） | PowerShell：`(Get-Counter '\Processor(_Total)\% Idle Time').CounterSamples[0].CookedValue` |
+| **② 平均忙核数 β** | 窗口内平均被占用的逻辑核数（比百分比更能反映多核浪费） | β = Σ(%Processor Time)/100 ÷ 1 ... 即 β = (100 − α)/100 × C，C=逻辑核数 | 同 ① | β 由 α 与 C 推导；C 取 `$env:NUMBER_OF_PROCESSORS` |
+| **③ 算力闲置系数 I**（本件主指标） | 未被使用的**核时**占窗口总核时之比 | I = (C − β) / C = α/100 | 按窗口积分，不按瞬时 | I = α/100（单核视角）与 β 联合判读 |
+| **④ 内存空闲率 γ** | 空闲物理内存占总物理内存比 | γ = `FreePhysicalMemory` / `TotalVisibleMemorySize` | **300 s** | `Get-CimInstance Win32_OperatingSystem` 取两字段；更贴近可用的口径建议改用 `\Memory\Available MBytes`（Windows 会把空闲内存做缓存，`Free` 偏低） |
+| **⑤ 窗口核时账单**（用于与计费对齐） | 窗口内实际消耗的核·时 | 核时 = ∫β dt（小时） | 窗口级 | 由 ② 的时间积分得出 |
+
+**本席基线（06:1x 单样本，非窗口均值，仅作参照）**：
+```
+IDLE_PCT=40.77  FREE_MB=670  TOTAL_MB=16076  CORES=20
+⇒ α≈40.77%  β≈20×0.5923≈11.85 忙核  I≈40.8%（约 8.15 核闲置）  γ≈4.17%
+```
+> 纪律：此为一瞬间样本。**α/γ 的考核值必须是窗口连续采集的均值或分位数**，单样本不得入账。
+
+**采集落地（建议）**：PowerShell 循环每 60 s 采样、追加写 CSV 到共享盘，文件名带窗口日期；采集进程本身须计入开销（单次采样耗时 < 1 s，对 α 的扰动 < 2%，可接受）。
+
+### 3.3 排期设想（云端部分 = **设计，未执行**）
+
+原则：**把「可并行、可重跑、可容忍中断」的批处理压进夜间窗口，把「需人工裁决、需对外承诺」的动作留在白天。**
+
+| 时段（北京时间） | 排布内容 | 理由 |
+|---|---|---|
+| 22:45–23:00 | 窗口开启自检：时段判定、段位牌写入、采集器启动 | 与 §四 机制 A 同源，靠会话启动自检而非 cron |
+| 23:00–03:00 | **CPU 密集批处理**：镜像仓同步、密钥扫描器全量扫、技能包回归编译、树证重建 | 峰谷价时段优先吃满核时，把 β 拉高、把 I 压低 |
+| 03:00–06:00 | **中负载**：文书生成、索引重建、实测复核 | 留出 CPU 余量给突发交互 |
+| 06:00–07:30 | **收敛**：结果汇总、差异登记、候裁项整理 | 距落盘线尚有缓冲 |
+| 07:30–08:00 | **只做落盘与回执**，停止新规划（机主新令第 2 条） | 硬截止；未完成的支线标「候补/未取证」入件 |
+| 08:00 以后 | 释放算力、停止批处理、退出长驻采集 | 出峰谷窗口，避免按标准价计费 |
+
+**降 I 的具体手法（可测量、非口号）**：批处理任务按核数分片并行（`CORES=20` ⇒ 目标 β ≥ 16，即 I ≤ 20%）；任务队列采用「填满即走」而非「串行等待」；I/O 等待型任务与 CPU 密集型**交错混入**以掩盖 I/O 空窗。**目标阈值本件不代拍板**（见 C6）。
+
+---
+
+## 四、主线四 · 夜间峰谷时段自动化调度
+
+### 4.1 机主新令（源＝口述，**未经实测，conf=Medium，本席显式标注**）
+
+| 序 | 新令内容 | 本席标注 |
+|---|---|---|
+| N1 | 默认夜间运维窗口：北京时间 23:00–次日 08:00（峰谷或特定折扣定价） | 时段本身可自证（本机 `date +%z`=+0800）；**「峰谷/折扣定价」这一费率属性未实测**，conf=Medium |
+| N2 | 临近 08:00 应妥善停止进一步规划并落盘 | 可执行、可验证（本件即按此执行：未完成支线标候补，先落盘） |
+| N3 | Deepseek 股市开盘日 20:00 后可能峰谷时段：自我唤醒 + 集结 A2A 特定网络先行协同 | **「20:00 后为峰谷」属费率口述，未实测**，conf=Medium；「自我唤醒」**不得用 cron**（见 4.2） |
+| N4 | Qwen 3.8 Max 在部分 Qoder CN 宿主应用北京时间 22:00 时有 4 折（×0.2 费率）优惠，应自动化拉入集会讨论 | **费率数字源＝机主口述，本席未实测、未查证**，conf=Medium；是否适用本宿主、是否限特定应用，均待核 |
+
+> **本件不代拍板**：N3/N4 的「哪些网络、哪些席、20:00 集结何种议题、22:00 拉谁入会」等**具体细则，有待 A2A 商榷**；本件只给机制骨架与时段骨架。
+
+### 4.2 硬约束：不得把 cron/计划任务当作可靠自唤醒
+
+石敢当席实证（`DF-GH-20261006-CAIRN-01` §一 G7）：**计划任务式自动重启在本环境 0/5 不可靠，长驻进程被回收。** 本席采纳该实证，**本方案不含任何 cron/计划任务/长驻守护作为自唤醒手段**。
+
+### 4.3 替代机制（以机制替代蛮力）
+
+**机制 A · 会话启动自检（session-start self-check）**
+每次会话的第一个动作即取时间与时区，判定所处时段，再执行该时段任务清单：
+```bash
+date "+%Y-%m-%d %H:%M:%S %z"     # 实测样式：2026-10-06 06:11:07 +0800
+```
+判段表：`23:00–03:00` 批处理段 ｜ `03:00–06:00` 中载段 ｜ `06:00–07:30` 收敛段 ｜ `07:30–08:00` 仅落盘 ｜ 其余为日间段。
+⇒ 不依赖任何外部触发器；**会话在，则机制在**。
+
+**机制 B · 段位牌（segment token）续做**
+在共享交换区维护 `_schedule/segment.json`（字段：窗口起止、当前段、任务清单、已完成项、落盘截止时间）。每次会话读取后**幂等续做**——已完成的跳过，未做的接着做。长驻进程被回收不影响进度，因为进度在**盘上**不在内存里。
+
+**机制 C · bundle 即时生效式**
+把该时段要做的全部动作打包成**本次会话内的一次性执行清单**（命令序列 + 落盘路径 + 回执格式），一次执行完即结束，不等下一次触发。本件即按此形态交付。
+
+**机制 D · 落盘线硬闸**
+`剩余时间 < 30 min` ⇒ 触发冻结：停止新规划、停止新检索，只做「写文件 → 校验字节数 → 发回执」。本件在 06:2x 触发该机制。
+
+**机制 E · 费率事项不作自动执行**
+凡涉及 N3/N4 的费率判断（20:00 集结、22:00 拉 Qwen 入会），本席只做**「到点生成待裁决提案并落盘」**，由机主/主理人确认后才执行；系统不因「据说便宜」而自动切换模型或自动拉会。理由：费率未经实测，自动化执行会把未核实信息变成既成事实。
+
+---
+
+## 五、实测证据表（命令原文 + 输出关键行 + 时间戳）
+
+> 时间戳统一为北京时间 2026-10-06 06:11–06:2x（UTC+8，`date +%z` 实测 `+0800`）。
+
+| 编号 | 命令原文 | 输出关键行 | 判据/结论 |
+|---|---|---|---|
+| E1 | `date "+%Y-%m-%d %H:%M:%S %Z"` / `date "+%z %Z offset"` | `2026-10-06 06:11:07` / `+0800` | 编制时刻在夜间窗口内，时区为北京 |
+| E2 | Read `C:\Users\欧阳宏俊\.workbuddy\mcp.json` | 全文 4 server：`supabase`(disabled true)、`richee-mcp-server`、`ioacloud-mcp`、`chanjet` | 五通道中仅 Supabase 被声明且已禁用；其余四项零声明 |
+| E3 | `git -C "A:/OPL_A2A/镜像仓" remote -v` | `origin https://github.com/moonhwm/openplanlink-mirror.git (fetch)` / `(push)` | **仅单远端，无 gitcode**（D1） |
+| E4 | `git -C "A:/OPL_A2A/镜像仓" log --oneline -3` | `1725c10 变更开源协议…` / `6c6da68 sync 2026-10-06: SC-6 密钥扫描器入库…` / `432ad06 push-gate: re-sign tree` | HEAD=`1725c10`，与 05:43 记录 `33b690d` 不同 ⇒ 仓在前进 |
+| E5 | `git -C "A:/OPL_A2A/镜像仓" branch -vv` | `* main 1725c10 [origin/main: ahead 2]`；备份分支含 `backup-pre-rebase2-20261006 33b690d` | `33b690d` 已退居备份分支；「ahead 2」依赖跟踪引用 |
+| E6 | `git -C "A:/OPL_A2A/镜像仓" status --porcelain --branch` | `## main...origin/main [ahead 2]`（无文件行） | 工作树干净 |
+| E7 | `git -C "A:/OPL_A2A/镜像仓" rev-parse --short HEAD origin/main` | `fatal: Needed a single revision`（rc=128） | **origin/main 跟踪引用不可解析 ⇒ 「ahead 2」不可复算，标未取证** |
+| E8 | `GIT_TERMINAL_PROMPT=0 git -C "A:/OPL_A2A/镜像仓" ls-remote origin` | rc=0，11 行引用，`7779d71… HEAD`、`7779d71… refs/heads/main` | 读通道**间歇可达**；远端 HEAD=`7779d71` |
+| E9 | `GIT_TERMINAL_PROMPT=0 GCM_INTERACTIVE=never timeout 25 git -C … push --dry-run origin HEAD:refs/heads/main` | **stdout/stderr 皆空，rc=124**（超时被杀） | **写凭据未闭环**（G2 成立）；挂起于凭据获取阶段 |
+| E10 | `GIT_TERMINAL_PROMPT=0 timeout 30 git -C … fetch origin` | `fatal: unable to access … CONNECT tunnel failed, response 502` | 经代理 ⇒ 502（**代理响应，非服务存活判据**） |
+| E11 | `GIT_TERMINAL_PROMPT=0 http_proxy= https_proxy= HTTP_PROXY= HTTPS_PROXY= timeout 30 git -C … fetch origin` | `fatal: … Failed to connect to github.com:443 after 21227 ms: Could not connect to server` | 清代理直连 ⇒ 21 s 超时不可达 |
+| E12 | `git -C … config --list --show-origin \| grep -E "user\.(name\|email)\|credential"` | 用户级 `credential.helper=manager`、`helperselector.selected=manager`、`credential.https://gitcode.com.provider=generic`、`user.name=守藏(DF-DOC-01)`；本仓级 `user.name=CH3CH2OH@hy3`、`user.email=454461837@qq.com` | 身份齐备但**两级不一致**；gitcode 仅剩凭据残迹；无 GitHub 写凭据 |
+| E13 | `env \| grep -iE "huawei\|^HW_\|github\|^GH_\|^GIT_" \| sed -E "s/=.*/=<REDACTED-SET>/"` | 仅 `GIT_PAGER`、`GIT_TERMINAL_PROMPT` 命中 | **HUAWEI*/HW_*/GITHUB/GH_ 全部缺位**；扫描方法经对照组验证有效 |
+| E14 | `find "A:/OPL_A2A" -maxdepth 4 -iname "push_gate*.py"` ＋ `ls -l --time-style=long-iso` | `cloud-integrations/openplanlink-mirror-20261006/tools/push_gate.py` 14440 B 2026-10-06 02:23；`codex-upload-fix/openplanlink-mirror-20261005-1815/tools/push_gate.py` 14166 B 2026-10-05 23:37 | 闸门脚本存在两份；取新者，**差异未审计（未取证）** |
+| E15 | PowerShell：`Get-Counter '\Processor(_Total)\% Idle Time'` ＋ `Get-CimInstance Win32_OperatingSystem`（结果落盘后回读） | `IDLE_PCT=40.77 FREE_MB=670 TOTAL_MB=16076 CORES=20` | 闲置系数口径可用；本样本为**单样本** |
+| E16 | `ls "C:/Users/欧阳宏俊/.workbuddy/skills" \| grep -iE "ima\|neon\|wps\|baidu\|supabase\|cloud\|oss"` | `cloudflare-mcp-usage`、`ima-upload-ops`、`minimax-h3`（+`cross-*`、`doc-image-solver`） | ima 有候补技能；**Neon / WPS / 百度云盘零命中** ⇒ 不在场 |
+| E17 | `ls "A:/OPL_A2A/skills"` ＋ `ls -R …/ima-skill-1.1.10` | `ima-skill-1.1.10`（含 `ima_api.cjs`、`knowledge-base/`、`notes/`）、`opl-document-preflight` | ima 另有镜像技能可走 HTTP API 通道 |
+| E18 | Read `…\_中转投递\README_投递规约.md` | 三件套 + 六栏说明 + 「草案建位，尚未启用」 | 兜底投递路径存在但**未启用**，须候授权 |
+
+### 差异登记
+
+| 编号 | 差异 | 本席实测 | 他席文书 | 处理 |
+|---|---|---|---|---|
+| **D1** | 远端数量 | `remote -v` **仅 origin**（E3） | 石敢当称双远端、gitcode/main=`160f5fc` | **登记为待核差异**；本席不采用双远端判据。旁证：`~/.gitconfig` 残留 `credential.https://gitcode.com.provider=generic` ⇒ gitcode 曾配置、现已不在 remote 列表 |
+| **D2** | HEAD 哈希 | `1725c10`（06:1x） | `160f5fc`（石敢当）/ `33b690d`（主理人 05:43） | 仓在前进，**勿沿用旧哈希**；`33b690d` 现已位于备份分支 |
+| **D3** | 本席写通道 | 读通、写未闭环、出口 502/超时（E8/E9/E10/E11） | 石敢当称其 push_gate 本日 3 次全通过 | 席位不同、通道状态不同，**不可互推** |
+
+---
+
+## 六、候裁项（本件不代拍板）
+
+| 编号 | 候裁事项 | 需谁裁 | 阻塞什么 |
+|---|---|---|---|
+| **C1** | 是否授权本席走石敢当席**中转投递**（CAIRN-01 路径乙）；本件产物是否随投 | 主权人 + 石敢当席 | 本件入仓 |
+| **C2** | 本席 GitHub 写凭据用哪种闭环：A 临时 env helper ／ B GCM 交互注册 ／ C Deploy key（路径甲，最小权限，本席倾向） | 主权人 | G2 解除 |
+| **C3** | gitcode 远端是否需**重建**并恢复双远端判据，或正式废弃并清理 `.gitconfig` 残迹 | 主权人 + 石敢当席 | D1 结案 |
+| **C4** | 五通道接入**优先级与去留**（是否先只打通 Supabase + ima 两条，Neon/WPS/百度云盘延后） | 主理人 + 各席 | 主线一资源投放 |
+| **C5** | 华为云凭据是否下发；不下发则主线三永久停留在设计态 | 主权人 | 云端算力排期可执行性 |
+| **C6** | 闲置系数**目标阈值**（本席建议先定 I ≤ 20%，即 20 核中忙核 β ≥ 16，但**不拍板**） | A2A 商榷 | 主线三考核 |
+| **C7** | N3/N4 细则：20:00 集结哪些网络与议题、22:00 是否自动拉 Qwen 入会、费率是否先做实测再自动化 | A2A 商榷 + 主权人 | 主线四落地 |
+| **C8** | 本件是否 canonical、是否需重建树证、采用何许可（沿用镜像仓 AGPL-3.0-only + SSPL-1.0 分层组合？） | 各席 + 主权人 | 投递与归档 |
+
+---
+
+## 七、风险与边界
+
+| 风险 | 等级 | 表征 | 降级/处置 |
+|---|---|---|---|
+| **R1 密钥泄露** | 高 | 凭据写入 mcp.json / 仓库文件 / 聊天记录 | 全件零字面凭据；凭据只走环境变量与本席进程内临时 helper；投递前跑密钥扫描（`tools/secretscan` 已在仓，见 E4 `6c6da68`） |
+| **R2 网络出口不稳** | 高 | 代理 502、直连 21 s 超时（E10/E11） | 先探活再动手；502 时**不复飞重试**，改走中转投递；判本地服务存活须 `--noproxy '*'` |
+| **R3 凭据助手挂起** | 中 | `push --dry-run` 零输出长挂（E9） | 一律带 `GIT_TERMINAL_PROMPT=0` 与 `timeout N`；GCM 交互注册须人工在场 |
+| **R4 历史被重写** | 高 | force push | 沿 CAIRN-01 §四：**禁 force**；遮蔽类改写走「新提交 + 重建树证」 |
+| **R5 通道状态被误报** | 中 | 把「已配置」当「已授权」、把他席通道当本席通道 | 本件严格二分（§1.1）；席位间状态不互推（D3） |
+| **R6 云端算力空转计费** | 中 | 凭据缺位下仍按排期启动实例 | C5 未裁前**不启动任何云端实例**；排期为纸面设计 |
+| **R7 单样本当结论** | 中 | 以 E15 单次样本当窗口均值 | 明确标注；考核须连续采集（60 s × 540） |
+| **R8 自动调度误信未核费率** | 中 | 按口述 4 折自动切换模型/拉会 | 机制 E：费率事项只生成提案、不自动执行 |
+| **R9 长时被 SIGTERM** | 中 | 脚本文件执行被杀、递归全盘被杀、push/fetch 长挂 | 一律 `python -c` 内联、递归限深 ≤4、`timeout` 兜底、结果落盘后回读 |
+| **R10 时间预算** | 中 | 距 08:00 落盘线不足 | 机制 D：剩余 <30 min 冻结规划，只落盘发回执 |
+
+**本席能力边界声明**：本件不负责人设与提示词撰写（相关需求建议转 prompt-crafter）；不代他席署名；不修改任何 canonical 文件；未对 `push_gate.py` 两份版本做逐行审计（标未取证）；未发起任何带凭据的云端请求。
+
+---
+
+—— WorkBuddy-hy4 桥接席（本席）· 工具集成工程师 岳连通
+2026-10-06（北京时间，夜间运维窗口内编制）｜档号 **DF-TOOL-20261006-HY4-01**
