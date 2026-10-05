@@ -93,3 +93,22 @@
 ---
 登记：守藏(DF-DOC-01)（Qoder 工作区，git 身份即提交署名，可复核）· 2026-10-06
 敏感面自检：本节不含密钥、令牌、MAC 地址、预签名 URL、真实主机名与用户目录字面值；E-08~E-13 全部为本轮实测，每条附可复核命令。
+
+## E-14 `MSYS_NO_PATHCONV=1` 是双刃导出：修好 `rev:path`，同时打断原生 Windows 工具的 POSIX 路径（conf=high）
+
+- 场景：E-09 的修法（关 MSYS2 参数路径转换）在本轮被整段导出后，`curl -sS -o /tmp/rb.bin <raw url>` 的落地件**从未生成**，而 `-w '%{http_code}'` 仍报 **200**；随后 `wc -c </tmp/rb.bin` 报 `No such file or directory`。
+- 教训：该导出关掉的是**所有**参数的 POSIX→Windows 转换。`git`（MSYS 二进制）因此得以正确收到 `origin/main:path`；但 `curl.exe`（原生 Windows 二进制）同时失去了 `/tmp/...` 的翻译，写出目标落到别处或直接失败。**HTTP 200 与文件落地是两件事**——只看状态码会把「探针自身缺陷」误读成「远端无内容」，与 E-09 同一类型的假阴性。
+- 处置：对原生 Windows 工具，要么该步骤临时不设此导出，要么**改管道直读**（`curl -sS <url> | python -c 'sys.stdin.buffer.read()'`），全程不出现路径参数。本轮以后者复核成功。
+- 判据沉淀：凡探针产出「空/不存在」类结论，先自问**输出通道本身是否可达**，再谈对端；本轮据此撤销一次「raw CDN 三件空返回」的误判。
+
+## E-15 推送后三级内容复核法（conf=high，本轮实测通过）
+
+- **一级（ref 域）**：`git ls-remote origin refs/heads/main` 读回的远端 HEAD 与本地 `git rev-parse HEAD` 逐字相同。git 提交哈希已密码学绑定整棵树，此级成立即内容已入库；但**本地 ref 不算证据**（E-13）。
+- **二级（对象域）**：`git rev-parse "HEAD:<path>"` 与 `git rev-parse "origin/main:<path>"` 的 blob SHA 逐件相同。注意此形参数必须带 E-09/E-14 的导出，否则假阴性。
+- **三级（公开面域）**：`raw.githubusercontent.com/<owner>/<repo>/main/<path>` 拉回字节，与**本地 LF 归一后**的字节比 sha3_512。本轮三件全等（EXPERIENCE 10935 B／`81ec54bc0249182a`，INDEX 4268 B／`76d90fe7d214f2e6`，SKILL 5593 B／`adbd002b139ebe01`）。
+- 关键坑：`core.autocrlf=true` 下**远端 raw 是 LF、本地工作树是 CRLF**，直接比字节必假失败（本轮 EXPERIENCE 本地 11030 B vs 远端 10935 B，差 95＝CRLF 行数）。比对方须先 `.replace(b"\r\n", b"\n")`；**不得**改验证器做归一化来抹平，那会掩盖真实内容变更。
+- 三级分工：一级证「推上去了」，二级证「推的是我写的那份」，三级证「公众面真能取到同一份」。仅一级不足以对外宣称同步完成。
+
+---
+登记：守藏(DF-DOC-01)（Qoder 工作区，git 身份即提交署名，可复核）· 2026-10-06 追加 E-14~E-15
+敏感面自检：本节不含密钥串、MAC 地址、预签名 URL；路径中用户名以 `<用户>` 占位；E-14~E-15 全部为本轮实测，逐条可复核。
