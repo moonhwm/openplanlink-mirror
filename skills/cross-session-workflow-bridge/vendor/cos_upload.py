@@ -3,18 +3,21 @@
 
 光伏产业链 K3 交付物 → 腾讯云 COS 上传 + 预签名 URL 生成
 =====================================================
-填写下方 4 项配置后运行：  python3 cos_upload.py
+通过 COS_SECRET_ID、COS_SECRET_KEY、COS_REGION、COS_BUCKET 配置后运行：  python3 cos_upload.py
 依赖：pip install cos-python-sdk-v5
 
 【凭证安全】SecretKey 仅存在于你本机，不要贴进任何对话/截图/仓库。
             推荐用「子账号密钥」或 STS 临时密钥（见 授权与上传指南.md）。
 """
 
-# ============ ① 需要你填写的 4 项 ============
-SECRET_ID  = "AKIDxxxxxxxxxxxxxxxx"   # TODO: 你的 SecretId
-SECRET_KEY = "xxxxxxxxxxxxxxxxxxxx"   # TODO: 你的 SecretKey
-REGION     = "ap-guangzhou"           # 截图已选：公有云园区-中国-广州
-BUCKET     = "kimi-share-1475054847"  # TODO: 截图里的 [名称]-1475054847，改成完整桶名
+# 配置来自进程环境，凭据和桶名不写入源码。
+import os
+
+# ============ ① 需要配置的 4 项 ============
+SECRET_ID = os.environ.get("COS_SECRET_ID", "")
+SECRET_KEY = os.environ.get("COS_SECRET_KEY", "")
+REGION = os.environ.get("COS_REGION", "ap-guangzhou")
+BUCKET = os.environ.get("COS_BUCKET", "")
 #    ↑ 完整桶名 = 你在控制台看到的名称（含后缀 -1475054847），例如 my-pv-1475054847
 #      若不确定，控制台「存储桶列表」第一列即是完整名称。
 # ==============================================
@@ -23,6 +26,9 @@ KEY_DURATION = 24 * 3600   # 预签名 URL 有效期（秒），默认 24 小时
 
 
 def main():
+    missing = [name for name, value in (("COS_SECRET_ID", SECRET_ID), ("COS_SECRET_KEY", SECRET_KEY), ("COS_BUCKET", BUCKET)) if not value]
+    if missing:
+        raise RuntimeError("Required environment fields: " + ", ".join(missing))
     from qcloud_cos import CosConfig, CosS3Client
 
     client = CosS3Client(CosConfig(
@@ -54,7 +60,7 @@ def main():
 
             print(f"{key:<45} {size:>9.2f}  ✓ 上传成功")
         except Exception as e:
-            print(f"{f:<45} {'—':>9}  ✗ {type(e).__name__}: {e}")
+            print(f"{f:<45} {'—':>9}  ✗ {type(e).__name__}")
 
     # 输出 URL 清单（把这个文件的内容发给 Kimi / 我即可，密钥不用给）
     out = "cos_urls.txt"

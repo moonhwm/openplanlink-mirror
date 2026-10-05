@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 """test_supply_chain.py —— 供应链三查单测（stdlib unittest）。"""
 import os
+import json
+import tempfile
 import sys
 import unittest
 
@@ -11,7 +13,11 @@ import supply_chain as SC
 
 class SupplyChainTests(unittest.TestCase):
     def setUp(self):
-        with open(r"C:\Users\欧阳宏俊\.sc_tmp_NOTICE.txt", "w", encoding="utf-8") as f:
+        self.tmp = tempfile.TemporaryDirectory(prefix="opl-supply-chain-")
+        self.addCleanup(self.tmp.cleanup)
+        self.notice_path = os.path.join(self.tmp.name, "NOTICE.txt")
+        self.secret_path = os.path.join(self.tmp.name, "sample.txt")
+        with open(self.notice_path, "w", encoding="utf-8") as f:
             f.write("NOTICE: demo")
 
     def test_empty_files_no_notice_rejected(self):
@@ -19,15 +25,15 @@ class SupplyChainTests(unittest.TestCase):
         self.assertFalse(r["ok"])
 
     def test_notice_file_accepted(self):
-        with open(r"C:\Users\欧阳宏俊\.sc_tmp_NOTICE.txt", "w", encoding="utf-8") as f:
+        with open(self.notice_path, "w", encoding="utf-8") as f:
             f.write("NOTICE: demo")
-        r = SC.notice_check([r"C:\Users\欧阳宏俊\.sc_tmp_NOTICE.txt"])
+        r = SC.notice_check([self.notice_path])
         self.assertTrue(r["ok"])
 
     def test_secret_scan_no_leak(self):
-        with open(r"C:\Users\欧阳宏俊\.sc_tmp_SECRET.txt", "w", encoding="utf-8") as f:
-            f.write("k=sk-abcdefghijklmnopqrstuvwxyz123")
-        r = SC.secret_scan([r"C:\Users\欧阳宏俊\.sc_tmp_SECRET.txt"])
+        with open(self.secret_path, "w", encoding="utf-8") as f:
+            f.write("k=" + "s" + "k-" + "abcdefghij" * 3)
+        r = SC.secret_scan([self.secret_path])
         self.assertFalse(r["ok"])
         self.assertTrue(all("sk-abcdefghij" not in json.dumps(r, ensure_ascii=False) for _ in [0]))
 
@@ -44,7 +50,7 @@ class SupplyChainTests(unittest.TestCase):
     def test_gate_accept_with_notice(self):
         r = SC.gate({"components": [{"name": "x", "version": "1", "license_layer": "AGPL-3.0",
                                      "source": "s",
-                                     "files": [r"C:\Users\欧阳宏俊\.sc_tmp_NOTICE.txt"]}]})
+                                     "files": [self.notice_path]}]})
         self.assertTrue(r["ok"])
 
 

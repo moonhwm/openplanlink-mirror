@@ -1,0 +1,38 @@
+name: Git upload gate
+
+on:
+  pull_request:
+  push:
+    branches: [main, 'codex/fix-git-upload-gate-*']
+
+permissions:
+  contents: read
+
+jobs:
+  check-outgoing-objects:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7, official tag checked 2026-10-05
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify Git fixtures
+        run: python3 -m unittest discover -s tests -p test_git_upload_gate.py -v
+      - name: Verify portable supply chain and COS configuration
+        run: |
+          python3 -m unittest discover -s tools -p test_supply_chain.py -v
+          python3 -m unittest discover -s tests -p test_cos_upload_config.py -v
+      - name: Verify delivery keys and multi-remote orchestration
+        run: python3 -m unittest discover -s tests -p test_upload_orchestration.py -v
+      - name: Inspect objects relative to the event baseline
+        env:
+          BASE_OID: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_OID: ${{ github.event.pull_request.head.sha || github.sha }}
+        shell: bash
+        run: |
+          if [[ -n "$BASE_OID" && "$BASE_OID" != "0000000000000000000000000000000000000000" ]]; then
+            python3 tools/git_upload_gate.py --range "$BASE_OID" "$HEAD_OID"
+          else
+            python3 tools/git_upload_gate.py --tip "$HEAD_OID"
+          fi

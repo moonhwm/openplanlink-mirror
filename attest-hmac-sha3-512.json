@@ -1,16 +1,22 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T12:16:23.943Z",
+  "generated_at": "2026-10-05T15:49:00.584Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 837,
-  "merkle_root_sha3_512": "5871212e05a586e6ccba346fd19594dc553d5a3b891b233dc2c3ea068a21251ff7c851d1bd9854810b95edc9b1a71d566bb6b63d6b5a7a78e349269186d3dabc",
-  "hmac_sha3_512": "8b4d5a28e9d2670053eebec2b22f6ff3affe186834db9304c943efa1a7d59ec7b9a16b4216a0793dc0810463384495415c49db5a765f68b6cd467535941b4db7",
+  "file_count": 845,
+  "merkle_root_sha3_512": "2f07336a7f3a374e4c0efd4ac577776e4f138de40c7fd7155dbcf35f7936f0b9cabfa719d9f0f08edab5a12ce1c872205bf1e53ef6a1c1cc089a70efa92a6981",
+  "hmac_sha3_512": "263f05e7a5d0c1c638a5ee4f723da85b54a707023188e94fe8a8017c3498ce7e693d4591c7c5a4eb2e70e8c87d1e725c821c116775e4b278315e287dac681108",
   "files": [
+    {
+      "path": ".gitattributes",
+      "size": 238,
+      "content_sha3_512": "69bf8ef50d19a3b68ea06ba5b675c1f0b66d76b7790897360cf8a9429b166e0e016605cdf5a010d750ef17a0aad67c0a298d7995d25d2dd6a29c2f740060d114",
+      "leaf_sha3_512": "650179ef7653809b43a5ce9d9480a53a6282f576c002dde3d31efa0c462701c4ce6b9012939370d4dce27615aef328a795126ca37d1deebb72faac1325570c80"
+    },
     {
       "path": ".githooks/link_baselines/README.md.txt",
       "size": 550,
@@ -54,10 +60,16 @@
       "leaf_sha3_512": "fa001e2b6e188bb555078dee0337e7d9b86d402f0b91c9da2449b38ec7dabb0def864c497209d4654833d32724ba5381bb69b2d0f485e97ceae79fc10cf33a76"
     },
     {
+      "path": ".github/workflows/git-upload-gate.yml",
+      "size": 1456,
+      "content_sha3_512": "b1ed01dab697353a212496cff0db4102f3d4f73e7df541b3e6d9f8038c9ff4aa319bd91628dda39cf2117be9b45b31a8473ccacf6c9ad71b2dac2243f59913be",
+      "leaf_sha3_512": "b981c7394587c4e1fa4e0a2ee5739879a6efa43d408963c328ff1344e09e53e0f5f2e4c0a3118c736e73dfff505ffd6f11ace58551bcdbc831d80d2c99f1086e"
+    },
+    {
       "path": ".gitignore",
-      "size": 25,
-      "content_sha3_512": "0b43ccf0416f1c1e25906ba9a26b52ef2e535d043791841004c0f870b7c9d7cc8f1fec24e7eaa9f1e3d193350a4c70d998440ba1e36c2f51a8fc26b8572f517a",
-      "leaf_sha3_512": "c9e3eaaf49929f74c8e44080df21079a6bae96128f186f1278867dc8f6ec26deef8cbb6a45968aca859ccf0b967b3a075ebbd65bb67137a29b995e8cd8acb76e"
+      "size": 81,
+      "content_sha3_512": "d9f517e3aa6ae538ab0e5a17238dd7ba153f9557d22ea0d3c9d355f29be9b0ac1aca7d7bf900f3031003e82fc2079af7bcd8200e22571677022d97abd1b13c4b",
+      "leaf_sha3_512": "0dff38acb54905a6055e66b83930f8028d9544ba297ff5a0f64cad6d7b021abaa1fed24d4cbf7d5001e7cd0909589892103097af1c6ba91e56a63e5894008c18"
     },
     {
       "path": ".nojekyll",
@@ -1045,9 +1057,9 @@
     },
     {
       "path": "skills/cross-session-workflow-bridge/vendor/cos_upload.py",
-      "size": 3127,
-      "content_sha3_512": "850dc41dc23e01ba75a8e43331292017b0ef6040f877f12d69731114e8332ac388e6eeef0d18d25d226dbd6022ecc453b38f1f00f67144e07c2fe50cf3c143cb",
-      "leaf_sha3_512": "0269b0d76938cb8544b8940799d64547bb7e75840080861b4a6ee514ee3d18ea9ca8a21f637c33c765f8fdcd07e7769d3c82cf19ecb4ec0f13df1fb98bd1c78f"
+      "size": 3360,
+      "content_sha3_512": "eb7d3a3a3067fd92475cb15f49f51bccee92652bfb197c544c9bb635105ed4012d61923b78739b9446df2cbd59fba9be60cbf3ffa90363272d1864b52f73390e",
+      "leaf_sha3_512": "f389f19a65cbc06d44830909e6912213be16d75ed972ad1343173a9fe9b2a18e6164fb5520ed18f546283015d2428a73ad0e4d5a55724f1cd6f55763bcec1028"
     },
     {
       "path": "skills/daily-life-autopilot/SKILL.md",
@@ -4518,6 +4530,24 @@
       "leaf_sha3_512": "128e690458bd9983198d289eddd903574d5b742867fb3cfe44453b792290b0a1f6a75fde64d5d8ed6d03b4fcacdd496e94283e3f57ab81e8317428f849012728"
     },
     {
+      "path": "tests/test_cos_upload_config.py",
+      "size": 2586,
+      "content_sha3_512": "4e2a53a9f0c95135d1c0af6c7f9cd848019f94b7d9db5da6f60937799fd40e8ca4eb90a16ec7dcc377ca34303c6d64315851526525491cef2c7ad4e2ee03cf34",
+      "leaf_sha3_512": "40d70756f378cd3a53868695777024e953ff6f005e6365479af498cc5177e4eb05de87399187cfa795a4dc28cb043bb1ccd65c7257cb1b205bf9abc4f6192747"
+    },
+    {
+      "path": "tests/test_git_upload_gate.py",
+      "size": 13463,
+      "content_sha3_512": "a1d7c55fa61aa59edbb6a8f76c7f0bb64e49f05402ea8552f2caecc118a905ab87acff2cd7ad18f7f1795bf502d54dcbdd81ed1599fb3b1cf11ab47bffe29647",
+      "leaf_sha3_512": "4fd0feb27a35f64066a9f997b049d39306f5add5f1cae54bd8e0b37c421c71ea0fa6128480849f64167121f312e9f512d36a0146ae592f5545dd2a8fdb27b946"
+    },
+    {
+      "path": "tests/test_upload_orchestration.py",
+      "size": 20363,
+      "content_sha3_512": "95020769b7fb749a1617a6fc425e01fc357c62038591ce14946d166731346da46f27702618a4e4f61d315f251e4c8c71ec1761f320223885c581720e420b6ab6",
+      "leaf_sha3_512": "ebdd57662fc0586848d0e52949cbb882b307677ac8ef26a27ba12e4dcdc77f57b9521671a1011009b8e27d4310c9ab0863110e00a832a65e62629564601798c8"
+    },
+    {
       "path": "tools/SHA3_TREE.md",
       "size": 1445,
       "content_sha3_512": "140f9e7a493907d84116ace5178b70b984b74a08016de269af2f8d4edae017a4245017dcf73b671ec0652f766915d1d101d159a34f59cc03c826000620fb1c4e",
@@ -4567,9 +4597,9 @@
     },
     {
       "path": "tools/build_opl_tree.py",
-      "size": 3761,
-      "content_sha3_512": "f53a3719085534e0926a13f56075d09f625ddc9ebeedaed96f949fadfa11e2755614996be1a4467a288cce6d1f68b91f6363ee6e5f7ee286035f7160aa2c6423",
-      "leaf_sha3_512": "27bf74e3ad3cb77cf2c045e00aeac22e0985108b13ad4a4d5e86c92a9cb198536a6d269336f02c5521658fb1238dc3164bcb9c2996d6992b0ee7f63194e4b02a"
+      "size": 5588,
+      "content_sha3_512": "813ab19d1ce998477e9457f7e477183c3215476701551f41890e4fb377258f920f63abd9f375038a97ca9eeca690b5afa296f0a9cd6afdc1b14ed59f6c9bc3fb",
+      "leaf_sha3_512": "61859024605aa48d5728678968552bb732730e0085670149aa22c9828b085c124a65b14f53faba9fecd78d6c842a962c426e4bde82179f5a278f43a8062cd413"
     },
     {
       "path": "tools/burn_daemon.py",
@@ -4602,6 +4632,12 @@
       "leaf_sha3_512": "714cc97123fc59c01448202f990775c8fea685a05074fdfe7fa2edd099bda1207413008bf2308d96ca4bfbe9b733fbdc8ec48d101baee814fcd9c02085ab3b93"
     },
     {
+      "path": "tools/git_upload_gate.py",
+      "size": 16360,
+      "content_sha3_512": "1c06802c7f6e5b9c972b71efe2ddd146070c137bcea1715398901ed584282bf397d25617c6116985d6b92921f2d970d25eb6e562d891725ee60c7af7ba166d19",
+      "leaf_sha3_512": "8216d6e21794fa05fbe5f887125d3aeb2d843c3f72fbb2a22bf43a6df945506ae2b7a467eec0deb1b28f8767c9f564a20cdc981cd00c404ae31d34822006b317"
+    },
+    {
       "path": "tools/gitcode_search.py",
       "size": 1424,
       "content_sha3_512": "fa9f69c5a81444ab67565d02858164aa44c305248deba104b7742e1a46c4b0ddd452c8d89b039cfd0bd58c040c15f3f13c1dc8b5384e7ab94f7a496b2f2bd8e5",
@@ -4620,6 +4656,18 @@
       "leaf_sha3_512": "666769829e3c2db363e8f233f8980d5dd1c9a3eaee11d06086cacf0491f9e76734afbef08ad4b01574c98f7bfeb0fcf2b9aa0f300680da887000fea8bf279ee8"
     },
     {
+      "path": "tools/hmac_key_policy.py",
+      "size": 3552,
+      "content_sha3_512": "c26052fe5a9e85a54ad119cf6fd168f9a6c2e15730e0fe7b663f811027388232cae4cdd18085d41542a5c5997fe4866fb9fcb2eee680aebc1d14fc5795685d64",
+      "leaf_sha3_512": "89c56de736a44607e0e813df2e0b0f61805cf3f1d711c0db7bef93c4edd078cd538a60801917d84b9b86e07f147940d3101a772c3a605115626a82d84aafabfc"
+    },
+    {
+      "path": "tools/hooks/README.md",
+      "size": 4816,
+      "content_sha3_512": "5c51db8372cd20086b1afcffa97f7d9947fd82cdce2dcac6e10543faa0d081a96eeb9df81f8f524eafd44d537b1ca06cffa62612728dc714ba2c260e79d1f7a9",
+      "leaf_sha3_512": "bfd78a27ddd884f0d1a7d4e18f8edbc913740c06625181257677057b14494cecf7951578cca70a5e48de60ff1b93c9b62666c478f56384bd7b40ec09aaa7e185"
+    },
+    {
       "path": "tools/hooks/pre-commit",
       "size": 1407,
       "content_sha3_512": "1a655fefed59ae9c73bfaef5ec7351bbab0d720191e697df344498484d6af6bc6dc847c30fb2cd55f4006a7c9061bd43531eb6f9b85fb98c3169002569660596",
@@ -4627,9 +4675,9 @@
     },
     {
       "path": "tools/hooks/pre-push",
-      "size": 1247,
-      "content_sha3_512": "9e32ae960a0e507b60e002015680b81bc6969d7ccd8977426f3d9774cb4a63ab45fd13a711e2d32f55fd0fe8a059eab1425fa13c86cf09304dccd86497c10187",
-      "leaf_sha3_512": "8c49a56db5d5cbea1c1c8eeb506b85b5bfb8c20306a953aba8d91712dfa46f61fea5a0ccb826143c85cfded17318c5acccdd87cc5b4280dd21706b81a556b289"
+      "size": 722,
+      "content_sha3_512": "5488fd6dfd80040309a11b11a9e4f84b801e48bc74f4858e6b2bcd4444e15bfb6c0fcf31e09461cf6e95d4b135b672816b56fdb72ea77b3fbef6bb8254dae36e",
+      "leaf_sha3_512": "94c4541662130e0a845f9afd29e13be3ff383d9a43a34f821d1abe0821a0e1dcf4ad8f6532d1cf9292042aac5fbf1dd43c38e15f104261fcb4cea92981fbed84"
     },
     {
       "path": "tools/knowledge_digest.py",
@@ -4675,9 +4723,9 @@
     },
     {
       "path": "tools/push_gate.py",
-      "size": 2631,
-      "content_sha3_512": "250005b57829fa8429dbfe3b2627fc25f9522386dc7d6cb22acd2c275b59f8133b25f5b2dc1b9f498ba8fe72789bf2ab75dbc5b1db8d38e156a4da6fb45e6a21",
-      "leaf_sha3_512": "a7372d8324c8788d30ebf9f352e549610af500cfa36b52feb0912682a8967c42b7d159bc1577c0ca5ef65100dc5141076c3c583f3063c2d61ed620b88c7e65b9"
+      "size": 14166,
+      "content_sha3_512": "ae6fdde4fb1604612eefb48df0b114070bd9f5f529d0889c03e15beac6b38e084064892cc8b9bbf438a2e98b855cee8030a7fd7c218138ba9f8a28be3c46b51d",
+      "leaf_sha3_512": "f374bc6c8dda63015cb77229eb5c8e1523708eb324eaf4aa0428a198df79b4cbaf01027372652f1ee5cdb265834144804f826382a90707196fc5cbc359a36c74"
     },
     {
       "path": "tools/quota_wall.py",
@@ -4969,9 +5017,9 @@
     },
     {
       "path": "tools/test_supply_chain.py",
-      "size": 2352,
-      "content_sha3_512": "6a1c1c855dfa0758ed950f3ace3d9385459661a452f54714edc7dbe92ada6d1e5b3dd8f3fdc2a218d5ada3c6d9b03d13c9c93d18b340bad3d185e7601b2e449b",
-      "leaf_sha3_512": "36acbf4c84a44c78120388a6af33f6f0778e4f819051c77eb0db74bd931f5646ed1a15b3d2c1f5fb42fc0d058d121471d6b6032b68d51b8835cd5d3998b8827f"
+      "size": 2473,
+      "content_sha3_512": "7b5bbcd2d7d7185748f16de0982c5e993f0b8263d8b2bb6fca50a5d9f1fb816de69784d12e2b09f5438de96caf4c11415adf6f089093dfd56fa91cf02a004f49",
+      "leaf_sha3_512": "118e1dd62d2d150d52eaddae0c5f468c27de210b51d55725c44c3d89ed8b1f019b7cdec71e933988b4928838ce69cc01c832c9b0839be5b8864aa07847fdfd2c"
     },
     {
       "path": "tools/test_totp.py",
