@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:31:32.560Z",
+  "generated_at": "2026-10-05T19:32:36.615Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1850,
-  "merkle_root_sha3_512": "fb7fbdddda5d956b5dd5233740819516563bf3123c8ca697c45919b67a7dc7d4368cfc2acda4f1ca9a595986b5fba732a693e579d2efc877affa1fe174a44552",
-  "hmac_sha3_512": "6152b320aaf28c0cf5d7235b54c924cec225fbb757492123b3c390bdbaa78b1409502dae6906c9a37f853932cd8047edb07478ef177066a7c9ce6b2a9f4367b2",
+  "file_count": 1851,
+  "merkle_root_sha3_512": "7a5acf421dfc2b999bbbbf0373961f6a20903f53907ee2d1e92e30dc663cdd5e0592eb57e18db4b7ffeaef923fac6639fef97d520a821d1bfa928acc28244ca1",
+  "hmac_sha3_512": "95c598cc86ac91e4520b1103c5edb207b2ef7adb6204fc02a7d5edd804a6045298c34cb346e861c2f1b27c3cd5d87cc86b29f9986d384a6b6a1db91f2e30e0de",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -454,6 +454,12 @@
       "size": 1532,
       "content_sha3_512": "1d73d3e659788cd0566b128cba469d2634ebfe5aa0314f7fc85ea989fba9833810667bea3550254ff984eb774df5f1fe293e3c31134123ca28fd00c0b407c60f",
       "leaf_sha3_512": "da0138e1d475450b8a1aef96f3110f16e400c4d9386e6e4e889581dd9582a997ee05fbe1aa079c68951f1d732918801d8fef6932f69f2802e5d2682738bab83a"
+    },
+    {
+      "path": "deliverables/20261006/seat-cairn/exchange/人设卡_石敢当Cairn席v0.1_DF-PERSONA-20261006-CAIRN-01.otl",
+      "size": 8772,
+      "content_sha3_512": "feb10c40e36d31f1b8d162035578a3725397d4896c7d246ea9d6c467285a570e286c03e3c4eaf89fd8996b5ea512d6acd0b978efccaf0ff802e0bd171b427aca",
+      "leaf_sha3_512": "864b4ac737930baa663d56a60099e86724c79a473a2c7f5701014af22b4a49c9dbd3841887d6010c36d16d21ab8c9f0b4166a446605959a39686565b8e45ed99"
     },
     {
       "path": "deliverables/20261006/seat-cairn/exchange/华为云X实例算力榨取与排期设想v0.2_DF-HWX-20261006-CAIRN-02.otl",
