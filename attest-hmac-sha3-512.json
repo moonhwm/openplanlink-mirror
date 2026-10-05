@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:14:13.445Z",
+  "generated_at": "2026-10-05T19:14:56.638Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1833,
-  "merkle_root_sha3_512": "ef8969d09d5ffaf0da5a9c66709ed363fd3b6dd154a40a448c88d17d430daf8140d8ddc6f59ec30d15fc5f002674790a3f65044579f53dde2d946a179fecec0e",
-  "hmac_sha3_512": "f55edd2169cddc8431ae90dad4761df993228ccff03469531e1a4970d46ce7383502c06c444c5a36baad76919d1e69d533a7c6da3ffd500b88972e17913de5f5",
+  "file_count": 1835,
+  "merkle_root_sha3_512": "6a0d459d0ad40283cc4f337c259b25b3c1f02058a573a492e805e87813568eb6f8cafa0b3c3af609ae12d80002cd73663349baa7bf3d607395cc4fd52c9248e8",
+  "hmac_sha3_512": "bf8a2cab06c148802348520874ae2c7d34116a07d3f1432a01874b83ab2455fbff4422035fa8aedb875b93e262153e7f94a9a503305ece0934eea3225b28d606",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -58,6 +58,12 @@
       "size": 1337,
       "content_sha3_512": "872c328f280f46c3eb7acaca068af110bd8b86aa7fa4af8d0d51df8adbeb5b57e06f6939eb6507ad8e137c84e68e73fe1da06f92cdceaa2d4682407d57c117ce",
       "leaf_sha3_512": "fa001e2b6e188bb555078dee0337e7d9b86d402f0b91c9da2449b38ec7dabb0def864c497209d4654833d32724ba5381bb69b2d0f485e97ceae79fc10cf33a76"
+    },
+    {
+      "path": ".github/workflows/license-precheck.yml",
+      "size": 2321,
+      "content_sha3_512": "071fabd4da8e3da2984bc955e4d03744fb4f85270ebb31f7f328175b2b4bfead828565a49fd1a0e46bebb0064fa43d6dfe8b20f39273dc49194448afa7ee5b8f",
+      "leaf_sha3_512": "1d59b819ab0dad482f8801ec8dd08e6c06721b4a629c2e05173d3fea49f3db0103389bdc5f8b94993924eb37d3bbf2859f12476432d83ac8d66b73066b1766d7"
     },
     {
       "path": ".gitignore",
@@ -10606,6 +10612,12 @@
       "size": 3162,
       "content_sha3_512": "039961ea2c4da2c7e91a0653fe24f5dd6783563c9badbfe8d445174a2cf689796b403c3a55ba8df7f5c804a44f6267315c4a236efa213a423099911c1721efb6",
       "leaf_sha3_512": "7a4a725a578648155efccace3426692b0516add0a9ee139b972098008e4d92664fda963fd8663f0832c57d435c8cf1a021ba29e04b655f6815460ecadea5d8a4"
+    },
+    {
+      "path": "tools/license_match.py",
+      "size": 11555,
+      "content_sha3_512": "90d42c406e11b7ab857f10eb18fc3dbf9480b25988f94ff45a2a27f190cf642c9490425a8796498ed0929333327040ffd805ceecbf28b3c7d0f26bbda323b594",
+      "leaf_sha3_512": "8be598f863d44f4a2e991eed456567a7c4f942c2a80deb63356da8d9dfbdea13cfa734a06ca84f604363195d2e7daa21d6f5728d83016e92f30b878347f11e8d"
     },
     {
       "path": "tools/live_state_loop.py",
