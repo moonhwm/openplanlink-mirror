@@ -1,0 +1,6 @@
+ev_type: ROUND
+subject: 目标轮12/256——**根治** CD↔坐席双远端分叉：把 CD 发布位从 main 改为独立 status 分支 ①工作流 cd-attest.yml 重写发布步：生成件先移出工作树 → 取 origin/status 作线性基底（无则建 orphan）→ 只提交 STATUS.md 与 status/index.html → push origin HEAD:status（**force-free**）；删除原「写 main + 双远端对账告警」两步，改为「main 与镜像远端不再被 CD 写入」说明步 ②**临时仓仿真**先行验证序列（orphan 分支恰含两文件、可线性追加）并据此修正浅取问题 ③**生产实证**：origin/status 已由 CD 创建(08bc092)，分支内容恰为 STATUS.md + status/(2 项)；页面内嵌 504405ea/1849 文件；main 最近 6 条作者全为坐席（守藏/moonhwm/cairn），**CD 机器人不再写 main** ④双远端一致 cd2135d
+detail: 依主权人令「持续对齐修复A2A网络中可能面临的相关github上传问题」「发布静态站」。★【形状】架构级修复：消除根因而非逐次救火。★★【定论】CD 写入位与坐席写入位物理隔离；静态站发布位=status 分支根（Pages 指该分支即上线）；main 历史纯坐席署名。★★★【下一步】候 Actions 队列复核；候凭据/授权/裁定。
+evidence: git ls-remote origin status → 08bc092b… refs/heads/status；API contents?ref=status = [file STATUS.md 645B, dir status]；status/index.html?ref=status 内嵌 504405ea/1849；origin/main 近 6 条作者无 opl-cd-bot；临时仓仿真输出
+seal_files:
+  - exp/push_gate.py
