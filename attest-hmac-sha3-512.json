@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:26:07.676Z",
+  "generated_at": "2026-10-05T19:26:40.267Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 1848,
-  "merkle_root_sha3_512": "29da53caf3e32b38aba5a4f62ebf6f34f85b25e264d3a32b7297d5deb499143ce80ead11407350eb115f79f7091a7d658fe77cdb062972ac306ab43dfc136872",
-  "hmac_sha3_512": "be99f6f323b03b0f271612ca23a1df556e09c3bd810cae8bed9838e362cfbb013a5ae48de3c9e72c7365bef82611d95d60f53667489d4a040325067ad4fce042",
+  "merkle_root_sha3_512": "f617d824a12683cc512e190f9de1bfbd88d982dca41b11d7d4da48f8068db55a615b9a92b356e89977455ad437ed7c57a5f73bf3f91af447b2dacfd55f76ac42",
+  "hmac_sha3_512": "b5b22cbe756849a8a2f229351bfd3213f7fbdca3f8eb9c3fb6754d16aee541e8982a2023b5abb2713baec9d9bc05adb86ca86643ccb20039eadc98b81f446b6a",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -10723,9 +10723,9 @@
     },
     {
       "path": "tools/push_reconcile.py",
-      "size": 4755,
-      "content_sha3_512": "c349fd632f29781e0d8c3efd2670e9199511ef67dfad341a8246fa4403cab47691f1ef417b8a30d5863f8873a4f22229d3bf552598cbbc435ffa8654280c8132",
-      "leaf_sha3_512": "9dd1e5ac8316df74d23caf9429ad48a1283ab5c4472f7450d461ec99fdbac446680fc00cdbf9a117cc759a801ea04dad35b8ac96557ee00c5310a9d77e3e0135"
+      "size": 6767,
+      "content_sha3_512": "86c35348be7a6eca17a86626c28b79b6e9443cea50255f25b26f020d235da1a46f1448a15a8aa39b892233093f3c39d6c202a7a6f89121aff3ae18105b3b125f",
+      "leaf_sha3_512": "da0e4c00cfa89c82fafa85a96ffb39506e173ba492f17eafd2329766f7ba3958cfa49d7d5c7a40320818279fa1bbcc9545d0f826970f814d1708aca76e0670db"
     },
     {
       "path": "tools/quota_wall.py",
@@ -10915,9 +10915,9 @@
     },
     {
       "path": "tools/spec/spec-push_reconcile.md",
-      "size": 1181,
-      "content_sha3_512": "68867b8ae3348a006a4da66a0fade3b03649f08131664ff74eb2578b49e4f76eeb3d47b7b3ea8085f220feff4795f68f378454b2917e52bee80945613bc6ebaa",
-      "leaf_sha3_512": "bbb48572631a26cbc15fa11ea17ec09ace3e056bf772f3ac7a01b0e20527dda397ba7aeb27d4ac98b6fd89e38a0924af8e4282eb6075f28a9e3d4e98bd1be137"
+      "size": 1550,
+      "content_sha3_512": "946a27426f07bfb14d65070e33bdcda47cb8559c8bd788242b5f48bc3ab5cda342b449dfe18c8d751350deb6f3ca7371c4802d28e6b3e5240ec9148a48aebdf3",
+      "leaf_sha3_512": "1ee3eac6b4b5f106ef389a4a44f826b0e6f4a6dc3a17bd6d7f570944f667f70e493d601e7e8edc4ecf0296c61120f3e953f6a6b8846f142a4c9a84a2dd412574"
     },
     {
       "path": "tools/spec/spec-quota_wall.md",
