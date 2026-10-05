@@ -1,0 +1,18 @@
+# dsh-plugin-baidu —— 百度网盘（社区 MIT 实现）MCP 接入
+# 工具以 mcp__baidu__<tool> 形式出现（共 27 个；登录走 baidu_auth_qrcode 二维码 OAuth）。
+# 环境变量（可选，授权时必需）：BAIDU_APP_KEY / BAIDU_SECRET_KEY / BAIDU_REDIRECT_URI
+- insert:
+    - id: mcp-baidu
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: baidu
+        transport: stdio
+        command: 'C:\Users\欧阳宏俊\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\node\bin\node.exe'
+        args:
+          - 'C:\Users\欧阳宏俊\.dsh\mcp-servers\launch.mjs'
+          - 'baidu'
+        env:
+          BAIDU_APP_KEY: !!js (process.env.BAIDU_APP_KEY ?? '')
+          BAIDU_SECRET_KEY: !!js (process.env.BAIDU_SECRET_KEY ?? '')
+          BAIDU_REDIRECT_URI: !!js (process.env.BAIDU_REDIRECT_URI ?? 'oob')
+        toolCallTimeoutMs: 60000

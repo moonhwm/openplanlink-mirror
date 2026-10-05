@@ -1,0 +1,16 @@
+# dsh-plugin-supabase —— Supabase MCP 接入（只读）
+# 工具以 mcp__supabase__<tool> 形式出现（共 19 个）。
+# 必需环境变量：SUPABASE_ACCESS_TOKEN（PAT；缺失时该插件不注册工具，不影响 harness）
+- insert:
+    - id: mcp-supabase
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: supabase
+        transport: stdio
+        command: 'C:\Users\欧阳宏俊\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\node\bin\node.exe'
+        args:
+          - 'C:\Users\欧阳宏俊\.dsh\mcp-servers\launch.mjs'
+          - 'supabase'
+        env:
+          SUPABASE_ACCESS_TOKEN: !!js (process.env.SUPABASE_ACCESS_TOKEN ?? '')
+        toolCallTimeoutMs: 60000

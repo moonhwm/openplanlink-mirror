@@ -1,0 +1,17 @@
+{
+  "name": "dsh-plugin-supabase",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Supabase MCP 接入插件：注册 mcp__supabase__* 工具（19 个，只读模式）",
+  "type": "module",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "cordis.patch.yml"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

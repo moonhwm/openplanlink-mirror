@@ -1,0 +1,16 @@
+# dsh-plugin-neon —— Neon（Serverless Postgres）MCP 接入
+# 工具以 mcp__neon__<tool> 形式出现（共 20 个）。
+# 必需环境变量：NEON_API_KEY（缺失时该插件不注册工具，不影响 harness）
+- insert:
+    - id: mcp-neon
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: neon
+        transport: stdio
+        command: 'C:\Users\欧阳宏俊\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\node\bin\node.exe'
+        args:
+          - 'C:\Users\欧阳宏俊\.dsh\mcp-servers\launch.mjs'
+          - 'neon'
+        env:
+          NEON_API_KEY: !!js (process.env.NEON_API_KEY ?? '')
+        toolCallTimeoutMs: 60000

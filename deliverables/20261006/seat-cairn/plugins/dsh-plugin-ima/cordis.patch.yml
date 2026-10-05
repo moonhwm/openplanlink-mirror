@@ -1,0 +1,14 @@
+# dsh-plugin-ima —— IMA（腾讯 ima 知识库）MCP 接入
+# 工具以 mcp__ima__<tool> 形式出现（共 17 个）。
+# 凭据（可选）由 OS 环境变量提供：IMA_OPENAPI_APIKEY / IMA_OPENAPI_CLIENTID / IMA_API_KEY / IMA_CLIENT_ID
+- insert:
+    - id: mcp-ima
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: ima
+        transport: stdio
+        command: 'C:\Users\欧阳宏俊\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\node\bin\node.exe'
+        args:
+          - 'C:\Users\欧阳宏俊\.dsh\mcp-servers\launch.mjs'
+          - 'ima'
+        toolCallTimeoutMs: 60000

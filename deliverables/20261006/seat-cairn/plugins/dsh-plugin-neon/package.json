@@ -1,0 +1,17 @@
+{
+  "name": "dsh-plugin-neon",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Neon Serverless Postgres MCP 接入插件：注册 mcp__neon__* 工具（20 个）",
+  "type": "module",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "cordis.patch.yml"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

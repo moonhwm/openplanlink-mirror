@@ -1,0 +1,17 @@
+{
+  "name": "dsh-plugin-wps",
+  "version": "1.0.0",
+  "private": true,
+  "description": "WPS 多维表格 MCP 接入插件：注册 mcp__wps__* 工具（4 个）",
+  "type": "module",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "cordis.patch.yml"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
