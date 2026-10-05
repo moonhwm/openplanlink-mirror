@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:28:19.500Z",
+  "generated_at": "2026-10-05T19:29:51.146Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1848,
-  "merkle_root_sha3_512": "d4923481884d38757b57d00dca1e1fd8f802beaad709ff44e8017e0c6eadec45d443ab673a648c696e6d9992703d6771df9fa2393c591768e2274816dd0d0ee6",
-  "hmac_sha3_512": "ee025c9440d5fbd23695d294526d4a622944ef8ddb12175803c0bcb308fda207d33248191a6a4ce1b2d9cb870ac16f40b37decd43569478c4484ed4f8b9c479d",
+  "file_count": 1849,
+  "merkle_root_sha3_512": "af858cbe346c1df2ea9dc69fe70425f451784ee37993fa7b2c66e9bb3836d94a493300eafb7b1dfc4f7085d12cf09896741cd2f7e59d831a6c2a38b91c678242",
+  "hmac_sha3_512": "a55c63b07d9f9a4898e9b712d8315a824c7ff0f2bd7bc6d65f7fe00748119edc0a47a7facc3bcec6ee6220a0b61126a813a1ad46cbc0fe02150aacced253ecf1",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -858,6 +858,12 @@
       "leaf_sha3_512": "71357c98e88018652d2511cfbcdad3ff8a00535ae8efc12f74a73f477576425650b1a0d16032c41644617c9d7cba35bdc78bbea98a5e0160042e9b5312f90e07"
     },
     {
+      "path": "research/sdd_v08_merge_card_20261006.md",
+      "size": 3255,
+      "content_sha3_512": "2e533068ec2dbe3daba344756c0819be2a6cc29c319e4c9925c8c1b2e60509d16a039dd5481b8e2e8df73808e437dc38fcbfa4d9011fecea17549ad6fc507448",
+      "leaf_sha3_512": "f32cc1e108a31b8dbcafd49e664f2a71a5a40737fb1d84712a041e73c746b2d1112b2f31272111b6bdc0b5686ff0c9eff67494f2aa5ff90dfdffe698dd73571b"
+    },
+    {
       "path": "seats/huan16-kimi-seat/persona_seed_v0.md",
       "size": 4082,
       "content_sha3_512": "2b63690d40cccc8b8263e2c71d75f2361b4484650870f073c9feec6dd5df5f3b259bfb2c11646c2211e9b039cf3c9701eee86969fe255bb38f708e04ea100b2b",
@@ -943,9 +949,9 @@
     },
     {
       "path": "skills/EXPERIENCE.md",
-      "size": 10935,
-      "content_sha3_512": "81ec54bc0249182ad8121e1456ad564ef5f98c062253c5ab09af4da2d276a8985ebf433310dbe1c799a5f781d7933bb8a06fed4d8195620a7d6b535c3a37a61d",
-      "leaf_sha3_512": "c56b836a44e157714c03ff4c81577eca50706d198ad358c1ac39a9865bd713a0f0c7d79fb4848b63bd1eec1a1ed6799c477a584c7be9626aef24378e1d3808d0"
+      "size": 13797,
+      "content_sha3_512": "875ea126b3690b48e142e0913a173a5ea6e162fb2e328293057fcb4f1d43fbf11e71a1c3e20ee0e268d6592d5fdba07f354104a2475adc7bf5b79930750724e2",
+      "leaf_sha3_512": "b9ec6f0e7da221add708fe616040464a1d8bab1480dcb69e21e4920c4d0713a2dd6d206b5cea0863460b7e9d4009c38a05e397456ba359817defb5dfe0e06cd8"
     },
     {
       "path": "skills/README.md",
