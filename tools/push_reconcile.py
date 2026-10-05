@@ -54,6 +54,10 @@ def main():
     ap.add_argument("--repo", default=r"C:\Users\欧阳宏俊\openplanlink-mirror")
     ap.add_argument("--remotes", nargs="*", default=None)
     ap.add_argument("--apply", action="store_true", help="补推落后端（仅快进）")
+    ap.add_argument("--merge", action="store_true",
+                    help="分叉时以合并方式合流（force-free）；生成件冲突取远端版，随后由 push_gate 重签覆盖")
+    ap.add_argument("--generated", nargs="*", default=["attest-hmac-sha3-512.json"],
+                    help="可安全取远端版的生成型文件（--merge 时用于解冲突）")
     a = ap.parse_args()
 
     repo = pathlib.Path(a.repo)
@@ -98,8 +102,34 @@ def main():
         return 0
 
     if diverged:
-        print("★ 结论：存在分叉/落后远端：%s —— 本工具不擅自改史。" % "、".join(diverged))
-        print("  处置：运行 `python tools/push_gate.py`（fetch→rebase→重建树证→双推，禁 force）。")
+        print("★ 结论：存在分叉/落后远端：%s" % "、".join(diverged))
+        if a.merge:
+            base = "origin/main" if "origin" in remotes else "%s/main" % remotes[0]
+            print("  --merge：尝试以合并方式合流（base=%s，全程禁 force）" % base)
+            out3, err3, code3 = run(["git", "merge", "--no-edit", base], repo)
+            print("  merge 退出码=%d" % code3)
+            if code3 != 0:
+                st, _e, _c = run(["git", "status", "--porcelain"], repo)
+                conflicts = [l[3:].strip() for l in st.splitlines() if l[:2] in ("UU", "AA", "DD", "AU", "UA", "DU", "UD")]
+                print("  冲突文件：%s" % ("、".join(conflicts) or "（未识别）"))
+                resolved = []
+                for f in conflicts:
+                    if f in a.generated:
+                        run(["git", "checkout", "--theirs", f], repo)
+                        run(["git", "add", f], repo)
+                        resolved.append(f)
+                if resolved and len(resolved) == len(conflicts):
+                    run(["git", "-c", "user.name=reconcile-bot", "-c", "user.email=reconcile@a2a.local",
+                         "commit", "--no-edit"], repo)
+                    print("  生成件冲突已按远端版解决并提交：%s（随后由 push_gate 重签覆盖）" % "、".join(resolved))
+                else:
+                    run(["git", "merge", "--abort"], repo)
+                    print("  ★ 非生成件冲突，已中止合并；须人工处置（本工具不改史）")
+                    return 4
+        else:
+            print("  处置：`python tools/push_reconcile.py --merge --apply`（合并合流，force-free）")
+            print("        或 `python tools/push_gate.py`（fetch→rebase→重签→双推；遇生成件冲突会中止）。")
+            return 3
     if lagging:
         print("★ 结论：远端落后且可快进：%s" % "、".join(lagging))
         if not a.apply:
