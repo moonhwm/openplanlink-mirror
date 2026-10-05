@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """push_reconcile.py —— 双远端一致性诊断与安全修复（不使用 force）
 
@@ -19,10 +19,15 @@
 """
 import argparse
 import pathlib
+import socket
 import subprocess
 import sys
+from urllib.parse import urlparse
 
 sys.stdout.reconfigure(encoding="utf-8")
+
+# 代理回退：当 git 配置的 http(s).proxy 不可用时，远程操作自动改为直连
+GIT_EXTRA = []
 
 
 def run(args, cwd):
@@ -38,10 +43,26 @@ def local_head(repo):
 
 def remote_head(repo, remote):
     """实查远端真值（不依赖本地跟踪引用）。"""
-    out, err, code = run(["git", "ls-remote", remote, "refs/heads/main"], repo)
+    out, err, code = run(["git", *GIT_EXTRA, "ls-remote", remote, "refs/heads/main"], repo)
     if code != 0 or not out:
         return None, (err or "ls-remote 无输出")
     return out.split()[0], ""
+
+
+def proxy_state(repo):
+    """探测 git 配置的 http(s) 代理端口是否可连。返回 (配置值, 是否活)。"""
+    out, _err, _c = run(["git", "config", "--get", "http.proxy"], repo)
+    url = out.strip()
+    if not url:
+        return "", True
+    try:
+        u = urlparse(url if "://" in url else "http://" + url)
+        host = u.hostname or "127.0.0.1"
+        port = u.port or 80
+        with socket.create_connection((host, port), timeout=1.5):
+            return url, True
+    except OSError:
+        return url, False
 
 
 def is_ancestor(repo, maybe_ancestor, descendant):
@@ -58,12 +79,22 @@ def main():
                     help="分叉时以合并方式合流（force-free）；生成件冲突取远端版，随后由 push_gate 重签覆盖")
     ap.add_argument("--generated", nargs="*", default=["attest-hmac-sha3-512.json"],
                     help="可安全取远端版的生成型文件（--merge 时用于解冲突）")
+    ap.add_argument("--no-proxy-fallback", action="store_true",
+                    help="禁用代理回退（默认：检测到代理端口不可连时，远程操作自动直连）")
     a = ap.parse_args()
 
     repo = pathlib.Path(a.repo)
     if not (repo / ".git").exists():
         print("★ 非 git 仓库：%s" % repo)
         return 2
+
+    # 代理回退检测（只读探测；不改任何 git 配置）
+    proxy_url, alive = proxy_state(str(repo))
+    if proxy_url and not alive and not a.no_proxy_fallback:
+        GIT_EXTRA.extend(["-c", "http.proxy=", "-c", "https.proxy="])
+        print("★ 代理不可达：%s 端口无监听 → 本次远程操作**自动直连**（未改动 git 配置）" % proxy_url)
+    elif proxy_url:
+        print("★ 代理可用：%s" % proxy_url)
 
     head = local_head(repo)
     if not head:
@@ -129,7 +160,7 @@ def main():
             # 合并成功后：本地已含各远端历史 → 各端均为可快进，按 --apply 一并补推
             if a.apply:
                 for r in remotes:
-                    out4, err4, code4 = run(["git", "push", r, "HEAD:main"], repo)
+                    out4, err4, code4 = run(["git", *GIT_EXTRA, "push", r, "HEAD:main"], repo)
                     print("  %s 合并后补推 → %s" % (r, "OK" if code4 == 0 else "失败"))
                     if code4 != 0:
                         print("      stderr: %s" % (err4 or out4)[:300])
@@ -145,7 +176,7 @@ def main():
             print("  处置（未执行，默认只诊断）：`python tools/push_reconcile.py --apply`")
         else:
             for r in lagging:
-                out2, err2, code = run(["git", "push", r, "HEAD:main"], repo)
+                out2, err2, code = run(["git", *GIT_EXTRA, "push", r, "HEAD:main"], repo)
                 ok = code == 0
                 print("  %s 补推 → %s" % (r, "OK" if ok else "失败"))
                 if not ok:

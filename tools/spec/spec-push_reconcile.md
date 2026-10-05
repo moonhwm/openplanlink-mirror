@@ -1,4 +1,4 @@
-﻿# spec-push_reconcile
+# spec-push_reconcile
 
 ## 目的
 双远端一致性诊断与安全修复：定位「部分推送失败」造成的 origin / gitcode 不一致，并在**不使用 force** 的前提下补推落后端或合并合流。
@@ -13,6 +13,7 @@
 - 分叉且未加 `--merge` 时**不动手**，返回退出码 3 并给出两条 force-free 处置路径
 - `--merge` 仅对 `--generated` 清单内的文件取远端版解冲突；出现非生成件冲突即 `merge --abort` 并返回 4（不改史）
 - 默认只读
+- **代理回退**：开工即探测 `git config http.proxy` 所指主机端口（TCP 1.5s）；**不可连时**本工具所有远程操作（`ls-remote`／`push`）自动附加 `-c http.proxy= -c https.proxy=` 走直连，**且绝不改动 git 配置**；`--no-proxy-fallback` 可禁用。缘起：本机代理 `127.0.0.1:10081` 无监听、zodaccess 退出时直连 GitHub 仍可达，而不适用代理覆盖的 `push_gate` 必然 FAIL
 
 ## 失败模式
 - 非 git 仓库或无 HEAD → 退出码 2

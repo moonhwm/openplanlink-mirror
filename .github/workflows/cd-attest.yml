@@ -88,13 +88,17 @@ jobs:
           ok=0
           for attempt in 1 2 3; do
             echo "--- 发布尝试 $attempt ---"
+            # 【关键】构建步改动了工作树中**已被跟踪**的 STATUS.md / status/index.html；
+            # 若不先还原，git checkout 到 status 分支会以「本地改动会被覆盖」拒绝 →
+            # 该步骤会在 CI 中稳定失败（本席历次 failure 的真因）。生成件已在 /tmp/cdout 备份，可安全丢弃。
+            git checkout -q -f -- STATUS.md status/index.html 2>/dev/null || true
             if git ls-remote --exit-code --heads origin status >/dev/null 2>&1; then
-              # 显式 refspec 写入跟踪引用，不依赖 checkout 配置的 refspec
+              # 显式 refspec 写入跟踪引用，不依赖 checkout 配置的 refspec；-f 丢弃生成件改动
               git fetch origin refs/heads/status:refs/remotes/origin/status
-              git checkout -B status origin/status
+              git checkout -f -B status origin/status
               echo "基于既有 origin/status 追加（线性、force-free）"
             else
-              git checkout --orphan status
+              git checkout -f --orphan status
               git rm -rf --cached . >/dev/null 2>&1 || true
               echo "首次创建 status 分支（orphan）"
             fi
