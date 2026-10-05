@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T20:03:00.531Z",
+  "generated_at": "2026-10-05T20:06:11.142Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1865,
-  "merkle_root_sha3_512": "4db03650e9199eaec6ae182d27c3843314527ba4d3a43f0a29628529cbebc60ee703656b64a166a52bbeea5368a17287b3ca3fe48d287932ad1914146958785a",
-  "hmac_sha3_512": "6b324bd59505136b50c448a892a0885929a03c2b4d20c8692a2a4ca4497e34e513b9e9529c38a50a5bd2474e8d889c5d9f55280df4b1ff22f0ebc4c6c7a53de5",
+  "file_count": 1867,
+  "merkle_root_sha3_512": "95b6ea658d887cda6308dce225fefc9639487ace77cf1f1127a1dbf05aed93c8524f261ff56b0dffd0f7e3e0239c97ed2bfa5060b351f49b7d8da982b7d519e6",
+  "hmac_sha3_512": "9f0f0eb3185d4f2d1edf1d68b01f2be4a78af0dfc865c14bfd19721d36d0607f2b9a363b95e593b79ce6a256dfd1a8dfd22c89cd94f17ff51a3bc04ec4cc970e",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -49,9 +49,9 @@
     },
     {
       "path": ".github/workflows/cd-attest.yml",
-      "size": 6103,
-      "content_sha3_512": "3d37ed6b1c4b6d444c73e70ec2f5a821fcd4eba2f3dcb5da78b370449a97b9bdbe18c02b69df66aa373a269a167bf1dd2b30850b6ed26f69de92998d0906f1c9",
-      "leaf_sha3_512": "0ca4fbcf01492fb8f156a4e7b5543940613e229a8db6833e3b136a98c886864141b3dd8fe8caa84b6f273a17c77509f16c2d840c6e14d1be6de98d892f48dd1a"
+      "size": 6578,
+      "content_sha3_512": "025627296bf5719ff1e7fcfdb1ffdcdc6b154f9fe2b0396f891c0e8eb4b9afa32eeea3e29f0f1ae48baf654f5c4d033821f965ad4ef07d66b715caf9e3cc072c",
+      "leaf_sha3_512": "6b6d386f62b082fb422259882c063ddbf9216e6fa2c2551a86ea5292f39993d3ca1537abc68da83c2608f98f01e58fbc1a32de690df7d1e919e50f0cdf55b7d6"
     },
     {
       "path": ".github/workflows/ci-verify.yml",
@@ -472,6 +472,12 @@
       "size": 8772,
       "content_sha3_512": "feb10c40e36d31f1b8d162035578a3725397d4896c7d246ea9d6c467285a570e286c03e3c4eaf89fd8996b5ea512d6acd0b978efccaf0ff802e0bd171b427aca",
       "leaf_sha3_512": "864b4ac737930baa663d56a60099e86724c79a473a2c7f5701014af22b4a49c9dbd3841887d6010c36d16d21ab8c9f0b4166a446605959a39686565b8e45ed99"
+    },
+    {
+      "path": "deliverables/20261006/seat-cairn/exchange/共享副本写域冲突与stash吞件观察_DF-WRITE-20261006-CAIRN-01.otl",
+      "size": 4482,
+      "content_sha3_512": "745bc653a3c803f06e9c93eba1250caee949e5bd8ffbcfc0f4e9214bc2b20d4bdd5bb0c8819331f75d5ecb8115d390949f6791d40b9cb3d64ef3420715d29f27",
+      "leaf_sha3_512": "ce459c48d1b7af5a21107245c8e05a443d710f9059feeeeb77cb8ec65f3cc58606e5105c5698d5052a86406c6e4fd799dc3c1c57606f620a50016ef12c8730d1"
     },
     {
       "path": "deliverables/20261006/seat-cairn/exchange/华为云X实例算力榨取与排期设想v0.2_DF-HWX-20261006-CAIRN-02.otl",
@@ -1000,6 +1006,12 @@
       "size": 2826,
       "content_sha3_512": "22fc3cb4c1dbf9499f7c2df3e0c87abdeffba8d28a9b362975f2a9407dec8cc8a76c81eb6187d29da68ee8efe4ae5a04c268232f6ffcd86662fab176f93b076b",
       "leaf_sha3_512": "b92d996a53e1a0430c379a84c7829c859e1295a5146a59db83a848604d06f1f153ee65cd758c602f19e4af83735e97c851eeaa908ad527001bb520806a7df80d"
+    },
+    {
+      "path": "skills-experience/kimi-code-quantlab/2026-10-06-kimi-code-quantlab-skill-experience-v03.md",
+      "size": 2401,
+      "content_sha3_512": "392de06278a5a8b999385606b6775b8549a1b4eb5e0f55fc6474e5107afb24384884ff1d35dffae1bb7e9a13bfae5ee2afa590d2400c1811136c919a8953bf04",
+      "leaf_sha3_512": "102a3d44ba1b6e760028837a69331bdac01e978092f046a2bf1674e26e63f681eed699f5d41bc9d80e21f0242cf8e7511d02fdc43ceccd4bda06979fef1a2f26"
     },
     {
       "path": "skills-experience/kimi-code-quantlab/2026-10-06-kimi-code-quantlab-skill-experience.md",
@@ -10807,9 +10819,9 @@
     },
     {
       "path": "tools/push_reconcile.py",
-      "size": 7361,
-      "content_sha3_512": "8132b06db15c8c66f84dcb9a314f1d1117fc74081c6e07a1a50ee41e8761d6ac20714f3e51b7c35b9044a18a73c9a12e0f39d9d7bc933a07910032b591b0fbba",
-      "leaf_sha3_512": "8003c7cbcfc1d8338d0c9ff99e8d41fc39bbf2dc2907a2890dc60f8d77733e29606768aee9d90fd324969de59f338d8adfc8d75b0bf1b02d3b8d62341cac95d3"
+      "size": 8737,
+      "content_sha3_512": "77a2b0b8a6605ed6ff52739d77b8309e084ff135c7507a16ef732ac763be4c6ac7ac25c1a931f257814b18e26daf817017fae91daf807f650e5194798c360759",
+      "leaf_sha3_512": "0fa4d70f59fcbfdc8b1ceba9ff3bdf271183918a15f44ddb6b7976e4dc519897653f95c7eaf66b2e3caa20020a0e73858d703031bd3853172da684f738d5bf01"
     },
     {
       "path": "tools/quota_wall.py",
@@ -11017,9 +11029,9 @@
     },
     {
       "path": "tools/spec/spec-push_reconcile.md",
-      "size": 1550,
-      "content_sha3_512": "946a27426f07bfb14d65070e33bdcda47cb8559c8bd788242b5f48bc3ab5cda342b449dfe18c8d751350deb6f3ca7371c4802d28e6b3e5240ec9148a48aebdf3",
-      "leaf_sha3_512": "1ee3eac6b4b5f106ef389a4a44f826b0e6f4a6dc3a17bd6d7f570944f667f70e493d601e7e8edc4ecf0296c61120f3e953f6a6b8846f142a4c9a84a2dd412574"
+      "size": 1986,
+      "content_sha3_512": "03c1f4c4ce51b86cad8e0ca64de624c8139a4ce1f39cd6f1b0462e902e3f3683a7d442dd1b78bf46cf0c4dd74b510c5e615fdd670e5ea38ab4c433085ef1820d",
+      "leaf_sha3_512": "80a8d49787f8d3df2bf0973f6434cd99ced72a47c3ff820ec8af0b611cccde119fb99c6077fad522b6d20b6ec7d76773febdf7ac0ee517cc77d6a59283ccaf61"
     },
     {
       "path": "tools/spec/spec-quota_wall.md",
