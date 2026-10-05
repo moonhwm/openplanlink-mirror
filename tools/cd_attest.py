@@ -140,6 +140,7 @@ def main():
     }
 
     out = pathlib.Path(a.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     # 一页纸状态（供留痕审计 / 静态发布）
