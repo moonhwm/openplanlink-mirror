@@ -1,0 +1,86 @@
+{
+  "schema": "openplanlink.cloud-integration-status/1",
+  "observed_at_utc": "2026-10-05 19:01:30 UTC",
+  "providers": {
+    "wps": {
+      "configured": true,
+      "read_verified": true,
+      "tool_count": 37,
+      "document_metadata_version_observed": 49,
+      "text_block_count": 842,
+      "characters": 22358,
+      "native_import_verified": false,
+      "cloud_acl_history_verified": false
+    },
+    "supabase": {
+      "configured": true,
+      "oauth_verified": true,
+      "read_verified": true,
+      "projects": 2,
+      "public_tables": 36,
+      "transaction_read_only": "on",
+      "rls_repair_applied": false
+    },
+    "ima": {
+      "configured": true,
+      "read_verified": true,
+      "official_skill_version": "1.1.10",
+      "adapter_version": "0.1.0",
+      "tool_count": 5,
+      "knowledge_bases": 2,
+      "project_content_count": 3989,
+      "docx_paragraphs": 1214,
+      "encrypted_source_roundtrip": true
+    },
+    "neon": {
+      "configured": true,
+      "oauth_verified": false,
+      "project_read_verified": false,
+      "last_attempt": "oauth_callback_timeout"
+    },
+    "baidu": {
+      "configured": false,
+      "read_verified": false,
+      "last_attempt": "browser_request_timeout"
+    }
+  },
+  "a2a": {
+    "agent_card_http": 200,
+    "health_http": 200,
+    "own_node_reply_hmac_verified": true,
+    "rpc_id_matches": true,
+    "peer_routes_returning_queued": 5,
+    "peer_queue_receipts_signed": false,
+    "independent_peer_acknowledgements_verified": 0,
+    "process_started_or_modified": false
+  },
+  "monitoring": {
+    "automation_id": "openplanlink-a2a",
+    "kind": "heartbeat",
+    "status": "ACTIVE",
+    "interval_minutes": 5,
+    "notify_on_meaningful_change": true
+  },
+  "huawei_x_efficiency": {
+    "scope": "本轮助手发起并取得回执的云作业",
+    "verified_jobs": 0,
+    "instance_id": null,
+    "region": null,
+    "profile_reference": null,
+    "vcpu_count": null,
+    "cpu_utilization_percent": null,
+    "wall_time_seconds": null,
+    "throughput": null,
+    "queue_wait_seconds": null,
+    "cost": null,
+    "execution_receipt": null,
+    "measurement_status": "未实测；待实际云端实例与授权配置引用",
+    "not_inferred_from_local_benchmarks": true
+  },
+  "publication_before_new_planning": {
+    "previous_published_commit": "0210012188bdaedde1388f9ee0f0db420c908306",
+    "pr_url": "https://github.com/moonhwm/openplanlink-mirror/pull/3",
+    "previous_commit_gate_ci": "success"
+  },
+  "sensitive_originals_or_credentials_in_this_file": false
+}

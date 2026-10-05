@@ -12,4 +12,8 @@ Neon 的只读参数是 readonly=true，Supabase 使用 read_only=true。二者�
 
 代码外发仅包含自主实现与本规范；ima 官方原包安装在本机，未将其捆绑进公开仓库。重试产生新回执，保留旧失败证据。协作报告发布与其他席位签收分别记账，避免把目录复制或共享库活跃时间当作网络握手。
 
+本轮后续检测到已有 A2A 服务在线，读取 Agent Card 与健康状态后，使用既有技术席位发送汇总通告。本地节点的响应通过 HMAC 校验且请求 ID 一致；向五个合作席位路由的请求返回未签名的入队应答。此结果分别登记为本地节点通信通过和路由入队返回，尚不作为五个席位在线或共同体共识证明。
+
+已配置当前对话的定期核查，每 5 分钟执行有界检查，状态未变时保持安静，出现有意义变化或需用户处理的新事项时通知。此为定期检查机制，不是连续流式监控。华为云 X 使用效能已列入汇报验收，当前未取得实际云端作业回执，耗时、CPU 利用率、吞吐量与费用均未实测。
+
 参考：[Supabase 官方 MCP](https://supabase.com/docs/guides/ai-tools/mcp)、[ima 官方 Agent 接入](https://ima.qq.com/agent-interface)、[Neon 官方 MCP 更新](https://neon.com/blog/give-your-agent-neon-tools)。

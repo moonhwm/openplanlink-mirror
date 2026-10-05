@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T18:42:54.763Z",
+  "generated_at": "2026-10-05T19:04:51.173Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 856,
-  "merkle_root_sha3_512": "7656b02c9c3c32756ee623d16dbc58b3802bb99f22d3e00299e522250e29849a11328c368f4361e49966c664fd5f75c5ed37acb3942e3508d4dd96b1b22c7c9c",
-  "hmac_sha3_512": "70e15e0778489cb9a5066f10d1a6e72aa925cd0d6672bc88369d4c07c9143c4ddbbd1ed589129576f79d369b9004a4f375c74cc8aa424875703948fb9736700d",
+  "file_count": 857,
+  "merkle_root_sha3_512": "957e68a56173288a3689e5e87428dcdb1bbea7a3e47e45dbc1237eeaa1c913dffe06a9d8973cb9de086dbaa4c64fb43e16bd53192b64d6702c4aa9c020838735",
+  "hmac_sha3_512": "71c15f7e7a00999be9e10582078e357e1a5046c60c882bde81a6eaf6c42698329cd5caab4aafbf239e8bf3e9b5aa40d8d85898125cc3b3f9b17cf981dd2e0597",
   "files": [
     {
       "path": ".gitattributes",
@@ -397,9 +397,15 @@
     },
     {
       "path": "docs/cloud_connections_experience_20261006.md",
-      "size": 2233,
-      "content_sha3_512": "bc7f1b13065e8d3f13668406c26de614cb919b6322f4d8bf6d26f55f4bd5c7d6f1000cc7a8b529151e0944cdf8774be4298bb816bd318bcb19c1c56eb586b99e",
-      "leaf_sha3_512": "53ff727040405db4d2c513022f550bafc2e741143da74c1ebf4936008bbfbf7b8242e155908747ea2cfa1286c51743b4b7f4382d5525322a9df282e9300b62ef"
+      "size": 2994,
+      "content_sha3_512": "6db3572e8998f2bcdaaacccea78b2158941312520e6609eff8ab66113bab12908feb0197e5564e1a78c98e957305c5a81d0e6f76eb243d71897bfcfae3ded54a",
+      "leaf_sha3_512": "a1e47542f15a3d56609e4d2c2edbfcbe24b9e285f62c1401b75ad0dd9ac853cd98179921ac33e7ddf6a41de6cbdf82a303311018c754dc4f46e6a16f0fdc2227"
+    },
+    {
+      "path": "docs/cloud_connections_status_20261006.json",
+      "size": 2550,
+      "content_sha3_512": "5bd7da761660fda2e2efeebfa970318a606e1f41a27e2e7ccab2ac5e896bf0286ee544263584dacff28f7a726e21f4f8d0eb0e913776e2b730e5bafd03c9d409",
+      "leaf_sha3_512": "ac23dcada5369aad30bbe31def5b69d826004cb7715a1d31b085b90123537645f5194ed0cc19bc71ac5ffa7652a1c5105bda5414e2fbb5b1f08a83a4e432d28b"
     },
     {
       "path": "docs/persona/initial-functional-persona.json",
@@ -409,9 +415,9 @@
     },
     {
       "path": "docs/persona/initial-functional-persona.md",
-      "size": 1832,
-      "content_sha3_512": "922d66d985d4ecc20e84607ed66827fdcf856a533b4d1132d682921f6523f0e0ad3ec1f73371863a7812b811966c281a0a6391d004602bf1410c25bffca07cf8",
-      "leaf_sha3_512": "5fe5465bdd40f72183034e1c0de916eeb7daf7027792006db2ef3c76dc139f25b68a4fa55e98b1249489fd426d8a2eaa37b15e750f5e1846dd9c9341b1cf3824"
+      "size": 3459,
+      "content_sha3_512": "69df4bc10086edaabd84c7c0d2431fb55c4cfba7f049a6cc97422062aa61e1f8ba6e60f80a66bfe4633ac97aaded5609075257cb68f2bf5c5d6abb94e395a812",
+      "leaf_sha3_512": "9574a2e1dbfecf62a0d9f5b69db6dbdde7b065f176865fa0362e38f0e7b9113d6fe3837496d882618b320b0e8af1f4077277113c59bfbc0ec940d36e80a19be1"
     },
     {
       "path": "index.html",
@@ -4549,21 +4555,21 @@
     },
     {
       "path": "specs/011-cloud-reader-integration/spec.md",
-      "size": 3965,
-      "content_sha3_512": "3e110b2db0393597b6d0e04e2968d38dd386d8d0db3bb75991d230fe693d8c9830d04efb34e6fcd9d41b46e58bd2cfe65d568a3e4de287b83fc07b3ea006747e",
-      "leaf_sha3_512": "85972891c4b07005a7d8f3e9c0dcdec227f164e5691d309c9c0a7155b441a2c2a2beb16ec273e3e0853aacce92e34ef40bc314d6b8cd4b5836c1b2f941d5200a"
+      "size": 4582,
+      "content_sha3_512": "0dcda4bc80ad4578e3a7c3aaf9859c9dfff923d6df80356f302c1b4fc47f2b54cf805bcbeda42c6b8ffa17e4cdff5e560c204213a745bd3ef7f126fe2056b3b3",
+      "leaf_sha3_512": "116462b7cba0daa58c5fd752ed73e0a27d7f8df004c80e05a44de5d1a2710fdb290f59c408557ddcd7c86cc5fbfcd3fbc4fa58cf2f8b6d62c416955013306e9a"
     },
     {
       "path": "specs/011-cloud-reader-integration/tasks.md",
-      "size": 1388,
-      "content_sha3_512": "c9a9cb5de073b985bbc85bf71fa0d24cd708c9c368e6841d2b7cc1f1ed8ee63725b4e4efdbf83a663be6d516fbdea412a309b8cf3489519618ae6cbbad44585c",
-      "leaf_sha3_512": "19b327cf2d4107a00428ea85161b133144335ab14caf7da9a00213dbf1d16ceb2e8fce5ee6ddf67c808edbc305695157cf9ed282449fca85f39510fe665d4c45"
+      "size": 1478,
+      "content_sha3_512": "e80e2aafb014e5fbacf22a1b6463de37add1aa899e84a8102a34e4c77578c0d3edcefcf6e152fb9dc36f96172d6e134d373ecfcb695a87de8a121b9c9861eca8",
+      "leaf_sha3_512": "c05b3dbdd722405d0d7104a97d1ffc9553c1d30948fb87f1157619c6a3ce71e9cedc54aaa3cce55189695cb5ab95e10ccb603c36619adc7d398d86c986f15bf3"
     },
     {
       "path": "specs/011-cloud-reader-integration/verification.md",
-      "size": 2324,
-      "content_sha3_512": "2aa582dff261fd03780d9d96457e805c0a3d29db9ec289d87b10d704169fb663f31772b8548da14bcde434d51cb38fa07ca30fbca01c82b5e611f6a30d87ae42",
-      "leaf_sha3_512": "335243666a4e13947bf6a1a8fedf077585c486de7ba53b58ffacdcd63c98e64f59784fffa33f12d65856408598d5dcc64853e2df53d260f29d5a62b4fad49ce5"
+      "size": 2862,
+      "content_sha3_512": "1203cf0fe80617afc053634233ae15b1153b0c096c8a5bd96bb5518276d970a8ec724f4efdd5620babd4932789146e1014a474fe9fbb2b12cc2964957fd66477",
+      "leaf_sha3_512": "838c3830938f675d5f82b683aa8e541b1ae9bbb81614847374398d7daea5130b205c336e41dfdcf032e7554db73f9ef314782f52ecd1ed840015a811389a87df"
     },
     {
       "path": "tests/test_cos_upload_config.py",
