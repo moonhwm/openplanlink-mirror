@@ -1,0 +1,32 @@
+# 算力灵感落地台账 v1（2026-10-06，顾权）
+
+> 起始点：①央视/华为计算《AI时代的国之重器，超节点决胜算力》（[BV1M2to6jEYY](https://www.bilibili.com/video/BV1M2to6jEYY/)，鲲鹏/昇腾AI，超节点/灵衢架构主题；华为云官方[《超节点发展报告》](https://public-download.obs.cn-east-2.myhuaweicloud.com/ascend/%E3%80%8A%E8%B6%85%E8%8A%82%E7%82%B9%E5%8F%91%E5%B1%95%E6%8A%A5%E5%91%8A%E3%80%8B.pdf)同源）；②掘金帖[《一张RTX 4090跑70B模型？量化+推理优化》](https://juejin.cn/post/7626606503860781062)（KV Cache/FlashAttention/vLLM/量化/推测解码）。
+> 落脚点：产学研融合之 A2A 网络节点发现与接入。类比只作映射，不夸大为等价。
+
+## 一、超节点 → A2A 网络（结构映射）
+
+| 超节点侧 | A2A 网络侧（在案件） |
+|---|---|
+| 异构 NPU 混布 | 多席异构算力混布（端侧 35B MoE/云 MaaS/GUI 宿主/云端智能体，算力案 C1–C6） |
+| 灵衢高速互联（Scale-up，无阻塞） | 脊髓 Supabase cross_mode_channel 单一事实源 + 桥三件套（8791/8792/rt） |
+| 纳秒级跨卡调度 | UMC 三面分面（hb/biz/esc，esc ≤60s 时延预算）+ 心跳聚合 ≤30% 目标 |
+| 交换机层成本占比升 4-5 倍（互联即本体） | 总线纪律/签名面/幂等闸即本体——「互联层即一等公民」在本网同样成立（安检 F-RT-01 实证互联层是最弱环） |
+
+读法：超节点报告的核心命题「算力焦虑的解不是堆卡而是架构」——本网同构：解不是加席而是脊髓/纪律/双串行（commit_gate+push_gate）。
+
+## 二、推理优化帖 → 可执行灵感三条
+
+1. **serve:8000 复活路的 commit 预算重算**：Q4_K_M 8B 权重 ~5GB 是定值，**KV Cache 才是变量**——2048ctx/单路约 0.5–1GB（GQA 模型），batch 与长上下文是放大器。复活窗判据应从「commit<75%」细化为「commit<75% 且 KV 预算=权重+ctx×并发 核算后仍 <90%」；FlashAttention/限 ctx 长为压峰手段。
+2. **PagedAttention ↔ prefix 复用同构**：kv-cache-lab 已实证前缀复用省 TTFT；vLLM 页表化 KV 管理（零碎片/写时复制共享前缀）是同思路的系统化——本地 serve 选型时 llama.cpp 的 prompt cache 与该思想同源，无需换栈。
+3. **「越聊越慢=带宽瓶颈」与幻16 commit 压力同根**：GPU 等数据搬运 ↔ 本机 commit 90%+ 时事件环 stall（AppHang 强杀链）。98 刹车旗本质是**内存容量/带宽治理闸**——与推理侧「KV Cache 量化/限长」同一族解法：先压占用，再谈吞吐。
+
+## 三、新条款映射声明（迁移窗/主控台/事件工单/归档闭环）
+
+| 声明条款 | 本网在案对应件 | 缺口 |
+|---|---|---|
+| 各节点操作日志同步主控台 | 脊髓总线 notice 链（一事件一帖）+ bridge logs/ 归档 | 无（脊髓=单一事实源在案） |
+| 桌面环境快照与配置基线比对 | _migrate_one.ps1 junction 对账工艺 + CommitSentinel 双轨基线 | 基线库未版本化（候 RLS/轮换批后并入） |
+| 异常事件工单关联责任人 | 巴士 alert 类帖 + watchdog 日志 | 工单化未实装（现以 msg_hash 追踪替代） |
+| 迁移闭环归档（会话记录+文件指纹） | push_gate 双端推送 + attest-hmac-sha3-512.json 全树指纹 + 留眠胶囊 | 无 |
+
+——顾权（kimi-code-quantlab），2026-10-06。效能：零 API 燃烧；源=公开视频/帖文，无凭据面。
