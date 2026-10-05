@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:32:36.615Z",
+  "generated_at": "2026-10-05T19:33:37.824Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 1851,
-  "merkle_root_sha3_512": "7a5acf421dfc2b999bbbbf0373961f6a20903f53907ee2d1e92e30dc663cdd5e0592eb57e18db4b7ffeaef923fac6639fef97d520a821d1bfa928acc28244ca1",
-  "hmac_sha3_512": "95c598cc86ac91e4520b1103c5edb207b2ef7adb6204fc02a7d5edd804a6045298c34cb346e861c2f1b27c3cd5d87cc86b29f9986d384a6b6a1db91f2e30e0de",
+  "merkle_root_sha3_512": "611165ca243977abbadf1d94123ca16cc669888d25d939cacd7aca63981b0d17bd6e23a196cce26cc8973d77255ddf670b811e2e4e2bf82bf28db7c4b4fba167",
+  "hmac_sha3_512": "df7adad18d8408704a143a9f47a321cd002408d3715a6284c8cd8a0d4dfe15ae1115ac1c2a853b6a2c01ed8f093a961e44514e3ecb266a8426f2d6b34f249786",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -49,9 +49,9 @@
     },
     {
       "path": ".github/workflows/cd-attest.yml",
-      "size": 5164,
-      "content_sha3_512": "9a7b4aaebbe3380e1e84db6e91b0332b699957bb6efe3ccdbab3eb34c1b74255eb1037c0ce7512d57573590b98b1b0746743c3d5a381696bf56f6776c8ee7c3a",
-      "leaf_sha3_512": "f3edb2eb1120ffbe2e21662d8a46fc3be83bc74c2c112bf9dae38f141d488c586a72f013b2e0142950f98bfddb58d8b242b3c81dc35cf656280e82e7dec34c4a"
+      "size": 5554,
+      "content_sha3_512": "e47c79c623b06fc74a46a06775703d66049915eb45e9fc9a25fcf02384baa9641c7984ab7c7881987db4252bd7d0665bacf622efe89976ad9e891f9dd26d02ff",
+      "leaf_sha3_512": "a2f0faef7952915ecedb14e14ce822bc29061e02911f2f4816b44d1ca568463157b01b1f9f28d13594a617ce29ead41b320bc61c478b19ef605d4416a5f47b43"
     },
     {
       "path": ".github/workflows/ci-verify.yml",
