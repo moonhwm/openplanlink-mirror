@@ -50,3 +50,46 @@
 ---
 登记：huan16-kimi-seat · 2026-10-06
 敏感面自检：本件不含 sk- 密钥串、MAC 地址、预签名 URL（网卡标识一律「已登记」）；全部经验指回 HANDSHAKE 批次号，可复核。
+
+## E-08 GitHub 上传阻断的真实判据：git 与 gh 是两条独立凭据链（conf=high）
+
+- 场景：DF-TOOL-2026-1005-01 曾据「gh 未装／身份缺失／凭据缺失」判上传阻断，推论为不可推送。
+- 实测：`gh auth status` 报 not logged into any GitHub hosts、`GH_TOKEN`／`GITHUB_TOKEN` 均未设，但 `GIT_TERMINAL_PROMPT=0 GCM_INTERACTIVE=never git push --dry-run origin main` 仍取到远端 ref 广告并回 `! [rejected] main -> main (fetch first)`。
+- 教训：非快进拒绝本身即证明**认证已通过**（GitHub 的 receive-pack 广告要求认证）；git 侧凭据由 `credential.helper=manager`（GCM／Windows 凭据管理器）承载，与 gh 的 OAuth 令牌互不依赖。故「gh 未登录」不能作为「不能推送」的判据。正确探针是关掉交互提示的 `--dry-run` 推送——不关提示会弹 GUI 阻塞自动化流程。
+- 复用条件：凡诊断上传阻断，先跑该 dry-run 探针，再看 gh 状态。
+
+## E-09 MSYS2 参数路径转换把 rev:path 变成假阴性（conf=high）
+
+- `git show origin/main:.gitignore` 在 Git Bash 下被改写为 `origin\main;.gitignore`，报 `fatal: Not a valid object name`，极易被读成「上游没有这个文件」。
+- 修法：`export MSYS_NO_PATHCONV=1`（或 `MSYS2_ARG_CONV_EXCL='*'`）后同一命令 rc=0 且正常输出内容。
+- 教训：凡参数含 `:` 且形如 `rev:path` 的 git 命令，在 Git Bash 下必须关闭路径转换。此类失败产出的是**假阴性结论**而非显式报错，属最危险的一类工具缺陷；本轮已致一次错误结论（误判上游无 .gitignore）并当场自纠。
+
+## E-10 上传门禁脚本的双副本分裂与红线冲突（conf=high）
+
+- `tools/push_gate.py` 硬编码 REPO 常量为用户主目录下的 openplanlink-mirror，而 Qoder 工作区副本位于 `Documents/Qoder/<日期>/<会话>/openplanlink-mirror`；二者是**各自独立的工作副本**，本轮实测 HEAD 分别为 a8b8d67 与 4155f97，各自落后上游。
+- 后果：工作区副本里的改动不会被 push_gate 带走；反之 `~/.push_gate.jsonl` 的成功记录（本轮见 5 条 origin push OK）也**不能**证明工作区副本已同步。两处都必须单独核验。
+- 红线冲突：该脚本含 `git push gitcode main --force` 与「工作区脏则 `git stash push -u`」两步，分别触「禁 force push」与「共享环境禁裸 stash」。本席不执行该脚本，改为手工等价的 fetch → `merge --ff-only` → 暂存 → 重签 → verify → push（全程无 force）。
+- 复用条件：任何自动化推送脚本上机前，先读其 REPO 常量、远端清单、是否 force、是否自动 stash 四项。
+
+## E-11 sha3-tree 重签的对象是 Git 索引而非工作树（conf=high）
+
+- `tools/sha3-tree.mjs` 的 `build`／`verify` 均经 `indexRecords(root)` 取 **stage-0 索引 blob**，并显式排除清单自身；`verify` 还要求清单**已入索引**，否则抛 `manifest is not staged`。
+- 故唯一正确次序：暂存全部内容件 → `build` → 暂存 `attest-hmac-sha3-512.json` → `verify` → 提交。先提交再重签、或重签后不暂存清单，都会产出与索引不符的清单。
+- 必须从仓库根运行（否则抛 `run from the Git repository root`）；密钥经 `OPL_A2A_HMAC_KEY_B64`（恰 64 字节的规范 base64）与 `OPL_A2A_HMAC_KEY_ID` 注入环境变量，密钥值不入命令行、不落盘、不回显。
+- 附带收益：索引 blob 已由 `core.autocrlf=true` 归一为 LF，故重签对象不含行尾噪声，规避了「工作树 CRLF 致哈希全变」的已知陷阱。
+
+## E-12 av-media-ops v0.2.0：失败关闭优先于能力宣称（conf=high）
+
+- 本轮 `scripts/av_intake.py` 增至 1287 行、新增 `scripts/test_av_intake.py` 955 行，引入 AV1／H265 本地转码门禁：仅接受固定本地磁盘上的普通文件，拒绝 URL、FFmpeg 伪协议、UNC、Windows 设备名／ADS、符号链接与重解析路径；输入先复制到私有有界快照，输出只写入已打开句柄；AV1 依次选 `libsvtav1`／`libaom-av1`，H265 只接受 `libx265`，编码器缺失即失败关闭；不覆盖既有输出、不自动安装 FFmpeg。
+- 教训：宿主 FFmpeg 不在 PATH 时，**不得**把「设计已实现」写成「编码已成功」。SKILL.md 明写「仅完成失败关闭与单元验证，不宣称真实编码成功」，且能力一律以 `codecs` 实时探针为准，不沿用 v0.1.0 的历史在场结论。
+- 出域前三项先行：CodeRabbit 只读复审 + `secrun scan` 六件 rc=0 零命中 + 敏感面正则复核（IPv4／端口／MAC／密钥形态／主机／Windows 路径六类），缺一不发布。
+
+## E-13 并发推送下「落后 N 提交」是瞬时读数（conf=high）
+
+- 本轮从首次勘查到执行 `fetch` 的数分钟内，落后数由 131 跳到 303（`6d47e7b..dc4105f`），并新增并行席分支 `seat/qoder-505f061a-sync-20261006`。
+- 教训：多席并发推送下，落后数与远端 HEAD 都不可写入结论后沿用。整合前必须重新 `fetch` 并以 `git rev-list --left-right --count HEAD...origin/main` 当场重测；推送后以 `git ls-remote` 读回的远端 HEAD 为准绳核验落地，**不以本地 ref 为凭**（本地 ref 只证明我方意图，不证明对方已收）。
+- 快进前置条件核验法：`git merge --ff-only` 在工作区有未提交改动时能否成功，本身即「上游是否触碰本地脏件」的经验判据——本轮成功即证明上游 303 提交未触碰本席三个脏件，无需逐件 diff。
+
+---
+登记：守藏(DF-DOC-01)（Qoder 工作区，git 身份即提交署名，可复核）· 2026-10-06
+敏感面自检：本节不含密钥、令牌、MAC 地址、预签名 URL、真实主机名与用户目录字面值；E-08~E-13 全部为本轮实测，每条附可复核命令。

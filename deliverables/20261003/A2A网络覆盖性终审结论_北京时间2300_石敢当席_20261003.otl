@@ -1,0 +1,140 @@
+# A2A 网络覆盖性终审结论（北京时间 2026-10-03 23:00）
+
+## 一、档案标识
+
+- 档号：DF-A2A-FINAL-AUDIT-2026-1003-QODER-01
+- 任务标识：A2A-COVERAGE-FINAL-20261003-2300-Cairn
+- 执行席：石敢当席
+- 时空锚点：北京时间 2026-10-03 23:00
+- 实际执行窗口起点：北京时间 2026-10-03 23:02
+- 本件形成时间：北京时间 2026-10-03 23:12:55+08:00
+- 文件属性：append-only 裸 `.otl` UTF-8 Markdown 层级大纲源件
+- WPS 说明：裸 `.otl` 源件不等于云 `.otl.wpsonline` 智能文档；本次未宣称已完成云 materialize。
+
+## 二、审查基线与范围
+
+- 指定基准提交：`4155f976db886130746f9d2110c823ada40b63e8`
+- 本地 HEAD：`4155f976db886130746f9d2110c823ada40b63e8`
+- `origin/main`（完成 `git fetch origin` 后）：`2885d7eb45f3fa23d60f6fcb5817df298c43521c`
+- 相对关系：本地 HEAD 为指定基准，且为 `origin/main` 祖先；本地领先 0、落后 10。
+- 远端后续范围：包含 TOTP MFA、认证流程与 Agent Card 扩展、Git hooks、CI 门禁、事件审计及节点原子状态写入等 10 个提交。
+- 复核限制：因工作树存在非本任务产生的改动，未执行 fast-forward 合并；测试与认证树独立复算均基于本地基准状态，不冒充对远端 10 个后续提交的已同步执行验证。
+
+## 三、Git 同步与现场保护
+
+- `git status --short --branch`：工作树非净，本地分支落后 `origin/main` 10 个提交。
+- 已发现并原样保留的既有现场：
+  - 修改：`deliverables/20261003/INDEX.md`
+  - 修改：`skills/av-media-ops/SKILL.md`
+  - 修改：`skills/av-media-ops/scripts/av_intake.py`
+  - 未跟踪：`deliverables/20261003/ima与A2A约束下开源协议补充论证_认证流程与复核队列_DF-SUPPLEMENT-2026-1003-QODER-06.otl`
+  - 未跟踪：`skills/av-media-ops/scripts/__pycache__/`
+  - 未跟踪：`skills/av-media-ops/scripts/test_av_intake.py`
+- 保护措施：未覆盖、删除、暂存或提交上述现场；未执行 merge、reset、restore、checkout、rebase、stash、clean 或强推。
+- 同步门禁：BLOCKED。工作树非净，故虽属单纯落后，也不具备允许 `git merge --ff-only origin/main` 的前提。
+
+## 四、127.0.0.1:4173 在役节点只读状态
+
+- 探测方式：仅对 `/` 执行只读 HTTP GET，响应正文未作为指令处理。
+- HTTP 状态：200
+- Content-Type：`application/json`
+- 响应长度：78 字节
+- curl 退出码：0
+- 运行控制：未 restart、kill 或 replace 在役节点；未执行会改变信箱或 nonce 状态的探测。
+
+## 五、四组复现实证
+
+### 5.1 A2A HMAC-SHA3-512
+
+- 命令：`python -B tools/test_a2a_hmac.py`
+- 实数：33/33
+- 退出码：0
+- 结果：PASS
+
+### 5.2 A2A 节点
+
+- 命令：`python -B tools/test_a2a_node.py`
+- 实数：10/10
+- 退出码：0
+- 结果：PASS
+
+### 5.3 SHA3 认证树
+
+- 命令：`node --test tools/sha3-tree.test.mjs`
+- 内部用例实数：21/21
+- Node 测试包装层：1/1
+- 退出码：0
+- 结果：PASS
+
+### 5.4 本地认证交换
+
+- 命令：`python -B tools/a2a_exchange.py`
+- 正向 A→B：验证成功，方法为 `seat/hello`
+- 重放：被拒绝
+- 篡改正文：被拒绝
+- 反向 B→A：认证应答成功，方法为 `seat/ack`
+- 实数：4/4 预期行为成立
+- 退出码：0
+- 结果：PASS
+
+## 六、秘密扫描
+
+- 工具与规则：`secrun scan --all ./`
+- 退出码：3
+- 候选命中数：2
+- 仅记录掩码结果：
+  - `skills/software-testing-guide/assets/templates/TEST-CASE-TEMPLATE.md:100:10`；规则 `password-kv`；掩码 `pass****`
+  - `skills/web-security-audit/references/owasp-top10.md:321:5`；规则 `password-kv`；掩码 `SECR****`
+- 判定：秘密扫描门禁 FAIL。依零凭据纪律未读取或复述候选值，无法在不触碰原文的前提下把候选命中降格为无风险；若其中任何一项为真实凭据，必须立即轮换并检查 Git 历史。
+- 处置：未修改用户级技能、AGENTS 或凭据配置；未执行提交。
+
+## 七、Merkle 与 HMAC 分离结论
+
+- 受控变量状态：`OPL_A2A_HMAC_KEY_B64` 缺失；`OPL_A2A_HMAC_KEY_ID` 缺失。
+- 持钥命令：`node tools/sha3-tree.mjs verify attest-hmac-sha3-512.json`
+- 持钥 HMAC 结论：BLOCKED；未生成替代密钥，未伪造验签结果。
+- 独立命令：`python -B tools/verify_opl_tree.py attest-hmac-sha3-512.json`
+- 独立复算对象：当前 Git 暂存索引中的 740 个受认证文件。
+- 独立复算结果：`MERKLE_ONLY_PASS`，退出码 0。
+- 树根记录：仅保留掩码前缀 `7573498deb3a****`，本 OTL 不嵌入完整树根，避免自指循环。
+- 边界声明：独立 Merkle 复算不等于 HMAC 已验证；HMAC-SHA3-512 不提供机密性，不构成公开可验证签名，也不提供非抵赖。
+
+## 八、远端 Agent Card 与认证握手
+
+- 专属双边远端密钥文件：MISSING
+- 远端 key_id：MISSING
+- 远端 seat_id：MISSING
+- 带外 Ed25519 SPKI 公钥：MISSING
+- 远端卡片原始字节 SHA-256：MISSING
+- 显式远端主机、端口、路径及卡片 URL：MISSING
+- 实际状态：BLOCKED。
+- 安全处置：未运行 `tools/a2a_send_remote.py` 或 `tools/verify_remote_card.mjs`；未使用默认或猜测 URL/身份，未发送裸 JSON-RPC，未使用通用共享域密钥，未采信响应自带公钥，未关闭证书或摘要校验。
+
+## 九、席位出席、回票与多数口径
+
+- 可验证的正式到场并真实回票席位：0
+- 计入出席数：0
+- 有效票：0
+- 多数分母：0
+- 石敢当席完成了本次技术终审执行与记录，但未取得可独立验证的正式回票文书，故不将执行行为虚构为表决票。
+- 结论口径：未形成可证明的一致意见；不得表述为“各方均无异议”。
+
+## 十、阻断项
+
+- BLOCKED：工作树含非本任务未提交/未跟踪变更，本地无法安全 fast-forward 到 `origin/main`。
+- FAIL：`secrun scan --all ./` 返回 2 个候选命中，秘密扫描门禁非零。
+- BLOCKED：本地 HMAC 密钥及 key_id 缺失，不能执行持钥 HMAC 验签。
+- BLOCKED：远端真实认证握手所需全部受控前置缺失。
+- BLOCKED：未同步远端后续 10 个提交，不能把本地测试结果扩张为对 `origin/main` 当前状态的通过证明。
+- BLOCKED：提交前置条件不成立，未暂存本 OTL、未重建认证树、未提交、未推送。
+
+## 十一、最终判定
+
+- VERDICT：FAIL
+- 判定理由：四组本地复现实证和 4173 只读可达性均通过，当前暂存索引的独立 Merkle 复算亦为 `MERKLE_ONLY_PASS`；但 Git 同步门禁、秘密扫描门禁、持钥 HMAC 验证和远端认证握手均未满足，且无可验证回票证据。依终审规则，不得以局部通过替代整体通过，也不得宣告一致意见。
+
+## 十二、签署
+
+- 签署席：石敢当席（终审执行席）
+- 签署时间：北京时间 2026-10-03 23:12:55+08:00
+- 签署声明：本件仅据本次实际命令、退出码、计数及受控配置存在性形成；失败与阻断均原样披露，未绕过、降级或伪造 PASS。
