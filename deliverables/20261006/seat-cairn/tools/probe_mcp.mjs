@@ -25,7 +25,7 @@ function probe(s) {
       try { child.kill(); } catch {}
       resolve(Object.assign(result, extra));
     };
-    const timer = setTimeout(() => done({ error: 'timeout(8s)', stderr: err.slice(0, 300) }), 8000);
+    const timer = setTimeout(() => done({ error: 'timeout(15s)', stderr: err.slice(0, 300) }), 15000);
     child.stdout.on('data', (b) => {
       out += b.toString('utf8');
       let idx;
