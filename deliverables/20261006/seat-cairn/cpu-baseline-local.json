@@ -1,0 +1,15 @@
+{
+  "measured_at": "2026-10-06T03:20:42+08:00",
+  "host": "LAPTOP-CHOCER02",
+  "algorithm": "sha3-512 / 1 MiB blocks",
+  "logical_cores": 20,
+  "physical_cores": null,
+  "workers": 16,
+  "seconds_per_worker": 3.0,
+  "wall_seconds": 3.434,
+  "single_process_mbps": 129.09,
+  "aggregate_mbps": 2024.26,
+  "parallel_efficiency": 0.9801,
+  "segment_cv": 0.0261,
+  "note": "同一脚本在同构实例复跑即可对比；并行效率<0.9 提示存在降频/争抢/带宽瓶颈"
+}
