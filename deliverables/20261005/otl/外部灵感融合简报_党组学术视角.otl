@@ -1,0 +1,160 @@
+# 外部灵感融合简报（党组学术视角）
+
+- 档号：OTL-20261005-01
+- 日期：2026-10-05
+- 拟稿席：Moon（ZCode 席外部灵感考据工作席）
+- 体例：党组学术技术成员视角；范围限外部灵感吸收与 OpenPlanLink A2A 治理网络落地映射
+- 依据：本 ask 交付素材（八库研读、六条 B 站视频元数据、SkillOpt/代季峰考据）；本会话对本地路径做了复核（opensrc 八库俱在、opensrc/digital-oracle 含 SKILL.md/scripts/tests 实测确认）
+
+## 引言：甄别尺度
+
+本轮考据覆盖克隆八库、UI 动效四库、华为生态三库、六条 B 站灵感与一项方法论考据（SkillOpt），全部以"可核验、可对账、可落地"为尺度。党组层面立三条纪律：一，一切灵感素材按【披露】/【媒体】两档标注，媒体源未经记录源印证不得作证据；二，一切落地方案须对应可验收交付物并列明承接席；三，一切高消耗接入先过燃烧-产出定式与审计局对账。凡素材截断、未执行、未观看之处，一律如实声明，绝不代拟。
+
+## 一、克隆八库总表
+
+| 库 | 状态 | 许可证 | 定性 | 关键证据 |
+|---|---|---|---|---|
+| canvas-ui | done | MIT + Commons Clause | 画布特效组件库，"效果叠加层"，不提供布局/数据结构 | README.md:44,55,59,97,189；src/lib/Liquid/；Liquid.tsx:39-44 |
+| arwes | done | MIT（已停维护但可用） | 未来科幻 UI 框架，动效编排层 | README.md:30,49；types.ts:26,37-43,56-72 |
+| cann-recipes-infer | done | Apache-2.0（cann 官方 @2225cae） | 昇腾 LLM 推理配方库 | README.md:24-37,168-170 |
+| MiroFish | exists | ——（zipball 无 .git） | 群体智能预测引擎（camel-ai/OASIS），同源判定已执行 | gitcode.com/GitHub_Trending/mi/MiroFish.git @ aa6abf3e |
+| tgrep | done | MIT v1.0.11（microsoft/tgrep） | trigram 索引 grep（定性纠正，非"树检索算法"） | pi-extension.ts |
+| Star-Office-UI | done | 代码 MIT/美术资产 LimeZu 禁商用 | 像素风 AI 办公室实时看板，A2A 像素看板最直接骨架 | README.md:78,83,158-168,173,189；app.py:38-41,953,1156,1290 |
+| huashu-design | done | 2026-05 起 MIT | 跨 agent 设计 skill，原型生产工具 | README.md:27,109-115,273；assets/animations.jsx:1-27,30-56 |
+| penecho | done | AGPL-3.0 + 商业双授权 | MCP 画布座席 v1.3.5（非华为系，gitcode 仅镜像域） | docs/canvas-agent-deepseek-harness-spec.md |
+
+## 二、UI 动效线（对接 HarmonyOS-7 像素看板与 HF Spaces 前端选型）
+
+### 2.1 四库定性：各安其位，不越界
+
+**Star-Office-UI**（代码 MIT/美术资产 LimeZu 禁商用）：像素风 AI 办公室实时看板。6 状态→3 区域映射（README.md:78,158-168）；join key 多 Agent 协作 15 秒推送（README.md:173,189）；Flask 2103 行 30+ 路由（app.py /agent-push:1156、/set_state:1290、/join-agent:953），JSON 文件落盘（app.py:38-41）；前端零框架（layout.js 133 行数据驱动布局、game.js 1034 行 spritesheet、index.html 4889 行单文件）。判定：A2A 像素看板的最直接骨架。
+
+**arwes**（MIT，⚠️ 已停维护但可用，README.md:30）：25 包 Vanilla+React18 双系。核心是树状四态动画状态机（AnimatorState types.ts:26；AnimatorNode 父子树 types.ts:56-72）与六种编排含 stagger（types.ts:37-43），9 种参数化 SVG 科幻边框（frames/）、文字解密动画 animateTextDecipher（text/）、背景与音效（bgs/bleeps）；不支持 React strict mode/RSC（README.md:49）。判定：与"层层展开"语义同构度最高的动效编排层。
+
+**canvas-ui**（MIT+Commons Clause）：35 组件以实验性 HTML-in-canvas API 把实时 DOM 作纹理（README.md:44），六框架×WebGL/WebGPU 双构建（README.md:55,59），shadcn registry 复制式分发+MCP ready；每组件 7 变体（src/lib/Liquid/ 目录），不支持时降级 GPU overlay（Liquid.tsx:39-44），HTML-in-canvas 需 Chrome flag（README.md:189）。判定：定位"效果叠加层"，不提供布局/数据结构。
+
+**huashu-design**（2026-05 起 MIT）：跨 agent 设计 skill 而非运行时库，一句话产出原型/deck/动画/信息图（README.md:109-115）；Stage+Sprite 时间轴引擎（assets/animations.jsx:1-27，expoOut/spring/anticipation 缓动 :30-56）+品牌资产协议+三方向顾问+反 AI slop；核心链路 100% 本地零 key（README.md:273）。判定："生成前端/看板原型"的生产工具。
+
+### 2.2 HarmonyOS-7 A2A 可核验 GUI IM 对接
+
+以 Star-Office-UI 为骨架：五席位写进 layout.js:17-23 areas；总线 hb.* 心跳映射 15 秒 POST /agent-push（app.py:1156）；esc.* 事件映射 /set_state（app.py:1290）。可核验做法：在 set_state/agent-push 处理器同步 append esc_trace JSONL，使画面状态与 audit_daily_report 台账可对账——画面即台账，台账即画面。HUD 采用 arwes vanilla（科幻边框+解密进场+音效）。公开部署必须替换 LimeZu 素材（禁商用条款）。
+
+### 2.3 HF Spaces 前端选型
+
+首选 Star-Office-UI 静态前端：零 npm 构建、多 Agent join/推送协议现成、云能力可裁剪（README.md:83）；后端用 Docker Space 跑轻量 Flask/FastAPI。排除与保留：canvas-ui 不宜作 Spaces 骨架——HTML-in-canvas 依赖 Chrome flag 且绑 Cloudflare Workers，iframe 访客环境不可控；arwes 作静态 HUD 增强层须接受停维护；huashu-design 用作产出 Spaces 前端候选的 skill。
+
+### 2.4 "层级对话"可行性判定（BV11mNA6vEJX）
+
+BV11mNA6vEJX，Explore_Official《打破线性聊天，让复杂知识层层展开》：层级对话=点击术语→子/关联/分支卡片无限钻取成知识树+3D 思维宇宙。元数据为真实 WebFetch 返回（页面+api.bilibili.com code=0 双源一致：播放 175,923/点赞 21,871/时长 60s/发布 2026-07-11）。【视频画面未观看】
+
+判定：canvas-ui/arwes 均不能单独承载——canvas-ui 是 DOM 之上的效果层（README.md:97），arwes 有与展开语义同构的 stagger 状态机但无布局/连线引擎。方案：自建节点树+边表数据层与 DAG/力导向布局；动效层用 arwes vanilla 或 canvas-ui vanilla 组件；原型产出用 huashu-design。
+
+### 2.5 诚实记录
+
+本轮 B 站元数据为真实 WebFetch 返回（双源一致）；此前一轮输出中出现过的"webReader 结果"未经真实执行、不作证据。四库研读全程只读，未运行任何库的 build/test（未安装依赖）——此为如实边界而非省略。
+
+## 三、华为生态线（CANN 推理配方接入 A2A 异构底座）
+
+### 3.1 cann-recipes-infer：自持昇腾第 5 兜底通道部署手册
+
+cann 官方 @2225cae，Apache-2.0。昇腾 LLM 推理配方库：models/ 原生优化 + integration/ vLLM/SGLang 双路线；GLM-5.3-Flash 950DT HiF8、Kimi K3 950PR/DT 0day、DeepSeek-V4.1-Flash 950PR 单卡 FP8-FP4 均为最新动态实锤（README.md:24-37）；单卡 MoE offload 三件套含 19-22.5 tok/s 实测门槛与 40 位提交号固定校验（README.md:168-170）。
+
+定性：火山/百炼/MaaS 云 API 通道之外的"自持昇腾"第 5 兜底通道部署手册。GLM-5.3-Flash/K3 配方与本会话引擎、K3 席位通道-底座同构——换底座不换模型，撞墙码 1308/1310 之外多一条物理底座退路。
+
+### 3.2 Agent 资产移植与零额度验证档
+
+库内 .agents/skills/ 16 个 model-infer-*（量化/图模式/KV Cache/性能剖析等）+ analyzer/implementer/reviewer 三 subagent，init-agent.sh 支持 claude 路径——建议立为 ZCode 侧"昇腾推理运维"技能线。CANNLab 一站式平台（浏览器即用）作撞墙窗口的零额度验证档，产出对接审计局。
+
+### 3.3 MiroFish 同源判定（已执行）
+
+opensrc/MiroFish/MiroFish-main（zipball 无 .git）与既有 opensrc/mirofish-gitcode（gitcode.com/GitHub_Trending/mi/MiroFish.git @ aa6abf3e，2026-07-22）同源同版——sha256 表面 8/8 DIFF 纯系 CRLF，diff --strip-trailing-cr 后 README/backend/static/scripts 逐字节一致；唯一差异为 zipball 侧本地扫描残留 .mimosa（非上游内容）。所用命令（git remote/log、sha256sum、diff --strip-trailing-cr、file）均当场执行并如实引用输出。
+
+### 3.4 MiroFish 能力面与接入门槛
+
+群体智能预测引擎（盛大孵化，引擎基于 camel-ai/OASIS）：GraphRAG 建图→双平台模拟→ReportAgent 五步 workflow；依赖 OpenAI 兼容 LLM API（推荐 dashscope qwen-plus——与 a2a-bridge/.env 的 DASHSCOPE 凭据模式同构，可直接燃百炼额度）+ Zep Cloud；官方自警示高消耗（<40 轮起步）。党组判断：若接入须按燃烧-产出定式立项，候选场景 red_blue_drill 沙盘预演、舆情/决策推演。B 站演示视频仅取 README 元数据，未观看。
+
+### 3.5 tgrep 定性纠正与总线映射
+
+定性纠正：tgrep 实为 trigram 索引 grep（client/server，microsoft/tgrep，MIT v1.0.11，已集成 GitHub Copilot CLI），非此前所述"树检索算法"，亦无知识图谱语义。正确映射：esc.trace/四台账/八域 JSONL 的毫秒级正则检索层（17/18 组合胜 ripgrep，--json 流可接对账管道）；其 agent 集成器 scripts/agent 原生支持 codex,pi 两种目标（pi-extension.ts），与本席 pi-orchestrator@zcode 同名生态可对接。
+
+### 3.6 penecho：A2A 网络可视化座席候选
+
+手绘画布+AI 的 MCP 画布座席（v1.3.5，AGPL-3.0+商业双授权；非华为系，gitcode 仅镜像域）。本地 HTTPS MCP（3922/13922/23922 + stdio 转发，Codex TOML 配置示例在库）+ Cloud MCP 双通道，画布级授权，1.3.5 支持 AI/Agent/MCP 并发编辑；docs/canvas-agent-deepseek-harness-spec.md 提供与 DeepSeek Harness 的集成规格，推荐模型表含 glm-5.3-flash 与 Kimi K3。候选用途：总线拓扑、esc.trace 流、红蓝演练五层防御图。
+
+## 四、灵感考据线
+
+### 4.1 SkillOpt × 技能五规范
+
+微软 Research（页面署名 2026-10-03，arXiv:2605.23904，MIT 开源，GitHub 约 18.0k stars，pip install skillopt）——把可复用自然语言技能当"可训练参数"做文本空间优化：冻结底座 agent 与权重，只优化技能文本；产物单文件 best_skill.md（典型 300–2,000 tokens，无额外推理调用）。
+
+四循环：Rollout（并行经验批回放：消息/工具调用/验证器反馈/任务元数据/终分）→ Reflect（批间不对称聚合：失败重加权 3×、成功 1×）→ Edit（受限增/删/替换="文本学习率"，默认 lr=4；消融示移除 lr 使 SearchQA/Spreadsheet/LiveMath 三基准 -2.5/-1.8/-4.0pp）→ Gate（验证门：验证集无提升即拒收更新）。工程件：拒改缓存 buffer（防旧错误复发）、slow update、meta skill（防优化器漂移）、concurrent rollouts 并行、worker 只回传分数/verdict/失败切片（低带宽分片思想）。迁移力：跨模型 +15.2pp（GPT-5.4 技能→GPT-5.4-nano LiveMathBench）、跨 harness +31.8pp（Codex 训练→Claude Code 执行）、自优化器 +10.4pp。
+
+与技能五规范对照：✅可压缩（单文件 300–2k tokens）；✅热插拔（frozen agent 零重训、drop-in 替换）；❌自动下载依赖（产出物零依赖机制，不涉依赖解析）；△指针化映射（meta skill/记忆层有索引复用雏形、无指针机制）；△分布式调度（并行 rollout+低带宽回传是分片思想，非跨机调度框架）。
+
+党组判断：SkillOpt 管"技能内容如何自进化"，五规范管"技能如何部署调度"，正交互补。建议 A2A 技能库引入"验证门+文本学习率+拒改缓存"为技能迭代纪律。
+
+### 4.2 群鸟涌现 × 集群行为
+
+BV1PquM6WEPP《群鸟算法的魔术，涌现，以及不可预测》@科技3D视界（72.9万粉），2026-08-08，9:10，33万播放/1.6万赞，"数学实验室"合集 3/5。简介原句："涌现是指由简单个体群集所构成的复杂行为，它不可预测，且不可逆。生命本身就是涌现行为"。【视频画面未观看】
+
+A2A 映射：总线多席位局部规则交互可涌现未设计集群行为——治理不能靠局部规则静态保证，须审计对账+红蓝演练持续探测；"不可逆"对应 esc.trace 双段式留痕的必要性。
+
+### 4.3 数字先知 × 技能库复评（补充录入）
+
+BV1pcd8B8EaH《因为这个AI数字先知，中本聪点赞关注了我》@Komako的工坊（2.2万粉，自称前 Codeforces 红名），2026-04-16，12.7万播放/1.7万赞/2.3万收藏；金融宏观趋势预测 AI Skill（oracle.komako.me + github.com/komako-workshop/digital-oracle），示例问题：世界大战概率/黄金/AI 泡沫。【视频画面未观看】
+
+交叉核实：本仓 opensrc/digital-oracle 目录存在（本会话 ls 复核实测，含 SKILL.md/scripts/tests），与视频开源地址同名对应（是否同一 upstream 未做 commit 级核验）。视频即该 skill 的理念宣讲，可直接纳入技能库复评。
+
+### 4.4 超级预测 × MHD 预演
+
+BV13E8B6zEEW《我做了个AI，帮你像「超级预测者」一样思考》@Komako的工坊，2026-08-22，12.8万播放；专家一手观点数据库+AI 检索（deeply.dev），讲泰特洛克"超级预测者"与复眼、达利欧 1980 教训、黄峥《测不准的爱情》、28 岁 Sam Altman 拆解比特币十角度；支持一键配置为 skill 装进自己的 Agent。【视频画面未观看】
+
+A2A 映射（本 ask 命名配对为"超级预测×MHD预演"）：董事会决策引入"观点库+基准率+多视角复眼"校验技能；观点库台账与 append-only 纪律同构。
+
+### 4.5 MISAKA DAG × ERE 引擎
+
+BV1xYar6CEoG《介绍MISAKA Agent》@萤火Luciole（3.8万粉），2026-10-02，1.5万播放/1032弹幕；开源 github.com/Luciole-Studio/Misaka-Agent；DAG+症候阅读的人文社科多专家 Agent：交课题后自主行动、现象学还原、拆解谱系与子课题、长周期专家管理、主 Agent 调用专家、多方法论并行、文献考辩/症候挖掘/文本细读/理论沙箱模拟/历史反事实推演。【视频画面未观看】
+
+ERE 引擎映射：专家管理=席位生命周期、方法论并行=多通道燃烧、症候挖掘=审计局深读、反事实推演=红蓝演练的文科版。
+
+### 4.6 柯西金 × 董事会治理
+
+BV1nY9aBbEoW《苏联经济改革史："商品经济"的联盟·01【离不开的柯西金】》@萤火Luciole，文案方文翁，2026-05-03，26:58，4.8万播放/2256赞；合集 02《当计划遇上利润》。「仅作历史人文科普」。【视频画面未观看】
+
+A2A 董事会治理历史参照：计划体制引入商品经济/利润激励 = 纯计划配额（额度墙管理）vs 激励定价（燃烧-产出定式）的制度选择；历史教训 = 激励改革必须配套审计纪律，防"一放就乱、一收就死"。
+
+### 4.7 Zotero × 知识库缺口（素材截断，如实记录）
+
+本线在上游素材传输中于 S3"代季峰人物定位"处截断，具体落定内容缺失。存录已核验残篇：URL 解码即「代季峰」（百科词条 ID 61773701 吻合），「戴季峰」为同音异写；百科页面 403 未直取。定位：清华电子工程系副教授/博导，CV→Agentic AI 学者——2009/2014 清华自动化本博（师从周杰），2014-2019 MSRA 视觉组首席研究员/研究经理，2019-2022 商汤执行研究总监，2022 回清华；代表作 R-FCN（三大目标检测元模型之一）（素材于此截断于"、D"，后文无从征引）。
+
+本席检视：本会话技能名册检视未见 Zotero 相关节能，知识库确存人物/学者档案缺口——Zotero 方向待下轮补考，本简报不代拟方案。
+
+## 五、落地优先级
+
+**P1（本周可承接，素材与落点俱备）：**
+1. HarmonyOS-7 像素看板对接——Star-Office-UI 骨架 + set_state/agent-push 同步 append esc_trace JSONL 对账（承接席：Moon 骨架与对账落点、砚 CodeArts 侧 GUI 构建、workbuddy-hy4 L3 桥通道）。
+2. 昇腾推理运维技能线——cann-recipes-infer 16 个 model-infer-* + 三 subagent 移植立线（承接席：K3 火山阵验证、Moon 技能线落库）。
+3. 技能迭代纪律——SkillOpt"验证门+文本学习率+拒改缓存"写入技能治理（承接席：Moon；审计局备查）。
+
+**P2（两周内）：**
+4. tgrep 检索层接入 esc.trace/四台账对账管道（承接席：Moon）。
+5. HF Spaces 前端原型——huashu-design 产出候选 + Star-Office-UI 静态前端（承接席：砚+Moon）。
+6. penecho 可视化座席评估——总线拓扑/esc.trace 流/五层防御图三用例（承接席：星枢三站展示、Moon 集成规格）。
+7. digital-oracle 技能库复评（承接席：Moon）。
+
+**P3（按燃烧-产出定式立项后启动）：**
+8. MiroFish 接入——高消耗（<40 轮起步），先立项后燃烧，候选 red_blue_drill 沙盘/舆情推演（承接席：K3 燃烧组织、审计局对账）。
+9. 层级对话自研——节点树+边表+DAG/力导向布局，arwes/canvas-ui 动效层（承接席：砚+Moon）。
+10. MHD 预演/反事实推演文科化（MISAKA 映射）（承接席：Moon）。
+11. Zotero 知识库缺口——待补考（承接席：待定）。
+
+## 六、纪律与边界声明
+
+1. **视频边界**：本简报全部六条 B 站视频（BV11mNA6vEJX、BV1PquM6WEPP、BV1pcd8B8EaH、BV13E8B6zEEW、BV1xYar6CEoG、BV1nY9aBbEoW）【视频画面未观看】，仅取页面元数据（标题/简介/UP主）与网检补充。
+2. **元数据核验**：BV11mNA6vEJX 为真实 WebFetch 返回（页面+api.bilibili.com code=0 双源一致：播放 175,923/点赞 21,871/时长 60s/发布 2026-07-11）；此前一轮输出中出现过的"webReader 结果"未经真实执行、不作证据。
+3. **库研读边界**：八库研读全程只读，未运行任何库的 build/test（未安装依赖），此为如实边界而非省略；同源判定命令（git remote/log、sha256sum、diff --strip-trailing-cr、file）均当场执行并如实引用输出，所有证据以文件路径落定。
+4. **素材截断**：S3 代季峰条目截断于"代表作 R-FCN…、D"；上游指令提及 CSDN 链接，但本次传输素材中未见 CSDN URL（疑在截断段），无从保留不存在之链接。
+5. **密钥自检**：本简报不含任何明文密钥/令牌；凭据仍唯一存于 a2a-bridge/.env 与环境变量（本简报撰写后已当场 grep 复检）。
+6. **产出边界**：本简报为本轮唯一产出物；八库研读期间未改动任何仓库文件。
+
+（完）

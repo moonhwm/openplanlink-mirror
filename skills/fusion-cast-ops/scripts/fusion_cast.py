@@ -3,7 +3,7 @@
 """fusion-cast-ops · 整合熔铸元技能核心脚本 v1.2.1（纯标准库，零凭证）
 四段循环：萃(extract)→排(deposit)→铸(cast)→验(register+collide+hashgate+audit)。
 子命令：
-  extract  --qa <qa.jsonl> --out <card.json>        萃取卡生成（原话透传+conf分级+md5+top3_wrong）
+  extract  --qa <qa.jsonl> --out <card.json>        萃取卡生成（原话透传+conf分级+摘要+top3_wrong）
   deposit  --card <card.json> --registry <reg.jsonl> --home <域>   沉淀入册（归宿唯一+写前验链）
   register --name <名> --desc "<描述>" --registry-desc <descs.jsonl>  描述入册（写 desc_md5；重名拒）
   collide  --desc "<新描述>" --registry-desc <descs.jsonl> [--threshold 0.3]  C4 注册测撞（≥阈值打回，出 top-3）
@@ -12,15 +12,58 @@
   audit    --skill-dir <dir>                          B 四检闸可机检子集（frontmatter/指针/自指/凭据嗅探）
   --smoke                                           自检（含负断言；只测 happy path 视为无效）
 纪律：一切输入文件缺失即报错点名路径（禁静默吞空）；账本路径一律 --registry 显式指定无默认；
+路径闸：一切外部输入路径（CLI 参数、SKILL.md 内提取的引用指针）必须经 _safe_join 以
+BASE=本脚本所在目录锚定并 resolve 后校验居内，越界即 raise ValueError('path escape blocked')；
+落盘一律走 _atomic_write（mkstemp 临时件+os.replace，杜绝半写与路径拼接写）；
 异常一律非零退出；smoke 临时目录建在本脚本同级并 finally 清理（不入 /tmp）。
 """
 import argparse, hashlib, json, os, re, shutil, subprocess, sys, tempfile, time
+from pathlib import Path
 
 GENESIS = "0" * 16
+BASE = Path(__file__).resolve().parent  # 路径闸锚点：外部输入路径须居本脚本目录之内
 
 
-def md5s(s):
-    return hashlib.md5(s.encode("utf-8")).hexdigest()
+def _safe_join(base, *parts):
+    """路径安全聚合（穿越闸）：锚定 base 后拼入外部段并整体 resolve，
+    校验结果仍居 base 之内（normcase + 目录分隔符前缀比对，杜绝同名前缀兄弟目录误放行），
+    越界即 raise ValueError('path escape blocked')。统一替换裸 os.path.join 与字符串拼接。"""
+    b = Path(base).resolve()
+    p = Path(b, *parts).resolve()
+    bs = os.path.normcase(str(b))
+    ps = os.path.normcase(str(p))
+    if ps != bs and not ps.startswith(bs + os.path.sep):
+        raise ValueError("path escape blocked")
+    return str(p)
+
+
+def _atomic_write(path, data):
+    """原子落盘：mkstemp 临时件建在目标同目录（随机名，不含任何用户输入），写满后
+    os.replace 到目标路径——既防半写，也令"写模式打开用户可控路径"这一构造不复存在。"""
+    fd, tmp = tempfile.mkstemp(dir=os.path.dirname(path) or str(BASE), suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(data)
+        os.replace(tmp, path)
+    except Exception:
+        try:
+            os.unlink(tmp)
+        except OSError:
+            pass
+        raise
+
+
+def _append_line(path, data):
+    """受控追加：路径经 _safe_join 校验后以追加模式落一行（调用方保证 data 以换行收尾）。"""
+    with open(path, "a", encoding="utf-8") as f:
+        f.write(data)
+
+
+def sha256s(s):
+    """内容摘要。Mimosa 弱加密整改：md5 → SHA-256。
+    注意：账本字段名 lhash 与 *_md5（card_md5/desc_md5/qa_md5）为既有 schema 契约
+    （见 SKILL.md），字段名不变，摘要值自本次整改起为 SHA-256 十六进制。"""
+    return hashlib.sha256(s.encode("utf-8")).hexdigest()
 
 
 def tokens(text):
@@ -66,7 +109,7 @@ def chain_verify(rows, p):
             sys.exit(f"FAIL: {p} 第 {i + 1} 行缺 lhash——链结构残缺疑篡改，停工上报（禁静默跳过）")
         h = r.pop("lhash")
         canon = json.dumps(r, sort_keys=True, ensure_ascii=False)
-        if md5s(prev + canon)[:16] != h:
+        if sha256s(prev + canon)[:16] != h:
             sys.exit(f"FAIL: {p} 哈希链断裂于 {r.get('type', '?')}——登记台被篡改，停工上报")
         r["lhash"] = h
         prev = h
@@ -78,12 +121,9 @@ def append_jsonl(p, row):
     prev = rows[-1]["lhash"] if rows else GENESIS
     row["ts"] = time.strftime("%Y-%m-%dT%H:%M:%S%z")
     canon = json.dumps(row, sort_keys=True, ensure_ascii=False)
-    row["lhash"] = md5s(prev + canon)[:16]
-    tmp = p + ".tmp"
-    with open(tmp, "w", encoding="utf-8") as f:
-        for r in rows + [row]:
-            f.write(json.dumps(r, ensure_ascii=False) + "\n")
-    os.replace(tmp, p)
+    row["lhash"] = sha256s(prev + canon)[:16]
+    body = "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows + [row])
+    _atomic_write(p, body)  # 原子整写：临时件+replace 取代旧 p+".tmp" 拼接路径
     return row["lhash"]
 
 
@@ -91,8 +131,10 @@ def append_jsonl(p, row):
 def cmd_extract(a):
     """从问答日志萃取卡片。qa.jsonl 每行 {"q":...,"a":...,"conf":"实证|估算|假设"}。
     铁律：原话透传（禁摘要改写）；conf 必填且 ∈ {实证,估算,假设}；每次必含一条对 Agent 本体问答。"""
-    must_exist(a.qa, "问答日志")
-    rows = load_jsonl(a.qa)
+    qa = _safe_join(BASE, a.qa)
+    out = _safe_join(BASE, a.out)
+    must_exist(qa, "问答日志")
+    rows = load_jsonl(qa)
     if not rows:
         sys.exit("FAIL: 空问答日志，无物可萃")
     for i, r in enumerate(rows):
@@ -106,38 +148,39 @@ def cmd_extract(a):
     card = {
         "type": "extract_card",
         "n_qa": len(rows),
-        "qa_md5": md5s(open(a.qa, encoding="utf-8").read()),
+        "qa_md5": sha256s(open(qa, encoding="utf-8").read()),
         "conf_dist": {c: sum(1 for r in rows if r["conf"] == c) for c in ("实证", "估算", "假设")},
         "top3_wrong": [{"q": r["q"], "a": r["a"], "why": r.get("why", "")} for r in wrong],
         "claims": [{"q": r["q"], "a": r["a"], "conf": r["conf"]} for r in rows],
     }
-    card["card_md5"] = md5s(json.dumps(card, sort_keys=True, ensure_ascii=False))
-    with open(a.out, "w", encoding="utf-8") as f:
-        json.dump(card, f, ensure_ascii=False, indent=1)
-    print(f"extract ok: {len(rows)} 条 → {a.out} card_md5={card['card_md5'][:12]} "
+    card["card_md5"] = sha256s(json.dumps(card, sort_keys=True, ensure_ascii=False))
+    _atomic_write(out, json.dumps(card, ensure_ascii=False, indent=1) + "\n")
+    print(f"extract ok: {len(rows)} 条 → {out} card_md5={card['card_md5'][:12]} "
           f"conf={card['conf_dist']} wrong={len(card['top3_wrong'])}")
 
 
 # ---------- 排 ----------
 def cmd_deposit(a):
     """沉淀入册：归宿域唯一（同 card_md5 重复入册=幂等跳过；同卡异归宿=拒绝）；写前验链。"""
-    must_exist(a.card, "萃取卡")
+    card_p = _safe_join(BASE, a.card)
+    reg_p = _safe_join(BASE, a.registry)
+    must_exist(card_p, "萃取卡")
     try:
-        card = json.load(open(a.card, encoding="utf-8"))
+        card = json.load(open(card_p, encoding="utf-8"))
     except json.JSONDecodeError as e:
-        sys.exit(f"FAIL: 萃取卡 JSON 坏: {a.card}（{e}）——先重跑 extract 产卡")
+        sys.exit(f"FAIL: 萃取卡 JSON 坏: {card_p}（{e}）——先重跑 extract 产卡")
     if card.get("type") != "extract_card":
         sys.exit("FAIL: 非萃取卡，拒绝入册（沉淀只认 extract 产物）")
-    rows = load_jsonl(a.registry)
-    chain_verify(rows, a.registry)
+    rows = load_jsonl(reg_p)
+    chain_verify(rows, reg_p)
     for r in rows:
         if r.get("card_md5") == card.get("card_md5"):
             if r.get("home") == a.home:
                 print(f"deposit 幂等: card={card['card_md5'][:12]} 已在域 {a.home}，跳过")
                 return
             sys.exit(f"FAIL: 归宿冲突——卡 {card['card_md5'][:12]} 已属 {r.get('home')}，拒绝再入 {a.home}（正交检）")
-    h = append_jsonl(a.registry, {"type": "deposit", "card_md5": card["card_md5"], "home": a.home,
-                                  "n_claims": card.get("n_qa")})
+    h = append_jsonl(reg_p, {"type": "deposit", "card_md5": card["card_md5"], "home": a.home,
+                             "n_claims": card.get("n_qa")})
     print(f"deposit ok: 域={a.home} 卡={card['card_md5'][:12]} lhash={h}")
 
 
@@ -146,23 +189,24 @@ def cmd_register(a):
     """描述入册：写 {name, desc, desc_md5}；重名拒。入册前先跑 collide 是调用方纪律（段4 顺序：collide→register）。"""
     if not a.name or not a.desc.strip():
         sys.exit("FAIL: name/desc 不能为空")
-    rows = load_jsonl(a.registry_desc) if os.path.exists(a.registry_desc) else []
+    rd = _safe_join(BASE, a.registry_desc)
+    rows = load_jsonl(rd) if os.path.exists(rd) else []
     if any(r.get("name") == a.name for r in rows):
         sys.exit(f"FAIL: 重名 {a.name}——改名或先走 hashgate 核查在册件")
-    with open(a.registry_desc, "a", encoding="utf-8") as f:
-        f.write(json.dumps({"name": a.name, "desc": a.desc, "desc_md5": md5s(a.desc)},
-                           ensure_ascii=False) + "\n")
-    print(f"register ok: {a.name} desc_md5={md5s(a.desc)[:12]} → {a.registry_desc}")
+    _append_line(rd, json.dumps({"name": a.name, "desc": a.desc, "desc_md5": sha256s(a.desc)},
+                                ensure_ascii=False) + "\n")
+    print(f"register ok: {a.name} desc_md5={sha256s(a.desc)[:12]} → {rd}")
 
 
 # ---------- 验：C4 测撞 ----------
 def cmd_collide(a):
     """C4 注册即测撞：新 description vs 注册表全量，Jaccard≥threshold 打回（默认 0.3——
     标定依据：同文=1.0、低撞面≈0 的取值中点偏上，0.2-0.4 可调）；C6 出 top-3 近邻供澄清。"""
-    must_exist(a.registry_desc, "注册表描述")
+    rd = _safe_join(BASE, a.registry_desc)
+    must_exist(rd, "注册表描述")
     if not (0.05 <= a.threshold <= 0.95):
         sys.exit(f"FAIL: --threshold={a.threshold} 越界（合法域 [0.05,0.95]）——C4 闸禁被参数整体绕过")
-    descs = load_jsonl(a.registry_desc)
+    descs = load_jsonl(rd)
     if not descs:
         sys.exit("FAIL: 注册表描述为空——测撞无基线，拒绝放行（禁静默）")
     t = tokens(a.desc)
@@ -179,17 +223,18 @@ def cmd_collide(a):
 
 # ---------- 验：C2 哈希闸 ----------
 def cmd_hashgate(a):
-    """C2 description 入哈希闸：在册 md5(desc) 与现 desc 比对，不一致=名实漂移；重名即拒。"""
-    must_exist(a.registry_desc, "注册表描述")
-    rows = load_jsonl(a.registry_desc)
+    """C2 description 入哈希闸：在册摘要与现 desc 比对，不一致=名实漂移；重名即拒。"""
+    rd = _safe_join(BASE, a.registry_desc)
+    must_exist(rd, "注册表描述")
+    rows = load_jsonl(rd)
     names = [r.get("name") for r in rows]
     if len(names) != len(set(names)):
         sys.exit("FAIL: 注册表重名——台账先修，哈希闸拒在脏表上判决")
     descs = {d.get("name"): d for d in rows}
     if a.name not in descs:
         sys.exit(f"FAIL: 注册表无 {a.name}——先注册（register）再过闸（装过≠在册）")
-    want = descs[a.name].get("desc_md5") or md5s(descs[a.name].get("desc", ""))
-    got = md5s(a.desc)
+    want = descs[a.name].get("desc_md5") or sha256s(descs[a.name].get("desc", ""))
+    got = sha256s(a.desc)
     if got != want:
         print(f"HASHGATE_FAIL: {a.name} 描述漂移 got={got[:12]} want={want[:12]}")
         sys.exit(4)
@@ -200,8 +245,9 @@ def cmd_hashgate(a):
 def cmd_cast(a):
     """C8/C9 轮铸裁定：判官 verdict 重算（不采信自述多数），奇数多数决：
     better 多数=KEEP / worse 多数=REVERT / 否则=DRAW；margin 按多数方票内 slight 计数（KEEP/REVERT 对称）。"""
-    must_exist(a.verdicts, "判官票")
-    vs = load_jsonl(a.verdicts)
+    vd = _safe_join(BASE, a.verdicts)
+    must_exist(vd, "判官票")
+    vs = load_jsonl(vd)
     if len(vs) < 3 or len(vs) % 2 == 0:
         sys.exit(f"FAIL: 判官票数须为奇数且 ≥3（实收 {len(vs)}）——奇数多数决")
     if not re.fullmatch(r"\d+\.\d+\.\d+", a.version or ""):
@@ -232,9 +278,8 @@ def cmd_cast(a):
            "margin": margin, "votes": {"better": b, "worse": w, "same": votes.count("same")},
            "judges": [v.get("judge") for v in vs]}
     rec["rollback_to"] = a.prev if decision == "REVERT" else None
-    out = a.out or f"cast_{a.version}.json"
-    with open(out, "w", encoding="utf-8") as f:
-        json.dump(rec, f, ensure_ascii=False, indent=1)
+    out = _safe_join(BASE, a.out or f"cast_{a.version}.json")
+    _atomic_write(out, json.dumps(rec, ensure_ascii=False, indent=1) + "\n")
     print(f"cast ok: {decision}/{margin} votes={rec['votes']} version={a.version} "
           f"rollback_to={rec['rollback_to']} → {out}")
 
@@ -263,8 +308,8 @@ def extract_description(fm):
 def cmd_audit(a):
     """可机检项：①frontmatter description ≤1024 且非空（含块标量写法）②自指频度 ③references 指针可达
     ④凭据嗅探。语义层（偏差度量/保真判读）归人工+判官，本命令不冒充。"""
-    d = a.skill_dir
-    sk = os.path.join(d, "SKILL.md")
+    d = _safe_join(BASE, a.skill_dir)
+    sk = _safe_join(d, "SKILL.md")
     if not os.path.exists(sk):
         sys.exit("FAIL: SKILL.md 缺失")
     t = open(sk, encoding="utf-8").read()
@@ -278,7 +323,11 @@ def cmd_audit(a):
             fails.append(f"description 长度 {len(desc)} 越界(0,1024]")
     for ref in re.findall(r'\(([^)]+\.md)\)|references/([\w.-]+)', t):
         ref = ref[0] or ref[1]
-        rp = ref if os.path.isabs(ref) else os.path.join(d, ref)
+        try:
+            rp = _safe_join(BASE, ref) if os.path.isabs(ref) else _safe_join(d, ref)
+        except ValueError:
+            fails.append(f"指针越界: {ref}")  # SKILL.md 内容提取的引用逃出锚定域——fail-closed 记为失败
+            continue
         if not os.path.exists(rp):
             fails.append(f"指针断裂: {ref}")
     name_m = re.search(r"name:\s*(\S+)", t)
@@ -289,7 +338,7 @@ def cmd_audit(a):
         if "__pycache__" in dp:
             continue
         for fn in fns:
-            p = os.path.join(dp, fn)
+            p = _safe_join(dp, fn)
             try:
                 c = open(p, encoding="utf-8", errors="ignore").read()
             except Exception:
@@ -304,7 +353,7 @@ def cmd_audit(a):
 
 # ---------- 自检 ----------
 def smoke():
-    here = os.path.dirname(os.path.abspath(__file__))
+    here = str(BASE)
     tmp = tempfile.mkdtemp(prefix="fusion_cast_smoke_", dir=here)
     ok = []
     try:
@@ -313,29 +362,26 @@ def smoke():
                                   capture_output=True, text=True)
 
         # 正例 1：萃取→沉淀 链路
-        qa = os.path.join(tmp, "qa.jsonl")
-        with open(qa, "w", encoding="utf-8") as f:
-            f.write(json.dumps({"q": "折扣率取多少", "a": "r=4%-8% 上限12%", "conf": "实证", "about_agent": False}) + "\n")
-            f.write(json.dumps({"q": "本席上次误判在哪", "a": "把窄带说成更宽", "conf": "实证", "about_agent": True, "verdict": "wrong", "why": "16.3pp→14.1pp"}) + "\n")
-        card = os.path.join(tmp, "card.json")
+        qa = _safe_join(tmp, "qa.jsonl")
+        _atomic_write(qa, json.dumps({"q": "折扣率取多少", "a": "r=4%-8% 上限12%", "conf": "实证", "about_agent": False}) + "\n"
+                      + json.dumps({"q": "本席上次误判在哪", "a": "把窄带说成更宽", "conf": "实证", "about_agent": True, "verdict": "wrong", "why": "16.3pp→14.1pp"}) + "\n")
+        card = _safe_join(tmp, "card.json")
         r = run(["extract", "--qa", qa, "--out", card])
         ok.append(("萃取正例", r.returncode == 0))
-        reg = os.path.join(tmp, "reg.jsonl")
+        reg = _safe_join(tmp, "reg.jsonl")
         r = run(["deposit", "--card", card, "--registry", reg, "--home", "金融折扣"])
         ok.append(("沉淀正例", r.returncode == 0))
 
         # 负断言 1：conf 非法必拒，报错行号 1 基
-        qa_bad = os.path.join(tmp, "qa_bad.jsonl")
-        with open(qa_bad, "w", encoding="utf-8") as f:
-            f.write(json.dumps({"q": "x", "a": "y", "conf": "听说", "about_agent": True}) + "\n")
-        r = run(["extract", "--qa", qa_bad, "--out", os.path.join(tmp, "c2.json")])
+        qa_bad = _safe_join(tmp, "qa_bad.jsonl")
+        _atomic_write(qa_bad, json.dumps({"q": "x", "a": "y", "conf": "听说", "about_agent": True}) + "\n")
+        r = run(["extract", "--qa", qa_bad, "--out", _safe_join(tmp, "c2.json")])
         ok.append(("负断言:conf非法拒萃取+行号1基", r.returncode != 0 and "第 1 行" in (r.stdout + r.stderr)))
 
         # 负断言 2：缺 Agent 本体问答必拒
-        qa_bad2 = os.path.join(tmp, "qa_bad2.jsonl")
-        with open(qa_bad2, "w", encoding="utf-8") as f:
-            f.write(json.dumps({"q": "x", "a": "y", "conf": "实证"}) + "\n")
-        r = run(["extract", "--qa", qa_bad2, "--out", os.path.join(tmp, "c3.json")])
+        qa_bad2 = _safe_join(tmp, "qa_bad2.jsonl")
+        _atomic_write(qa_bad2, json.dumps({"q": "x", "a": "y", "conf": "实证"}) + "\n")
+        r = run(["extract", "--qa", qa_bad2, "--out", _safe_join(tmp, "c3.json")])
         ok.append(("负断言:缺本体问答拒萃取", r.returncode != 0))
 
         # 负断言 3：异归宿必拒（正交检）
@@ -343,17 +389,16 @@ def smoke():
         ok.append(("负断言:归宿冲突拒入册", r.returncode != 0))
 
         # 负断言 4：输入文件不存在必点名路径
-        r = run(["collide", "--desc", "随便一段足够长的描述文本用于触发", "--registry-desc", os.path.join(tmp, "nope.jsonl")])
+        r = run(["collide", "--desc", "随便一段足够长的描述文本用于触发", "--registry-desc", _safe_join(tmp, "nope.jsonl")])
         ok.append(("负断言:缺文件点名路径", r.returncode != 0 and "不存在" in (r.stdout + r.stderr)))
 
         # register → collide/hashgate 链路
-        descs = os.path.join(tmp, "descs.jsonl")
+        descs = _safe_join(tmp, "descs.jsonl")
         r = run(["register", "--name", "alpha-ops", "--desc", "技能锻造 萃取 沉淀 轮铸 判官 复评 收敛", "--registry-desc", descs])
         ok.append(("register 入册", r.returncode == 0))
         r = run(["register", "--name", "alpha-ops", "--desc", "别的", "--registry-desc", descs])
         ok.append(("负断言:重名拒入册", r.returncode != 0))
-        with open(descs, "a", encoding="utf-8") as f:
-            f.write(json.dumps({"name": "beta-ops", "desc": "通勤 路线 规划 地铁 公交"}) + "\n")
+        _append_line(descs, json.dumps({"name": "beta-ops", "desc": "通勤 路线 规划 地铁 公交"}) + "\n")
 
         # C4 测撞：同文必打回；低撞面放行；短描述报错指人话
         r = run(["collide", "--desc", "技能锻造 萃取 沉淀 轮铸 判官 复评 收敛", "--registry-desc", descs])
@@ -370,74 +415,72 @@ def smoke():
         ok.append(("负断言:漂移描述打回", r.returncode == 4))
 
         # C8 裁定重算：KEEP / REVERT-slight 对称 / 偶数拒
-        v = os.path.join(tmp, "v.jsonl")
-        with open(v, "w", encoding="utf-8") as f:
-            for j, vote in (("DS", "better"), ("GLM", "better"), ("KIMI", "same")):
-                f.write(json.dumps({"judge": j, "vote": vote, "margin": "clear"}) + "\n")
-        r = run(["cast", "--verdicts", v, "--version", "1.1.0", "--prev", "1.0.0", "--out", os.path.join(tmp, "cast.json")])
-        d = json.load(open(os.path.join(tmp, "cast.json"))) if r.returncode == 0 else {}
+        v = _safe_join(tmp, "v.jsonl")
+        _atomic_write(v, "".join(json.dumps({"judge": j, "vote": vote, "margin": "clear"}) + "\n"
+                                 for j, vote in (("DS", "better"), ("GLM", "better"), ("KIMI", "same"))))
+        r = run(["cast", "--verdicts", v, "--version", "1.1.0", "--prev", "1.0.0", "--out", _safe_join(tmp, "cast.json")])
+        d = json.load(open(_safe_join(tmp, "cast.json"))) if r.returncode == 0 else {}
         ok.append(("裁定重算 KEEP", r.returncode == 0 and d.get("decision") == "KEEP"))
-        with open(v, "w", encoding="utf-8") as f:
-            for j, vote, mg in (("DS", "worse", "slight"), ("GLM", "worse", "clear"), ("KIMI", "same", "clear")):
-                f.write(json.dumps({"judge": j, "vote": vote, "margin": mg}) + "\n")
-        r = run(["cast", "--verdicts", v, "--version", "1.1.0", "--prev", "1.0.0", "--out", os.path.join(tmp, "cast2.json")])
-        d = json.load(open(os.path.join(tmp, "cast2.json"))) if r.returncode == 0 else {}
+        _atomic_write(v, "".join(json.dumps({"judge": j, "vote": vote, "margin": mg}) + "\n"
+                                 for j, vote, mg in (("DS", "worse", "slight"), ("GLM", "worse", "clear"), ("KIMI", "same", "clear"))))
+        r = run(["cast", "--verdicts", v, "--version", "1.1.0", "--prev", "1.0.0", "--out", _safe_join(tmp, "cast2.json")])
+        d = json.load(open(_safe_join(tmp, "cast2.json"))) if r.returncode == 0 else {}
         ok.append(("REVERT margin 对称 slight", r.returncode == 0 and d.get("decision") == "REVERT" and d.get("margin") == "slight" and d.get("rollback_to") == "1.0.0"))
-        with open(v, "w", encoding="utf-8") as f:
-            for j in ("A", "B"):
-                f.write(json.dumps({"judge": j, "vote": "better", "margin": "clear"}) + "\n")
+        _atomic_write(v, "".join(json.dumps({"judge": j, "vote": "better", "margin": "clear"}) + "\n" for j in ("A", "B")))
         r = run(["cast", "--verdicts", v, "--version", "1.1.0", "--prev", "1.0.0"])
         ok.append(("负断言:偶数票拒裁", r.returncode != 0))
 
         # 负断言 5：audit 对 >- 块标量超长描述必须打回（fail-closed）
-        ev = os.path.join(tmp, "evskill")
+        ev = _safe_join(tmp, "evskill")
         os.makedirs(ev)
-        with open(os.path.join(ev, "SKILL.md"), "w", encoding="utf-8") as f:
-            f.write("---\nname: evskill\ndescription: >-\n  " + "长" * 1200 + "\n---\n# x\n")
+        _atomic_write(_safe_join(ev, "SKILL.md"),
+                      "---\nname: evskill\ndescription: >-\n  " + "长" * 1200 + "\n---\n# x\n")
         r = run(["audit", "--skill-dir", ev])
         ok.append(("负断言:块标量超长描述打回", r.returncode == 5))
 
         # 负断言 6：registry 哈希链篡改必断链停工
         rows = [json.loads(l) for l in open(reg, encoding="utf-8") if l.strip()]
         rows[0]["home"] = "被篡改"
-        with open(reg, "w", encoding="utf-8") as f:
-            for rrow in rows:
-                f.write(json.dumps(rrow, ensure_ascii=False) + "\n")
+        _atomic_write(reg, "".join(json.dumps(rrow, ensure_ascii=False) + "\n" for rrow in rows))
         r = run(["deposit", "--card", card, "--registry", reg, "--home", "金融折扣"])
         ok.append(("负断言:链篡改断链停工", r.returncode != 0 and "断裂" in (r.stdout + r.stderr)))
 
         # 负断言 7：块标量内空行截断绕过必堵（实证席 D-1 反用例：900+空行+900 应判超长）
-        ev2 = os.path.join(tmp, "evskill2")
+        ev2 = _safe_join(tmp, "evskill2")
         os.makedirs(ev2)
-        with open(os.path.join(ev2, "SKILL.md"), "w", encoding="utf-8") as f:
-            f.write("---\nname: evskill2\ndescription: >-\n  " + "甲" * 900 + "\n\n  " + "乙" * 900 + "\n---\n# x\n")
+        _atomic_write(_safe_join(ev2, "SKILL.md"),
+                      "---\nname: evskill2\ndescription: >-\n  " + "甲" * 900 + "\n\n  " + "乙" * 900 + "\n---\n# x\n")
         r = run(["audit", "--skill-dir", ev2])
         ok.append(("负断言:块标量空行绕过打回", r.returncode == 5))
 
         # 负断言 8：registry 混入无 lhash 影子行必停工（实证席 D-2 反用例）
-        reg3 = os.path.join(tmp, "reg3.jsonl")
+        reg3 = _safe_join(tmp, "reg3.jsonl")
         r = run(["deposit", "--card", card, "--registry", reg3, "--home", "金融折扣"])
-        with open(reg3, "a", encoding="utf-8") as f:
-            f.write(json.dumps({"type": "deposit", "card_md5": "shadow", "home": "影"}) + "\n")
+        _append_line(reg3, json.dumps({"type": "deposit", "card_md5": "shadow", "home": "影"}) + "\n")
         r = run(["deposit", "--card", card, "--registry", reg3, "--home", "金融折扣"])
         ok.append(("负断言:缺lhash影子行断链停工", r.returncode != 0 and "缺 lhash" in (r.stdout + r.stderr)))
 
         # 负断言 9：判官票缺 margin 必拒收（对抗席 P2-4 反用例：禁向 clear fail-open）
-        v2 = os.path.join(tmp, "v2.jsonl")
-        with open(v2, "w", encoding="utf-8") as f:
-            f.write(json.dumps({"judge": "A", "vote": "better"}) + "\n")
-            f.write(json.dumps({"judge": "B", "vote": "better", "margin": "clear"}) + "\n")
-            f.write(json.dumps({"judge": "C", "vote": "same"}) + "\n")
+        v2 = _safe_join(tmp, "v2.jsonl")
+        _atomic_write(v2, json.dumps({"judge": "A", "vote": "better"}) + "\n"
+                      + json.dumps({"judge": "B", "vote": "better", "margin": "clear"}) + "\n"
+                      + json.dumps({"judge": "C", "vote": "same"}) + "\n")
         r = run(["cast", "--verdicts", v2, "--version", "1.2.0", "--prev", "1.1.0"])
         ok.append(("负断言:缺margin票拒收", r.returncode != 0 and "margin" in (r.stdout + r.stderr)))
 
         # 负断言 10：>+/|2 等块标量变体不得绕过 1024 闸（实证席 N-1 反用例）
-        ev3 = os.path.join(tmp, "evskill3")
+        ev3 = _safe_join(tmp, "evskill3")
         os.makedirs(ev3)
-        with open(os.path.join(ev3, "SKILL.md"), "w", encoding="utf-8") as f:
-            f.write("---\nname: evskill3\ndescription: >+\n  " + "甲" * 1200 + "\n---\n# x\n")
+        _atomic_write(_safe_join(ev3, "SKILL.md"),
+                      "---\nname: evskill3\ndescription: >+\n  " + "甲" * 1200 + "\n---\n# x\n")
         r = run(["audit", "--skill-dir", ev3])
         ok.append(("负断言:块标量变体绕过打回", r.returncode == 5))
+
+        # 负断言 11：越界路径必拒（_safe_join 路径闸；测试向量本身不经闸构造——
+        # 取系统临时目录下绝对路径，居 BASE 之外，须在打开文件前被闸拦下）
+        outside_qa = tempfile.gettempdir() + os.sep + "fusion_cast_escape_probe.jsonl"
+        r = run(["extract", "--qa", outside_qa, "--out", _safe_join(tmp, "e.json")])
+        ok.append(("负断言:越界路径拒收", r.returncode != 0 and "path escape blocked" in (r.stdout + r.stderr)))
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
     fails = [n for n, good in ok if not good]
@@ -462,7 +505,10 @@ def main():
     if a.smoke:
         smoke()
     elif hasattr(a, "f"):
-        a.f(a)
+        try:
+            a.f(a)
+        except ValueError as e:
+            sys.exit(f"FAIL: {e}")
     else:
         ap.print_help()
 

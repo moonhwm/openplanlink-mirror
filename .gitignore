@@ -1,3 +1,19 @@
 __pycache__/
 *.pyc
 *.pyo
+
+# 2026-10-06 主理人席补齐：凭据与运行时垃圾目录绝不入库
+# 凭据零字面量（宪法第一条）：.env 为全机唯一凭据真值源，任何情况下不得入库
+.env
+.env.*
+*.env
+!.env.example
+
+# Mimosa 运行时缓存目录（各 skills 脚本下均有，纯运行时产物）
+.mimosa/
+
+# 本机编辑器/系统残留
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
