@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:12:15.589Z",
+  "generated_at": "2026-10-05T19:12:48.916Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1828,
-  "merkle_root_sha3_512": "d4a383fddfc313662b24fd0ca9e1b777069e63043de74829d5ec42b6da866e50c1092e0f11ee7b77915d93ac747e2c3e56c20b8529764f8a2b521fd54a04585b",
-  "hmac_sha3_512": "8ce4aa25fbf84ad987bb4a3bc3db86eeb1ebe2b4fc9663570a6cfcaf18ed9598f53eed35e1d321ded9246ed24269cddf6d83e691d38be1dfe9f34c6cda9bb16f",
+  "file_count": 1829,
+  "merkle_root_sha3_512": "f0fee68132a7d6c50cd7a8b72089aa174d5a46e83a538990f3a4349ebaf05ffe05aec47bc115c3ffc6422a69fb9120cb99ae18959e00546eb422cef21657333c",
+  "hmac_sha3_512": "ac60f62e80feb1342798d857b81fc9612c24e9634988df696fcb91765e0598aeb05ba8e61bcc27b9846bfd7a5fdbf6892a6aa7bc9b21030bfa8e72fafc2ae3bc",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -140,8 +140,8 @@
     {
       "path": "STATUS.md",
       "size": 645,
-      "content_sha3_512": "b1e0644ee98df0bd32f3d4dd983765bd3ef9784f02db0b8a2faee28982b4a24d9f990e9441afe896de614b53f57875c75333cd45a08444f0d553577fbb3c94d7",
-      "leaf_sha3_512": "b096caa90cdf5e95b6679c9023d3371213fb76d2edddbd86683ef28a6f31e9f87254616976fdb65230c156f3e128f8086ec50cb8ae3b33b7b47015f78df660cc"
+      "content_sha3_512": "8530c7422c173e983a301304283db3ff7678efa82c65944e165cce5d60cb0b6856e40f29828f40f1f322b67e7727b8373ca9c8d577fc5d90443aab09d7a62028",
+      "leaf_sha3_512": "1e50522b50af8c05be1e8cf1cc31dee2d77afcc2d435d1bd50e22b51b1e6742298eed1ba3596038f34abdc95bded6da34c65ad4f6f71bf803ada2344b38f3e3b"
     },
     {
       "path": "_tmp_probe.yml",
@@ -394,6 +394,12 @@
       "size": 2204,
       "content_sha3_512": "90b94db6915a3170bdae443f3bc10cceff214d737622ea0147e3abfbed3e93b4b6e6f0dca9fe803e57b07ab265caeed0af7346f23570b31623709dfe647246db",
       "leaf_sha3_512": "5459e4b0e865695c0fe3e204fec5c632acd2f54c761e650a8af669afa48dfef396f8f45e296f85281dbb860e812239e0cc2aaa16c66441540118dd1d1e8f6215"
+    },
+    {
+      "path": "deliverables/20261006/seat-cairn/exchange/A盘映射清点与可调用分级_DF-AMAP-20261006-CAIRN-01.otl",
+      "size": 4233,
+      "content_sha3_512": "92f2bf83f82590d8de3f663a4b7ffdf5d287520e871e5cde5ba7523f729f29fed98a834ac6fef22d75e6078a1a463e67a3c8f98e3e782d388f177a0a1e09e87e",
+      "leaf_sha3_512": "2c6c5c53fee7606b32f0d6021d30cd3831eb397f1606733ff4e5854a8fc298296ccf9b8eed734823a95bb51a82670318174932cfc2fcd19ef6b2c25c0d3c2c72"
     },
     {
       "path": "deliverables/20261006/seat-cairn/exchange/DF-PERSONA-20261006-KIMIWORK-01.otl",
