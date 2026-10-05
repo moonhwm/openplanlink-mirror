@@ -69,6 +69,7 @@ def main():
     ap.add_argument("--root", default=".")
     ap.add_argument("--out", default="attest-cd.json")
     ap.add_argument("--status", default="STATUS.md")
+    ap.add_argument("--html", default=None, help="输出自包含静态状态页（无外部依赖，可直接发布）")
     ap.add_argument("--key-file", default=r"C:\Users\欧阳宏俊\.a2a-hmac-key.bin")
     ap.add_argument("--key-env", default="OPL_TREE_KEY", help="存放 64 字节密钥 hex 的环境变量名")
     ap.add_argument("--key-id", default="opl-a2a-2026q4")
@@ -157,10 +158,58 @@ def main():
     ]
     pathlib.Path(a.status).write_text("\n".join(lines) + "\n", encoding="utf-8")
 
+    if a.html:
+        import html as _html
+        mac_txt = mac if mac else "未签名（无密钥，仅结构完整性）"
+        page = """<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenPlanLink A2A · 交付状态</title>
+<style>
+:root{color-scheme:light dark}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;margin:0;padding:2rem;line-height:1.6}
+main{max-width:52rem;margin:0 auto}
+h1{font-size:1.35rem;margin:0 0 .25rem}
+p.sub{opacity:.7;margin:0 0 1.5rem;font-size:.9rem}
+table{border-collapse:collapse;width:100%;margin:0 0 1.5rem}
+th,td{border:1px solid rgba(128,128,128,.35);padding:.5rem .6rem;text-align:left;vertical-align:top;font-size:.92rem}
+th{width:11rem;background:rgba(128,128,128,.12)}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.85em;word-break:break-all}
+footer{opacity:.65;font-size:.82rem;border-top:1px solid rgba(128,128,128,.3);padding-top:.8rem}
+</style>
+</head>
+<body><main>
+<h1>OpenPlanLink A2A · 交付状态</h1>
+<p class="sub">CD 自动生成（每次 main 推送重建）· 无外部依赖、无脚本、无凭据</p>
+<table>
+<tr><th>生成时刻（UTC）</th><td><code>@@GEN@@</code></td></tr>
+<tr><th>提交</th><td><code>@@COMMIT@@</code></td></tr>
+<tr><th>文件数</th><td><strong>@@COUNT@@</strong></td></tr>
+<tr><th>默克尔根<br>(SHA3-512)</th><td><code>@@ROOT@@</code></td></tr>
+<tr><th>根 MAC<br>(HMAC-SHA3-512)</th><td><code>@@MAC@@</code></td></tr>
+<tr><th>构建器</th><td><code>tools/cd_attest.py</code>（契约见 <code>tools/SHA3_TREE.md</code>）</td></tr>
+</table>
+<footer>本页由 CI/CD 自动重生成；数值可经 <code>tools/verify_opl_tree.py</code> 复算。本页不含任何凭据、密钥或个人信息。</footer>
+</main></body></html>
+"""
+        for token, value in (
+            ("@@GEN@@", _html.escape(generated_at)),
+            ("@@COMMIT@@", _html.escape(head or "（非 git 目录）")),
+            ("@@COUNT@@", str(len(entries))),
+            ("@@ROOT@@", _html.escape(root)),
+            ("@@MAC@@", _html.escape(mac_txt)),
+        ):
+            page = page.replace(token, value)
+        hp = pathlib.Path(a.html)
+        hp.parent.mkdir(parents=True, exist_ok=True)
+        hp.write_text(page, encoding="utf-8")
+
     print("★ 文件数 =", len(entries))
     print("★ merkle_root =", root)
     print("★ 根MAC =", mac or "（未签名）")
-    print("★ 已写 =", out, "/", a.status)
+    print("★ 已写 =", out, "/", a.status, ("/ " + a.html) if a.html else "")
 
 
 if __name__ == "__main__":

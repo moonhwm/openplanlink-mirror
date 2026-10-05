@@ -39,12 +39,15 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: 构建交付证明（SHA3-512 默克尔树）
+      - name: 构建交付证明（SHA3-512 默克尔树 + 静态状态页）
         env:
           # 仓库机密可选：64 字节密钥的 hex；未配置则只出默克尔根（无签名）
           OPL_TREE_KEY: ${{ secrets.OPL_TREE_KEY }}
         run: |
-          python tools/cd_attest.py --root . --out attest-cd.json --status STATUS.md
+          python tools/cd_attest.py --root . \
+            --out attest-cd.json \
+            --status STATUS.md \
+            --html status/index.html
           echo "--- STATUS.md ---"
           cat STATUS.md
 
@@ -56,6 +59,7 @@ jobs:
             cat STATUS.md
             echo ""
             echo "产物：attest-cd.json（本运行期生成，不随仓提交；可用 tools/verify_opl_tree.py 复算）"
+            echo "静态状态页：status/index.html（自包含、无外部依赖、无脚本；启用 Pages 指向 /status 即发布）"
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: 一致性复核（file_count ↔ files 数组）
@@ -68,16 +72,16 @@ jobs:
           sys.exit(0 if ok else 1)
           PY
 
-      - name: 提交 STATUS.md（带 [skip ci]，禁 force）
+      - name: 提交 STATUS.md 与静态状态页（带 [skip ci]，禁 force）
         run: |
-          if [ -z "$(git status --porcelain STATUS.md)" ]; then
-            echo "STATUS.md 无变化，跳过提交"
+          if [ -z "$(git status --porcelain STATUS.md status/index.html)" ]; then
+            echo "无变化，跳过提交"
             exit 0
           fi
           git config user.name "opl-cd-bot"
           git config user.email "cd-bot@openplanlink.local"
-          git add STATUS.md
-          git commit -m "cd: 刷新交付状态 STATUS.md [skip ci]"
+          git add STATUS.md status/index.html
+          git commit -m "cd: 刷新交付状态 STATUS.md + status/index.html [skip ci]"
           git pull --rebase --autostash origin main
           git push origin HEAD:main
 
