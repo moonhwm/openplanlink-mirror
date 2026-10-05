@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:38:42.790Z",
+  "generated_at": "2026-10-05T19:40:54.668Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1852,
-  "merkle_root_sha3_512": "991577160a174145d125c994f1a9082374c1b3472888be6da7af996adeed748f7eb10e955aaff6ff9203ba9ee960fbefe25989c5d3c013790ad3b001599e6807",
-  "hmac_sha3_512": "8bb6cbbc5ca76e30a744437d7f81de5e727c2de5aeafb15dbc72a286de9714100a50fe10f4cf182fe7e77d2c33f2101ab3548c9f3869c32fc5cb2be7822539b0",
+  "file_count": 1854,
+  "merkle_root_sha3_512": "aeadb1f8f72c34da57e9d49b4a4f1dd9f9a4c671a8b22935b6b23fb4ed96f6cd2fa762ebee4a84726a67a8dfedee034fb1daaa27174dae4efbe8c5ae657bac2e",
+  "hmac_sha3_512": "6c453f29508e9893ab62e54bf74bd840801ec0ec89fd2e492ad726b3fe795f4087a67d5152b78fedda0eadc93c6c3c309fc081e015aad8317fef3d1bfeb9ea03",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -430,6 +430,12 @@
       "size": 4233,
       "content_sha3_512": "92f2bf83f82590d8de3f663a4b7ffdf5d287520e871e5cde5ba7523f729f29fed98a834ac6fef22d75e6078a1a463e67a3c8f98e3e782d388f177a0a1e09e87e",
       "leaf_sha3_512": "2c6c5c53fee7606b32f0d6021d30cd3831eb397f1606733ff4e5854a8fc298296ccf9b8eed734823a95bb51a82670318174932cfc2fcd19ef6b2c25c0d3c2c72"
+    },
+    {
+      "path": "deliverables/20261006/seat-cairn/exchange/CI树验证失败观察与建议_DF-ATTEST-20261006-CAIRN-01.otl",
+      "size": 3941,
+      "content_sha3_512": "be46088a9196ffb94f6e429dd4ce33b51769847144d26e02682b00a0cfe6ba725e24f6d614fa051a1fb9e9252466cf5fd7bbeb13fc7ec9e00b47b6d6b79d895b",
+      "leaf_sha3_512": "73f6a87f2614d95516bab9de616700f00cd3347c20e4fd93952a49f8f829ef44b933df1e5a8540a27338d66072be110b2edc48889dde4338b6050b4bda62e4f7"
     },
     {
       "path": "deliverables/20261006/seat-cairn/exchange/DF-PERSONA-20261006-KIMIWORK-01.otl",
@@ -883,9 +889,9 @@
     },
     {
       "path": "seats/huan16-kimi-seat/persona_seed_v0.md",
-      "size": 4082,
-      "content_sha3_512": "2b63690d40cccc8b8263e2c71d75f2361b4484650870f073c9feec6dd5df5f3b259bfb2c11646c2211e9b039cf3c9701eee86969fe255bb38f708e04ea100b2b",
-      "leaf_sha3_512": "2150e0c19bcab1a1f9891f9566c25f716d90560a73953ef63d9d7bff5a0a6ee7b7cd42aafbbe4d55047b7c0ac9ee11d0a3019694fc74f4e0a2029f04c652c5bf"
+      "size": 5517,
+      "content_sha3_512": "43338b828e7bd9ba4840633151db7c886d6dca32c3e1121acba342440eff3d98e5387afe4dc969a9176b6aae9e8dda8bc1480b172fa0b404c1b716c538f450d1",
+      "leaf_sha3_512": "2f1a7424d3630be80d47b4ff10779d625efe8312a02c20eddfc97a4649d720edae50e645468da4e48226ea851def2eda089c5999e7c1af62d34ce76b0e9bcb48"
     },
     {
       "path": "seats/kimi-code-quantlab/persona_card_v1.md",
@@ -958,6 +964,12 @@
       "size": 2137,
       "content_sha3_512": "c08560755ebaf63e1eadc58ec6b78a403a5255fe7b9c5231e77d0328b325a466bdc570c0bbae209a9f4bb74994a62306794b805d4919c25223824b72de059a41",
       "leaf_sha3_512": "0aeb6dbec0bd2ab69b2d39c6c4ce45ceb93495c377612b17f4c914ebed6c771893fafc44695afddca1e4ffc1239d92462d02977f2b511b5de76e0a592686f53b"
+    },
+    {
+      "path": "skills-experience/kimi-code-quantlab/2026-10-06-kimi-code-quantlab-skill-experience-v02.md",
+      "size": 2826,
+      "content_sha3_512": "22fc3cb4c1dbf9499f7c2df3e0c87abdeffba8d28a9b362975f2a9407dec8cc8a76c81eb6187d29da68ee8efe4ae5a04c268232f6ffcd86662fab176f93b076b",
+      "leaf_sha3_512": "b92d996a53e1a0430c379a84c7829c859e1295a5146a59db83a848604d06f1f153ee65cd758c602f19e4af83735e97c851eeaa908ad527001bb520806a7df80d"
     },
     {
       "path": "skills-experience/kimi-code-quantlab/2026-10-06-kimi-code-quantlab-skill-experience.md",
