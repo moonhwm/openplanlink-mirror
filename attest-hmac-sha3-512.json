@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:43:01.762Z",
+  "generated_at": "2026-10-05T19:49:51.206Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1854,
-  "merkle_root_sha3_512": "bf833c570e333a455b71824ec4accc360c0373905f27facecc7e35ea0822397cfaa8359279ca48a3e3b7e9fde7519d4f624674e993bac6f889029e101887861c",
-  "hmac_sha3_512": "eb631bded87fe1675d838a5531d2cbd68785a21981c85414ac1c8499505bc9d2596f6975c597fa1719887b524b9c72dfcf34f4a01bfefcad39ed3668915bce3f",
+  "file_count": 1855,
+  "merkle_root_sha3_512": "e92191529463484e0be1c1941ec1dba9c22cef18220f37f3a290cc3eae38b6a86121bbe0ebd8dc45497fff6bb34d3d00b969859c3e5a818ca33bb7a77e233f72",
+  "hmac_sha3_512": "23c7837b3c2ea47f2ca7495dd2382d7d661aa5ee84878d83d96d7413115e8097f85cd38dd93748eb8600b9d2802e8e19596513e8a14ff8898267015b4ec2c742",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -889,9 +889,9 @@
     },
     {
       "path": "seats/huan16-kimi-seat/persona_seed_v0.md",
-      "size": 5517,
-      "content_sha3_512": "43338b828e7bd9ba4840633151db7c886d6dca32c3e1121acba342440eff3d98e5387afe4dc969a9176b6aae9e8dda8bc1480b172fa0b404c1b716c538f450d1",
-      "leaf_sha3_512": "2f1a7424d3630be80d47b4ff10779d625efe8312a02c20eddfc97a4649d720edae50e645468da4e48226ea851def2eda089c5999e7c1af62d34ce76b0e9bcb48"
+      "size": 5637,
+      "content_sha3_512": "3898a3d143afe7b47ef87f91a37696307175ed636a5a22a378ce4ddcabed66bb790d44afd89bb77beb08ce99ebcfc20f91787cb553910e3723c315e220bc12ef",
+      "leaf_sha3_512": "610494508abe91b1830fcf8487a40b87ae7ba0e1357c032092361f83c2e0c04fb79f2a96dab87655e28df9e8f699a58d6f6b96a770e6555a5c6ef4e1a6bc1590"
     },
     {
       "path": "seats/kimi-code-quantlab/persona_card_v1.md",
@@ -979,9 +979,9 @@
     },
     {
       "path": "skills/EXPERIENCE.md",
-      "size": 13797,
-      "content_sha3_512": "875ea126b3690b48e142e0913a173a5ea6e162fb2e328293057fcb4f1d43fbf11e71a1c3e20ee0e268d6592d5fdba07f354104a2475adc7bf5b79930750724e2",
-      "leaf_sha3_512": "b9ec6f0e7da221add708fe616040464a1d8bab1480dcb69e21e4920c4d0713a2dd6d206b5cea0863460b7e9d4009c38a05e397456ba359817defb5dfe0e06cd8"
+      "size": 15337,
+      "content_sha3_512": "cafaebdc5d39b84309dcade369b70b5893fe6b28330a053b5b3b14cf3596ef5ee49810292433b49ea9a3a3be52dd0d7abbd122223ff0a0d3c4338a230f3d85af",
+      "leaf_sha3_512": "4cd097fbe84826a7af151fdf906e40361ebc6b7a6d6fb9907c0015110006f6e031862c07c3588d6f1ea50a7ca26e8279efa624738b853bfaa6fce9fc959dfb2e"
     },
     {
       "path": "skills/README.md",
@@ -10654,6 +10654,12 @@
       "size": 9025,
       "content_sha3_512": "561c11e000858c55f7c058bb7f961b58ab6b312e9de7334fb4c78955428fe47b6e3d37c92038f904ef2a7af1fe677531ae257bc488f92ee4df52c9fae89c3732",
       "leaf_sha3_512": "e29ca19e61596a62a40913a62cbe8153a1bc93c96c32deb1b19f4bfecf0f95eb2fa140f3b26c98dc1f195379cda6b66e2912c43ba0709d1415b7e2c22a30358f"
+    },
+    {
+      "path": "tools/commit_gate.sh",
+      "size": 1932,
+      "content_sha3_512": "46eeb75d3030a58680c9306fed2b01afdacbc3c5bee54c7d028f2ca761c053ee64934ac071c80839f7ea2a039ffe32995a5b86c3dc592a3dc1270a0a1b9eb326",
+      "leaf_sha3_512": "6d38e686dc2f65502296d1229729ef5f60ed8b6760eacd7bed58a654f8d2cc28e568e4cffcd5417f2df8118671fb8e01c23b871afeec2c06b50121d143a0e1d7"
     },
     {
       "path": "tools/compensate.py",
