@@ -1,0 +1,58 @@
+name: 许可预检（开源协议条款匹配）
+
+# 依据：
+#   主权人令「在Kimi Chat端部署技能，辅助术语一致性检查、格式合规性预检及开源协议条款匹配」
+#   本席 DF-LIC-20261006-CAIRN-01 §四-2 提请（把 license_match 纳入 CI 预检）
+#
+# 定位：与既有 ci-verify.yml 的 compliance_check.py / supply_chain.py 形成三层预检，
+#       本层专责「**声明面（LICENSE/NOTICE/SBOM）↔ 文件面（各级 LICENSE/SPDX 头）**」一致性。
+#
+# 纪律：
+#   1. 只读扫描，不改动任何许可文件、不写仓库（报告经运行摘要发布）；
+#   2. 与 ci-verify.yml 同用已钉扎的 checkout / setup-python 两个 Action，不引入新依赖；
+#   3. 默认**报告型**（不阻断）；仅当出现**不适格许可**（政策表：GPL-3.0）时硬失败；
+#   4. 声明冲突（如 skills/ 层间不一致）**只登记不阻断**——冲突裁定属治理事项，非流水线事项。
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  license-precheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4 pinned（Trae 席 R5 SHA 固定提案 2026-10-05）
+
+      - name: 安装 Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5 pinned（Trae 席 R5 SHA 固定提案 2026-10-05）
+        with:
+          python-version: "3.12"
+
+      - name: 协议匹配扫描（声明面 ↔ 文件面）
+        run: |
+          python tools/license_match.py --repo . \
+            --out license-match-report.md \
+            --json license-summary.json
+          echo "--- 报告（前 80 行）---"
+          head -80 license-match-report.md
+
+      - name: 写入运行摘要
+        run: |
+          {
+            echo "## 许可预检结果"
+            echo ""
+            echo '```json'
+            cat license-summary.json
+            echo '```'
+            echo ""
+            echo "报告全文见本步骤上方输出；本层为**报告型**，仅不适格许可（GPL-3.0）会硬失败。"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 门禁（仅不适格许可硬失败）
+        run: python tools/license_match.py --repo . --fail-on-deny
