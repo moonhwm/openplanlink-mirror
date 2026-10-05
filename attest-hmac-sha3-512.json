@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:50:07.033Z",
+  "generated_at": "2026-10-05T19:53:56.048Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1856,
-  "merkle_root_sha3_512": "fd5d03a2b6c1c10f520db56034ab2ec3030d7453bc9ffc8a726310c821c98b80705e3b25dcd2978f6e457b18dd6cbb9606115d03952a2c5f55c599a9b098985a",
-  "hmac_sha3_512": "bc4a1855c004238cd6861a9b3e88ef53852debf35e3ea89033cf8d5c864694dbaed68ccfbf0ff82aa164f5c4e644a70520abcfa2f21361a82ad9179b477cf419",
+  "file_count": 1861,
+  "merkle_root_sha3_512": "9aa60c5286e1cac9ba7b7dd4b46bfc49fcba7178fb54cf3c7d82b57fd60d9b023c9f770c4a5cdc2373cf5579611642959979bf2be2d8fd9cce7612b2ed3f0dcf",
+  "hmac_sha3_512": "ef47683daa3ed12e6f4bfa2f7837a5e51cd9b56be33b2d2cf5a020987743e404a400e232d7cc809a5cf91e0052bc66f65751d2d414c50835ab9f5ce7babc1251",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -492,6 +492,12 @@
       "leaf_sha3_512": "2f135141c24a58dd9258be82754d0e772dca5504c8967bbcebca21fe8878f4cb2c9ec70ab819109cdc06467575554e102acd10c636cf0e2c69090371f7851fac"
     },
     {
+      "path": "deliverables/20261006/seat-cairn/exchange/本席MVP状态卡v1.0_DF-MVP-20261006-CAIRN-01.otl",
+      "size": 4461,
+      "content_sha3_512": "e017fada31b58b76786d67c6274219088267d229d0d2443b9be728f8e8d9c60172de93de30212087bed870a1ab2bc274b2e5afe319a6ee2d34877065c2dcd809",
+      "leaf_sha3_512": "10427f2536facf355a496f31c76cde79618d34e8a11f7f347f04395ec27474d53b206eda62e94895360557a267d3f809e9ce09c3b96f6305b0d54aa4700e9bd0"
+    },
+    {
       "path": "deliverables/20261006/seat-cairn/exchange/桌面清点与跨席独立复核_DF-DESK-20261006-CAIRN-01.otl",
       "size": 5382,
       "content_sha3_512": "e7589da1f40a035ca9725b95ed085dbac4c5984f71fb92d0b6caeac53258649ae538f086062fd1fe8a31c83dfdbc871e644bee0140a3748a1e394c495d81eee2",
@@ -678,16 +684,28 @@
       "leaf_sha3_512": "90fa9c29bb04bf5b6249da49d53992fa294c983bc048806895210d0a0ae7473493616cd9adb7bd0585e354e263a566ea7c07c4ad585d59bba146ae466ca5b9f9"
     },
     {
+      "path": "deliverables/20261006/seat-cairn/tools/preflight.py",
+      "size": 6950,
+      "content_sha3_512": "041c79f5facf4b2fb7f404e38f0d91aae4b364d6ef926b3013657bd8bf2278a1f790a483596fb600495e3b3b442662b34e9f740018dae2688e3a98769248e1c4",
+      "leaf_sha3_512": "5bd9be615c7a2fb82ead397dfda8a149a040c8c299afa11d6acabf983e806f89944cbd17787888332c2b7ae1c75b826b3f8c6227280d2c5d20a01432d731eb30"
+    },
+    {
       "path": "deliverables/20261006/seat-cairn/tools/probe_mcp.mjs",
-      "size": 3395,
-      "content_sha3_512": "e373d7d56117e72aa769e3a11970de68f904c98598916bf3f5870a288b6011fca0fbb4256785f9b9c5fc6463773d193a2aa1b9f1466a1528cf7ad83ab55eae7b",
-      "leaf_sha3_512": "f6847867a25950b6fc026cb7a899622007b7f317a358067cbeb9da44a0992e75d31bcb5cbfdb769e1c424473f438ab784d9acc7a1de8d3cc3205fdffaaaf1a26"
+      "size": 3397,
+      "content_sha3_512": "652cdcc61d4fe8114529da4e1f5ff7a5a01c28c33445b628fefd210f799bfd3498085e9e73e4dc4ce50106b2cd1f9a950f6e289c229e349445469629dbf01ef6",
+      "leaf_sha3_512": "2a32c1288ed4868007ed6e58604288aeeefa62a4fe9354e63e67803a9873a2ad3b3301204a106fbd73742faa3833493cd8ab0981869881cc7c59c1fce3025995"
     },
     {
       "path": "deliverables/20261006/seat-cairn/tools/probe_one.mjs",
       "size": 2283,
       "content_sha3_512": "257fbd1ec03e43e9121aa7f31801db8b3601c5a5f42d7051ebc5dee06d4b5e206cff18f46b1609266f674060ac56fceb82a8675b8f081f84ef8b7b09ee22dbb4",
       "leaf_sha3_512": "1c3767b8f5ece205577c684401b818fc20d172304688060e794e5a90546ac523827a15cec124ead28e6bbc81b30008d99c7edc47b78d64bab1803478c3f6e574"
+    },
+    {
+      "path": "deliverables/20261006/seat-cairn/tools/spec-preflight.md",
+      "size": 1393,
+      "content_sha3_512": "0f2caa1973f8d4bcc19e0a429d6144593690ec747d24d1116b2c3b470a5c26af25f7bdccc55703b1cf21cbd78c55f49847f26c229127c3746d5d2669d05cd50a",
+      "leaf_sha3_512": "2906d2f0174978df48db886c94b91e2cfca40af8528be453150abfe8dba66faa90062d645de6d0c062eb20421a76822c86e92fe23308310bbc69c2cf110740ac"
     },
     {
       "path": "deliverables/20261006/seat-cairn/使用效能报告_自动生成_v1.1.md",
@@ -10758,6 +10776,12 @@
       "leaf_sha3_512": "ce28a74f3838cb4a5d122ca8d2f671e897046d59ab6921fd0bebf306c1935a318e39775ccd7a52962225ff7c4d59136030776d30a779ebaaf16f084cba128164"
     },
     {
+      "path": "tools/preflight.py",
+      "size": 6950,
+      "content_sha3_512": "041c79f5facf4b2fb7f404e38f0d91aae4b364d6ef926b3013657bd8bf2278a1f790a483596fb600495e3b3b442662b34e9f740018dae2688e3a98769248e1c4",
+      "leaf_sha3_512": "0fa656db031c0627d0a8076e25b9d8581dc41a1af29f475dfd6778194c299223312c0c77d1c31609c69b39df73c7499553a6c51660f91252b824f64c319bf1e0"
+    },
+    {
       "path": "tools/proto.py",
       "size": 2101,
       "content_sha3_512": "8ae20162efb0e6c9055eb555dd9e947f585c28b7b74134629e051af7b29ae5d72b77a142d6cf65c642bc680d819e69b41b95666a969495ee9affad9deffdb92a",
@@ -10954,6 +10978,12 @@
       "size": 220,
       "content_sha3_512": "5676b02a7f9bc8677d15bfab3fa3bf653297caa23fc89a469a4b8dcb670019c0ec35d9e2452ffeb22b780caa861e293cba6c955e10cd05aa7873dc856b2e6889",
       "leaf_sha3_512": "9933856c6ca8e976decfaaf335d6fbe9640cdd54a0d2d12fbc49c5933a01d476883e0e8373a83918759f9ee6b0af3f09cbe2e33be2e3765eca5d390d2ac3e119"
+    },
+    {
+      "path": "tools/spec/spec-preflight.md",
+      "size": 1393,
+      "content_sha3_512": "0f2caa1973f8d4bcc19e0a429d6144593690ec747d24d1116b2c3b470a5c26af25f7bdccc55703b1cf21cbd78c55f49847f26c229127c3746d5d2669d05cd50a",
+      "leaf_sha3_512": "adb47590c4671142ad7437af0a3db6da870fff5437424dd1fbb1961fd1814cd04bcc8e7f4fd47133eade230a0f04ec9f0babccc6b617c5ffccbc5d95d07382ec"
     },
     {
       "path": "tools/spec/spec-proto.md",
