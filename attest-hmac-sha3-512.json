@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T20:16:55.420Z",
+  "generated_at": "2026-10-05T20:21:47.560Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1869,
-  "merkle_root_sha3_512": "6b112ff54c811251dd4af7805c0b6f4149061d241b53c073e34d1488153c8fa7d9e9af73255c97083de5d5da06303f2a9979859d9abd43ff6efca3a888293654",
-  "hmac_sha3_512": "4c886e89e9711d86e540c2eabb4f8e8a3499effb5a7620e231a00dfefe4c0006880d723761fbeec76ef6a6568ddd0963409927c2b0660fd21b06dd72b474ccde",
+  "file_count": 1870,
+  "merkle_root_sha3_512": "3696ee9be669a6108064608689e83471378f6df90b70a5e156caa7e67f3025e7778b8c6fb049c33f2e04ef6935fc7078ae942b7514764b028ad4ce520d884ae0",
+  "hmac_sha3_512": "069438cb706464074e34793989b0f28a8b7d175cf128bbec58070f6acda6a23e302caba2e6f0166d6802fcbff4f6c88a4a2d8b1f707d1f4f0e9adfe9b2636808",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -10816,6 +10816,12 @@
       "size": 6950,
       "content_sha3_512": "041c79f5facf4b2fb7f404e38f0d91aae4b364d6ef926b3013657bd8bf2278a1f790a483596fb600495e3b3b442662b34e9f740018dae2688e3a98769248e1c4",
       "leaf_sha3_512": "0fa656db031c0627d0a8076e25b9d8581dc41a1af29f475dfd6778194c299223312c0c77d1c31609c69b39df73c7499553a6c51660f91252b824f64c319bf1e0"
+    },
+    {
+      "path": "tools/prepush_samebatch.py",
+      "size": 6234,
+      "content_sha3_512": "63a04e442c132eaa1811e8eab49c0d66cb128043041106d8cce5e0025d86503d09749017945faf31c0a996ad2782311ec55ed9081bb65bfb78f8e40302a7048a",
+      "leaf_sha3_512": "8c81accdb36140493fe1388e6c9518a9518524f0853a764c53b08d65f3d5500a7cda46cc64430b05304d0aeeb81f79f967e0264ab36a8e1a0dbac54276ec4458"
     },
     {
       "path": "tools/proto.py",
