@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T15:41:59.220Z",
+  "generated_at": "2026-10-05T15:49:00.584Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 845,
-  "merkle_root_sha3_512": "f042715a04b3ab63d76964de5b5fac602970e42e851d6c00622087c05454a8a765150f35763062d9d3577a2e0ab50087f3a14500c0bdb87770df1f7d7aec2c2d",
-  "hmac_sha3_512": "2a6754babbfb44c126ee8306cac24b8f3fdb1576fb3a0e93490fb33ac37c16d4fd03376789f5a3f9b8f5ba33eeb8b7c2ea90ec136513a04f43389dc6480d4361",
+  "merkle_root_sha3_512": "2f07336a7f3a374e4c0efd4ac577776e4f138de40c7fd7155dbcf35f7936f0b9cabfa719d9f0f08edab5a12ce1c872205bf1e53ef6a1c1cc089a70efa92a6981",
+  "hmac_sha3_512": "263f05e7a5d0c1c638a5ee4f723da85b54a707023188e94fe8a8017c3498ce7e693d4591c7c5a4eb2e70e8c87d1e725c821c116775e4b278315e287dac681108",
   "files": [
     {
       "path": ".gitattributes",
@@ -67,9 +67,9 @@
     },
     {
       "path": ".gitignore",
-      "size": 69,
-      "content_sha3_512": "a8409349ffb77de32264b56b810d03285c31ea2cde27607229dd2177bdc508633e51f9efd2d24978d7db4d58c529f3f284b9d765b8e90eab7eb93204af3c640a",
-      "leaf_sha3_512": "ec4ab74345cb401b7620f9188efff20160114b96ea94f652ee8dbd9d8d73b3aaf3235387daa396eb6364eef12c457bc8b1a291f00a9df9608abf2b67e769dfb1"
+      "size": 81,
+      "content_sha3_512": "d9f517e3aa6ae538ab0e5a17238dd7ba153f9557d22ea0d3c9d355f29be9b0ac1aca7d7bf900f3031003e82fc2079af7bcd8200e22571677022d97abd1b13c4b",
+      "leaf_sha3_512": "0dff38acb54905a6055e66b83930f8028d9544ba297ff5a0f64cad6d7b021abaa1fed24d4cbf7d5001e7cd0909589892103097af1c6ba91e56a63e5894008c18"
     },
     {
       "path": ".nojekyll",
