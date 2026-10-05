@@ -1,0 +1,63 @@
+# 许可声明一致性冲突登记（候裁定）
+
+- 档号：DF-LIC-20261006-CAIRN-01
+- 登记席：A2A新席_石敢当Cairn（SEAT `a2a-node-local`）
+- 日期：2026-10-06 ｜ 视角：党组纪律 × 学术技术规范
+- 发现工具：`license-match` 技能（`license_match.py`，只读扫描）
+- 凭据纪律：本件零密钥零 token
+
+## 〇、结论先行
+
+1. 本仓根 `LICENSE` 经指纹确认为 **AGPL-3.0**；**未发现不适格许可（GPL-3.0 = 0）**。
+2. 但存在 **85 处「文件面 ≠ 声明面」冲突**：`SBOM.md` 声明 `skills/` 为 AGPL-3.0，而各技能自带 `LICENSE` 为 **MIT（79 件）/ Apache-2.0（7 件）**。
+3. 另发现**全仓 1683 个源文件零 `SPDX-License-Identifier` 头**，导致无法按文件级自动判许可。
+4. 本席**只登记、只提请，不改写任何他席文件**（与他席档案不代署同纪律）。
+
+## 一、实测证据
+
+| 项 | 实测值 | 来源 |
+|---|---|---|
+| 根 LICENSE 身份 | AGPL-3.0（指纹 `GNU AFFERO GENERAL PUBLIC LICENSE` + `Version 3`） | 只读扫描 |
+| NOTICE | 在位；载明 2026-10-03 由 MIT 升级 AGPL-3.0，原 MIT 副本权利不受影响 | 只读 |
+| SBOM.md | 在位；组件表将 `skills/`（生态技能库镜像）许可列为 **AGPL-3.0** | 只读 |
+| LICENSE* 文件总数 | 96 | 只读 |
+| 识别分布 | MIT×79、Apache-2.0×7、AGPL-3.0×2、CC-BY-SA-4.0×1、未识别×7 | 只读 |
+| 扫描源文件数 | 1683 | 只读 |
+| 含 SPDX 头文件数 | **0** | 只读 |
+| 不适格（GPL-3.0） | **0** | 政策表比对 |
+| 声明冲突 | **85** | 文件面 vs SBOM 声明面 |
+
+**冲突样例（全表见随附报告 `license-match-report.md`）**：
+`skills/ad-copywriter/LICENSE`→MIT、`skills/campaign-planner/LICENSE.txt`→Apache-2.0 …
+而 SBOM 声明 `skills/` → AGPL-3.0。
+
+## 二、冲突成因（推测，标注为推测）
+
+`NOTICE` 载明本仓 2026-10-03 由 MIT 升级为 AGPL-3.0，且「原 MIT 条款下已取得副本者，其既有副本权利不受影响」。
+`skills/` 系**外来技能库镜像**（SKILL 件自带上游 LICENSE），镜像入库时保留了上游 MIT/Apache 许可文件，
+而 SBOM 按「本仓主许可」口径将其登记为 AGPL-3.0——两种口径之间的**层间不一致**。
+（成因系本席据文本推断，**未经作者确认**。）
+
+## 三、提请裁定（三选一，本席不代拍板）
+
+| 选项 | 含义 | 影响 |
+|---|---|---|
+| **甲** | **以声明面为准**：`skills/*/LICENSE` 统一为 AGPL-3.0 | 与上游镜像来源的许可条款可能冲突，须核上游授权 |
+| **乙** | **以文件面为准**：SBOM 将 `skills/` 细分为「逐件许可（MIT/Apache-2.0）」并加注 | 保留上游条款，SBOM 需重排 |
+| **丙** | **双轨登记**：保留上游 LICENSE 文件，同时在 SBOM/NOTICE 显式标注「镜像件·上游许可为准，本仓主许可不覆盖」 | 改动最小；须统一措辞模板 |
+
+**本席倾向**：丙（改动最小、追溯最清），惟最终以主权人令与仓库管理席裁定为准。
+
+## 四、附带提请
+
+1. **SPDX 头**：建议逐步为源文件补 `SPDX-License-Identifier`（**只增标识、不改许可**），使自动化扫描可文件级判定；
+2. **入 CI**：建议把 `license_match.py` 纳入 CI 预检（现 CI 已有 `compliance_check.py` / `supply_chain.py`，本件补「声明面↔文件面」一层）；
+3. **定期复跑**：许可面随镜像件变动，建议每批入库后复跑一次并留存报告。
+
+## 五、声明
+
+- 本件为**只读扫描**的如实记录；未改动任何许可文件、未改 SBOM/NOTICE、未删任何件。
+- 「成因」一节系文本推断，已标注；未亲验事项不列。
+- 报告全文：`deliverables/20261006/seat-cairn/license-match-report.md`（可复算：`license_match.py --repo . --out ...`）。
+
+——A2A新席_石敢当Cairn · 2026-10-06
