@@ -1,0 +1,78 @@
+{
+ "schema": "openplanlink-mirror/sharded-b64/v1",
+ "path_prefix": "moon/media-manifest-b64/",
+ "parts": [
+  {
+   "name": "p00",
+   "chars": 4588,
+   "sha3_256": "b5461d138c0c47e0e4a279921ca06cb62553910d93a44ca1097762ba3be510e0",
+   "commit": "996cac6f1ff957ef7fb8ab0d7abafcae6b31e167"
+  },
+  {
+   "name": "p01",
+   "chars": 4588,
+   "sha3_256": "e8bfd5cbfaeb5417a6593990e0d4e1c5a54b3ee44871faa1e56122087e1f01e5",
+   "commit": "996cac6f1ff957ef7fb8ab0d7abafcae6b31e167"
+  },
+  {
+   "name": "p02",
+   "chars": 4588,
+   "sha3_256": "d42ba14139c7a01dc6b535162efd0e6013387a179221d51c244ca6f78f7a9354",
+   "commit": "8892664589295bb12335a678e2ee5dc5accc6e17"
+  },
+  {
+   "name": "p03",
+   "chars": 4588,
+   "sha3_256": "7cc1dfbb96e5dd774ca54be7fb3dc1a0a9e666f075964f1b5d1445cae68a315e",
+   "commit": "8892664589295bb12335a678e2ee5dc5accc6e17"
+  },
+  {
+   "name": "p04",
+   "chars": 4588,
+   "sha3_256": "d970a77bce557791fcf6457352181d288c257c937afeb1780a043d47158036dc",
+   "commit": "18784d17b50bbe40c884199031f11a7daceb403b"
+  },
+  {
+   "name": "p05",
+   "chars": 4588,
+   "sha3_256": "c19dc262b0f90c21f57fe1cfff50ee7c700f439fa84bacef9d436b3339ffdc14",
+   "commit": "2eb3f6db4a91b47872a892887279f738807fc092"
+  },
+  {
+   "name": "p06",
+   "chars": 4588,
+   "sha3_256": "c9406cf15aa583ec52dfbb2e41317d24604dc753b940dcc7bdc8dda2ad5312f3",
+   "commit": "c4c105589873a637959a7afb8257a00c9752653b"
+  },
+  {
+   "name": "p07",
+   "chars": 4588,
+   "sha3_256": "ce8cfa770b8a29335eb609635cdb06f103d9d2d40d47503e1fd535c2a987a729",
+   "commit": "c4c105589873a637959a7afb8257a00c9752653b"
+  }
+ ],
+ "assembly": {
+  "order": [
+   "p00",
+   "p01",
+   "p02",
+   "p03",
+   "p04",
+   "p05",
+   "p06",
+   "p07"
+  ],
+  "concat_chars": 36704,
+  "b64_sha3_256": "de75807278b41659ed3b738d66f2665d31bef89a8d3f52f8d369a2dab1d5fae4",
+  "b64_sha3_256_12": "de75807278b4",
+  "b64_git_blob_sha1": "775b38352df58ca7b661cf4bc18ee833a69b72cf",
+  "decoded_gz_sha256": "2d46a9773979fe1065cdb208edd2147b506348902ac0b2b8a53a29bb6edf6aed",
+  "decoded_gz_bytes": 27527,
+  "csv_bytes": 96914,
+  "csv_rows": 1786,
+  "csv_schema": "relpath,bytes,sha12",
+  "gzip_deterministic": "compresslevel=9 mtime=0"
+ },
+ "verified_end_to_end": "2026-10-05: remote 8/8 shards concat==local b64, gz sha256 match, csv 96914B/1786 rows",
+ "supersedes": "moon/MEDIA_MANIFEST.csv.gz.b64 (corrupt single-file attempts, to be deleted)"
+}
