@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T20:56:48.712Z",
+  "generated_at": "2026-10-05T20:58:21.871Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1879,
-  "merkle_root_sha3_512": "5a311d826a67ddb81256b4fdd6f47dec0cd6c64abaa761b7012bdf798ccd9705de8e39bf04648f85207cfc901d94c91e00e26784fa84eaca02dbddaf953dcdc9",
-  "hmac_sha3_512": "120f6adb7817a39b230dca1b235393ef2e1ab21ac7799387ef15f3af404be4310018caaf43a1516a0b1a82b702baf297a5e85fbe11d5b0c8b1c98a7b5e114071",
+  "file_count": 1880,
+  "merkle_root_sha3_512": "0ce3604d456d0e90d8115f26a2044f81324216cc9b2991f387e470b8af6a488b855fb382407c65eb3d8ecebdc0829f48eed606f7ac515a87d14cce21a2625c8f",
+  "hmac_sha3_512": "8a7c30d13064edbaed755b9474d38dce3d1af09095a604533a82aad150f1612eac7c710b5837859ee82e3e8f9b1891bb40730f468437b997b3e19bf64c555d27",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1072,6 +1072,12 @@
       "size": 2401,
       "content_sha3_512": "392de06278a5a8b999385606b6775b8549a1b4eb5e0f55fc6474e5107afb24384884ff1d35dffae1bb7e9a13bfae5ee2afa590d2400c1811136c919a8953bf04",
       "leaf_sha3_512": "102a3d44ba1b6e760028837a69331bdac01e978092f046a2bf1674e26e63f681eed699f5d41bc9d80e21f0242cf8e7511d02fdc43ceccd4bda06979fef1a2f26"
+    },
+    {
+      "path": "skills-experience/kimi-code-quantlab/2026-10-06-kimi-code-quantlab-skill-experience-v04.md",
+      "size": 2603,
+      "content_sha3_512": "a1c5528c7a8670dffd681dab844f65588d3c0f5491243263573df09b0d03ab5a5cdc276cfaa106613f058a40fdd47e425ebd150bcb8319798c18fc61ccd483f5",
+      "leaf_sha3_512": "3852dae1df074f4dc941f347c166d7775137f808f2d89072caeb94e2b296900ebcf4c25a2c0424e65a88d717fa049fc9e61fef208a66348b2aff53c4eb000177"
     },
     {
       "path": "skills-experience/kimi-code-quantlab/2026-10-06-kimi-code-quantlab-skill-experience.md",
