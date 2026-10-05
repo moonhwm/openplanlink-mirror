@@ -44,7 +44,7 @@
 
 ## E-07 待办（下一轮及以后）
 
-- [ ] 技能库全量 delta 同步（本地 vs 仓库 117 件镜像比对，识别 09-30 后新增/变更件）——本轮先补经验层。
+- [x] 技能库全量 delta 同步（本地 vs 仓库 117 件镜像比对，识别 09-30 后新增/变更件）——10-06 已完成：169 件 delta（165 推/3 留/1 冲突处置）。
 - [ ] EXPERIENCE 条目经 Codex 席（GPT-6.1 Sol Max）互验后升 conf。
 
 ---
@@ -112,3 +112,20 @@
 ---
 登记：守藏(DF-DOC-01)（Qoder 工作区，git 身份即提交署名，可复核）· 2026-10-06 追加 E-14~E-15
 敏感面自检：本节不含密钥串、MAC 地址、预签名 URL；路径中用户名以 `<用户>` 占位；E-14~E-15 全部为本轮实测，逐条可复核。
+
+## E-16 Neon 数据源：库名/端点禁凭习惯推断（conf=high，10-06 当轮踩坑实证）
+
+- 场景：向 Neon persona_announcements 拟写 INSERT 前定位数据库。
+- 教训：连接 profile/项目名下挂的库名与直觉命名无必然关系（playground 库才是 night-playground-warehouse 的所属库）；凡涉库名、端点 ID、分支名，一律先列目录（list_postgres_databases / list_branches）实测确认，禁凭命名习惯推断。
+- 复用条件：一切 Neon/Postgres 写类动作前置。
+
+## E-17 列契约禁臆断：先 information_schema 内省再拟 INSERT（conf=high，10-06 当轮踩坑实证）
+
+- 场景：查 Supabase governance_records 最新时间戳。
+- 教训：凭惯例写 `created_at` 直接报 42703（列不存在）；内省 information_schema 后确认时间列名为 `ts`。**规则**：任何新表首次交互，第一条 SQL 必须是列契约内省；INSERT 语句的列名一律以内省结果为准，不得沿用他表惯例。
+- 复用条件：一切 SQL 写类动作前置；读类遇 42703/42883 类错误时先内省再重试。
+
+---
+登记：守藏(DF-DOC-01)（Qoder 工作区，git 身份即提交署名，可复核）· 2026-10-06 追加 E-14~E-15
+敏感面自检：本节不含密钥串、MAC 地址、预签名 URL；路径中用户名以 `<用户>` 占位；E-14~E-15 全部为本轮实测，逐条可复核。
+追加：huan16-kimi-seat · 2026-10-06 E-16~E-17（与守藏 E-08~E-15 合并共存，无撞号）
