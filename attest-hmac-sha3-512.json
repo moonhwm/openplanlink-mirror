@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:10:11.160Z",
+  "generated_at": "2026-10-05T19:10:36.879Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1823,
-  "merkle_root_sha3_512": "d3cb11f6126bd0fa1e9532638e7895743a6b71c93ead649477c0feaa763792de4e43a49defca9951f0f46770c71eca49f8b898c969a6984b8a18b90e75b9e655",
-  "hmac_sha3_512": "5156a7cafc947c7cde06b551c28e09d7d16b430027cc16db30449d686434012de2117a75baf41fc25438431ecac0024bff2434c77c7b65962f272f82aaecc959",
+  "file_count": 1826,
+  "merkle_root_sha3_512": "bfb79a438cf4f3c30f47d8d5042d588840d96d6b56aa83471d237600c37170164ebb01c9cb570bce1ebb104d012a8b6d4d59e3d3266d1b49beaec605d50cc1a5",
+  "hmac_sha3_512": "ddf3c4699c01cebf102636e8d650860374674104ada0a3880fba06637731189c52b68f26dd1425f1c932fc947399c67e7984a188e1b31f9f47ea396b660043da",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -46,6 +46,12 @@
       "size": 1082,
       "content_sha3_512": "e2ca8fcf0ce11c281581206b115c29e77c1873691bc4be52de758118b0eb768aca8f26b883d3d7c22b21b4d85fa43e2c4a52b00e7035d925afbc229f3d646567",
       "leaf_sha3_512": "d8bbaa7df785716b709f97a010c2730fa2a17a7c4551bc09fe5af66b5b082e634f5fd977a296d10fde68ec4acfad36a454017208cc5e26e76568a4635f481a49"
+    },
+    {
+      "path": ".github/workflows/cd-attest.yml",
+      "size": 3266,
+      "content_sha3_512": "a5e28d699e0c94a870abb8f2e7c1d795f3da2dd41b539de6da1044ca6edd99933e394eba807a866fb80314fc00aa38035818b1e5e3c8d80df9162d12b8e0d10e",
+      "leaf_sha3_512": "cdb3415b8d52c8da581b258c1c313fe0615255ef53fe4d7375b3df48a95a1c004eaeebda5d5bac01ebbabda96a00efd776a503e401a160d6c55a27456f952162"
     },
     {
       "path": ".github/workflows/ci-verify.yml",
@@ -130,6 +136,12 @@
       "size": 460,
       "content_sha3_512": "c023c3f28c3ce223f841779ef25669c403b412a7bcd647fe094620d2f1fdd75f207cf0c9619efd0252325af55613115213886c5b62d221f6e82316fac85ff313",
       "leaf_sha3_512": "b186295b9fd866242e2e7b71eb1b304491d8f110afbcc7f6861d815d691abafff97a37a552658a378abe9fb1f3da1745f84393a2ef8ac37b02bd08eb90c53ec7"
+    },
+    {
+      "path": "STATUS.md",
+      "size": 739,
+      "content_sha3_512": "7c3630c37d007d9fcdb6b218df80584c6e717261311934dedb97b904f309f62809f26c583b45e710a483c25c82bccfd75e3337bbb46dca2ee80deff34f59130e",
+      "leaf_sha3_512": "71bbb3b4ac66aaac882672c58e1027599e119cbedf79585330bba1bfab84fa4704e15674865c78d6beab3daea89b37e0d361c5755d450b3ce37de28bd3878235"
     },
     {
       "path": "_tmp_probe.yml",
@@ -10498,6 +10510,12 @@
       "size": 2940,
       "content_sha3_512": "017a3f6a7f3e35689f651de485297fbd50b0b950b9f813fcfc8937754ea04d2f344f69ea5ec95548b4066844ef554284f90c893069d124636f3a2de39a6a3f4f",
       "leaf_sha3_512": "0fd3dd6e1340a6045616a6f133a19f02d7aecc3982e9fad34f77b2bd6d8247e2bc5868618b5dcfa641983bc81659b4b736f2cba3571d0eeb369d8f2e07837bf8"
+    },
+    {
+      "path": "tools/cd_attest.py",
+      "size": 6534,
+      "content_sha3_512": "7610892b25ab0fe4a3655dbcfbba1e86b940b4eeb1cc7955ed1a91e8cecd3fd80eb298675818616c5d992bd1fb61a396a562a63ee7a2a2cc4a30910d63c069b9",
+      "leaf_sha3_512": "69c1a199861aff830bdd6065cb15fe1f11037c5081bd9a4268eefaa045b10434487ee7cd5c7b7ef74430393b08b60d58a2e58ed3510392a28d8e4490c7d85041"
     },
     {
       "path": "tools/compensate.py",
