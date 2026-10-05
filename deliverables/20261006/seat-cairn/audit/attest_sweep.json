@@ -1,0 +1,160 @@
+{
+  "scanned": 10,
+  "same_batch": 6,
+  "different_batch": 4,
+  "results": [
+    {
+      "rev": "eb2c9479c3dbe54b589b77008071a9ffc612a104",
+      "verdict": "SAME_BATCH",
+      "l1": true,
+      "l3": true,
+      "coverage": true,
+      "file_count": 1894,
+      "tree_files": 1895,
+      "missing_declared": 0,
+      "extra_declared": 0,
+      "missing_sample": [],
+      "extra_sample": [],
+      "paired": false
+    },
+    {
+      "rev": "8a39c6c235aefccadd4b346fe8ce93053da86e26",
+      "verdict": "PAIRED_OK",
+      "l1": true,
+      "l3": true,
+      "coverage": false,
+      "file_count": 1890,
+      "tree_files": 1895,
+      "missing_declared": 4,
+      "extra_declared": 0,
+      "missing_sample": [
+        "deliverables/20261006/seat-cairn/console/mem_audit_20261005T214028Z.json",
+        "deliverables/20261006/seat-cairn/console/mem_audit_20261005T214028Z.md",
+        "deliverables/20261006/seat-cairn/exchange/折扣取证与窗口对齐_内存体检_DF-NIGHTOPS-20261006-CAIRN-02.otl"
+      ],
+      "extra_sample": [],
+      "paired": true
+    },
+    {
+      "rev": "fed168241be8f5478ccaff04df9bca56934689f6",
+      "verdict": "SAME_BATCH",
+      "l1": true,
+      "l3": true,
+      "coverage": true,
+      "file_count": 1890,
+      "tree_files": 1891,
+      "missing_declared": 0,
+      "extra_declared": 0,
+      "missing_sample": [],
+      "extra_sample": [],
+      "paired": false
+    },
+    {
+      "rev": "4597de46c6c1400bccfc8a23515fda12644ad598",
+      "verdict": "PAIRED_OK",
+      "l1": true,
+      "l3": true,
+      "coverage": false,
+      "file_count": 1887,
+      "tree_files": 1891,
+      "missing_declared": 3,
+      "extra_declared": 0,
+      "missing_sample": [
+        "deliverables/20261006/seat-cairn/console/console_20261005T213923Z.json",
+        "deliverables/20261006/seat-cairn/console/console_20261005T213923Z.md",
+        "deliverables/20261006/seat-cairn/tools/console_report.py"
+      ],
+      "extra_sample": [],
+      "paired": true
+    },
+    {
+      "rev": "848ec46edbd50b0a779a795da194f8cacb23baba",
+      "verdict": "SAME_BATCH",
+      "l1": true,
+      "l3": true,
+      "coverage": true,
+      "file_count": 1887,
+      "tree_files": 1888,
+      "missing_declared": 0,
+      "extra_declared": 0,
+      "missing_sample": [],
+      "extra_sample": [],
+      "paired": false
+    },
+    {
+      "rev": "15ce41ce0cafb6e0751226a14dbb39f9e7589513",
+      "verdict": "PAIRED_OK",
+      "l1": true,
+      "l3": true,
+      "coverage": false,
+      "file_count": 1885,
+      "tree_files": 1888,
+      "missing_declared": 2,
+      "extra_declared": 0,
+      "missing_sample": [
+        "deliverables/20261006/seat-cairn/exchange/夜间运维窗口与折扣时段调度方案v0.1_DF-NIGHTOPS-20261006-CAIRN-01.otl",
+        "deliverables/20261006/seat-cairn/tools/night_window.py"
+      ],
+      "extra_sample": [],
+      "paired": true
+    },
+    {
+      "rev": "ec4618a9de33e78f5bdb1772efd667f5a0842882",
+      "verdict": "SAME_BATCH",
+      "l1": true,
+      "l3": true,
+      "coverage": true,
+      "file_count": 1885,
+      "tree_files": 1886,
+      "missing_declared": 0,
+      "extra_declared": 0,
+      "missing_sample": [],
+      "extra_sample": [],
+      "paired": false
+    },
+    {
+      "rev": "12f9bbbd694bb267fbbd330e8902c0a6dd364fe5",
+      "verdict": "PAIRED_OK",
+      "l1": true,
+      "l3": true,
+      "coverage": false,
+      "file_count": 1884,
+      "tree_files": 1886,
+      "missing_declared": 1,
+      "extra_declared": 0,
+      "missing_sample": [
+        "deliverables/20261006/kimi-code-quantlab/收口报_GOVCLOSE-2026-1006-GQ-01.md"
+      ],
+      "extra_sample": [],
+      "paired": true
+    },
+    {
+      "rev": "2b728582b1cc951bcdaa0b36d0ff70bb91db0712",
+      "verdict": "SAME_BATCH",
+      "l1": true,
+      "l3": true,
+      "coverage": true,
+      "file_count": 1884,
+      "tree_files": 1885,
+      "missing_declared": 0,
+      "extra_declared": 0,
+      "missing_sample": [],
+      "extra_sample": [],
+      "paired": false
+    },
+    {
+      "rev": "fa886fc0a2aae210d4090c7ff4e1631e55d26200",
+      "verdict": "SAME_BATCH",
+      "l1": true,
+      "l3": true,
+      "coverage": true,
+      "file_count": 1884,
+      "tree_files": 1885,
+      "missing_declared": 0,
+      "extra_declared": 0,
+      "missing_sample": [],
+      "extra_sample": [],
+      "paired": true
+    }
+  ]
+}
