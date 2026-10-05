@@ -1,0 +1,444 @@
+{
+ "round": "R57",
+ "ts": "2026-10-05T12:40:00+0800",
+ "root": "moon/",
+ "repo": "moonhwm/openplanlink-mirror",
+ "branch": "main",
+ "total": 1906,
+ "note": "媒体 1786 件在 MEDIA_MANIFEST.csv.gz.b64（relpath,bytes,sha12）；本文件登记代码/指针类 120 件",
+ "media_csv": {
+  "bytes": 96914,
+  "gz_sha256": "2d46a9773979fe1065cdb208edd2147b506348902ac0b2b8a53a29bb6edf6aed",
+  "rows": 1786
+ },
+ "classes": {
+  "delta-skeleton": 1,
+  "text-deferred": 2,
+  "vendor-pointer": 1,
+  "blob-pointer": 1786,
+  "text": 116
+ },
+ "files": {
+  "css/liquid-glass.css": {
+   "cls": "text",
+   "bytes": 9899,
+   "sha12": "e4d582c3a201"
+  },
+  "favhub/assets/three.module.min.js": {
+   "cls": "vendor-pointer",
+   "bytes": 670681,
+   "ref": "npm three@0.160.0/build/three.module.min.js (r160, MIT)",
+   "sha12": "c40305c4ea11"
+  },
+  "favhub/assets/vendor/aplayer/APlayer.min.css": {
+   "cls": "text",
+   "bytes": 12528,
+   "sha12": "d2e38d3c32a6"
+  },
+  "favhub/assets/vendor/aplayer/APlayer.min.js": {
+   "cls": "text",
+   "bytes": 59325,
+   "sha12": "c462532feaaa"
+  },
+  "favhub/assets/vendor/suncalc.js": {
+   "cls": "text",
+   "bytes": 9116,
+   "sha12": "075d0dc7de1e"
+  },
+  "favhub/data/f1864816428.json": {
+   "cls": "text",
+   "bytes": 10791,
+   "sha12": "078f982c1832"
+  },
+  "favhub/data/f2026849128.json": {
+   "cls": "text",
+   "bytes": 11342,
+   "sha12": "83bab7c15228"
+  },
+  "favhub/data/f2525826128.json": {
+   "cls": "text",
+   "bytes": 1861,
+   "sha12": "5ec49e0314b6"
+  },
+  "favhub/data/f2546853528.json": {
+   "cls": "text",
+   "bytes": 3444,
+   "sha12": "ec7ddfa45b01"
+  },
+  "favhub/data/f2552713828.json": {
+   "cls": "text",
+   "bytes": 26176,
+   "sha12": "7f7303e4b747"
+  },
+  "favhub/data/f2870777228.json": {
+   "cls": "text",
+   "bytes": 22254,
+   "sha12": "042a290ab9a1"
+  },
+  "favhub/data/f2956636228.json": {
+   "cls": "text",
+   "bytes": 18564,
+   "sha12": "2388587ead84"
+  },
+  "favhub/data/f3059371328.json": {
+   "cls": "text",
+   "bytes": 43539,
+   "sha12": "0b12c7fcdb1d"
+  },
+  "favhub/data/f3337330628.json": {
+   "cls": "text",
+   "bytes": 173891,
+   "sha12": "7f038e46b86d"
+  },
+  "favhub/data/f3447594228.json": {
+   "cls": "text",
+   "bytes": 5015,
+   "sha12": "d20bed7bf319"
+  },
+  "favhub/data/f3456697428.json": {
+   "cls": "text",
+   "bytes": 10788,
+   "sha12": "5a307ca73e95"
+  },
+  "favhub/data/f3459451628.json": {
+   "cls": "text",
+   "bytes": 5898,
+   "sha12": "765e8c7015f1"
+  },
+  "favhub/data/f3462690228.json": {
+   "cls": "text",
+   "bytes": 343,
+   "sha12": "93c6ccf2c418"
+  },
+  "favhub/data/f3462878728.json": {
+   "cls": "text",
+   "bytes": 3963,
+   "sha12": "f298cbd1fa14"
+  },
+  "favhub/data/f3465487628.json": {
+   "cls": "text",
+   "bytes": 4897,
+   "sha12": "1063a958b9f1"
+  },
+  "favhub/data/f3480299428.json": {
+   "cls": "text",
+   "bytes": 7947,
+   "sha12": "6c81268bcf08"
+  },
+  "favhub/data/f3489294528.json": {
+   "cls": "text",
+   "bytes": 15988,
+   "sha12": "ab11791da71c"
+  },
+  "favhub/data/f3489464028.json": {
+   "cls": "text",
+   "bytes": 6479,
+   "sha12": "b10121e867de"
+  },
+  "favhub/data/f3493142728.json": {
+   "cls": "text",
+   "bytes": 973,
+   "sha12": "e95e1fd9fc38"
+  },
+  "favhub/data/f3499418728.json": {
+   "cls": "text",
+   "bytes": 6172,
+   "sha12": "099387f7c767"
+  },
+  "favhub/data/f3501053628.json": {
+   "cls": "text",
+   "bytes": 31794,
+   "sha12": "5a3699799e75"
+  },
+  "favhub/data/f3504399828.json": {
+   "cls": "text",
+   "bytes": 349,
+   "sha12": "d48bf846463a"
+  },
+  "favhub/data/f3510240328.json": {
+   "cls": "text",
+   "bytes": 18197,
+   "sha12": "02acd8e5ed84"
+  },
+  "favhub/data/f3512977928.json": {
+   "cls": "text",
+   "bytes": 295,
+   "sha12": "7f98d7e4da6a"
+  },
+  "favhub/data/f3519138128.json": {
+   "cls": "text",
+   "bytes": 4238,
+   "sha12": "c234c890eec8"
+  },
+  "favhub/data/f3521347228.json": {
+   "cls": "text",
+   "bytes": 32173,
+   "sha12": "dddc7996342f"
+  },
+  "favhub/data/f3535908928.json": {
+   "cls": "text",
+   "bytes": 23863,
+   "sha12": "c4f74f1e57d7"
+  },
+  "favhub/data/f3536007728.json": {
+   "cls": "text",
+   "bytes": 7926,
+   "sha12": "e15003d2b477"
+  },
+  "favhub/data/f3558980328.json": {
+   "cls": "text",
+   "bytes": 946,
+   "sha12": "1f1e7919f7aa"
+  },
+  "favhub/data/f3585956928.json": {
+   "cls": "text",
+   "bytes": 4769,
+   "sha12": "b759c387e5f7"
+  },
+  "favhub/data/f3588838028.json": {
+   "cls": "text",
+   "bytes": 27293,
+   "sha12": "7955395c4a6a"
+  },
+  "favhub/data/f3600453528.json": {
+   "cls": "text",
+   "bytes": 3288,
+   "sha12": "0db7cb26b3bf"
+  },
+  "favhub/data/f3609005628.json": {
+   "cls": "text",
+   "bytes": 10127,
+   "sha12": "f708d8eed006"
+  },
+  "favhub/data/f3610015828.json": {
+   "cls": "text",
+   "bytes": 433,
+   "sha12": "dbd7785ac414"
+  },
+  "favhub/data/f3627172628.json": {
+   "cls": "text",
+   "bytes": 1030,
+   "sha12": "90bebe30f338"
+  },
+  "favhub/data/f3631375528.json": {
+   "cls": "text",
+   "bytes": 1220,
+   "sha12": "ba6fb185ca05"
+  },
+  "favhub/data/f3634218228.json": {
+   "cls": "text",
+   "bytes": 1533,
+   "sha12": "5df401985e07"
+  },
+  "favhub/data/f3656733628.json": {
+   "cls": "text",
+   "bytes": 904,
+   "sha12": "16fa989e2f29"
+  },
+  "favhub/data/f3659499228.json": {
+   "cls": "text",
+   "bytes": 632,
+   "sha12": "6d69a6e256a0"
+  },
+  "favhub/data/f3767348728.json": {
+   "cls": "text",
+   "bytes": 931,
+   "sha12": "8a542e5ac6f7"
+  },
+  "favhub/data/f3864220528.json": {
+   "cls": "text",
+   "bytes": 4285,
+   "sha12": "a6ae6e172b57"
+  },
+  "favhub/data/f3866633728.json": {
+   "cls": "text",
+   "bytes": 333,
+   "sha12": "d94b4a20db5d"
+  },
+  "favhub/data/f3880179728.json": {
+   "cls": "text",
+   "bytes": 1191,
+   "sha12": "2650850e70d9"
+  },
+  "favhub/data/f3880229528.json": {
+   "cls": "text",
+   "bytes": 351,
+   "sha12": "439d727f67fd"
+  },
+  "favhub/data/f3885232828.json": {
+   "cls": "text",
+   "bytes": 296,
+   "sha12": "607769c2703b"
+  },
+  "favhub/data/f3893199728.json": {
+   "cls": "text",
+   "bytes": 19552,
+   "sha12": "8ce46b79b599"
+  },
+  "favhub/data/f3924365328.json": {
+   "cls": "text",
+   "bytes": 274,
+   "sha12": "e144f56496b2"
+  },
+  "favhub/data/f3979881928.json": {
+   "cls": "text",
+   "bytes": 2600,
+   "sha12": "d95d3aabbedf"
+  },
+  "favhub/data/f3982060828.json": {
+   "cls": "text",
+   "bytes": 5087,
+   "sha12": "c81f77759445"
+  },
+  "favhub/data/f4010628928.json": {
+   "cls": "text",
+   "bytes": 1070,
+   "sha12": "d7d187f236ba"
+  },
+  "favhub/data/f4017403728.json": {
+   "cls": "text",
+   "bytes": 631,
+   "sha12": "43ec4cbcd263"
+  },
+  "favhub/data/f4018726328.json": {
+   "cls": "text",
+   "bytes": 1262,
+   "sha12": "cfba755d8648"
+  },
+  "favhub/data/f4030537328.json": {
+   "cls": "text",
+   "bytes": 3323,
+   "sha12": "f574eed339df"
+  },
+  "favhub/data/f4044302528.json": {
+   "cls": "text",
+   "bytes": 36283,
+   "sha12": "c68a69a29cb3"
+  },
+  "favhub/data/f4048036228.json": {
+   "cls": "text",
+   "bytes": 10141,
+   "sha12": "398e8936dcb1"
+  },
+  "favhub/data/f4050247928.json": {
+   "cls": "text",
+   "bytes": 326,
+   "sha12": "249ad87710ea"
+  },
+  "favhub/data/f4060021228.json": {
+   "cls": "text",
+   "bytes": 1311,
+   "sha12": "779747de561b"
+  },
+  "favhub/data/f4061976128.json": {
+   "cls": "text",
+   "bytes": 2949,
+   "sha12": "071fee3df7d1"
+  },
+  "favhub/data/f4074181428.json": {
+   "cls": "text",
+   "bytes": 627,
+   "sha12": "bf19043e59e4"
+  },
+  "favhub/data/f4104195228.json": {
+   "cls": "text",
+   "bytes": 968,
+   "sha12": "8cd8bd29961a"
+  },
+  "favhub/data/f4104238428.json": {
+   "cls": "text",
+   "bytes": 19344,
+   "sha12": "9638e0394ff9"
+  },
+  "favhub/data/f4106653128.json": {
+   "cls": "text",
+   "bytes": 666,
+   "sha12": "12dc02bd1464"
+  },
+  "favhub/data/f4120703828.json": {
+   "cls": "text",
+   "bytes": 285,
+   "sha12": "2fb6aca47361"
+  },
+  "favhub/data/f4121531728.json": {
+   "cls": "text",
+   "bytes": 260,
+   "sha12": "4b705526b036"
+  },
+  "favhub/data/f4124262728.json": {
+   "cls": "text",
+   "bytes": 312,
+   "sha12": "d0f918fe20c6"
+  },
+  "favhub/data/f4126110628.json": {
+   "cls": "text",
+   "bytes": 1552,
+   "sha12": "73d587b549bd"
+  },
+  "favhub/data/f4129151128.json": {
+   "cls": "text",
+   "bytes": 319,
+   "sha12": "c23cd4177f94"
+  },
+  "favhub/data/f4137122828.json": {
+   "cls": "text",
+   "bytes": 301,
+   "sha12": "fcef3f52d2a0"
+  },
+  "favhub/data/f4143096128.json": {
+   "cls": "text",
+   "bytes": 7586,
+   "sha12": "89f0220e6c77"
+  },
+  "favhub/data/f4164038428.json": {
+   "cls": "text",
+   "bytes": 304,
+   "sha12": "d3c8bce2df76"
+  },
+  "favhub/data/f4173074328.json": {
+   "cls": "text",
+   "bytes": 593,
+   "sha12": "424205f26cce"
+  },
+  "favhub/data/f4174552828.json": {
+   "cls": "text",
+   "bytes": 309,
+   "sha12": "086159f8110c"
+  },
+  "favhub/data/f4181252628.json": {
+   "cls": "text",
+   "bytes": 7423,
+   "sha12": "2c17a19160a0"
+  },
+  "favhub/data/f4191132528.json": {
+   "cls": "text",
+   "bytes": 330,
+   "sha12": "bcb3c8d235c2"
+  },
+  "favhub/data/f4197064628.json": {
+   "cls": "text",
+   "bytes": 269,
+   "sha12": "aad6eb1e3cad"
+  },
+  "favhub/data/f4202791528.json": {
+   "cls": "text",
+   "bytes": 5053,
+   "sha12": "f373bad582d8"
+  },
+  "favhub/data/f4211976728.json": {
+   "cls": "text",
+   "bytes": 308,
+   "sha12": "c66dbb8a8ca9"
+  },
+  "favhub/data/f4223219328.json": {
+   "cls": "text",
+   "bytes": 1005,
+   "sha12": "03df8697ff89"
+  },
+  "favhub/data/f4240423928.json": {
+   "cls": "text",
+   "bytes": 665,
+   "sha12": "c504af9d58b1"
+  }
+ }
+}
