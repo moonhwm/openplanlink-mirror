@@ -3104,3 +3104,36 @@
   5. 4件wpsonline文件正文未获取（须机主登录kdocs.cn手动导出）
   6. 符号链接创建须机主以管理员身份手动执行
   7. GitHub push须机主将公钥添加到GitHub
+
+---
+
+## 2026-10-05T23:00 砚坚席——ICRF原型+Server酱实装+Cordis精读+A2A看板ArkUI
+
+- **谁**：砚坚（码道·GLM-5.2/华为云CodeArts）
+- **何时**：2026-10-05T23:00 CST
+- **改了什么**：
+  - 新增 scripts/event_bus.py — 事件总线ICRF原型（publish/consume/get_pending + 5种分发模式 + 共识聚合器）
+    - 本地自检6项全绿 + 幻16部署自检6项全绿
+  - 新增 scripts/serverchan_push.py — Server酱推送模块实装
+    - 幻16自检3项全绿（INFO推送pushid=46642204/频率控制拦截/CRITICAL告警pushid=46642205）
+  - 更新 GOVERNANCE/proposals/cordis_research_20261005.md — Cordis论文与文档精读补充
+  - 新增 entry/src/main/ets/pages/A2ADashboard.ets — A2A IM GUI看板ArkUI代码（3Tab+5状态+3类条目）
+- **如何验证**：
+  - V1：事件总线本地+幻16自检6项全绿 ✅
+  - V2：Server酱幻16自检3项全绿 ✅
+  - V3：Cordis论文摘要+官方文档已补充 ✅
+  - V4：A2A看板ArkUI代码包含3Tab+5状态+3类条目 ✅
+  - V5：越窗如实报 ✅
+  - V6：API密钥不落盘不入档 ✅
+- **遗留**：
+  1. A2ADashboard.ets尚未接入路由
+  2. 事件总线ICRF须与幻16A2A端点集成
+  3. A2A看板须接入真实事件总线数据
+
+## [意向登记] 2026-10-05 08:5x — Kimi Code（顾权席）· 不动代码
+
+- **意图**：申请将 `harmony-app/` 整目录以 junction 工艺迁移至 `A:\migrate\kimi\harmony-app`（robocopy→/MIR /L 干跑对账→原件入回收站→mklink /J→读验；路径不变、全程可逆），释放 C: 约 1.53G。依据：机主 2026-10-05 令「任何可以正常调用的映射迁移到A盘」+守藏/石敢当迁移共识。
+- **现状障碍**：`.codeartsdoer/.codebase/watch.pid.lock` 被 PID 34796（python.exe，CodeArts 守望进程）持有（robocopy 错误 33 实证）；且本工程主权席为码道 IDE，依 AGENTS.md 越界规则须先登记+停机主确认。
+- **本席未动**：未迁移、未改任何文件；仅按契约登记本意向。
+- **候批**：①机主确认迁否；②若迁，请停 CodeArts 守望进程（或机主示下停法），本席即按工艺执行并回报双验证据。
+- **遗留**：迁移后 `.codeartsdoer` 索引库路径经接点解析不变，守望进程重启即可复挂；若码道席有异议请总线回函顾权。
