@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:17:04.694Z",
+  "generated_at": "2026-10-05T19:18:28.643Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1836,
-  "merkle_root_sha3_512": "207e521f7b723c814bc2c05b0c9bb943e506ba79c45f000c2d8c6616777900cb0082e50286773c355d0bc99391063a190c021037eca1e3cf35163d4bec5ef2f5",
-  "hmac_sha3_512": "cdced00b713bc401f357c3747e4f0be34f97ab9c316aa5e8e3d96a74ea161ac212b1c737bf7b583c246960bceed0a52a938b42d46cf5e557b5969910d9fc04a2",
+  "file_count": 1837,
+  "merkle_root_sha3_512": "ed42057bbf682ad179ce8cab248a47baaaf968de06adc7c2332b5863aedbce9a4f5339a13bdc4d00f6c52b95897f07c0fe5d1743210678e80db19210d3d49ade",
+  "hmac_sha3_512": "5c140e159c221b805b07d8094bdc7d43df2bab230cb74c058990e3134aa82640c4f78f952710d62c3d82bc77a4432ed07b255f7e5d0b4ed5eab460cca0f2b49a",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -49,9 +49,9 @@
     },
     {
       "path": ".github/workflows/cd-attest.yml",
-      "size": 4173,
-      "content_sha3_512": "9184ab05ca4b77e04422e3b67acba81608bdd3946e504dadb5837c28f5d41478f37f04d7664da7476848895fcac6ae55f461831df14f595672e195eeba5bc327",
-      "leaf_sha3_512": "13559eb696ea230f4a5738908db72fe3f4becc99a8df513ab91055d5fb8123f3f6cc11ace74f7e02d3eca5cb94a01f3369dcb227796e83de126e0e347be8eb9d"
+      "size": 4463,
+      "content_sha3_512": "e2510db723f8009a7ee39fdb080206f869379e033e316a7e8ea6bbb9836104cccef050a530761cd718ecbd7a6ed128af10000cc2a5d0e4161db10d87d139dca0",
+      "leaf_sha3_512": "6dd11e9f702c558b251f66f6214bfaa27335b58052736fe8bc1e9c9e405b8bc251bd58166d21e80f4f8ab10f2033ba3a423cc11c7b2f9e6a32995ae825c95618"
     },
     {
       "path": ".github/workflows/ci-verify.yml",
@@ -145,9 +145,9 @@
     },
     {
       "path": "STATUS.md",
-      "size": 645,
-      "content_sha3_512": "bf7df7447072f28c7eb44b4d9c28297c3bfb12c7691c75e03d9754fb6ad3326c832e49825263cf2f68cbb1ace8837120979f1e4db43e7e667a55a0506c897e9b",
-      "leaf_sha3_512": "5358c23924100bf7fe7bab2d0c1d731dc524b49cfeed1ff7a9338f72e0edf4bd9ad769977ea6740a577d2e5c3536f8a715cc462720be382a530188fe358dae37"
+      "size": 739,
+      "content_sha3_512": "295f62ec0415afc7a365c7ec9df5897498997f09e26d4cee13980bf3942e7b1c6f207e12a1b4c17f7804b2ba50f93749c1a00f3527c548459576c120bd7f18d0",
+      "leaf_sha3_512": "554db1084a52d83bb4ce1d380ff769261c97636c69bd6730942a6d3e54c83ac51f4755bfdab6176438f64b12dfdf8eac1079385a8edfdd7a64a4e7fd9cbf9e11"
     },
     {
       "path": "_tmp_probe.yml",
@@ -10494,6 +10494,12 @@
       "leaf_sha3_512": "128e690458bd9983198d289eddd903574d5b742867fb3cfe44453b792290b0a1f6a75fde64d5d8ed6d03b4fcacdd496e94283e3f57ab81e8317428f849012728"
     },
     {
+      "path": "status/index.html",
+      "size": 1981,
+      "content_sha3_512": "3eff55eefde764e334003fd1b0074cbb39c7c06f3f07d140b91fc5188cd34ced54a756e895aded6ac35a3880fdfc797d3c0b501578f62a6027d82e9780e88335",
+      "leaf_sha3_512": "f78f343bb7dee669320b22f030168ea6e4a6a3ba6ba056d0bfbf6d67796220f286e5f2ccf1a928e3e972595f7fd061705823e4cb39115761674074875c3870de"
+    },
+    {
       "path": "tools/SHA3_TREE.md",
       "size": 1445,
       "content_sha3_512": "140f9e7a493907d84116ace5178b70b984b74a08016de269af2f8d4edae017a4245017dcf73b671ec0652f766915d1d101d159a34f59cc03c826000620fb1c4e",
@@ -10561,9 +10567,9 @@
     },
     {
       "path": "tools/cd_attest.py",
-      "size": 6534,
-      "content_sha3_512": "7610892b25ab0fe4a3655dbcfbba1e86b940b4eeb1cc7955ed1a91e8cecd3fd80eb298675818616c5d992bd1fb61a396a562a63ee7a2a2cc4a30910d63c069b9",
-      "leaf_sha3_512": "69c1a199861aff830bdd6065cb15fe1f11037c5081bd9a4268eefaa045b10434487ee7cd5c7b7ef74430393b08b60d58a2e58ed3510392a28d8e4490c7d85041"
+      "size": 9025,
+      "content_sha3_512": "561c11e000858c55f7c058bb7f961b58ab6b312e9de7334fb4c78955428fe47b6e3d37c92038f904ef2a7af1fe677531ae257bc488f92ee4df52c9fae89c3732",
+      "leaf_sha3_512": "e29ca19e61596a62a40913a62cbe8153a1bc93c96c32deb1b19f4bfecf0f95eb2fa140f3b26c98dc1f195379cda6b66e2912c43ba0709d1415b7e2c22a30358f"
     },
     {
       "path": "tools/compensate.py",
