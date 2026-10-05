@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T20:07:05.523Z",
+  "generated_at": "2026-10-05T20:13:51.317Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1867,
-  "merkle_root_sha3_512": "95b6ea658d887cda6308dce225fefc9639487ace77cf1f1127a1dbf05aed93c8524f261ff56b0dffd0f7e3e0239c97ed2bfa5060b351f49b7d8da982b7d519e6",
-  "hmac_sha3_512": "78688317b14df4a04cbd928b667136e36c9858725bbf9585a22cf67dab850b5d32f4bb39b3004eab131146a2ae4cd49245c5edcf95e294eef3c3ee3f5d1b14c3",
+  "file_count": 1868,
+  "merkle_root_sha3_512": "df7cb80e2cbd5bf905bde34bc413ffa2d348365c03c0b6ea5a933cd46ef02103bccee811c2009c54841d97e54043815c78b1815dc60eac0c2e2422c4ad285b00",
+  "hmac_sha3_512": "d86c0f4f2df7a9f0a22f44d4c1379e9356b5d67e860e0ac91a0cf686507b71b63af20a13605170e8e010c07816784ef3ce010fa9f6cd96285e98c9c088589913",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -982,6 +982,12 @@
       "size": 5138,
       "content_sha3_512": "c7e1d6f3128959d7a5cb5322e4b0aa67d42944b4dfa591dd3f03ebeba4840e3c0087525a384ae5767c1ad468a54e40971d5f1dce031efab845b7bbb3067460b3",
       "leaf_sha3_512": "902cc7bf36c38ab21ae0a1e68fdb1716368a07dbbe1dcfb88b00bb9184995544745a200448993d61549f5bcc6473fda5d820e674b032961cc364367ec4b85c22"
+    },
+    {
+      "path": "skills-experience/k3-cloud-govdoc/2026-10-06-k3-cloud-govdoc-skill-experience-01.md",
+      "size": 3489,
+      "content_sha3_512": "514243af0960f4f2d3864d90affdf6d675b9cd20f8546447a9eda60e61151f95e2433c6e6a16bf7dc668b6269718d1e22a5a3e8833e5a4e249d99938ff7eff52",
+      "leaf_sha3_512": "066009c7cce86bb5c30f760bfc0dd441d79eda3cbfff3db75a4cb31ab4a54bb74bc411b4a9d90e950e4e504331a4677847489361e5598c32c44ec875d59e0024"
     },
     {
       "path": "skills-experience/k3-main/2026-10-06-k3-main-skill-experience-02.md",
