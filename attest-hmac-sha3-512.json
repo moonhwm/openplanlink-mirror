@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T12:15:01.467Z",
+  "generated_at": "2026-10-05T12:16:23.943Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 836,
-  "merkle_root_sha3_512": "cd59c1d883179bff6fccbea43259f311662a96be2d95632e91221664dd0834f630b2d6b6bb57526f6f3a5c92081516dafa38af46b86c4ed5c37a71a57f545f75",
-  "hmac_sha3_512": "d95e7c1f544feb47fed36334029f4515ff7e9f5803e1e2e703a8fa50900a2ea92586a24cc9865f8db03fec351750aa95d08ac00e943949aa29af68db3b343774",
+  "file_count": 837,
+  "merkle_root_sha3_512": "5871212e05a586e6ccba346fd19594dc553d5a3b891b233dc2c3ea068a21251ff7c851d1bd9854810b95edc9b1a71d566bb6b63d6b5a7a78e349269186d3dabc",
+  "hmac_sha3_512": "8b4d5a28e9d2670053eebec2b22f6ff3affe186834db9304c943efa1a7d59ec7b9a16b4216a0793dc0810463384495415c49db5a765f68b6cd467535941b4db7",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -52,6 +52,12 @@
       "size": 1337,
       "content_sha3_512": "872c328f280f46c3eb7acaca068af110bd8b86aa7fa4af8d0d51df8adbeb5b57e06f6939eb6507ad8e137c84e68e73fe1da06f92cdceaa2d4682407d57c117ce",
       "leaf_sha3_512": "fa001e2b6e188bb555078dee0337e7d9b86d402f0b91c9da2449b38ec7dabb0def864c497209d4654833d32724ba5381bb69b2d0f485e97ceae79fc10cf33a76"
+    },
+    {
+      "path": ".gitignore",
+      "size": 25,
+      "content_sha3_512": "0b43ccf0416f1c1e25906ba9a26b52ef2e535d043791841004c0f870b7c9d7cc8f1fec24e7eaa9f1e3d193350a4c70d998440ba1e36c2f51a8fc26b8572f517a",
+      "leaf_sha3_512": "c9e3eaaf49929f74c8e44080df21079a6bae96128f186f1278867dc8f6ec26deef8cbb6a45968aca859ccf0b967b3a075ebbd65bb67137a29b995e8cd8acb76e"
     },
     {
       "path": ".nojekyll",
