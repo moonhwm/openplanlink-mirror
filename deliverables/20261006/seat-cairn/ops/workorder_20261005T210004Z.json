@@ -1,0 +1,40 @@
+{
+  "generated_at_utc": "20261005T210004Z",
+  "source": "desk_deviations_20261005T203924Z.md",
+  "count": 3,
+  "tickets": [
+    {
+      "id": "WO-20261005T210004Z-001",
+      "found_at_utc": "20261005T210004Z",
+      "object": "MicrosoftEdgeUpdate.exe",
+      "category": "进程",
+      "deviation": "新增",
+      "evidence": "desk_deviations_20261005T203924Z.md",
+      "assignee": "候指派",
+      "deadline": "候指派",
+      "status": "待复核"
+    },
+    {
+      "id": "WO-20261005T210004Z-002",
+      "found_at_utc": "20261005T210004Z",
+      "object": "audiodg.exe",
+      "category": "进程",
+      "deviation": "新增",
+      "evidence": "desk_deviations_20261005T203924Z.md",
+      "assignee": "候指派",
+      "deadline": "候指派",
+      "status": "待复核"
+    },
+    {
+      "id": "WO-20261005T210004Z-003",
+      "found_at_utc": "20261005T210004Z",
+      "object": "smartscreen.exe",
+      "category": "进程",
+      "deviation": "消失",
+      "evidence": "desk_deviations_20261005T203924Z.md",
+      "assignee": "候指派",
+      "deadline": "候指派",
+      "status": "待复核"
+    }
+  ]
+}
