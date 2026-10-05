@@ -3137,3 +3137,44 @@
 - **本席未动**：未迁移、未改任何文件；仅按契约登记本意向。
 - **候批**：①机主确认迁否；②若迁，请停 CodeArts 守望进程（或机主示下停法），本席即按工艺执行并回报双验证据。
 - **遗留**：迁移后 `.codeartsdoer` 索引库路径经接点解析不变，守望进程重启即可复挂；若码道席有异议请总线回函顾权。
+## [砚坚] 2026-10-05 16:30 — 砚坚席·SPDX标识+A2A看板路由+诊断报告+SDD方案+A2A节点发现+人设定义
+
+- **谁**：砚坚（挂帅席/神经中枢）
+- **何时**：2026-10-05T15:30~16:30 CST
+- **改了什么**：
+  1. scripts/event_bus.py/serverchan_push.py/k4_audit_schedule.py — 添加SPDX-License-Identifier AGPL-3.0-only AND SSPL-1.0
+  2. entry/src/main/ets/pages/A2ADashboard.ets — 移除@Entry改为@Component，添加NavDestination包装+返回按钮+navStack
+  3. entry/src/main/ets/pages/Index.ets — 导入A2ADashboard，添加A2A看板入口按钮+navDestination路由注册
+  4. LICENSE — 新建，GNU AGPL-3.0全文+SPDX标识+SSPL分层引用
+  5. NOTICE_SSPL.md — 新建，SSPL v1.0分层组合说明
+  ! 6. GOVERNANCE/proposals/kimi_process_kill_diagnosis_20261005.md — 新建，Kimi进程被杀诊断报告（根因:内存耗尽）
+  7. GOVERNANCE/proposals/sdd_spec_driven_dev_20261005.md — 新建，SDD规范驱动开发方案
+  8. GOVERNANCE/specs/FS-20261005-01_a2a_dashboard_real_data.md — 新建，第一个SDD规范文件
+  9. GOVERNANCE/proposals/a2a_node_discovery_20261005.md — 新建，A2A网络节点发现与接入方案
+  10. GOVERNANCE/proposals/yanjian_persona_v1_20261005.md — 新建，砚坚席位人设v1.0.0定义
+  11. GOVERNANCE/audit_logs/a2a_notice_log.jsonl — 新建，A2A通告发送失败留痕
+  12. A:\A2A_Mappings\api_configs\endpoint_registry.md — 更新，添加MAC地址A0:88:69:0A:1C:2E
+- **为什么**：
+  - SPDX标识补充：3个新文件缺少协议标识，补齐合规要求
+  - A2A看板路由接入：解决遗留项#1，A2ADashboard已接入Index.ets Navigation路由
+  - LICENSE创建：满足pre-push hook的LICENSE存在性检查
+  - Kimi进程被杀诊断：机主指令"检查Kimi Code和Kimi Work经常被杀进程导致无法到场的问题"
+  - SDD方案：机主指令"尽快开始基于SDD规范驱动开发"
+  - A2A节点发现：机主指令"初始化A2A网络及节点发现与接入方案"
+  - 人设定义：机主指令"尝试给定自身以确定初始人设"
+- **如何验证**：
+  - V1：SPDX标识3个文件已添加 ✅
+  - V2：A2ADashboard路由接入（NavDestination+Index注册+A2A按钮）✅
+  - V3：LICENSE+NOTICE_SSPL.md满足pre-push检查 ✅
+  - V4：诊断报告含实测数据（15.7GB/1.4GB/910进程/事件日志）✅
+  - V5：SDD方案含6步流程+MVP策略+铃语落地计划 ✅
+  - V6：A2A节点发现含三层架构+接入协议+实现计划 ✅
+  - V7：人设定义含名字释义+性格特质+能力边界+社交风格 ✅
+  - V8：API密钥不落盘不入档 ✅
+- **遗留**：
+  1. GitHub push需机主配置SSH key或Personal Access Token
+  2. A2A通告（Codex/Astra Max状态）因幻16端点502未发送，待恢复后重发
+  3. SDD第一个规范文件（A2A看板接入真实数据）待实现
+  4. A2A节点发现注册中心原型待在幻16部署
+  5. 砚坚人设v1.0.0待在实际工作中验证和迭代
+  6. 5个wpsonline文件须机主登录kdocs.cn手动导出
