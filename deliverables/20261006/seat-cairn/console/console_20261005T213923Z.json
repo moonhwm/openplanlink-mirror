@@ -1,0 +1,66 @@
+{
+  "generated_at_utc": "20261005T213923Z",
+  "host": "LAPTOP-CHOCER02",
+  "seat": "a2a-node-local",
+  "ledger": {
+    "entries": 613,
+    "chain_ok": true
+  },
+  "ops": {
+    "events": 5,
+    "chain_ok": true
+  },
+  "repo": {
+    "local": "848ec46",
+    "origin": "848ec46",
+    "gitcode": "848ec46",
+    "aligned": true
+  },
+  "mcp_live": [
+    "ima",
+    "baidu"
+  ],
+  "idle": {
+    "at": "20261005T203924Z",
+    "cpu_idle_pct": 43.0,
+    "mem_idle_pct": 5.9,
+    "processes": 904
+  },
+  "night": {
+    "in_window": true,
+    "next_boundary": "夜间窗口止(08:00)",
+    "next_in_minutes": 141,
+    "near": false,
+    "guidance": "距最近边界 141 分钟，本窗口内可继续作业"
+  },
+  "workorders": {
+    "latest": "workorder_20261005T210004Z.json",
+    "count": 3
+  },
+  "ci": [
+    {
+      "name": "CI 校验阶段（发布门禁）",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "848ec46"
+    },
+    {
+      "name": "CD 交付证明与状态发布（attest → status）",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "848ec46"
+    },
+    {
+      "name": "许可预检（开源协议条款匹配）",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "848ec46"
+    },
+    {
+      "name": "CD 交付证明与状态发布（attest → status）",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ec4618a"
+    }
+  ]
+}
