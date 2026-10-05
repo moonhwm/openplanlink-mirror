@@ -1,0 +1,18 @@
+{
+  "seat": "k3-main",
+  "version": "v0.1-S2",
+  "date": "2026-10-06",
+  "naming_status": "候选待授名（名不自命，机主裁决）",
+  "candidates": ["唐行谨/言信", "谭成命/昊天", "石穆清/肃雍", "李如琢/如磋", "程迁善/改过"],
+  "recommendation": "唐行谨（主推）",
+  "bank_file": "bank_s2.jsonl",
+  "bank_audit": "verify_bank 八项+正交性 PASS（剪枝分布 R1:322 R2:221 R3:255 R4:249 R5a:77 R5b:0，碰撞拦截命中3）",
+  "phonology": "候选5名全 PASS（唐行谨带 N3 NOTE 留痕），三串朗读通过",
+  "collision": "候选5名碰撞零命中；W1/W2 观察行已剔除",
+  "sync_status": "谱系JSON已落；台账落库与黑板通报触发条件=机主正式授名时三同步",
+  "skill_versions": {
+    "persona-iteration-loop-ops": "v1.0.6",
+    "seat-naming-ops": "GOV-NAMING-2026-09-16-001→006"
+  },
+  "mirror": "synced 2026-10-06 via GitHub MCP (openplanlink-mirror@main)"
+}
