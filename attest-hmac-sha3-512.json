@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T21:36:54.083Z",
+  "generated_at": "2026-10-05T21:38:22.722Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1884,
-  "merkle_root_sha3_512": "469396a911ce5944ed05c8e3a0b44a56fa0ed4b5f497d1b44c056d75232d37b2284cc9c0e284ba7bfe1c24ecd099ce42d5f6f65237c37c81c4f06629935e680c",
-  "hmac_sha3_512": "b44ed1acd2a759988b65252c3ab3f95b6051d1f1b0dc6066d9c27011e95045e284b5ecb97c248cf437013ae7254bb8f41243b4c232373b00634dd95b496ba80e",
+  "file_count": 1885,
+  "merkle_root_sha3_512": "537263ec480521031f9e7ef651ade201db709bf8adfbd9a66944ce22c3bfdd09e1310510e2e2a1b6f7f44e6d37c2ae3f0ba1e7e35a8039b5ebd90e099e494dcf",
+  "hmac_sha3_512": "12536cc6a4b4047452f935c2aec8366e396b32ab90a978651baa7dc386a069e8a7b3d4187b4190d2465cd07ad344aa476bd762dce534e96ab7166855cbad8b6d",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -412,6 +412,12 @@
       "size": 2204,
       "content_sha3_512": "90b94db6915a3170bdae443f3bc10cceff214d737622ea0147e3abfbed3e93b4b6e6f0dca9fe803e57b07ab265caeed0af7346f23570b31623709dfe647246db",
       "leaf_sha3_512": "5459e4b0e865695c0fe3e204fec5c632acd2f54c761e650a8af669afa48dfef396f8f45e296f85281dbb860e812239e0cc2aaa16c66441540118dd1d1e8f6215"
+    },
+    {
+      "path": "deliverables/20261006/kimi-code-quantlab/收口报_GOVCLOSE-2026-1006-GQ-01.md",
+      "size": 7273,
+      "content_sha3_512": "7f68c54f1909067ba6e4f3bdffbb48e6569218a5374a055d43dcc03dbe09bdbd2c11cd0c4e94b1e8565e5f5e655b4cf6dff6aaae793731cc67e8e858c72b2b6d",
+      "leaf_sha3_512": "53fc217fa3f8def272572e1146e014a42ced81ad44dbd17dab028c87915d42bf2be53c1805ad249c271e714bc03cb7ead017f2cfbd29052dda08a012ac6c66fe"
     },
     {
       "path": "deliverables/20261006/seat-cairn/cpu-baseline-local.json",
