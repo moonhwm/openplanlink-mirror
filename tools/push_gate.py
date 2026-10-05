@@ -120,6 +120,7 @@ class Controller:
         hook.chmod(0o755)
         self.server_reference_hook_configured = True
         return directory, {'OPL_PUSH_GATE_PYTHON': sys.executable,
+                           'OPL_PYTHON': self.env.get('OPL_PYTHON') or sys.executable,
                            'OPL_PUSH_GATE_CHECKER': str(Path(git_upload_gate.__file__).resolve()),
                            'OPL_PUSH_GATE_REPO': str(self.repo),
                            'OPL_PUSH_GATE_PREVIOUS_HOOK': str(previous) if previous.is_file() else ''}
@@ -184,7 +185,10 @@ class Controller:
                 checked = self.run(['node', str(builder), 'verify'], extra_env=material.environment())
                 if checked.returncode:
                     raise PushGateError('tree_verification_failed')
-                self.git('commit', '-m', 'push-gate: refresh verified tree', code='manifest_commit_failed')
+                if self.git('diff', '--cached', '--name-only', '-z') != MANIFEST + '\0':
+                    raise PushGateError('unexpected_staged_changes_before_manifest_commit')
+                self.git('commit', '--only', '-m', 'push-gate: refresh verified tree',
+                         '--', MANIFEST, code='manifest_commit_failed')
                 self.events.append({'stage': 'tree_refreshed', 'head_oid': self.head()})
             else:
                 self.events.append({'stage': 'existing_tree_verified'})

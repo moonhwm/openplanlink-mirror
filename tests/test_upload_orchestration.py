@@ -78,7 +78,7 @@ class DeliveryTreeTests(unittest.TestCase):
         self.assertEqual(actual, json.loads(result.stdout))
         self.assertEqual(self.invoke(self.key_file)[0], 0)
         self.assertEqual(self.key_file.read_bytes(), self.key)
-        self.assertEqual(json.loads((self.delivery / build_opl_tree.OUTPUT).read_text())['file_count'], 2)
+        self.assertEqual(json.loads((self.delivery / build_opl_tree.OUTPUT).read_text(encoding='utf-8'))['file_count'], 2)
 
     def test_invalid_environment_key_does_not_fall_back_to_valid_file(self):
         with patch.dict(os.environ, {'OPL_A2A_HMAC_KEY_B64': 'invalid',
@@ -347,6 +347,49 @@ class PushOrchestrationTests(unittest.TestCase):
         self.assertEqual(result['code'], 'push_not_confirmed')
         self.assertTrue((self.repo / '.git/fixture-hook-marker').exists())
         self.assertEqual(self.heads(), [self.base, self.base])
+
+    def test_existing_python_hook_receives_an_executable_runtime(self):
+        self.add_clean()
+        hook = self.repo / '.git/hooks/pre-push'
+        hook.write_bytes(b'#!/bin/sh\nset -eu\n"$OPL_PYTHON" --version > /dev/null\nprintf checked > .git/fixture-runtime-marker\n')
+        hook.chmod(0o755)
+        with patch.dict(os.environ, {'OPL_PYTHON': ''}):
+            result = self.controller().gate()
+        self.assertEqual(result['status'], 'success')
+        self.assertTrue((self.repo / '.git/fixture-runtime-marker').exists())
+        self.assertEqual(self.heads(), [self.git('rev-parse', 'HEAD')] * 2)
+
+    def test_repository_hook_skips_an_unusable_python3_alias(self):
+        self.add_clean()
+        aliases = self.root / 'aliases'
+        aliases.mkdir()
+        alias = aliases / 'python3'
+        alias.write_bytes(b'#!/bin/sh\nexit 127\n')
+        alias.chmod(0o755)
+        hook = self.repo / '.git/hooks/pre-push'
+        content = '#!/bin/sh\nset -eu\nunset OPL_PYTHON SELFVO_PYTHON\nPATH="' + aliases.as_posix() + ':$PATH"\nexport PATH\nexec "' + (TOOLS / 'hooks/pre-push').as_posix() + '" "$@"\n'
+        hook.write_bytes(content.encode('utf-8'))
+        hook.chmod(0o755)
+        result = self.controller().gate()
+        self.assertEqual(result['status'], 'success')
+        self.assertEqual(self.heads(), [self.git('rev-parse', 'HEAD')] * 2)
+
+    def test_concurrent_unexpected_staging_is_preserved_and_blocks_commit(self):
+        self.add_clean()
+        prior_head = self.git('rev-parse', 'HEAD')
+        fixture = self
+        class UnexpectedStaging(push_gate.Controller):
+            def run(instance, args, *other, **kwargs):
+                result = super().run(args, *other, **kwargs)
+                if args[0] == 'node' and args[-1] == 'verify' and result.returncode == 0:
+                    (fixture.repo / 'unexpected.txt').write_text('unreviewed side work')
+                    fixture.git('add', '--', 'unexpected.txt')
+                return result
+        result = self.controller(UnexpectedStaging).gate()
+        self.assertEqual(result['code'], 'unexpected_staged_changes_before_manifest_commit')
+        self.assertEqual(self.git('rev-parse', 'HEAD'), prior_head)
+        self.assertEqual(self.heads(), [self.base, self.base])
+        self.assertIn('unexpected.txt', self.git('diff', '--cached', '--name-only'))
 
     def test_remote_rewind_after_precheck_uses_actual_server_reference(self):
         marker = ('s' + 'k-') + 'Q' * 40
