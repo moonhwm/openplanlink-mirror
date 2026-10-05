@@ -117,6 +117,34 @@ def archive_stats():
     return len(files)
 
 
+def baseline_stats():
+    """读本地算力基线（exp/cpu_baseline.py 产出）。"""
+    p = os.path.join(SEAT, "outbox", "cpu-baseline-local.json")
+    if os.path.exists(p):
+        try:
+            with open(p, encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:  # noqa: BLE001
+            return None
+    return None
+
+
+def cloud_run_stats():
+    """读外延算力池回传件（约定名 hw-x-run-*.json；本席只读，不接触账务凭据）。"""
+    out = []
+    d = os.path.join(SEAT, "outbox")
+    if not os.path.isdir(d):
+        return out
+    for n in sorted(os.listdir(d)):
+        if n.startswith("hw-x-run-") and n.endswith(".json"):
+            try:
+                with open(os.path.join(d, n), encoding="utf-8") as f:
+                    out.append(json.load(f))
+            except Exception:  # noqa: BLE001
+                continue
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out")
@@ -129,6 +157,8 @@ def main():
     repo = repo_stats()
     ex = exchange_stats(a.since)
     arch = archive_stats()
+    baseline = baseline_stats()
+    cloud_runs = cloud_run_stats()
     node = http_code(NODE_HEALTH, timeout=6)
     bus = [(u, http_code(u)) for u in BUS_ENDPOINTS]
 
@@ -172,13 +202,38 @@ def main():
     for u, c in bus:
         L.append("| 总线 %s | HTTP %s |" % (u, c))
     L.append("")
-    L.append("## 四、最近来件（交换区）")
+    L.append("## 四、外延算力（本地基线 / 云端对比）")
+    L.append("")
+    L.append("| 项 | 实测 |")
+    L.append("|---|---|")
+    if baseline:
+        L.append("| 本地基线（SHA3-512 聚合吞吐） | **%.2f MB/s** |" % baseline.get("aggregate_mbps", 0))
+        L.append("| 本地并行效率 | %.1f%% |" % (baseline.get("parallel_efficiency", 0) * 100))
+        L.append("| 本地稳定性（分段 CV） | %s |" % baseline.get("segment_cv", "—"))
+        L.append("| 基线测量时刻 | %s |" % baseline.get("measured_at", "—"))
+    else:
+        L.append("| 本地基线 | **未测**（运行 `exp/cpu_baseline.py` 生成） |")
+    if cloud_runs:
+        for c in cloud_runs:
+            ratio = (c.get("aggregate_mbps", 0) / baseline["aggregate_mbps"]
+                     if baseline and baseline.get("aggregate_mbps") else None)
+            L.append("| 云端 %s | 聚合 %.2f MB/s；并行效率 %s；有效占比 %s；同口径比 %s |" % (
+                c.get("run_id", "?"), c.get("aggregate_mbps", 0),
+                c.get("parallel_efficiency", "—"),
+                c.get("active_ratio", "—"),
+                ("%.2f×" % ratio) if ratio else "—"))
+    else:
+        L.append("| 云端对比 | **待凭据**（无 `hw-x-run-*.json`；见 DF-HWX-20261006-CAIRN-02） |")
+    L.append("")
+    L.append("> 判据：同口径比 ≥ 1.0 且并行效率 ≥ 90%%、有效占比 ≥ 85%% 方视为「榨取有效」；触线即按排期熔断回退。")
+    L.append("")
+    L.append("## 五、最近来件（交换区）")
     L.append("")
     for p in ex["newest"]:
         L.append("- %s  %s" % (dt.datetime.fromtimestamp(os.path.getmtime(p)).strftime("%m-%d %H:%M"),
                                os.path.basename(p)))
     L.append("")
-    L.append("## 五、改进项（自动推断）")
+    L.append("## 六、改进项（自动推断）")
     L.append("")
     tips = []
     if mcp["tool_ratio"] < 1.0:

@@ -22,8 +22,10 @@ permissions:
   contents: write
 
 concurrency:
+  # 同一 ref 只保留最新一次：旧运行被顶掉时**不再回写陈旧 STATUS**（本轮实测教训：
+  # d10b5d5 的 CD 运行被新推送顶成 cancelled，若其仍回写会与最新件错位）。
   group: cd-attest-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   attest:
