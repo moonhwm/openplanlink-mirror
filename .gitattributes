@@ -1,0 +1,6 @@
+tools/hooks/* text eol=lf
+tools/git_upload_gate.py text eol=lf
+tools/test_supply_chain.py text eol=lf
+tests/test_git_upload_gate.py text eol=lf
+tests/test_cos_upload_config.py text eol=lf
+.github/workflows/git-upload-gate.yml text eol=lf
