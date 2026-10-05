@@ -85,15 +85,32 @@ def main():
         "missing_declared": [p for p in tracked if p not in files and p not in IGNORE_EXTRA],
         "content_mismatch": [],
     }
-    for p in tracked:
-        f = files.get(p)
-        if not f:
-            continue
-        blob, cc = git(["cat-file", "blob", "%s:%s" % (a.rev, p)])
-        if cc != 0:
+    # 批量取 blob：单进程 `git cat-file --batch`（首版逐文件调用 → 1878 次子进程，过慢量级）
+    want = [p for p in tracked if p in files]
+    blobs = {}
+    if want:
+        payload = ("\n".join("%s:%s" % (a.rev, p) for p in want) + "\n").encode("utf-8")
+        proc = subprocess.run(["git", "cat-file", "--batch"], cwd=str(REPO), input=payload,
+                              capture_output=True, timeout=900)
+        data = proc.stdout
+        i = 0
+        for p in want:
+            nl = data.find(b"\n", i)
+            if nl < 0:
+                break
+            head = data[i:nl].split()
+            if len(head) < 3 or head[1] != b"blob":
+                break
+            size = int(head[2])
+            i = nl + 1
+            blobs[p] = data[i:i + size]
+            i += size + 1
+    for p in want:
+        blob = blobs.get(p)
+        if blob is None:
             problems["content_mismatch"].append(p + "(读 blob 失败)")
             continue
-        if sha3(blob).hex() != f.get("content_sha3_512"):
+        if sha3(blob).hex() != files[p].get("content_sha3_512"):
             problems["content_mismatch"].append(p)
 
     ok1 = d.get("file_count") == len(files)
