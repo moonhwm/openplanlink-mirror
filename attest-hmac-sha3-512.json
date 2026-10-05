@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:11:29.201Z",
+  "generated_at": "2026-10-05T19:11:55.533Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1827,
-  "merkle_root_sha3_512": "478b3118b62204b5c757fc2c62cc0014c70d76c507eadff6b8c31c3a384dabb67386f07ea107e2140a58f49a8dcca465b9d9094da1ca4b6f87a2240b83fe8e1b",
-  "hmac_sha3_512": "8a102456f3c423469f569ca679528992559921bdde68aa70b312bcbc2344a968265c9f822e79e251ac573c89fc6d5fddaad86ee1cfa75cb3a4a22be1df9d1bb3",
+  "file_count": 1828,
+  "merkle_root_sha3_512": "be5db162128284ebff6b4bd61f01b0fce5ba89770eafda1932d0bde55fc44d49ae9de71ddd594728a5ad217a3e64d10ba0e4b8b8a5c6223a169492f925758169",
+  "hmac_sha3_512": "c589a34e8dcb9cadf506af0f29f24feba7595c673a47e3aecec79f1cf0078ec69a41b7ca9b2a0fae73b5c88d97a749651ba5097ad0393edb32cb671cadf09a90",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -10618,6 +10618,12 @@
       "size": 2631,
       "content_sha3_512": "250005b57829fa8429dbfe3b2627fc25f9522386dc7d6cb22acd2c275b59f8133b25f5b2dc1b9f498ba8fe72789bf2ab75dbc5b1db8d38e156a4da6fb45e6a21",
       "leaf_sha3_512": "a7372d8324c8788d30ebf9f352e549610af500cfa36b52feb0912682a8967c42b7d159bc1577c0ca5ef65100dc5141076c3c583f3063c2d61ed620b88c7e65b9"
+    },
+    {
+      "path": "tools/push_reconcile.py",
+      "size": 4755,
+      "content_sha3_512": "c349fd632f29781e0d8c3efd2670e9199511ef67dfad341a8246fa4403cab47691f1ef417b8a30d5863f8873a4f22229d3bf552598cbbc435ffa8654280c8132",
+      "leaf_sha3_512": "9dd1e5ac8316df74d23caf9429ad48a1283ab5c4472f7450d461ec99fdbac446680fc00cdbf9a117cc759a801ea04dad35b8ac96557ee00c5310a9d77e3e0135"
     },
     {
       "path": "tools/quota_wall.py",
