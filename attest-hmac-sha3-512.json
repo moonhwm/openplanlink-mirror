@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T10:09:08.561Z",
+  "generated_at": "2026-10-05T10:17:25.119Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 849,
-  "merkle_root_sha3_512": "6809a63d83a33e3d0f1e7c261bce259248226775f20de5ccec1ba6d19e4322ac4aeed2d402b153da1bd417e27ca25cf1bd3767e0c851177a3796a070fda4d210",
-  "hmac_sha3_512": "b0b6c7e0397f2599ae615bf47c1fc90e5ec61622bae30f7ffeb1af3a040346a2c290fd5648470834a2333272c25ae20e8789f0c227a8b81913dab2bc384d2750",
+  "file_count": 850,
+  "merkle_root_sha3_512": "ac8a1c9c36d51f06489fc2dd6b466b5ca1cad5209c293383543b683d90e3a74332706964b1d242c7bc69f4b5357a90c273ef3e7db67c5731ddebff4675f126da",
+  "hmac_sha3_512": "d2519bc8cbbed496aa6e23b9c3d8ec399fa2a0c9db3919c07e2bd9727dea3088f142b0b2ae42550fd037106a4a42904286811603d2c0f32f4fdad0b8ec6a53fb",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -4714,6 +4714,12 @@
       "size": 3162,
       "content_sha3_512": "039961ea2c4da2c7e91a0653fe24f5dd6783563c9badbfe8d445174a2cf689796b403c3a55ba8df7f5c804a44f6267315c4a236efa213a423099911c1721efb6",
       "leaf_sha3_512": "7a4a725a578648155efccace3426692b0516add0a9ee139b972098008e4d92664fda963fd8663f0832c57d435c8cf1a021ba29e04b655f6815460ecadea5d8a4"
+    },
+    {
+      "path": "tools/live_state_loop.py",
+      "size": 2561,
+      "content_sha3_512": "a7cf729297a4a02d96372737df422af5a4329519371f1f4a979dc47fb93a1d16d8cd22dddf63b3de9440c3ef6ca150a6cb9f53a4eae7550ddca1d1a060b1ae1a",
+      "leaf_sha3_512": "a31e0a7a11e13b38c7f6036ad48eeda18dbdf90d51d8cd2051a019ac75dcd4b3128d84d30a2df3fc576cdf0c9687b02ca182bf79b6dec8f946e6f25ee0b5e1d8"
     },
     {
       "path": "tools/media_validate.py",
