@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T20:34:44.084Z",
+  "generated_at": "2026-10-05T20:38:24.515Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1873,
-  "merkle_root_sha3_512": "466eaa8e4ef17bf1f7e66004b0b25cac954d13ef3a5cd5d0a01260869049baaffe1c1e0644f6f23898a664e660cae21283dcbf62d9dec5b3c64635e0fb816eb4",
-  "hmac_sha3_512": "e5591c2dac6b4cb7f6b109af4aab6f205967d92c49838c39e0c7073a4521015f4376a252053fcb724dd795eb35aa1dea2c0d02e09b95d009d06a8aa4b27e1608",
+  "file_count": 1874,
+  "merkle_root_sha3_512": "040bc902c46f697496ae78a40701e1e80dd5bbb70de9138ca4a32c534ae53665cf585dd0330904917b5a74ba79af978fad0d6c604acb7442c0d55fcb700be5e8",
+  "hmac_sha3_512": "2cc2c2c3bd35135b4a71bb7e8708f4e81a2ebe6930f2bb4c3ebbbbb3e64fe80f7aa6be9206ef54adaabb8d51f3bfc011b8e1d9f358fd29f952d6ae1d00bf7f27",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -922,6 +922,12 @@
       "size": 6093,
       "content_sha3_512": "d12a04a092c1ed67562e2bff9ea6fc49b8b9bb26fcbb7af62b1e2db91b6c3eb61b8894bd78409abd20a469490b325d6c137f86f519d7fac51e05ed17ca048eac",
       "leaf_sha3_512": "eb9ee030796d7be3b3e564b60cb02f27a975341b9299fc0afb477c8f602efff582954db131a670f1427cbc3299272ecfc2c8bf565881b3da8e5b226fc03a2676"
+    },
+    {
+      "path": "research/suanli_inspiration_20261006.md",
+      "size": 3482,
+      "content_sha3_512": "a645e47cfd169c5a5daa3926e7bbd9865567f1fd530c3b0b0df254ad68cbdcbcaec7f9ccc6da1e6dfbb72d17e66b683c9bff2951f5de2d93a35bed951325c73f",
+      "leaf_sha3_512": "6b98145e767c2e152524419fcda233a0d6caffed47e3f68117376b2d373d027e201a21bde9015b0c65459214660116c19b9b3b2482a9a754d74257a219ff22a2"
     },
     {
       "path": "seats/huan16-kimi-seat/persona_seed_v0.md",
