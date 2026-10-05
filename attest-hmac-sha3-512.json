@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T20:38:24.515Z",
+  "generated_at": "2026-10-05T20:40:32.704Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1874,
-  "merkle_root_sha3_512": "040bc902c46f697496ae78a40701e1e80dd5bbb70de9138ca4a32c534ae53665cf585dd0330904917b5a74ba79af978fad0d6c604acb7442c0d55fcb700be5e8",
-  "hmac_sha3_512": "2cc2c2c3bd35135b4a71bb7e8708f4e81a2ebe6930f2bb4c3ebbbbb3e64fe80f7aa6be9206ef54adaabb8d51f3bfc011b8e1d9f358fd29f952d6ae1d00bf7f27",
+  "file_count": 1878,
+  "merkle_root_sha3_512": "482adc8a18cb634adf35f603a3ab5c0d803f8c618e2450cb7d631d27061b27e64ccd7ed49550cabbc1024a0485112e189a6a88ba31d99a42afa8678192960c2b",
+  "hmac_sha3_512": "6a7a52fdf9e61cefc4c4a1f8e2612b1fc9bbe30af12eb9540cf61e8312c81c7481973478877cdb1d8bb9b61224caaf3d08b8f23428cebed3e0ab2ef3d7d07e5d",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -426,6 +426,12 @@
       "leaf_sha3_512": "11f58bdb77c4b26b1bbf34996b5d7180cb6f57dcd0e4bdeb6d43db11e91852f6b7fb1dfb3244a0d383a64349be3cb02dfafed0adef23ed6947e97728f991a640"
     },
     {
+      "path": "deliverables/20261006/seat-cairn/desk_snapshot_latest.json",
+      "size": 115255,
+      "content_sha3_512": "8f034abc3f91b4d46d7e8e86983c477f880cab3fb5aadb36bddff6b84c662bc51c8d9b1d8faacdb90c01fdc2361d11b139366586d1321de87a9f81610c26b09f",
+      "leaf_sha3_512": "1ca068e9f9859745373d64a0a91914a2e616b2e9b6fa5b882f488640bcaf5b736270f740389b26bc77a908c7801efac824c513abfc2aaaa4bed3ef66be368acb"
+    },
+    {
       "path": "deliverables/20261006/seat-cairn/exchange/A盘映射清点与可调用分级_DF-AMAP-20261006-CAIRN-01.otl",
       "size": 4233,
       "content_sha3_512": "92f2bf83f82590d8de3f663a4b7ffdf5d287520e871e5cde5ba7523f729f29fed98a834ac6fef22d75e6078a1a463e67a3c8f98e3e782d388f177a0a1e09e87e",
@@ -526,6 +532,12 @@
       "size": 3887,
       "content_sha3_512": "9b2648807ad804b0883704e7e4d2d6520aa34c8a0e44cda0f58c4abad2749d6b3d385520cf15a237a4ab851e88378f7a18dd6c8ec631784deb69bdb12d0b9f21",
       "leaf_sha3_512": "a3a5694bc9f7cb04363774f2c4745e6ab8773b3ba7ca0d9ea152a0ccfc70a6fb48fdc2a9e762bad525319cf7e8ca6452b76318f2b98f511034e7e1b24566f356"
+    },
+    {
+      "path": "deliverables/20261006/seat-cairn/exchange/闲置系数实测与桌面基线比对_DF-IDLE-20261006-CAIRN-01.otl",
+      "size": 6212,
+      "content_sha3_512": "0d556feb23318e7bbefc5cbc9aa3ee214f95d5929eeb6337ba9df27e415ccc9ec5ec32d013aacb47e6c2d9ce3857105c97ffd87b90b9dbdbe5a867841780ca3c",
+      "leaf_sha3_512": "edab58d8758639b6b7bf2a38cdb77a714830b8f0b757a6c01c64a71d1e0556d29c78a581417ccb33c998dc08121eb1b033ee7e27bacb9370c09223aab431409d"
     },
     {
       "path": "deliverables/20261006/seat-cairn/five_channel_integration_v01.md",
@@ -682,6 +694,12 @@
       "size": 6435,
       "content_sha3_512": "e460cc38166cd0c18bcb4622c97fdd0de78871086b390f55fa44fcd07efdf1651a86321ed1786da8e412e201fcb8979b5d3eaa06216ed40b6d02f761bc0798af",
       "leaf_sha3_512": "f6c8ecea3961bf349bf8ef8aa5bb1e2138c28f65a2685b61d2bbbba272e744346d230cb5e4bce8b7ca6f14fa47dc37727983a46795833a4e34076d49e6c8391a"
+    },
+    {
+      "path": "deliverables/20261006/seat-cairn/tools/desk_baseline.py",
+      "size": 9587,
+      "content_sha3_512": "de3ea85fb14f61d46d73c984338e6fc25bede1116d356efabddb8be46197b924bab59d7caefafd4c2646276b62d7d6717ec075ca5644169f9cc610468e0448db",
+      "leaf_sha3_512": "9d6eb9396ea10f843707eb8274720433ec514854d61b392cd36bee0eace0952555cfd2b6ee8e5411a56be4bfdbfdff4146cb519d0ab4574f75e6be42ee6a27d9"
     },
     {
       "path": "deliverables/20261006/seat-cairn/tools/eff_report.py",
@@ -900,6 +918,12 @@
       "leaf_sha3_512": "471635049fc7c4021b6bcc8736a67d561002a0f5a4a407fd473fd966ec58ed96142da93f767e76c1afc395493feb6246ddc860ae37125ff918b0ef2f1f2ede79"
     },
     {
+      "path": "research/2026-10-06-k3-cloud-govdoc-compute-crossref-01.md",
+      "size": 1486,
+      "content_sha3_512": "8ea146daad337479232d4f2b1e336ff5fac758b0437ff2549d30b137ac240e61738a0946fd0cb96480bf43769462241ea8e092b2d9286aeefa340ce774a7ea34",
+      "leaf_sha3_512": "e7766b7fd67460dddc14efd05c98fa65c2443dd1a3af4110aa2099db2f55757551170a81211ac42671d44be7583243d7a59470e3f02c3a47e8910668a36486d0"
+    },
+    {
       "path": "research/huawei_x_instance_card_20261006.md",
       "size": 2861,
       "content_sha3_512": "e510e99f2e87746e72fc8edc32c6013d39f1d8ffe2aa611a7370895849596d2a321ed3be2d14ddb6e569a91ffd8211120b14c0598f8996dcd59dae019934fc39",
@@ -925,9 +949,9 @@
     },
     {
       "path": "research/suanli_inspiration_20261006.md",
-      "size": 3482,
-      "content_sha3_512": "a645e47cfd169c5a5daa3926e7bbd9865567f1fd530c3b0b0df254ad68cbdcbcaec7f9ccc6da1e6dfbb72d17e66b683c9bff2951f5de2d93a35bed951325c73f",
-      "leaf_sha3_512": "6b98145e767c2e152524419fcda233a0d6caffed47e3f68117376b2d373d027e201a21bde9015b0c65459214660116c19b9b3b2482a9a754d74257a219ff22a2"
+      "size": 5497,
+      "content_sha3_512": "ea9d2b3060c1d7a15e0a9e3f45dd5793391671cd6109a0277a511095aabbe70bb8206f72e616ed533cd88a95f00430c76b853a1cc3b20988e786aa74ee734520",
+      "leaf_sha3_512": "05dd629712417240a4a73fa819306e527a17b3f293c74fd0d0d3eb1d4d9a6c1ff011c0779f0d0fae7e478e333f29592b46a427e995f392c56fd8b469ed059e53"
     },
     {
       "path": "seats/huan16-kimi-seat/persona_seed_v0.md",
