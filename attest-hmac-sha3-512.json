@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T15:49:00.584Z",
+  "generated_at": "2026-10-05T18:42:54.763Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 845,
-  "merkle_root_sha3_512": "2f07336a7f3a374e4c0efd4ac577776e4f138de40c7fd7155dbcf35f7936f0b9cabfa719d9f0f08edab5a12ce1c872205bf1e53ef6a1c1cc089a70efa92a6981",
-  "hmac_sha3_512": "263f05e7a5d0c1c638a5ee4f723da85b54a707023188e94fe8a8017c3498ce7e693d4591c7c5a4eb2e70e8c87d1e725c821c116775e4b278315e287dac681108",
+  "file_count": 856,
+  "merkle_root_sha3_512": "7656b02c9c3c32756ee623d16dbc58b3802bb99f22d3e00299e522250e29849a11328c368f4361e49966c664fd5f75c5ed37acb3942e3508d4dd96b1b22c7c9c",
+  "hmac_sha3_512": "70e15e0778489cb9a5066f10d1a6e72aa925cd0d6672bc88369d4c07c9143c4ddbbd1ed589129576f79d369b9004a4f375c74cc8aa424875703948fb9736700d",
   "files": [
     {
       "path": ".gitattributes",
@@ -394,6 +394,24 @@
       "size": 2204,
       "content_sha3_512": "90b94db6915a3170bdae443f3bc10cceff214d737622ea0147e3abfbed3e93b4b6e6f0dca9fe803e57b07ab265caeed0af7346f23570b31623709dfe647246db",
       "leaf_sha3_512": "5459e4b0e865695c0fe3e204fec5c632acd2f54c761e650a8af669afa48dfef396f8f45e296f85281dbb860e812239e0cc2aaa16c66441540118dd1d1e8f6215"
+    },
+    {
+      "path": "docs/cloud_connections_experience_20261006.md",
+      "size": 2233,
+      "content_sha3_512": "bc7f1b13065e8d3f13668406c26de614cb919b6322f4d8bf6d26f55f4bd5c7d6f1000cc7a8b529151e0944cdf8774be4298bb816bd318bcb19c1c56eb586b99e",
+      "leaf_sha3_512": "53ff727040405db4d2c513022f550bafc2e741143da74c1ebf4936008bbfbf7b8242e155908747ea2cfa1286c51743b4b7f4382d5525322a9df282e9300b62ef"
+    },
+    {
+      "path": "docs/persona/initial-functional-persona.json",
+      "size": 3860,
+      "content_sha3_512": "d3f1e25901267320fede77a3662271957d93e07147f93def4c990ac8c37ae8790bb7c527000855e457ddf881a5c3f59d76c39dd8d7516f533bf1721e3f0f41b1",
+      "leaf_sha3_512": "cee960b742c9b95a5fe2d79876e158207a325dcfb796e874689c07824eda7890f80b57f49769ab387a49d186f1a0c27dfd3a91c8fb8609388d789cba82e314a0"
+    },
+    {
+      "path": "docs/persona/initial-functional-persona.md",
+      "size": 1832,
+      "content_sha3_512": "922d66d985d4ecc20e84607ed66827fdcf856a533b4d1132d682921f6523f0e0ad3ec1f73371863a7812b811966c281a0a6391d004602bf1410c25bffca07cf8",
+      "leaf_sha3_512": "5fe5465bdd40f72183034e1c0de916eeb7daf7027792006db2ef3c76dc139f25b68a4fa55e98b1249489fd426d8a2eaa37b15e750f5e1846dd9c9341b1cf3824"
     },
     {
       "path": "index.html",
@@ -4530,6 +4548,24 @@
       "leaf_sha3_512": "128e690458bd9983198d289eddd903574d5b742867fb3cfe44453b792290b0a1f6a75fde64d5d8ed6d03b4fcacdd496e94283e3f57ab81e8317428f849012728"
     },
     {
+      "path": "specs/011-cloud-reader-integration/spec.md",
+      "size": 3965,
+      "content_sha3_512": "3e110b2db0393597b6d0e04e2968d38dd386d8d0db3bb75991d230fe693d8c9830d04efb34e6fcd9d41b46e58bd2cfe65d568a3e4de287b83fc07b3ea006747e",
+      "leaf_sha3_512": "85972891c4b07005a7d8f3e9c0dcdec227f164e5691d309c9c0a7155b441a2c2a2beb16ec273e3e0853aacce92e34ef40bc314d6b8cd4b5836c1b2f941d5200a"
+    },
+    {
+      "path": "specs/011-cloud-reader-integration/tasks.md",
+      "size": 1388,
+      "content_sha3_512": "c9a9cb5de073b985bbc85bf71fa0d24cd708c9c368e6841d2b7cc1f1ed8ee63725b4e4efdbf83a663be6d516fbdea412a309b8cf3489519618ae6cbbad44585c",
+      "leaf_sha3_512": "19b327cf2d4107a00428ea85161b133144335ab14caf7da9a00213dbf1d16ceb2e8fce5ee6ddf67c808edbc305695157cf9ed282449fca85f39510fe665d4c45"
+    },
+    {
+      "path": "specs/011-cloud-reader-integration/verification.md",
+      "size": 2324,
+      "content_sha3_512": "2aa582dff261fd03780d9d96457e805c0a3d29db9ec289d87b10d704169fb663f31772b8548da14bcde434d51cb38fa07ca30fbca01c82b5e611f6a30d87ae42",
+      "leaf_sha3_512": "335243666a4e13947bf6a1a8fedf077585c486de7ba53b58ffacdcd63c98e64f59784fffa33f12d65856408598d5dcc64853e2df53d260f29d5a62b4fad49ce5"
+    },
+    {
       "path": "tests/test_cos_upload_config.py",
       "size": 2586,
       "content_sha3_512": "4e2a53a9f0c95135d1c0af6c7f9cd848019f94b7d9db5da6f60937799fd40e8ca4eb90a16ec7dcc377ca34303c6d64315851526525491cef2c7ad4e2ee03cf34",
@@ -4626,6 +4662,18 @@
       "leaf_sha3_512": "b0ae3e0826b3e3139c171a1870ff9aebcae022b98a32c138a16b707a22d5bd51809a298a759b318ecb9ecd5487405eccb00b90c64d89d38b9c859246e144a15e"
     },
     {
+      "path": "tools/connect_neon.py",
+      "size": 3789,
+      "content_sha3_512": "4187d6804a07e7016de8f4686857531497bbb8107e3ad10ce4388589e3450a054c5567afb72ecbf89666dbb70fb926065526c31d568c745a71df589b18ca556d",
+      "leaf_sha3_512": "790539e0b4d54822e4bcc6516d5579cc756b23e894296c9698a6a8751d15b4e279e5c8d003cf57a549d3ceb137b2d4224bcd554c6c7ba3d658b37e006658d056"
+    },
+    {
+      "path": "tools/connect_wps_supabase_ima.py",
+      "size": 13155,
+      "content_sha3_512": "f32eb5d7075dc37bc413c0b5f654da8862fbb6e08eca2c4bba55f3c33f4326e29708c148d86b6af8f1dee114c0428ce6b16fe28808a71d78c3e9dcc95b515e88",
+      "leaf_sha3_512": "2a7ca339e0ad06afb038f8af99affd2d0119cf9643644f45a5bd0b17cfc977f1ca4c82231db1b4454f737c4e9329b92787df12c7fa53bf0cba87a24561a819a1"
+    },
+    {
       "path": "tools/event_driven.py",
       "size": 4810,
       "content_sha3_512": "66b33eddcb801492efab18c5b34d70787618b1167ccfabc42c1baed3ac88b319eded63dd880aed8c164d36ec0bf3721b12dd372764ef472eccff0be2092e1578",
@@ -4678,6 +4726,18 @@
       "size": 722,
       "content_sha3_512": "5488fd6dfd80040309a11b11a9e4f84b801e48bc74f4858e6b2bcd4444e15bfb6c0fcf31e09461cf6e95d4b135b672816b56fdb72ea77b3fbef6bb8254dae36e",
       "leaf_sha3_512": "94c4541662130e0a845f9afd29e13be3ff383d9a43a34f821d1abe0821a0e1dcf4ad8f6532d1cf9292042aac5fbf1dd43c38e15f104261fcb4cea92981fbed84"
+    },
+    {
+      "path": "tools/ima_readonly_mcp.cjs",
+      "size": 8528,
+      "content_sha3_512": "5e23594d51554f0462aa152fbbcd30d290b959b361f5c36a784d673b730bbba005d1aac0af9282c10602bb8cd96c03aab17e28c97617f18913584a0be721ecce",
+      "leaf_sha3_512": "52527b806dbd5bf78357fa0972680a864e9933441048de369cf587e0cdf44315922bd1c78a35ccd4b535c9a85484593acaef1eb46c9f16d90eebd447c7758690"
+    },
+    {
+      "path": "tools/install_ima_connection.py",
+      "size": 6143,
+      "content_sha3_512": "526e0025a0ba7fc45218b61ada2ccd26e49f850c149f0303fad0967e4c7247a8be2550772c0af2fe2740fe151b2942f83e0f5048ebac98ec875cd1e606a155be",
+      "leaf_sha3_512": "9f9a9d5651cfa3035420c8d923a34aab0e074a7dd10c37a0704418f30f88fd1d498b2a88500a3a0e8e3575c73707396ea55d76d3bf9facfffaca13eedced4dd1"
     },
     {
       "path": "tools/knowledge_digest.py",
@@ -4966,6 +5026,12 @@
       "size": 4216,
       "content_sha3_512": "c82d83b0378e91799d4e162e66cd565acbaef6caab5faa2b7a4b23a646bf40a26049496c048e34ff5ab35d1bb5cc77bc4faaa01fe503828d746d96ca360fe0cc",
       "leaf_sha3_512": "15225e00ff35d36cc54732bd79beabf263ba6be7471f3aac174906ddf8163cdaa540aad8535cbfcebf7b760edd392ac73d608fbdb1598f7c6b574664425de2e2"
+    },
+    {
+      "path": "tools/supabase_oauth_connect.py",
+      "size": 6069,
+      "content_sha3_512": "a90e093670e8ac5ebc34f46337b56c58e45ed6d5eafc73d6b0eb85f9593746a468a8b5c2b3d93de24b53ff3f17e40577a72d989aa75cc41bb3c3877b55cec382",
+      "leaf_sha3_512": "0928e97b1f12fe66555eeb857a705b3fe9c40e21893d593a1a3de456e510462baf87f342bc066463860f1f3e2a337d4a977a141e4081713c414efb49ccd61e57"
     },
     {
       "path": "tools/supply_chain.py",
