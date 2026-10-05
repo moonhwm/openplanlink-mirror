@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T10:17:25.119Z",
+  "generated_at": "2026-10-05T11:26:41.781Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 850,
-  "merkle_root_sha3_512": "ac8a1c9c36d51f06489fc2dd6b466b5ca1cad5209c293383543b683d90e3a74332706964b1d242c7bc69f4b5357a90c273ef3e7db67c5731ddebff4675f126da",
-  "hmac_sha3_512": "d2519bc8cbbed496aa6e23b9c3d8ec399fa2a0c9db3919c07e2bd9727dea3088f142b0b2ae42550fd037106a4a42904286811603d2c0f32f4fdad0b8ec6a53fb",
+  "merkle_root_sha3_512": "842b1a1dc068fa8a7e54f0ef3dc3cef2ced5fa96a625aa242e7a3712fb4e07656f8c013c29b8e385dc04e8ec31d04d10793f515cbc17596742971a3369013ad0",
+  "hmac_sha3_512": "32b9802c1832411b6fa73cd3ad6d58e8afb2e017b0fdada65325f3f32e9f7923c3103b985bad6f0f188705360e23ddd99e803da9ce694427cb675904cf9dff50",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -49,9 +49,9 @@
     },
     {
       "path": ".github/workflows/ci-verify.yml",
-      "size": 1147,
-      "content_sha3_512": "902c3757259b37be39fb4c88f8bc1b9c80f9942b4986a417b72ca136bd83e3a165fd8516f4eec143ca8c894900d559db612087cfbd0ec90c8b1129c3739bba56",
-      "leaf_sha3_512": "9c28dc3742575daf7d2f0ff81143cbc78fc3b93fd2077184ecfa207401259b8b1361f2598e3690f86452035b227d51b1610b1b06debde2111f76317ef69937cb"
+      "size": 1337,
+      "content_sha3_512": "872c328f280f46c3eb7acaca068af110bd8b86aa7fa4af8d0d51df8adbeb5b57e06f6939eb6507ad8e137c84e68e73fe1da06f92cdceaa2d4682407d57c117ce",
+      "leaf_sha3_512": "fa001e2b6e188bb555078dee0337e7d9b86d402f0b91c9da2449b38ec7dabb0def864c497209d4654833d32724ba5381bb69b2d0f485e97ceae79fc10cf33a76"
     },
     {
       "path": ".nojekyll",
