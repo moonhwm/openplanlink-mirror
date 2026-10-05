@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:22:34.749Z",
+  "generated_at": "2026-10-05T19:24:36.877Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1842,
-  "merkle_root_sha3_512": "7e282e97561d49e62488789ed6012f20b831b21a977cbe777c0bd2e44e8c596d27965bb8600af9ccef8191b34340a4013b4974a6c1cbe6544e35d2930c698c0e",
-  "hmac_sha3_512": "9e8fb3ad3763755aef7839a56ea57716c54c6d06b70a327a253d15f193eb2f91f12d5743337d471196f82efb3e90d85f771aa317ff39533a6a2216ff07256cd8",
+  "file_count": 1845,
+  "merkle_root_sha3_512": "c5ebae1f7f78730446edf1af1ac1ae9d17cca6d8529adf19f33dd99fce84233c422a8d8d00d09836b4709c4beae0857d77a1d7ce64ca13aaafb367ba620d0dcd",
+  "hmac_sha3_512": "7903fd63f1881793175d04b839ebac4a06b0c65e52e3eaf8b5ba5ef17ba11cc60b3184d4c91503c2fe6481fc21641716f03a172e39975fc79a3fc8c8a896549c",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -145,9 +145,9 @@
     },
     {
       "path": "STATUS.md",
-      "size": 739,
-      "content_sha3_512": "295f62ec0415afc7a365c7ec9df5897498997f09e26d4cee13980bf3942e7b1c6f207e12a1b4c17f7804b2ba50f93749c1a00f3527c548459576c120bd7f18d0",
-      "leaf_sha3_512": "554db1084a52d83bb4ce1d380ff769261c97636c69bd6730942a6d3e54c83ac51f4755bfdab6176438f64b12dfdf8eac1079385a8edfdd7a64a4e7fd9cbf9e11"
+      "size": 645,
+      "content_sha3_512": "99999e79df398bd3dc2b3ebc7c46471380a7137d7d54fc7f38b075ccd034b6cc505bc7467de09be514535d834c4605766b20996852d5a4b961734e8b5421e797",
+      "leaf_sha3_512": "1cff2ed9c9027ea1ad27af9c7c59f1f8ebb27de4c997fb84fb118bc93b13675588bc50db37a4e8d16f5179a893b3b37a956fd07c2d0d691ffe46581272dad799"
     },
     {
       "path": "_tmp_probe.yml",
@@ -10525,9 +10525,9 @@
     },
     {
       "path": "status/index.html",
-      "size": 1981,
-      "content_sha3_512": "3eff55eefde764e334003fd1b0074cbb39c7c06f3f07d140b91fc5188cd34ced54a756e895aded6ac35a3880fdfc797d3c0b501578f62a6027d82e9780e88335",
-      "leaf_sha3_512": "f78f343bb7dee669320b22f030168ea6e4a6a3ba6ba056d0bfbf6d67796220f286e5f2ccf1a928e3e972595f7fd061705823e4cb39115761674074875c3870de"
+      "size": 1898,
+      "content_sha3_512": "9e78d485ab4f1492b4e7ef406b6e8401988955fc8b7a067ee762ee5e9a23ba4d2b2bcac4f69d692024e72195e1c47c88fab9c5b5ff698dea4fe3b2a798815c15",
+      "leaf_sha3_512": "5758311a6223c5fb65df884533cb68931ab787e3058bc74bebf4ac7cf8f21bb333439d7e0d4f4943d205a5a3126b254584f5e4635f65c6716b6defef4a129c46"
     },
     {
       "path": "tools/SHA3_TREE.md",
@@ -10806,6 +10806,12 @@
       "leaf_sha3_512": "75f0fdbbe8e6a0f9abd5e3d681e0f5a9fdbb8fd0aa6983e82b9f4dc6aea5f1255de4f65007b1568d23ec6ecf41b666a6eb2c6d3cb2591ef6d13ad57defd048da"
     },
     {
+      "path": "tools/spec/spec-cd_attest.md",
+      "size": 1447,
+      "content_sha3_512": "5c4e2902ab2d73565c13b8abd34a9d79b73dc18c61e0193dbb0f0b5fc8cb925f703a3abb4f1c798825c545dfdeac24d3ba15e215cbafebe09e5c8179d4b24eae",
+      "leaf_sha3_512": "69e174a29eb568525b4f3c51f12b77ad5808cf6b984e7ed328b2c668edf4d65c11edf943e74aa2986bc60905468002ccb5286258b887e8d94d9c045b083c094a"
+    },
+    {
       "path": "tools/spec/spec-compensate.md",
       "size": 281,
       "content_sha3_512": "45f0b75ce7e0ce48fac8d79708045156f1b9234e8e425c6e71a60a8c7da124b4847d5af34b958939f7f01a760879d0191a9a6d186b1e354a7485f33e2a970c11",
@@ -10848,6 +10854,12 @@
       "leaf_sha3_512": "6b99c8516426ae3f6f40267adf13288fddb7203786ce3a411d7b159a7ca47421a007c8e8d87873339c7883ba91856a5c55b90e9650d7ff85306aa77443c0fdf2"
     },
     {
+      "path": "tools/spec/spec-license_match.md",
+      "size": 1430,
+      "content_sha3_512": "cc380090a305fe88b6830d2ffa55d0d7954c44a7e858af112b760b12803d0de264350f66d0818be68b6955278b7ee6c560760b2574a5191c4b2cc0b6de3c1920",
+      "leaf_sha3_512": "3a5c5dd35319e901c2e5bacfa677e4357d43e79254eb34b047e8653fa1198d320be68689f9abdf1a43f6970714efdce113633b5ac464e922240920cba54e5390"
+    },
+    {
       "path": "tools/spec/spec-live_state_loop.md",
       "size": 204,
       "content_sha3_512": "2ee09e58dd00a8237629cce52567b866333a688a236e6ec03d43cb6e29f1a33a8dc8e68a1a59aededd5388cb713117f31bd73de5d7dd7efcf94077096c5fafe0",
@@ -10882,6 +10894,12 @@
       "size": 298,
       "content_sha3_512": "e5bfa64b1bf140b7dad3352c737daa4f67ef873a49e6bed886e9c94bef7b72b91bb4762dada4d95c7806322efaa635e465cb787ec7819db02683d3072893a360",
       "leaf_sha3_512": "25cc4a40c3ff8d81e79be43265f93be3cd5bc2d3824d7f422ae085910476b5ef5f67cda25ca63c9050f3b7066d1705292d00302dfcc59cecbfc6203390b14b0e"
+    },
+    {
+      "path": "tools/spec/spec-push_reconcile.md",
+      "size": 1181,
+      "content_sha3_512": "68867b8ae3348a006a4da66a0fade3b03649f08131664ff74eb2578b49e4f76eeb3d47b7b3ea8085f220feff4795f68f378454b2917e52bee80945613bc6ebaa",
+      "leaf_sha3_512": "bbb48572631a26cbc15fa11ea17ec09ace3e056bf772f3ac7a01b0e20527dda397ba7aeb27d4ac98b6fd89e38a0924af8e4282eb6075f28a9e3d4e98bd1be137"
     },
     {
       "path": "tools/spec/spec-quota_wall.md",
