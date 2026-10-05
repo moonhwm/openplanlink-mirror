@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:55:14.749Z",
+  "generated_at": "2026-10-05T19:59:32.955Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1862,
-  "merkle_root_sha3_512": "0f3f813bf8c0fa4319432a95a09eade7f36e710a34cf196dc5c16d85e7fc97078fbb414baf251f08e81ce4a583af64f03ffbce97b47d59c7c1abbc7e2009fb86",
-  "hmac_sha3_512": "61b5e4d75ec15f488c1b7554aeab3254e9ddd42cbea4daa4e1962147464fd54e9d1ac8134e8b87b165fda3d57cc358630a959d84a67f036a38c1d9d7e52fe4ad",
+  "file_count": 1864,
+  "merkle_root_sha3_512": "bedd4bdbfa550bdb1d26b9a34994596f765e35e72adb92e368f381af3834c447cb01e52ba3ea008fab7c3d6ce9bb1bc9006465689d8be8111a3a25dddadd6e76",
+  "hmac_sha3_512": "fe826c982852819009396536d0879a659691a6570459537572628b71889d3825250cdfd972c1e3521456ca3764276d0db11b7807952cf9f5f91c6d2ead8c6edc",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -10662,6 +10662,12 @@
       "leaf_sha3_512": "43c3f6aa990d2a1578ea5908c8839449cb20914bf9e81b45c4cfb883ee564344d41e04f45515ef35fab87761fd81d48b7d86a5c050f39ac35ee351c547de3cab"
     },
     {
+      "path": "tools/attest_selfcheck.py",
+      "size": 7936,
+      "content_sha3_512": "b37745ada61ba31e783bd72a9ed45549ad652eef28b9c2ba31e1a71c1b395410d527eacce1466979180fbdda3e532962652abfcc078b1ed8e9f1a75f09062874",
+      "leaf_sha3_512": "64b9ed61b7d1bcb7b8c1c0e1ff51ab54766eede1f0ec41935b1b783cc9f3e8453d06c28b035df6a70357b39b306b287184e497eed6558e4e2363f5372429faff"
+    },
+    {
       "path": "tools/build_opl_tree.py",
       "size": 3761,
       "content_sha3_512": "f53a3719085534e0926a13f56075d09f625ddc9ebeedaed96f949fadfa11e2755614996be1a4467a288cce6d1f68b91f6363ee6e5f7ee286035f7160aa2c6423",
@@ -10681,9 +10687,9 @@
     },
     {
       "path": "tools/cd_attest.py",
-      "size": 9025,
-      "content_sha3_512": "561c11e000858c55f7c058bb7f961b58ab6b312e9de7334fb4c78955428fe47b6e3d37c92038f904ef2a7af1fe677531ae257bc488f92ee4df52c9fae89c3732",
-      "leaf_sha3_512": "e29ca19e61596a62a40913a62cbe8153a1bc93c96c32deb1b19f4bfecf0f95eb2fa140f3b26c98dc1f195379cda6b66e2912c43ba0709d1415b7e2c22a30358f"
+      "size": 9075,
+      "content_sha3_512": "fefff3b8aa72bedad6c0b7e6f0939f64c4409669b864f911fe891df80407c41870c901c7c75597f1e89503dc88c3a696d29edea3539cff55dce597de7eaa065b",
+      "leaf_sha3_512": "4d0aa64e6f147c488498d80ff5fc4297b109ed718fd9f6c3894cdcd50b32f1540f4777cc619f84e3cb67e877f2cb71c5cfde8e0a5b1f036104381dd95230c056"
     },
     {
       "path": "tools/commit_gate.sh",
@@ -10894,6 +10900,12 @@
       "size": 301,
       "content_sha3_512": "efb8d7dce34e8f976b83df59711099d1b34bcf69913b09b7c5607c92489c62c539a1ccf9e06614e3ee79662579d2184851bc5ecc90ed61dd6ef1b4cd2684e4a0",
       "leaf_sha3_512": "f95149b560ffff70406df75b3d6a24138d06d4b30dfb513a07f95776d037040e3111bc79696f92194c8343afdc3f9bb38fe466ad3e74405428237f1648f04deb"
+    },
+    {
+      "path": "tools/spec/spec-attest_selfcheck.md",
+      "size": 1978,
+      "content_sha3_512": "f13c1dc1666b6e48c2227fc1664fa9110c2ff309adb392d851d0ffc6cdf752f8146cfec030447bcabf4ef51ebae8c028cc77b55bb70a0964c043ba64c1a79759",
+      "leaf_sha3_512": "ae6e08aed7a79e7f46266c13d40d82d42b1d8c1397c7309b5412be91d75a81382647e30c40d1c13609a2a5f071c2eb5925241d8fa3b52bd9137914b879502db1"
     },
     {
       "path": "tools/spec/spec-cas_store.md",
