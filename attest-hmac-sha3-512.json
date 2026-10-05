@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T12:16:23.943Z",
+  "generated_at": "2026-10-05T17:15:11.194Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 837,
-  "merkle_root_sha3_512": "5871212e05a586e6ccba346fd19594dc553d5a3b891b233dc2c3ea068a21251ff7c851d1bd9854810b95edc9b1a71d566bb6b63d6b5a7a78e349269186d3dabc",
-  "hmac_sha3_512": "8b4d5a28e9d2670053eebec2b22f6ff3affe186834db9304c943efa1a7d59ec7b9a16b4216a0793dc0810463384495415c49db5a765f68b6cd467535941b4db7",
+  "merkle_root_sha3_512": "b2995de13c4c296f964575c5247fcf1ee1cc26bf531a1c4f912cbba26524c624bb138ff4baea2618ca804f2eda19b1c96a0ff3e029867047dd3d741411237291",
+  "hmac_sha3_512": "98da4126e2f3e2bf63f743d0a08e80abb34d5433059587b5a5a6c6f304ef33be0de0077dd6fc4c5fcd902832ed54e23b88036e951beafb4cf2a92dc527950702",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -79,9 +79,9 @@
     },
     {
       "path": "HANDSHAKE_LOG.md",
-      "size": 29478,
-      "content_sha3_512": "a138b758d89b4840cc12f0b0f41c7115bbddb489dedb8dff4b4877599f648fd50c48026a4bbbd3cc780c30e1672bd5eebe9219f3f13320d40fb4aa57f7f76f3a",
-      "leaf_sha3_512": "6e58ebfbc492465ca8eb0b19ae1e4a0511d592c1c1bc84de3373809c47f79b4929ddd40ff39a55a4fe6fefec209a6727404ec3a889b91e945923a11244ed8c6b"
+      "size": 36120,
+      "content_sha3_512": "6da054d273a2085c4d6c37d7fb9486197242dbf44d33d45c65e8cd6bf0231f1dea6aa8c3f506248ba54db5e015677658e5625424e073996aab87471dd2fc7817",
+      "leaf_sha3_512": "033fd70a68ad08a25836c62c32f969ecc2e6208fbeeb73522992dd62b3db9e161829c3f6b8f10fb1ed3b0a4776972731afe5ab2fe39bb6a18247ea5c004504de"
     },
     {
       "path": "LICENSE",
