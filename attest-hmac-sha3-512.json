@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T12:27:26.653Z",
+  "generated_at": "2026-10-05T12:27:39.878Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 845,
-  "merkle_root_sha3_512": "cb7411fb25da5576f2d174993180dbaf3df304f51d9b54dad8928942e6814ce06f1e3a4b3672a6c89a185d6280a3e2b273ec77dabf3c7b7c293e37bd2507711a",
-  "hmac_sha3_512": "580fcf490820e2ca1a94dcd61913e74143f50e085cbe2a68d664d02ef99dbae812980dc98657778007fce7cb3079753be2b80a2bdc85e6aee6b2bc6c421615f5",
+  "merkle_root_sha3_512": "c9d9c5db47390404a4480070e47418bb1af9035393e1692e22d4fa27a88bec93ce73406fbfaa4f5de12e8f997bda64c68c9f4b39cd877e2f60d24964eac3e19a",
+  "hmac_sha3_512": "2385b0fafcda0047720862bedcaccd1648f3bd987cbbcbcf8a49185707670d9a2b364b596de791d5058ae903fa3819fe89e9aa982c775bca07de6aadf054c6aa",
   "files": [
     {
       "path": ".gitattributes",
@@ -55,9 +55,9 @@
     },
     {
       "path": ".github/workflows/ci-verify.yml",
-      "size": 1147,
-      "content_sha3_512": "902c3757259b37be39fb4c88f8bc1b9c80f9942b4986a417b72ca136bd83e3a165fd8516f4eec143ca8c894900d559db612087cfbd0ec90c8b1129c3739bba56",
-      "leaf_sha3_512": "9c28dc3742575daf7d2f0ff81143cbc78fc3b93fd2077184ecfa207401259b8b1361f2598e3690f86452035b227d51b1610b1b06debde2111f76317ef69937cb"
+      "size": 1337,
+      "content_sha3_512": "872c328f280f46c3eb7acaca068af110bd8b86aa7fa4af8d0d51df8adbeb5b57e06f6939eb6507ad8e137c84e68e73fe1da06f92cdceaa2d4682407d57c117ce",
+      "leaf_sha3_512": "fa001e2b6e188bb555078dee0337e7d9b86d402f0b91c9da2449b38ec7dabb0def864c497209d4654833d32724ba5381bb69b2d0f485e97ceae79fc10cf33a76"
     },
     {
       "path": ".github/workflows/git-upload-gate.yml",
