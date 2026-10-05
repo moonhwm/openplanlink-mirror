@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:08:54.758Z",
+  "generated_at": "2026-10-05T19:10:11.160Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1821,
-  "merkle_root_sha3_512": "3fef2d0a0466f7c583728b8a4d59024629fa079e4671c20872ee4bab85cfeb80606aa410e0ab4106fbbba9c4250993d74b715e6ab314a9c578ac7b3b71fbd01e",
-  "hmac_sha3_512": "c3d5b7ac88f76387476e4bd5ff1244c3d637fd3b15658fa1e913a035bc56fa4353051c5d3fb24b372661ce7e1de24ffd8f40283bb126d3e247ee39ba2557a4bc",
+  "file_count": 1823,
+  "merkle_root_sha3_512": "d3cb11f6126bd0fa1e9532638e7895743a6b71c93ead649477c0feaa763792de4e43a49defca9951f0f46770c71eca49f8b898c969a6984b8a18b90e75b9e655",
+  "hmac_sha3_512": "5156a7cafc947c7cde06b551c28e09d7d16b430027cc16db30449d686434012de2117a75baf41fc25438431ecac0024bff2434c77c7b65962f272f82aaecc959",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -606,6 +606,12 @@
       "leaf_sha3_512": "c484b20153befd92bc6a66ed6c71e2b0f6e54e0c3778f8859cac0aa1824cc12c62cf4bc06d9eebc6a91b872a8e61b47fd1b8ee7e4fdd572a6df171739478b49e"
     },
     {
+      "path": "deliverables/k3-main/object-pool/CAS-VERIFY-20261006-01.md",
+      "size": 3300,
+      "content_sha3_512": "f809e15c0efb52565871f32b179713abb88b7508f854be62671c6164d478b37c9b3cee4543bde83581bf0b82541ed92e51f650c1e48ac754692d8ee254759969",
+      "leaf_sha3_512": "4159717bca410ee97acb382ed4da18d015420ee0a9d64b24caf4c19b2ac0b004373718c7f5eabe3652e9710a5de6fb6ebbde81280165e047d79432415d433338"
+    },
+    {
       "path": "deliverables/k3-main/object-pool/LICENSE-VERIFY-20261006-01.md",
       "size": 2980,
       "content_sha3_512": "879534d70d03286db9b4fd21a5708e0a18898b504d9277f2952678c83fb1bf1753624173573b0e05ec4f0c227021fe772e673823e07f8132535b4a373579640f",
@@ -826,6 +832,12 @@
       "size": 2137,
       "content_sha3_512": "c08560755ebaf63e1eadc58ec6b78a403a5255fe7b9c5231e77d0328b325a466bdc570c0bbae209a9f4bb74994a62306794b805d4919c25223824b72de059a41",
       "leaf_sha3_512": "0aeb6dbec0bd2ab69b2d39c6c4ce45ceb93495c377612b17f4c914ebed6c771893fafc44695afddca1e4ffc1239d92462d02977f2b511b5de76e0a592686f53b"
+    },
+    {
+      "path": "skills-experience/kimi-code-quantlab/2026-10-06-kimi-code-quantlab-skill-experience.md",
+      "size": 3941,
+      "content_sha3_512": "3d9143e657f5d25c4e3bd5e8b3e2fe9af819f6f5058eba8a18a3c65d3eec0718b7bf9256e6cb0adeb6d5dacb798e25b39eff091e053bf80c82b14b6ce41824e3",
+      "leaf_sha3_512": "f9c03ce2666dffc687eea2a4593c37e35c06b2a48b8a8328af5679e3813f0b68f206753172d02f6813c5a2678a0dc7d2b6515aad10238391bd8afbb276daec62"
     },
     {
       "path": "skills/EXPERIENCE.md",
