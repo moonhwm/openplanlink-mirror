@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T21:38:22.722Z",
+  "generated_at": "2026-10-05T21:38:44.566Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1885,
-  "merkle_root_sha3_512": "537263ec480521031f9e7ef651ade201db709bf8adfbd9a66944ce22c3bfdd09e1310510e2e2a1b6f7f44e6d37c2ae3f0ba1e7e35a8039b5ebd90e099e494dcf",
-  "hmac_sha3_512": "12536cc6a4b4047452f935c2aec8366e396b32ab90a978651baa7dc386a069e8a7b3d4187b4190d2465cd07ad344aa476bd762dce534e96ab7166855cbad8b6d",
+  "file_count": 1887,
+  "merkle_root_sha3_512": "7b5fe8a0daf81068be524d33a98e64f187da3703a371ded9317f2a57d3b14fe2fd6daeb90a9275c416a14bfb25246c59af9de4e1307a1c303b4c1d0c40c4263e",
+  "hmac_sha3_512": "741b36204b12df471c16978256e6129f18cd7952f7ce47ba7700f62818cb280e0e1acfcb32175e17c7f8c9c1cdad923635593740e5c1867387b33a149839151c",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -498,6 +498,12 @@
       "leaf_sha3_512": "3cd43fe77722260121aeede71c794dbb1d20628152b5eef5013e5d5ac455d8a58171a5b4ddf2d6aaea1600cb280552fc97ad5138b1f7a8d7ad2a628c342cce82"
     },
     {
+      "path": "deliverables/20261006/seat-cairn/exchange/夜间运维窗口与折扣时段调度方案v0.1_DF-NIGHTOPS-20261006-CAIRN-01.otl",
+      "size": 5105,
+      "content_sha3_512": "58eb75db42e957291413185c66255151e381b83d8cc6913d3e2b6fe26c8f244025a5cc5d54bda49b7becae4c1df4f64fdb3227a127805192c19dff5425957329",
+      "leaf_sha3_512": "79a784f6c6ebaa908d857d78b0ab28f50fc43c5074c00848221b853e4c713707f9dd893ee265983635ff8dc37849bd5f57865eac68e47acb0b02d681c498577b"
+    },
+    {
       "path": "deliverables/20261006/seat-cairn/exchange/大讨论计票v2_DF-TALLY-20261006-CAIRN-02.otl",
       "size": 6550,
       "content_sha3_512": "99d256cafee276657eaace08f04bc9801164a859bd6cac6f04696cf8ccb6045e3d9014a52fefdf8981f9d91c890be1e4e33ab59224be588fa5454c579ffb228a",
@@ -742,6 +748,12 @@
       "size": 2341,
       "content_sha3_512": "2c7db4bb433a24c9589682fef80f982c6bdd5364866d165e3586c72470b0df5b208ccb79a2cbfff6ffe96f73ecb5036667f5fb328def9ac6ef090dc7ec5479e0",
       "leaf_sha3_512": "90fa9c29bb04bf5b6249da49d53992fa294c983bc048806895210d0a0ae7473493616cd9adb7bd0585e354e263a566ea7c07c4ad585d59bba146ae466ca5b9f9"
+    },
+    {
+      "path": "deliverables/20261006/seat-cairn/tools/night_window.py",
+      "size": 5399,
+      "content_sha3_512": "9b29047ac20e0678d883abea15c0c6193a68e2d0b3250d9eb93c8b8eb2c556aac5201d9a7fd429c6709a736f043633a02b07097b1a552e6f2f0e4a44d894a67f",
+      "leaf_sha3_512": "c83923195c0496aca28fbde8cfe6a58705dc62d5109efa2a3ab551e96f47197e4cedaa8693dd3c81b701bfadbb2be4f3730e8afe026ee72f91de616f06f2402c"
     },
     {
       "path": "deliverables/20261006/seat-cairn/tools/ops_event.py",
