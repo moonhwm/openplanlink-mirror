@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T19:18:28.643Z",
+  "generated_at": "2026-10-05T19:21:06.381Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1837,
-  "merkle_root_sha3_512": "ed42057bbf682ad179ce8cab248a47baaaf968de06adc7c2332b5863aedbce9a4f5339a13bdc4d00f6c52b95897f07c0fe5d1743210678e80db19210d3d49ade",
-  "hmac_sha3_512": "5c140e159c221b805b07d8094bdc7d43df2bab230cb74c058990e3134aa82640c4f78f952710d62c3d82bc77a4432ed07b255f7e5d0b4ed5eab460cca0f2b49a",
+  "file_count": 1841,
+  "merkle_root_sha3_512": "421dfce9ca4ac61f7c7bc8efa668dab0b844d0d44c5f81bac5e1db525d65effb292b8f7e4f71b88501da32d1fff11aea97d00cdd4da5faa777eccb26f8d1de8b",
+  "hmac_sha3_512": "58a8285e18d515e19fbbd9de8f532c64788bfb9ed516c82876a27e375e8b9c5ac7153cf7e04f840b1bb1a8cbf6325246a33c73559d2c75e298c46356fd03092d",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -402,6 +402,18 @@
       "leaf_sha3_512": "5459e4b0e865695c0fe3e204fec5c632acd2f54c761e650a8af669afa48dfef396f8f45e296f85281dbb860e812239e0cc2aaa16c66441540118dd1d1e8f6215"
     },
     {
+      "path": "deliverables/20261006/seat-cairn/cpu-baseline-local.json",
+      "size": 476,
+      "content_sha3_512": "f0d6b7e897fdd760155e4bcc78f837cd72861c6a1fcb935761c56abc7abe10b4c7ca55b2c884297c5ff6e3cec17342218e978fc085537265efa20bd91f2f37bb",
+      "leaf_sha3_512": "6402cd2ec1a9a8f5bec7aef5487be1835016d040fea70a2131ca1597d951bab6223384d6327288cc95a9ec77b90ac2a4bee877239f6f8b51ce9da34bb0026123"
+    },
+    {
+      "path": "deliverables/20261006/seat-cairn/cpu-baseline-local.md",
+      "size": 756,
+      "content_sha3_512": "d41128ee1c8be0113986f9ec79c7f1122d36169762c1b24a46bb2d46ebba2380ce3609d37768f57bd2c9a26515bc8aa159b156147319198ac81d6110b4894978",
+      "leaf_sha3_512": "11f58bdb77c4b26b1bbf34996b5d7180cb6f57dcd0e4bdeb6d43db11e91852f6b7fb1dfb3244a0d383a64349be3cb02dfafed0adef23ed6947e97728f991a640"
+    },
+    {
       "path": "deliverables/20261006/seat-cairn/exchange/A盘映射清点与可调用分级_DF-AMAP-20261006-CAIRN-01.otl",
       "size": 4233,
       "content_sha3_512": "92f2bf83f82590d8de3f663a4b7ffdf5d287520e871e5cde5ba7523f729f29fed98a834ac6fef22d75e6078a1a463e67a3c8f98e3e782d388f177a0a1e09e87e",
@@ -430,6 +442,12 @@
       "size": 1532,
       "content_sha3_512": "1d73d3e659788cd0566b128cba469d2634ebfe5aa0314f7fc85ea989fba9833810667bea3550254ff984eb774df5f1fe293e3c31134123ca28fd00c0b407c60f",
       "leaf_sha3_512": "da0138e1d475450b8a1aef96f3110f16e400c4d9386e6e4e889581dd9582a997ee05fbe1aa079c68951f1d732918801d8fef6932f69f2802e5d2682738bab83a"
+    },
+    {
+      "path": "deliverables/20261006/seat-cairn/exchange/华为云X实例算力榨取与排期设想v0.2_DF-HWX-20261006-CAIRN-02.otl",
+      "size": 6082,
+      "content_sha3_512": "cf762e22f63176a35fe13828a76b5cc5c7069c983cd06f3e6293ef613eb6ed2c2df5525b77532848854d9489b83e435dd0f1e6197cb8e8e306956f6a61d11147",
+      "leaf_sha3_512": "3cd43fe77722260121aeede71c794dbb1d20628152b5eef5013e5d5ac455d8a58171a5b4ddf2d6aaea1600cb280552fc97ad5138b1f7a8d7ad2a628c342cce82"
     },
     {
       "path": "deliverables/20261006/seat-cairn/exchange/大讨论计票v2_DF-TALLY-20261006-CAIRN-02.otl",
@@ -604,6 +622,12 @@
       "size": 10578,
       "content_sha3_512": "78f0a0e1cfc4b8aa1c44821057cc93cc71f5bc602cc41db3b533bff0d8f295e2e592f743336cc9d3f666d04a2411ffbfdf63037abdf419c4248bbc8bf265b998",
       "leaf_sha3_512": "e5177180061394d510d9151239e63cdf40c73a759e33f4f80aec8b2e4293254581992639cf65bf5b49d0c0e62e9f144936708b8865f86cb1be63853081d28d6e"
+    },
+    {
+      "path": "deliverables/20261006/seat-cairn/tools/cpu_baseline.py",
+      "size": 6435,
+      "content_sha3_512": "e460cc38166cd0c18bcb4622c97fdd0de78871086b390f55fa44fcd07efdf1651a86321ed1786da8e412e201fcb8979b5d3eaa06216ed40b6d02f761bc0798af",
+      "leaf_sha3_512": "f6c8ecea3961bf349bf8ef8aa5bb1e2138c28f65a2685b61d2bbbba272e744346d230cb5e4bce8b7ca6f14fa47dc37727983a46795833a4e34076d49e6c8391a"
     },
     {
       "path": "deliverables/20261006/seat-cairn/tools/eff_report.py",
