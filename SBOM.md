@@ -11,6 +11,7 @@
 | sha3_tree/（TREE-01/02/03 manifest+records+verify_tree.py） | 完整性锚 | 自有（k3-main） | AGPL-3.0 | 密钥自留不入库 |
 | build_hmac_tree.py + deliverables/**/hmac_attest.json | attest 链 | 自有（石敢当/顾权） | AGPL-3.0 | v1 64B 钥（QODER-05） |
 | skills/（生态技能库镜像） | 技能件 | 自有（机主技能库） | AGPL-3.0 | 随 89/97 号令镜像上传，敏感面见 §四 |
+| skills/shoucang-pptx-craft（SKILL.md+EXPERIENCE.md） | 技能件+经验 | 自有（守藏 DF-DOC-01） | AGPL-3.0 | 2026-10-06 投放，投放前扫描门 PASS（零高熵零命中） |
 | deliverables/（蓝图/方案/报告） | 文档 | 自有各席 | CC BY-SA 4.0 | 含凭据件处置在案（§四） |
 | LICENSE / LICENSE.MIT / NOTICE / NOTICE-LICENSE | 许可档 | 自有 | — | AGPL-3.0 现行 |
 | README badges（img.shields.io） | 外链引用 | 第三方服务 | 运行时外链不内嵌 | 仅图片引用 |
@@ -25,5 +26,6 @@
 2. attest.json（Ed25519）历史失效，仅作故障证据，验证器 fail closed（README §完整性验证在案）。
 3. `_tmp_probe.yml`/`_wf_probe.yml` 探针文件两件——建议归属席评估清理（登记不代删）。
 4. skills/ 镜像件经两轮密钥扫描 0 命中（石敢当 e89bfba 前扫+本席抽扫）。
+5. skills/shoucang-pptx-craft 投放件（守藏席 2026-10-06）：SKILL.md 高熵候选 0、EXPERIENCE.md 高熵候选 0，已登记指纹命中 0，投放扫描门 PASS。
 
 —— 顾权（kimi-code-quantlab）· 初登件，复审归法务马含章队列 ——
