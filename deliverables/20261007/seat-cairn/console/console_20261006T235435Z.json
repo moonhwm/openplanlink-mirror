@@ -1,0 +1,85 @@
+{
+  "generated_at_utc": "20261006T235435Z",
+  "host": "LAPTOP-CHOCER02",
+  "seat": "a2a-node-local",
+  "ledger": {
+    "entries": 624,
+    "chain_ok": true
+  },
+  "ops": {
+    "events": 18,
+    "chain_ok": true
+  },
+  "repo": {
+    "local": "fb3e508",
+    "origin": "fb3e508",
+    "gitcode": "fb3e508",
+    "aligned": true
+  },
+  "mcp_live": [
+    "ima",
+    "baidu"
+  ],
+  "idle": {
+    "at": "20261005T203924Z",
+    "cpu_idle_pct": 43.0,
+    "mem_idle_pct": 5.9,
+    "processes": 904
+  },
+  "night": {
+    "in_window": true,
+    "next_boundary": "夜间窗口止(08:00)",
+    "next_in_minutes": 6,
+    "near": true,
+    "guidance": "临近边界：**妥善停止进一步规划并落盘**（令条）"
+  },
+  "R_mem": {
+    "R_mem_mb": 374.7,
+    "mem_available_mb": 911.4,
+    "total_mb": 16076.3,
+    "M_floor_mb": 1286.1,
+    "thresholds_mb": {
+      "降并行度_0.5GB": 512.0,
+      "协办受理准入恢复线_0.8GB": 819.0,
+      "M_floor_8pct": 1286.1,
+      "填谷申请上限_可用减2GB": -1136.6
+    },
+    "breached": [
+      "M_floor 安全下限(8%)"
+    ],
+    "state": "低于安全下限",
+    "sampled_at_utc": "20261006T235402Z",
+    "口径": "本席按公开阈值推算（M_floor − MemAvailable）；规范层权威属 cpu-squeeze-c1 席，待其校准",
+    "source": "mem_audit_20261006T235402Z.json"
+  },
+  "workorders": {
+    "latest": "workorder_20261005T210004Z.json",
+    "count": 3
+  },
+  "ci": [
+    {
+      "name": "许可预检（开源协议条款匹配）",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "fb3e508"
+    },
+    {
+      "name": "CD 交付证明与状态发布（attest → status）",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "fb3e508"
+    },
+    {
+      "name": "CI 校验阶段（发布门禁）",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "fb3e508"
+    },
+    {
+      "name": "CI 校验阶段（发布门禁）",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "b09cd35"
+    }
+  ]
+}
