@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-06T23:57:19.614Z",
+  "generated_at": "2026-10-06T23:58:18.084Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1932,
-  "merkle_root_sha3_512": "05fbeee6a579e0ec05fab74616a416fccb7920e123680d118c315aebfcfe9a2f77367fac16266567fc2e5fb42ab27e7ee37ad182f30a8833050a4050d7874326",
-  "hmac_sha3_512": "c6063d8d8253ba654fde4a04ef5efdf7cf64895384bd75daef12bce229850f08046da4be4702789b57f3dcc70ea7218ba93262351fe1bf67c0273c6d069ed181",
+  "file_count": 1933,
+  "merkle_root_sha3_512": "3c9bdf5e1f8595c1a71eacdfe72ff3b9f5ab8231fafb93b48121dc9435853d9634adc8b0ae35710004d7fb8abd2824d34af284dccde5d3d9bc58c7b6eac428e4",
+  "hmac_sha3_512": "bc0060b929f6e19759b258acc472fb06bf58bd7b4f63920600e1f7c01421702493417c1e08a9469e5242bbd15b86cdc19f5df677ef4a64cb844f40ff698763a5",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1006,6 +1006,12 @@
       "size": 5117,
       "content_sha3_512": "af6e9cedc9622d3c4d582ca941d9610ed3db00bca9630c3ad018a3bdb9035d8cd65babc12d8813db32830bbf67b2087e586c4cced429ae10f0675aa1411e22a8",
       "leaf_sha3_512": "4d8f6dbeca3c2b246f3c103aa2fd1dac39a0aa558f8a4b6c34ab3dbd9d85df32497b3543ae3a77fba427b160244fe22cdbb59a8c940a91dbbccf703a6fb12801"
+    },
+    {
+      "path": "deliverables/20261007/seat-cairn/exchange/新起始点摄取记录_推测解码知识库入口页_DF-START2-20261007-CAIRN-01.otl",
+      "size": 4112,
+      "content_sha3_512": "3a1c2713bdee5b62bcc8a99ba7af2be51d9df38546735fcd462067ec5c6516a3d2d97fc48e3d9724c5540fb04b2fb8725ad35be4da81ce82fc5ce237dc8554f9",
+      "leaf_sha3_512": "89a6b112a65441c1e125d2aa4e803fda1302c24ff392e153c872a49421932747ab576a9dea28a266cdfd0dfddff89c1e5088f2473bac0bc4afa94e127a0fcf31"
     },
     {
       "path": "deliverables/20261007/seat-cairn/exchange/状态更新_门禁复测与GitHub通路时序_DF-UPDATE-20261007-CAIRN-01.otl",
