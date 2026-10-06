@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-06T23:52:03.628Z",
+  "generated_at": "2026-10-06T23:53:12.278Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1922,
-  "merkle_root_sha3_512": "59c894f1e835c987f71a127a160d66d872e5c33e2451c4cf29492b3cda9f2f5f6b66561d9cc076a8f4741abfaa8c5a394528077e043fa04bae67ff2c637c6d01",
-  "hmac_sha3_512": "0af4cf09bf81bfda1935b76fe130384390b1a53e5fbcbb5ef5b7d909479dc1f6e8e7758e412a74ac0ab9d4889eef8e37d6657aedba395b8658458cb36b5f5ff0",
+  "file_count": 1923,
+  "merkle_root_sha3_512": "4191dbb6ea363f953949cb4f1870b5efccbefa27f5b0a5b8eeb72d647d4d88e098a397f6cc067885215e8c44bff5dcf0fce4f88548d498d847c789d36e2ee117",
+  "hmac_sha3_512": "76bc4aca8369efebae038f4ced3d0fce4474d81f5bf2adf4bde80fb40ba7430e34dc4289061eefcb669343dd08630840577060b982ecb277d90aa57f44fd6616",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -964,6 +964,12 @@
       "size": 1699,
       "content_sha3_512": "e570e21220dd2d43a2c981dbca1d87c66e9f56fe77b87d26f4595c1ba566a8d41a43b28827e33604ac579e3a7af3808373871f22021d8d76c268c0e08d017e66",
       "leaf_sha3_512": "53e5568f589723e7f18962c0319ee2f173642a97b934659842dec3fae44591410d36dbf38f2aaff32f386f4e16c755e7f209f06c0a67d39e27658e8704e7d1c5"
+    },
+    {
+      "path": "deliverables/20261007/seat-cairn/ctxmig/pack_manifest.json",
+      "size": 1632,
+      "content_sha3_512": "9a29e5920ef01414d0f7b334d749e58994328754c124a5a65d8bef66d247d14c4efdba05c0daa1ee23664f5eaff32fb4d60070b23424af64772937a07d2c2fcd",
+      "leaf_sha3_512": "d2b88d2aa2ede175d73275bc43ca8166843913eaa24a6538fddab1ba132d77327bb52f13b9d9a7eec1496a20ae04cededd22af03f720fa1b69acd3ba31439f81"
     },
     {
       "path": "deliverables/20261007/seat-cairn/ctxmig/scan_report_20261007_074747.json",
