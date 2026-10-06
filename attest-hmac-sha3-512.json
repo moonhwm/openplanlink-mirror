@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-06T15:36:55.719Z",
+  "generated_at": "2026-10-06T23:43:48.692Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1915,
-  "merkle_root_sha3_512": "8ebb0ae8059c71d4efd228b4ccdba6ebc93836518a7794a08b34fee8e18789b415f5111baa58f0905f6c14b68f58b8d4de0fcb146167ff74df0942e876fcaf54",
-  "hmac_sha3_512": "da50ce33ecb2d1f4da8000724ac9628815e23a5da85141ee7adc4bd5d1f63984cbba8ca35827dc801abf50bd35718c097fd2b123edc8ac95b8a8755011e0f64e",
+  "file_count": 1916,
+  "merkle_root_sha3_512": "893ec5f6058786cedf4bb401517bf5822752936b66a612ab32e52798bfb8825f81eef5b0dcbf992f5d6f11b1e6534b09dd6c8cc3ddcfaa354d32bad7ca776df1",
+  "hmac_sha3_512": "849eb8bf38d5d8483e3477728de733509e22da253b97ffaa9df622b0332d961e01b03b49f82fdaedb3db82bd7385ba1c5b6f84f8902ebd1547bf670c46c4faad",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -952,6 +952,12 @@
       "size": 6011,
       "content_sha3_512": "8c9cc25d92c52f2394b03ae01b828ea5c361f291a37a512b5a68c7b66a90bc2165fd7fa1b21f0c76f9e18d09abb222b319aa5aae8a0d2025420e33ef04779440",
       "leaf_sha3_512": "2e3aa7fb48c30a48ef4124b74e277838c04073c69d60b351b18731094a44ba11fcfd1ce38d453fa12da58efa400dcf317501955fd4cfcf0a71918b65dc6f3598"
+    },
+    {
+      "path": "deliverables/20261007/seat-cairn/exchange/夜间窗口收官回执与R_mem合规声明_DF-ACK-20261007-CAIRN-01.otl",
+      "size": 5080,
+      "content_sha3_512": "85919578791b1819e79b11cb0e9ec751b475c8895cf61761daeffab4d4637649b941a0bf1072df9cb64310a9558f6b2f0add5e9356a8dcc48bb41adbea5c3834",
+      "leaf_sha3_512": "d804726017967d283d2600f8b27d37d79b1d18d263835b9a12d9c855700b66d7096cff569728eb9bd7b688fe6e8e62f91e2091e290f5a1f3f2069ca9f1118060"
     },
     {
       "path": "deliverables/k3-main/dual-pillar/SCHED-20261006-01.md",
