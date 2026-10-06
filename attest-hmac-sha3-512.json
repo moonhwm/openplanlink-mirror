@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T22:24:22.959Z",
+  "generated_at": "2026-10-06T15:36:55.719Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1901,
-  "merkle_root_sha3_512": "3234bd35fd09bba3b9ceade478a62f35928a84f99de22cf4510456cff963ec2fde9e0110ce41f0d670849ce86ff6d516870c31131660c8deea8ea1ddeb183402",
-  "hmac_sha3_512": "e5eae7c386697c6dadd1450356c6cba092d5b66155340ba5a74b1c84f3a78724700c25da160f17fc962d7d6bac47f12b320b08f3d679b647c1ae8a9e72d6d888",
+  "file_count": 1915,
+  "merkle_root_sha3_512": "8ebb0ae8059c71d4efd228b4ccdba6ebc93836518a7794a08b34fee8e18789b415f5111baa58f0905f6c14b68f58b8d4de0fcb146167ff74df0942e876fcaf54",
+  "hmac_sha3_512": "da50ce33ecb2d1f4da8000724ac9628815e23a5da85141ee7adc4bd5d1f63984cbba8ca35827dc801abf50bd35718c097fd2b123edc8ac95b8a8755011e0f64e",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -876,6 +876,84 @@
       "leaf_sha3_512": "e85e0b5ce9ef87e8044daad437550ce05ed0f363c039b02a51d2fad68fdf7df20183d4eaad2e6ce06dead6dbd54b51f5efa218ee629ad697c7c4637eaac8734d"
     },
     {
+      "path": "deliverables/20261006/workbuddy-hy4/MAC第二方独立复核_DF-MACDIFF-20261006-HY4-01.otl",
+      "size": 6528,
+      "content_sha3_512": "124501c9e68e8475f1fa822802624c5c90fc8375d3c83dd3e7ba3d9a73a5d5e27a5fc90e093a902f44561d4be6c2ff58621ec0d82e6f816a077ea7fb759ed45a",
+      "leaf_sha3_512": "dea4d4c4301b3d6af4c116fe6e349aed4660b13764c4c565e62c38ea7bc04e1992600127e05620318ab75c4cd81d22323c0364ea1d6a66a59c6ad324c2f93f00"
+    },
+    {
+      "path": "deliverables/20261006/workbuddy-hy4/_eff_memex_0712.txt",
+      "size": 72,
+      "content_sha3_512": "c2d65088a3fdf594aae44221df4d5cd5f7752d9e085b7a5563f40853b45b803b565c6858200f77cc2c102885a3bdbb34d4fdd035cd03ecfa620ccd004aa714ca",
+      "leaf_sha3_512": "01a3006220b3953a2562788b48becc0882c142dbecf7912fc53d9a94996685029634a5f42667f4c2ca5e870f5b483b68de384add6e045413a39d1737b86224f7"
+    },
+    {
+      "path": "deliverables/20261006/workbuddy-hy4/_eff_sample_0712.csv",
+      "size": 379,
+      "content_sha3_512": "f3e003bea53a1b6bb48cfe42e9f37aba26e5ec4da285d7a512907a13ace131a74f65bdc34f5a20cc498cf222088a2be30a33f61f0d9d1ec5b6b00fd9af3b97fa",
+      "leaf_sha3_512": "e80fb42360f7bb5ce278dd55ebd4a876f51f71fe69af65227309d6a1cd78e17290e67d60e475aa86db311cf0b914f552807204ad17081c1dd508ac46128e6c7f"
+    },
+    {
+      "path": "deliverables/20261006/workbuddy-hy4/_eff_totalmem_0712.txt",
+      "size": 0,
+      "content_sha3_512": "a69f73cca23a9ac5c8b567dc185a756e97c982164fe25859e0d1dcc1475c80a615b2123af1f5f94c11e3e9402c3ac558f500199d95b6d3e301758586281dcd26",
+      "leaf_sha3_512": "51575a659741d1b3300476a0c255bfec2759bda462ec4f84bd9f1eec9d86dda13e40cbd18171ccc3dc936d21e81d88345d5cfceaa6b7eb69ee0e37384f9f3582"
+    },
+    {
+      "path": "deliverables/20261006/workbuddy-hy4/hy4席使用效能报告v1.0_DF-EFF-20261006-HY4-01.otl",
+      "size": 7402,
+      "content_sha3_512": "cce35142c1f4da17ce1df9046eddcc0f9bac7cc7009c2ab2e67ef2411c00d51b9f83e32d7a5e204a12b52c6b03be7401e23b70618d125d9433aa393ec82c2855",
+      "leaf_sha3_512": "4ca88a723a73e375f70c4cd07ae94e92cd599bbe59c55622280a4bcd6678206b22d5d12e527f413f97c08774f174026f46b82545c987cd9a830579a288fcc7d2"
+    },
+    {
+      "path": "deliverables/20261006/workbuddy-hy4/hy4席表态_阻塞六项表决矩阵_DF-ACK-20261006-HY4-01.otl",
+      "size": 11774,
+      "content_sha3_512": "f4a31760464018d3609ec776455a6f9f1e53e4ec62a5ff4862ce0d33e752339c1779d03a407050ab0be1698e916aa7030aefb7f93bd8868ac1402d31f65642f3",
+      "leaf_sha3_512": "f6f6b8ae8cf1885fe0f98c0886436c9511b121647018749a34ecbce7884e0a9156b5fb7d36fb7a2eaa7982c298ff08c8451fbce67780c3e7ad5b56dbb68ebe18"
+    },
+    {
+      "path": "deliverables/20261006/workbuddy-hy4/上传通道实测与身份串用风险登记_DF-GH-20261006-HY4-01.otl",
+      "size": 8007,
+      "content_sha3_512": "130a784cc02bf1911f6d08215943eee58b6ba836135cd383488911c81703b63a99719f4f922ea8502bdfc3ec9106f6fe200328663614c2977b206b5b545cdce6",
+      "leaf_sha3_512": "821ba9415ac7d0865e70c3c279c484a06ad833251fe0f4942a178a5ab945fc44bdb30b6a2e899086d9c3fe19dd88104c445385f023772ab93887f4fcad3e2695"
+    },
+    {
+      "path": "deliverables/20261006/workbuddy-hy4/人设卡_WorkBuddy-hy4桥接席v0.1_DF-PERSONA-20261006-HY4-01.otl",
+      "size": 36999,
+      "content_sha3_512": "ff41c7eb3d3f53d92d0d09eed68831502c07559c1e363530e635394b141864be671fc048535a9a2c59e30bfdbd965fb725136b0217e87d5d0892f24279e888c7",
+      "leaf_sha3_512": "3c329403f3cd1004e36f7c9083ce622bca12023d03fef7e42b5520c2a58b960b091f131da696717a5f35edf76b6437b84b306c50104b3a9c0b39ca296f02ae76"
+    },
+    {
+      "path": "deliverables/20261006/workbuddy-hy4/人设卡_WorkBuddy-hy4桥接席v0.2_DF-PERSONA-20261006-HY4-02.otl",
+      "size": 14112,
+      "content_sha3_512": "6b87e6a28e749b7b062a25312bddd0fc6f85c425ef228fdb03cbc7e180227ceaa86c68580716eaead9a21394ca2ca5072b400c6894c3c99f1d432c1f8826a0d8",
+      "leaf_sha3_512": "bb53c2f578434954b3136fa148c8c82183f0ba5bd9f10fcaeeadce5d9b19d862e848a73f2a249576e1eacbaf06a4d5051c501e1b36f3d5134e23dffb024d4965"
+    },
+    {
+      "path": "deliverables/20261006/workbuddy-hy4/工具通道与算力排期方案_DF-TOOL-20261006-HY4-01.otl",
+      "size": 29652,
+      "content_sha3_512": "da7fa16f746d7bed0f649bd3e0f6a84eec62071c83ed6d6b233e88aaa90ebcb1fae0378d04d0104eb9ae7a3978f6e0f25e2099152db725696df1e03c238ea477",
+      "leaf_sha3_512": "3337242f9faea2d74eb3c31047613f36eabf3327f6ad67105d02adad2bbf661ca7c2453d0694f86f1c5f22306a43fde7f3195c8fe96b483c4ef8c33e39ab9a09"
+    },
+    {
+      "path": "deliverables/20261006/workbuddy-hy4/第十轮重读批注索引_四件并轨_DF-REVIEW-20261006-HY4-01.otl",
+      "size": 7782,
+      "content_sha3_512": "60aa9de40cc7b047a9f27f9227b0d136740087efc2d926b8e760d7dc40fa552695d1a4d7e6047b80fd29a2c202affcb059c05a039107757cb79483461bb0c01f",
+      "leaf_sha3_512": "a9dc23841cdb409071c10dc3d44a39c89f09c42feac2189e227dfb5db055acc5456e4138d549080fd3dff205faaa18a25d8026dab51c5250fc827610fd0072e4"
+    },
+    {
+      "path": "deliverables/20261006/workbuddy-hy4/起始点摄取与并轨意见_DF-INSP-20261006-HY4-01.otl",
+      "size": 7043,
+      "content_sha3_512": "3a72c966290ef3f4aebcfa91bb322af10c387d3b31fcbef5d81ffc8e3f56b3b2c997e3213918aa68c0157efcc0f35e51b9b587f325c320b3c20e44f6fada64c0",
+      "leaf_sha3_512": "9c537c7d5687825b973803c722359059f6a8f2b36da7a0f5b92df6449c5da91e071e0718dc12b79a1e7805f607960eca5035d59a807c439702b1fdfd675ecd1f"
+    },
+    {
+      "path": "deliverables/20261006/workbuddy-hy4/门禁阻断根因定位_DF-CIGATE-20261006-HY4-01.otl",
+      "size": 6011,
+      "content_sha3_512": "8c9cc25d92c52f2394b03ae01b828ea5c361f291a37a512b5a68c7b66a90bc2165fd7fa1b21f0c76f9e18d09abb222b319aa5aae8a0d2025420e33ef04779440",
+      "leaf_sha3_512": "2e3aa7fb48c30a48ef4124b74e277838c04073c69d60b351b18731094a44ba11fcfd1ce38d453fa12da58efa400dcf317501955fd4cfcf0a71918b65dc6f3598"
+    },
+    {
       "path": "deliverables/k3-main/dual-pillar/SCHED-20261006-01.md",
       "size": 2874,
       "content_sha3_512": "da802f4a395b1508f05c9a5734690e202ffbe5b7bacb26cc27cf3f2bb183bb61803446b7df372a66d7f0f46ccb068430e43e79ad20c34a93e760a3d0baaf597d",
@@ -1084,6 +1162,12 @@
       "size": 5637,
       "content_sha3_512": "3898a3d143afe7b47ef87f91a37696307175ed636a5a22a378ce4ddcabed66bb790d44afd89bb77beb08ce99ebcfc20f91787cb553910e3723c315e220bc12ef",
       "leaf_sha3_512": "610494508abe91b1830fcf8487a40b87ae7ba0e1357c032092361f83c2e0c04fb79f2a96dab87655e28df9e8f699a58d6f6b96a770e6555a5c6ef4e1a6bc1590"
+    },
+    {
+      "path": "seats/jianyao/persona-anchor-card-v1.0.md",
+      "size": 1650,
+      "content_sha3_512": "f68a5ba68c37fbf2ced4b319b3ab6cadf66a85d67847f62625000cbbfa3c067d093443c4926228dc5d141876bd4d12cee2564fd66f9a7b2e9564eb193ece9015",
+      "leaf_sha3_512": "0abaae2227a4e0c6b299fe5ba3152b5147a151b90efc38c9b0fe5da88ed511127f48fbdfdb2ecf018936d43ec1e096bea51c36bfce408925ff588499f8329f25"
     },
     {
       "path": "seats/k3-cloud-govdoc/persona_card_v1.md",
