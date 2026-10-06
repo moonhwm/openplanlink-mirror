@@ -1,0 +1,36 @@
+﻿{
+    "ratio":  0.2532,
+    "src_sha256":  "d1c103ca1e604c5be9c51251628bdb9efb58bee7a12a64a346f8661180d509fc",
+    "package_sha256":  "906a033815ca9444c429c0631059da78fb0fde6ad7aa62b391ae94d7532b8825",
+    "mode_chosen":  "bzip2",
+    "bench":  {
+                  "zstd":  {
+                               "bytes":  201686,
+                               "sec":  0.404
+                           },
+                  "xz":  {
+                             "bytes":  196480,
+                             "sec":  0.326
+                         },
+                  "bzip2":  {
+                                "bytes":  184117,
+                                "sec":  0.072
+                            },
+                  "brotli":  {
+                                 "bytes":  195549,
+                                 "sec":  1.291
+                             }
+              },
+    "src_bytes":  727040,
+    "verify":  "ultra_pack.py verify → {\"ok\": true, \"mode\": \"bzip2\", \"ratio\": 0.2532} exit 0",
+    "generated_at_utc":  "2026-10-06T23:53:02Z",
+    "sampled_at_local":  "2026-10-07 07:52",
+    "mode_requested":  "auto",
+    "src":  "本席 archive/ 全量 .otl（57 件）",
+    "entry_count":  1,
+    "note":  "包留 upload（A:\\\\upload\\\\cairn-cache）；总线写操作按技能红线须逐次显式批准，本轮未写总线；公网仓仅入本指纹清单，不入二进制",
+    "package_path":  "A:\\upload\\cairn-cache\\cairn-archive-20261007.upack",
+    "package_bytes":  184514,
+    "tool":  "skills/ultra-compress-ops/scripts/ultra_pack.py (canonical)",
+    "schema":  "opl-ctx-pack-manifest/1"
+}
