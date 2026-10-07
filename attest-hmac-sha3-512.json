@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-07T21:23:51.108Z",
+  "generated_at": "2026-10-07T21:28:12.952Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2034,
-  "merkle_root_sha3_512": "165db535a5a2c90fbe38f91632bb59ff16375f3fd7afdb785ba872e213d360ee88bc911eb52ee5dcd276a049185bc35071a25b44a8cdd223f05743c8ae7cde7c",
-  "hmac_sha3_512": "b13a56b284dd99dbcb630536c291d3150387665516c3ca05a4c0742b2c7362d0548d9a764a33eeb7d87ba5ac7f8b881bd097b2de6c4e4c53ed8227a79063bda3",
+  "file_count": 2047,
+  "merkle_root_sha3_512": "0644f6cb1d63d9712994aeb8eda4db25f3d5f439e5b0de33e251cc737b9fa4ee4a383b2752dd570977eac4d974f442dee15100dc252168947ac8bbc42cd121ad",
+  "hmac_sha3_512": "e6a0527c3e1dde7185ff823fbfdb2e73e9f65e7e44c6016d85e566eb9e6f9b797d9930a91661db705053721aaf324f2dfc0f4d294c6b383aebbc038ebedb8695",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -115,9 +115,9 @@
     },
     {
       "path": "NOTICE",
-      "size": 2754,
-      "content_sha3_512": "0952fa4f7979e016d61d61db4865a11f2f2d32990b401ee3d590d857cd8c4b380b5c75e6f134d9d52514328459bf7e256dc3cfa9c9610d14bd2d9fb5fbcd0c12",
-      "leaf_sha3_512": "03035472bd3cd08943198ddf401821987d23af6bdbd28d4c50f4d168a6b6518f633d96e066ebea2bbd4c43e140d62bf2b4a5520ad7a11ca484fe8ea61d4db542"
+      "size": 3257,
+      "content_sha3_512": "ebb9c554ca9da854ce6c645b6615081376d7f54a2a87b0dcbd948561deb9fff3f9b1a0d945f62fc508dc9b1bc00cf3106f72ba8d7b20ead1ac0ea126f8fa5561",
+      "leaf_sha3_512": "ae01788e012b766313a580fefd5195860c8c067ca6c9789c9a94c3b810b0a870eb5681f40aa5313b63793190912325acf6d6174780a82bda3cfb1b4a32bdbe4d"
     },
     {
       "path": "NOTICE-LICENSE",
@@ -133,9 +133,9 @@
     },
     {
       "path": "SBOM.md",
-      "size": 2623,
-      "content_sha3_512": "28167ad1ad28c9756982047654ad338ffe1c25e72fa23f91e2607e2bc1775552f4aa0182603e7571f9ca536ad6ae51135eb8da94efdad676233d6242764fa39f",
-      "leaf_sha3_512": "3829426f162dff3fcd2873757ed8273173ec985f9f81200f2dd48424a0fc731439ce2953c044b6e3da7f6454ea4c0ce806a36f4f35a306b885aafb00669bfd30"
+      "size": 2903,
+      "content_sha3_512": "d1a7f432c0c8c20b8bf5c53bfacb4bfe515bf5690f39b041b8d794ce4bf3ef30ef66afddec9135e82e4280a39aa7a4a67c5de6870d25488ca3f7ad7692c2c846",
+      "leaf_sha3_512": "7b1f650dc3bd5a2d253bec05cda644b570f0ccc4a26e55898482c3aaceb9a3abef8360ee15e3ac194cc77b61d95e5b6375ac2096b991fda08fc46730bfff3a46"
     },
     {
       "path": "SIGNING.md",
@@ -1674,6 +1674,12 @@
       "leaf_sha3_512": "1da56fc3d62020ee1ff0ac8dcb345238f01cece91f2b90b2292807638a98ae6d705f71c6a4430f3fe89334619b6718ce0e1bb8c8c1ad484d3d578bc59cdb5f30"
     },
     {
+      "path": "deliverables/k3-main/skill-patch/govdoc-compliance-ops/references/doccode_registry.jsonl",
+      "size": 10344,
+      "content_sha3_512": "de5ac9aa771b489ff94d047a77b3431a29fee6d7102ffe6d7b3c88ce61998fc640e3f4a71e090bf2a528110633244475dd5be5930dcdcb28b5a48ade5aed998b",
+      "leaf_sha3_512": "5b0c46c07bd2f76e250955956fa19ed739b1b2d719a62ba08e12979e8e03e2ea08548131158038508e1d9660e74d446283043f3e44c3498b37756e7b9d5d55b1"
+    },
+    {
       "path": "deliverables/k3-main/skill-patch/govdoc-compliance-ops/references/license-matrix.md",
       "size": 3291,
       "content_sha3_512": "e4e995491e29242e82d72f48070d62f5ca3a18a2bdc07265db8da69b628e7d20b9c12d3c4ed2f82757e76cd47c4eb1ea0fdda07a7979a9a186bc2e511195a77c",
@@ -1692,10 +1698,22 @@
       "leaf_sha3_512": "e66b9fbc23adc369dff214f23fa42c87fba5d05ea221c6977f17183a9e38cc537c2f388517f1f893bdd2a28f2c0c6169749fac18e085bf12b6e98103680653b5"
     },
     {
+      "path": "deliverables/k3-main/skill-patch/govdoc-compliance-ops/scripts/govdoc_precheck.py",
+      "size": 20006,
+      "content_sha3_512": "5bdfce99dfb7fc00389cce3448d40303cf25504394b2f6744c6b8a3601e49014f207c59b0fa86d34270425d63effa4397e0d1fbe1c5a8b206587dcaff031ca87",
+      "leaf_sha3_512": "52ba6bd786f45659b5a00d94726aaee75828894dfddd1eeb9c5f746a15ab128306ef6fa88700555f75d6cf29d3d01db530a4e245a2bff92835eb5e19502f85de"
+    },
+    {
       "path": "deliverables/k3-main/skill-patch/ls-bus-format-ops/PATCH_NOTES.md",
       "size": 2348,
       "content_sha3_512": "918602ac49e6451411d2f4a8278a05052d4c2457c33d893600e67cc99e44d13090c00bde626994d13e7ecb4b6f699a2c3fcf54516d64d2089fc87db414d62d11",
       "leaf_sha3_512": "c968eb4bf8678f08eb80396b08339653bc7d929df9a5352b2627dbc1ab1ecf3967e8552ae86cfe7e6594dd70da49ee59fffa116a2232981cf2b2b3d6963dc104"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/ls-bus-format-ops/scripts/ls_bus_format.py",
+      "size": 13375,
+      "content_sha3_512": "c8e56e56a850dbe8454b97b67d5e95c44032e3e6f8793c8d8a7ef4d5c29b9ea2cf2d136e8210e0d2952d8bb2747a811f923a502d03e7c222795086f22fdc9c29",
+      "leaf_sha3_512": "3a4b1ed730b0b300d1e3d2449d810049f71831e40318b5649d227c40be0b3c228a805f97dd5e318755b0a90fb345a1565e4d3ac711a4260c9d70462db2940273"
     },
     {
       "path": "index.html",
@@ -1930,6 +1948,66 @@
       "size": 5138,
       "content_sha3_512": "c7e1d6f3128959d7a5cb5322e4b0aa67d42944b4dfa591dd3f03ebeba4840e3c0087525a384ae5767c1ad468a54e40971d5f1dce031efab845b7bbb3067460b3",
       "leaf_sha3_512": "902cc7bf36c38ab21ae0a1e68fdb1716368a07dbbe1dcfb88b00bb9184995544745a200448993d61549f5bcc6473fda5d820e674b032961cc364367ec4b85c22"
+    },
+    {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/141号令响应执行件_DF-ORD-20261008-GITCODE141-01.md",
+      "size": 4781,
+      "content_sha3_512": "bfeb2ef74bb1e4a198e7b9ee4dab498873cf877e2abfef44eb4f3c1b02d717aa94755c4dcca5be0458f5b875ef6dbe0facae31e52824e82eab85a5e4d1d4308d",
+      "leaf_sha3_512": "c445df73e6bc9f0acef9643552f2b774bd4e53355e4a7f78351e6c0142484163418415182aae30acbe12c5e7db042589e542db13f4af0744beff4d689d382f46"
+    },
+    {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/B站外源件灵感映射_赛博办公室_DF-MAP-20261007-BILI-01.md",
+      "size": 3145,
+      "content_sha3_512": "3560916b6656d28af4de320260919843b0885f71de78c40fbb57984fcca3e81bc10fdda70ed001500600da4da9f7cdcff8e17e0b63c3213a7fffb9b16bd8beee",
+      "leaf_sha3_512": "9e4966f9e3500f050a7a7f975643388803902e05df991fe72ca39324980226c3d61ce4b439c592a0b81712969ec914dba5695daa51ed4bb39018b8657e350702"
+    },
+    {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/README.md",
+      "size": 996,
+      "content_sha3_512": "3f08f862d0af06d6ed3c756d1877dc2fbc60ac1feb1699d6bb8b17fb9dd69a03e52ef0a419b1bf81bee0e438c56846fa3a5d9a0f6caf81894f6e2682b485a4d1",
+      "leaf_sha3_512": "214c99892707ad777d9f4bf968996bfd45aec1da775055358ece4607324ac444ca603968a8b2e5454c13afd700f3b793a88adf1bc78f16fa8e29343d3917beff"
+    },
+    {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/三大操作集双源检索证据链呈报_DF-EVID-20261007-OPS3-01.md",
+      "size": 14351,
+      "content_sha3_512": "273c2ff69774849e24474e03b7c1aea84f2f5fa59e161ed399ebf32851ac9c1f3eec2ebcba5a7dfbdd2bb65f01c40917ea4276553f924f7ca97e10038e76fb45",
+      "leaf_sha3_512": "9ef95bd3e8227cd29a2d83dddfc8693131371f82cc7b90e07381dc5ef3d93c909492b05eb17dec268a903ef4eb71b6a6821831bee133708950370eece7a9b48c"
+    },
+    {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/凭据请求回应规范_后量子版_DF-PQC-2026-1006-CREDRESP-01.md",
+      "size": 2199,
+      "content_sha3_512": "06794cde79a382cef639195989f24ff0bb4cf228b3ca6e039a81c5734433f6c73bc0b999d07bf866a30d51129704f9808e92c7fca2c40b25ff74e5719d92e2f6",
+      "leaf_sha3_512": "ec5176ce540976bad1e956eb994021ce47c02e85c70350b88e4f3dd784b567a8a051b21ac83eafdb9e1d3fe1083dcdfef85758c92866511a57c2b1d692e0ba79"
+    },
+    {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/双柱监听运维台账_DF-LOOP-2026-1006-DUALPILLAR-01.md",
+      "size": 2391,
+      "content_sha3_512": "b614c9a6ec9042a632164ef98cc09a5d41b15f1949e705084932ca1557a0f487d6c4b7f9fef1cce3404ecfd48bf5a642ab3c0c1bd1d57395def17784fdddedba",
+      "leaf_sha3_512": "b78fe826d1844858fa25b96cf5eda007c8dc566aaf200185b7d4f6c6abf06510a19addd9a294307fb70e522ae6836041c96f3a3e28a1359fd00a85a9a152d46c"
+    },
+    {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/席位初始人设卡_守藏_DF-PERSONA-2026-1006-SHOUCANG-01.md",
+      "size": 2794,
+      "content_sha3_512": "720639f9bcc6dabf2c891b7c9b857c33b7d86f76956017981043c87fe9afb1ef84862a1c38ef83332165ae2691b5e7eccbdcfdd092dcdc3655fcbfa2b1ead2ef",
+      "leaf_sha3_512": "ff6f80a647b0cab5dd6f797b1472ef58ff13b8c19031d2a9b139489bb6c202646d8943492b94f192c929e29e0b98907a5458612f37f1a9309f7126ddd23ea24b"
+    },
+    {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/算力使用效能报告_守藏二期_DF-EFF-2026-1006-02.md",
+      "size": 937,
+      "content_sha3_512": "69417dd3f6237fcfb61ea2bf730c06025a7d9d98529f37bf48007bc9d66e87b682dda392d6b7cf8b1a41a307555a0c0d29fea7dada2eed38b4fc74fbbd0a9099",
+      "leaf_sha3_512": "47d1b2c5a9875fd54f97660611fd5960deb5283ab7120a77e34df77fda260b01b446758a926fbf0c665377adc6ea58477cfe92a508e1d00499ef7094f4b6ed2b"
+    },
+    {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/算力使用效能报告_守藏首期_DF-EFF-2026-1006-01.md",
+      "size": 1371,
+      "content_sha3_512": "b6c43f3c69d16ceb27581445063cba0d76a1a07d7869b23808ed694b08122d1b2c1610202004915eb42f5c1b1d400420f88409966298387be3a495fe11ce9b71",
+      "leaf_sha3_512": "62f138f5da7705e3769bcb186f3f3d1b9390a8b75616721e5a766969e3f58a777d614208cc45962bafb6fac202d9d566c4b7c1852ae2bd676d32ac98736f957c"
+    },
+    {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/记忆资产索引_20261007.md",
+      "size": 1348,
+      "content_sha3_512": "66c37a17698c1a8ac4b5efdf8179a1e98c938f1a619ad653b6f0ba8fea1cda90e81a0b2b7195e9655bedb447e8f989e08ac2fec8c9cca18d58012e79ba6d1797",
+      "leaf_sha3_512": "69d1ca036339e527a678fbc1b6ff2ff733a5388153ff8d0af7c3ccaa0d76b0a10ee0708cd4cd8bac8031de91a198c61a1a50118e60b9434a4b380751e80ac4ce"
     },
     {
       "path": "skills-experience/k3-cloud-govdoc/2026-10-06-k3-cloud-govdoc-skill-experience-01.md",
