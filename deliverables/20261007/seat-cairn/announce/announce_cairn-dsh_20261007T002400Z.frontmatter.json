@@ -1,0 +1,16 @@
+{
+  "schema": "iurn-node-announce/v0.1",
+  "seat_key": "cairn-dsh",
+  "seat_name": "石敢当Cairn",
+  "tripartite": "research",
+  "bus_id": "pending",
+  "facets": "[hb]",
+  "pubkey_fp": "SHA256:rrZ7MdOQ8jNRa6t4gx7dby1XdkvGUlxRMGChQiRgHEA",
+  "challenge_ep": "pending",
+  "rotate_days": 30,
+  "status": "probation",
+  "issued_at_utc": "20261007T002400Z",
+  "expires_at_utc": "20261106T002400Z",
+  "msg_hash": "sha256:6b102800204c344e11bbbcb1a8e8d286b1f14d1cdf4a461d843f93ce4a771219",
+  "sig": "ed25519-sshsig:-----BEGIN SSH SIGNATURE-----|U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgg8jcDP53iVCBUsdyGcjrmJtBJd|Xk/dOGp/yEHGrbvl4AAAARYTJhLWl1cm4tYW5ub3VuY2UAAAAAAAAABnNoYTUxMgAAAFMA|AAALc3NoLWVkMjU1MTkAAABAob17AJCtWHDD0CBj0eQUtumXBhkB4k26AQw9h6euqAQayQ|ad/bARWMnpDDo/O1oivn2yHsUusCP9+cUb5h6LDg==|-----END SSH SIGNATURE-----"
+}
