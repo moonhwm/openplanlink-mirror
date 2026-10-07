@@ -163,6 +163,18 @@ def cloud_run_stats():
     return out
 
 
+def cost_block():
+    """固定成本记账（承 DF-START5 §四 丙/戊）：调用 cost_ledger，取回其表格文本。
+    取不到即如实标注（不臆造数字）。"""
+    for cand in (os.path.join(os.path.dirname(os.path.abspath(__file__)), "cost_ledger.py"),
+                 os.path.join(SEAT, "exp", "cost_ledger.py")):
+        if os.path.exists(cand):
+            o, c = run([sys.executable, cand, "--hours", "6"], cwd=os.path.dirname(cand))
+            if c == 0 and o.strip():
+                return o.strip()
+    return "（cost_ledger.py 未就位或执行失败 → 本块**未测**）"
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out")
@@ -180,6 +192,7 @@ def main():
     cloud_runs = cloud_run_stats()
     node = http_code(NODE_HEALTH, timeout=6)
     bus = [(u, http_code(u)) for u in BUS_ENDPOINTS]
+    cost = cost_block()
 
     L = []
     L.append("# A2A新席·石敢当Cairn · 使用效能报告（自动生成）")
@@ -257,6 +270,13 @@ def main():
     for p in ex["newest"]:
         L.append("- %s  %s" % (dt.datetime.fromtimestamp(os.path.getmtime(p)).strftime("%m-%d %H:%M"),
                                os.path.basename(p)))
+    L.append("")
+    L.append("## 五·二、固定成本记账（承 DF-START5 §四 丙/戊：隐性成本显式化 + 给上界）")
+    L.append("")
+    L.append("> 口径：重签＝窗口内 re-sign 提交数 × 实测单次耗时；提交＝窗口内提交数 × 保守守卫估值；扫描＝显式传入次数 × 实测全仓扫描耗时。")
+    L.append("")
+    for _ln in cost.splitlines():
+        L.append(_ln)
     L.append("")
     L.append("## 六、改进项（自动推断）")
     L.append("")
