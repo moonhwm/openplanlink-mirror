@@ -40,7 +40,7 @@ Layer 1: 席位实例（各AI工具进程）
   "capabilities": ["code", "review", "test", "governance"],
   "status": "online|busy|offline",
   "lastHeartbeat": "<ISO8601>",
-  "macAddress": "A0:88:69:0A:1C:2E"
+  "macAddress": "F0:B6:1E:31:EA:61"
 }
 ```
 

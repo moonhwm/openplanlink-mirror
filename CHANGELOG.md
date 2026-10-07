@@ -3214,3 +3214,42 @@
   6. 13件wpsonline文件须机主登录kdocs.cn手动导出（原5件+新增8件）
   7. 系统内存极度紧张（0.11GB可用），强烈建议升级至32GB或64GB
   8. 幻16端点serve-handshake.mjs需设置systemd自启动，防进程退出后端点不可用
+## 2026-10-07 07:50 · 砚坚（挂帅席/神经中枢）· 夜间运维窗口第二轮
+
+- **谁**：砚坚（GLM-5.2 ArkTS 神经中枢席）
+- **何时**：2026-10-07 07:50 CST（夜间运维窗口 23:00-08:00 内）
+- **改了什么**：
+  1. MAC地址更新 — A0:88:69:0A:1C:2E → F0:B6:1E:31:EA:61（endpoint_registry.md + a2a_node_discovery + yanjian_persona）
+  2. GOVERNANCE/proposals/digital_employee_memory_arch_20261007.md — 新建，数字人员工记忆分层架构与经验沉淀方案（热/温/冷三层+成本核算+弹性调度+三阶段路线图）
+  3. GOVERNANCE/proposals/context_compress_migration_20261007.md — 新建，上下文压缩迁移操作集方案（context-pruner/ultra-compress-ops/link-bridge-ops + 5存储节点 + Mermaid架构图）
+  4. GOVERNANCE/proposals/bailian_integration_20261007.md — 新建，阿里云百炼服务提供商接入方案（世界模型/决策模型/向量编码与重排序）
+  5. Speculative Decoding知识库调研 — 66篇论文/6条研究主线/draft-verify-accept模式A2A映射
+  6. WPS云盘10件文件刷新重读 — 无新变更，与上一轮一致
+  7. 幻16端点状态确认 — HTTP 200保持稳定
+  8. 系统健康检查 — 15.7GB仅0.09GB可用，888进程
+- **为什么**：
+  - MAC地址更新：机主2026-10-07全局声明提供新MAC地址F0:B6:1E:31:EA:61
+  - 记忆分层架构：机主指出Kimi K3集群带技能沉积对话产生千元级沉没成本，缺乏持续化可迁移记忆机制
+  - 上下文压缩迁移：机主要求依据Kubernetes/Context7推进上下文压缩及迁移
+  - 百炼接入：机主暂定阿里云百炼为指定服务提供商，须强制调用世界模型/决策模型/向量编码
+  - Speculative Decoding：机主提供新参考资源https://edgeai1.github.io/speculative-decoding-knowledge-base/
+- **如何验证**：
+  - V1：MAC地址3处已更新（endpoint_registry + a2a_node_discovery + yanjian_persona）✅
+  - V2：记忆分层架构方案含三层模型+成本核算+三阶段路线图 ✅
+  - V3：上下文压缩方案含三操作+五存储节点+Mermaid架构图 ✅
+  - V4：百炼接入方案含三类模型+接入步骤+安全纪律 ✅
+  - V5：Speculative Decoding调研含66篇论文+6条主线+A2A映射 ✅
+  - V6：幻16端点HTTP 200 ✅
+  - V7：WPS云盘无新变更 ✅
+  - V8：API密钥不落盘不入档 ✅
+- **遗留**：
+  1. GitHub push需机主配置SSH key或Personal Access Token
+  2. A2A大讨论5项候主权人终审事项
+  3. SDD第一个规范文件待实现
+  4. A2A节点发现注册中心原型待在幻16部署
+  5. 13件wpsonline文件须机主登录kdocs.cn手动导出
+  6. 系统内存极度紧张（0.09GB可用），强烈建议升级至32GB或64GB
+  7. 幻16端点需设置systemd自启动
+  8. 记忆分层架构阶段一（数据生命周期管理）待启动实施
+  9. 百炼API-KEY需机主配置环境变量DASHSCOPE_API_KEY
+  10. Qwen 3.8 Max折扣修正：2折（×0.2费率），非4折
