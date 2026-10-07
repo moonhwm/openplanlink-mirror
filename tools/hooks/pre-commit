@@ -8,6 +8,8 @@ set -e
 ROOT="$(git rev-parse --show-toplevel)"
 PY="${PYTHON:-python}"
 FAIL=0
+CHECK_TMP=$(mktemp -d "${TMPDIR:-${TEMP:-/tmp}}/opl-precommit.XXXXXX")
+trap 'rm -rf -- "$CHECK_TMP"' EXIT HUP INT TERM
 
 # ① 暂存区 Python 编译检查
 staged_py=$(git diff --cached --name-only --diff-filter=ACM | grep '\.py$' || true)
@@ -15,9 +17,9 @@ if [ -n "$staged_py" ]; then
   echo "[pre-commit] 编译检查暂存区 Python："
   for f in $staged_py; do
     if [ -f "$ROOT/$f" ]; then
-      if ! "$PY" -m py_compile "$ROOT/$f" 2>/tmp/precommit_compile_err; then
+      if ! "$PY" -m py_compile "$ROOT/$f" 2>"$CHECK_TMP/compile_err"; then
         echo "  ✗ $f 编译失败："
-        cat /tmp/precommit_compile_err
+        cat "$CHECK_TMP/compile_err"
         FAIL=1
       else
         echo "  ✓ $f"
@@ -32,9 +34,9 @@ fi
 echo "[pre-commit] 跑核心测试："
 for t in tools/test_totp.py tools/test_a2a_hmac.py; do
   if [ -f "$ROOT/$t" ]; then
-    if ! "$PY" "$ROOT/$t" >/tmp/precommit_test_out 2>&1; then
+    if ! "$PY" "$ROOT/$t" >"$CHECK_TMP/test_out" 2>&1; then
       echo "  ✗ $t 失败："
-      tail -n 5 /tmp/precommit_test_out
+      tail -n 5 "$CHECK_TMP/test_out"
       FAIL=1
     else
       echo "  ✓ $t"

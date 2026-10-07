@@ -1,0 +1,2 @@
+# Verification
+2026-10-08: python -m unittest discover -s tests -p test_memory_sample_audit.py -v passed: 6 test methods, 20 input scenarios. Includes missing/invalid/non-finite samples, measured zero, boundaries, three command failure modes and raw KiB validation. JSON parsing rejects NaN/Infinity. This is mocked regression evidence, not a host benchmark or cloud job receipt. Existing credential gates, attestation and remote readback are separate release checks.

@@ -29,6 +29,8 @@ jobs:
         run: python3 -m unittest discover -s tests -p test_a2a_discovery.py -v
       - name: Verify night scheduling evidence boundaries
         run: python3 -m unittest discover -s tests -p test_night_schedule.py -v
+      - name: Verify missing memory sample boundaries
+        run: python3 -m unittest discover -s tests -p test_memory_sample_audit.py -v
       - name: Inspect objects relative to the event baseline
         env:
           BASE_OID: ${{ github.event.pull_request.base.sha || github.event.before }}
