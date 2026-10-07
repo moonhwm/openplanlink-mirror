@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """disclosure_scan.py —— 披露前扫描闸（网络标识 + 凭据形态；**不回显值**）
 
 缘起（本席轮13 实测）：
@@ -57,6 +57,13 @@ CRED_PATTERNS = [
     ("私钥头", re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----")),
     ("赋值式凭据", re.compile(r"(?i)\b(?:api[_-]?key|access[_-]?token|secret|password|passwd)\s*[:=]\s*['\"]?[A-Za-z0-9_\-]{12,}")),
     ("Bearer 令牌", re.compile(r"(?i)bearer\s+[A-Za-z0-9_\-\.]{20,}")),
+    # ↓ 轮46 新增：承他席 EVT-P0-20261007-01（CAS 内 Supabase 活凭据随分片出网；其闸门 37 条规则不覆盖下列形态）
+    #   本席闸门原有**同一盲区**（仅 sk-/ghp_/AKIA）⇒ 补齐 Supabase 与 JWT 两类形态
+    ("Supabase anon 族(设计上可公开)", re.compile(r"\bsb_publishable_[A-Za-z0-9_\-]{8,}")),  # 承他席 -CORR：等价 anon、可公开内联；**定级看 RLS，不按泄露计**
+    ("Supabase service/secret 族(真敏感)", re.compile(r"\bsb_secret_[A-Za-z0-9_\-]{8,}")),  # 仅此族为真敏感
+    ("Supabase 项目主机(标识非密)", re.compile(r"\b[a-z0-9]{16,}\.supabase\.co\b")),  # 标识；与 anon key 同现属前端常态
+    ("supabase.co 字面", re.compile(r"\bsupabase\.co\b")),
+    ("JWT 形态(eyJ…)", re.compile(r"\beyJ[A-Za-z0-9_\-]{10,}\.[A-Za-z0-9_\-]{10,}\.[A-Za-z0-9_\-]{6,}")),
 ]
 TEXT_EXT = {".md", ".otl", ".txt", ".json", ".jsonl", ".py", ".mjs", ".js", ".yml", ".yaml",
             ".sh", ".ps1", ".led", ".csv", ".ini", ".cfg", ".toml", ".html"}
