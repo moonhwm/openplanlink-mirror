@@ -54,18 +54,43 @@ def main():
             pathlib.Path(a.json).write_text(json.dumps({"needed": True, "why": "no existing attest"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         return 10
 
+    # 🔴 前置：必须有签名密钥；否则 build 会 exit=1 且**不重写文件** ⇒ 会被误判为"树未变"（本席 2026-10-07 实证）
+    if not os.environ.get("OPL_A2A_HMAC_KEY_B64"):
+        kf = pathlib.Path.home() / ".a2a-hmac-key.bin"
+        if kf.exists():
+            import base64
+            os.environ["OPL_A2A_HMAC_KEY_B64"] = base64.b64encode(kf.read_bytes()).decode()
+        else:
+            print("★ **判定中止：缺 OPL_A2A_HMAC_KEY_B64**（build 会失败且不重写文件）⇒ 结论『未知』，不得判为免重签")
+            if a.json:
+                pathlib.Path(a.json).write_text(json.dumps({"needed": None, "why": "missing key"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            return 11
+    os.environ.setdefault("OPL_A2A_HMAC_KEY_ID", "opl-a2a-2026q4")
+
     old_h = sha(att)
+    old_m = att.stat().st_mtime
     with tempfile.TemporaryDirectory() as td:
         bak = pathlib.Path(td) / "bak.json"
         shutil.copy2(att, bak)
         env = dict(os.environ)
-        env.setdefault("OPL_A2A_HMAC_KEY_ID", "opl-a2a-2026q4")
         p = subprocess.run(["node", "tools/sha3-tree.mjs", "build"], cwd=str(repo),
                            capture_output=True, text=True, encoding="utf-8", errors="replace",
                            timeout=300, env=env)
         build_out = ((p.stdout or "") + (p.stderr or "")).strip().splitlines()
+        # 🔴 构建失败（exit≠0）⇒ 不得据此判定"树未变"
+        if p.returncode != 0:
+            shutil.copy2(bak, att)
+            print("★ **判定中止：build 失败（exit=%d）** ⇒ 结论『未知』（不得判为免重签）" % p.returncode)
+            for ln in build_out[:3]:
+                print("  build: %s" % ln[:100])
+            if a.json:
+                pathlib.Path(a.json).write_text(json.dumps(
+                    {"needed": None, "why": "build failed", "exit": p.returncode}, ensure_ascii=False, indent=2) + "\n",
+                    encoding="utf-8")
+            return 11
         new_h = sha(att) if att.exists() else ""
-        same = (new_h == old_h) and new_h != ""
+        rewritten = att.stat().st_mtime != old_m
+        same = (new_h == old_h) and new_h != "" and rewritten
         if same and not a.force:
             shutil.copy2(bak, att)   # 恢复，确保工作树无变更
             print("★ **树未变** ⇒ **无需重签提交**（needed=false）")
