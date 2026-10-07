@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-07T01:27:11.919Z",
+  "generated_at": "2026-10-07T01:28:59.196Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 1996,
-  "merkle_root_sha3_512": "aa10d54e3e2abae543c73c2860826ae1e246c64c87e47c23378f661390f5224107382b0a361ba9df267f1f521e687369ec1c54c1f8e04f51d121af212460c2a1",
-  "hmac_sha3_512": "83e56034b1b8c56c424e6293d030b527970deaf865e5dc3f784ee44375e116de8eedbaca68e1739e4e3d437a4e40e1d2c31c4dd06d54fe678465fc39d533cefd",
+  "merkle_root_sha3_512": "67fc1e5adc0fdbb6138d9e08f40436612e068481c07c33ece68e3a930cc75b814fe9b0d60fab49b9f4f067c92636752220602b76675ee94452c6b06d97d683c6",
+  "hmac_sha3_512": "3dd47f97d5af274a51e055640ea3c0714d4810c4212e9dae58582c3ab737dc3ddbc10180227561fb1c2149af175367885d2d795a7a98a3a1c89bafa6c860d5d3",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1195,9 +1195,9 @@
     },
     {
       "path": "deliverables/20261007/seat-cairn/eff/eff_latest.md",
-      "size": 3821,
-      "content_sha3_512": "eb0cef34bd9a86f60c3eaae870c884b0fef2030690fd1fa3b2d92498964980ff94dc05b1250bd634fc87773626454c05e9a94f41f5393127cd43d29a75b8b75d",
-      "leaf_sha3_512": "dfa5fae6a0160a656b924f1b412dcbdd61d693ede842c45739dc898966f4bd64f73353ec88498357f0b2800c5c163a34257cfe411932477fb26f78a8bfbccb75"
+      "size": 4394,
+      "content_sha3_512": "c3ce6754be87c0cc400a3132dc5c642fbf9c0bc47af4be0eae98ea3b5b7d350e349bc7b8d8a6b7cb75b8dd5f4abd466506910c7e76af333096d6c5e41e934ecd",
+      "leaf_sha3_512": "f68d8a78e1ecf5f684a3a97d72c85079f89046e72b667f7b4494d165ccf9e21118dc1c1d0a41e819612a41c2f3b92f866060aaa7ae4a08f2e19091ac3f1de870"
     },
     {
       "path": "deliverables/20261007/seat-cairn/eff/eff_report_20261007.md",
@@ -1357,9 +1357,9 @@
     },
     {
       "path": "deliverables/20261007/seat-cairn/tools/eff_report.py",
-      "size": 13854,
-      "content_sha3_512": "2773085c0bf3131d18cfd15c2830e8ff19c04ab09c71cb49f464b19bdda4bb2e6f8315519fc7c4604dad50d24b82587e9175c42134485f78822d92172fa888df",
-      "leaf_sha3_512": "441e35fb36a61b4b64ef756ed6aff8edef17316ee165ed97b3e61b13fb5182e79b9bd7aa0fdc39c042fecba9b97f83c422550807a0397358de1bc248edbe448c"
+      "size": 15954,
+      "content_sha3_512": "e0e097c5fb4518140dc358788cd2eaa5a229efe3766d6e2b446629e904e879bc8c9cba5a6721d6ce95973810053a4da13144fee5cfe90eb8ded2d0159dfa8b20",
+      "leaf_sha3_512": "92d5b63f6b3c89a2528f807ae06c0fc6deeb2c6b708c062727ad54d5288bee8f4965cf12cfa247235867d295abe99b87a050c94ab55d3fa7b627088ef2326e39"
     },
     {
       "path": "deliverables/20261007/seat-cairn/tools/mem_audit.py",
