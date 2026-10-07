@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """mk_announce.py —— 生成并签名本席「节点宣告」文档（承 DF-IUR-NODE-20261006-HY4-01 §2.1）
 
 规范要点（他席件）：
@@ -56,6 +56,7 @@ def main():
     ap.add_argument("--status", default="probation",
                     help="probation|active|degraded|suspect|retired（本席最小实现，缺省 probation）")
     ap.add_argument("--key", default=str(DEFAULT_KEY))
+    ap.add_argument("--verify-block", action="store_true", help="附三维度核验段（第④条）")
     a = ap.parse_args()
 
     outdir = pathlib.Path(a.out)
@@ -78,6 +79,32 @@ def main():
         "issued_at_utc": issued,
         "expires_at_utc": expires,
     }
+
+    # ── 三维度核验（可选；承「自治决议原则」第④条：禁以键名为唯一核验依据）──
+    vinfo = {}
+    if a.verify_block:
+        # 维度二：内容（仓库 Merkle 根）
+        merkle = ""
+        att = pathlib.Path(r"C:\Users\欧阳宏俊\openplanlink-mirror\attest-hmac-sha3-512.json")
+        if att.exists():
+            try:
+                j = json.loads(att.read_text(encoding="utf-8"))
+                merkle = j.get("merkle_root_sha3_512") or j.get("merkle_root") or ""
+            except Exception:  # noqa: BLE001
+                merkle = ""
+        # 维度三：数据链路（canonical 件路径＋sha256）
+        links = []
+        for rel in ("_HANDOFF_20261007.md", "a2a/challenge.json"):
+            p = SEAT_DIR / rel
+            if p.exists():
+                h = hashlib.sha256(p.read_bytes()).hexdigest()
+                links.append("%s@sha256:%s" % (rel, h[:16]))
+        vinfo = {"merkle_root": merkle[:32] if merkle else "未提供",
+                 "data_links": links or ["未提供"]}
+        fm["verify_merkle_root"] = (merkle[:32] + "…") if merkle else "未提供"
+        fm["verify_data_links"] = "; ".join(links) if links else "未提供"
+        fm["verify_note"] = "禁以键名为唯一核验依据（第④条）；身份见 pubkey_fp/sig，内容见 verify_merkle_root，链路见 verify_data_links"
+
     canon = canonical(fm)
     fm["msg_hash"] = "sha256:" + hashlib.sha256(canon.encode("utf-8")).hexdigest()
 
