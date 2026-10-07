@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """console_report.py —— 主控台一页纸读数（审计就绪）
 
 对应令条：
@@ -81,6 +81,34 @@ def repo_three_way():
         res[r] = out.split()[0][:7] if out.strip() else None
     res["aligned"] = bool(res["local"]) and res["local"] == res.get("origin") == res.get("gitcode")
     return res
+
+
+def disk_block():
+    """磁盘水位与容量阈值（DF-MEM-20261007-CAIRN-01 §三）：C 黄<15GB / 红<8GB；A<100GB 停归档。"""
+    import shutil
+    out = {}
+    for d, letter in (("C:\\", "C"), ("A:\\", "A")):
+        try:
+            u = shutil.disk_usage(d)
+            out[letter] = {"total_gb": round(u.total / 2**30, 1), "free_gb": round(u.free / 2**30, 1),
+                           "used_gb": round(u.used / 2**30, 1)}
+        except Exception:  # noqa: BLE001
+            out[letter] = None
+    c = out.get("C") or {}
+    free = c.get("free_gb")
+    if free is None:
+        lvl = "未知"
+    elif free < 8:
+        lvl = "红（<8GB，须强制冷化并上报工单）"
+    elif free < 15:
+        lvl = "黄（<15GB，触发一轮冷化）"
+    else:
+        lvl = "正常"
+    a = out.get("A") or {}
+    a_lvl = "正常" if (a.get("free_gb") or 0) >= 100 else "停归档（A<100GB）"
+    return {"disks": out, "c_level": lvl, "a_level": a_lvl,
+            "thresholds": {"c_yellow_gb": 15, "c_red_gb": 8, "a_stop_gb": 100},
+            "source": "DF-MEM-20261007-CAIRN-01 §三"}
 
 
 def r_mem_block():
@@ -167,11 +195,12 @@ def main():
             "seat": "a2a-node-local",
             "ledger": ledger_stats(), "ops": ops_stats(), "repo": repo_three_way(),
             "mcp_live": mcp_live(), "idle": idle_from_snapshot(), "night": night_state(),
-            "R_mem": r_mem_block(),
+            "R_mem": r_mem_block(), "disk": disk_block(),
             "workorders": workorders(), "ci": ci_status(a.no_net)}
 
     n, r, i = data["night"] or {}, data["repo"], data["idle"] or {}
     rm = data["R_mem"] or {}
+    dk = data["disk"] or {}
     L = ["# 主控台一页纸读数（审计就绪）", "",
          "- 生成时刻（UTC）：%s ｜ 主机：%s ｜ 席位：a2a-node-local" % (ts, data["host"]), "",
          "## 一、证据链", "", "| 项 | 读数 | 结论 |", "|---|---|---|",
@@ -187,6 +216,9 @@ def main():
              i.get("at"), i.get("cpu_idle_pct"), i.get("mem_idle_pct"), i.get("processes")),
          "| **R_mem（第四必填项）** | **%s MB**（%s）｜ 来源 %s |" % (
              rm.get("R_mem_mb"), rm.get("state", "—"), rm.get("source") or "无体检件"),
+         "| **磁盘水位（DF-MEM 阈值）** | C 可用 %s GB（%s）｜ A 可用 %s GB（%s） |" % (
+             (dk.get("disks") or {}).get("C", {}).get("free_gb") if dk.get("disks") else None, dk.get("c_level"),
+             (dk.get("disks") or {}).get("A", {}).get("free_gb") if dk.get("disks") else None, dk.get("a_level")),
          "| 夜间窗口 | %s；距边界 %s 分钟 |" % (
              ("**在窗口内**" if n.get("in_window") else "窗口外"), n.get("next_in_minutes")),
          "| 处置指引 | %s |" % n.get("guidance"), ""]
