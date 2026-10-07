@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T22:43:05.870Z",
+  "generated_at": "2026-10-07T00:09:19.457Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 874,
-  "merkle_root_sha3_512": "3b5bf1c44b24a86c52e93e562cae1920fbe8f97cf19c6dc7f1ff891a07bc1e0b2aa8737bf12022417a390bafebdc3bb6bfaacc7e570143d7c59d49976936b030",
-  "hmac_sha3_512": "0fbd963a596675fea34d86a37de2914b022565f9b28d690a72753ef576b0515f5b8f167712cbf684ce3650f13f9c78df0e91ddcc719390c0f1f065c9ac968811",
+  "merkle_root_sha3_512": "a283b247928d8f8e52bbca8e861b934e186cd2a4f7bc85f60d86e4b4424cc4bc41388902ac5d90fff3c2ea7d2f9f46901551c253bc8ee7d584135a2f3f182414",
+  "hmac_sha3_512": "6edb6a501f824064bfbe50e3b2990f1bed66040dc11c3b1282f17bd198e75006df63b9c0a40198391b9e453c05983decd8eb70f9a1c8e9cf679114dc67a9a017",
   "files": [
     {
       "path": ".gitattributes",
@@ -415,9 +415,9 @@
     },
     {
       "path": "docs/night_scheduling_experience_20261006.md",
-      "size": 7052,
-      "content_sha3_512": "be5d5b30b99d31908b1326917eb0c4c886a84d78eab8328abc48daaa75cf78547362773f50940af262fbc534e9d5f6f1dfe1145f4a5ab5e6d7b85b417980ee0d",
-      "leaf_sha3_512": "45ba0b2ebbfa37f82233be2ec615517eba6a59920bf851a9e9668d23efa68a577185537777c81d681fc709f9cf7d5ebad4c5081c5827e9f17117cfb4749532e7"
+      "size": 7564,
+      "content_sha3_512": "905c42c5d2585d9502e25a62237c0b1ce83b7d59158e6337938a66d37245c6d8103b7a0c0477bbed9f59b0a301bd5ed9005bcfebea688ce58a992b4ca1d8c7f5",
+      "leaf_sha3_512": "b192525e753679328daf12de978c3cf76d0c84a2c9498ea71548b40acbf47d1c40beaca0d22a72f61f6b9ca7df23cc62c52356e5a46c9dae61881d28f508db5f"
     },
     {
       "path": "docs/persona/initial-functional-persona.json",
@@ -4633,21 +4633,21 @@
     },
     {
       "path": "specs/013-night-scheduling/spec.md",
-      "size": 6418,
-      "content_sha3_512": "d6bc8b4390af17ac687b813c405c8bf18af29991eecf0439306669d67b8ec5f016c2aca7effde9edb87c397164fd7bd248347ada83b4d0dcb93f7aec8ea14ad5",
-      "leaf_sha3_512": "d16f6492f69e1dcd838715691dbc54a26dc1fb9718cd2782f1f1dbc3f7f5891fb6a1b7316984e036e33c64965b8c707686d4b8cc3cf028ed36b868c1db729f2b"
+      "size": 6766,
+      "content_sha3_512": "dd16c70789f6618cfb28f0d893e34015389a9a2bd8167ebc3476b3afc625e1aa2970c088274f57be5150146679f328822a2d861f23ec007cd558f8f2984935c5",
+      "leaf_sha3_512": "9aab149451cd9208f8f234a0eabe4990ec742162223878916cdc3f3a08268833eb1038c1a00df64270c764f3358e398a849cbf9b0db556d8a7ecc73ab88cb2ba"
     },
     {
       "path": "specs/013-night-scheduling/tasks.md",
-      "size": 1247,
-      "content_sha3_512": "b61e8ae0208c64b87e466ad93ed880e9e4223fd3a83bcb257f6ef9ed85dde1d7dcfa1aca86c32319466a08ef5d81e89e223b8f1418ee4233b1480a2f3a2bc3de",
-      "leaf_sha3_512": "fd5f3950ca9a5a4e105af0002d8b3eaf1e1b6d0722f07258654fc7ebcee6a98d861a67522bf2dd38e715b3c55626f7f633a58a6d573c5cb167b68dcd34a0708b"
+      "size": 1423,
+      "content_sha3_512": "8d49ac1ca68d2cbccb3f8a9427aeab47503f1fcf2bc2e7c15794d03a7047e48e99a651a321fbdb2975880026b95c6fbc7c9ffd909b68075d45017220b9074098",
+      "leaf_sha3_512": "c193ce08cc14b885aed144f9e16ad68e16d5ab306b956da8b4e319e7a955295c8de2b2475fd7219020e0e1356d84ca909a3c89b59dee58f7b1c6b2c43a9c4e39"
     },
     {
       "path": "specs/013-night-scheduling/verification.md",
-      "size": 5568,
-      "content_sha3_512": "e1c42c101d1c53bfbbd116c5a76794f1049ab9d3f6b0fab038fef40240d3e5e890a6c7a05c3b0222658809c3de2750f3a4e78c045fbf9e282069841a8a8fece3",
-      "leaf_sha3_512": "4554e893a38ef52a7631d04013edae8c1c9eaf81810088aa6d771acd2898da3725874822c2233aefeb1ce343b7c8483d934881387a942e9a59f5c85dbee7d759"
+      "size": 6835,
+      "content_sha3_512": "9c0f74cd5938e78fce9b4285c2896fec2ee6c663a14478dfbfbebe06ad9e277834dcff3cd4c904e62be08e728501465e93c719360b4b7f5f6a43a341fed3fb53",
+      "leaf_sha3_512": "abdd079313f818df5fe26346ca43710d773d54a33cdf675dd4f849f6e07c053110a0831f8374c445a161e119e3ec769d609793b0e38eb1d86f9e0f6d122a5d63"
     },
     {
       "path": "tests/test_a2a_discovery.py",
@@ -4669,9 +4669,9 @@
     },
     {
       "path": "tests/test_night_schedule.py",
-      "size": 31775,
-      "content_sha3_512": "a3e47580dd35883bb134df1ff351eec4a93742512eaef3bdd8a06fd238b2840400538dd8bb3345a46722351eb1ae79c0d008becc7aec0d6db15ea4838e0e1fda",
-      "leaf_sha3_512": "dc8d4a769a23f6b07dc852092b54610612aa0643a47fa141d723113ca4117c3121bf7cc7703c3bc2081c4fca677cda3cca0828134f35d23084f03e262abecc5c"
+      "size": 33753,
+      "content_sha3_512": "8e3ae3d22842a8d1d3e21c7fa9d0a063136a3a9af8e3f031aeec82a2680e182941a26cc815b69428a41fc0d9a02a5b8e350e4fef0065eb4bee585ee708844218",
+      "leaf_sha3_512": "30cb09881bc329af7649e09c326e12361c0033bd8a475ff495a9a8d15f318afa8c11a54f294fd71bb7394070b581801a2923d4c5a86222f349e0cff83225b7fa"
     },
     {
       "path": "tests/test_upload_orchestration.py",
@@ -4867,9 +4867,9 @@
     },
     {
       "path": "tools/night_schedule.py",
-      "size": 24110,
-      "content_sha3_512": "4523e84d9a072ebd9bc5ef3158cf9e6eedecf11e9bf95a37c90883b2ef743127598e400e50da06f28920a01ef3b76a3f6d4d6bb1b5b86733e7dcda23e9b95ad4",
-      "leaf_sha3_512": "cc0f4e23d48b479a1cf744fa9995ccee2b7c22f1d6a39e2cc47d54f79569789b29b9b23b30bdb7f76feb76480d5efb899b527c0c00ae8a5bf1e0a5837fde40a1"
+      "size": 24441,
+      "content_sha3_512": "22dbcaf271a4f87b0f91d3436516b9437bccf5fed51ca8f5bffb44e7f60672e5bddddbf1be111be23274c73c5fa9dc295e934725a91b32d259a10b7ef237fadd",
+      "leaf_sha3_512": "ab4425f37df7e4e97715ec9fef39120b07d1c3e4e23c60052d5a25c9d69c5f01693931db4cb02c84c09570751c2cd708e9fdb05b2659055299059230607719bb"
     },
     {
       "path": "tools/open_access.py",

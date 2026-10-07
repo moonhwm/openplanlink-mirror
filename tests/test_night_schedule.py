@@ -333,6 +333,36 @@ class EvidenceTests(unittest.TestCase):
 
 
 class ThroughputTests(unittest.TestCase):
+    def test_missing_prerequisites_block_increase_even_with_useful_cloud_samples(self):
+        for field in ("identity", "instance_authorization", "node_receipt",
+                      "standard_methods_receipt", "peer_acknowledgements"):
+            value = sampled_input()
+            del value[field]
+            with self.subTest(field=field):
+                result = schedule.evaluate(NOW, value)
+                self.assertEqual(result["planning_status"], "blocked_or_outside_window")
+                self.assertFalse(result["readiness"]["dispatch_authorized"])
+                self.assertEqual(result["concurrency"]["recommendation"], "hold_current_concurrency")
+                self.assertEqual(result["concurrency"]["suggested_concurrency"], 1)
+                self.assertEqual(result["concurrency"]["basis"], "missing_current_bound_prerequisite_claims")
+
+    def test_invalid_prerequisites_block_increase_even_with_useful_cloud_samples(self):
+        cases = (("identity", "expires_at", NOW),
+                 ("instance_authorization", "subject_sha256", OWN),
+                 ("node_receipt", "scope_sha256", OWN),
+                 ("standard_methods_receipt", "verification_status", "unverified"),
+                 ("peer_acknowledgements", "signature_scheme", "hmac-sha256"))
+        for field, attribute, invalid in cases:
+            value = sampled_input()
+            claim = value[field][0] if field == "peer_acknowledgements" else value[field]
+            claim[attribute] = invalid
+            with self.subTest(field=field, attribute=attribute):
+                result = schedule.evaluate(NOW, value)
+                self.assertEqual(result["planning_status"], "blocked_or_outside_window")
+                self.assertFalse(result["readiness"]["dispatch_authorized"])
+                self.assertEqual(result["concurrency"]["recommendation"], "hold_current_concurrency")
+                self.assertEqual(result["concurrency"]["suggested_concurrency"], 1)
+
     def test_cloud_claims_can_only_suggest_observed_candidate_and_never_measured_result(self):
         result = schedule.evaluate(NOW, sampled_input())
         self.assertEqual(result["concurrency"]["recommendation"], "consider_candidate_after_independent_verification")

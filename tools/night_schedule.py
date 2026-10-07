@@ -334,7 +334,8 @@ def sample_is_current(sample: dict, at: datetime, task: dict) -> bool:
             and sample["elapsed_seconds"] > 0 and sample["completed_units"] > 0 and sample["healthy"] is True)
 
 
-def concurrency_advice(value: dict, at: datetime, phase: str) -> dict:
+def concurrency_advice(value: dict, at: datetime, phase: str, *,
+                       prerequisite_claims_current: bool = False) -> dict:
     workload = value.get("workload", {})
     current, requested = workload.get("current_concurrency", 1), workload.get("requested_concurrency", 1)
     result = {"recommendation": "hold_current_concurrency", "suggested_concurrency": current,
@@ -346,6 +347,9 @@ def concurrency_advice(value: dict, at: datetime, phase: str) -> dict:
         return result
     if workload.get("pending_units", 0) == 0:
         result["recommendation"] = "idle_no_synthetic_work"
+        return result
+    if prerequisite_claims_current is not True:
+        result["basis"] = "missing_current_bound_prerequisite_claims"
         return result
     samples = workload.get("huawei_x_samples", [])
     task = value.get("task", {})
@@ -385,13 +389,15 @@ def evaluate(at: str, value: dict | None = None, closeout_minutes: int = 30) -> 
     value = validate_input({} if value is None else value)
     window = night_window(instant, closeout_minutes)
     evidence = readiness(value, instant)
-    candidate = window["may_expand_plan"] and evidence["prerequisites_satisfied_given_trusted_evidence"]
+    claims_current = evidence["prerequisites_satisfied_given_trusted_evidence"]
+    candidate = window["may_expand_plan"] and claims_current
     return {"schema": "openplanlink.night-schedule/1", "spec_id": "013-night-scheduling",
         "at_utc": instant.isoformat(), "at_bjt": instant.astimezone(BJT).isoformat(),
         "scope": "planning_and_external_claim_readiness_only", "window": window,
         "provider_rules": provider_windows(value, instant), "readiness": evidence,
         "planning_status": "candidate_requires_independent_verification" if candidate else "blocked_or_outside_window",
-        "concurrency": concurrency_advice(value, instant, window["phase"]),
+        "concurrency": concurrency_advice(value, instant, window["phase"],
+                                          prerequisite_claims_current=claims_current),
         "measurement": {"local": {"sample_claim_count": len(value.get("workload", {}).get("local_samples", [])),
                                   "measurement_verified_by_this_tool": False},
             "huawei_x": {"measurement_status": "unmeasured", "verified_jobs": 0,
