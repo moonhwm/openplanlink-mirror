@@ -1,161 +1,11 @@
 /**
  * A2A IM GUI 看板页面
  * 展示各席位状态、行为轨迹、审计信息
- * 参考 Star-Office-UI 的像素风AI办公看板 + Cordis Fiber状态模型
+ * 数据源：幻16节点注册中心 (http://120.46.86.165:4174)
+ * 规范：FS-20261005-01 A2A看板接入真实事件总线数据
  */
 
-// 席位状态枚举（映射Cordis Fiber状态模型）
-enum SeatState {
-  IDLE = 'idle',           // PENDING - 灰色，等待中
-  THINKING = 'thinking',   // LOADING - 蓝色脉动，正在思考
-  ACTING = 'acting',       // ACTIVE - 绿色，活跃运行
-  SYNCING = 'syncing',     // DISPOSING - 黄色，正在同步
-  ERROR = 'error',         // DISPOSED - 红色，错误/离线
-}
-
-// 席位信息接口
-interface SeatInfo {
-  name: string;            // 席位名称
-  role: string;            // 席位角色描述
-  state: SeatState;        // 当前状态
-  lastActive: string;      // 最后活跃时间
-  tasksCompleted: number;  // 已完成任务数
-  tasksInProgress: number; // 进行中任务数
-  avatarColor: string;     // 头像颜色
-}
-
-// 事件日志接口
-interface EventLogEntry {
-  eventId: string;
-  timestamp: string;
-  seatName: string;
-  eventType: string;
-  description: string;
-  priority: 'CRITICAL' | 'HIGH' | 'NORMAL' | 'LOW';
-}
-
-// 审计信息接口
-interface AuditEntry {
-  timestamp: string;
-  seatName: string;
-  action: string;
-  result: 'success' | 'failure' | 'warning';
-  detail: string;
-}
-
-// 模拟数据（实际运行时从事件总线获取）
-const MOCK_SEATS: SeatInfo[] = [
-  {
-    name: '砚坚',
-    role: '挂帅席 / 神经中枢',
-    state: SeatState.ACTING,
-    lastActive: '刚刚',
-    tasksCompleted: 7,
-    tasksInProgress: 1,
-    avatarColor: '#FF6B35',
-  },
-  {
-    name: 'Qoder',
-    role: '开发席',
-    state: SeatState.IDLE,
-    lastActive: '5分钟前',
-    tasksCompleted: 3,
-    tasksInProgress: 0,
-    avatarColor: '#4ECDC4',
-  },
-  {
-    name: 'Kimi',
-    role: '分析席',
-    state: SeatState.THINKING,
-    lastActive: '刚刚',
-    tasksCompleted: 5,
-    tasksInProgress: 2,
-    avatarColor: '#45B7D1',
-  },
-  {
-    name: '守藏',
-    role: '审计席',
-    state: SeatState.SYNCING,
-    lastActive: '1分钟前',
-    tasksCompleted: 12,
-    tasksInProgress: 1,
-    avatarColor: '#96CEB4',
-  },
-];
-
-const MOCK_EVENTS: EventLogEntry[] = [
-  {
-    eventId: 'evt_20261005_001',
-    timestamp: '22:30:00',
-    seatName: '砚坚',
-    eventType: 'negotiation_request',
-    description: 'K1 eid registry 协商请求',
-    priority: 'HIGH',
-  },
-  {
-    eventId: 'evt_20261005_002',
-    timestamp: '22:31:05',
-    seatName: 'Qoder',
-    eventType: 'negotiation_response',
-    description: 'K1 方向认可，须补充操作规程',
-    priority: 'NORMAL',
-  },
-  {
-    eventId: 'evt_20261005_003',
-    timestamp: '22:35:00',
-    seatName: '砚坚',
-    eventType: 'state_change',
-    description: 'K1/K3/K5补充规程文档已生成',
-    priority: 'HIGH',
-  },
-  {
-    eventId: 'evt_20261005_004',
-    timestamp: '22:40:00',
-    seatName: '守藏',
-    eventType: 'alert_critical',
-    description: '凭据扫描：未发现泄露',
-    priority: 'CRITICAL',
-  },
-  {
-    eventId: 'evt_20261005_005',
-    timestamp: '22:45:00',
-    seatName: '砚坚',
-    eventType: 'task_complete',
-    description: 'Server酱推送模块自检通过',
-    priority: 'NORMAL',
-  },
-];
-
-const MOCK_AUDITS: AuditEntry[] = [
-  {
-    timestamp: '22:20:00',
-    seatName: '砚坚',
-    action: 'git commit',
-    result: 'success',
-    detail: '5e51c04 - K1/K3/K5补充规程+K4审计排程',
-  },
-  {
-    timestamp: '22:25:00',
-    seatName: '砚坚',
-    action: '幻16同步',
-    result: 'success',
-    detail: 'bddbfe8 - merge + sync',
-  },
-  {
-    timestamp: '22:30:00',
-    seatName: '砚坚',
-    action: '事件总线自检',
-    result: 'success',
-    detail: '6项测试全绿',
-  },
-  {
-    timestamp: '22:35:00',
-    seatName: '砚坚',
-    action: 'Server酱推送自检',
-    result: 'success',
-    detail: '幻16上3项测试全绿',
-  },
-];
+import { EventBusService, SeatState, SeatInfo, EventLogEntry, AuditEntry } from '../services/EventBusService';
 
 // 状态颜色映射
 function getStateColor(state: SeatState): string {
@@ -225,13 +75,55 @@ function getAuditResultColor(result: string): string {
 
 @Component
 struct A2ADashboard {
-  @State seats: SeatInfo[] = MOCK_SEATS;
-  @State events: EventLogEntry[] = MOCK_EVENTS;
-  @State audits: AuditEntry[] = MOCK_AUDITS;
+  // 真实数据状态（从节点注册中心拉取）
+  @State seats: SeatInfo[] = [];
+  @State events: EventLogEntry[] = [];
+  @State audits: AuditEntry[] = [];
   @State currentTab: number = 0; // 0=席位状态, 1=事件日志, 2=审计轨迹
   @State selectedSeat: string = '';
   @State isRefreshing: boolean = false;
+  @State connectionStatus: 'connected' | 'disconnected' = 'disconnected';
+  @State lastFetchTime: string = '';
+  @State hasInitiallyLoaded: boolean = false;
   private navStack: NavPathStack | null = null;
+  private pollTimerId: number = -1;
+
+  // 5秒轮询拉取数据
+  private startPolling(): void {
+    this.fetchData();
+    this.pollTimerId = setInterval(() => {
+      this.fetchData();
+    }, EventBusService.getPollInterval());
+  }
+
+  private stopPolling(): void {
+    if (this.pollTimerId !== -1) {
+      clearInterval(this.pollTimerId);
+      this.pollTimerId = -1;
+    }
+  }
+
+  // 拉取真实数据
+  private async fetchData(): Promise<void> {
+    const result = await EventBusService.fetchDashboardData();
+    this.connectionStatus = result.connectionStatus;
+    this.lastFetchTime = new Date().toLocaleTimeString();
+
+    if (result.ok) {
+      this.seats = result.seats;
+      this.events = result.events;
+      this.audits = result.audits;
+    }
+    // 连接失败时保留上次成功获取的数据（规范验收条件#3）
+    this.hasInitiallyLoaded = true;
+    this.isRefreshing = false;
+  }
+
+  // 手动刷新
+  private async manualRefresh(): Promise<void> {
+    this.isRefreshing = true;
+    await this.fetchData();
+  }
 
   // 构建席位状态卡片
   @Builder
@@ -348,7 +240,7 @@ struct A2ADashboard {
 
   // 构建事件日志条目
   @Builder
-  EventLogEntry(entry: EventLogEntry) {
+  EventLogEntryView(entry: EventLogEntry) {
     Row() {
       // 优先级指示条
       Column() {
@@ -445,6 +337,43 @@ struct A2ADashboard {
     .margin({ bottom: 4 })
   }
 
+  // 空状态提示
+  @Builder
+  EmptyState(message: string) {
+    Column() {
+      Text('📋')
+        .fontSize(32)
+        .margin({ bottom: 8 })
+      Text(message)
+        .fontSize(14)
+        .fontColor('#888888')
+    }
+    .width('100%')
+    .justifyContent(FlexAlign.Center)
+    .alignItems(HorizontalAlign.Center)
+    .padding({ top: 40, bottom: 40 })
+  }
+
+  // 连接中断提示
+  @Builder
+  DisconnectedBanner() {
+    Row() {
+      Circle()
+        .width(8)
+        .height(8)
+        .fill('#FF6B6B')
+      Text('连接中断 — 节点注册中心不可达，显示最后缓存数据')
+        .fontSize(12)
+        .fontColor('#FF6B6B')
+        .margin({ left: 4 })
+    }
+    .width('100%')
+    .padding({ left: 16, right: 16, top: 6, bottom: 6 })
+    .backgroundColor('#2A1A1A')
+    .borderRadius(8)
+    .margin({ left: 16, right: 16, bottom: 8 })
+  }
+
   build() {
     NavDestination() {
     Column() {
@@ -493,40 +422,35 @@ struct A2ADashboard {
         .backgroundColor('#333355')
         .borderRadius(8)
         .onClick(() => {
-          this.isRefreshing = true;
-          // 模拟刷新延迟
-          setTimeout(() => {
-            this.isRefreshing = false;
-          }, 1500);
+          this.manualRefresh();
         })
       }
       .width('100%')
       .padding({ left: 16, right: 16, top: 12, bottom: 8 })
+
+      // 网络状态指示（连接中断时显示红色banner）
+      if (this.connectionStatus === 'disconnected' && this.hasInitiallyLoaded) {
+        this.DisconnectedBanner()
+      }
 
       // 网络状态指示
       Row() {
         Circle()
           .width(8)
           .height(8)
-          .fill('#4ECDC4')
-        Text('A2A网络：在线')
+          .fill(this.connectionStatus === 'connected' ? '#4ECDC4' : '#FF6B6B')
+        Text(this.connectionStatus === 'connected' ? 'A2A网络：在线' : 'A2A网络：中断')
           .fontSize(12)
-          .fontColor('#4ECDC4')
+          .fontColor(this.connectionStatus === 'connected' ? '#4ECDC4' : '#FF6B6B')
           .margin({ left: 4 })
 
         Blank()
 
-        Text('事件总线：活跃')
-          .fontSize(12)
-          .fontColor('#4ECDC4')
-
-        Text(' | ')
-          .fontSize(12)
-          .fontColor('#666666')
-
-        Text('Server酱：已连接')
-          .fontSize(12)
-          .fontColor('#4ECDC4')
+        if (this.lastFetchTime) {
+          Text(`最后更新: ${this.lastFetchTime}`)
+            .fontSize(12)
+            .fontColor('#888888')
+        }
       }
       .width('100%')
       .padding({ left: 16, right: 16, top: 4, bottom: 8 })
@@ -554,9 +478,13 @@ struct A2ADashboard {
         Column() {
           if (this.currentTab === 0) {
             // 席位状态
-            ForEach(this.seats, (seat: SeatInfo) => {
-              this.SeatCard(seat)
-            }, (seat: SeatInfo) => seat.name)
+            if (this.seats.length === 0 && this.hasInitiallyLoaded) {
+              this.EmptyState('暂无在线席位')
+            } else {
+              ForEach(this.seats, (seat: SeatInfo) => {
+                this.SeatCard(seat)
+              }, (seat: SeatInfo) => seat.name)
+            }
 
             // 选中席位详情
             if (this.selectedSeat) {
@@ -568,23 +496,38 @@ struct A2ADashboard {
                   .margin({ top: 12, bottom: 8 })
 
                 // 席位行为轨迹
-                ForEach(this.events.filter(e => e.seatName === this.selectedSeat), (entry: EventLogEntry) => {
-                  this.EventLogEntry(entry)
-                }, (entry: EventLogEntry) => entry.eventId)
+                const seatEvents = this.events.filter(e => e.seatName === this.selectedSeat);
+                if (seatEvents.length === 0) {
+                  Text('暂无该席位的事件记录')
+                    .fontSize(12)
+                    .fontColor('#888888')
+                } else {
+                  ForEach(seatEvents, (entry: EventLogEntry) => {
+                    this.EventLogEntryView(entry)
+                  }, (entry: EventLogEntry) => entry.eventId)
+                }
               }
               .width('100%')
               .padding({ left: 16, right: 16 })
             }
           } else if (this.currentTab === 1) {
             // 事件日志
-            ForEach(this.events, (entry: EventLogEntry) => {
-              this.EventLogEntry(entry)
-            }, (entry: EventLogEntry) => entry.eventId)
+            if (this.events.length === 0 && this.hasInitiallyLoaded) {
+              this.EmptyState('暂无事件')
+            } else {
+              ForEach(this.events, (entry: EventLogEntry) => {
+                this.EventLogEntryView(entry)
+              }, (entry: EventLogEntry) => entry.eventId)
+            }
           } else {
             // 审计轨迹
-            ForEach(this.audits, (entry: AuditEntry) => {
-              this.AuditEntryView(entry)
-            }, (entry: AuditEntry) => entry.timestamp)
+            if (this.audits.length === 0 && this.hasInitiallyLoaded) {
+              this.EmptyState('暂无审计记录')
+            } else {
+              ForEach(this.audits, (entry: AuditEntry) => {
+                this.AuditEntryView(entry)
+              }, (entry: AuditEntry) => entry.timestamp)
+            }
           }
         }
         .padding({ left: 16, right: 16 })
@@ -600,7 +543,7 @@ struct A2ADashboard {
 
         Blank()
 
-        Text('2026-10-05 22:45 CST')
+        Text(this.lastFetchTime || '等待数据...')
           .fontSize(10)
           .fontColor('#666666')
       }
@@ -615,6 +558,12 @@ struct A2ADashboard {
     .hideTitleBar(true)
     .onReady((context: NavDestinationContext) => {
       this.navStack = context.pathStack
+    })
+    .onShown(() => {
+      this.startPolling();
+    })
+    .onHidden(() => {
+      this.stopPolling();
     })
   }
 }

@@ -3253,3 +3253,38 @@
   8. 记忆分层架构阶段一（数据生命周期管理）待启动实施
   9. 百炼API-KEY需机主配置环境变量DASHSCOPE_API_KEY
   10. Qwen 3.8 Max折扣修正：2折（×0.2费率），非4折
+## 2026-10-07 13:10 · 砚坚（挂帅席/神经中枢）· 日间运维第三轮
+
+- **谁**：砚坚（GLM-5.2 ArkTS 神经中枢席）
+- **何时**：2026-10-07 13:10 CST（日间运维窗口）
+- **改了什么**：
+  1. 幻16端点重启恢复 — serve-handshake.mjs进程僵死（4173端口绑定127.0.0.1外部不可达），kill后以BIND=0.0.0.0重启，systemd服务配置完成（/etc/systemd/system/serve-handshake.service），端口4173恢复监听0.0.0.0
+  2. 幻16端点systemd自启动 — 创建/etc/systemd/system/serve-handshake.service，Restart=always，enabled+active，防止进程退出后端点永久不可用
+  3. A2A节点发现注册中心原型部署 — 新建GOVERNANCE/prototypes/node_registry.mjs，部署到幻16/root/a2a-node-registry.mjs，systemd服务a2a-node-registry.service（端口4174），6项API测试全通过（register/query/heartbeat/unregister/health/nodes）
+  4. SDD第一个规范实现（FS-20261005-01） — 新建entry/src/main/ets/services/EventBusService.ets（从节点注册中心拉取真实数据），重写A2ADashboard.ets（移除全部MOCK数据，改为@State动态数据+5秒轮询+连接中断指示+空状态提示+手动刷新）
+  5. WPS云盘10件文件刷新重读 — 发现新文件：尼采式游乐与自进化札记.otl（OTL-20261005-05，Moon席拟制），OpenPlanLink全局声明wpsonline修改时间更新（Oct 7 04:14）
+  6. 幻16A2A端点确认 — Supabase函数路径http://120.46.86.165/functions/v1/app HTTP 200正常，4173端口本地正常但外部安全组未开放（不影响A2A通信）
+- **为什么**：
+  - 幻16端点重启：上一轮结束后端点进程再次僵死，本轮发现并修复，同时配置systemd防止复发
+  - 注册中心原型：A2A节点发现方案Phase 1落地，为各席位自动发现彼此提供基础设施
+  - SDD规范实现：FS-20261005-01从draft进入implementation，A2ADashboard从模拟数据切换为真实节点注册中心数据源
+  - WPS云盘刷新：每轮必须执行的批注纪律，发现Moon席新产出尼采式札记
+- **如何验证**：
+  - V1：幻16serve-handshake.service systemd active(running) ✅
+  - V2：幻16a2a-node-registry.service systemd active(running) ✅
+  - V3：节点注册中心6项API测试全通过（register/heartbeat/unregister/query/health/nodes）✅
+  - V4：EventBusService.ets从节点注册中心拉取数据，连接失败时保留缓存+显示中断指示 ✅
+  - V5：A2ADashboard.ets移除全部MOCK数据，改为@State动态数据+5秒轮询 ✅
+  - V6：WPS云盘新文件尼采式札记已读取 ✅
+  - V7：幻16Supabase函数端点HTTP 200 ✅
+  - V8：API密钥不落盘不入档 ✅
+- **遗留**：
+  1. GitHub push需机主配置SSH key或Personal Access Token
+  2. A2A大讨论5项候主权人终审事项
+  3. 13件wpsonline文件须机主登录kdocs.cn手动导出
+  4. 系统内存极度紧张（0.24GB可用），强烈建议升级至32GB或64GB
+  5. 记忆分层架构阶段一（数据生命周期管理）待启动实施
+  6. 百炼API-KEY需机主配置环境变量DASHSCOPE_API_KEY
+  7. 幻16安全组需开放4174端口（节点注册中心外部可达）
+  8. A2A节点发现Phase 2（本地心跳代理）待开发
+  9. HarmonyOS SDK配置需机主在DevEco Studio中完成
