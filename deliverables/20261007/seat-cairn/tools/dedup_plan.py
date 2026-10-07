@@ -26,6 +26,16 @@ from collections import defaultdict
 sys.stdout.reconfigure(encoding="utf-8")
 
 
+
+def norm_sha16(p):
+    """CRLF/LF 归一化后的 sha16（承 DF-CCM §七：须内置归一化，否则伪差异会被误判为不同）。"""
+    import re as _re
+    h = hashlib.sha256()
+    with open(p, "rb") as fh:
+        data = fh.read()
+    h.update(_re.sub(rb"\r\n", b"\n", data))
+    return h.hexdigest()[:16]
+
 def sha16(p):
     h = hashlib.sha256()
     with open(p, "rb") as f:
@@ -79,6 +89,29 @@ def main():
                 "reclaim_bytes": size * len(drops),
             })
 
+    # ── 近重复（CRLF/LF 归一化后相同，但字节不同）——**只报告，绝不自动隔离** ──
+    near = {}
+    for root, dirs, files in os.walk(seat):
+        dirs[:] = [d for d in dirs if d not in ("__pycache__", ".git", "quarantine")]
+        for fn in files:
+            p = pathlib.Path(root) / fn
+            try:
+                st = p.stat()
+            except OSError:
+                continue
+            if st.st_size < a.min_size:
+                continue
+            try:
+                k = norm_sha16(p)
+            except OSError:
+                continue
+            near.setdefault(k, []).append(p)
+    near_groups = {k: v for k, v in near.items() if len(v) > 1}
+    exact_keys = {g["sha16"] for g in groups}
+    near_only = [v for k, v in near_groups.items() if all(
+        sha16(x) not in exact_keys for x in v)]
+    near_bytes = sum(sum(x.stat().st_size for x in v[1:]) for v in near_only)
+
     groups.sort(key=lambda g: -g["reclaim_bytes"])
     reclaim = sum(g["reclaim_bytes"] for g in groups)
 
@@ -104,6 +137,11 @@ def main():
     md.append("- 组数：**%d**（验收标准②：执行后 `mem_tier_scan` 复测**重复组归零**）" % len(groups))
     md.append("- 回滚：**隔离区原路移回**（不删除 ⇒ 无不可逆风险）")
     md.append("")
+    md.append("## 近重复（归一化口径，**只报告**）")
+    md.append("")
+    md.append("- **CRLF/LF 归一化后相同、字节不同**：**%d 组**，额外占 **%.2f MB**" % (len(near_only), near_bytes / 1048576.0))
+    md.append("- 口径声明（承 `DF-CCM` §六.4）：**已按「归一化 sha256 逐件比对」之口径检查**；本类**不属逐字重复**，**不得自动隔离**，仅备网络裁量")
+    md.append("")
     md.append("> 🔴 本预案**未执行任何文件操作**；**候批**后按纪律「执行 → 复测 → 记账」推进。")
 
     text = "\n".join(md)
@@ -115,6 +153,9 @@ def main():
             "groups": groups, "n_groups": len(groups),
             "reclaim_bytes": reclaim, "reclaim_mb": round(reclaim / 1048576.0, 3),
             "executed": False,
+            "near_dup_groups": len(near_only),
+            "near_dup_extra_bytes": near_bytes,
+            "near_dup_note": "CRLF/LF 归一化后相同、字节不同 ⇒ **不属逐字重复，不得自动隔离**（承 DF-CCM §七）",
         }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print("\n★ JSON 已写出：%s（**executed=false**）" % a.json)
     return 0
