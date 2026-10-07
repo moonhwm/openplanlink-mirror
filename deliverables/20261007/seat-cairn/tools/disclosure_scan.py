@@ -41,8 +41,15 @@ NET_PATTERNS = [
     ("主机名(本机前缀)", re.compile(r"(?i)\bLAPTOP-[A-Z0-9]{4,}\b")),
     ("主机名(通用模式)", re.compile(r"\b(?:DESKTOP|SERVER|WIN|PC)-[A-Z0-9]{4,}\b")),
     ("磁盘卷序列号(带语境)", re.compile(r"(?i)(?:卷序列号|volume\s*serial[^\n:：]{0,12})[:：]?\s*([0-9A-F]{4}-[0-9A-F]{4})\b")),
-    # ↓ 轮19 新增：裸「名:端口」形态（如 relay:8791）——同属口径所指"高位端口"，此前正则未覆盖
-    ("裸名称:端口", re.compile(r"\b[a-zA-Z][a-zA-Z0-9_\-]{2,}[:：][1-9]\d{2,4}\b")),
+    # ↓ 轮19 新增、轮20 精化：裸「名:端口」形态（如 relay:8791）——同属口径所指"高位端口"。
+    #   轮19 首版无排除 → 全仓 364 命中，抽样实证 16/16 为 CSS 属性（font-weight:/width:/height:）。
+    #   轮20 加 **CSS 属性负向前瞻**（并同步排除常见 CSS 值单位形态），使其由"噪声筛"变为"可用筛"。
+    ("裸名称:端口", re.compile(
+        r"\b(?!font-weight|font-size|font-family|line-height|letter-spacing|min-width|max-width"
+        r"|min-height|max-height|border-radius|border-width|z-index|text-align|background-color"
+        r"|width|height|margin|padding|border|top|left|right|bottom|gap|flex|grid|color|opacity"
+        r"|transition|transform|scale|rotate|delay|duration|content|order|columns|rows)\b"
+        r"[a-zA-Z][a-zA-Z0-9_\-]{2,}[:：][1-9]\d{3,4}\b", re.I)),
 ]
 # 凭据形态（只查形态，不回显）
 CRED_PATTERNS = [
