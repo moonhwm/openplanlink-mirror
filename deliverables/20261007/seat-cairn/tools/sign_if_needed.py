@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """sign_if_needed.py —— **树未变则免重签提交**（把 DF-PROPOSAL §甲 落实为本席流程）
 
 背景（实测，见 DF-START5 §三 / bus_snr 轮38）：
@@ -39,6 +39,20 @@ def sha(p):
     return h.hexdigest()
 
 
+
+def log_verdict(needed, old_h, new_h, rc):
+    """追加命中率台账（供统计"免重签"真实比例）。失败不影响判定。"""
+    try:
+        import datetime as _dt
+        p = pathlib.Path(r"C:\Users\欧阳宏俊\WPSDrive\29969771\WPS云盘\月之暗面的Plasma游乐场\A2A新席_石敢当Cairn_20260928\outbox\mem\sign_needed_log.jsonl")
+        p.parent.mkdir(parents=True, exist_ok=True)
+        with p.open("a", encoding="utf-8") as fh:
+            fh.write(json.dumps({"ts": _dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                                 "needed": needed, "old": (old_h or "")[:16],
+                                 "new": (new_h or "")[:16], "rc": rc}, ensure_ascii=False) + "\n")
+    except Exception:  # noqa: BLE001
+        pass
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo", default=r"C:\Users\欧阳宏俊\openplanlink-mirror")
@@ -61,6 +75,7 @@ def main():
             import base64
             os.environ["OPL_A2A_HMAC_KEY_B64"] = base64.b64encode(kf.read_bytes()).decode()
         else:
+            log_verdict(None, "", "", 11)
             print("★ **判定中止：缺 OPL_A2A_HMAC_KEY_B64**（build 会失败且不重写文件）⇒ 结论『未知』，不得判为免重签")
             if a.json:
                 pathlib.Path(a.json).write_text(json.dumps({"needed": None, "why": "missing key"}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -80,6 +95,7 @@ def main():
         # 🔴 构建失败（exit≠0）⇒ 不得据此判定"树未变"
         if p.returncode != 0:
             shutil.copy2(bak, att)
+            log_verdict(None, old_h, "", 11)
             print("★ **判定中止：build 失败（exit=%d）** ⇒ 结论『未知』（不得判为免重签）" % p.returncode)
             for ln in build_out[:3]:
                 print("  build: %s" % ln[:100])
@@ -93,6 +109,7 @@ def main():
         same = (new_h == old_h) and new_h != "" and rewritten
         if same and not a.force:
             shutil.copy2(bak, att)   # 恢复，确保工作树无变更
+            log_verdict(False, old_h, new_h, 0)
             print("★ **树未变** ⇒ **无需重签提交**（needed=false）")
             print("  旧/新 sha256 相同：%s…" % old_h[:16])
             print("  效果：省 1 次提交 + 1 次守卫 + 1 次推送往返（承 DF-PROPOSAL §甲）")
@@ -101,6 +118,7 @@ def main():
                     {"needed": False, "sha256": old_h, "restored": True}, ensure_ascii=False, indent=2) + "\n",
                     encoding="utf-8")
             return 0
+        log_verdict(True, old_h, new_h, 10)
         print("★ **树有变** ⇒ **需要重签提交**（needed=true）")
         print("  旧 sha256=%s… ｜ 新 sha256=%s…" % (old_h[:16], (new_h or "-")[:16]))
         if build_out:
