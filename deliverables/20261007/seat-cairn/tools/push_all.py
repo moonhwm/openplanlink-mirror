@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """push_all.py —— 双路径推送与三面核验（本席推送例程，固化轮11教训）
 
 缘起（本席轮11实测）：同一时刻 `github.com` **直连不通(000)、经代理 curl 200**，
@@ -18,6 +18,7 @@
 import argparse
 import pathlib
 import subprocess
+import os
 import sys
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -69,6 +70,8 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--skip-guard", action="store_true",
                     help="跳过同批守卫前置闸（仅限已知无害场景；默认 FAIL 即拒推）")
+    ap.add_argument("--auto-sign", action="store_true",
+                    help="守卫非 PASS 时自动重签（跑 build→add→commit）后复检；判定『未知』则拒推")
     ap.add_argument("--force-gitcode", action="store_true",
                     help="仅 gitcode 镜像位允许 force（origin 永不 force）")
     ap.add_argument("--skip-gate", action="store_true",
@@ -95,20 +98,57 @@ def main():
 
     # ── 前置闸②：同批守卫（承轮39 教训：**守卫 FAIL ⇒ 不得推送**，改为机械强制） ──
     guard = pathlib.Path(REPO) / "tools" / "prepush_samebatch.py"
+
+    def guard_pass():
+        gp = subprocess.run([sys.executable, str(guard), "--rev", "HEAD"], cwd=str(REPO),
+                            capture_output=True, text=True, timeout=180, encoding="utf-8",
+                            errors="replace")
+        out = (gp.stdout or "") + (gp.stderr or "")
+        return ("VERDICT=PASS" in out), out
+
     if not a.skip_guard and guard.exists():
         try:
-            gp = subprocess.run([sys.executable, str(guard), "--rev", "HEAD"], cwd=str(REPO),
-                                capture_output=True, text=True, timeout=180, encoding="utf-8",
-                                errors="replace")
-            gout = (gp.stdout or "") + (gp.stderr or "")
-            if "VERDICT=PASS" in gout:
+            ok, gout = guard_pass()
+            if ok:
                 print("★ 前置闸②同批守卫（prepush_samebatch HEAD）：**PASS**")
+            elif a.auto_sign:
+                print("★ 前置闸②非 PASS 且启用 --auto-sign ⇒ 进入**自愈重签**流程")
+                sn = pathlib.Path(__file__).with_name("sign_if_needed.py")
+                rc = 10
+                if sn.exists():
+                    sp = subprocess.run([sys.executable, str(sn)], cwd=str(REPO),
+                                        capture_output=True, text=True, timeout=300,
+                                        encoding="utf-8", errors="replace")
+                    rc = sp.returncode
+                    for ln in ((sp.stdout or "").strip().splitlines()[:3]):
+                        print("   判定：%s" % ln)
+                if rc == 11:
+                    print("★ 判定『未知』（缺密钥或 build 失败）⇒ **拒绝推送**（未知≠否）")
+                    return 4
+                env = dict(os.environ)
+                if not env.get("OPL_A2A_HMAC_KEY_B64"):
+                    kf = pathlib.Path.home() / ".a2a-hmac-key.bin"
+                    if kf.exists():
+                        import base64 as _b64
+                        env["OPL_A2A_HMAC_KEY_B64"] = _b64.b64encode(kf.read_bytes()).decode()
+                env.setdefault("OPL_A2A_HMAC_KEY_ID", "opl-a2a-2026q4")
+                subprocess.run(["node", "tools/sha3-tree.mjs", "build"], cwd=str(REPO),
+                               capture_output=True, text=True, timeout=300, env=env)
+                git(["add", "--", "attest-hmac-sha3-512.json"])
+                git(["-c", "user.name=cairn-dsh", "-c", "user.email=cairn@a2a.local",
+                     "commit", "-q", "-m", "push-gate: re-sign tree (auto)"])
+                ok2, gout2 = guard_pass()
+                print("★ 自愈后复检：**%s**" % ("PASS" if ok2 else "非 PASS"))
+                if not ok2:
+                    for ln in gout2.strip().splitlines()[-5:]:
+                        print("   %s" % ln)
+                    return 4
             else:
                 print("★ 前置闸②同批守卫：**非 PASS → 拒绝推送**（轮39 违规之机械防止）")
                 for ln in gout.strip().splitlines()[-6:]:
                     print("   %s" % ln)
                 print("  处置：先重签（node tools/sha3-tree.mjs build → git add attest → commit）再推送；")
-                print("        确需跳过（仅限已知无害场景）用 --skip-guard")
+                print("        或用 --auto-sign 自愈；确需跳过（仅限已知无害场景）用 --skip-guard")
                 return 4
         except Exception as exc:  # noqa: BLE001
             print("★ 前置闸②执行异常（%s）→ **保守拒绝推送**" % exc)
