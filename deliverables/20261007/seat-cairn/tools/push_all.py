@@ -98,8 +98,10 @@ def main():
             h, src, how = remote_head(r, args)
             matrix[(r, name)] = h
             matrix[(r, name + "|src")] = "%s(%s)" % (src, how)
-    print("★ 通路矩阵（ls-remote 实查）：")
+    print("★ 通路矩阵（真值来源已标注；live=ls-remote 直查，fetch快照=fetch 后读跟踪引用）：")
     for (r, name), h in matrix.items():
+        if name.endswith("|src"):
+            continue
         print("   %-8s %-6s → %s  [%s]" % (r, name, h or "不可达", matrix.get((r, name + "|src"), "-")))
 
     if a.dry_run:
@@ -136,11 +138,13 @@ def main():
 
     local = local_head()
     heads = {}
+    srcs = {}
     for r in a.remotes:
         h = None
         for name, args in ROUTES:
-            h = remote_head(r, args)
+            h, src, how = remote_head(r, args)
             if h:
+                srcs[r] = "%s(%s)" % (src, how)
                 break
         heads[r] = h
     print("★ 三面核验（%s）：local=%s ｜ %s" % (now_hm(), local, " ｜ ".join("%s=%s[%s]" % (k, v or "?", srcs.get(k, "不可达")) for k, v in heads.items())))
