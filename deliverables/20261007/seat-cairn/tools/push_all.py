@@ -42,10 +42,25 @@ def local_head():
 
 
 def remote_head(remote, route_args):
+    """实查远端真值。返回 (sha7, source, route)：
+       source='live' → ls-remote 直查；source='fetch快照' → ls-remote 失败后经 fetch 更新跟踪引用再读
+       （承轮24 教训：ls-remote 可能连续失败而 fetch 可用；**必须标注真值来源，不得以快照冒充 live**）"""
     out, code = git([*route_args, "ls-remote", remote, "refs/heads/main"], timeout=25)
-    if code == 0 and out.strip():
-        return out.split()[0][:7]
-    return None
+    if code == 0 and out.strip() and out.split()[0][:7] != "":
+        return out.split()[0][:7], "live", "ls-remote"
+    # 回退：fetch 路径（更新远端跟踪引用后读值）
+    fout, fcode = git([*route_args, "fetch", remote, "main"], timeout=60)
+    if fcode == 0:
+        ro, _rc = git([*route_args, "rev-parse", "--short", "refs/remotes/%s/main" % remote])
+        ro = ro.strip()
+        if ro:
+            return ro, "fetch快照", "fetch+rev-parse"
+    return None, "不可达", "-"
+
+
+def now_hm():
+    import datetime as _dt
+    return _dt.datetime.now().strftime("%H:%M:%S")
 
 
 def main():
@@ -80,11 +95,12 @@ def main():
     matrix = {}
     for r in a.remotes:
         for name, args in ROUTES:
-            h = remote_head(r, args)
+            h, src, how = remote_head(r, args)
             matrix[(r, name)] = h
+            matrix[(r, name + "|src")] = "%s(%s)" % (src, how)
     print("★ 通路矩阵（ls-remote 实查）：")
     for (r, name), h in matrix.items():
-        print("   %-8s %-6s → %s" % (r, name, h or "不可达"))
+        print("   %-8s %-6s → %s  [%s]" % (r, name, h or "不可达", matrix.get((r, name + "|src"), "-")))
 
     if a.dry_run:
         print("★ dry-run：不推送")
@@ -127,8 +143,10 @@ def main():
             if h:
                 break
         heads[r] = h
-    print("★ 三面核验：local=%s ｜ %s" % (local, " ｜ ".join("%s=%s" % (k, v or "?") for k, v in heads.items())))
+    print("★ 三面核验（%s）：local=%s ｜ %s" % (now_hm(), local, " ｜ ".join("%s=%s[%s]" % (k, v or "?", srcs.get(k, "不可达")) for k, v in heads.items())))
     aligned = all(v == local for v in heads.values()) and bool(heads)
+    if any("fetch快照" in s for s in srcs.values()):
+        print("★ 注：含 fetch 快照真值 —— 属『截至上次成功 fetch 的一致』，**非 live 核实**")
     print("VERDICT=" + ("ALIGNED" if aligned else "MISALIGNED"))
     return 0 if aligned else 3
 
