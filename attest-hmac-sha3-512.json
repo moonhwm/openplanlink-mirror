@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-07T05:07:23.934Z",
+  "generated_at": "2026-10-07T05:10:06.097Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2017,
-  "merkle_root_sha3_512": "aecb27c7845248883724c0b27105c1a067dadfdf18422f9db27e62128e08688e1015b745603cd77167b7b6ddf221c87281e487e7203ea3232370cab4fe5b2613",
-  "hmac_sha3_512": "48b4ab73266e23ade4d98bda890cac37736a39771dd12602c646b780eaf41e98474dd748dc9bdb6c692c8663b0aea1c6f8d44ac8bb182ec7fd7edc019e74a9d2",
+  "file_count": 2018,
+  "merkle_root_sha3_512": "e99c1fdb8484ab4e9e1c6ec3d6290e30f1904f21138492bd13b1a356fd5aa810c3089f69f2f102e529d1b842482577c4d146a939ec14d6143fdc9afca9f03f4e",
+  "hmac_sha3_512": "26bb1dd32d1fd1c75b52a1bbb5e95de365f4e6d65c53a5a757678f1b73dabceca65f57dc11d63f937b3af28460894092e43bbb8c33da62af15300f745ade2df1",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1246,6 +1246,12 @@
       "size": 4574,
       "content_sha3_512": "5cb2949714911083ab89c4c225464c41698d0a1366b9d5c4ad0629cf583f35c19f0ec6a9fbee7022829d938f42455767028413f5c3a75680f3aeefa9b10947cb",
       "leaf_sha3_512": "99572ff9828b3269a8e725233d076ae80c34f570f71442622f71fbfab2cda1113046b3cc0f940b5d69bde6750b105a5f07b84d08b0eb66a4b31c6aee645e96bd"
+    },
+    {
+      "path": "deliverables/20261007/seat-cairn/exchange/受领百炼前置硬闸门与四类能力现状实测_DF-ACK-20261007-CAIRN-04.otl",
+      "size": 5528,
+      "content_sha3_512": "ac69b43c545900ac1c089131dd9c46a62edc5a7ec3ff194203cafde29a1be6dd572c74c975301195b7f92eaee7eeecf640e99c88cde637cfd313fef1255212e7",
+      "leaf_sha3_512": "9c34804b4aa17fb0547ab801969404071c7ab51ad70cdbd2739d68855887902443ae0ab9a4c55f4391f816d3d4d5399de5531b8f2e3256a89ae6bb655d470546"
     },
     {
       "path": "deliverables/20261007/seat-cairn/exchange/夜间窗口收官回执与R_mem合规声明_DF-ACK-20261007-CAIRN-01.otl",
