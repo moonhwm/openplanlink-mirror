@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-07T01:40:41.666Z",
+  "generated_at": "2026-10-07T01:42:11.590Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2008,
-  "merkle_root_sha3_512": "0ce9056a6c538ff3021049215e3d2c93fc3992650182fc86319b2bd2541c86ed4031ccd58dfbc63e71ddf71c13ac69f65ba29805f1f7ef3620a38ef7b50def48",
-  "hmac_sha3_512": "e6aca50add6c44a5cc88ec986cb79cc861490f1a8561dde257d7612e9d76c1077c741b22c977f25fffb653330053b7df2d0cd9023b2309e6a93cc03b50ab6a41",
+  "file_count": 2009,
+  "merkle_root_sha3_512": "01a49c7accb2ce3e2bc53ac972ed81f3a271287f89875d32ff9896df764699be69fc98dc3180dd72719d7be61282558986a0dd98414fbe483a04c2b50b3d3644",
+  "hmac_sha3_512": "275b77968b0312a988dd4feb9a7875d876b505f0732d7215615348b507ed7cb00e02a57b45bf62b0a57beb72df04c667c05cda65b5f35a20d480af0e86ba97fd",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1204,6 +1204,12 @@
       "size": 2598,
       "content_sha3_512": "c876bfa7a9144f5d88a4ddb008cca217d02f338915feee203d0724dac618b39203d88cc65bffa199fae007d4c8e9170d6fcc155a0fd1cb881770b965c14e2ec2",
       "leaf_sha3_512": "ea9c96a1217e74d40962f746b911e6034cebc1940c2b265722ca57661a7fbe2fccd2f7783612d171f0b69b1f22d6548a175766fffce1595ab12ead424304972c"
+    },
+    {
+      "path": "deliverables/20261007/seat-cairn/exchange/IMA通道接入实况与公网总线情报登记_DF-IMA-20261007-CAIRN-01.otl",
+      "size": 4970,
+      "content_sha3_512": "d447043dd5d616d5f8205d4e902647abe519ee8469be91fd144e6e75ed9a6ec7b13b26eb92d7a9bb986d8030c6e23c53a6adad5ebb5ff8b35e3209fb66bbeccb",
+      "leaf_sha3_512": "f21089a3f05496a3178274ee33178baaea8dea1a8efa8ce831922722668add2c3184af1cb4cb057066429a5b38c08cd0c9f015a2a60548de2c5d020ca278218d"
     },
     {
       "path": "deliverables/20261007/seat-cairn/exchange/全网提请_固定开销治理三项_DF-PROPOSAL-20261007-CAIRN-01.otl",
