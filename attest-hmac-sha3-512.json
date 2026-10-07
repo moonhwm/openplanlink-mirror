@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-07T00:15:12.805Z",
+  "generated_at": "2026-10-07T00:21:05.251Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1942,
-  "merkle_root_sha3_512": "2858573e47a7b3727000b90fa8d253f51bda991cc066e9939894229be6f43a1278ecfdd3eacb34a29af486de0d71cc89d9ed53ebe8176da090cdd85854604a2a",
-  "hmac_sha3_512": "f2364846547f7ad22b4305f74fd1e08547ae0373dea174ad11897f7c122c614737517c0c0aff90b27d69607f52918b1240b9a98f7988542e60f8fdae8f82603a",
+  "file_count": 1972,
+  "merkle_root_sha3_512": "7784d40b581e2afc779420dee366b865c298d6f88428870062e3034b2f81395562f429b18b78a6dfcb9055de5ac4a8ec40ba32b0590387c4c33656b364306cae",
+  "hmac_sha3_512": "8d61e7947dd7867282f6521f0a06ee7ccabeccf412db99fa7e9cffb31a462633ef9572abec045a31db0f783ed4e7100259c8b7d523e83e6ebefb5f1df50e72da",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -67,9 +67,9 @@
     },
     {
       "path": ".gitignore",
-      "size": 25,
-      "content_sha3_512": "0b43ccf0416f1c1e25906ba9a26b52ef2e535d043791841004c0f870b7c9d7cc8f1fec24e7eaa9f1e3d193350a4c70d998440ba1e36c2f51a8fc26b8572f517a",
-      "leaf_sha3_512": "c9e3eaaf49929f74c8e44080df21079a6bae96128f186f1278867dc8f6ec26deef8cbb6a45968aca859ccf0b967b3a075ebbd65bb67137a29b995e8cd8acb76e"
+      "size": 403,
+      "content_sha3_512": "b28c9d83c29e6d0cd91541b432387edbeaf4daf79d72906ce224b38df9b8e50afbf6cc32bd835eadf546c130dfb17142e3f690b136e14338d334aefa9a944921",
+      "leaf_sha3_512": "aceacbe7bf25412529ed8c5b622e9f2f0b5085ae66d896574845cdc0a3e82b7e964cf6e7c1e46f1a7637224ae2c49f4cc925a7904e753afeb35cd89ee231a57c"
     },
     {
       "path": ".nojekyll",
@@ -412,6 +412,168 @@
       "size": 2204,
       "content_sha3_512": "90b94db6915a3170bdae443f3bc10cceff214d737622ea0147e3abfbed3e93b4b6e6f0dca9fe803e57b07ab265caeed0af7346f23570b31623709dfe647246db",
       "leaf_sha3_512": "5459e4b0e865695c0fe3e204fec5c632acd2f54c761e650a8af669afa48dfef396f8f45e296f85281dbb860e812239e0cc2aaa16c66441540118dd1d1e8f6215"
+    },
+    {
+      "path": "deliverables/20261005/INDEX.md",
+      "size": 1190,
+      "content_sha3_512": "45738e58da0204ba6cea22649ea7c6dcbe099eef6264cf556804811997428206dd3739bf21ae575247eb1b407985f8e66ad1dd2672268bf6602da6f3175d17cd",
+      "leaf_sha3_512": "99d4d0dc1cc1fbd3bdf7777ad1a6d7e7ea23f080575201c6caeafec64ac8a25e5de3680de39d0f30fbcaf04bec36cd6792836774d3d2f04840fe5d1ed8cc54d9"
+    },
+    {
+      "path": "deliverables/20261005/POINTER.md",
+      "size": 4726,
+      "content_sha3_512": "71506c85b1ede4a2e94d20cfca48ff18a4a5faf87e9718fa551b4c991ce0ec4d6011e4091f7a5abdadbe44f34ecbed4b205604092d6cc2fb9d720bb0a7a405e1",
+      "leaf_sha3_512": "cf49630a2a02adeab30e99cd59b8e3a6e5cca53c303d1447c2b9a5d0175eb616fc5928ce35122ec0a97ae2b87e99cc438a0f9a031153def7432bf9ff11fb412d"
+    },
+    {
+      "path": "deliverables/20261005/claims/attendance_check_20261005.md",
+      "size": 8279,
+      "content_sha3_512": "a86c85156652130c9276b68a9eb4e1b2d7ab97804146f552bf553a136e35809b6c84d83da333d364923c42ea12fb99171476512052dc947d9dff6ca6ee21fa21",
+      "leaf_sha3_512": "ec0b70fdfd4712bfc1e2659ac7fc0b46862085413cd51c83797e0c39e2f18322bcaec50a02ba485b80457cb884de7fb2ea83016f032f35a181a590246f6cb594"
+    },
+    {
+      "path": "deliverables/20261005/claims/codex_install_20261005.md",
+      "size": 2005,
+      "content_sha3_512": "913e1d3a0de754a7c1272ea610041bdae7e74ea0310f9f5f3dfebc0e6f66d3853754968460b34a0fc7d2ec24a94aa136dc402af7b621c7f966a065768f128d0a",
+      "leaf_sha3_512": "18d7d07d3bbf551ca638e48042436c11f262a156715e9b15bcd80b347e979adba61c8a763f31fa94532605e7d3d34995a60d9588146ded7041629f7c4b5d417e"
+    },
+    {
+      "path": "deliverables/20261005/claims/desktop_inventory_20261005.md",
+      "size": 23490,
+      "content_sha3_512": "3d16c81a9ca4de49673bb11dabac7f1952a029b879ad13fbbc9729eddfb8c1febb51f4822317d8b89e5cd29ab2d5675c08d07f21749f0529f54576429bdd7298",
+      "leaf_sha3_512": "be7083e13bc0e578350a53c57a22afe1278255b83dd69cedf912b5bcb2595750e2ba8128a1f76321786388d80468652451ba9cef8dcccdd1f03e0211cbe1b7bf"
+    },
+    {
+      "path": "deliverables/20261005/claims/desktop_reorg_report_20261005.md",
+      "size": 8585,
+      "content_sha3_512": "cca6a0734ba180a7402f2287cf01e1b11ab883871eeb1950f61c5f83803eee421269e5a7e992ee4513e7e13cb54c7441f452182a58465d561b0ab3de1d29be51",
+      "leaf_sha3_512": "3b1958af6b99b15c1d992313bf73a5ed8c3311d82bdf8bdf30033f97c794ba18dab46550a3bb6fa85f5ad6af3a0d933046f671a79858ba59b44d467d06c0252c"
+    },
+    {
+      "path": "deliverables/20261005/claims/version_flow_repair_final_20261005.md",
+      "size": 9037,
+      "content_sha3_512": "878ec0167eadd38ec02e5775465eec2c9d74b7afbb8ff9a8463bc967ba3cf1d8f9c19d5dbb837f976759cc55223a030959ec331c4589bbc6f9daec73f515020e",
+      "leaf_sha3_512": "f7268fecc8938db47a3f6b01bd62062ccf7919f5fd47a71d39a8887034ea14328043527d33f87dc419cd6df3c13d4e8ab3796bec53b409acded7394b2b9ca621"
+    },
+    {
+      "path": "deliverables/20261005/governance/GOVERNANCE_AMENDMENT_v2_提案.md",
+      "size": 18046,
+      "content_sha3_512": "115be35fa50ae689bd35172dd9e164b1e38655d049e582be0b45221c3d03167dfbe832778f1f726d97725045b80af8a234774c4e7b936cf0acb60f2c37bc4bf4",
+      "leaf_sha3_512": "6240396bc2045edd2994439328b5ec953455758ee72853776ca543b43b638f42a0ad4454712396b738003f6f7f8bc466c6d3467fc2aa76489bee38f53f033736"
+    },
+    {
+      "path": "deliverables/20261005/governance/LICENSES.md",
+      "size": 7471,
+      "content_sha3_512": "801a7a12ff65df14951f7bc8e6ada36e4bf248993666bcd96f9493bea86effded084a41d9bb296fdded6a3d492761370ca0a3c11335edb9a4a1e8714450b9071",
+      "leaf_sha3_512": "3324bcd2ceaccdf52277f734ec9160914d28d184b53ab3d9e5e04355696dbed34211fa6419f78c63d038a1721b69f2165c9128a31e2fe58ccf09887ae1b5be01"
+    },
+    {
+      "path": "deliverables/20261005/moon_persona_v1.md",
+      "size": 8158,
+      "content_sha3_512": "1387e2375b429142902d928c3f7a0efb1e9d20a91fec5d8b6c890adce2d9c45540faa6b854e3705489f9d0d0c44c78208c64ae444e7d9c1812c4d7bfa0595e91",
+      "leaf_sha3_512": "a2725d31ff550e75f68599877bdb674e570d373d47f285f3f05f758d60c0086c265e59d60709a1f69a289bd7bcae9de30f9de27d38b3baf2f951cd8fb64dde6b"
+    },
+    {
+      "path": "deliverables/20261005/otl/A2A大讨论纪要与自动审批记录_党组学术视角.otl",
+      "size": 14253,
+      "content_sha3_512": "d01c91ed0e7ca39f6dee8d960390549a265cac138b2fe35eea57ac209dde06fbe3611666b64dbfcb3360e79bc04f631183207784c2377c542de73482e94ceb4f",
+      "leaf_sha3_512": "d40d2a749bb7e0edafcfc71a9f17bfd8de9d97e15c0e6b2a82b7d5247fa28470785a7b59c75360667554c19a2e948ba7e4ac28ffebc8240d4a3f2b844615cdcd"
+    },
+    {
+      "path": "deliverables/20261005/otl/Codex接入状态简报_党组学术视角.otl",
+      "size": 5174,
+      "content_sha3_512": "3dea62dc7fc9ba55b73f0e973b50fc09f646b1d4293eeff921fd272bf6879829437b11f52111ef515ea5b1d8f5cddad1ddc4fb912ac054700519e2e7595b692a",
+      "leaf_sha3_512": "8b5ba465cebe86d54e0fb9914b1bacc9456172661a07ca14862586f8ec91b15b96a482023c5f3cdb46ee4b374aae2398be363748e63cbe262c551bbf1281d1b1"
+    },
+    {
+      "path": "deliverables/20261005/otl/Kimi席位进程守护方案_党组学术视角.otl",
+      "size": 14685,
+      "content_sha3_512": "affcb95ac6e13f470b2b6ebabd6335e835d911ecb8b2283cf78a41ee19a1368e37fb79cd9b896c465878cdc9c2508a32a1bd8f0ac040da470db86f1dc5d0be0e",
+      "leaf_sha3_512": "5eae1bdbf2c59dbd3b53ea15a2d4e3772eb55eb1dc8981c3388f187dfef2712b6be2800f7e2875b8e82a8200704406789e0c2cbd309de477006c88509a3ec73a"
+    },
+    {
+      "path": "deliverables/20261005/otl/OpenPlanLink全局声明_v2.0_修订版.otl",
+      "size": 24697,
+      "content_sha3_512": "ec0cf48c5f7084ba5bfe765939ea89af525733319101c4263320835caba4a54973311341ac014e109b4badbd2eb90855295a4be7885584d8882ed2311e634880",
+      "leaf_sha3_512": "378d3154aa93c226ef4be688fde9d14278a5722c8248075b047473dd01d7b7d2db1f68e22926f2cc8daa4ba0d360a9de8e8acbe2874ee54c03ebb278c7b7d18e"
+    },
+    {
+      "path": "deliverables/20261005/otl/OpenPlanLink全局声明_初始化版.otl",
+      "size": 13723,
+      "content_sha3_512": "e37d9af299e32c8932d0d7b4968a56b4c25556c2545de49c51b02a79b9a2831f1f13e790f39bdcc76c922a81a5a70b61f568e5f838aa9aa9fe1ca4366ddf3dce",
+      "leaf_sha3_512": "92409530c7dbdc510f75aa44351a6e9071bf6cca763d85f10b2226c77127b9b887fdcd5a93aad2c9e4ba71aaee946ddcb2af5cd62bbfc391d35df3f37c5b3bb3"
+    },
+    {
+      "path": "deliverables/20261005/otl/a_drive_migration_scan.md",
+      "size": 22823,
+      "content_sha3_512": "32d70365c50cd49e48356b1a55e73c2a07e2c032a007d96871b9caeafcf7303cd2a4579abb5e16ded2b2c32d4c9f0ace2409658ca71e2d57fbe8635b13c64d38",
+      "leaf_sha3_512": "a9a2441ddec5fc1fb2c39b92cc977a5f4c0eeee671e09a8b60f732e5db01c369e7652f8cb49c8327f3d5078c44fab04dc80c4d1b3f42159d4fb5eed3cdb34c77"
+    },
+    {
+      "path": "deliverables/20261005/otl/codex_claims_verification.md",
+      "size": 47262,
+      "content_sha3_512": "e9425fb1c2f7a56b58131d4fe7f14cde9b666540c54dc218820dff2ca42a39fefd6da10a2006cf674fb39207dcdf331730d6aab25d879941d19d94b0cc93ea76",
+      "leaf_sha3_512": "331c8ba3a7837c9db8e765493912541714584ed2b5c310f5293a14353f9a6c163ee0636fb215b7aac8874791bdced6b3f2744b2c5c4606faddbb298b0f598529"
+    },
+    {
+      "path": "deliverables/20261005/otl/github_sync_diagnosis_fix.md",
+      "size": 21336,
+      "content_sha3_512": "03e2bcc4c5a73a12f4294cad582b7b91bad4254b754df894faa9f66354a26e106048422aa388d925fb9ede639a55ee36fe1b771a9227b0d081dce6a659460de3",
+      "leaf_sha3_512": "8da72f77841d24a69f506daaa8d4921f59f8fe9a345580f6483566bf41b0d97ec04173950a4ab7fd16b86c7d49c4a444292df1902133cba33d32bde3f95c65af"
+    },
+    {
+      "path": "deliverables/20261005/otl/impl_verification_20261005.md",
+      "size": 28631,
+      "content_sha3_512": "908314be1085c5cc48c9b12d0a02424e09135d913d1ffe23d7b5484790d9b2116453d7da0eb3cdb97aefc12fd3461dd6ae4c4f837b01654edd49aad0fbdc09c6",
+      "leaf_sha3_512": "0a9e8bec95285b85009dcbfdd7f818f00bb814260070b2fb2b8bed8f9db0820201f626b6c9ff81b9dc664465bc5276a33206872c6ac1ddabe881d2f4ee033055"
+    },
+    {
+      "path": "deliverables/20261005/otl/p0_ledger_race_fix.md",
+      "size": 18260,
+      "content_sha3_512": "d3a452670dff4e68d00a940345a6566a087f1b1a29c7e6ce0ec797277b0760f3abe8cb4c9d07906840f2edb4b80f7b59a2998ca60e17e5edd9bc57c31f34eff5",
+      "leaf_sha3_512": "40d6023f9848afbbe2c7a8790bd1b903db39a1beff4742e5afa74e0f7ce0232c5f3cc69322572b5f121cd700122346e2ed91fd20d98ff7ce8298ce363540a9f0"
+    },
+    {
+      "path": "deliverables/20261005/otl/secret_scan_20261005.md",
+      "size": 10373,
+      "content_sha3_512": "4825eb7ab32aeb40cb4fb1291419588144d798bc48b3086a89fb4904f40e0253486c5a6d26f391ed7db0845b04eafeae41977b6796b4644ef448ccb117577961",
+      "leaf_sha3_512": "3e133a9b73d093df548ca2ca92cc2dc8dbb033b4b34b760ee94c060bc17691cf045720e4b6e50d18441de7c4216b1fa063a0e4d80262b8757c85a2525130b4b2"
+    },
+    {
+      "path": "deliverables/20261005/otl/secret_scan_review_verdict.md",
+      "size": 5970,
+      "content_sha3_512": "c5c49cb4cefa595e58f06095df0b89342aa12a7b01956a49db53987a36186d7d06a67574975754961f445e1b5b701bdbdc4f4a46d76852840f8095fe6c9028c6",
+      "leaf_sha3_512": "0fea16d0ab7e2eb03d01180909c5672d19103ce2207359369190a07bdb1d1d5102c7f7b7027b87a03bbc6a82861d98c3e699a3544814cb82469d0667e7cdbf32"
+    },
+    {
+      "path": "deliverables/20261005/otl/self_evolution_research.md",
+      "size": 52262,
+      "content_sha3_512": "87b54717e832a3358d786a4a7f34f730d64897c6ae807f860253e0e7089ee8699f0871d1c828d18ec5347f7e48cc06742a27a13d7699397383b7e2daaa8a998a",
+      "leaf_sha3_512": "d5abbd1f333d6d329d3981018cebaa5637d7128390d4642a742d387efca56d3ac9283e6e5ae2ee1807309e47cdf634060e18b9565804732d955d18bde3bfcdd1"
+    },
+    {
+      "path": "deliverables/20261005/otl/workbuddy-hy4.persona_20261006.md",
+      "size": 21035,
+      "content_sha3_512": "0646bd8faa782c1ff585b0bf2fc02dfcb27a8f2e162cabd7f9a1688bedf2506990352e1ea6e5c9d3afcfc234a47ad0855f73c4b487b2c267997fff679c2ef1a1",
+      "leaf_sha3_512": "d3b336b31776ef85ac4cfbb9ccafac9c4fbd8bca2e76c37aaf7841b5dfbf032afd4143f7d5459864c10f61d5e70ca2681bf65beb35310d3ddb83f084f2121979"
+    },
+    {
+      "path": "deliverables/20261005/otl/产学研融合A2A节点发现与接入方案_党组学术视角.otl",
+      "size": 30450,
+      "content_sha3_512": "8c2d6bff30f17d3e23b79be6535205f42e65b3f885805cccb8fc085b83c81ecaefb54d744086b6e2c14332d648bc17c3a9fb03d281c7424706ac66ef6a08675b",
+      "leaf_sha3_512": "2763727a1db5574a698133a240b92165f74b227dda2f7d2605de80e2812077e9733161f29fb5959258caedc1fa3552b84284c52b0812d2b99d0db7a82a2a3613"
+    },
+    {
+      "path": "deliverables/20261005/otl/外部灵感融合简报_党组学术视角.otl",
+      "size": 18631,
+      "content_sha3_512": "a19406bb8fabd95071eb26fe2fe1f6e880b073ef7b5c3a9ee33756c1e660acd0bbc32b9767f176204999281b514a3c350f072156988d1fe64e136e678a2851f8",
+      "leaf_sha3_512": "578406cb07baaa504fc66397908800ebd0d20c9012143accde17053cc1c43ed26cde4515a09911da1b1df01df722c54ccce95a6147c0141b104ebfd6c40794e0"
+    },
+    {
+      "path": "deliverables/20261005/otl/算力分配与分布式协同演进探讨_党组学术视角.otl",
+      "size": 21940,
+      "content_sha3_512": "f9fc3cc8427ea7de9e6bfaf643031e014dda74707b95184c567a0cde7a1bd01dd89c1308585397e58c95746a619edcaef624f4fb789e1d8774954b96eeac8657",
+      "leaf_sha3_512": "3f45b916713d7c2afb9520c46d3c2b71bab3ed094b850232a25c12afa2d53e49718ddfab5f8b9bfc7359590ba4cd967ecd095bffe8b2e52030df1756f9251834"
     },
     {
       "path": "deliverables/20261006/kimi-code-quantlab/收口报_GOVCLOSE-2026-1006-GQ-01.md",
@@ -1296,6 +1458,12 @@
       "leaf_sha3_512": "d8b761b661a05653dfeae08fde51f2d33c3deeff82f764677a6d8d24112a4befd977a3add98636b27c7c0701859e64441c3b87300a8ed84897507fc48c45105d"
     },
     {
+      "path": "research/mem_layer_20261007.md",
+      "size": 4897,
+      "content_sha3_512": "e25cf7694b8c741e6657215d25912d0b4825468d4db6d4945f43dfe1f2695b35e523ce0a5ce5895477d4efdbf1c41c4067d73c442cb98ed4ea8a7896587cc764",
+      "leaf_sha3_512": "04798a10d195bcf12d1350e2004b09ecb96c818ac221d64a47d34dda202bfb19160e47737a08c6323719d99ffd494a5fae31f4223890380b51f90876980a4c4f"
+    },
+    {
       "path": "research/sdd_onboarding_card_20261006.md",
       "size": 2712,
       "content_sha3_512": "971bc66342407550d27d6fa858dcab8c7631aa059fa9f088657847eb9701a148c32e8c5b97b185ac6a04c35602244c22900b458b96483680cefedef43c8ecc89",
@@ -1348,6 +1516,12 @@
       "size": 2165,
       "content_sha3_512": "3874dd32358f1821224f48b0899e9583593bdfa43d89e49a2ba8b593b201337f890563caedec106d7a57bfb2e3baa302adcb1a80abe0412b3fd77cc55b0a87f6",
       "leaf_sha3_512": "fae66fd501d7ca8bd1159927b723db797804b518ef89af73249e11a879d6e407e65290555e23c223c984e264b6d4cf9ec8cf48c18c418236df74119f1efd2e9c"
+    },
+    {
+      "path": "seats/workbuddy-hy4/persona_seed_v0.md",
+      "size": 21035,
+      "content_sha3_512": "0646bd8faa782c1ff585b0bf2fc02dfcb27a8f2e162cabd7f9a1688bedf2506990352e1ea6e5c9d3afcfc234a47ad0855f73c4b487b2c267997fff679c2ef1a1",
+      "leaf_sha3_512": "197ef5b88386e1d141431096a6e04f65decd4d6eb09b6934d464e02064a82e4d3639a903f54a2c54d79246bda691e09f05b8441954e97c75be81cb314a418d62"
     },
     {
       "path": "sha3_tree/README.md",
@@ -5053,9 +5227,9 @@
     },
     {
       "path": "skills/fusion-cast-ops/scripts/fusion_cast.py",
-      "size": 25765,
-      "content_sha3_512": "fe011e7bb5c4ba32e53c5e79f65d8e385919ee16c2b40182682f1fdfc13efe5364dcccd380fdb02024f2ed8e73b8277e1658df3a5dc0d84df8d3df821bb3982c",
-      "leaf_sha3_512": "a18229ef5561f85eba6f13663ed2773c86697a6f80b4c5002f7018e993163202aad09b53c0e8d16737b3ac6d59850f7cb63c3e4c6e921052ee855445810eff0f"
+      "size": 28296,
+      "content_sha3_512": "b1a70aef1034a15eed23190066e43c8f22416821ab3afc25d02aef4e3a301fb4226ad5b3db8f66da6c245671125c12962d38c77f0086333c12bddf9fd72eabed",
+      "leaf_sha3_512": "a4a404c81997f042381a389f6844453c2f021971c2916c61781cd7aff234d9d3284f3ec323e4f11a02520aacbc79f89edc143ff2257a76b641a1b6ec77e73086"
     },
     {
       "path": "skills/fusion-program-audit/SKILL.md",
@@ -9169,9 +9343,9 @@
     },
     {
       "path": "skills/skill-version-ops/scripts/version_flow.py",
-      "size": 16727,
-      "content_sha3_512": "b86b00312e2e690949d03b6beb5a99908502f907a6ecdd30c15b4e30be9f82abefa00b311f9c412a31843b744690b242f72b6b0ee395e4e178ba81f280a3e52a",
-      "leaf_sha3_512": "5673c11828a2540a2c30ef8585d45387f7a478adae7818052a454ca078fbb0df9749829753fdc2bbdd8fc2055a62e36822d9c42e70e115ab716a83594cfda81b"
+      "size": 21857,
+      "content_sha3_512": "9340c11fca8b27a7e17e9eb58f6fe5552a787425a270d63b500c51f09184382a4a5f6d994a01cc97f474ddc57e657255b9ef038a4b5b9d8ca5fb2442196647b5",
+      "leaf_sha3_512": "3255499ab7c8429807773acea99e716c92a0f714c9b3f978c4804c74cf5cddaf472db4c6b2d5c68efd63ad4de2dd107188cc1638c914cda2fa48ece5012b5e24"
     },
     {
       "path": "skills/slime-cluster-ops/SKILL.md",
@@ -9403,9 +9577,9 @@
     },
     {
       "path": "skills/software-testing-guide/scripts/init_qa_project.py",
-      "size": 12683,
-      "content_sha3_512": "5e054257b05b9dc5ae36528efb4faefcc541d285b5f366213b242449c196124f249c7f0dca9a46c6506f84ac492954f293c227bd0dd6cc6844012449bedc3d1b",
-      "leaf_sha3_512": "032b48139c1abb0455913f3733a168c27e501e10b805501137755b271a66f0b5a6f5c24c2549b71a0c5eb114a0ad5d54507b28f0e5e86f1270f549eff2ae72d7"
+      "size": 17480,
+      "content_sha3_512": "e5f7233c0e824a830e341e08b7c186f32188944045447602fc77e6acfe3025d28acc0a4a0a002388d6c0fa714764ca9b6c78fa6c5f1dd0918442e5e5af94dfd8",
+      "leaf_sha3_512": "bc2ac9f9b579cb16cfab9722dfe3899d41f5cd9c9b2c433e5975f9913890f0c2c84859590cc1ea48bc3734ce4c6a846b561a5eb1584d64dcef80990cbd637120"
     },
     {
       "path": "skills/sop-writer/LICENSE.txt",
@@ -11290,6 +11464,12 @@
       "size": 3366,
       "content_sha3_512": "42701acc02bc29291dc37234810a1f52822d83bce75357424f4f8cf3549353142948d23e3b13638fa9c3f0ade81f026c5a5e55709e1fd81f6e4193c77adb32a5",
       "leaf_sha3_512": "1c161ad039b851332d159add03b5aab76a2f2e7f166a0161fb0d2a33448b0c73a23f9cf42eae8bde83d6894ef2c200d697ba118d9891a79f537991bf3a234e05"
+    },
+    {
+      "path": "tools/secretscan/scan.py",
+      "size": 17065,
+      "content_sha3_512": "304fb115012670c4c49aeffd97dce49e8ac6f50e653887233cf449a2fbb95e9ff81483cd793e2b872961d0722c3d2cc636d3e0a0ac4bfb449a28079c76377950",
+      "leaf_sha3_512": "b987cbb96a7ac921b4757c30b8e8092990fa91b1b62268afcd0811f837580d47b6b9f1d3a04c112a7e79460d398c3b5a0d0d2d3b2b9012869e60f79b415bf818"
     },
     {
       "path": "tools/sha3-tree.mjs",
