@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-07T00:07:37.878Z",
+  "generated_at": "2026-10-07T00:15:12.805Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1940,
-  "merkle_root_sha3_512": "6d6d9fd59f966e6a161d064a0ed271dd5b1413b818f3f1665ae9886bc84a8c546afe57b747ef36bb5c53eeb7c5b129057332a69e7f74211ea5ce8fb6a672aa90",
-  "hmac_sha3_512": "2b8f2cc1f17adfc3aabb0e9bace1de4c81be707b1eb8e4f6c5452295039b7e6d10f81b391919e7243cf3b71f112ad1eecf9e1cdbc0aa9e16734a76c0ef9b87ef",
+  "file_count": 1942,
+  "merkle_root_sha3_512": "2858573e47a7b3727000b90fa8d253f51bda991cc066e9939894229be6f43a1278ecfdd3eacb34a29af486de0d71cc89d9ed53ebe8176da090cdd85854604a2a",
+  "hmac_sha3_512": "f2364846547f7ad22b4305f74fd1e08547ae0373dea174ad11897f7c122c614737517c0c0aff90b27d69607f52918b1240b9a98f7988542e60f8fdae8f82603a",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1014,6 +1014,12 @@
       "leaf_sha3_512": "d804726017967d283d2600f8b27d37d79b1d18d263835b9a12d9c855700b66d7096cff569728eb9bd7b688fe6e8e62f91e2091e290f5a1f3f2069ca9f1118060"
     },
     {
+      "path": "deliverables/20261007/seat-cairn/exchange/披露前扫描闸与首轮基线报告_DF-DISCGATE-20261007-CAIRN-01.otl",
+      "size": 4629,
+      "content_sha3_512": "1eb80f8c942bcfba85c5f6b340ba4e20d573b3b31436c805699afbf21ed06851c5512249f26e60672256e0a3f47a38c8862f359f2b28c55621de00d0581986a8",
+      "leaf_sha3_512": "acad24241afb8a66455f1e389594ae5019ec73e172a0c4fc29bce8ba43b21c655a32e84514b4f6674b87ce5ad5123cf66526395fabbde824b07415f36d579fc9"
+    },
+    {
       "path": "deliverables/20261007/seat-cairn/exchange/数字人员工记忆分层与经验沉淀方案v0.1_DF-MEM-20261007-CAIRN-01.otl",
       "size": 7556,
       "content_sha3_512": "5abc88ea730c5e1002d32288069265e6347b29a9ad575e7cdba49c0411c95ac2c13752abcafb12489423ed864b22faf91c964cc51e1f0f0b563e3db4dff6351b",
@@ -1084,6 +1090,12 @@
       "size": 11646,
       "content_sha3_512": "c586a0f0d8f1901d244b42da3a695c1b83e268034147e6a4957e4b362518aa03b055af1ea6c1ec562a24540821ccbafa1bf72b830b2c2d1e925bbb10297ebe3f",
       "leaf_sha3_512": "628d6a93ba123c5d6cbcffc6b80aad530f8ff1304c4d97251cbdad5f06aec22273975ba5b3918946b142bd52e43bb2c4fb1c03fbf77f220492664a236e020e4c"
+    },
+    {
+      "path": "deliverables/20261007/seat-cairn/tools/disclosure_scan.py",
+      "size": 7431,
+      "content_sha3_512": "06eb124d012e1187651a3a93cd79080372929402bd5ef290ec58121fdb8fb8d9f2e1a3c51ca5535e319b3f3ea60fe7dcad207219a76ad126d4069f49d644fd03",
+      "leaf_sha3_512": "c5678de43f5f904e884f99b51af9175d4cae7c1c63dd3e44ff969da8277e6a00ea6d9978403b9c4124c5b38ae53154ab83f13b7043cfa2e32534e04d61f21904"
     },
     {
       "path": "deliverables/20261007/seat-cairn/tools/eff_report.py",
