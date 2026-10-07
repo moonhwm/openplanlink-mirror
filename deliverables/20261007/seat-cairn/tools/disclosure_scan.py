@@ -41,6 +41,8 @@ NET_PATTERNS = [
     ("主机名(本机前缀)", re.compile(r"(?i)\bLAPTOP-[A-Z0-9]{4,}\b")),
     ("主机名(通用模式)", re.compile(r"\b(?:DESKTOP|SERVER|WIN|PC)-[A-Z0-9]{4,}\b")),
     ("磁盘卷序列号(带语境)", re.compile(r"(?i)(?:卷序列号|volume\s*serial[^\n:：]{0,12})[:：]?\s*([0-9A-F]{4}-[0-9A-F]{4})\b")),
+    # ↓ 轮19 新增：裸「名:端口」形态（如 relay:8791）——同属口径所指"高位端口"，此前正则未覆盖
+    ("裸名称:端口", re.compile(r"\b[a-zA-Z][a-zA-Z0-9_\-]{2,}[:：][1-9]\d{2,4}\b")),
 ]
 # 凭据形态（只查形态，不回显）
 CRED_PATTERNS = [
