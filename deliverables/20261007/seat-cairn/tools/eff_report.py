@@ -195,6 +195,15 @@ def mem_block():
     return None
 
 
+
+def mem_guard_stats():
+    """R_mem 破线期失败/重试计数（承 DF-ACK-20261007-CAIRN-06 §四）。取不到即标未测。"""
+    cand = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mem_guard.py")
+    if not os.path.exists(cand):
+        return "（mem_guard.py 未就位 → 本块**未测**）"
+    o, c = run([sys.executable, cand, "stats"], cwd=os.path.dirname(cand))
+    return o.strip() if (c == 0 and o.strip()) else "（mem_guard stats 执行失败 → 本块**未测**）"
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out")
@@ -317,6 +326,11 @@ def main():
                  % (mem.get("dup_groups", 0), mem.get("dup_wasted_bytes", 0) / 1048576.0))
     else:
         L.append("（mem_tier_scan.py 未就位或执行失败 → 本块**未测**）")
+    L.append("")
+    L.append("## 五·四、R_mem 破线期运行统计（承 DF-ACK-06 §四：资源性受阻须计数，非仅观察）")
+    L.append("")
+    for _ln in mem_guard_stats().splitlines():
+        L.append(_ln)
     L.append("")
     L.append("## 六、改进项（自动推断）")
     L.append("")
