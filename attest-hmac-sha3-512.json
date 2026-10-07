@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-07T00:49:15.687Z",
+  "generated_at": "2026-10-07T00:49:44.361Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1986,
-  "merkle_root_sha3_512": "9c0f332d13c7fc1ef8b9e4b6aa86a6fd491738cf6dd138f815eae3c348a19754da61751776b81956dee256d65e4a57e50f27f947e52a5d0ebca85b6b24d52b6d",
-  "hmac_sha3_512": "8b53b4c93b786d22ed92e6f0af8cbe8362e97c201db016cdb368d44f7cea447c574432cc131818159b1792f7ad7e7d11ba185259794415805c7347b537fb7937",
+  "file_count": 1987,
+  "merkle_root_sha3_512": "283fcfdfbbda37e8bd8c636864fd6199c1808fdd5a21b32ebce1b5ca1a1635dce01731a1567fa6d513b0ed7be1108b12a43394f92842395f1dc3fd0e39ce2da7",
+  "hmac_sha3_512": "11497ef225b1e3316408b2c0f82268c87b4a6d8e03c8a06053a45930c58a700f895e946d72bb10f91a557445e120e93728a5a5c52880093c0debe327f205f1a5",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1258,6 +1258,12 @@
       "size": 5234,
       "content_sha3_512": "377357dd18f27367eecbcd5aabd338df37bbfa4550246b862a1eeec3c63b49473bcaea3ced6426700995061984e41e97ef20efd53642167c4644a98d104abc5e",
       "leaf_sha3_512": "0dfbee57683f00291d1f638653261f3b5141753c91c72e236097b38cc87af48890525b7767adc59b56a771c3ff31a6f53371438ddaca1f8a44ff1c807359a1e9"
+    },
+    {
+      "path": "deliverables/20261007/seat-cairn/exchange/起始点细读Ⅲ_04与05线及四类成本清单_DF-START4-20261007-CAIRN-01.otl",
+      "size": 4863,
+      "content_sha3_512": "5c64329c0c5b08d2439baa8daeb6a6d1ae885d3ea489255b3dc516030b1339338bbb341a770377434002f390a7967370f8f189d00aca1c462c5609839b17446b",
+      "leaf_sha3_512": "4033295f770cd4d6cad2089193ef56f1e0e4ba5ab5135c36c1e1c773e52ccde48e6c74cc1b664f7401e176d3dc72a0662f7e875fa13fcbbd6ba31b0c303b8892"
     },
     {
       "path": "deliverables/20261007/seat-cairn/exchange/跨席并轨提议_架构图与记忆分层命名_DF-ALIGN-20261007-CAIRN-01.otl",
