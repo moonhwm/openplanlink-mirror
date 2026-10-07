@@ -117,6 +117,19 @@ def scan_paths(paths, nets: bool, creds: bool):
     return findings
 
 
+
+def log_scan_event(scope, hits):
+    """全仓扫描后**自动记事件**（供成本记账自动计次）。仅在全仓模式调用；失败不影响扫描结果。"""
+    try:
+        import json as _j
+        import subprocess as _sp
+        _sp.run([sys.executable, str(pathlib.Path(__file__).with_name("ops_event.py")), "log",
+                 "--action", "disclosure.scan", "--target", str(scope),
+                 "--result", "hits=%d" % hits],
+                capture_output=True, timeout=30)
+    except Exception:  # noqa: BLE001
+        pass
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--paths", nargs="*", default=None)
