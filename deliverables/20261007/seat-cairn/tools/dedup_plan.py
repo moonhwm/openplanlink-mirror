@@ -44,6 +44,54 @@ def sha16(p):
     return h.hexdigest()[:16]
 
 
+
+
+def collect_rows(seat):
+    """收集 (tier, rel, size, age_days) 供孪生告警使用（只读）。"""
+    import datetime as _dt
+    rows = []
+    now = _dt.datetime.now()
+    for root, dirs, files in os.walk(seat):
+        dirs[:] = [d for d in dirs if d not in ("__pycache__", ".git", "quarantine")]
+        for fn2 in files:
+            fp = pathlib.Path(root) / fn2
+            try:
+                st = fp.stat()
+            except OSError:
+                continue
+            rows.append(("-", str(fp.relative_to(seat)), st.st_size,
+                         round((now - _dt.datetime.fromtimestamp(st.st_mtime)).total_seconds() / 86400.0, 1)))
+    return rows
+
+def sibling_warnings(rows):
+    """孪生命名告警（承 DF-CASVERIFY-20261007-HY4-01 §二；v2 收严）：
+    **收严口径**：仅当「去掉末尾副本标记后的基名」与**同目录另一文件的基名完全相等**，
+    且二者**尺寸不同**时告警 ⇒ 排除"同基名不同扩展名"（如 .json/.led）之**误报**。
+    ⇒ 疑为**互补续卷/不同切分点**，**严禁按重复删除**；本器只告警、不列入可回收。"""
+    import re as _re
+    bydir = {}
+    for tier, rel, size, age in rows:
+        d = str(pathlib.PurePath(rel).parent)
+        base = pathlib.PurePath(rel).name
+        bydir.setdefault(d, {})[base] = size
+    marker = _re.compile(r"^(?P<stem>.+?)(?:\((\d+)\)|\s*-\s*副本|\s*副本|_copy|\s*copy)$", _re.I)
+    warn = []
+    for d, files in bydir.items():
+        for base, size in files.items():
+            stem_only = base.rsplit(".", 1)[0]
+            m = marker.match(stem_only)
+            if not m:
+                continue
+            target = m.group("stem")
+            # 要求同目录存在「基名恰为 target」的其它文件（任意扩展名）
+            sibs = {b: s for b, s in files.items() if b.rsplit(".", 1)[0] == target}
+            if not sibs:
+                continue
+            sizes = sorted({size} | set(sibs.values()))
+            if len(sizes) > 1:
+                warn.append({"dir": d, "stem": target, "n": 1 + len(sibs), "sizes": sizes})
+    return warn
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--seat", default=r"C:\Users\欧阳宏俊\WPSDrive\29969771\WPS云盘\月之暗面的Plasma游乐场\A2A新席_石敢当Cairn_20260928")
@@ -153,6 +201,8 @@ def main():
             "groups": groups, "n_groups": len(groups),
             "reclaim_bytes": reclaim, "reclaim_mb": round(reclaim / 1048576.0, 3),
             "executed": False,
+            "sibling_warnings": sibling_warnings(collect_rows(seat)),
+            "sibling_note": "名似副本而哈希不同 ⇒ 疑为互补续卷/不同切分点，**勿按重复删除**（承 DF-CASVERIFY §二）",
             "near_dup_groups": len(near_only),
             "near_dup_extra_bytes": near_bytes,
             "near_dup_note": "CRLF/LF 归一化后相同、字节不同 ⇒ **不属逐字重复，不得自动隔离**（承 DF-CCM §七）",
