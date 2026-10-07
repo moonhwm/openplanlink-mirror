@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-07T01:31:59.408Z",
+  "generated_at": "2026-10-07T01:32:43.523Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1999,
-  "merkle_root_sha3_512": "140aa47ce26882236763e77c0f55c088e7d1d1e9c0946e8e8e38115be805353ca45fe8ed76898cf5e8f494edb7ecba73773fa453763b16d6338ab0f10dc7901d",
-  "hmac_sha3_512": "154d337b4b496b9ad425daf8885042cf64b3a7561be33946ee5aff35692651b94f689bd15b26921f84ac7bcfc6d6eb089f040f26a9a850118cc28d1d8dd98832",
+  "file_count": 2000,
+  "merkle_root_sha3_512": "85682b1d443f949be482916b66560036f8b331998b093a3601b7652872593d91f4c0515e84be1f288885afba6e6abed8c6b18b3ce283974eec47282add126885",
+  "hmac_sha3_512": "9118ef85621f60529f0c2d2949db98a1d721c60a87114b699f74f36fd22d699539e5a0d84c5fb70c76015f5ffaf5d1a35e8006ebf0cd371b57839f33d03bb7c6",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1270,6 +1270,12 @@
       "size": 4655,
       "content_sha3_512": "f7119948f68c761300be5dd17386f2a1a5d3b26dae9e341ef2ec54b217b2e801508e8cdfa55291a441d5ab113025befaaefe521280d385e6c714d015e821345e",
       "leaf_sha3_512": "114bec390de07a963a6c8d4ec08e1be12e25850104aab61f09c797ef9338432474caae9174a9b869d83ec871f9ed22c4d7bec789e5ad83f6ddd7449ad79e572d"
+    },
+    {
+      "path": "deliverables/20261007/seat-cairn/exchange/记忆分层方案修订v0.2_首测基线与可压性_DF-MEM-20261007-CAIRN-02.otl",
+      "size": 4913,
+      "content_sha3_512": "d07db4b6a4abde6a7c4bc0f5e29fb6de30b558920d31f54d1c84678bca67ed646e91c52b5163d8030fbd9ea0f8b082da67131ac85dd1f0f80cf40aa40cb8d9c5",
+      "leaf_sha3_512": "b252cd7470f755c15423526e8c441836dd39db253f263f73ac78eee5c41060000fb38e0655fadbb8e38423f71bc265b5949061db1c4164becc356d788dc3b137"
     },
     {
       "path": "deliverables/20261007/seat-cairn/exchange/起始点细读Ⅱ_推测解码知识库结构与方法论_DF-START3-20261007-CAIRN-01.otl",
