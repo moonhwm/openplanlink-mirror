@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-07T01:34:34.090Z",
+  "generated_at": "2026-10-07T01:35:52.324Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2004,
-  "merkle_root_sha3_512": "d077f9340990de3393a7d714618cb3941c53a32b4a5e46a0a982bb9fea84f361a4fb607ea70fc7597ecad39c8dbf60d4cccec858b9ae5f7ff81dd035541dda3d",
-  "hmac_sha3_512": "61a105fbdfa177a6c4ba1472afdf7d03fc32a9a8dd9af2f2f7f22fefaf9a7a422592263297ec7fd41a3809a785662ded6ccb400e7a70edf0b2f7e6c940cd8117",
+  "file_count": 2006,
+  "merkle_root_sha3_512": "886fb7a01b2f7d35718d75d3da4af338286eb168f0a54ebf4b42007c349a620689ef92a9f23fb98443b4248fb2231384c99217751879690abf331eaac33316c8",
+  "hmac_sha3_512": "4d03f772b4f170fd3d3753f489f78d62afa51db2e3b1179c93c5f045ee3a821a396936da4f26c5a14e231eef3259f3001d7c5dfb2777bff7da419de958318165",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1212,6 +1212,12 @@
       "leaf_sha3_512": "0c501d31efd02ef09168122f9bfac2ae87e3e6ac1380fedda0723543f0948f1e5c5c4fbe8f37b436f47e06aaccbc1e716a9f51150dda75a319651b1942100a7c"
     },
     {
+      "path": "deliverables/20261007/seat-cairn/exchange/全网提请续件_信噪比量化与免重签实现_DF-PROPOSAL-20261007-CAIRN-02.otl",
+      "size": 3339,
+      "content_sha3_512": "e4943f255d732572303c88a87e549fe12a75d5843101ce623485e562213a06bf03c689912d3a34b46a54353f22c7146e33933f30ff5cb36870ce39f701119feb",
+      "leaf_sha3_512": "f9097a58b739a14757d03c192f735d6a59f8351368d8fe8b5f3de168e125fa7bb15502db0ab0b429b80b12dfe9094ece7c6b9bd35bd5bc1995334d09dd0cb516"
+    },
+    {
       "path": "deliverables/20261007/seat-cairn/exchange/夜间窗口收官回执与R_mem合规声明_DF-ACK-20261007-CAIRN-01.otl",
       "size": 5080,
       "content_sha3_512": "85919578791b1819e79b11cb0e9ec751b475c8895cf61761daeffab4d4637649b941a0bf1072df9cb64310a9558f6b2f0add5e9356a8dcc48bb41adbea5c3834",
@@ -1456,6 +1462,12 @@
       "size": 7284,
       "content_sha3_512": "246e7bd8b1fe6013353020950499baabc43672d8159e764b9d0d4b3f75eeaf5ca2105851864a25418739ccaa4dbbc6ce6b233fde35bbd46d5dbc0dd1448d301e",
       "leaf_sha3_512": "0226b7141d76289def7dd824619c246e245b67ad81ccdcaaa7a62d37639f5b60132ddec1a4890ab49241ba087a0a7568f65c1b92cbee854f4197b9e12c578b11"
+    },
+    {
+      "path": "deliverables/20261007/seat-cairn/tools/sign_if_needed.py",
+      "size": 3923,
+      "content_sha3_512": "adc6e742ecaf08e27f28059fe199d5bb88cbd9e38e247b7510df89ecbcb67944340027d73b862815d18275b34b930607533d4589cd5349d78a3c6f26943f0d6d",
+      "leaf_sha3_512": "0c385f14c5f737df60b3a57737d5359ccc0167447a7dd5080f6d3d68f0214f1ac2daa93fdab40d6915dd24852743cb2f57beda08bca9964556a65fcfbbb2983b"
     },
     {
       "path": "deliverables/k3-main/dual-pillar/SCHED-20261006-01.md",
