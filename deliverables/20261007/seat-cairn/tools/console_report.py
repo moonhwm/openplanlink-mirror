@@ -38,6 +38,14 @@ PY = sys.executable
 PROXY_OFF = ["-c", "http.proxy=", "-c", "https.proxy="]
 
 
+
+def host_ref():
+    """主机名伪名（承脱敏口径：主机名不录值，但需可关联）——H-<sha256(hostname)[:8]>。"""
+    import hashlib as _h
+    import os as _o
+    hn = (_o.environ.get("COMPUTERNAME") or "unknown").strip().lower()
+    return "H-" + _h.sha256(hn.encode("utf-8")).hexdigest()[:8]
+
 def run(args, cwd=None, timeout=180):
     try:
         p = subprocess.run(args, cwd=str(cwd or REPO), capture_output=True, text=True,
@@ -191,7 +199,7 @@ def main():
     a = ap.parse_args()
 
     ts = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    data = {"generated_at_utc": ts, "host": os.environ.get("COMPUTERNAME", "?"),
+    data = {"generated_at_utc": ts, "host_ref": host_ref(),
             "seat": "a2a-node-local",
             "ledger": ledger_stats(), "ops": ops_stats(), "repo": repo_three_way(),
             "mcp_live": mcp_live(), "idle": idle_from_snapshot(), "night": night_state(),
@@ -202,7 +210,7 @@ def main():
     rm = data["R_mem"] or {}
     dk = data["disk"] or {}
     L = ["# 主控台一页纸读数（审计就绪）", "",
-         "- 生成时刻（UTC）：%s ｜ 主机：%s ｜ 席位：a2a-node-local" % (ts, data["host"]), "",
+         "- 生成时刻（UTC）：%s ｜ 主机：%s ｜ 席位：a2a-node-local" % (ts, data["host_ref"]), "",
          "## 一、证据链", "", "| 项 | 读数 | 结论 |", "|---|---|---|",
          "| 台账（sha256 链） | %s 条 | **%s** |" % (data["ledger"]["entries"], "PASS" if data["ledger"]["chain_ok"] else "FAIL"),
          "| 事件链（ops_event） | %s 条 | **%s** |" % (data["ops"]["events"], "PASS" if data["ops"]["chain_ok"] else "FAIL"),

@@ -1,0 +1,107 @@
+{
+  "generated_at_utc": "20261007T002941Z",
+  "host_ref": "H-5a03ac7f",
+  "seat": "a2a-node-local",
+  "ledger": {
+    "entries": 638,
+    "chain_ok": true
+  },
+  "ops": {
+    "events": 29,
+    "chain_ok": true
+  },
+  "repo": {
+    "local": "c14cde4",
+    "origin": "c14cde4",
+    "gitcode": "c14cde4",
+    "aligned": true
+  },
+  "mcp_live": [
+    "ima",
+    "baidu"
+  ],
+  "idle": {
+    "at": "20261005T203924Z",
+    "cpu_idle_pct": 43.0,
+    "mem_idle_pct": 5.9,
+    "processes": 904
+  },
+  "night": {
+    "in_window": false,
+    "next_boundary": "事件 20:00",
+    "next_in_minutes": 691,
+    "near": false,
+    "guidance": "距最近边界 691 分钟，本窗口内可继续作业"
+  },
+  "R_mem": {
+    "R_mem_mb": 374.7,
+    "mem_available_mb": 911.4,
+    "total_mb": 16076.3,
+    "M_floor_mb": 1286.1,
+    "thresholds_mb": {
+      "降并行度_0.5GB": 512.0,
+      "协办受理准入恢复线_0.8GB": 819.0,
+      "M_floor_8pct": 1286.1,
+      "填谷申请上限_可用减2GB": -1136.6
+    },
+    "breached": [
+      "M_floor 安全下限(8%)"
+    ],
+    "state": "低于安全下限",
+    "sampled_at_utc": "20261006T235402Z",
+    "口径": "本席按公开阈值推算（M_floor − MemAvailable）；规范层权威属 cpu-squeeze-c1 席，待其校准",
+    "source": "mem_audit_20261006T235402Z.json"
+  },
+  "disk": {
+    "disks": {
+      "C": {
+        "total_gb": 453.4,
+        "free_gb": 22.0,
+        "used_gb": 431.4
+      },
+      "A": {
+        "total_gb": 1863.0,
+        "free_gb": 930.3,
+        "used_gb": 932.7
+      }
+    },
+    "c_level": "正常",
+    "a_level": "正常",
+    "thresholds": {
+      "c_yellow_gb": 15,
+      "c_red_gb": 8,
+      "a_stop_gb": 100
+    },
+    "source": "DF-MEM-20261007-CAIRN-01 §三"
+  },
+  "workorders": {
+    "latest": "workorder_20261005T210004Z.json",
+    "count": 3
+  },
+  "ci": [
+    {
+      "name": "CI 校验阶段（发布门禁）",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "c14cde4"
+    },
+    {
+      "name": "CD 交付证明与状态发布（attest → status）",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "c14cde4"
+    },
+    {
+      "name": "许可预检（开源协议条款匹配）",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "c14cde4"
+    },
+    {
+      "name": "CD 交付证明与状态发布（attest → status）",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "e15b569"
+    }
+  ]
+}

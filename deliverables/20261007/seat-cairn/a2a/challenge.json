@@ -1,0 +1,20 @@
+{
+  "schema": "iurn-node-challenge/v0.1",
+  "seat_key": "cairn-dsh",
+  "seat_name": "石敢当Cairn",
+  "issued_at_utc": "20261007T002604Z",
+  "expires_at_utc": "20261008T002604Z",
+  "ttl_hours": 24,
+  "nonce": "06c414f83cb56da3f956672cdc0f5253",
+  "nonce_sha256": "sha256:3fd0af3653c5c9cfebc6339a6798783c07e34c6fa8f7c89c0ef4ab8318eceb26",
+  "answer_rule": "以本席 Ed25519 密钥对 nonce 做 SSHSIG 签名：ssh-keygen -Y sign -n a2a-iurn-announce -f <本席私钥> <含 nonce 的文件>；验证者以宣告中 pubkey_fp 对应公钥验签，且要求签名件含同一 namespace",
+  "verify_cmd": [
+    "# 记录命令而非值（承脱敏口径）；<nonce> 由本文件 nonce 字段取，<pub> 为宣告 pubkey_fp 对应公钥",
+    "printf '%s' '<nonce>' > /tmp/chal.txt",
+    "ssh-keygen -Y sign -n a2a-iurn-announce -f <本席私钥> /tmp/chal.txt",
+    "ssh-keygen -Y verify -n a2a-iurn-announce -f <pub> -I cairn-dsh -s /tmp/chal.txt.sig < /tmp/chal.txt"
+  ],
+  "key_material": "NONE（本文件不含任何公钥/私钥材料；公钥指纹见 announce_cairn-dsh_*.md）",
+  "value_discipline": "不含主机标识值/端口值；如需定位请用 verify_cmd",
+  "rotation_note": "轮换：重跑本脚本（nonce 与 expires 同步更新；旧 nonce 作废）"
+}
