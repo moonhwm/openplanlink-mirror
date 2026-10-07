@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-07T00:38:28.921Z",
+  "generated_at": "2026-10-07T00:40:54.049Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 1984,
-  "merkle_root_sha3_512": "641a092c64133c745d0c889c08905edda5f2abed08595c01324efe04b465a6a956fbecab19f8b7d3905785bd7d2ad83b5ff8b62f2b0db32de0d868e97b525108",
-  "hmac_sha3_512": "c774e351331af4ab73cba79f3091b9cf05c749224c2d61774fe2f991d6bb4f187fe78dd59d84a4819efadffcd20e480e931c835b384da3c0c0892cda9d243033",
+  "merkle_root_sha3_512": "f8fbd4db9ad5b1dfcc34579ac0fdecd7a8e832b6cdea014d5bc525855498a99308c9905565d32c0a501ec136ba1b76733d9ed98458b4eda4d7ad282eb366678b",
+  "hmac_sha3_512": "9608dc8bb593ecd5938c3670a1e8a8e7481c823c20ca832f723d64dc4c8cc25d15e8476a2622a8aabbf4c0fd2e5813a58fe686fb39d925e113deaaf90ce00cd9",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1303,9 +1303,9 @@
     },
     {
       "path": "deliverables/20261007/seat-cairn/tools/disclosure_scan.py",
-      "size": 8076,
-      "content_sha3_512": "69e6b7ec8bac7741fb62e944504ce2149cb22cfe688024843babcd7c6d72fcbc969e28043aaa4f92440f5ffc4c4c5501a6ec64a0c2e30f9426acf6e5d409a925",
-      "leaf_sha3_512": "7e2447f88e14b6701fb89b492c8e46eba706038ed37bd5d9985cd038cf533cb5eca4f6f7f80676e261f0e1c348a5588a1d2072d3b0d8bb8ac2bc8dcc6b91c6dd"
+      "size": 8724,
+      "content_sha3_512": "d13710e101ce7b035682dfc1fbf1e75f021d892458ffdb434ac378fe28f91e2efe20eb6048c3d4691768fc96d53b6a50ea4f8438f7d3cf47c1a3106910cf82d8",
+      "leaf_sha3_512": "547acc18b7cf17488462da679292e8bacba69d3fc50f58620a1d3adf62f16994be872e272e5e78bb2b6346021ac67e7822962a8b5c3ba360743ce57ef7683fa1"
     },
     {
       "path": "deliverables/20261007/seat-cairn/tools/eff_report.py",
