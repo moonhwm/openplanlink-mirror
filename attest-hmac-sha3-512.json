@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-07T01:37:33.623Z",
+  "generated_at": "2026-10-07T01:39:12.597Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2006,
-  "merkle_root_sha3_512": "482087b9415ac8e1745c369bf8d19bf1662239b0ae76a1db7e052629b994f5f716fc33b13a491607cc475c8483bcd228c0e204defb54aa396721eb0d412efb41",
-  "hmac_sha3_512": "17da5baf554e6d54bc77121a701e2f70ec370119c0b774181abb2c1404055dbd34ff905d5098050b552c2084de70014b64e4e3bc4d6c15847133ac96d2fb4e3c",
+  "file_count": 2008,
+  "merkle_root_sha3_512": "f72b1e852d75ac717c5ca9da03377b6f2cc0ff508cdb685c1e59caba0166818e40b5d723d91f6b6d31c4bde523bdffbe048f8b16c5a1e414031e5f2c77263030",
+  "hmac_sha3_512": "76f669ccf6c97b589a3ce8caa64131abb66604a98c325e06cf1b7751c1b235cbf3d5a96ef9065f22a7fc5562be9996744e59c167f77fc61b3f45ce2266ac474c",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1354,6 +1354,18 @@
       "size": 2063,
       "content_sha3_512": "0f719aed643f1d4e20c0249013bf3862ed36c6eee2d816ec5dcb0b78c7595ed412f331b91301d5ec29386ea32cd1928eba8730369d61bf35c44f9e2ad30e99e7",
       "leaf_sha3_512": "1822dac92f258af2380d6389ae96078d47fe9e8e564c9626c8684f7397064c8f4ed4ad1b2c36269f4fdf8a3c49e9cb11b00d644e2688edb39ffc73ed6101a297"
+    },
+    {
+      "path": "deliverables/20261007/seat-cairn/probe/heal_probe.txt",
+      "size": 25,
+      "content_sha3_512": "3ede188c173cc40fb9c8a343b4e1b29d4b4ff0e5010a3eb161a34496a0902d47537865c6e1c38159bedae6ebecd52530ecc3b81405da29db131cd14f6d49929b",
+      "leaf_sha3_512": "e448b78e6fb72dbd0c5d884ec2b4fe02f3716c4baf24c569063999634a325dff724cdd5232c63c49a0c7c46af6581aeebf780226f56a59eaff2edd1ea5a00b83"
+    },
+    {
+      "path": "deliverables/20261007/seat-cairn/probe/heal_probe2.txt",
+      "size": 28,
+      "content_sha3_512": "1def897699222d50b215149677c5ecfc7258fc0057c9bad935aaa82c10c49cce77fa9ed081d2423a7a26f031ea4e627a9f74c297269bfa721aa8f1a04db6dc8b",
+      "leaf_sha3_512": "85803d7f1c3440cd9a60b178d621c0b42df6625773c05de5b69cd75886dc3d834112a479fc6af5ff72b3adc53ed8bbcd3f17b27b79dee5f99223481116c776c2"
     },
     {
       "path": "deliverables/20261007/seat-cairn/tools/arch_diagram.py",
