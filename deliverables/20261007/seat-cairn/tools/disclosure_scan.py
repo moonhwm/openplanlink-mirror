@@ -137,6 +137,21 @@ def log_scan_event(scope, hits):
     except Exception:  # noqa: BLE001
         pass
 
+
+def basis_line(scope):
+    """比对基准声明（承 DF-CONFLICT-...-RESOLUTION：冲突多源于基准不同，故须显式声明）。"""
+    import datetime as _dt
+    import subprocess as _sp
+    try:
+        head = _sp.run(["git", "-C", str(REPO), "rev-parse", "--short", "HEAD"],
+                       capture_output=True, text=True, timeout=30).stdout.strip()
+        n = _sp.run(["git", "-C", str(REPO), "ls-files"], capture_output=True, text=True, timeout=60)
+        files = [x for x in (n.stdout or "").split("\n") if x.strip()]
+    except Exception:  # noqa: BLE001
+        head, files = "?", []
+    return "★ 比对基准：范围=%s ｜ HEAD=%s ｜ 基准文件数=%d ｜ 采样时点=%s（+08）" % (
+        scope, head, len(files), _dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--paths", nargs="*", default=None)
@@ -177,6 +192,7 @@ def main():
 
     print("★ 披露前扫描闸 —— 范围：%s ｜ 网络标识=%s ｜ 凭据形态=%s" % (scope, nets, creds))
     print("★ 纪律：本工具**不回显值**，仅示类别与掩码")
+    print(basis_line(scope if "scope" in dir() else "见下"))
     print("")
     if not findings:
         print("| 结果 | 命中 |")
