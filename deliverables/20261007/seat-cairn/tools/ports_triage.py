@@ -33,7 +33,7 @@ COMMON_PORTS = {"3000", "3001", "4173", "433", "443", "5432", "6379", "8000", "8
                 "8791", "8792", "8888", "9000", "9200", "11434", "1024", "1080", "1081"}
 NOT_PORT_WORDS = {"css", "px", "em", "rem", "vh", "vw", "pt", "ms", "s", "fr", "deg", "http",
                   "https", "file", "data", "utf", "iso", "sha", "md", "json", "yaml",
-                  # ↓ v0.2：引文/文献类前缀（arXiv:2101 一类为本轮实证的主要误报源）
+                  # ↓ v0.2：引文/文献类前缀（arXiv:<编号值不录> 一类为本轮实证的主要误报源）
                   "arxiv", "doi", "isbn", "issn", "vol", "no", "pp", "ch", "sec", "fig", "tab",
                   "eq", "ref", "refs", "ver", "rev", "chapter", "section", "line", "id"}
 SERVICE_NAMES = {"localhost", "proxy", "a2a", "relay", "server", "api", "host", "node", "port",
