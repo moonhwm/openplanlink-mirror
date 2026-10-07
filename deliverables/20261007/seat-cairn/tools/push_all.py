@@ -67,6 +67,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--remotes", nargs="*", default=DEFAULT_REMOTES)
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--skip-guard", action="store_true",
+                    help="跳过同批守卫前置闸（仅限已知无害场景；默认 FAIL 即拒推）")
     ap.add_argument("--force-gitcode", action="store_true",
                     help="仅 gitcode 镜像位允许 force（origin 永不 force）")
     ap.add_argument("--skip-gate", action="store_true",
@@ -90,6 +92,27 @@ def main():
                 return 2
         except Exception as exc:  # noqa: BLE001
             print("★ 前置闸①披露扫描：执行异常（%s）→ 按保守策略继续但**留痕**" % exc)
+
+    # ── 前置闸②：同批守卫（承轮39 教训：**守卫 FAIL ⇒ 不得推送**，改为机械强制） ──
+    guard = pathlib.Path(REPO) / "tools" / "prepush_samebatch.py"
+    if not a.skip_guard and guard.exists():
+        try:
+            gp = subprocess.run([sys.executable, str(guard), "--rev", "HEAD"], cwd=str(REPO),
+                                capture_output=True, text=True, timeout=180, encoding="utf-8",
+                                errors="replace")
+            gout = (gp.stdout or "") + (gp.stderr or "")
+            if "VERDICT=PASS" in gout:
+                print("★ 前置闸②同批守卫（prepush_samebatch HEAD）：**PASS**")
+            else:
+                print("★ 前置闸②同批守卫：**非 PASS → 拒绝推送**（轮39 违规之机械防止）")
+                for ln in gout.strip().splitlines()[-6:]:
+                    print("   %s" % ln)
+                print("  处置：先重签（node tools/sha3-tree.mjs build → git add attest → commit）再推送；")
+                print("        确需跳过（仅限已知无害场景）用 --skip-guard")
+                return 4
+        except Exception as exc:  # noqa: BLE001
+            print("★ 前置闸②执行异常（%s）→ **保守拒绝推送**" % exc)
+            return 4
 
     print("★ 本地 HEAD = %s" % head)
     matrix = {}
