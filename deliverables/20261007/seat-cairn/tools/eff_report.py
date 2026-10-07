@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """使用效能报告自动生成器（一页纸指标 + 改进项）
 
 依据：守藏席 DF-EFF-20261006-SHOUCANG-01 §九（每次工作汇报须强制附效能报告）
@@ -175,6 +175,26 @@ def cost_block():
     return "（cost_ledger.py 未就位或执行失败 → 本块**未测**）"
 
 
+def mem_block():
+    """记忆分层盘点（承 DF-MEM）：调用 mem_tier_scan，取其 JSON 摘要以渲染紧凑表。
+    取不到即如实标"未测"。**只读**：本块不触发任何移动/删除。"""
+    import tempfile
+    for cand in (os.path.join(os.path.dirname(os.path.abspath(__file__)), "mem_tier_scan.py"),
+                 os.path.join(SEAT, "exp", "mem_tier_scan.py")):
+        if not os.path.exists(cand):
+            continue
+        with tempfile.TemporaryDirectory() as td:
+            jp = os.path.join(td, "tier.json")
+            _o, c = run([sys.executable, cand, "--json", jp], cwd=os.path.dirname(cand))
+            if c == 0 and os.path.exists(jp):
+                try:
+                    with open(jp, encoding="utf-8") as f:
+                        return json.load(f)
+                except Exception:  # noqa: BLE001
+                    return None
+    return None
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out")
@@ -193,6 +213,7 @@ def main():
     node = http_code(NODE_HEALTH, timeout=6)
     bus = [(u, http_code(u)) for u in BUS_ENDPOINTS]
     cost = cost_block()
+    mem = mem_block()
 
     L = []
     L.append("# A2A新席·石敢当Cairn · 使用效能报告（自动生成）")
@@ -277,6 +298,25 @@ def main():
     L.append("")
     for _ln in cost.splitlines():
         L.append(_ln)
+    L.append("")
+    L.append("## 五·三、记忆分层盘点（承 DF-MEM：数据生命周期管理；只读）")
+    L.append("")
+    if mem:
+        L.append("- 采样时点：%s ｜ 口径：只读（不移动/删除/改名）｜ 层级用语：`层-*`（承 DF-ALIGN 甲案）" % mem.get("sampled_at", "?"))
+        L.append("")
+        L.append("| 层 | 文件数 | 字节 |")
+        L.append("|---|---|---|")
+        for k in ("层-热", "层-温", "层-冷", "层-未分"):
+            v = (mem.get("tiers") or {}).get(k)
+            if v:
+                L.append("| %s | %d | %.2f MB |" % (k, v["n"], v["bytes"] / 1048576.0))
+        L.append("")
+        L.append("- **冷层占比：%.1f%%**（阈值 >70%% ⇒ 优先冷化/归档%s）"
+                 % (mem.get("cold_share_pct", 0.0), "，**已越阈**" if mem.get("cold_share_pct", 0) > 70 else ""))
+        L.append("- 重复内容：**%d 组**、可回收 **%.2f MB**（哈希确认；处置**候批**）"
+                 % (mem.get("dup_groups", 0), mem.get("dup_wasted_bytes", 0) / 1048576.0))
+    else:
+        L.append("（mem_tier_scan.py 未就位或执行失败 → 本块**未测**）")
     L.append("")
     L.append("## 六、改进项（自动推断）")
     L.append("")
