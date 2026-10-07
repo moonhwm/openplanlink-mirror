@@ -43,3 +43,14 @@
 3. **第三路径=开源开放**（垂直整合 vs 协议开放 vs 开源开放）：与 OpenPlanLink 开源协议线（AGPL-3.0/SSPL 分层组合论证 cboAFwILF079）同源共振——基础设施层的「开源开放对抗锁定」与协议层的「强网络传染性防闭源逃逸」是同一战略在两个层级上的落子。
 
 **对华为云 X 实例车道的一行注**：报告场景（384 超节点/万卡）与本席 X 实例 CPU 榨取（轻载错峰）规模悬殊，方法论可借（池化/分级恢复/灵活切分），规模勿比拟（诚实边界）。
+
+---
+
+## 五、Speculative Decoding 知识库接入（v1.2 追加，2026-10-07 08:5x）
+
+源：[speculative-decoding-knowledge-base](https://edgeai1.github.io/speculative-decoding-knowledge-base/#_2)（66 篇核心/1,188 页核读/六主线/2026-08-26 增量）。proposal–verification–serving 三抽象与本网四面映射：
+
+1. **判官池=proposal，独立重算=verification**：KB 的「draft 快通道起草+target 严格验证」即圆桌「判官意见一律独立重算不盲信」的学术同源——且 KB 明示 **lossless 四档**（greedy-exact/distribution-preserving/模型保持/有界近似）：本席 SkillOpt Gate「严格优于最佳才 accept」=greedy-exact 档，有界近似档即「降级声明后采纳」（如 GLM 判官算术糙→逐条重推导纠后可用），两档不可混。
+2. **acceptance-collapse 与成本隔离**：KB 言「低收益自动回退 AR、共享 batch 风险隔离、最坏额外成本上界」——本席 98 刹车旗（峰值即停）+降档规程（QA FAIL→显式降档重试一次→文字降级）正是该三术的本机实现；quota 墙的「最坏额外成本」=日顶 ¥2/字符档熔断，上界先于调用设定。
+3. **batch=1 最高数字误导**：KB 诫「勿被 batch=1 最高速度数字误导」——效能章只报真实 tokens/耗时/读数，不报理论峰值，同戒律。
+4. **2026 前沿交叉点**（KB 推荐）：严格可校正半并行 joint drafter+non-anticipating block scheduler——对本网调度面的借法=**提案可并行、调度不可预知未来**（与本席「防未来函数」量化口径同构！quant-lab 防未来函数纪律在案）——「non-anticipating」是跨域通用硬约束。
