@@ -42,7 +42,7 @@ def local_head():
 
 
 def remote_head(remote, route_args):
-    out, code = git([*route_args, "ls-remote", remote, "refs/heads/main"], timeout=90)
+    out, code = git([*route_args, "ls-remote", remote, "refs/heads/main"], timeout=25)
     if code == 0 and out.strip():
         return out.split()[0][:7]
     return None
@@ -54,9 +54,28 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--force-gitcode", action="store_true",
                     help="仅 gitcode 镜像位允许 force（origin 永不 force）")
+    ap.add_argument("--skip-gate", action="store_true",
+                    help="跳过披露前置闸（仅在已确认命中原因为良性时使用）")
     a = ap.parse_args()
 
     head = local_head()
+    # ── 前置闸①：披露扫描（--staged；承 DF-DISCGATE：提交/推送前必做复扫） ──
+    gate = pathlib.Path(__file__).with_name("disclosure_scan.py")
+    if not a.skip_gate and gate.exists():
+        g, _gc = git(["--no-pager", "diff", "--cached", "--name-only"])
+        try:
+            gp = subprocess.run([sys.executable, str(gate), "--staged"], capture_output=True,
+                                text=True, timeout=120, encoding="utf-8", errors="replace")
+            if "VERDICT=CLEAN" in (gp.stdout or ""):
+                print("★ 前置闸①披露扫描（--staged）：**CLEAN**")
+            else:
+                print("★ 前置闸①披露扫描：**发现命中 → 停止推送**（详见下列输出）")
+                print((gp.stdout or "").strip())
+                print("  处置：改记类别名／值只入本地附件；确认为良性后可用 --skip-gate 跳过")
+                return 2
+        except Exception as exc:  # noqa: BLE001
+            print("★ 前置闸①披露扫描：执行异常（%s）→ 按保守策略继续但**留痕**" % exc)
+
     print("★ 本地 HEAD = %s" % head)
     matrix = {}
     for r in a.remotes:
@@ -73,8 +92,16 @@ def main():
 
     pushed = {}
     for r in a.remotes:
+        # 快失败：两路皆不可达则不再逐路硬撞（承"网络不可达时不反复硬撞"纪律）
+        if all(matrix.get((r, name)) is None for name, _ in ROUTES):
+            print("   %-8s —— 两路皆不可达 → 跳过（保留待办，不硬撞）" % r)
+            pushed[r] = None
+            continue
         ok = False
         for name, args in ROUTES:
+            if matrix.get((r, name)) is None:
+                print("   %-8s %-6s → 跳过（该路已探明不可达）" % (r, name))
+                continue
             cmd = [*args, "push", r, "main"]
             if r == "gitcode" and a.force_gitcode:
                 cmd.insert(len(args) + 1, "--force")
