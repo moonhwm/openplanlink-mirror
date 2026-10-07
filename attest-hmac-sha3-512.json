@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-07T06:49:37.757Z",
+  "generated_at": "2026-10-07T21:23:51.108Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2024,
-  "merkle_root_sha3_512": "31241be1992d594c3d7f320f081741b70af3a9ea33eeb4d4c09f15fb14019691ee3d340b39e9328fe0d8834077d35f0ecfd6d1787e86c3c821b5a53b3b2e7292",
-  "hmac_sha3_512": "e492ec72a9d74bc0997acee7aa59b90cae2b431844ae49e42c4f35cb6bd7b269157996bec2d5026bb29e26ef178ab39f506eaa0f95bfbaf18eb01a6f9d17ca0d",
+  "file_count": 2034,
+  "merkle_root_sha3_512": "165db535a5a2c90fbe38f91632bb59ff16375f3fd7afdb785ba872e213d360ee88bc911eb52ee5dcd276a049185bc35071a25b44a8cdd223f05743c8ae7cde7c",
+  "hmac_sha3_512": "b13a56b284dd99dbcb630536c291d3150387665516c3ca05a4c0742b2c7362d0548d9a764a33eeb7d87ba5ac7f8b881bd097b2de6c4e4c53ed8227a79063bda3",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1644,6 +1644,60 @@
       "leaf_sha3_512": "876d8cfd390d74b6f8c13ba8b1fa9d8ba3a1c117c3852d87a60d1ae65359c63ecd7cb7e5711445c9b3d6be2a4b5fb31628a84ee127e2a1640e37d5f87ad5bb60"
     },
     {
+      "path": "deliverables/k3-main/skill-patch/github-mirror-sync-ops/SKILL.md",
+      "size": 8772,
+      "content_sha3_512": "9e4d83ee9b3c862eb5c3eb902462b299b86576164c9e736bfbc8d9b05591666d144a87038d9bca9f6e150fd2acf70a02421541891a8f5f0e266a0589185f3f91",
+      "leaf_sha3_512": "254b6fea26b82b396f7f50ec0608b8e86bccc2bdca883282d361dc35e76c70127045e22db4afe7a1660558fb5e5ec2c13936910848392306137f4ac3b43f8a0c"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/github-mirror-sync-ops/references/push-lanes.md",
+      "size": 7419,
+      "content_sha3_512": "ec6551d6e77a76fb02c28b9f73514f3e298aaaac566fac799aba71d6711c947e4d0a3b77782173627ca0cb4c59fbe72ae04738ecbdf4a61d6026dee550f48f2e",
+      "leaf_sha3_512": "f5e60ad7a8944bdf6fa7e34497aed5a6b45cc4d676d5c66db9ff1fd944732302ad33153749a4c06e73a12ba683ff78ab340f5fe9615cfb8978802a3238cfd9ec"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/github-mirror-sync-ops/scripts/gh_sync_verify.py",
+      "size": 7251,
+      "content_sha3_512": "be1dd96b2b444d991c1e4e459a8fef1e1c760001497b1c425254155648c658bc9cf7d0f8adf2b0d6583e861e49b2a352040a604b88b58e2767534613be13065a",
+      "leaf_sha3_512": "b0464f49e5d15579c8a8544651be3657080b99affede990bc819a5476309228b2837b12ccf0b99f072c2342fda8d3be83f7b1ff930c76eff3aa52129d83420ab"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/govdoc-compliance-ops/SKILL.md",
+      "size": 7289,
+      "content_sha3_512": "7814e3327e99fb03e277fb7f6136e05573d7f9fd76c3438a8b3bffc187ca828d4a932ed70f08116f8b23152eae625bd613b9ed1811a80ce7d5fd143be0160bf6",
+      "leaf_sha3_512": "60cb861cb28dbb7d0c30218f4fec4b4aa6f511cd0129f85f1ffe9a67a1501caa64f684ed9f222e06d51342e78ca15f7bbe7f19996461dcf39568c04ef1493003"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/govdoc-compliance-ops/references/doccode-spec.md",
+      "size": 6655,
+      "content_sha3_512": "1243c4bd3eed7ccf2bccf4330e5132db48e98684a7b7c792fcf26b3c7ae9aea79101e3ed1c99afc51171301f01a9d48c629f7046f950c2037a0ff32423213eca",
+      "leaf_sha3_512": "1da56fc3d62020ee1ff0ac8dcb345238f01cece91f2b90b2292807638a98ae6d705f71c6a4430f3fe89334619b6718ce0e1bb8c8c1ad484d3d578bc59cdb5f30"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/govdoc-compliance-ops/references/license-matrix.md",
+      "size": 3291,
+      "content_sha3_512": "e4e995491e29242e82d72f48070d62f5ca3a18a2bdc07265db8da69b628e7d20b9c12d3c4ed2f82757e76cd47c4eb1ea0fdda07a7979a9a186bc2e511195a77c",
+      "leaf_sha3_512": "7e60257bf1b17b8efd18dff82955a37f69b4fe4d591fc9f113c9f9cf283f14d772a29d931eb13b4e3669eb7ba7219b0d1754d7a3efe576e1bda6cb54b14e458f"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/govdoc-compliance-ops/references/terminology.md",
+      "size": 4328,
+      "content_sha3_512": "d9540b10637b27e88a6c9d0e88c8ada7d171ba9804187db100afde2a37b485ee49a13c1aa9d6c32796ef1ca3ac9c9a7141b4136b1d27d3d67606ce47fffd4117",
+      "leaf_sha3_512": "fe9dd886a5624c1a98411dfd61d645acbed055681a652fa61cee7cc781dac6f3678de969b67a1ab7bb4089cd13ce893a75102e03c29265d6d3fb46fad79db588"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/govdoc-compliance-ops/scripts/build_registry.py",
+      "size": 3986,
+      "content_sha3_512": "09a755a4fb22892c64c7d002df75aca1677f6b0e10d55c3838c096003d718db09ff21ef260761b1db5adf30988af4e9f746e03899b693ea178c82e627d04071b",
+      "leaf_sha3_512": "e66b9fbc23adc369dff214f23fa42c87fba5d05ea221c6977f17183a9e38cc537c2f388517f1f893bdd2a28f2c0c6169749fac18e085bf12b6e98103680653b5"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/ls-bus-format-ops/PATCH_NOTES.md",
+      "size": 2348,
+      "content_sha3_512": "918602ac49e6451411d2f4a8278a05052d4c2457c33d893600e67cc99e44d13090c00bde626994d13e7ecb4b6f699a2c3fcf54516d64d2089fc87db414d62d11",
+      "leaf_sha3_512": "c968eb4bf8678f08eb80396b08339653bc7d929df9a5352b2627dbc1ab1ecf3967e8552ae86cfe7e6594dd70da49ee59fffa116a2232981cf2b2b3d6963dc104"
+    },
+    {
       "path": "index.html",
       "size": 12324,
       "content_sha3_512": "aa07e35f076db6bab30cf301436776b8766709cb2a9ffd1362b0a8acadc0a60613495611ce8fd2002c4c9acc105157fdba8e7d4833775c9b429d4be8b92983de",
@@ -1944,10 +1998,16 @@
       "leaf_sha3_512": "10174b46b45539866508d07904676eb29a71ca0f13d5eaa62c242fcde6fe279c308bf285202052b34bb42ebb0d6a4be7710301531570d908381a3ca8d4146213"
     },
     {
+      "path": "skills-experience/opl-document-preflight/2026-10-06-opl-document-preflight-skill-experience-01.md",
+      "size": 6003,
+      "content_sha3_512": "452171bf847e92eb042fd7bded04e5f0fd8a32d32fd7554cf0da1c0bb637a7b57428f80444480eb9a603a594ac099e40e59d7fac779914ca477518f7c23e93d2",
+      "leaf_sha3_512": "261368171f0cedd03bf8c5bae32ae3a9c35e94edd051956ad022df86f13ec93f4b924b668f1c95d68b5c5ebb6616955bba7c0b884808fc2a96e544d945290e6d"
+    },
+    {
       "path": "skills/EXPERIENCE.md",
-      "size": 15337,
-      "content_sha3_512": "cafaebdc5d39b84309dcade369b70b5893fe6b28330a053b5b3b14cf3596ef5ee49810292433b49ea9a3a3be52dd0d7abbd122223ff0a0d3c4338a230f3d85af",
-      "leaf_sha3_512": "4cd097fbe84826a7af151fdf906e40361ebc6b7a6d6fb9907c0015110006f6e031862c07c3588d6f1ea50a7ca26e8279efa624738b853bfaa6fce9fc959dfb2e"
+      "size": 22854,
+      "content_sha3_512": "73feace6a1ecb4008186ba9a85f36edcf469e65343bae64587c0fd6c29e0d8076a2e36f93c63358f3fb8beb772f167c58a6fc26a69b88585651eb978e5cc1e61",
+      "leaf_sha3_512": "d5dbb4cfb9cf1aa45d5427d5967649fe3ae5d57ac634d00cac56ebc3ade35e5c035eb011876115300e7118e07b5e7f9e9f7b5c540f65b51f12d85a5b9efbdf23"
     },
     {
       "path": "skills/README.md",
