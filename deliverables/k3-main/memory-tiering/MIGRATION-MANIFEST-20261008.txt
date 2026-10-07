@@ -1,0 +1,21 @@
+k3-main 记忆分层迁移 · 云端索引清单（MIGRATION-MANIFEST-20261008）
+
+迁移令：机主 2026-10-08 07:14「自主迁移」（extension usePlugin://neon 已送达，唯 Neon MCP 通道本轮不在场，冷层改走 WPS A盘+百度网盘双通道，Neon 恢复后补第三副本）。
+数据基线：MEMTIER-20261008-01（552 文件 / 107.0 MiB 热温冷盘点）。
+
+一、WPS A盘通道（字节级指纹已回验一致）
+路径：WPS云盘\月之暗面的Plasma游乐场\k3-main-archive\20261008-memtier\
+1. k3-everything-archive.skill  35.2 MiB  sha256=3c6c056a297a17a7ed996b068f426cd7f61f659a2e9110c23669c159d9547cfe
+2. k3-skill-os-installer.zip    2.9 MiB  sha256=92be7a6af054e7de5dc4d81414f6debba5482a9729396874573c4cfd692f9b1c
+3. skill-baks_20261008.zip      21 条目  sha256=e5e9c48e41cfe1db177747f3f00dc1db620759a60f58f01d444ab6d453ec75d4
+   （含 skill-baks 全量 5 包 21 文件：extpool-furnace-ops.bak-1.0.0 / omni-exhaust-research-ops.bak-3.1.2 / sector-stock-rumorchain-pipeline.bak-1.1.0 / skill-reinstall-ops.bak-1.0.0 / vision-intake-ops.bak-0.1.0）
+
+二、百度网盘通道（本清单及目录骨架）
+路径：/k3-main-archive/20261008-memtier/
+- 本文件 MANIFEST
+- 目录骨架 skill-baks/extpool-furnace-ops.bak-1.0.0、skill-baks/omni-exhaust-research-ops.bak-3.1.2 已建
+- 说明：百度 MCP 上传通道仅支持文本，三枚二进制已由 WPS A盘通道承担；如需百度侧二进制副本，待文本通道支持二进制或另获通道后补。
+
+三、本地状态（截至清单生成时）
+本地原件未删除——本地清理属不可逆动作，已列清单候机主单独点头（写类批准制）。
+ Neon 通道恢复后补登第三副本并更新本清单。
