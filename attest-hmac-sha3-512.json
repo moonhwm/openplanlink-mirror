@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-06T23:59:15.232Z",
+  "generated_at": "2026-10-07T00:00:53.270Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1934,
-  "merkle_root_sha3_512": "8dd0f761302aaf95f8e7f3e828595a06c8d8d058b5e3f170807fd8af342a74a69239e0d215c64397c10ba0f8fdd2326281764d7e055e9cf5e8296623cc599cfc",
-  "hmac_sha3_512": "428edbf5a8519bea733e6da70130e4e1e151976048ea9f2ccc04582220e0e6def0242d492feb29055206e1929c842f928ab6c66baef7911febca2c7e5e377490",
+  "file_count": 1935,
+  "merkle_root_sha3_512": "e47fe50292530d8046834ef991e624485a9bd161a4566ad5c8fabd37358ee0fcdf863a38603737da417e7b89e6a2637e4ed6e5a8ca63bda1caed6a173d433596",
+  "hmac_sha3_512": "901b8a95c0eed64c0eb6b5119adf9d310ec3cde369a5460b79d01a57df4e68272e62561cd49137f19845e21752f1706889df2cc6af7818f167fd8982268f2e12",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1000,6 +1000,12 @@
       "size": 5080,
       "content_sha3_512": "85919578791b1819e79b11cb0e9ec751b475c8895cf61761daeffab4d4637649b941a0bf1072df9cb64310a9558f6b2f0add5e9356a8dcc48bb41adbea5c3834",
       "leaf_sha3_512": "d804726017967d283d2600f8b27d37d79b1d18d263835b9a12d9c855700b66d7096cff569728eb9bd7b688fe6e8e62f91e2091e290f5a1f3f2069ca9f1118060"
+    },
+    {
+      "path": "deliverables/20261007/seat-cairn/exchange/数字人员工记忆分层与经验沉淀方案v0.1_DF-MEM-20261007-CAIRN-01.otl",
+      "size": 7556,
+      "content_sha3_512": "5abc88ea730c5e1002d32288069265e6347b29a9ad575e7cdba49c0411c95ac2c13752abcafb12489423ed864b22faf91c964cc51e1f0f0b563e3db4dff6351b",
+      "leaf_sha3_512": "387855ae03ae25a86022710cd6fae207ac583a185dfa7350971a1e747dd1b85b684aa66cb8c0a093639ee6e6982465efb4faaff0b80702bba5ee144b26e41049"
     },
     {
       "path": "deliverables/20261007/seat-cairn/exchange/新周期接管登记与环境差异_DF-INTAKE-20261007-CAIRN-01.otl",
