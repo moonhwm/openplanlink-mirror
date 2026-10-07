@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-07T01:36:34.867Z",
+  "generated_at": "2026-10-07T01:37:33.623Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 2006,
-  "merkle_root_sha3_512": "280649ba09b6fa0e15f531aaabaad24790baf355a4b5379840ec26e4eb648720ddc18a93268c21750f7f2a57d796b8b074d04d94aa2d27654601a8b02d7a05b6",
-  "hmac_sha3_512": "f1b74685a282e08a9293169d1c20a16030fe323406ae5e883e8bf9b8e767f97d47bf0f96ef3da23d5d761a66acb37271fc5d41f54edd5ea2d65a7d7a272f2ca7",
+  "merkle_root_sha3_512": "482087b9415ac8e1745c369bf8d19bf1662239b0ae76a1db7e052629b994f5f716fc33b13a491607cc475c8483bcd228c0e204defb54aa396721eb0d412efb41",
+  "hmac_sha3_512": "17da5baf554e6d54bc77121a701e2f70ec370119c0b774181abb2c1404055dbd34ff905d5098050b552c2084de70014b64e4e3bc4d6c15847133ac96d2fb4e3c",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1459,9 +1459,9 @@
     },
     {
       "path": "deliverables/20261007/seat-cairn/tools/push_all.py",
-      "size": 7284,
-      "content_sha3_512": "246e7bd8b1fe6013353020950499baabc43672d8159e764b9d0d4b3f75eeaf5ca2105851864a25418739ccaa4dbbc6ce6b233fde35bbd46d5dbc0dd1448d301e",
-      "leaf_sha3_512": "0226b7141d76289def7dd824619c246e245b67ad81ccdcaaa7a62d37639f5b60132ddec1a4890ab49241ba087a0a7568f65c1b92cbee854f4197b9e12c578b11"
+      "size": 8764,
+      "content_sha3_512": "43412629e1ac0536f7a69e6032575931e6cb70ba17ce77e71d535bdb386689751a37dbeac52a9597de53dafc992bd544c47a6fa0a449156cccd5fc979ffc12de",
+      "leaf_sha3_512": "b6b6c203338faba29a30ecd6b65d54549e92d74d23cfd2f124a80b6634bb1c7f3235032e460d827bba01677a7e5dbc9014d9d5516208dc7098296e4306987db8"
     },
     {
       "path": "deliverables/20261007/seat-cairn/tools/sign_if_needed.py",
