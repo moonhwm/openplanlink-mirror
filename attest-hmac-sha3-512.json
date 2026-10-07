@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-07T00:32:39.513Z",
+  "generated_at": "2026-10-07T00:34:01.348Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1982,
-  "merkle_root_sha3_512": "2d87cf6b047374e4689007c56441556c2a10bc12737cf01efaa7b9c0aae141bfed11c529c001fce126e4c983b146d8bdb018bfa9fa87c97d7682f9abbfed6f1c",
-  "hmac_sha3_512": "c9027edfc9dd46e6d0775ba54681ee3d46a412abe0869563ff09447b3bba3f8ad921d9a9d84917ac3438ebaf775a5b22ad9bda43e0a87642e2637acba6ba5c9d",
+  "file_count": 1983,
+  "merkle_root_sha3_512": "6e70609a5b14dd6e32b6fe5c3bafaf2ec17427fff05b87e7b54335e605d03e97395c86b16dd9b40a9ef7cc1e17fabef8ced4b9916cb80f009b7a971f94706053",
+  "hmac_sha3_512": "7b22abcbe87072354bdb8e30d8030efb09fbf311d4df37dfbe82052233bc7796601f149ab2c7fec5e2211f28c930e55d5cdc2a713812952228e895c006fdbff1",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1510,6 +1510,12 @@
       "size": 1486,
       "content_sha3_512": "8ea146daad337479232d4f2b1e336ff5fac758b0437ff2549d30b137ac240e61738a0946fd0cb96480bf43769462241ea8e092b2d9286aeefa340ce774a7ea34",
       "leaf_sha3_512": "e7766b7fd67460dddc14efd05c98fa65c2443dd1a3af4110aa2099db2f55757551170a81211ac42671d44be7583243d7a59470e3f02c3a47e8910668a36486d0"
+    },
+    {
+      "path": "research/a2a_arch_map_20261007.html",
+      "size": 9027,
+      "content_sha3_512": "d70a51b7039e4d8c77161750be3e330b5a3676dd23b899d4893d1bb69f9f45214ed09b2481044d49d790f203132c0153304774971795baf13384092698c475bb",
+      "leaf_sha3_512": "b8a99d49258bd57e7b1692c6452dbf36f524263187dcf33feb45059845862a18ad05c924a5656544e721d29b514a081886a2edc02071b3167af3aae5049387d2"
     },
     {
       "path": "research/huawei_x_instance_card_20261006.md",
