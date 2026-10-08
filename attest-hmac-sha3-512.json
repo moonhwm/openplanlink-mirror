@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T23:14:52.540Z",
+  "generated_at": "2026-10-08T23:19:45.704Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2365,
-  "merkle_root_sha3_512": "9ba49779eb3665b8c83f1fd7e0969d9c2380899d95711d0cb3166e0a399f992fb8bc183d5ae469a5fbbb00149770fc8d68da2c478d3707ca2714e7dc2e76c93e",
-  "hmac_sha3_512": "a29dd5f0b4f8076d5bd2a3e2fd5804fe5244efa81370a6a03f6c96f4326bda449c656eac6ae5b09d76cbef1a26ebe5a14df5a6a3e08ee0ddc18f415b23068703",
+  "file_count": 2366,
+  "merkle_root_sha3_512": "2204856e94784b8a4119f595b15ffac5d177998e016bd3ede22f7ccfdbc943e1dee1fb497d8601e3b9139ca1df753ea376324934b53bb4c0e5936c05467db043",
+  "hmac_sha3_512": "797e36e4681d242e0f37fb3503c8396ffbedd8c3052be5e5a0583228e7d31e1a66abbaca58c125d41d09904b89df2c2a0d9154cae1a2b8ffd1a44eb1b4f32378",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2356,6 +2356,12 @@
       "size": 6055,
       "content_sha3_512": "d3ce093afa98f1f031dd3f3cc8ad0873817ed8a1805d5fcde0aa9195c22e3b0901074e1c4554959b3c407544d867782a2ea1e0618d371394fbec41f2fdb5f8d6",
       "leaf_sha3_512": "b58e8d0ac7f05075ca2387c6b7c09a3ff8dea68543fbd37e77ffae0b104a8a2153f20b8095ef305e350589f313b36b2493d8c39ab37d4be89405af3513b1395c"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/标记实验与产物性质判定_DF-AI-20261009-CAIRN-41.otl",
+      "size": 6345,
+      "content_sha3_512": "c608c24721d88af5b6bf7387c9a89f37541e8b025666f4c8252a031b6973e9b0606c0be5fafc19aa5493e29819e7499d0bb63a48cabd3b9d35410bfa9e734981",
+      "leaf_sha3_512": "3782d94b2045b59239ab59ce5357b6462aac6d9bf7235018784f14b2c83f078129969714f9a9d7c516fb476f7f90f5ab480de7d05cfa810a7105c2daa2c2fd9e"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/检索精度对比与跨厂商复核_DF-AI-20261009-CAIRN-02.otl",
