@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T22:41:01.795Z",
+  "generated_at": "2026-10-08T22:44:25.119Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2337,
-  "merkle_root_sha3_512": "13879518a9390cbddd6f8777765b43ec740a42213a81ee42ca9411831a870d7b6845287c87b7d7275d2aa4be471e65be469cdc4437350eb665a2421aea093bac",
-  "hmac_sha3_512": "572260a8f502e7d4277ef73c84af03851868c2d3153765dd35bec2c2d817fa4ad663e8876a4660b41c3e094c56479139f2ef3d487a03c78b8b43bb7ca82ff441",
+  "file_count": 2338,
+  "merkle_root_sha3_512": "1a3446b5c53a16f97129b17e57fe51368aa27865c30c4c89bddf5c976fa589e349de6590dbcfb80f2fd52d0064765c36e195560a1da02442346a36fb277010bc",
+  "hmac_sha3_512": "b6955b31ceab3fa5beb9ad89a0922bcf6fea468da437e90d42b44b5951b7e88f1b1076c643cd470c8de37e33b742e9bfacdd56483f203b5c55f61d92c9934f54",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2224,6 +2224,12 @@
       "size": 7167,
       "content_sha3_512": "c9d768bec4ae6bcec646969da301cc56ed98c1ea9739455ece54a97550b84a9f4ed1671ea3fc1d5e8cf72718a4b4afe98f0a2860dc99a398a178ad63d297d3ef",
       "leaf_sha3_512": "90e8efcccb3eb4efba702698f936583d1d00e52975d699ece2082313ff20ff519d8f7e1b1a470527922bca82e54997bccd307c7394db9d924533de29d5473982"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/夜班合卷v4_DF-OPS-20261009-CAIRN-15.otl",
+      "size": 10256,
+      "content_sha3_512": "1d361cfc911b2cc8b2c6db8f8f3c751e9872a4e554b718a013154e1afbf6d8f151a4498dc2f448a7e8ddfd2baf0287e6de1671e8c84db2674880918b84ebb86e",
+      "leaf_sha3_512": "115814933fb69e894897aa8a701358f897d3936f64c0e6ce90454be34b40f6172a5141683aeeda88c2a4d8bb5c76ba1437366054172c12acdfeb89629555501b"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/夜班合卷与致Moon席世界模型正解_DF-OPS-20261009-CAIRN-08.otl",
