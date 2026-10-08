@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T17:26:48.568Z",
+  "generated_at": "2026-10-08T17:28:22.124Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2235,
-  "merkle_root_sha3_512": "872f1f70d1c11a031b82f497274bdc9eb3ab60978c68281738888769878f40f8ff5f69be51727988a4ae68c9ace79c95daf76f43841db49726fb5e6aba300c63",
-  "hmac_sha3_512": "0e84ee44a03f10969ad01012caae4c444f0f86b3de2a0128282e9d07ccde02599a0c81d39a722fdeb631ca5c7f77984f6ad13d0ba88d15e143714e32d538f15b",
+  "file_count": 2236,
+  "merkle_root_sha3_512": "33399d943fa8ae2cb2ca161259a764b7fbb8d601f485b4a29966183d60df1d2afc1a268e350024c5473f5b4c4f77ddb9d97956bee17b3c908c01f2e627fc8e05",
+  "hmac_sha3_512": "4b6e3e63482c14128127dd57b3005cd320c86b08629b194fb6d9cfa24334321a773e0f1ed881298392a96094b9c23111923f4d392ceb2c2b69ad78b1800583a4",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1804,6 +1804,12 @@
       "size": 12661,
       "content_sha3_512": "165878b07a2f14dd91afb59d579856bc4fe60874c0511dd6fdd5f10ac6a708a70fa36ae7977ac7865b56a83a7a6eb002e958f7ad8a618a8a358d0c76a48b36fc",
       "leaf_sha3_512": "44adcdb3109c6ae40b7129f7825f0bb2fe8cc96fe44dc7afdd15aa0b0f0ed0d6cc754e3ed5451c5d506cd63dbb2bc9640a91b33e33e41715d3a84ccc7baba29e"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/善恶的彼岸六章二零四至二一零_DF-NIETZ-20261008-CAIRN-36.otl",
+      "size": 17286,
+      "content_sha3_512": "c92d224f6b93a8940b5399f48a3ea81426558c1b31615cfec0a792a3cfa659ff44689a493faf0560d2e483c3a4e6a1b67825b7caa2eeba47611bb4d5f5f8fa1f",
+      "leaf_sha3_512": "302bee0d4dec86e36cde900718fbd32965c921b12c8f259bc9c4038320db5953e2ace95f274a63512947904074c0ae94298de97ed51966a985ca2457b184219d"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/善恶的彼岸前言与独断四源_DF-NIETZ-20261008-CAIRN-09.otl",
