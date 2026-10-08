@@ -1,0 +1,113 @@
+{
+  "schema": "opl-declaration-consistency/1",
+  "source": {
+    "name": "2026-10-08-global-declaration-v3.txt",
+    "bytes": 26507,
+    "sha3_512": "e1aee7d3e206a06280fec19e73529f531c1537c220c351bce8a21bdea9ea3d740edcca304baa13c0e58a1b8c8a1b7649f5e1f14ca9687bc6e7626007375eac1b",
+    "sha3_512_16": "e1aee7d3e206a062",
+    "crlf": 32,
+    "bare_lf": 0,
+    "segments": 33,
+    "nonempty_segments": 32
+  },
+  "duplication": {
+    "exact_pairs": [
+      {
+        "first_line": 15,
+        "second_line": 22,
+        "norm_len": 91
+      },
+      {
+        "first_line": 17,
+        "second_line": 28,
+        "norm_len": 105
+      }
+    ],
+    "divergent_pairs": [
+      {
+        "first_line": 6,
+        "second_line": 9,
+        "ratio": 0.9127,
+        "len_first": 277,
+        "len_second": 330,
+        "containment": false,
+        "verdict": "口径歧义",
+        "diff": {
+          "only_in_first": [],
+          "only_in_second": [
+            "GitHub(GitCode)、华为云X实例、",
+            "（优先考虑每次元处理推送WPS、ima等议会物理地址选择处）"
+          ],
+          "truncated": false
+        }
+      },
+      {
+        "first_line": 16,
+        "second_line": 23,
+        "ratio": 0.8368,
+        "len_first": 278,
+        "len_second": 200,
+        "containment": true,
+        "verdict": "口径歧义(包含关系)",
+        "diff": {
+          "only_in_first": [
+            "消息推送通道（[MASK:push-sendkey]）配置入口:https://sc3.ft07.com/sendkey。"
+          ],
+          "only_in_second": [],
+          "truncated": false
+        }
+      }
+    ],
+    "overlap_pairs": [],
+    "threshold": 0.6,
+    "min_segment_len": 40,
+    "ambiguity_ratio": 0.9,
+    "skipped_short_pairs": 196,
+    "compared_segments": 32
+  },
+  "links": {
+    "url_total": 32,
+    "url_unique": 30,
+    "url_repeated": {
+      "https://sc3.ft07.com/sendkey": 2,
+      "https://www.kdocs.cn/l/cboAFwILF079": 2
+    },
+    "clone_targets": [
+      "https://gitcode.com/gh_mirrors/canv/canvas-ui.git",
+      "https://gitcode.com/gh_mirrors/ar/arwes.git",
+      "https://gitcode.com/cann/cann-recipes-infer.git",
+      "https://gitcode.com/GitHub_Trending/mi/MiroFish.git",
+      "https://gitcode.com/gh_mirrors/tg/tgrep.git",
+      "https://gitcode.com/gh_mirrors/st/Star-Office-UI.git",
+      "https://gitcode.com/gh_mirrors/hu/huashu-design.git",
+      "https://gitcode.com/gh_mirrors/pe/penecho.git"
+    ],
+    "clone_target_count": 8
+  },
+  "accounts": [
+    {
+      "masked_form": "45*******@qq.com",
+      "local_len": 9,
+      "occurrences": 2,
+      "concatenated_self_duplicate": true,
+      "doubled_span_chars": 32
+    }
+  ],
+  "secret_shapes_detected": {
+    "mac-address": 1,
+    "push-sendkey": 2
+  },
+  "emoji_present": true,
+  "emoji_count": 9,
+  "verdict": "FAIL",
+  "fail_reasons": [
+    "同稿口径歧义：2 对近似段文本不一致"
+  ],
+  "warnings": [
+    "逐字重复条款 2 对（合并痕迹，宜归并或标注版本）",
+    "196 对段因短于 40 字未参与比对（覆盖缺口，非「已比对无差异」；如需全覆盖请下调 --min-segment-len）",
+    "含表情符号 9 处（正式公文口径宜核）",
+    "账号标识粘连重复：45*******@qq.com 形态自粘贴两次（跨 32 字符）",
+    "稿内含凭据形态 mac-address×1、push-sendkey×2（真值不入本报告；出域前须脱敏）"
+  ]
+}

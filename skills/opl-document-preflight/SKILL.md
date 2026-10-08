@@ -13,7 +13,7 @@ description: 检查 OpenPlanLink 与 A2A 技术文档的术语、格式证据和
 
 部署报告分列磁盘安装、脚本实跑、Kimi Code 调用、Kimi Chat 自定义技能加载。没有对应产品运行证据时写待核，不从本地目录或群聊工具推断 Chat 已部署。
 
-结构化 OTL 候选中的文本节点使用 `type: text` 与字符串 `content` 字段；无法读取的节点、正文为空或只有标题时，报告必须保留待复核状态。当前维护版本为 0.2.0，历史包及其报告保留用于复核。
+结构化 OTL 候选中的文本节点使用 `type: text` 与字符串 `content` 字段；无法读取的节点、正文为空或只有标题时，报告必须保留待复核状态。当前维护版本为 0.3.0，历史包及其报告保留用于复核。
 
 ## 监测层（跨轮漂移监控，0.2.0 新增）
 
@@ -24,3 +24,19 @@ description: 检查 OpenPlanLink 与 A2A 技术文档的术语、格式证据和
 - `p6_custom_probe.py`：掩码基线探针。`python scripts/p6_custom_probe.py --target <docx> --out-dir <目录> --label <轮次>`；custom/core 属性只记名称、值长、值哈希，真值不落盘。
 
 监测结论只绑定被检件哈希；名称集合两侧不齐备时必须拒比，不得以零计数冒充已比对。
+
+## 同稿一致性层（公文类长稿内部口径预检）
+
+`scripts/declaration_consistency.py`——对声明/纲要类长稿做**同稿内部**一致性机检，产出 cred-clean 报告：
+
+    python scripts/declaration_consistency.py <稿路径> [--json 报告] [--threshold 0.60] [--min-segment-len 40]
+
+判据分层：逐字重复（WARN）／包含关系且长度比例 >=0.6（FAIL，口径歧义）／相似度 >=0.9（FAIL，口径歧义）／0.6-0.9（WARN，部分重叠）。退出码 0=PASS/WARN、1=FAIL、2=用法或读取错误。
+
+它解决的实际问题：版本合并会在同一文档内留下重复条款，而重复的两处文本未必一致，执行席位据此会得出互相矛盾的操作口径（实测抓到「目标存储节点清单」一处有一处无）。
+
+三条硬纪律：
+
+- **一切输出经 `mask()`**，凭据形态只报规则名+计数+掩码前缀，绝不回显真值；该性质由常驻测试断言，不靠自觉。
+- **覆盖缺口须披露**：因长度门槛未参与比对的段对计入 `skipped_short_pairs` 并升为 WARN，不得以零命中冒充「已比对无差异」。
+- **门必须能失败**：`scripts/test_declaration_consistency.py`（16 项）逐层自证 FAIL/WARN/PASS 三条路径均可达，含假阳性回归（独立成行的短 URL 被长段落包含不得判歧义）。
