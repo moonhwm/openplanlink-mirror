@@ -1,16 +1,5 @@
 #!/usr/bin/env python3
-"""ls-bus-format-ops 核心脚本 v3.0（自我革命正本）。
-
-沿革：v1 原版（/app/.user/skills 只读封存）→ v2/v2.1 梯度补丁（_skill_patch）
-→ v3.0 自我革命正本（主权令 2026-10-08：全权授权全面自我革命与初始化）。
-v3 增量（在 v2.1 梯度底座上叠加）：
-  1. 命令组：scan / bussql / execute 之外，增 emit（自描述卡片）、validate（清单
-     完整性与哈希抽验）、norm（规范化白名单预审）、--smoke（scan 冒烟模式，
-     限 N 件快速验证管线连通）。
-  2. 自描述：emit 输出工具契约 JSON（命令/参数/安全闸/梯度参数），供 A2A 网络
-     节点机器读取后自动接线。
-  3. 版本烙印：TOOL_VERSION 常量 + manifest 头版记。
-安全闸与三段式不变（不可跳步、批准令牌、漂移检测、KEEP 双保险、runs 强制保留）。
+"""ls-bus-format-ops 核心脚本 v2（梯度读取补丁版，原体 /app/.user/skills 只读不动）。
 
 v1 卡死定谳：scan 对目标目录全部文件逐一全量 sha256（6133 件 / 156MB，
 其中 20 件 >1MB 计 133MB，node_modules 二进制为主），且无目录排除、无大小分档、
@@ -37,7 +26,6 @@ from datetime import datetime, timezone
 
 ALLOWED_ROOT = os.path.realpath("/mnt/agents/output")
 RUNS_DIRNAME = "_ls_bus_format_runs"
-TOOL_VERSION = "v3.0-sovereign"
 
 KEEP_PATTERNS = [
     "persona", "人设", "周嘤鸣", "授名", "署名", "身份锚点", "锚点",
@@ -101,7 +89,7 @@ def load_extra_patterns(keep_file):
 
 
 def scan(target, extra_patterns, prune_dirs=True, max_files=MAX_FILES_DEFAULT,
-         jobs=JOBS_DEFAULT, smoke=0):
+         jobs=JOBS_DEFAULT):
     entries, pruned, todos = [], [], []
     for dirpath, dirnames, filenames in os.walk(target, followlinks=False):
         dirnames.sort()
@@ -123,9 +111,6 @@ def scan(target, extra_patterns, prune_dirs=True, max_files=MAX_FILES_DEFAULT,
             if len(todos) > max_files:
                 raise SystemExit(f"REFUSE: 文件数超保险丝 {max_files}，请缩目录或 --max-files")
     # 档二/档三：并发指纹（FUSE per-open 延迟摊销；GIL 让位于 I/O）
-    if smoke > 0:
-        todos = todos[:smoke]
-        print(f"[scan] SMOKE 模式：仅前 {len(todos)} 件", file=sys.stderr)
     n = 0
     with ThreadPoolExecutor(max_workers=jobs) as ex:
         futs = {ex.submit(fingerprint, full, size): (rel, size)
@@ -148,14 +133,13 @@ def cmd_scan(args):
     extra = load_extra_patterns(args.keep_file)
     entries, pruned = scan(target, extra,
                            prune_dirs=not args.no_prune_dirs,
-                           max_files=args.max_files, jobs=args.jobs,
-                           smoke=getattr(args, "smoke", 0))
+                           max_files=args.max_files, jobs=args.jobs)
     keep = [e for e in entries if e["class"] == "keep"]
     purge = [e for e in entries if e["class"] == "purge"]
     sampled = sum(1 for e in entries if e.get("hash_mode") == "sampled")
     ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     manifest = {
-        "tool": "ls-bus-format-ops", "tool_version": TOOL_VERSION,
+        "tool": "ls-bus-format-ops", "tool_version": "v2-gradient",
         "ts_utc": ts, "target_dir": target,
         "keep_patterns": KEEP_PATTERNS + extra,
         "gradient": {"full_hash_max": FULL_HASH_MAX, "sample_block": SAMPLE_BLOCK,
@@ -267,84 +251,6 @@ def cmd_execute(args):
                      ensure_ascii=False, indent=1))
 
 
-# ================= v3 命令组 =================
-
-def cmd_emit(args):
-    """自描述卡片：A2A 节点据此自动接线。"""
-    card = {
-        "tool": "ls-bus-format-ops", "tool_version": TOOL_VERSION,
-        "commands": {
-            "scan": {"args": ["--target-dir", "--keep-file", "--no-prune-dirs",
-                              "--max-files", "--jobs", "--smoke"],
-                     "effect": "只读生成分类清单 manifest(json+md+sha256)"},
-            "bussql": {"args": ["--manifest", "--seat", "--out", "--digest"],
-                       "effect": "生成总线 INSERT SQL 底稿（脚本生成禁人工转录）"},
-            "execute": {"args": ["--manifest", "--approve", "--prune-empty-dirs"],
-                        "effect": "凭 manifest_sha256 前16令牌删除 purge 集"},
-            "emit": {"args": [], "effect": "输出本卡片"},
-            "validate": {"args": ["--manifest", "--sample"],
-                         "effect": "复算 manifest_sha256＋抽样重哈希比对"},
-            "norm": {"args": ["--target-dir", "--keep-file"],
-                     "effect": "白名单预审：列出 keep/purge 计数，不落盘"},
-        },
-        "safety_gates": ["target_dir 须在 /mnt/agents/output 内",
-                         "KEEP 双保险（scan/execute 两处独立判定）",
-                         "execute 令牌 = manifest_sha256 前16",
-                         "漂移检测：execute 前重扫零漂移",
-                         "不随符号链接", "runs 留痕目录强制保留"],
-        "gradient": {"full_hash_max": FULL_HASH_MAX, "sample_block": SAMPLE_BLOCK,
-                     "prune_dirnames": sorted(PRUNE_DIRNAMES),
-                     "jobs_default": JOBS_DEFAULT, "max_files_default": MAX_FILES_DEFAULT},
-    }
-    print(json.dumps(card, ensure_ascii=False, indent=1))
-
-
-def cmd_validate(args):
-    """清单校验：复算 manifest_sha256＋抽样重哈希。"""
-    with open(args.manifest, encoding="utf-8") as f:
-        m = json.load(f)
-    declared = m.get("manifest_sha256", "")
-    body = {k: v for k, v in m.items() if k != "manifest_sha256"}
-    calc = hashlib.sha256(json.dumps(body, ensure_ascii=False, indent=1,
-                                     sort_keys=True).encode()).hexdigest()
-    ok_hash = (calc == declared)
-    target = resolve_target(m["target_dir"])
-    sample_n = args.sample
-    pool = [e for e in m["purge"] if e.get("hash_mode") == "full"]
-    import random
-    random.seed(declared)
-    picks = random.sample(pool, min(sample_n, len(pool))) if pool else []
-    bad = []
-    for e in picks:
-        full = os.path.join(target, e["rel"])
-        if not os.path.isfile(full):
-            bad.append((e["rel"], "missing")); continue
-        if sha256_of(full) != e["sha256"]:
-            bad.append((e["rel"], "hash-mismatch"))
-    print(json.dumps({"manifest_sha256_ok": ok_hash, "declared": declared[:16],
-                      "sampled_full_files": len(picks), "mismatches": bad,
-                      "verdict": "PASS" if ok_hash and not bad else "FAIL"},
-                     ensure_ascii=False, indent=1))
-    if not ok_hash or bad:
-        raise SystemExit(1)
-
-
-def cmd_norm(args):
-    """规范化预审：只报计数与首 N 件，不落盘不删除。"""
-    target = resolve_target(args.target_dir)
-    extra = load_extra_patterns(args.keep_file)
-    entries, pruned = scan(target, extra, jobs=JOBS_DEFAULT)
-    keep = [e for e in entries if e["class"] == "keep"]
-    purge = [e for e in entries if e["class"] == "purge"]
-    print(json.dumps({"target": target, "total": len(entries),
-                      "keep": len(keep), "purge": len(purge),
-                      "pruned_dirs": len(pruned),
-                      "keep_head": [e["rel"] for e in keep[:10]],
-                      "purge_head": [e["rel"] for e in purge[:10]],
-                      "note": "预审只读，不落盘；正式清单走 scan"},
-                     ensure_ascii=False, indent=1))
-
-
 def main():
     ap = argparse.ArgumentParser(prog="ls_bus_format.py")
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -356,8 +262,6 @@ def main():
     p1.add_argument("--max-files", type=int, default=MAX_FILES_DEFAULT)
     p1.add_argument("--md-max-rows", type=int, default=2000, help="manifest.md 每段最大行数")
     p1.add_argument("--jobs", type=int, default=JOBS_DEFAULT, help="指纹并发线程数")
-    p1.add_argument("--smoke", type=int, default=0, metavar="N",
-                    help="冒烟模式：仅处理前 N 件文件（0=关闭），快速验证管线连通")
     p2 = sub.add_parser("bussql")
     p2.add_argument("--manifest", required=True)
     p2.add_argument("--seat", default="k3-govdoc-seat")
@@ -371,16 +275,8 @@ def main():
     p3.add_argument("--no-prune-dirs", action="store_true")
     p3.add_argument("--max-files", type=int, default=MAX_FILES_DEFAULT)
     p3.add_argument("--jobs", type=int, default=JOBS_DEFAULT)
-    p4 = sub.add_parser("emit")
-    p5 = sub.add_parser("validate")
-    p5.add_argument("--manifest", required=True)
-    p5.add_argument("--sample", type=int, default=20, help="抽样重哈希件数（仅 full 档）")
-    p6 = sub.add_parser("norm")
-    p6.add_argument("--target-dir", default="/mnt/agents/output")
-    p6.add_argument("--keep-file", default=None)
     args = ap.parse_args()
-    {"scan": cmd_scan, "bussql": cmd_bussql, "execute": cmd_execute,
-     "emit": cmd_emit, "validate": cmd_validate, "norm": cmd_norm}[args.cmd](args)
+    {"scan": cmd_scan, "bussql": cmd_bussql, "execute": cmd_execute}[args.cmd](args)
 
 
 if __name__ == "__main__":
