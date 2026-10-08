@@ -86,7 +86,15 @@ def main():
     if a.append:
         cur = p.read_text(encoding="utf-8", errors="replace")
         if "SIG-BLOCK v1" in cur:
-            print("★ 该件已含署名块（幂等：未重复追加）")
+            # ★自纠（2026-10-08）：哨兵在而**无摘要行**者＝「占位块」而非有效署名块 ⇒ 必须重写而非跳过
+            import re as _re
+            if _re.search(r"本件正文 sha256（署名块之前）\*\* \| `[0-9a-f]{64}`", cur):
+                print("★ 该件已含**有效**署名块（幂等：未重复追加）")
+                return 0
+            print("★ 检出**占位块**（哨兵在、无摘要行）⇒ 截断至哨兵并重写有效块")
+            head = cur[:cur.index("<!-- SIG-BLOCK v1")].rstrip() + "\n"
+            p.write_bytes(head.encode("utf-8") + ("\n" + text).encode("utf-8"))
+            print("★ 已重写署名块 → %s" % p.name)
             return 0
         with p.open("a", encoding="utf-8", newline="") as f:
             f.write("\n" + text)
