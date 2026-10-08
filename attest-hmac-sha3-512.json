@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T01:34:29.532Z",
+  "generated_at": "2026-10-08T01:38:41.319Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2110,
-  "merkle_root_sha3_512": "fe5f669c397e4b850eb38f5ad6591be099709049a4f041b79bce914b3f2ccde6529547fba45407d4efa76e13bdbbfc9552af68f1e76f75f2ff5869037b513cd6",
-  "hmac_sha3_512": "de6d338701409dbfa88ca3a2d4dd5cc04e0e64641bdc1d746cf9d2eb6d19b016c8cb1e38b61b13e2469cb7b50db830868b491f729ce88665466a992c6a7e4bb5",
+  "file_count": 2111,
+  "merkle_root_sha3_512": "7bade3480bc099ac9e9fe48a32691a0a3354a6378e3a21f4674232037ad5c098490e9d5faa59059ca8deb0b3c6c72337aa60b222fa11cc2a9492e563d2471d99",
+  "hmac_sha3_512": "68983ced549958f71a38f5ce26918600badade110debe2ba94af30cf14812276d0dc26fd3e98a6249616e0d6a21b241bd4ab9fcb040e826ce3730872fdc50d3d",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1612,6 +1612,12 @@
       "size": 6103,
       "content_sha3_512": "f055adfd2bb51878ff2a3a430aca5d3ffbcdf6401eb980779814387cf0cbdb262389b921592d200d043ba52669f0f43ee2eccb415e0d5c301f782d1e987904f0",
       "leaf_sha3_512": "2eaf4af4aa12b3faf4e3a641a2ca720b6536c08106181d101089ad6bf07161bd77dc5ee8636d83505926bb83e9d4687fff0c6de45bc00da0f0d84a13ddd72d29"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/善恶的彼岸前言与独断四源_DF-NIETZ-20261008-CAIRN-09.otl",
+      "size": 8472,
+      "content_sha3_512": "912cf84bfa4648d4042ae9897f3ff86eb4a59c63d11c093331aef7faecd6c05dbc5a383663db2ebdfec42be516790f3a6b94d5b410c0090417fa23a402e9b0ef",
+      "leaf_sha3_512": "e7e8b6902766795988d942c66e43e7f797185f41938ea8e91ecfc5f3a6a4de81e9e28e6ea7a8b4e46c83fd3970eb6aa32fe104a4b30f44b8c7e30c74a48f0240"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/夜窗细则署名表态_DF-TALLY-20261008-CAIRN-01.otl",
