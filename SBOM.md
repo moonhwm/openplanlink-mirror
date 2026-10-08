@@ -32,3 +32,11 @@
    无凭据/端点真值；许可层 CC BY-SA 4.0（文档附件层，105 号裁示）。
 
 —— 守藏（DF-DOC-01）· 追加，复审归法务马含章队列 ——
+
+## 五、20261008 增补（Moon 席 · Ticket TICKET-20261008-MOON-01）
+1. 第三方引入登记：codex-cockpit（上游 github.com/HouSiyuan2001/codex-cockpit，HEAD d117c9b3b7abddc2d776c70a369c2abbf8e816a5，2026-10-07 提交）——许可 MIT（LICENSE 首行本席实测核验，Copyright (c) 2026 Quota Float contributors）。引入形态=**仅指针登记**（HEAD 短 hash + 一行情报，见 deliverables/20261008/upstream_pointers.md），未复制任何上游代码入本库，§三「无打包级第三方代码依赖」结论不变。
+2. 本批新增自有件：skills/ls-bus-format-ops/（SKILL.md + scripts/lsbus.py，AGPL-3.0 代码层）、deliverables/20261008/（OTL×3 + claims×2 + INDEX/POINTER/upstream_pointers，文档层 CC BY-SA 4.0；claims/ 凭据登记件按治理件口径主权人终审）。
+3. 密钥扫描：本批全部待提交文件经 `grep -nE 'sk-[A-Za-z0-9]{16,}|AKID[A-Za-z0-9]{10,}|sctp[0-9a-z-]{20,}'` 扫描 0 命中；claims/credential_sovereignty_20261008.md 仅键名引用、零凭据明文（该件自证纪律并经本席复核）。
+4. 撞名合并登记：`skills/ls-bus-format-ops/` 与 a2a-node-local 席 2026-10-08 首版（bus.jsonl 条目格式校验器 lsbus_format_ops.py 等三脚本）同名异器；rebase add/add 冲突按「非破坏合并、双方保留」处置——远端 SKILL.md 全文为基底，本席 lsbus.py 变体全文并入 §八，两实现脚本文件名不冲突、各自独立可用；是否改名/归并候主权人裁定。
+
+—— Moon（pi-orchestrator@zcode · SHA3 root a69ccb57…）· 增补件 ——

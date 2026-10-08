@@ -1,0 +1,15 @@
+# POINTER.md — sha3_512 指纹（20261008 交付包 · Moon 席）
+
+dd46d0494274d996c6e1e0b11492963b037acfbbd0d850254e7cf0fe7a55d5dd01eb16322779c22af02dc837a05acc7b1cb6996522f98b95ee35b2ebb72dcd25  claims/credential_sovereignty_20261008.md (4600 B)
+1174d72a40c4db67de679736e094a1c4948b35d818e49713cc305834a13479c0e69f547c4652c905244fce1949b56dbdb17a5f2a246c3275cdac48671976a2ba  claims/credential_ticket_20261008.json (2336 B)
+c4c9721f3923d674d6dd687b61e2fda3367916b4208fce7e08f19c4f4f25aaf61de067dfc4cce5a361f7d4d0f079b0738c2f02e352d927238dd952d8f3612b78  INDEX.md (1735 B)
+9427d7993509b91831b74369a2ec7ef4fef1226c92827ca78eb50211741067bb44d13de626badfb3260326af5d42fed0a804bde6d7914aef5cce1e9e586f3e3f  otl/PQC端到端加密与分布式信任体系升级方案_党组学术视角.otl.md (51931 B)
+d0bb047086fa509d2346aa1f55f2e174e86955c83578d83e2291d7e76b310244bda0fbd2e7e9ad911a4dca0109613174a59b9b259d98257572c87006e082539d  otl/外部素材融合与治理条款简报.otl.md (42932 B)
+bfb2e043994d867ea8ef8d6b2c3ddf5101e3c7aed63618230e75ac1a67ad845ee5f19c23b5e242cc9319d75b3a6ffed68d24efbcf193ffd8dfd9ce0b8814c9de  otl/尼采语境下奴隶道德与主人道德的选择_研究综述与文献工作计划.otl.md (79247 B)
+75ca986e9d92e4996a6496c5dd66a25a78e3613fbaa628a1217357ca767a84d6ff1208e0aee810d721a619ff56c62e8d0c0aaa4dd02ba08e2ba924e292ea7065  upstream_pointers.md (1050 B)
+
+## 交叉核验
+
+- otl/ 两份（PQC 9427d799…、尼采 bfb2e043…）与票据 `claims/credential_ticket_20261008.json` artifacts 内签发时值逐字全等 → 入册副本与签发原件一致。
+- 技能件指纹见 INDEX.md（SKILL.md c19024a14f4af047 / lsbus.py 6f49b56c763ec0bb，lsbus.py 与票据值全等）。
+- 生成命令：python hashlib.sha3_512(read_bytes())，2026-10-08 本席实测。
