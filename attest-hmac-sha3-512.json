@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T00:48:26.782Z",
+  "generated_at": "2026-10-08T00:59:25.648Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2094,
-  "merkle_root_sha3_512": "a593fde1f68e93a4a1933caa3dfc848c63ddc44c29d8f07f6fb598d7df481dbc5ec34c98a02f3298a21e9447ae0cf85bbce0e3475b64ff7152ea8b252a718421",
-  "hmac_sha3_512": "c304c007f1bf5f585d9d8c249bb14a8ff429d110b201c5733e355e4adcf58365c1e9e7562aa95300653a9106e00ac0d638566d8d4064f93d2d09be1fc43aa0fb",
+  "file_count": 2098,
+  "merkle_root_sha3_512": "03ede7801d898a3712d9d1a48d94925f3970e99fb84f772383731a84c5b08cd06af5ac9dbe6952a4693276b4df904e659b34a1db77c7d33194b3919552e8b735",
+  "hmac_sha3_512": "bb1fc8f37e183178b00f93372514ee3f5e735c1674b9638255e0f440052e53c8fa7b3b14f0ab5513f3e8b2028aad4cd1636a447a8f23f92ae8027655e4d30c79",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1602,6 +1602,12 @@
       "leaf_sha3_512": "03a07cd40a3fe19926c0af10a9d301e1cabcd61c11b1358eb841e408f7c211443fb10743c7ac85586268d1c9d8cc175f51f633aeb8833d9aa6c036fa85179aaf"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/容量预警阈值落地与编码能力核定_DF-CAP-20261008-CAIRN-01.otl",
+      "size": 5011,
+      "content_sha3_512": "57945c44a8818244ffa5861bfa4e2b36b3449380bdefcd7afd8dcf3db554af2038e4d2b709021ae87aa5fe77fe6dc4c14b183d63fc91c7931bf6c73cf7e4d763",
+      "leaf_sha3_512": "27427e72ff8eaaefdba46a6c337d492544134cf96b10450e1e31c3b0d5a079cb0bdfdd8e30349fdda2f3fc545618a95e2194b5e5fa67a44b8621699ed4184643"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/尼采主人奴隶道德第一手原文研读_DF-NIETZ-20261008-CAIRN-01.otl",
       "size": 11574,
       "content_sha3_512": "481dbd87e036f783e764055a0a1a7b9d82c8ad7cf292660d7faf57e84b4ff6b10423705442a13088ebbb2557ca310b31157e939711bbe5cfb9d7a0cd5138dbce",
@@ -1638,6 +1644,12 @@
       "leaf_sha3_512": "c5d1c244219117cded7fe7b0f72089f2fb0e1aebf4d425f829e7e184df376563ac2e0ec6722c2c4a1637fdfcc3030cffd5afa5befef95afa1415e28e5d2b810b"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/谱系第二篇十一至二十节方法论与第四歧义_DF-NIETZ-20261008-CAIRN-04.otl",
+      "size": 9483,
+      "content_sha3_512": "a067d8248caee87bb6819629fb7c13223df7825ad64c47c4175f2ac7f5f28096c6e5c6c0f6e35696d36a6cbce3d9851425f3970452ce55e42a28f159a2dcd066",
+      "leaf_sha3_512": "f7ef4db2526b7d3d29f62156926379c50df42094b40465b678a4ae63442986bcfd3e685a1734bc6c9c46e8942137f9eb52474e565a37a0da18f70dbd757bbddd"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/谱系第二篇自主个体与三处澄清_DF-NIETZ-20261008-CAIRN-03.otl",
       "size": 10436,
       "content_sha3_512": "840ecb3beb31fc5a3e3c0ac7c0ecf2187415d8cefca446d8e881011946b70bf22c3d491ff1c7628d5349b2b8a379287ccf159595bcf1b0f75c7c1c92e8f8ed68",
@@ -1648,6 +1660,12 @@
       "size": 5522,
       "content_sha3_512": "66df3f728119139061dac1a41dec6af15f1658c613cbf9882918fc9e6e7d0a3e069b743b1f3f265930122f584b01a0ef7899ac0c4bd7d783a65e9eb2c4fa6d26",
       "leaf_sha3_512": "aab7e53a5f009c719e0711d64fa15b984fc886122a2a1238df77ceaf7cd29f379152edf89ed1eb25813058f46ca6835232ec889ae50cda3198ef099d841cb688"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/mem/capacity_alert.json",
+      "size": 1143,
+      "content_sha3_512": "840e9f620b2bd58c9b66cc3c3ed6e056b6a84e8c79461a3c23a7e9c4b202ac475e52b17738067867878c68d5457995ebd05b21360e308d12dc9e9e4780f0599c",
+      "leaf_sha3_512": "91d7737d9cb181578012f875d19387d6344c4ba51fda35bed3c9090bcfdc088f30eda70167f401ef7268d71b925262f9e7c54c1e9d3138dc267fb7490690eea3"
     },
     {
       "path": "deliverables/20261008/seat-cairn/mem/dedup_plan_v6.json",
@@ -1675,9 +1693,9 @@
     },
     {
       "path": "deliverables/20261008/seat-cairn/mem/termtable.json",
-      "size": 4749,
-      "content_sha3_512": "fbd6da04e77346dd7d9faabec8074644a3b9e42a66846d5b03633e92eaa601e3c81238645b29171a57997d15019deab5f653a600540da237fd15ce65cdb4c0b1",
-      "leaf_sha3_512": "d4c5d56bdbf89e229da8f7dfdd80529e1f662c24d672a89cfe46c2efe5d1556c4401133ee3d2079d5912f0052684894982a12bb868464dfdc4fc29eb6feb5751"
+      "size": 5606,
+      "content_sha3_512": "194aec746f5b81a43ab8e15bc2e98e0ff671b0603cde7250c9c9d94778df493b0ec7c8500aed810350f2c6f57ffdac62beba3406cde2014afa9013ec8c7ec709",
+      "leaf_sha3_512": "8026d2d8eefbce78e717465d86f9d7735d6b2609285e362c9407d6138dd82d779d74056364a7c41c2620ab1dabcd28363bddd5e44df3d9d0cfb9d7bea8ad419e"
     },
     {
       "path": "deliverables/20261008/seat-cairn/mem/winddown_20261008T083430Z.json",
@@ -1696,6 +1714,12 @@
       "size": 3517,
       "content_sha3_512": "dff715c637dd41dc08cfeddfbbc0a17cdbdd2ec9a11334518888d22ee49d1f29062d617d9b11668459cf0e50b9dcb0391e77f04db7b5c048697f10b1a5eaf202",
       "leaf_sha3_512": "db3a94bbdc7977b851d3e2ce0234f072bc18fcfa5f309bea00bc4c6d6476c8de4ea19fd3a2c57cdb18934510f9fd176939a0115dddd3b37c7064c217f0ca084f"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/tools/capacity_alert.py",
+      "size": 5779,
+      "content_sha3_512": "eda0bd587929cd12df61eaea507c958309b7c2a891f85051347af1b82087bacbc939eabd9ecf1191537cf819bec9e04dd03d0b6b57f3b4afa2df919e3193014b",
+      "leaf_sha3_512": "2b5cc3f1471fd1fe857b079ea8478fa831397fa3367c001784125d2bbf6d75b80f687821dd0f5f1168180875e03ed8bb1cdc469f97779a13d4a2c60af83e5c29"
     },
     {
       "path": "deliverables/20261008/seat-cairn/tools/keyderiv.py",
@@ -1723,9 +1747,9 @@
     },
     {
       "path": "deliverables/20261008/seat-cairn/tools/termtable.py",
-      "size": 9723,
-      "content_sha3_512": "153520ba4e72bfd46a48fe253c0339491e21090f6b079428fbf04c74ef556bfe06bbc03bd8822dd8ab8f8a5fb93fe40c7cf2b96d0c7df6ce623beb9ba14a23fc",
-      "leaf_sha3_512": "4f1e409be7b5badf69ddfdfdee93f988a395dffcc831f0c6d776b9a077612c62ea7203312929b12be154e4c753d7679ac67373d33972302015571b85559004c6"
+      "size": 10606,
+      "content_sha3_512": "8318c6583c23989bffd73b1092bc7a8296196c66c2e12d306dabca963a031a22d1ecde4c8f941e273bf8eeb44f988e6dc2488a89fadf22c4d9dd5c18ce7fc9a8",
+      "leaf_sha3_512": "9779285e9855c063666dabd95ce2ad2e273814381396a6057739086bdd7479cb30867799241a0ee66b9872d3f99c6eb32da20fb01f364ad3b7edec2ea9380e2d"
     },
     {
       "path": "deliverables/20261008/seat-cairn/tools/winddown.py",
