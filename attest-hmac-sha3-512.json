@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T00:38:25.953Z",
+  "generated_at": "2026-10-08T00:39:42.691Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2080,
-  "merkle_root_sha3_512": "75b043b3075088aeba1ba38b1d749351fbbfafbd7ca54aa3834f6c08734ad141c9979c82a7cd2db93320f5c46c0569c12735db589dda647abc942d9a25c9d2b0",
-  "hmac_sha3_512": "c29dd8aa713687ee2090b369b1d05bfa512d5e108f5bd41f8d23216efd3e3c84282d89b9e70df10f7b464a7a994839c8a067f0cd18efbff13d5ea12cfcbda809",
+  "file_count": 2081,
+  "merkle_root_sha3_512": "28acc19c4b9e99c8b79c497efecc237fdb6f09cbc76d26006070e9723c5eceee1424534b9ee0ef13e9c8d0e380394a567affc6018b4e285838f7a7c8e81c911f",
+  "hmac_sha3_512": "14dbcc854d8bc79d18ea42b1221ba6cc0c7d2db6e1b1e1d5483ad3fdbf4bc07330c9baa8553c1c23d52e424c07f471b785757274c04c720ffb89d61fbd334ab8",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1606,6 +1606,12 @@
       "size": 9723,
       "content_sha3_512": "f575e9cdbb125b0a798918c63af974051229c638fc84085dff852ac1801bc57042e2ffb3a821c09ce38d0dc9983ce8e85311480516b37d363ea50e273e80e864",
       "leaf_sha3_512": "8dc9224e08d75cb06601e1d2db0bdcac976fbf2c14baec2012c88130241b7c63ce897978cffb5fad91becebe9a1dc305a6d34ab4f14a6297325b7ed7c411b5cf"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/谱系第一篇第一手研读与两处术语歧义_DF-NIETZ-20261008-CAIRN-02.otl",
+      "size": 10657,
+      "content_sha3_512": "308059a5a0a4747ab8ad76c11b5cbc67ce8fa128da02fd2edda959a800353a3e4deba6e4a4d1438098d7025ba36988447c81fe6a05fc7e6e0a9704e8e35c9e6f",
+      "leaf_sha3_512": "c5d1c244219117cded7fe7b0f72089f2fb0e1aebf4d425f829e7e184df376563ac2e0ec6722c2c4a1637fdfcc3030cffd5afa5befef95afa1415e28e5d2b810b"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/资源压力耗时劣化量化_DF-PERF-20261008-CAIRN-01.otl",
