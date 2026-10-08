@@ -1,0 +1,41 @@
+{
+  "schema": "opl-roleplay-boost-sweep/1",
+  "note": "声明式参数扫描：全格报出，不择格呈报。R2 判据为「余量 >= 3x 零效应噪声地板」。",
+  "seat": "shoucang-df-doc-01",
+  "rows": [
+    {
+      "boost": 2.5,
+      "margin": 0.014991,
+      "noise_floor": 0.008331,
+      "signal_floor_3x": 0.024993,
+      "R2_pass": false,
+      "ratio_margin_over_floor": 0.5998,
+      "explore_ok": true,
+      "direct_ok": true,
+      "all_ok": false
+    },
+    {
+      "boost": 6.0,
+      "margin": -0.017248,
+      "noise_floor": 0.008331,
+      "signal_floor_3x": 0.024993,
+      "R2_pass": false,
+      "ratio_margin_over_floor": -0.6901,
+      "explore_ok": true,
+      "direct_ok": true,
+      "all_ok": false
+    },
+    {
+      "boost": 12.0,
+      "margin": -0.005993,
+      "noise_floor": 0.008331,
+      "signal_floor_3x": 0.024993,
+      "R2_pass": false,
+      "ratio_margin_over_floor": -0.2398,
+      "explore_ok": true,
+      "direct_ok": true,
+      "all_ok": false
+    }
+  ],
+  "conclusion": "角色演绎模式已实现且可跑；「角色携带信号」之主张仅在部分 boost 格成立，默认 boost=2.5 下不成立。此为对世界的有界结论，非实现失败。"
+}

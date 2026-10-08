@@ -1,0 +1,102 @@
+{
+  "schema": "opl-worldmodel-three-modes/1",
+  "generated_at_utc": "2026-10-08T22:47:39Z",
+  "seat": "shoucang-df-doc-01",
+  "world": {
+    "ledger": "EXPERIENCE.md",
+    "ledger_sha3_512_16": "eaa28e6d551a078d",
+    "agents": 672,
+    "entries": 28,
+    "steps": 40,
+    "dt": 0.02,
+    "softening": 0.35,
+    "cluster_eps": 0.22,
+    "role_boost": 2.5,
+    "deterministic": true,
+    "credentials_used": "none",
+    "external_calls": 0
+  },
+  "modes": {
+    "世界探索": {
+      "bodies_total": 175,
+      "bodies_discovered": 175,
+      "walk_path_length": 53.472732,
+      "one_step_coverage": 0.005714,
+      "full_walk_coverage": 1.0,
+      "criteria": {
+        "X1_discovery_matches_cluster_measure": {
+          "pass": true,
+          "discovered": 175,
+          "cluster_sizes_len": 175,
+          "rule": "游走发现的天体数 == 独立聚簇测量数（两法互证）"
+        },
+        "X2_world_not_trivially_reachable": {
+          "pass": true,
+          "one_step_coverage": 0.005714,
+          "rule": "一步可达率 < 1.0，即世界确有需要探索之处"
+        }
+      },
+      "MODE_OK": true
+    },
+    "实时导演": {
+      "inject_at_step": 20,
+      "spread": {
+        "initial": 1.364662,
+        "baseline_none": 0.690291,
+        "directed_compress": 0.643602,
+        "directed_disperse": 0.705726
+      },
+      "delta_vs_baseline": {
+        "compress": -0.046688,
+        "disperse": 0.015435
+      },
+      "criteria": {
+        "D1_absent_director_is_identity": {
+          "pass": true,
+          "rule": "指令 none 时末态与基线逐点相同（导演不在场则世界不变）"
+        },
+        "D2_instruction_sign_respected": {
+          "pass": true,
+          "rule": "compress 使散布下降、disperse 使散布上升；符号须与指令语义一致"
+        }
+      },
+      "MODE_OK": true
+    },
+    "角色演绎": {
+      "roles_derived": {
+        "并发协调": 120,
+        "判据设计": 144,
+        "工具陷阱": 120,
+        "证据方法": 144,
+        "未分类": 96,
+        "凭据纪律": 48
+      },
+      "role_rule": "命中数最高者胜，平票以条目 sha3_16 定序（可复算）",
+      "n_agents": 672,
+      "per_ring_agents": 24,
+      "same_role_neighbor_fraction": 0.206302,
+      "control_same_role_fraction": 0.191311,
+      "control_design": "环级置换（保持块结构与角色多重集不变），排除初值几何排布混淆",
+      "margin": 0.014991,
+      "noise_floor": {
+        "boost_1_margin": 0.008331,
+        "signal_floor_3x": 0.024993,
+        "note": "boost=1.0 时角色对动力学零影响，其差值即标签排布噪声地板"
+      },
+      "criteria": {
+        "R1_role_assignment_deterministic": {
+          "pass": true,
+          "rule": "同正文重算必得同角色"
+        },
+        "R2_role_carries_signal": {
+          "pass": false,
+          "margin": 0.014991,
+          "signal_floor_3x": 0.024993,
+          "rule": "同角色近邻占比超出环级置换对照组，且余量 >= 3x 零效应噪声地板"
+        }
+      },
+      "MODE_OK": false
+    }
+  },
+  "ALL_THREE_MODES_OK": false
+}
