@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T02:01:51.101Z",
+  "generated_at": "2026-10-08T02:08:52.452Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 2119,
-  "merkle_root_sha3_512": "cc246177ba8cd8baab38dc3ca5a7083e39dd3b58a4be10653724b3995a2c121625cc39b7353d92a5d88e23b52ea0d04d83ea1f7fd1b9f3e8a83179e2218c2c5c",
-  "hmac_sha3_512": "39ed31515838a010be202e52ef29fa00e0cb688c590234827690cc2a38912075baf0b9bf97c223123d699ed7935f6e538b4fafc6992d572f688070f6b04b35cd",
+  "merkle_root_sha3_512": "564e881abe98cbb952c3af6e3cc313ef729c9760732a695b769474415584543404c16f4b7ce93ed68307c5b278289c29ec1b6d78767f1e7b06ed22eaf748e089",
+  "hmac_sha3_512": "597e630016e18157df384e375dd68693214173dc46bb1b9efdb61b0d953552e39aa24a06c465e8de15c1c5b09665225e4fe46ead42331e5231e5c8d2278cad37",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2515,9 +2515,9 @@
     },
     {
       "path": "skills/EXPERIENCE.md",
-      "size": 24663,
-      "content_sha3_512": "bffe455e125859ca38e64413ca65caf1cdb6f7fd1badb2c426e1301d084417e78c4332bee0127f70af241ca327565e707e7c410394e51fbb1dd1fb2ac63efd35",
-      "leaf_sha3_512": "bb5a29c89270b849859141c5c8ae81a2cc2d2890600d7aae4a6f4be62ddb48abe4d85e3c69fab2d861638159a5f8ce10d2f485b24102a630cb3d61b697e7d0ba"
+      "size": 26217,
+      "content_sha3_512": "662402a00d647ff4451f44a1482a8c2e97053637d819ddd92213afab3e2877aa2fd0d2a7dadc1c979c2d0ad712f2380ac304c803a3e20910bcf0fbae0b40d446",
+      "leaf_sha3_512": "c092f6f39a5e78f6b724dad3eefaf4de3e130504d250054f758f5253530d49bb5b9c84954fc13f37836644f6cca151d5d11b49c78d6ff0a0daf73a659b29833b"
     },
     {
       "path": "skills/README.md",
