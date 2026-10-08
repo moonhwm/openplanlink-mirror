@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T06:17:10.813Z",
+  "generated_at": "2026-10-08T06:58:36.107Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2165,
-  "merkle_root_sha3_512": "a7431d5b7943d5db3a8008668a0018bafcebae892c4d9039dde56ed263e1be6d6a30af0a0efaa101d0754c98be69e008f9e0162b2160f98fe3d391d08247ca6d",
-  "hmac_sha3_512": "bf79cb5f96583a33d43efcc955660eb57908a39d30723fa8c1686443f95c64f725dd95ffa41ab3db132749af67e20b9abdb807ffd0245f41d6abce7da211035d",
+  "file_count": 2166,
+  "merkle_root_sha3_512": "652686224fa841a922b5053128d227715db29a73d393622ac8480aacab8900d12799a434ca4f27ca4fb3fcc5400d8e2341b9530b0d525de17756e7430dface89",
+  "hmac_sha3_512": "d8cecb623960f710f00d04bfa3e07f38dc095953f86969b47d6b0675b5554c7a340e37d85c3dc77f503d150078714a9824c3e1576e3dc6678d7787f530d593ac",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1632,6 +1632,12 @@
       "leaf_sha3_512": "f7e61bed731608f05d04ccad6faec22fac1d086232b5e4b5507635a93b41704b1bdc8408262dec47037f21a3847099ca7a5f8e33c4e81812c6143e52eb8a8b31"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/全面改用SHA3-512树_DF-SHA3-20261008-CAIRN-01.otl",
+      "size": 5342,
+      "content_sha3_512": "40c2e84c262ebd72f422ef19e78388f62c69b1fa505b4abdbf677fe72572387030772a306f806c30f688f0a0c90f99c66a0e231d026594b85b0fb03f68fa77c0",
+      "leaf_sha3_512": "69734ebb0c2ed9a07d05172914ed6444a4852e7d78fe0b4d06455849decd82678481409fe1b5eb3fc2c4490540d0fefcffaa20746c0bfe266873099e694dd14c"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/分层密钥派生与版本管理落地划界_DF-KEY-20261008-CAIRN-01.otl",
       "size": 6248,
       "content_sha3_512": "afef90f4215630fa0723206737d9a176da837f15f29d06b2d6dbb133691d90af6fadea8f387066fcc982dc9b0a80226a286609f8cb4480b2091e23cf17171501",
@@ -1975,9 +1981,9 @@
     },
     {
       "path": "deliverables/20261008/seat-cairn/tools/sig_block.py",
-      "size": 5722,
-      "content_sha3_512": "1fc8ead0ee7d3bd90dbf86f97bb0ac4b37817195001550616cddf6e88591241310dc6aaa4d132042553f1da814136ccc7582b287e632f09456f00f27a7cf763c",
-      "leaf_sha3_512": "6fd77c9083977187197b9e1da210780e49d243f9c3a5e1f5f1b02539bd184366cb177036623e957470bcea378ee905fcb1fcd39db46e92d59894f07c45d64c7d"
+      "size": 6536,
+      "content_sha3_512": "397f25d6502afdb5ce02371e53e05a805cd04923653e4cd790b09f2f5f746693505ecc77d9cce7c5b954a735295b62bf54bed5af452ce4a79cf4ccf1708d85b0",
+      "leaf_sha3_512": "d2d90c918ec6469a74a2bc5f9cb3590fead522ab10068ee5dc763b97d800c78f05350ba353a8378dfc0283d5eaf7fd08ad319e6af1daa9227d0e4f11dc39bee6"
     },
     {
       "path": "deliverables/20261008/seat-cairn/tools/termtable.py",
@@ -8215,9 +8221,9 @@
     },
     {
       "path": "skills/ls-bus-format-ops/scripts/lsbus_format_ops.py",
-      "size": 13190,
-      "content_sha3_512": "120bb359863e97016ab7a2df0d8014370db100edacacbf0468ec8677675c513b0f157b66dc5025d2dab3c23b4015ee069dd4861eda007ec33522d7b7326ab8c0",
-      "leaf_sha3_512": "7fa596a129e177b7aa00f8e0a87ee5c288e2a68e6b938e86334f2a02c262e120a5ebf868516acd4d55074a75109991775c30a0df52b90a2e00658f6d221c7f14"
+      "size": 13416,
+      "content_sha3_512": "e359b4ba33ab3955b9b7dbece6f217276b6609f64d320393a472a31abeb75725280ea72917d608c2e492a6d76ea3ebf3f65b6c4d9752f682cc36c85a0f4e4af3",
+      "leaf_sha3_512": "a38c5942d1f06b872fd6a6dab5e88fa7647800cb1ada873611e29f1fdd6c6a7000577d184f43ecb0816ff30f457e45f79b95e86365c31bbb477b5a9f3c6ace41"
     },
     {
       "path": "skills/market-insight-report/SKILL.md",
