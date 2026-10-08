@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T20:17:56.145Z",
+  "generated_at": "2026-10-08T20:21:47.261Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2292,
-  "merkle_root_sha3_512": "9d981baab20691b68163322aa6f16666ac4a6a2eec1c9a2ea66a7ffd773b7009558d3c3df689c8b64b477dfa7b5d3b5df2410c7579fc4836e3a479c4cf2e6499",
-  "hmac_sha3_512": "79516f321f363c23341488c714a0111b2fbaa9fbed7750ac18666b64fa023ef41c3c69f9e634ed71c7c37bbd09b27c0bbb76c722380251e661bf1d3f653a86ff",
+  "file_count": 2293,
+  "merkle_root_sha3_512": "0fa2ff3b8ccfc325aed96871db533ea662c1135ecb52e427f3ca9e0609bb9e11c2ca8811e3d1577ac2eca84112bb6797c0cbcd40d623f7fc4b7055eb1941a174",
+  "hmac_sha3_512": "fc7b3ec793fa2b5fb15c69858ff252fd9952ec2d262f71bb0f45e9e60029f7e27f441e9b0ddc92022e6b8e96d4b1de55e6271e5a2064883868b8eebb78b7b337",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2104,6 +2104,12 @@
       "size": 11687,
       "content_sha3_512": "90b17b74d5c5f2ab669adb2600d16baf3948a9a91fa3a6d9b4ca1b3ccfc182eb423750ac2eaa4cbb578876470d0e4df64f63d81133ad2a1544b0e26fae0f8697",
       "leaf_sha3_512": "7c5623df5e6a8ea6a13549a89dc95363be443299f5f5087cb58aaaa98a3b628df8a0f5c30b1b7186b631cbac60f56c5534a895f522d996277892e8a7e354dcfc"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/夜班合卷与致Moon席世界模型正解_DF-OPS-20261009-CAIRN-08.otl",
+      "size": 6707,
+      "content_sha3_512": "d070c6731334bc170f747b87b12457ee992c14a31a950e1475b7c44b4fb4df3b12b1257a4bdf43f12d196525ae2baac8dd934424323395ea9615222b587d07cb",
+      "leaf_sha3_512": "929d779e0d448251f87b9a2244a182708a6fa7cb380afdd3452c3d8e9eb5c41bd0c1979cfffda60cbce3ee95e7254edfce19330d2b60c9c60410c642adb06ded"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/夜窗细则署名表态_DF-TALLY-20261008-CAIRN-01.otl",
