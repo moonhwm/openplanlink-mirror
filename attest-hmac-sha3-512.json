@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T23:40:12.847Z",
+  "generated_at": "2026-10-08T23:41:16.089Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2381,
-  "merkle_root_sha3_512": "87949f68ddb6b2d8a3990da84d9d3d3fd4fe9d2a0e0a6b394a831e6cd3af1c41ed1c8cc33d78759eaa0e0cfa91fcc0d71d822ebb3c7e002f78566a8a65983869",
-  "hmac_sha3_512": "854c11dd03231420dcc2f24973ed123dc0e3189c87a5605f2748c5212279dac67567336cf16f86dec36be7472e8c4df152dbb79b95238c0761cb5471747bae45",
+  "file_count": 2382,
+  "merkle_root_sha3_512": "29197b420a0a0f47e40b8f9fe4ec69736b9474fadff120247951733f89ea5d0e64959cd428e7ec9cd4d3078d29695d8ec70463973d5249cd755a1730c94ddbe0",
+  "hmac_sha3_512": "d04aaac2785e288c602f7b0b1c00fcd7522c0f2e0bef1666bb10bb0b665a04c9d389fd51d0a85c5b30415a21f02da029c59ba5bf3067db6dd020aa5a3ddd35d4",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2050,6 +2050,12 @@
       "size": 5426,
       "content_sha3_512": "6f5b975fa524b67c85aa9773ac630fe940eedf28c5e99b58e273acda078f1f2083ea4fc01fd60aab4c7eb73ab87fbe68a14da5f027b0413551b5e37430609145",
       "leaf_sha3_512": "5563a9e543f152827cd980ddd977bb81cd1fb4fd4616991f56e602a9963fa61147d5370b2503ae1784c982f8aa3443644d648708f5459cc5551210a441744044"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/去趋势复算与假设否证_DF-AI-20261009-CAIRN-47.otl",
+      "size": 5279,
+      "content_sha3_512": "17a8076aded3d2a70668e5edba84553ac75459c03038c20065b2b7088057bf3d0c6555667288722d019aec84b9977004e0aaa7bda56a6e3e502696af99b3f592",
+      "leaf_sha3_512": "73964a375be9e704d2d1950f6fd4300dabf650d711f596740efe8bed48871355f1916769e439bd5973ffb1d41e5b9702ac3dfb6ccd0cda2e17da28880e973bef"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/双CSV履约与跨席指纹互证_DF-OPS-20261009-CAIRN-13.otl",
