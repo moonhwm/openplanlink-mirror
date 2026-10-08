@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T21:33:44.397Z",
+  "generated_at": "2026-10-08T21:35:26.573Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2309,
-  "merkle_root_sha3_512": "5a63fc1b0f0705e182108fe39c00f3c7d024e55180ce90da55c336d6a1987046de2bbd15053e903b74b323ce1c0dc578edad3e60271c87d2f9d0a70be867d38f",
-  "hmac_sha3_512": "8e7e7513c731f727cf760073a5e5665a3290f9dc80d8f42d00c7c4ca7bb3a6942a657f67059240f82240849c11b4e3ce340df6a401119231198ce3bd9f4b8c5d",
+  "file_count": 2311,
+  "merkle_root_sha3_512": "2729ff5671c650288c54e16182a63983ee3d792c0c7fd126332dee6ad697bdd388431f59bd4e766d60b8260f23a7306059ce422f662380ae685a48e7aecf26b7",
+  "hmac_sha3_512": "00772f5894ad049dc3ded4b9b8d0d7ef28f5d74e248511cf4f6aadb778cb34a6156d5c46b9a2eef4bd2d2e1bbe47c57e77290026cba6cbd9da5cbeeacfe40866",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1848,6 +1848,12 @@
       "leaf_sha3_512": "f7e61bed731608f05d04ccad6faec22fac1d086232b5e4b5507635a93b41704b1bdc8408262dec47037f21a3847099ca7a5f8e33c4e81812c6143e52eb8a8b31"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/世界台账八件与他席并用实证_DF-AI-20261009-CAIRN-20.otl",
+      "size": 6620,
+      "content_sha3_512": "f0d44a35f9226ce482d6fee5cf24fc3e2307e1e487804b4952ee32cd36950578153f581019d4a52ef65f19b44cefe491e18e9be55fce7de649f6e25ee6a7ed93",
+      "leaf_sha3_512": "a29fdab30a4f5668ca61d93f1f0e4e06c3864c0b6530dab46a2d60a38b8c5df630e7c42bfab2753a6a931c005e76446685dc043643923f312326ea427fc46558"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/世界探索服务端全链打通含ticket_DF-AI-20261009-CAIRN-12.otl",
       "size": 5620,
       "content_sha3_512": "f9aabcbd0e2b4a77af59394d24f877e43d948756baad9a9ac271ed86b876487f2567142caa8daabefb049d763f0bb90cf1176ef5f3994e472e7118299093251c",
@@ -2566,6 +2572,12 @@
       "size": 2315,
       "content_sha3_512": "e733d1985367ca0ca3080c2c6f5e6b3e3b955b1d59da4d8611591ad4869c125d59e3e49774b7b2e47f582a2881e40d803fdd045af84bbc35c236aee8749eac64",
       "leaf_sha3_512": "87602478ccf3bad54f3a2b9e2d5cbcef7f71f9cbc978d4d0e4f697f6f531733f43d28b2924f0941502d76f8a6c3429f71da17c406172987cd7b8c258e42264d6"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/mem/worlds_inventory_20261009_CAIRN.json",
+      "size": 2382,
+      "content_sha3_512": "0862444c90edece04a8079b171a8913dec060b92d4ba4ab0d0b84fa7be920bc0ff8ce81d893782752e8e6c88032bcd6aaed92c6126398d571671cf6b5a6cde9d",
+      "leaf_sha3_512": "d4231d2320ac2c01986abba8da8b59a2f429a82cd4972414d66f3075b32509d17a09bb43d1df9b8f730ab19aec1e00500e75a1f3edb06f0297230ca189f4b4dc"
     },
     {
       "path": "deliverables/20261008/seat-cairn/mem/wpsonline_linkid_map_20261009_CAIRN.json",
