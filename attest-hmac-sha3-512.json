@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T03:19:07.235Z",
+  "generated_at": "2026-10-08T03:20:38.729Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2137,
-  "merkle_root_sha3_512": "57b45abb90dca04a61266a1b1d478b4074407e440f8b8654eeadb747e831fd21627303344ba0a64c727503fc03e51c85c563541a13f8290eda3cd836db228de8",
-  "hmac_sha3_512": "67eefcfa6a5ede27baa61f3015c45590a80bfc1c5d07ea5f93c3a7f25cb347f086cc5ac992dee54e98fa3341351ce3d947a6e375fbf71b2a1be962f32aff6749",
+  "file_count": 2142,
+  "merkle_root_sha3_512": "ae75e9856edd52c90705d811b7325f02ce23426c4a2c07aede2266f0fe6c8be4561e7cfffe0614a28d3701646151aa331fa2291c4a83b01859621a35513fc49f",
+  "hmac_sha3_512": "93fcea8a1f3d296e9191035dbaeb09774df3cdf307ee5ee3ce46201b1d182e41dc04799b2802fd3c18ed77c12914d394939b8359b02943407c411f616a767dc7",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -3058,6 +3058,36 @@
       "size": 7765,
       "content_sha3_512": "42f841136004790785580acde13cb3fa98e282a479b1d5aee8ff86d95ce7bc427f75b2ae036bf182b453227e0d69031a5d294e105599650eafc04c71560b2e8d",
       "leaf_sha3_512": "af5f002688bb1334dc77cab20b2052d16c1fdf5f774b85069a59ea001f053121f3f95b63ae5f147b82f7aa60baef4408d9e38c22237307c1ab8e74b111406a9b"
+    },
+    {
+      "path": "skills/cairn-otl-signing/SKILL.md",
+      "size": 4917,
+      "content_sha3_512": "a9ef39d3ba98df95b05020512e0a6507b1685e46cdc56be69a2d923c9b97f848392f89a9209e7341ad4eaa71ad4f895ff5909ca6d95e12ce9437c6badee2bab6",
+      "leaf_sha3_512": "6822abd26735f386272b56eca975d1668b418f81874788b7545d2a47a34b9aac285ec731451aa25093e414d0d86ee56e24aa9faa3aaa9884d61281aac5ad24db"
+    },
+    {
+      "path": "skills/cairn-otl-signing/scripts/clock_stamp.py",
+      "size": 1957,
+      "content_sha3_512": "aaa7193ff2dd44107e2002969d9f4541f39cd40d534083fbd6d1b563da095f3b41e8c9f143f06b36cbedb47a94c40d956b49a71a38888caf845864d72f805a9b",
+      "leaf_sha3_512": "f5b7cb65adf4b3e8cdafdafa9515415fc9cda6543064f9b3b83393f23ff1c1057c8f08657c6f165eab35755134c61b06032ef24caeeaa510de649ecdd2313fbc"
+    },
+    {
+      "path": "skills/cairn-otl-signing/scripts/sig_block.py",
+      "size": 5722,
+      "content_sha3_512": "1fc8ead0ee7d3bd90dbf86f97bb0ac4b37817195001550616cddf6e88591241310dc6aaa4d132042553f1da814136ccc7582b287e632f09456f00f27a7cf763c",
+      "leaf_sha3_512": "42d85425a5f9e98dc085434ec9657050d850f47a3c45609340f76b691c9d799ab6485691ce157ef54e1253cacfbf61a61f2697853c0475d1eda5bf03c7e1cad8"
+    },
+    {
+      "path": "skills/cairn-term-consistency/SKILL.md",
+      "size": 4671,
+      "content_sha3_512": "c54d923bf9dc4a2a7597eb5f97d17822bc7350edcf43ec02a886419f1e0364f414032d1757909e9468a1d6152cce8ecbcfc7d7dd64a84b48ca906c5468b0b1aa",
+      "leaf_sha3_512": "10507a4293fba3df7942e36328ccf8ddd4a55a0d4e595c796d7b72b53bbb2e6e5f29271fa09bf7c5bddd793452d5a3052e4616e10620f555004e7fcc43957e69"
+    },
+    {
+      "path": "skills/cairn-term-consistency/scripts/termtable.py",
+      "size": 18740,
+      "content_sha3_512": "f815aed460eef255666c5988a2de0613feb4de34feaed8dc8f0bee4db0fa82fc1c310c3b918a309f161c20b519b19571cbf6d4c3296f39c265747b5e9ff2d083",
+      "leaf_sha3_512": "affad80f7490e65faeba8a754c10c302acc6ab41b6f8fa33bc2d2c4d094ee68a234da5f50b205f8873bed5de36f73baa77ea777b1c43ad57d75547a4308096b5"
     },
     {
       "path": "skills/campaign-planner/LICENSE.txt",
