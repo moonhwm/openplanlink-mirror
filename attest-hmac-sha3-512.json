@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T02:15:48.546Z",
+  "generated_at": "2026-10-08T02:30:44.689Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2125,
-  "merkle_root_sha3_512": "90755ed45c65cfd03b7f856193314f9bd5275769b1b51b04f8557437dac233175f88bcd0028e4a3f40cf9f2a6b3b9ffdaa4df349e1bc2b2d204bce4a12cdadce",
-  "hmac_sha3_512": "f361761214d74b49f9397317a4dfd3887115db233fbc74c26352231c19ad80c685749528e4fa2f30dad6487fd6853ceaec55d4874aea0c5c09a357d72bf05c5e",
+  "file_count": 2127,
+  "merkle_root_sha3_512": "e612c5d11f6d432ffce3e1eea342880229936bea3b9daa157e2d232f19e6f0ada5776d34e8f38d126d56888ae2a160b217030af2c48ef42663705967eab12224",
+  "hmac_sha3_512": "425bbf0ba127aee85ce5b55f0f08ef929af87b6d5d2d5d0267df10828bdd1d960b8a297c4b580106cc3995f0203eb799a11c66c0b2beaec8920a2f4f9f8aa9c3",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1596,6 +1596,12 @@
       "leaf_sha3_512": "e9bb28c1372a240101da75ba7c6529bc524457ced80ca57ce349bdf241cedc2c74d41c80ca84480989cbe3e4354206803c80189f64bce574809aee7349d8ae7f"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/prepush钩子v2精化与跨席签名冲突_DF-PUSH-20261008-CAIRN-04.otl",
+      "size": 7881,
+      "content_sha3_512": "9fd018d5de5f717d75bd518bc2365dcc1cc96704c7a94232ab60737ae851158b0fe122c7b0d9333b5f88c53689551187fed9369bed0e8bb1283df3114731eb7b",
+      "leaf_sha3_512": "38eee83b5b48e89bbcd0ab0757b274164290e46215d2ab02011ea3d626ca9b5dcd95a3c372dc3367c0337f1ac16f0c0abd62fee9c27c78254ac0b5ca338a232d"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/三面收束与浅克隆降级自纠_DF-PUSH-20261008-CAIRN-02.otl",
       "size": 5355,
       "content_sha3_512": "788136db71696fc3f3ac3b0b31e919fcde6b7b24a83ed41c1797d1ee11a84b7820901ebb2404ef727f3c62dbfb4348ca69d4fc99071c00c7e1fde37d5ae20e61",
@@ -1878,6 +1884,12 @@
       "leaf_sha3_512": "fc4fe206fb870aafb7b09eb48a5552f9db51114b46b023f31ec258de8f3085621e3be9a8f7c12a50fd46771134afdb22fd699828e982db4f434c5554a051e6fc"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/tools/pre-push.v2.txt",
+      "size": 2215,
+      "content_sha3_512": "ade6c6b228e42964dc83796462b51af6f524846eb00680751eea6249301897b68dcd1fd3f557827c34fdcce274fffb565b6b0a7aec7c61f5e56f5845d429b47e",
+      "leaf_sha3_512": "4fde506e68fa9fed05f58a3435b1f4a903abd3ce6988b2d332604450c945bb218858194bc980718a8cafb6bccdbc0962f64ff5ff489d45f2380b1d818f194a76"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/tools/principles_index.py",
       "size": 4285,
       "content_sha3_512": "e34031c78c61831123d384b3ff48e9025d18a4c17a742bea50f1d70d5e1a2c59ced24f3ab92ddc381da906a31d95c0666f132779dba1c9cbb0a4bdd05ad38c8d",
@@ -1885,9 +1897,9 @@
     },
     {
       "path": "deliverables/20261008/seat-cairn/tools/push_all.py",
-      "size": 12870,
-      "content_sha3_512": "58d4c9cbdc5c3b4936d36cb2a089ed4e1ea3d2534712735a6ea78e15fde3b9478939fe225d5793ea0e5c5b829d7436cc402bda2fd175de676e4240ab8a38bb49",
-      "leaf_sha3_512": "17c58becd0e1857d28a6fa786a71993ca03b5be629e7db5e21522e9e7798f5f9cee7f83dc491a5c3c26a8332663d893b338b1be5557248c5a2323307d811e0ae"
+      "size": 13232,
+      "content_sha3_512": "757a0d76458e396b54ca5cc729aec50d33d8be52f918173a0782ed6936ea130368bfa892a021cdfc524e4a08b8a50825cbdef9793c7c15c40a575dbdbc0358cc",
+      "leaf_sha3_512": "8ac12cf064d58f01cadceabe2bcd1fa8378cbfedfeea22259149daa76231c102e32ea3c0028555265c6e8c4812979800507583feb46f71980fe6ebe78ebb12ab"
     },
     {
       "path": "deliverables/20261008/seat-cairn/tools/sig_block.py",
