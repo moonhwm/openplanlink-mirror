@@ -136,6 +136,38 @@ TERMS = [
     },
 ]
 
+# ── ★v3（轮29 落地三事）：①「自限栏」(则十四·则二十一) ②「反证条件栏」(则十六) ──
+LIMITS = {
+    "价值重估 / Umwertung": {"origin": "文本所载（GM I §7 直引）", "viewpoint": "谱系学之发生—功能视角", "degree": "★或为程度差异（创造与反转或系同一历程之两段）"},
+    "自决 / zijue-self-determination": {"origin": "文本所载（GM II §2；I §10）", "viewpoint": "发生学（Ressentiment）与运作（支配）两层", "degree": "★或为程度差异（自发与反应或为连续谱）"},
+    "良心 / Gewissen": {"origin": "文本所载（GM II §4·§6／§2）", "viewpoint": "债务—内化视角 vs 自主支配视角", "degree": "★或为程度差异"},
+    "自我克服 / Selbst-überwindung": {"origin": "文本所载（GM II §2／§16·§18）", "viewpoint": "支配 vs 内转两层", "degree": "★或为程度差异（支配过度即近施暴）"},
+    "禁欲理想 / asketisches Ideal（按主体分列）": {"origin": "文本所载（GM III §1 逐类列举）", "viewpoint": "按主体（artist/philosopher/priest/saint）", "degree": "非程度差异（系异质之物）"},
+    "主人道德 / 奴隶道德（Herren-/Sklaven-Moral）": {"origin": "文本所载（JGB §260）", "viewpoint": "类型学视角", "degree": "★或为程度差异（JGB §260 明言同灵魂内并存）"},
+    "打通 / 可用 / 不可用（节点）": {"origin": "本席推演（承 DF-CCM §四）", "viewpoint": "工程核验视角", "degree": "非程度差异（三态离散）"},
+    "marginals ≠ joint（边际≠联合）": {"origin": "本席推演（DF-START6）", "viewpoint": "统计口径视角", "degree": "非程度差异"},
+    "报告值 ≠ 核实值": {"origin": "本席推演（本席自课）", "viewpoint": "核验层级视角", "degree": "非程度差异"},
+    "（则四）评价性/历史性判断须带时点": {"origin": "文本所载（GM III §9）", "viewpoint": "价值变迁视角", "degree": "非程度差异"},
+    "（则三）工具/技能陈述须带时点与版本": {"origin": "文本所载（GM II §12）", "viewpoint": "版本—形态视角", "degree": "非程度差异"},
+}
+
+FALSIFIERS = {
+    "价值重估 / Umwertung": "若原文某处将两义混用而不及区分意图（直引可证）⇒ 分列失据",
+    "自决 / zijue-self-determination": "若原文以「反对外部」正面界定自决 ⇒ 本席②义之禁立失据",
+    "良心 / Gewissen": "若原文仅一义且自洽 ⇒ 分列失据",
+    "自我克服 / Selbst-überwindung": "若原文将支配与施暴视为同一而不加分别 ⇒ 分列失据",
+    "禁欲理想 / asketisches Ideal（按主体分列）": "若原文某类主体未列举 ⇒ 该义须删（并须补缺号）",
+    "主人道德 / 奴隶道德（Herren-/Sklaven-Moral）": "若原文否认二者可并存（直引可证）⇒ 并存提示失据",
+    "打通 / 可用 / 不可用（节点）": "若某节点确有无入参之可复现判定 ⇒ 该节点可脱离「未测」",
+    "marginals ≠ joint（边际≠联合）": "若给出联合口径且受核 ⇒ 由「未证」转「已证」",
+    "报告值 ≠ 核实值": "若核验链与报告链同源且可复算 ⇒ 二者合一",
+    "（则四）评价性/历史性判断须带时点": "若判断为纯技术性（无历史褒贬）⇒ 不适用",
+    "（则三）工具/技能陈述须带时点与版本": "若对象自始至今唯一形态（有据）⇒ 可免注版本",
+}
+
+# ★「提及语境」标记（不删、只降级为"已注明"）：规则自述/列举/检验要求等语境
+MENTION_RE = r"自限|反证条件|须过.{0,8}检验|术语表|规则之列|则十[四五六]|本二分|分义项|提及"
+
 
 def scan_file(p):
     """两段限定：**行级**（qualifier）或**文档级**（doc_qualifier）命中其一 ⇒ 视为已限定。
@@ -155,8 +187,10 @@ def scan_file(p):
             line_ok = bool(re.search(chk["qualifier"], ln))
             doc_pat = chk.get("doc_qualifier") or chk["qualifier"]
             doc_ok = bool(re.search(doc_pat, text))
-            hits.append({"line": i, "term": t["term"], "qualified": line_ok or doc_ok,
-                         "qualified_by": ("行级" if line_ok else ("文档级" if doc_ok else "未限定")),
+            # ★v3：**提及语境**（规则自述/列举/检验要求）⇒ 降级为"已注明"，**不删除**（承"误报须辨明"）
+            mention = bool(re.search(MENTION_RE, ln))
+            hits.append({"line": i, "term": t["term"], "qualified": line_ok or doc_ok or mention,
+                         "qualified_by": ("行级" if line_ok else ("文档级" if doc_ok else ("★提及语境" if mention else "未限定"))),
                          "advice": chk["advice"], "masked": ln.strip()[:110]})
     return hits
 
@@ -179,11 +213,24 @@ def main():
             for s in t["senses"]:
                 print("   - %s：%s（锚：%s）" % (s["label"], s["meaning"], s["anchor"]))
             print("   检查：%s" % t["check"]["advice"])
+            lim = LIMITS.get(t["term"])
+            if lim:
+                print("   ★自限：来源=%s ｜ 视角=%s ｜ %s" % (lim["origin"], lim["viewpoint"], lim["degree"]))
+            fal = FALSIFIERS.get(t["term"])
+            if fal:
+                print("   ★反证条件：%s" % fal)
         return 0
 
     if a.cmd == "export":
-        out = {"schema": "opl-termtable/1", "generated_at": dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S +08"),
-               "terms": TERMS}
+        terms = []
+        for tt in TERMS:
+            row = dict(tt)
+            row["limit"] = LIMITS.get(tt["term"])
+            row["falsifier"] = FALSIFIERS.get(tt["term"])
+            terms.append(row)
+        out = {"schema": "opl-termtable/3", "generated_at": dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S +08"),
+               "terms": terms,
+               "note": "v3：含自限栏（则十四·则二十一）与反证条件栏（则十六）"}
         pathlib.Path(a.json).write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
         print("★ 已导出机读术语表：%s（%d 条）" % (a.json, len(TERMS)))
         return 0
