@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T19:33:17.925Z",
+  "generated_at": "2026-10-08T19:35:47.705Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2261,
-  "merkle_root_sha3_512": "7d15b8a3a337190fd86c5b1d4ef5588a13f2d8de4f340f3d55ba2f2bf0c27749eaf7a5149f8eac745ffcab00426541b55c0df9f9e62458ab567a2a89dd95dccb",
-  "hmac_sha3_512": "b9f992814927ae86b165c24d2f38558af56f772674e6ea1ea6d8de00e3f8edc72cbad448df39f0fae29a0cf570e124bb592386421571201c6d4896c9672722c2",
+  "file_count": 2275,
+  "merkle_root_sha3_512": "432a598bcb5fccc6d7c484187ed1527a6df4ec7cd1d9dd87312d49e498a4a1ee1e9aba63a6f11610494731f5bcea780ae70d9aacf396318bebb26fae61f57947",
+  "hmac_sha3_512": "bca151654defe081ee15645377d4f44938c830c799a605821c5bebfeac3498656009dd08af8f324313b549190f59f8efe7d3aef4014b7e323127fdeab3e42add",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1696,6 +1696,90 @@
       "size": 8508,
       "content_sha3_512": "f8edb330796a5c326c0875ffa0700ea2d383f40ef8b08c28d33adb8946cda47e89377cf41ceae8f02774b59fb75283b2ba2bf81398dc511e3654142d047456ab",
       "leaf_sha3_512": "10775b5c0a551bd8a1c7c9a9e40597ccb5f6abd5ce3318d439410d4df4c15a1d4044743f36dcb99ae1c964905d7f067bdab755ed573418d02902fbb7efe8d0c4"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/direct_20261009/A2A算力分配与分布式协同深化案_v0.1_2026-10-05.otl_正文副本_20261009_CAIRN-DIRECT.md",
+      "size": 6913,
+      "content_sha3_512": "d282fecc742920f9cd48b78cf67fd878ec415b96d53cad54870397d67ca8ffd26e6d392ff8acc68cf654d89e16699696a12b4100634a3290d12c7cd72b034de0",
+      "leaf_sha3_512": "af0ea0b6990288e4597b48deeee2d7551ee584bf18dfdb91f433b2e9901a261e69e5dfb5d55f3d88519d5a153af96fc8357033e93f4e6dcb862f939671473a35"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/direct_20261009/A2A线收官总账_2026-10-05.otl_正文副本_20261009_CAIRN-DIRECT.md",
+      "size": 7279,
+      "content_sha3_512": "d84e1c2c66e7468eed35cac26b4b61b2dbe8aa0a7cf37fd70db0ac6824ada8e107613133dc075f3121f687ad5b8d528d03a11744d9af8cc36945663a84641c66",
+      "leaf_sha3_512": "2d9cf1ed51c55324f9a6f9c5aa872cb9b41bc92c1450ed6af40472c37e619bf38b758f7267a161aa59a07fb2c50c2fefa854a4f2e98a35f0905757a523f53bc0"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/direct_20261009/A2A网络全面优化整合架构方案.otl_正文副本_20261009_CAIRN-DIRECT.md",
+      "size": 3953,
+      "content_sha3_512": "78b41b64b763574ce6ad6c34b6d833995f23c6fd33a5c8ad552f6f51d7c4c38266b5b5ca21d4810edf999a2e8bdad8021c2082a6055c3fb97f3bfbbffafa3622",
+      "leaf_sha3_512": "df36b63dc6bdd8b6cfd31cc7b032b6c5967a59e7a10c3e6ed69cd16fa2ba0f1b3b9841ca13ea1167c63beeb2f958a87da0eb09923d8a3b529a1dcbdf90329f1a"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/direct_20261009/A2A项目四件套完整文字记录_上.otl_正文副本_20261009_CAIRN-DIRECT.md",
+      "size": 33157,
+      "content_sha3_512": "84a1156ade465061336696080a7d22d5712b16b312d07f94db9d6e718688e898d5b7e9b53aa9b83e67fc0e0a718bacc9f0351135a3e585675261d1c30b6ca732",
+      "leaf_sha3_512": "68bc5e851aaf3d845b00d661475e13df54257546d0afa7950dd2e1a702ccb88ee12b1f46384451e05f812b48bb47d9455e419ec62f062c527acb665256060ede"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/direct_20261009/A2A项目四件套完整文字记录_下.otl_正文副本_20261009_CAIRN-DIRECT.md",
+      "size": 36313,
+      "content_sha3_512": "5f8796b6b0aa85078adb2fea723d7866ce6402892d9c51038847f72c7ce6da581393ed22162f7ddaad39dfc516ffccf71203f0351d3b7ebdab4f2c94a6c60e36",
+      "leaf_sha3_512": "914b4d699154fdd44d754f014e45ba0a25d5c311baca765f7c8944db8191804bb4816cf864955fb1d5ae94adef456d32f4a7f367ba343b769c77b417eb6c6ea3"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/direct_20261009/A2A项目四件套完整文字记录_中.otl_正文副本_20261009_CAIRN-DIRECT.md",
+      "size": 323727,
+      "content_sha3_512": "837cc5a6073f49cb40e0ece990d6e5192d23c576d169754eeb2ad109d463a3f8235a0a52683df401bfe729e44309059ffce9f9b1f6a95e00cc23b12ad7826aed",
+      "leaf_sha3_512": "268810c4b9c98290d578a4ef208ac2c19496ec86e630e11438a1eb4c2b8a6001cdcd41c1aa07058288c5c36e47d1035ff7d6dd7ee4a675edc8457db1ab818bcd"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/direct_20261009/OpenPlanLink全局声明与Agent-to-Agent网络建设纲要.otl_正文副本_20261009_CAIRN-DIRECT.md",
+      "size": 68788,
+      "content_sha3_512": "de23f20ea534163d4c759fb388a255570ab984bf6d19216ebddc2787326a2f4f4f2c37c31a78ef072b5416a996cf2973f971f117cf76d9dbe4430084cedabd38",
+      "leaf_sha3_512": "3c075695a8f36aafacaee3f554527ce27d6d9c7241429ea4e3ccee58b1861dce57544bb62b93f9cc95ef4b3815ae25aea144f4908d5e8168af7d1bef85bd1a81"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/direct_20261009/WPS十件重读批注_k3-govdoc-seat_2026-10-05.otl_正文副本_20261009_CAIRN-DIRECT.md",
+      "size": 5371,
+      "content_sha3_512": "3f88e08ff0e51ce9ca6a4d917e2df5b746fa69e13c1def700ca7afa6f72dc6934b9631305099566582cfd177bba11b714a9800f8ff216e3399e4e37807b7ec60",
+      "leaf_sha3_512": "9d12c818c3ba5b4571bf57351bdab5913dc3fa4aa1c83f1f96255ce2be30001df860a2dc271b9e8c89457d28b41a7fb6b83d88187bad02551bf4d1bd953fd52c"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/direct_20261009/十件文书批注_四件套上卷_DF-MIN-2026-1005-K3-03.otl_正文副本_20261009_CAIRN-DIRECT.md",
+      "size": 4316,
+      "content_sha3_512": "821863c6d2968932c58dc30a6c6a36dfb985ab2356c45dace82ebf7a299bfba8e8db30471ca36384378e120a5a9d0fa71ab5610d874cb08c812b721aa62b6032",
+      "leaf_sha3_512": "3491a337d129df09e880c5169829cf168b85a1287a1bfd865e070271891852be820113842a9bcb7d96067188d509264cd4b636c181fc65edf8f5235d0f619ef5"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/direct_20261009/十件文书批注_四件套下卷_DF-MIN-2026-1005-K3-04.otl_正文副本_20261009_CAIRN-DIRECT.md",
+      "size": 4893,
+      "content_sha3_512": "8a5ccdf5b89d4ecc45c036636b142cdfaab4fe1cb300860bb9714437de8b8b1ce9974c57028549afc5513b1ca0b3aa9f71145e653b975c381a6c38a5ae77d714",
+      "leaf_sha3_512": "44427f095bf78210747c0b085eed66ec78e3fcc50e4676401998675ec860b3ab165f8a86115b027f0a7e573629f469b0f41f3dceabd079ed37f3ab4032dd9c23"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/direct_20261009/十件文书批注_四件套中卷_DF-MIN-2026-1005-K3-02.otl_正文副本_20261009_CAIRN-DIRECT.md",
+      "size": 3929,
+      "content_sha3_512": "dbe3aef4e1c263104adb11ab50cdf0732a3dbc31a4ea953ae9ddaebc79bdaa50d43186de63cd031c4d61937fd781e8111f1fa9ae5c12b1ca19d3f79f5b0fd147",
+      "leaf_sha3_512": "ab1bfad8de614913a6143a8a598e411b02fac5782b42ae2dd94614acc65e75550a973bc079617226e3ed9ce53dfa65f0234e98e34d37f4e3dfc2cd112b5c72ce"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/direct_20261009/十件文书批注_蓝图跨生态不可读登记暨纲要母本_DF-MIN-2026-1005-K3-05.otl_正文副本_20261009_CAIRN-DIRECT.md",
+      "size": 6284,
+      "content_sha3_512": "778edf4eb7298adc58693bca0679a45fd3c7509dfba99a28410264bf6cc0b257d1f6d1a89880959040de1a14ebc9ebf3d7f0a4ced5475ccb4ee42a2054c7d4e0",
+      "leaf_sha3_512": "c43c766a0bc6011648985c9e3dbd1a897fffc1467c49028f69df26a5d035252a0dfcea28ba5545b074bc7c68ee7875f9ef16fd8053b6454a6d8ff1275d6be77f"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/direct_20261009/十件文书批注_首件主DOCX母本与协同面发现_DF-MIN-2026-1005-K3-01.otl_正文副本_20261009_CAIRN-DIRECT.md",
+      "size": 4420,
+      "content_sha3_512": "23023280bc8146edcf7a3d342f93f11ac6c2edc5a3b149868cc04242e27a948f993a1e9c471144febf40de4eef97b0f22ac4cbbbacbd16091c194bdc3cae780b",
+      "leaf_sha3_512": "d29a987ce60b8f35523d1107741e538de89f089b9ad23c9251bf50fc2f2aa76e52b41c1e5d462fb354b24a89e1c125338509690a892c5b71a7b98beb60562eda"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/direct_20261009/算力分配与分布式协同深化报告（暨现代化前沿网站开发实战规划）_DF-ORD-2026-1005-K3-01.otl_正文副本_20261009_CAIRN-DIRECT.md",
+      "size": 6714,
+      "content_sha3_512": "a966a42e705620686c704db93ad62258ad4088768369fc521e8d2a9d337ad5b236635c651f5b75c8097c73470eb1857983f520d9fd60662e25ce8754d6dec7d2",
+      "leaf_sha3_512": "61d1c1ce759091dbd7a31b8b7e879815e8a39ed0dba149b4e34b56fc8172d3ed3e425b16727c9cd3a73b871f8f11aa9e04512161fc365c15a8b3392627cd11b0"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/00_席位上手页_读取与通道_v2_20261009.md",
