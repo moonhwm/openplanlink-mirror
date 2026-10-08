@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T21:35:26.573Z",
+  "generated_at": "2026-10-08T21:37:47.549Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2311,
-  "merkle_root_sha3_512": "2729ff5671c650288c54e16182a63983ee3d792c0c7fd126332dee6ad697bdd388431f59bd4e766d60b8260f23a7306059ce422f662380ae685a48e7aecf26b7",
-  "hmac_sha3_512": "00772f5894ad049dc3ded4b9b8d0d7ef28f5d74e248511cf4f6aadb778cb34a6156d5c46b9a2eef4bd2d2e1bbe47c57e77290026cba6cbd9da5cbeeacfe40866",
+  "file_count": 2312,
+  "merkle_root_sha3_512": "a4b5bec1ef4c6cd793a49323e50c75b21ede1895fa0dc233d8c3ecac99d6be1f558fc08eb544495c8699ed2ada5c3acb5b59dc3239f7193d85422d979437b005",
+  "hmac_sha3_512": "9f7b288b688e92beb6d0aed41f138be8c0ba9e2ba0da89d032854bbf1cc5db639ee3157f0f7b4dbb42747aae44ece4a6050c507329dcfad1d92c9c377bcda949",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1834,6 +1834,12 @@
       "size": 7881,
       "content_sha3_512": "9fd018d5de5f717d75bd518bc2365dcc1cc96704c7a94232ab60737ae851158b0fe122c7b0d9333b5f88c53689551187fed9369bed0e8bb1283df3114731eb7b",
       "leaf_sha3_512": "38eee83b5b48e89bbcd0ab0757b274164290e46215d2ab02011ea3d626ca9b5dcd95a3c372dc3367c0337f1ac16f0c0abd62fee9c27c78254ac0b5ca338a232d"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/refWorldId衍生实证与谱系核验_DF-AI-20261009-CAIRN-21.otl",
+      "size": 6706,
+      "content_sha3_512": "2973e5d3ecad8362ddf60bce912bb95fb4beac2c2d81ed2fad3bf52b1fea5db1a3f7a7136f1d234c99e5ce990430477673a1a876fab7bdcddcaecf366080fed1",
+      "leaf_sha3_512": "4832b9163d3f649f851f6884d57cf68dc9df58d8af8cd8f27a34d88780bfc56fec7f0aa19bd94f7d7b675c56dd7352ab74eb9694a07282b74b679f459d9c6c6c"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/三型域名对照与Directing取径_DF-AI-20261009-CAIRN-13.otl",
