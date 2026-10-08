@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T10:05:31.716Z",
+  "generated_at": "2026-10-08T10:06:58.302Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2188,
-  "merkle_root_sha3_512": "26dad4fc70d1864fc856f35c3bb4e71d3ea1b42243478ee6c360e8c39bb89ba5fec1ddf464c0976626a09b1f8531dfbc1f8b08b2c56007e15953769e1df429de",
-  "hmac_sha3_512": "4b9d5536f2f542bf82b14e2c01d95106a338820f7c3cf7f8a1bdea4c9606161eaf292383fc9d32bb7c1d18648d4e9d8ce73ec4a9bd9282400b4b550a4d0d5594",
+  "file_count": 2195,
+  "merkle_root_sha3_512": "d32bc4b297445322e3e606ca785cc734618041b36c5acecd657330af6fe56249cf22e991c91f08e44c5c67d9e7129ce8da4d30f471611364f445a994c738b794",
+  "hmac_sha3_512": "599eb399277207324dee1dfbea17d59e62b16ed86cda994d6ceba72ba41a6e68e5e4a0324454c8e42a4e352d95b1223db9a935cbf95a17e322651b6de92e3da1",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2280,10 +2280,34 @@
       "leaf_sha3_512": "2fb73d4e5dd6cdea7c1351d8cbb83a819381ec3f84c84080bd24dca0fbff7d4bfc0d99a02d9a50255b3f9730cf2585e94d0200998f17fe76a878b115be83337a"
     },
     {
+      "path": "deliverables/k3-main/persona/GOV-NAMING-20261008-007_genealogy.json",
+      "size": 2915,
+      "content_sha3_512": "c07251b85406fe8f0e1be06f341ed4898a543131c690cc67c0095cda2defe91dcb907b626eda8bdbf95249817d764743d1481cd25083e7b670a4b6f561018741",
+      "leaf_sha3_512": "a2c92ed2f0c1e2c8b81d5cf4b36999d8b2b5ed26d8b9a562c14299ad60912e0f9b8bd0088ba659973b43e9d7c36ae50675e579de271e5401810c3a8ac1cb1295"
+    },
+    {
+      "path": "deliverables/k3-main/persona/PERSONA-DECISION.md",
+      "size": 4122,
+      "content_sha3_512": "8cc406c67055c725790d555d01a2f5e7e2a7b423c547d48d8240edf46edfb5264f3b57fbefadf6af65f49e08b70284b83fbb19f1819e3177a4d98b72fba620cb",
+      "leaf_sha3_512": "f3067106a1c4be26db7589e171d733ad47a37c554f22a6c0493449ab182b06e1421dc5977d774a42bb56a31fc6ba7d2a788e52dfddb3f8a8c3c07d6d9d4ba260"
+    },
+    {
+      "path": "deliverables/k3-main/persona/README.md",
+      "size": 1324,
+      "content_sha3_512": "b328eb8192c89f71c6776a467c32900e87436425975220eac84f3549999b32d43dad4a86e405da00a0048bf60029368115c9ceb5d058c381bb07baaadf8473f7",
+      "leaf_sha3_512": "48a08a35b77458ae392286536f3ea2ae21437ff5fdc2c6f36b6263eabf95c97f67291703434febf2739a0637c88a16b71fe039b74c2137e6416ea81ef20c253f"
+    },
+    {
       "path": "deliverables/k3-main/persona/anchors_S2.md",
       "size": 2621,
       "content_sha3_512": "daab28ac44032abd763a10d50b1adfc7cfa304f3d6b86186c4a1ac9f8b222f1d4b8eb769086c66d272250443f6715ff1449db221d4de0b160a31bb1b5a0b94ec",
       "leaf_sha3_512": "b08b3c06252ff9d7dc1251c971c17c21099db3a10748a5c69973cfc56335d09156dba71b180e1c7a742461d26c39c21695bc449dcc165e67066223f1a992fb38"
+    },
+    {
+      "path": "deliverables/k3-main/persona/build_persona_docs_v101.py",
+      "size": 18938,
+      "content_sha3_512": "b9883cec0be6a045ca67a7f146f858f36844ef3216ab7899811df01ed20a7a16c9ef0973635bb8af9b3ba811a1fd2fec478c014aa4f07ebb90f285ae86c0bb41",
+      "leaf_sha3_512": "7c2057cc410d17f947c9dea63ded2203adacfca2f0e05f0f22ab334e14a4a27e34beb61dfaaba390c870e28266485956da8d59061d5bd3bc11affcf28354ef0e"
     },
     {
       "path": "deliverables/k3-main/persona/candidates_S2.md",
@@ -2296,6 +2320,18 @@
       "size": 947,
       "content_sha3_512": "60f7c753515720ba13027e395b0ae89996944ed13adc4162202376cf228c23701e11b8af49ac84d91b1559125c8c3c0f42339c1be62d9350ac4349f88389f66b",
       "leaf_sha3_512": "d4d6cc1288989ed717232fc06aca968d0ebdfd2b166a72b57b4ad738b52dac2c239cd94ac470baf628fe6d9156df27c94d615a6dd2deb64103c92cfed2680ad9"
+    },
+    {
+      "path": "deliverables/k3-main/persona/notice_20261008_08_insert.sql",
+      "size": 1850,
+      "content_sha3_512": "6a74c238eb0c23fd66bc124b9ecd943b0457ab5e2a4ed0047a0def4312c88199e30aa407958a29d55548b355aef1d2e7bc59b771403fe13942336b77ddb7bf84",
+      "leaf_sha3_512": "95d7a40482f971558200da1370e9d1caaf5d78f53bf9111c0c87baae009b3bcfa2da962afc35b1993557fec70d4f0299a40969862ccfe1d397390cb5a37029b5"
+    },
+    {
+      "path": "deliverables/k3-main/persona/桌面席_记忆锚点预埋件_v1.0.1.json",
+      "size": 9050,
+      "content_sha3_512": "3408c90752ece6a17f934908dc2d76a13d900e564dbdd27d42fdf167f27c92f78338dc1ceb2b3a69d489dc0498f1706a757a2c310d11039ad08abc186247f36e",
+      "leaf_sha3_512": "33e81dbf56d56d32740564ea5c38d6db1efc878500d432713ebba542666fd3e1f6e626ad47ea04bac0026da89b1104e4b3e6ce3a13891eeeaf1e9c6c5144645e"
     },
     {
       "path": "deliverables/k3-main/plasma-reread/SPEC-20261005-SELFVO-01_段落级批注_k3main.md",
@@ -2632,6 +2668,12 @@
       "size": 3860,
       "content_sha3_512": "4dc25fd1726d1c7563cc7b63d8324aba85a5e54519cdb7810929503cd75106714c5ff4dc31406dff056d986d4fbb96f7cc779ee8b160460525f6a7bcecd2bebe",
       "leaf_sha3_512": "57af301a5b44da89ecebe7f6c1914cf57538bcbe85322476f23d536a53e95b89d247dcffaa108ec67f6e94356bdda9c91365cd71465edf6113142e7173f67e07"
+    },
+    {
+      "path": "seats/kimiwork-selector/三镜审议_哲学研究现状复跑_v2.md",
+      "size": 11483,
+      "content_sha3_512": "19c2939dc68272e3a5384205b7405f19dfdf2b52f80d9712f379a1ebaa9a54a7b7daf1ef6f4b8ba7c19eeb0968a0ad1a4eadc5e8642dc542e8a53720fbdfabeb",
+      "leaf_sha3_512": "fed4257372dd1288c941536023a1089aa6f708f928c8b8cdb64eba974b13cc5a78b81b66a68cdd4d405350280c223471aec3b68ea12c34ad049d69f378c20647"
     },
     {
       "path": "seats/kimiwork-selector/三镜审议_徐湛字露晞_定案确认_v1.md",
