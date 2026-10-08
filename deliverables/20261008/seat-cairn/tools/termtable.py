@@ -59,6 +59,17 @@ TERMS = [
                   "advice": "「良心」须注明系「债务所生（他律内化）」抑或「自主者之良心（自律支配）」"},
     },
     {
+        "term": "自我克服 / Selbst-überwindung",
+        "senses": [
+            {"label": "①自主支配（可）", "meaning": "对自身与命运的支配（Herrschaft über sich；与「自决」同向）", "anchor": "GM II §2"},
+            {"label": "②内向施暴（须标注）", "meaning": "自由本能被潜抑后转而反对自身的 Verinnerlichung（其「乐趣」属残酷）", "anchor": "GM II §16, §18"},
+        ],
+        "status": "必分列（性质相反）",
+        "check": {"pattern": r"自我克服|Selbst-überwindung|Selbstüberwindung",
+                  "qualifier": r"自主|支配|施暴|内化|Verinnerlichung|分列|两义",
+                  "advice": "「自我克服」须注明系「自主支配」（GM II §2）抑或「内向施暴」（§16/§18），否则「自决」可能被误读为自我施暴之正当化"},
+    },
+    {
         "term": "主人道德 / 奴隶道德（Herren-/Sklaven-Moral）",
         "senses": [
             {"label": "作为类型", "meaning": "两种价值规定方式（高贵↔可鄙 / 善↔恶）", "anchor": "JGB §260"},
