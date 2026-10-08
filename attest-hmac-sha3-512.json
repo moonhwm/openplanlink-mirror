@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T22:28:48.752Z",
+  "generated_at": "2026-10-08T22:35:21.614Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2332,
-  "merkle_root_sha3_512": "2e9320cbba37fccdef99f50cffbf949a0e451da47f9e478cc9eb1b8f8236efc68e35b4151f097286ad2cd85cfbfe90efb4b6bbdfcc9d9380d9eab5dddf1336a1",
-  "hmac_sha3_512": "9c6441e0295506c71c172c70b05fe5412130e6eb6355dd015841ff6e7e9bc6e69f7adf993916d86a06f287bc880e444a7f94e5aaa458173cb5f9bcf04457a1b1",
+  "file_count": 2333,
+  "merkle_root_sha3_512": "1fe075c47170e06268214499537814af57267181bbca9f7c42b630a42efb51901f27566189382be07afa87a999fe59e60a00f6993c3c1878184446d4a0a54fca",
+  "hmac_sha3_512": "5ed2ad2b1a9585b68d99646c9aa0c1e68d4625a89b664c8b4ea36dc7a543d8fac8eb3b15f00e861501d7afce13b22da1adc4f4db8edd7a26fdad5cd53db791ad",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2356,6 +2356,12 @@
       "size": 2624,
       "content_sha3_512": "9da74ded7700ddec9df1da73a8395e94c0d0d71b8f703a3462440f35372744ac68447a100d16a9b2fe584dcfd054614174dc876f87bd9a974f4d80d43c9d785d",
       "leaf_sha3_512": "fbf3696a26109ddd4c01c59b23d1fc22088a76d51584fe10896654ba08bc6abca013c19297d8df94c6a37f990309c2ddc80a6b8b2b07579c9a71c7e657cb3592"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/自产真3D资产入世本席台账几何_DF-AI-20261009-CAIRN-29.otl",
+      "size": 6534,
+      "content_sha3_512": "68b86784e3f86b4ffb8130c87ea33dce100dab45453618304eaa8be32d1cfad08b9e8e28adca5b1a5e05fe62f1015457b6c033ef66e3c31f094c5063179da419",
+      "leaf_sha3_512": "746606eb1f74b51d7ee90040ae037b1477cd0fc03b247b864bbb6e32b9d36a3b27e51f8f6906f3e499fca71dc3215166e24e89e5e7c721f8f53d9b7c27a2789d"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/自我唤醒集结令与四章九一至一百_DF-WAKE-20261008-CAIRN-01.otl",
