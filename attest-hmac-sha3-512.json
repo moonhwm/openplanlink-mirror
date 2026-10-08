@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T01:30:45.528Z",
+  "generated_at": "2026-10-08T01:32:14.871Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2108,
-  "merkle_root_sha3_512": "e02b06da6a6a7575d9650450ca93caadd0013c6b69883c17ca26677478a776d4dea056ef332be6a88e04a55c8ef46a949c985805c197f68a0d5a20196b44e74b",
-  "hmac_sha3_512": "1d16e45c427174db56d2faca68507109ae4bd4d0d82528695ff85ff6a36b611bf4f7f7927755a90371d2ab320d51c44f4444506e4797c4fa0f028dbdb1cf7d53",
+  "file_count": 2109,
+  "merkle_root_sha3_512": "6014c29580b61d64f958f5f4df9a0cb37816465d02dfc26f30b87151d12b113fdd89d081bb77bd40589cee804c8ba0c62496b42f2ab67afcc2c204e8629ce3ea",
+  "hmac_sha3_512": "fbcac0e0afec481f15bd6f967b4ddef71ad1cf39625917506167caac95cef10bee0f8cd40599ac1fafd6111e3661f88cf8a695c167653f64d4ebdbdfe5575504",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1660,6 +1660,12 @@
       "size": 6109,
       "content_sha3_512": "89716538cacb4025ca9332495c27593ee7b77079c8f7fc6ac7cdb985432c6a8569ad900b91ddd2536a5a55de3fb686a75bfeb484c25a371dd725482bc425ea67",
       "leaf_sha3_512": "c0597cabce5d35149702ca5518c2caadc76f1c367f3bb78b6fc5b35e5cb81cf75843f00b783f93607f7776cb27d7297493d47bc3288453ea6cce605b80720e7c"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/谱系全书通读完成与则十至十二_DF-NIETZ-20261008-CAIRN-08.otl",
+      "size": 12446,
+      "content_sha3_512": "f439a242341faefed4c0cd283c3638d462a3b5caf9d4dbdbed4c9dc59cf5fa1aa840f7a3234232900ed7d97930847e81f3848f0178d40e16f0570f03d013978b",
+      "leaf_sha3_512": "63a730184e22d2142d0ae10fc7b5a403e116069d4340d79a413d245600314354f36de90b1aa51298c8019f8df2bfb95ff1ebb0ecaa3c6257313887d156f4d896"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/谱系正文通读完成与则八则九_DF-NIETZ-20261008-CAIRN-07.otl",
