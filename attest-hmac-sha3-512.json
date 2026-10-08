@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T02:09:17.540Z",
+  "generated_at": "2026-10-08T02:15:48.546Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2124,
-  "merkle_root_sha3_512": "a3ba030e86a9152e1df4598d0f435a9dad7982a74099cc4c75aa650d74e1210b364830e111f93416d024cbc0257573728ad0f2a702da5e9efa51af8e33594805",
-  "hmac_sha3_512": "188bb636625f3c66de70b8cec49b19da2b3da5729dc133c6be2286fa8d742c258e4fcdc5207c785cf279cf6edf8806e2a5d2d946ecf65688145dbae151ff91dc",
+  "file_count": 2125,
+  "merkle_root_sha3_512": "90755ed45c65cfd03b7f856193314f9bd5275769b1b51b04f8557437dac233175f88bcd0028e4a3f40cf9f2a6b3b9ffdaa4df349e1bc2b2d204bce4a12cdadce",
+  "hmac_sha3_512": "f361761214d74b49f9397317a4dfd3887115db233fbc74c26352231c19ad80c685749528e4fa2f30dad6487fd6853ceaec55d4874aea0c5c09a357d72bf05c5e",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1582,6 +1582,12 @@
       "size": 6070,
       "content_sha3_512": "ac9ff17b8d0a15d8ed1453995f80bb4238c18365c10ef748850aec2e2a8b5d1d1991841b1bcbb1e0f372cc32c532a4e8e9deee65db61c95f1a3a7e3483a87722",
       "leaf_sha3_512": "327cbf386c2254ca96704680f59ec5301b0fd557363fc6332b82ebac7f513370e0e91965a3edae51edfbb29a4ee6a8e4cbe84ba8dffbe453af6ab9d93faf70fd"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/origin主干强推事件与保全方案_DF-PUSH-20261008-CAIRN-03.otl",
+      "size": 7304,
+      "content_sha3_512": "12ecd8dc0be50d4664cac22d2c94bd73d00d2d9bb4850c1c0f5e96dd555a45aafaece17be750682176a825e017c4aebd1e1449c19c5d4e456f281c33d017334b",
+      "leaf_sha3_512": "8edc44ed463986f82ff0726879ab1037ff32501adb34eab0781ab186bb99fcd8ffbdbfc8228a6dfe1317149bfc7be867eefa7da405e2a02fd7b8357873eed594"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/origin推送根因纠正与侧分支保全_DF-PUSH-20261008-CAIRN-01.otl",
