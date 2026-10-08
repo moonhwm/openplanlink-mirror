@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-07T21:55:22.195Z",
+  "generated_at": "2026-10-08T19:47:49.244Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 882,
-  "merkle_root_sha3_512": "18ee8b7bcae437fd8b5beb5f2af6f13f8c2b0a88841d722830fa355a51f5f635d1de782ef14b441f7ecf9ae5f0194e376aa1170a83f9b834caafea333849b8d9",
-  "hmac_sha3_512": "c31c1814368bc51684feeaf2b9827bec71eb1eb47663e9c4403d42a371e961c10617781b134b22b459addce8d69957bf967d4fec67e81ae892c2715f96fb3e20",
+  "file_count": 896,
+  "merkle_root_sha3_512": "13106c92418ce01fa13452a510146dea7c6ca7931be930c2f22c222df63a29c58c71556388f88ded42ac5301348f17c80394473ee44aa9bcf254ef0dcdc13a1a",
+  "hmac_sha3_512": "a7d7b027e13944b9db0cf66a1d93ef24a5fafc70516fae376a2103627459646a4b1de01ee00cfbcf4546d971b50febe3f818db36f3f6fc43d4fe313de7996e64",
   "files": [
     {
       "path": ".gitattributes",
@@ -61,9 +61,9 @@
     },
     {
       "path": ".github/workflows/git-upload-gate.yml",
-      "size": 1863,
-      "content_sha3_512": "26b0d2e53a561f555e6707890e0ca71f618f9a8b5a2e6ec5775e4a28fe880bb8541f372f073220b079534a995bbfbb8ba8e833299cfd46778d8949ccf8fa47f3",
-      "leaf_sha3_512": "cb53b3c1fcbdbf2a7a243917e5d884ae464453ac34dfe0440d22652e16aa1bfcbe8597ba5c792319004969e04467d2246a41e5255ceac3cf07954884f708f83e"
+      "size": 2145,
+      "content_sha3_512": "1b2891f21241f24b420495c59496d83e76e5c0d6154836cd7f77565cc64deba4a91a444b971d0c5eea5e443730359a028c80ab0f2378fa5bdecd01da3f250b7c",
+      "leaf_sha3_512": "7be04d12fe332822dc7b8cb2570c3acb916fe6a78f437593605a07c5ce42db71b4b5894f3f4aea313f0f2b745ef2c4002fb2a7b906ac820d1775bc25f61180ce"
     },
     {
       "path": ".gitignore",
@@ -408,10 +408,22 @@
       "leaf_sha3_512": "d3190722561699f1e0f353dc143e9ad76e8144c6db9073f925870d0ad0c6bca7c3ef28f6aaa770ab3ac122744ec58045e64f5843ba28f347bf41f9a669151bb7"
     },
     {
+      "path": "docs/alibaba_execution_readiness_20261009.md",
+      "size": 19395,
+      "content_sha3_512": "c6d643cadd733eba96b01ebef4b12788ddeb7a365662e39e60a812ec9289976f2a21c072364f4e36733358858e0f413de70c4fe79617b6e8e00642807777229e",
+      "leaf_sha3_512": "1e548c04343c632b8f553e5b4d852e95354e6fb0e2c1b08f69d98ba5d25dee9974f5fb90d0e062f4441463c5f96d1de7992d49fda3370ed25b5fa072b66f4e21"
+    },
+    {
+      "path": "docs/bailian_night_execution_20261009.md",
+      "size": 7643,
+      "content_sha3_512": "34bc0b52d3a29b22261dc56248c66ffb8fe2f3f94e6176f11e78bd4f8b79ca4292330af9745ac0242cd6444881d210ed9417850e771e3dd0b60d451f74163112",
+      "leaf_sha3_512": "4b0adbd5565d0f187d9999b182a0f595e76b85c8e6434f4e645d5d9d5eb08b92cfd28131129336cc7d7fb78ac3e785a64aa35da23255461c530e043257d1de41"
+    },
+    {
       "path": "docs/chatgpt_ecosystem_results_20261008.md",
-      "size": 2191,
-      "content_sha3_512": "da8692e3e8aee71b622a5a7a0fb4aee35902565ae64c3aedd10de5c1c1d75f67e9f6c2e2c14d3439ed462fde1b441a0f32ce004658f8cabbf85919adcfb8b685",
-      "leaf_sha3_512": "00ab7275c4f2f96d077f2c8389ce4cae2d1e35f9c6d2326ffb2e4e2e9c292b3e612fb1245a26d935272626267ddd2ce90a89e358e223166b87f25c8e51649db3"
+      "size": 3338,
+      "content_sha3_512": "e777b95eb2e951a5c059dde1f514d3e29e45e8bd615dac06d27667c5f43fe4b0493c3da01cb6237438d45767352fc5a2063382d48b8300549c9111f1b8a9d4f4",
+      "leaf_sha3_512": "d7f41e8e122679d25eb279ce4a6122424d80cdda4c8714dd4b94f26253ae9773d05632ead82ee15760162aef2d35f66ca98928d0645342c4b5d32e33702c2b81"
     },
     {
       "path": "docs/cloud_connections_experience_20261006.md",
@@ -424,6 +436,42 @@
       "size": 5312,
       "content_sha3_512": "94dabd896991ad17f3476fac072c1cc4978262df4ec6a58075e6061acda71ac3e64b14f3be417453a5b167d061e6c609e21c40326a616361ab7dd05e422e9802",
       "leaf_sha3_512": "8933f5960832f0ee383746840807abb6b230f2fca83fce96c82d8e5801cda12220ee7fcdc76adde3a19f1040c47bb0e7bceb4d0051ef10410f33f709017969b8"
+    },
+    {
+      "path": "docs/dual_pillar_cockpit.html",
+      "size": 7922,
+      "content_sha3_512": "3e68c7abff65320d8db24d795bb7f18d381772a346ed3a404b476501cf0c5ae4577366815b59622d1339c10d983799a0d3a4b47c1d06fa341eaaeaf486c1a015",
+      "leaf_sha3_512": "bbaff1f2a52ad251f44a296204b3c47820a7df3cec1bb03874ed5882a635dee09aab4fd1fa60461878e17a26bc2b178b6c325bd533fb83e44ef8a580c39f74e5"
+    },
+    {
+      "path": "docs/dual_pillar_execution_20261008.md",
+      "size": 4831,
+      "content_sha3_512": "4cbea8897ffe2b6450045ba80e903240bb1a6a8fdac60ab46769fbb81a99e31244d9686bcd1142c04b2e3f7071e3c1744579389bb314d87792c5ba8fd90fbc13",
+      "leaf_sha3_512": "d550c8e7d2daad0a51795e98b5045a48ebd7c3d6eedc4c1c36e5dd960b7b343cd17dd19e0487cdb16bb4c62bd6146bfd11ec2ee75b9ba5d89fc4a7dc38b8f5e3"
+    },
+    {
+      "path": "docs/dual_pillar_standards_review_20261008.md",
+      "size": 14592,
+      "content_sha3_512": "aa24989a08c95a068d7d56c78369faed7936485027f3289854731a9f7ead9651cebc730f2f6c3d69e851dbec00719a7382b848ef2d072e03438269a4b057fde3",
+      "leaf_sha3_512": "08e6342ccd7e981728b13df4a36c3e5e50975c99b7ca3bb7d457ea89c7021aab875112a169d8f9604965530736fffb4c867f5b4b46034b7fbd2ec18e7360db08"
+    },
+    {
+      "path": "docs/memory_tier_pilot_example.json",
+      "size": 4917,
+      "content_sha3_512": "0318818b82406ab300457ff51cca7f970b6dc00e13d5063cf71e5dece0d17eb73cf0ffe650cdf4b8deaa76bb34e1c4a56f7b61d1ca40bddf5b2eabe011cecaa7",
+      "leaf_sha3_512": "be375cbecad294df9ead7c9c7b4a36d0db3f8b8b4e08b801b6073b7d992e5b445384acbba6916b3592a550500394dd467d38b4b1f823fe50b91bd0fba81625a2"
+    },
+    {
+      "path": "docs/nietzsche_corpus_manifest_20261008.json",
+      "size": 10857,
+      "content_sha3_512": "870ca8a7661824875f3a3c023672a6fdac5b35d1493043dab199471f7fc3f8f63f65a0e4610c14d3eb51f3d75553a05d4dea7e5cf89f53d549a542e9b6f30b59",
+      "leaf_sha3_512": "6aa1c2f6ca16b86da75771c662cc1254d59160186a56d28e840cfa0e740f9d93bd068b322b0ed3f334d10426826da16ffec872655214970882c8913d815ec44f"
+    },
+    {
+      "path": "docs/nietzsche_corpus_pilot_20261008.md",
+      "size": 17750,
+      "content_sha3_512": "cd17ee456460c6aba3f9acacc03003b913f7aeff67260d65a796e896e6a8b08e02330e946da3fc63d7c67119362a57816e5646db27d84a5d6b2ee2b2fc703958",
+      "leaf_sha3_512": "54265c7ba85f3ce063ffd0f466ff7ceaf4b327353dbfe7607e972c62e2d63a8447cd05ffb37b3a97de02347ac2af73f4739731797702a5af885f3540431e3569"
     },
     {
       "path": "docs/night_scheduling_experience_20261006.md",
@@ -4686,6 +4734,24 @@
       "leaf_sha3_512": "789425bb68628cb7eac69f0fa39269372a6c41657a94d08539bae7d808ea5dc61565f02d8bc526bb84d3e5bd7e5a17b99ce8e38184a9d3ed698d5806d1c23f7f"
     },
     {
+      "path": "specs/015-dual-pillar-pilot/memory-pilot.md",
+      "size": 6718,
+      "content_sha3_512": "285ce60db65e15602213db5b9cfd61cf461789a7570c152f09c46a12feb76c335c101c47f9a42fec2a63b3225ad8147e4541a50f952f6299e5784caeb4cb8e3a",
+      "leaf_sha3_512": "b1a12f4303f2ea948e9e3d6372faa022071a50ca01d4354ee25085848407e6de0820d50b07ecbd2cde8dd61f2732d45e39d7d231d3af8b02b9a6ec32ed84c0ee"
+    },
+    {
+      "path": "specs/015-dual-pillar-pilot/spec.md",
+      "size": 3958,
+      "content_sha3_512": "06eca74726c6e45e76a421b4e0b6fbafac9df496978f5d927986015c8cc610af3372ef3cc026dd15295daa17be543a52ca8c90c0254dbd97fc528e7fc4325a7f",
+      "leaf_sha3_512": "d8f7ab358ac751bd25703972d7f34141afc8d31a68d6dd278396ad9884b25363ad85511fb193b7d7da76910ab470f156ddfdddfbe9ede033487036f20ea0cebe"
+    },
+    {
+      "path": "specs/015-dual-pillar-pilot/verification.md",
+      "size": 2577,
+      "content_sha3_512": "80bf0bee2db663b4bdeca811c4779ba9220e18b0a7aa899ebaf7bc365c5d29274ce2b3faf38c03426e8306eb4b1d8abdfa829aaf157764f552f6543ed3ba3d96",
+      "leaf_sha3_512": "3deecc9dd58cd9ec6af8ee570c85d3160250d0ef6490a81cb0db7d1869d0cd4882f8836ae12f2864cea23892217115c34bb3a7b7d6466f7fd8386d6d211d08c9"
+    },
+    {
       "path": "tests/test_a2a_discovery.py",
       "size": 6435,
       "content_sha3_512": "8574a46eda42276c970e0ddcb0be9c7fbb71e5aeb518fbe0147b239ade5e597d83ae9993fb56788d689f40e415daa79e8a2e7a6dfa1cda8411e07db4b8be2684",
@@ -4704,10 +4770,22 @@
       "leaf_sha3_512": "4fd0feb27a35f64066a9f997b049d39306f5add5f1cae54bd8e0b37c421c71ea0fa6128480849f64167121f312e9f512d36a0146ae592f5545dd2a8fdb27b946"
     },
     {
+      "path": "tests/test_hetero_models.py",
+      "size": 5839,
+      "content_sha3_512": "ccaa2c3f69f0f8fd650713112de9caa60fdb43ae79a1eae90bafcd532fe142da16c3b298c1e23633d793ac52986a1fe701a0a28b9e38e30e49ffce634aba70cf",
+      "leaf_sha3_512": "057363ec562798917a1c34e78c9ba339889162f4897c7d7fe697a0965341408853a1be952a39568492d01d7fa1c5a79651979e6f6ffd9e3183e4988d887f2ef8"
+    },
+    {
       "path": "tests/test_memory_sample_audit.py",
       "size": 3959,
       "content_sha3_512": "1870adcc30a649210e3b25b4a418485ba2e1d8abff85a6bd1dff1273463d198795bc406bc472cc1fd6ca668782538684cf796ee1c0b99b96d3e65569d1b25799",
       "leaf_sha3_512": "bec407536b3fd2509f2a4b9cdd9d4ab0ca350fda4c48d2bfe450ba6105aa56b4d551e44f4f715d6a0de58abebe27c9912f7eb1fe257b318afcaf4ddeb82cc939"
+    },
+    {
+      "path": "tests/test_memory_tier_pilot.py",
+      "size": 8789,
+      "content_sha3_512": "4608dc27e19652158f6e2d5be690a055fd96053e510344ae64955e4f064bf6ccb7b13b3bd2cd1015b93a4696689559c23a150c8f9a554e212781e1a16a7a2367",
+      "leaf_sha3_512": "f81b56dc3424051b23198451d4bc0008be3602a0f47fd6e55751c688189e7b93d7cacffee861979cec0f010bad7b93e8a940f071252ccc0860bb9c2b6160ca5e"
     },
     {
       "path": "tests/test_night_schedule.py",
@@ -4843,9 +4921,9 @@
     },
     {
       "path": "tools/hetero_models.py",
-      "size": 2864,
-      "content_sha3_512": "6a37cb9bd05f5ce08b8492edb2fcb77f2be3285f5179690e1a6742492e2d651ee86b49ad6525c582ff019567f673c439e978e6e7c05be66e90afa625e2f22bf3",
-      "leaf_sha3_512": "666769829e3c2db363e8f233f8980d5dd1c9a3eaee11d06086cacf0491f9e76734afbef08ad4b01574c98f7bfeb0fcf2b9aa0f300680da887000fea8bf279ee8"
+      "size": 7011,
+      "content_sha3_512": "72570f0bfe64e77db3bfb14d398e7f0eb9f7c2abb1e52a924f4a0af4231923fc913ead09634ac213d9d7a9e47214855922ef78f8f2bc958b733a4acf1311dbfa",
+      "leaf_sha3_512": "375d669d722f6d964dc4f9a5a2451106e5b9f8ac381b27f56c11d28366edd71f23a343b0624ef84125dac3e1457184786cf0ad8ab93c397d763c627f7960bc3d"
     },
     {
       "path": "tools/hmac_key_policy.py",
@@ -4906,6 +4984,12 @@
       "size": 11143,
       "content_sha3_512": "31603462f28712e2fc0013bae5850f9d2213a654d6ce175cc091b2bf7e6540bc416519928eb66a7f1c054f8d23116f0c288e778c6b059fea2925aa5aed1eb237",
       "leaf_sha3_512": "d5a7b0929e8f6d6c849aef332e9b509416ed140343bc685b171a89cebcd978ac4a8bbf30ed708b2ac133dda7bae4a3ec24cd5eb6771a646a9ee28c177147bb95"
+    },
+    {
+      "path": "tools/memory_tier_pilot.py",
+      "size": 18996,
+      "content_sha3_512": "440519ab30d317f643f9a0405e487341a17d3b87955ba5c2235d84445b557a074ffb802559e94c1b6c4cad853df9c313dca35582c3eb0b60d89f662f8b4ca13d",
+      "leaf_sha3_512": "787c7da416710c6b818914aa8ad74c27f55d1973b280bef7363dec9fe9a23d856e6cd5cfabba304b3e90e4a3ee8feeda6cbc5b1e69741c418081a1024c638efc"
     },
     {
       "path": "tools/mkled.py",
@@ -5071,9 +5155,9 @@
     },
     {
       "path": "tools/spec/spec-hetero_models.md",
-      "size": 252,
-      "content_sha3_512": "94b1e3811e0ef52a585e2f7a217f95219964ed7bfe750a4c315e675508b2cde592458190bd51f70e7a40f0040a8a9ece5f9bed62049a9dd0226d3fa9e4087c00",
-      "leaf_sha3_512": "f12b23efcc30698d9f48ba54000d4a7244f61b4fb002333ba948fcceb41dc98fba92cdcbadad8f3501bc40b99d1e60184353a21e086326e6944e4c11e644b8c7"
+      "size": 1049,
+      "content_sha3_512": "1fa123c93d0cc3c959e1281e3ce16fcd8f0b7f8c0d35d175ecbf1c89f0761f23e0c1a268a89a34ea483703c28d8b2e340bf6e53245c5c6be6b40679c4e116621",
+      "leaf_sha3_512": "d68bd82f4f15fd20ff082d5384764c46ffbca820bd903ddf341cec46aeefe8dcb2d724237cc5337baefb5d9f2393bd8ec3ede95135ed63e94dfcbfeed2ede363"
     },
     {
       "path": "tools/spec/spec-knowledge_digest.md",

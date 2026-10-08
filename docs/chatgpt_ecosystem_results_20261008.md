@@ -9,6 +9,12 @@
 | 夜间排期候选 | [SDD 013](../specs/013-night-scheduling/spec.md) | 前提证据约束建议；不证明云执行 |
 | 内存采样修复 | [SDD 014](../specs/014-memory-sample-validity/spec.md) | 缺失不报安全，异常与有效零值区分 |
 | 功能角色候选 | [人设说明](persona/initial-functional-persona.md) | 授名、身份登记、独立席位同意分别待证 |
+| 记忆分层与持久化幂等 | [SDD 015](../specs/015-dual-pillar-pilot/spec.md) | 合成行为试点；真实云效能另验 |
+| 离线交互架构与成本情景 | [交互页](dual_pillar_cockpit.html) | 静态证据观察与情景输入；没有后台云调用 |
+| 双支柱声明执行与标准审阅 | [执行口径](dual_pillar_execution_20261008.md)、[官方资料审阅](dual_pillar_standards_review_20261008.md) | 已核验公开范围、项目待证项及资源审批链 |
+| 第一批尼采原典研读 | [研读报告](nietzsche_corpus_pilot_20261008.md)、[证据清单](nietzsche_corpus_manifest_20261008.json) | 下载与实际研读分记；未宣称完整综述或数据库计量 |
+| 百炼四能力实际调用 | [夜间执行记录](bailian_night_execution_20261009.md)、[官方执行前提](alibaba_execution_readiness_20261009.md) | 三项推理 HTTP 200、Adventure 构建 ready；RTC、其他模式和实际账单另验 |
+| 异构服务路由约束 | [模型工具](../tools/hetero_models.py)、[规格](../tools/spec/spec-hetero_models.md) | 302.AI 严格限制非国产模型与返回模型；本轮仅目录读取 |
 
 ## 本次新增
 

@@ -1,0 +1,253 @@
+{
+  "schema_version": "1.0",
+  "artifact_id": "OPL-NIETZSCHE-PILOT-20261008-01",
+  "signed_by": "codex-review-20261005",
+  "candidate_identity": {
+    "name": "沈云汉",
+    "courtesy_name": "为章",
+    "status": "candidate label; not asserted legal identity or institutional affiliation"
+  },
+  "verified_on": "2026-10-08",
+  "timezone": "Asia/Shanghai",
+  "status": "bounded_primary_text_pilot",
+  "report": "nietzsche_corpus_pilot_20261008.md",
+  "completed_full_literature_review": false,
+  "completed_all_books": false,
+  "completed_course_viewing": false,
+  "private_download_root": "A:/OPL_A2A/connections/20261008-dual-pillar-implementation/research/public-domain",
+  "downloads": [
+    {
+      "id": "PG52319",
+      "title": "The Genealogy of Morals",
+      "author": "Friedrich Nietzsche",
+      "translator": "Horace B. Samuel (Genealogy); J. M. Kennedy (appended Peoples and Countries)",
+      "print_edition": "T. N. Foulis, Edinburgh and London, 1913",
+      "language": "en",
+      "metadata_url": "https://www.gutenberg.org/ebooks/52319",
+      "original_url": "https://www.gutenberg.org/cache/epub/52319/pg52319.txt",
+      "file_name": "pg52319_genealogy_morals_english.txt",
+      "bytes": 358579,
+      "sha256": "90AB67B3C15FB8A4220F36B559514098E33F43D58E4403405575949C039C1CBA",
+      "download_scope": "complete ebook including appended fragment",
+      "read_scope": [
+        "GM I2 excerpt",
+        "GM I10 complete in this translation",
+        "GM I11 opening excerpt",
+        "GM I13 complete in this translation"
+      ],
+      "license_status": "Source metadata: public domain in USA; Project Gutenberg license retained; no universal rights claim",
+      "downloaded_at_utc": "2026-10-08T11:03:21.7675802Z",
+      "private_path": "A:\\OPL_A2A\\connections\\20261008-dual-pillar-implementation\\research\\public-domain\\pg52319_genealogy_morals_english.txt"
+    },
+    {
+      "id": "PG4363",
+      "title": "Beyond Good and Evil",
+      "author": "Friedrich Nietzsche",
+      "translator": "Helen Zimmern",
+      "print_edition": "Original print edition not independently established in this pilot",
+      "language": "en",
+      "metadata_url": "https://www.gutenberg.org/ebooks/4363",
+      "original_url": "https://www.gutenberg.org/cache/epub/4363/pg4363.txt",
+      "file_name": "pg4363_beyond_good_evil_english.txt",
+      "bytes": 408794,
+      "sha256": "6EE088F717D3760036086F108C03D57588036C9D344B7D71EDBEF4E631BD374A",
+      "download_scope": "complete ebook",
+      "read_scope": [
+        "JGB 260 partial comparison"
+      ],
+      "license_status": "Source metadata: public domain in USA; Project Gutenberg license retained; no universal rights claim",
+      "downloaded_at_utc": "2026-10-08T11:03:24.5974852Z",
+      "private_path": "A:\\OPL_A2A\\connections\\20261008-dual-pillar-implementation\\research\\public-domain\\pg4363_beyond_good_evil_english.txt"
+    },
+    {
+      "id": "PG7204",
+      "title": "Jenseits von Gut und Böse",
+      "author": "Friedrich Nietzsche",
+      "translator": null,
+      "print_edition": "German transcription derived from Projekt Gutenberg DE; precise critical base not established",
+      "language": "de",
+      "metadata_url": "https://www.gutenberg.org/ebooks/7204",
+      "original_url": "https://www.gutenberg.org/cache/epub/7204/pg7204.txt",
+      "file_name": "pg7204_jenseits_german.txt",
+      "bytes": 425702,
+      "sha256": "0FB771D68EC489BA9D8B9FCDA2F53E59EE12057DA2C16B2556515A50847FA30F",
+      "download_scope": "complete ebook",
+      "read_scope": [
+        "JGB 211 complete",
+        "JGB 260 complete"
+      ],
+      "license_status": "Source metadata: public domain in USA; Project Gutenberg license retained; no universal rights claim",
+      "downloaded_at_utc": "2026-10-08T11:04:13.5525805Z",
+      "private_path": "A:\\OPL_A2A\\connections\\20261008-dual-pillar-implementation\\research\\public-domain\\pg7204_jenseits_german.txt"
+    }
+  ],
+  "online_reading": [
+    {
+      "id": "GM1887-P23",
+      "url": "https://austria-forum.org/web-books/en/nietzschemoralde1887isds/000023",
+      "language": "de",
+      "section": "GM I10 opening on online page labelled 23",
+      "scope": "page text read; remainder of section not read here; scan not visually collated",
+      "source_license_label": "PD"
+    },
+    {
+      "id": "GM-II-2-DE",
+      "url": "https://projekt-gutenberg.org/authors/friedrich-wilhelm-nietzsche/books/friedrich-nietzsche-zur-genealogie-der-moral/chapter/3/",
+      "language": "de",
+      "section": "GM II2",
+      "scope": "section text read online; surrounding treatise not completed"
+    },
+    {
+      "id": "KANT-AA4-440",
+      "url": "https://korpora.org/kant/aa04/440.html",
+      "language": "de",
+      "section": "Grundlegung AA4:440, autonomy definition, especially lines 16-20",
+      "scope": "definition text read; no complete freedom argument"
+    }
+  ],
+  "edition_controls": [
+    {
+      "id": "eKGWB",
+      "metadata_url": "https://doc.nietzschesource.org/en/ekgwb",
+      "rights_url": "https://doc.nietzschesource.org/en/rights",
+      "license": "CC BY-NC-ND 4.0 per project rights statement",
+      "primary_text_retrieved": false,
+      "failure": "direct GM-I-10/JGB-260/texts-eKGWB-GM endpoints returned empty/transport/access errors; do not claim critical text collation"
+    },
+    {
+      "id": "DFGA",
+      "url": "https://doc.nietzschesource.org/en/dfga",
+      "read_scope": "project description on manuscripts and posthumous Will to Power compilation; no full manuscript reading"
+    },
+    {
+      "id": "NIETZSCHE-KOMMENTAR",
+      "url": "https://digi.hadw-bw.de/view/nietzsche_kom5_1/0765?ui_lang=ger",
+      "read_scope": "search metadata and partial OCR only; whole commentary not read"
+    }
+  ],
+  "teacher_verification": {
+    "name": "余明锋",
+    "official_url": "https://sal.tongji.edu.cn/info/1027/3101.htm",
+    "official_page_publication_date": "2020-04-23",
+    "official_page_current_claims": [
+      "副教授",
+      "博士生导师",
+      "欧洲思想文化研究院副院长"
+    ],
+    "latest_profile_update_date": null,
+    "account_ownership_independently_verified": false
+  },
+  "course_metadata": [
+    {
+      "user_requested_title": "同济余明锋老师讲现代西方哲学",
+      "url": "https://www.bilibili.com/cheese/play/ep41402",
+      "publisher_display": "余明锋的哲学课",
+      "platform_claimed_lessons": 20,
+      "directory_note": "Numbered intro 0 and lessons 1-20 are visible; count includes separate introduction in directory",
+      "paid_content": true,
+      "viewed": false,
+      "first_release_date": null,
+      "university_course_accreditation_verified": false
+    },
+    {
+      "user_requested_title": "余明锋讲尼采：现代社会的生存哲学",
+      "url": "https://www.bilibili.com/cheese/play/ep712024",
+      "publisher_display": "余明锋的哲学课",
+      "platform_claimed_lessons": 21,
+      "paid_content": true,
+      "viewed": false,
+      "first_release_date": null,
+      "university_course_accreditation_verified": false
+    }
+  ],
+  "official_events": [
+    {
+      "url": "https://www.lib.tongji.edu.cn/index.php?classid=11979&newsid=31474&t=show",
+      "announcement_date": "2020-12-02",
+      "event_date": "2020-12-05",
+      "event_time": "18:30",
+      "venue": "德文图书馆二楼影音室",
+      "primary_work": "Der Antichrist",
+      "participated": false
+    },
+    {
+      "url": "https://www.lib.tongji.edu.cn/index.php?classid=11979&newsid=31733&t=show",
+      "announcement_date": "2021-04-09",
+      "event_date": "2021-04-13",
+      "event_time": "18:00",
+      "venue": "德文图书馆二楼报告厅",
+      "review_url": "https://www.lib.tongji.edu.cn/index.php?classid=12518&newsid=31910&t=show",
+      "participated": false
+    }
+  ],
+  "conceptual_guardrails": [
+    "Master/slave moralities can coexist in one person; not a classification by income, admin permission or government power.",
+    "GM I10 attributes value production to ressentiment as well; value creation alone does not prove affirmative valuation.",
+    "Do not remove hierarchy/violence context to turn Nietzsche into generic self-help.",
+    "Kantian autonomy requires universal lawgiving; project self-direction is an operational term, not philosophical equivalence.",
+    "Will to power concept in published works and posthumous Will to Power compilation must be distinguished.",
+    "No empirical psychological diagnosis or legal/institutional entitlement follows from the pilot."
+  ],
+  "database_search_status": [
+    {
+      "platform": "CNKI",
+      "status": "not_searched",
+      "authorization_status": "interface/subscription not accepted",
+      "candidate_query": "主题: 尼采 AND (怨恨 OR 主人道德 OR 奴隶道德 OR 价值重估 OR 自主); separate author search 余明锋",
+      "hits": null,
+      "exported_records": null,
+      "bibliometrics_performed": false
+    },
+    {
+      "platform": "Web of Science Core Collection",
+      "status": "not_searched",
+      "authorization_status": "interface/subscription not accepted",
+      "candidate_query": "TS=(Nietzsche AND (ressentiment OR \"master morality\" OR \"slave morality\" OR \"revaluation of values\" OR autonomy))",
+      "hits": null,
+      "exported_records": null,
+      "bibliometrics_performed": false
+    },
+    {
+      "platform": "JSTOR",
+      "status": "not_searched",
+      "authorization_status": "no validated access",
+      "candidate_query": "Nietzsche AND (ressentiment OR autonomy); syntax to be checked in actual interface",
+      "hits": null,
+      "exported_records": null,
+      "bibliometrics_performed": false
+    },
+    {
+      "platform": "Government public data",
+      "status": "not_searched",
+      "candidate_query": "Digital governance / public services / participation; specify institution, release, geography, year, variable and denominator",
+      "hits": null,
+      "exported_records": null,
+      "bibliometrics_performed": false
+    }
+  ],
+  "future_routes": [
+    "Kant",
+    "Existentialism",
+    "Phenomenology",
+    "Foucault",
+    "Habermas",
+    "Analytic philosophy",
+    "Nietzsche critical editing"
+  ],
+  "pending_verification": [
+    "Official university cross-link to publisher account",
+    "Course first release dates and authorized full viewing",
+    "PG7204 critical base and eKGWB collation",
+    "GM I2 and I10-I13 complete German comparison",
+    "Relation of GM II2 to GM I13",
+    "Specific posthumous Will to Power editions and Nachlass concordances",
+    "Database access and reproducible exports",
+    "Normative and empirical validity of any OpenPlanLink application"
+  ],
+  "publication": {
+    "local_only": true,
+    "github_gate_and_push_owner": "parent agent",
+    "ima_written": false,
+    "wps_written": false
+  }
+}

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OpenPlanLink · 证据与记忆试点</title>
+<style>
+:root{color-scheme:dark;--bg:#111622;--card:#1b2434;--muted:#aab8ce;--line:#34425b;--good:#77d6b0;--wait:#ffd18a}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#f0f4fb;font:16px/1.65 system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:36px 24px}h1{font-size:32px;margin:6px 0}h2{font-size:21px;margin:0 0 18px}p{color:var(--muted)}a{color:#a2c9ff}.eyebrow{color:var(--good);letter-spacing:.12em;font-size:13px}.grid{display:grid;grid-template-columns:2fr 1fr;gap:20px}.card{padding:24px;border:1px solid var(--line);background:var(--card);border-radius:16px;margin:16px 0}.nodes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.node{min-height:96px;text-align:left;border:1px solid var(--line);background:#111c2d;color:inherit;border-radius:10px;padding:14px;cursor:pointer}.node b{display:block}.node span{color:var(--wait);font-size:12px}.node:focus-visible,input:focus-visible{outline:3px solid #93beff}.node[aria-pressed=true]{border-color:var(--good);background:#20373b}.flow{color:#97b5d8;text-align:center;padding:12px;border:1px dashed var(--line);margin:12px 0}label{display:block;color:var(--muted);margin-top:12px}input{width:100%;background:#101a29;color:white;padding:10px;border:1px solid #52617a;border-radius:6px;font:inherit}.metric{font-size:28px;color:var(--good);margin:18px 0}.pill{display:inline-block;padding:2px 9px;border:1px solid var(--line);border-radius:12px;font-size:12px}table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:9px;border-bottom:1px solid var(--line)}footer{font-size:12px;color:var(--muted);margin-top:25px}.hint{font-size:13px}.full{grid-column:1/-1}@media(max-width:750px){.grid{grid-template-columns:1fr}.nodes{grid-template-columns:repeat(2,1fr)}main{padding:24px 16px}h1{font-size:27px}}
+</style></head><body><main>
+<div class="eyebrow">OPENPLANLINK / LOCAL PILOT</div><h1>证据、记忆与成本</h1><p>离线交互试点 · 点击节点查看已知范围与下一项验收。页面不发送消息或执行云作业。</p>
+<div class="grid"><section class="card"><h2>协作架构</h2><div class="flow">授权来源 → 隐私预检 → 内容摘要与事件账本 → 分层检索</div><div class="nodes" id="nodes"></div><div class="flow">公开文件清单 → Git 门禁 → 非强制推送 → 远端回读</div><p class="hint">连线表示设计数据流。节点证据来自一次观察，不能视为持续在线监控。</p></section>
+<aside class="card" aria-live="polite"><h2 id="nodeTitle">本地证据</h2><span class="pill" id="nodeState">待选择</span><p id="nodeDetail"></p><p id="nodeNext"></p></aside>
+<section class="card"><h2>分层策略情景</h2><p class="hint">以下阈值仅为演示策略，未成为获批生产基线。调整输入可观察建议变化。</p><label>近 7 日访问次数<input id="access" type="number" min="0" value="3"></label><label>距上次访问的天数<input id="age" type="number" min="0" value="0.5"></label><label>期望检索延迟（毫秒）<input id="latency" type="number" min="1" value="100"></label><div class="metric" id="tier" aria-live="polite"></div><p class="hint">与 Python 默认策略一致：热层为 7 日窗口内访问 ≥3 且最近 ≤1 天，或预算 ≤20 ms；温层为窗口内访问 ≥1 且最近 ≤7 天，或预算 ≤200 ms；其余冷层。预算不是实测延迟，建议不自动迁移原件。</p></section>
+<section class="card"><h2>成本情景计算</h2><p class="hint">用户输入的情景估算，未接供应商账单，不代表任何当前报价或折扣资格。</p><label>情景输入 Token 数<input id="tokens" type="number" min="0" value="100000"></label><label>假设单价（元 / 百万 Token）<input id="rate" type="number" min="0" step="0.01" value="1"></label><div class="metric" id="estimate" aria-live="polite"></div><p class="hint">仅计算所填输入项；输出、缓存、工具、存储、税费等须另行纳入完整费用模型。</p></section>
+<section class="card full"><h2>真实云执行指标</h2><table><thead><tr><th>CPU</th><th>内存</th><th>耗时</th><th>吞吐</th><th>排队</th><th>费用</th></tr></thead><tbody><tr><td>未实测</td><td>未实测</td><td>未实测</td><td>未实测</td><td>未实测</td><td>未知</td></tr></tbody></table><p>每次有效作业须关联受管身份、区域、实例与供应商回执。助手未核验到作业不等于账户没有作业。</p><a href="../specs/015-dual-pillar-pilot/spec.md">查看验收规格</a> · <a href="dual_pillar_execution_20261008.md">查看执行口径</a></section></div>
+<footer>OPL-DP-UI-20261008-02 · codex-review-20261005 · 候选沈云汉，字为章。观察日期：2026-10-08。正式授名、身份登记和独立席位同意分别待证。</footer>
+<script>
+'use strict';
+const data=[
+['本地记录','已部分读取','十份指定源资料中九份读取成功，一份发生文件读取错误；失败已保留。','下一项：确认主源件可稳定读取，再验证完整加密成员。'],
+['ima','目录元数据可读','本轮取得授权知识库目录；目录读取不证明全部正文已获取。','下一项：确定目标条目和授权正文读取范围。'],
+['Supabase','未登录','本轮只读项目查询返回未登录。','下一项：正常账户授权完成后进行只读回读。'],
+['WPS','正文捕获待审','本轮元数据观察为版本 147；完整正文已加密捕获。隐私预览仍被拦截。','下一项：分开核验原生 OTL、ACL、完整历史、附件及元数据。'],
+['Neon / 百度','授权证据待补','尚无新账户授权完成证据。','下一项：获得授权回执后有界读取。'],
+['A2A / 华为云','执行回执待补','本地 Agent Card 发现失败；华为云仍缺实例与有效作业回执。','下一项：受管 profile、区域、实例、公钥维护回执及获批作业方案。']
+];
+const nodes=document.getElementById('nodes');data.forEach((row,i)=>{const b=document.createElement('button');b.className='node';b.type='button';b.setAttribute('aria-pressed','false');const title=document.createElement('b');title.textContent=row[0];const state=document.createElement('span');state.textContent=row[1];b.append(title,state);b.addEventListener('click',()=>{for(const n of nodes.children)n.setAttribute('aria-pressed','false');b.setAttribute('aria-pressed','true');document.getElementById('nodeTitle').textContent=row[0];document.getElementById('nodeState').textContent=row[1];document.getElementById('nodeDetail').textContent=row[2];document.getElementById('nodeNext').textContent=row[3]});nodes.append(b);if(i===0)b.click()});
+const ids=['access','age','latency','tokens','rate'];
+function tierFor(access,age,latency){return latency<=20||(access>=3&&age<=1)?'热层建议':latency<=200||(access>=1&&age<=7)?'温层建议':'冷层建议';}
+function render(){
+  const vals=Object.fromEntries(ids.map(id=>[id,Number(document.getElementById(id).value)]));
+  const present=id=>document.getElementById(id).value.trim()!==''&&Number.isFinite(vals[id])&&vals[id]>=0;
+  const memoryValid=['access','age','latency'].every(present)&&Number.isInteger(vals.access)&&vals.latency>0;
+  document.getElementById('tier').textContent=memoryValid?tierFor(vals.access,vals.age,vals.latency):'访问次数须为非负整数，其余输入须有效';
+  const total=vals.tokens/1000000*vals.rate;
+  const costValid=['tokens','rate'].every(present)&&Number.isInteger(vals.tokens)&&Number.isFinite(total);
+  document.getElementById('estimate').textContent=costValid?'情景估算 ¥ '+total.toFixed(4):'输入无效';
+}
+ids.forEach(id=>document.getElementById(id).addEventListener('input',render));render();
+</script></main></body></html>

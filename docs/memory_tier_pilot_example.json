@@ -1,0 +1,176 @@
+{
+  "pilot_id": "OPL-MEM-TIER-PILOT-20261008-01",
+  "author": "codex-review-20261005",
+  "report_at_utc": "2026-10-08T01:00:00+00:00",
+  "execution_scope": "local_logical_pilot",
+  "demo": true,
+  "policy": {
+    "hot_min_accesses": 3,
+    "warm_min_accesses": 1,
+    "hot_recency_hours": 24,
+    "warm_recency_hours": 168,
+    "access_window_hours": 168,
+    "hot_max_latency_ms": 20,
+    "warm_max_latency_ms": 200,
+    "warning_ratio": 0.8,
+    "capacities_bytes": {
+      "hot": 40,
+      "warm": 100,
+      "cold": 100
+    }
+  },
+  "objects": [
+    {
+      "original_hash": "4d9b86a0225f069f6d33db066cdc24e8cc4c74f34f870168f82f3f94e40cff35",
+      "logical_original_bytes": 44,
+      "reference_ids": [
+        "demo-reference-2"
+      ],
+      "tier": "cold",
+      "tier_reason": "no_recent_demand_in_observed_event_window",
+      "accesses_in_window": 0,
+      "last_access_utc": null,
+      "requested_latency_budget_ms": null,
+      "observed_latency_ms": null,
+      "evidence_kind": "synthetic",
+      "full_original_retained": true
+    },
+    {
+      "original_hash": "9cfa4ab220c49e0f471b6cacbb507b419d347e3f5c832d486e6346b636b18d7b",
+      "logical_original_bytes": 45,
+      "reference_ids": [
+        "demo-reference-1"
+      ],
+      "tier": "warm",
+      "tier_reason": "access_count_and_recency",
+      "accesses_in_window": 1,
+      "last_access_utc": "2026-10-06T00:00:00+00:00",
+      "requested_latency_budget_ms": null,
+      "observed_latency_ms": null,
+      "evidence_kind": "synthetic",
+      "full_original_retained": true
+    },
+    {
+      "original_hash": "c3ff06274616ed337883690d135a6dc0f61c52ccb40286eed026895b31a0d3cf",
+      "logical_original_bytes": 43,
+      "reference_ids": [
+        "demo-reference-0",
+        "demo-reference-alias"
+      ],
+      "tier": "hot",
+      "tier_reason": "access_count_and_recency",
+      "accesses_in_window": 3,
+      "last_access_utc": "2026-10-08T00:00:02+00:00",
+      "requested_latency_budget_ms": null,
+      "observed_latency_ms": null,
+      "evidence_kind": "synthetic",
+      "full_original_retained": true
+    }
+  ],
+  "capacity": {
+    "hot": {
+      "used_logical_bytes": 43,
+      "capacity_bytes": 40,
+      "utilization_ratio": 1.075,
+      "state": "exceeded"
+    },
+    "warm": {
+      "used_logical_bytes": 45,
+      "capacity_bytes": 100,
+      "utilization_ratio": 0.45,
+      "state": "within_limit"
+    },
+    "cold": {
+      "used_logical_bytes": 44,
+      "capacity_bytes": 100,
+      "utilization_ratio": 0.44,
+      "state": "within_limit"
+    }
+  },
+  "baseline": {
+    "without_dedup_reference_bytes": 175,
+    "unique_original_bytes": 132,
+    "avoided_duplicate_bytes": 43,
+    "all_hot_estimate_units_per_month": 1.2293457984924316e-06
+  },
+  "cost": {
+    "kind": "synthetic_estimate",
+    "unit": "synthetic_units_per_month",
+    "rates_per_gib_month": {
+      "hot": 10,
+      "warm": 3,
+      "cold": 1
+    },
+    "components": {
+      "hot": 4.0046870708465576e-07,
+      "warm": 1.257285475730896e-07,
+      "cold": 4.0978193283081055e-08
+    },
+    "estimated_total": 5.671754479408264e-07,
+    "actual_cloud_bill": null,
+    "billing_evidence": null,
+    "exclusions": [
+      "CPU",
+      "RAM",
+      "requests",
+      "egress",
+      "replicas",
+      "compression",
+      "metadata",
+      "queue"
+    ]
+  },
+  "resources": {
+    "cpu_seconds": null,
+    "memory_peak_bytes": null,
+    "elapsed_seconds": null,
+    "throughput_events_per_second": null,
+    "queue_wait_seconds": null,
+    "cloud_cost": null,
+    "host_identity": null
+  },
+  "os_memory_risk": {
+    "R_mem_mb": null,
+    "mem_available_mb": null,
+    "total_mb": null,
+    "M_floor_mb": null,
+    "thresholds_mb": {
+      "降并行度_0.5GB": 512.0,
+      "协办受理准入恢复线_0.8GB": 819.0,
+      "M_floor_8pct": null,
+      "填谷申请上限_可用减2GB": null
+    },
+    "breached": null,
+    "state": "未实测",
+    "measurement_valid": false,
+    "sampled_at_utc": null,
+    "attempted_at_utc": "2026-10-08T01:00:00+00:00",
+    "口径": "按既有暂定阈值推算；未证实为获批政策基线，不构成处置或调度授权",
+    "measurement_error": "missing_or_invalid_os_memory_sample"
+  },
+  "event_ledger_count": 8,
+  "claims": {
+    "cloud_synced": false,
+    "cloud_online": null,
+    "external_receipt": null,
+    "physical_tiers_moved": false,
+    "originals_deleted": false
+  },
+  "demo_events": {
+    "unique_fixture_events": 8,
+    "duplicate": {
+      "ok": true,
+      "duplicate": true,
+      "result": {
+        "access_recorded": true,
+        "original_hash": "9cfa4ab220c49e0f471b6cacbb507b419d347e3f5c832d486e6346b636b18d7b"
+      }
+    },
+    "conflict": {
+      "status": "rejected",
+      "reason": "event_id_payload_conflict",
+      "side_effects": false
+    }
+  },
+  "note": "Entirely synthetic demonstration; cost rates are artificial, resources unmeasured, no cloud calls."
+}
