@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T22:39:31.962Z",
+  "generated_at": "2026-10-08T22:41:01.795Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2336,
-  "merkle_root_sha3_512": "caca22858c0360f5aba562d6b248d0aaa2574332f82d78812e58d55ab9cb2f1556e958398dec3fd3826235bc89b68848b387be6a5b1875bee2f1dc5f1b239910",
-  "hmac_sha3_512": "5fed17f8e9efe0e301f14f3c9f52e3a309463499516a0b0ba8b794c31f6600dd083571467b629744e104f80b051aec996d2fe2fca18250f97d9c2aca731f011c",
+  "file_count": 2337,
+  "merkle_root_sha3_512": "13879518a9390cbddd6f8777765b43ec740a42213a81ee42ca9411831a870d7b6845287c87b7d7275d2aa4be471e65be469cdc4437350eb665a2421aea093bac",
+  "hmac_sha3_512": "572260a8f502e7d4277ef73c84af03851868c2d3153765dd35bec2c2d817fa4ad663e8876a4660b41c3e094c56479139f2ef3d487a03c78b8b43bb7ca82ff441",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1996,6 +1996,12 @@
       "size": 5688,
       "content_sha3_512": "9ef561090640e0848134c0cd260926b48c32343a74933d0895121dd4371d08c8ec09a5be22a560136fea8ee267bc33f637770994ca43f8ded6c886f533b24010",
       "leaf_sha3_512": "8361f75893a817b706bc34e234b6e2fa9e6ca21cd737e9627a65c90b0e5632e6111914feeee44caefb4cffb075a8d715ed74ac463a36c7cdef28e02abc9a5b8f"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/判官重推导纪律吸收与自查_DF-AI-20261009-CAIRN-31.otl",
+      "size": 8625,
+      "content_sha3_512": "7cfc5662b7c4c07d1ee0e91924b78676ab0bbb0ffeab31342aebe09f025b15c7a9497e9151921fa90c46d8f6a9a5e3fea7de1ae1b2ddb1cc818702bc2b42221b",
+      "leaf_sha3_512": "b47bc4bbb855108bf0c0a571bf4a2eeca12e55dd9b3f283784ce13ea0643582dece833b356902fa5aeff37f648523de65ba0299208f1ff587b23c6349483bf04"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/动态完善实证v1v2两版世界对比_DF-AI-20261009-CAIRN-17.otl",
