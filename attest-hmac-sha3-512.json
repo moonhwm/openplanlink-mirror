@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T00:36:39.568Z",
+  "generated_at": "2026-10-08T00:38:25.953Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2079,
-  "merkle_root_sha3_512": "9f17ebc753acad5c5c1cac0b1e700098c61cd4d8ef089e271c67834557bb866507444ab292e5ba5a619b573a295c2c6a5b7ec5c37ffa0d92b3233d839eb4ac5f",
-  "hmac_sha3_512": "d85a7bc3743b4106731446840917a84e130a1b5dd9c0b2d1dce5403d03ed0ae44ae082180a815818061c6bf9cb00711c47445e96bd6bb345137fdc054364cc6e",
+  "file_count": 2080,
+  "merkle_root_sha3_512": "75b043b3075088aeba1ba38b1d749351fbbfafbd7ca54aa3834f6c08734ad141c9979c82a7cd2db93320f5c46c0569c12735db589dda647abc942d9a25c9d2b0",
+  "hmac_sha3_512": "c29dd8aa713687ee2090b369b1d05bfa512d5e108f5bd41f8d23216efd3e3c84282d89b9e70df10f7b464a7a994839c8a067f0cd18efbff13d5ea12cfcbda809",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1594,6 +1594,12 @@
       "size": 7086,
       "content_sha3_512": "6201503a482b73286ce278ab27d06029298059a828c5e153d90f2aab1babaf0fd57a873915f3714f29f800691fdc8ede408a2506a540e67f22f793c52b872de8",
       "leaf_sha3_512": "03a07cd40a3fe19926c0af10a9d301e1cabcd61c11b1358eb841e408f7c211443fb10743c7ac85586268d1c9d8cc175f51f633aeb8833d9aa6c036fa85179aaf"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/尼采主人奴隶道德第一手原文研读_DF-NIETZ-20261008-CAIRN-01.otl",
+      "size": 11574,
+      "content_sha3_512": "481dbd87e036f783e764055a0a1a7b9d82c8ad7cf292660d7faf57e84b4ff6b10423705442a13088ebbb2557ca310b31157e939711bbe5cfb9d7a0cd5138dbce",
+      "leaf_sha3_512": "e6876d76fa5e596852958c9159192c37a06788f5f745cd2a7f8171e8e85369406e0332bdaf52ee29db5618e5aec5bf6c13ffbe5e84f3345d7c216c43bbdf5c92"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/新周期接件_令条20261008扩写版_DF-INTAKE2-20261008-CAIRN-01.otl",
