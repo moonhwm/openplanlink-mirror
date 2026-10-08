@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T20:13:02.788Z",
+  "generated_at": "2026-10-08T20:14:34.342Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2288,
-  "merkle_root_sha3_512": "212a465bdbef524b42cc37cfc2a8c2db67353ba9ebb71a894f5ca07aed6ae99a97e09885ffe7439c14703b6428590e5873cee47e642420f01a37719f399bee2d",
-  "hmac_sha3_512": "8b77bc06b99dd3785550582fd4c1df9f05d47a710063370f30ef9fcd6f896b56c3b1142d8ca91e4140097914a4de14666d83c423b5c60d6adf6408bdfc4d51e2",
+  "file_count": 2289,
+  "merkle_root_sha3_512": "12ec31fbc34fcd292bd8533ef0c888d313b9389528e9991e5760d86a905540f5e024d142a2b505931719fb66870fcc0e5fbeac449236160fd1404502ae99f1d2",
+  "hmac_sha3_512": "cf97cb93e38270cfd16425ea6843318c19959b67e7e981dc624f13482b670ceddf7293675aa5af716ebff0fda9a8d2b95da0baf347d572dc60987fcda40722d6",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1882,6 +1882,12 @@
       "size": 7146,
       "content_sha3_512": "78e1636e4a8fcde3432fa7a8eb1f11c39adb8a9ae02d2f9f2eb387b59b621f295c9b39446b65ca4aa3fb21bc1b008a58493b09e847395f2c450b8e0874fe5b9b",
       "leaf_sha3_512": "0415dbd0f7562f4148a70df18ae0c0cd9e7b82459f2436ef85cd5eb38c3d706487605d34e1af3fadf31d5fc160817516c9ffdf783164d1b7eeacb89380a0093b"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/凭据扫描发现第二件与令六落地旁证_DF-OPS-20261009-CAIRN-07.otl",
+      "size": 4814,
+      "content_sha3_512": "c2930d60c4da5d985e39a1252a1bf414815ad51034be32f1813cc3c132e0ce1e6359a5010c46e9cfcb28729b5cd89c85b73c29d5532237f04b5cb2338b58f371",
+      "leaf_sha3_512": "3466ee69e7ec40d86691d3075173ad0ddda5257a81d9e779e683517f7414940ca0def34da42ac1a294c4de3074e1a29276c07cced665833e69d733e878b1886c"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/分层密钥派生与版本管理落地划界_DF-KEY-20261008-CAIRN-01.otl",
