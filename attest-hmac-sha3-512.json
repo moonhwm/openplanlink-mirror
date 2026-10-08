@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T05:52:26.370Z",
+  "generated_at": "2026-10-08T06:02:24.017Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2161,
-  "merkle_root_sha3_512": "1d384722aa0fd5dfc3de07f714740cb97822f25d927e8b9b9533f4b7face98df57589947c2f0f5c0124afb4b8231c8484f7bc6ec3f5177b8c7ceea2176c9f877",
-  "hmac_sha3_512": "1b1520fd45300ed7f75f67bbaeac67de747bea00b24ddbd1599c47dc3fdc87793b9b01f3a8df3bfec3cb12af961624c5242d2ca76188dc537954df7f6c0856bc",
+  "file_count": 2164,
+  "merkle_root_sha3_512": "cdaa01888c4ff8fe79274f32fe49c7b3173643b1ee8b08527de0357e98065729dcdc81b93f4365e216d151ec03795168861101464e2ce575c8a7207942a40d55",
+  "hmac_sha3_512": "cf661503717ca43598c1381e912fb89050abf2d3234daaea0b5c404fc03c4f26848e15f843f13f96cdda14568c782e90e725c1130357b8c8799ed31dffc12f12",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1590,6 +1590,12 @@
       "leaf_sha3_512": "7e916c97889cb0dc8bf86249f2a48698c358ceb3b4a62670191f6a883742403d4098fc05539a1170be327bcfa6872139a4f5a39f0e376f2ff016b76446ccf35a"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/_HANDOFF_20261008.md",
+      "size": 283,
+      "content_sha3_512": "9fa0f5165ca1eb7fff53d42f68555bcb7bcecb8b4a4824511c67abc1dd9f8462b95d8ae3d230d13ddb3d8986ca3ec0c733ac0f87d9e14f265536f91ba6d30c04",
+      "leaf_sha3_512": "636b2c0c7af01c159a0dc464cba7e6075a8def4a8a86d77b7ecff9d21a9b63c39b72f919affb4ef0b9c306d8a880601abaa11ec8b479a2a11a75f2c2683df494"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/lsbus增补建议并轨五议_DF-LSBUS-20261008-CAIRN-04.otl",
       "size": 6688,
       "content_sha3_512": "ba0001b1679a08bf70119cdfeb8fc22ae4398c27b4673344e289298059b2c3730cc66a3e461ad26b12f6ecd949bd2232cad21a06ba229439738468fb3250a30e",
@@ -1764,6 +1770,12 @@
       "leaf_sha3_512": "b58e8d0ac7f05075ca2387c6b7c09a3ff8dea68543fbd37e77ffae0b104a8a2153f20b8095ef305e350589f313b36b2493d8c39ab37d4be89405af3513b1395c"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/石敢当Cairn_A2A可交互架构图_20261008.html",
+      "size": 8508,
+      "content_sha3_512": "f8edb330796a5c326c0875ffa0700ea2d383f40ef8b08c28d33adb8946cda47e89377cf41ceae8f02774b59fb75283b2ba2bf81398dc511e3654142d047456ab",
+      "leaf_sha3_512": "3b735a96b4a63d582825de7adf1ecfbdd3dcc66e36c9552a360e08d4cd8e864576acd7da1d8b3a22e2aede8165dab154de84eb670b1b0e1685dad26fb7677890"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/署名块五轮纠正与取代锚_DF-LSBUS-20261008-CAIRN-03.otl",
       "size": 3075,
       "content_sha3_512": "22cf8ae0718532ea577123e47b952be2d3ebdbf8df62191ab47668753605ef485ead98a0165bd015f55b912fe32be71336245bd09ef5eca1f882e171b1c78e52",
@@ -1870,6 +1882,12 @@
       "size": 1887,
       "content_sha3_512": "e2650cc86fa9f996d152d28212d2337a9ff05aa1fc32208a6977f31be89ead868e4da99de913534904edc782eb2af8209d779986d51a23ed41a69ac2c490f1c6",
       "leaf_sha3_512": "bb0ffc136d8b4029694f589e346cd02711068c61fb2558ec7dc6d9a1ec5d7881bb05b815682c32c29907393db181297947f13a7210c21823e88090cfbdf9512b"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/mem/scan_report_20261008_140115.json",
+      "size": 63749,
+      "content_sha3_512": "bcde5efd7e6e84a981546082d7c19b9a2f8a0c52fbaf55b57fd737c623adbc1bf97486ad29bec17d59c68105e7fef279f48ff1297c18081274cc7f109f23bd7c",
+      "leaf_sha3_512": "369b97ddb26909ab91da50706f01732d37eb48034ab1101931a77584f60830305095926c62556b5af71a62bfd7cf660e02f669a064b21b092c83d808e8262ff7"
     },
     {
       "path": "deliverables/20261008/seat-cairn/mem/termtable.json",
