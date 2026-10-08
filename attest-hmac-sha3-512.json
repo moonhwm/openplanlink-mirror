@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T00:39:42.691Z",
+  "generated_at": "2026-10-08T00:41:14.955Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2081,
-  "merkle_root_sha3_512": "28acc19c4b9e99c8b79c497efecc237fdb6f09cbc76d26006070e9723c5eceee1424534b9ee0ef13e9c8d0e380394a567affc6018b4e285838f7a7c8e81c911f",
-  "hmac_sha3_512": "14dbcc854d8bc79d18ea42b1221ba6cc0c7d2db6e1b1e1d5483ad3fdbf4bc07330c9baa8553c1c23d52e424c07f471b785757274c04c720ffb89d61fbd334ab8",
+  "file_count": 2086,
+  "merkle_root_sha3_512": "8508dbe29d52b48eade5b274b073a9eb3c974b9b3d08091d6110fa998cfa127e1f38dcfe58c32beafde6d52f3476ec2fde065cf6f2b08b0be454572c2c06ff4d",
+  "hmac_sha3_512": "e740e8b525ee204aa84df5324bdc34adeb0987a32368f96efbfaaeca865797dc015ebb0e91f46e63b9be892b6d74e450c5917835db3189b4ddf585f45791341e",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1614,6 +1614,12 @@
       "leaf_sha3_512": "c5d1c244219117cded7fe7b0f72089f2fb0e1aebf4d425f829e7e184df376563ac2e0ec6722c2c4a1637fdfcc3030cffd5afa5befef95afa1415e28e5d2b810b"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/谱系第二篇自主个体与三处澄清_DF-NIETZ-20261008-CAIRN-03.otl",
+      "size": 10436,
+      "content_sha3_512": "840ecb3beb31fc5a3e3c0ac7c0ecf2187415d8cefca446d8e881011946b70bf22c3d491ff1c7628d5349b2b8a379287ccf159595bcf1b0f75c7c1c92e8f8ed68",
+      "leaf_sha3_512": "b1765ca57fabeb5ce613a30a4a5a70c413e9e2c363e76469a9e347cc59e8e36a05b06982649fe98d021e8cf3f7a973ec5afeb5be252ed838cd85da3178a8b794"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/资源压力耗时劣化量化_DF-PERF-20261008-CAIRN-01.otl",
       "size": 5522,
       "content_sha3_512": "66df3f728119139061dac1a41dec6af15f1658c613cbf9882918fc9e6e7d0a3e069b743b1f3f265930122f584b01a0ef7899ac0c4bd7d783a65e9eb2c4fa6d26",
@@ -1692,6 +1698,12 @@
       "leaf_sha3_512": "a53fd531a4b6004cb6719061400a28d1c69847d378b850d75d6e1ccf4f0799a312eb8505240e6db40e7dba15818926011338f72be7620b88a64b9053e7116c83"
     },
     {
+      "path": "deliverables/k3-main/a2a-plaza/gen_notice_20261008_02.py",
+      "size": 2922,
+      "content_sha3_512": "e1410ac88fbf343262fd4a1144bd754c4fbfb054dd8ddd96491428328e90a95305867e11c17bb65b10e8e01c53e89721f022fed157f43a51e5788af8eb409fdc",
+      "leaf_sha3_512": "4a983df665b19030c77b90cdf762ed7c491c726d2a3d1f46ac0cf7ca2749fe22c8bcd3bbdd68ceeaf1ca6d48efa1f855be7daba339caada1d205cbe8d559ef7a"
+    },
+    {
       "path": "deliverables/k3-main/a2a-plaza/gen_tongling_20261008.py",
       "size": 2526,
       "content_sha3_512": "2d00d83d4f7c6cc7b66457da63e641f56ea15bee5a439ae4523f82d1b0f186383114756ee44ec155d34a9fda12bc2b303fcc4119e8d076c13b1ed34797c1e188",
@@ -1704,10 +1716,22 @@
       "leaf_sha3_512": "1f6120775518b1187fbf6564dbc79f1cb102bb75be8a0de1b3541f6f1d1427a84aed88ff1396960cfab9044260d3b2176d3d73799e666b4c43f31d585ef38d64"
     },
     {
+      "path": "deliverables/k3-main/a2a-plaza/notice_20261008_02_insert.sql",
+      "size": 1978,
+      "content_sha3_512": "a1e9e4caf92847df3b020f6eb02dd652e2eef65f81b4a832eeb1be1ae17389dd5440390c5c6c4885ccf96fde745166d25d355a750f145e01e4b6893c21716a4f",
+      "leaf_sha3_512": "4b69cc561e5e22779d496e38804bb5f3e7228b479c51e5fe010b6a69449a068ef041b87b81068ee15038df3a9131265e767b819cc21a1b406c7de87aede60d2c"
+    },
+    {
       "path": "deliverables/k3-main/a2a-plaza/tongling_20261008_insert.sql",
       "size": 1693,
       "content_sha3_512": "7dff8ed3677993d834c25230cbda9bc1663f61424261fdd66200ae4f9d6538bf1abd6bece2d1ae4526eb691846aed0fcfff6af2894f663ec6c6d7bab988a4d33",
       "leaf_sha3_512": "edf004ebe84978ff263cfecbb882636ad37aaa986c903869744ffb4e3a242213f23781bd4838f40dc9a34255599112c43553669a069a9a9a451a0bdd1fd38c63"
+    },
+    {
+      "path": "deliverables/k3-main/declarations/DECL-DELTA-20261008-v1tov2.md",
+      "size": 3188,
+      "content_sha3_512": "93fb2e56674efc9096614c69f226082413f0d19c4049f7591db677014ebdd68d0c368a61f1bc4c17ea1d291fd9d4445e96e1ca6d6675a5c1dbd3f87cedf28e70",
+      "leaf_sha3_512": "b47954745b28abbe7f8fd0cb5734c2d8c3d044b9449cd254420246d595f3a82285f2e34ab665f96381f8ea6d26d142bec126568a6069fa0d96e82658cf71493d"
     },
     {
       "path": "deliverables/k3-main/dual-pillar/SCHED-20261006-01.md",
@@ -1909,9 +1933,9 @@
     },
     {
       "path": "deliverables/k3-main/watch-log/WATCH-LOG-20261008-01.md",
-      "size": 5440,
-      "content_sha3_512": "a628a63e668790e7c696da60da9925c594add02023452e619b37d65f191cc14f8e21a1fc94f1a30a3d6101a6a40641d6f729cb9a6f562808e0203a58b2d3a4f3",
-      "leaf_sha3_512": "81723dc98d090e9e007841aeb137786ddf1eb916599142c1adb8ec328f40e5c89c4ed7c7a79270f8dff9eee6acbc381a99c09be9766ad5bf79076ce0faaf98e5"
+      "size": 7085,
+      "content_sha3_512": "11caeee1a06e3d96948bc98152d96c441fb1ca12ef05fc3e4c6f7c70ee22ccca3877cda681c6d94835adbf6c0abbdc6ca27c60da0a7e547c32d64dd310643f63",
+      "leaf_sha3_512": "f2e5c8fcd60e09e050a5ed365f97c6dbb0b942a44039cb4e90f78ee8cd93ce7c8b528b5e3f09e8c9b48e686f9f4e273b179a2d8d97768939b8ecb24922a13739"
     },
     {
       "path": "index.html",
@@ -2098,6 +2122,12 @@
       "size": 2165,
       "content_sha3_512": "3874dd32358f1821224f48b0899e9583593bdfa43d89e49a2ba8b593b201337f890563caedec106d7a57bfb2e3baa302adcb1a80abe0412b3fd77cc55b0a87f6",
       "leaf_sha3_512": "fae66fd501d7ca8bd1159927b723db797804b518ef89af73249e11a879d6e407e65290555e23c223c984e264b6d4cf9ec8cf48c18c418236df74119f1efd2e9c"
+    },
+    {
+      "path": "seats/kimiwork-selector/patrol_20261008_R30-32.md",
+      "size": 2450,
+      "content_sha3_512": "b5a3353da4a2d3df7bdf33292c76c3461a006f6aa1741865d0132665a9e99b0f59d79aab934f777d1657ced9cefcc70cd848c6ce210c79145c7786d7a1ffecfc",
+      "leaf_sha3_512": "144dc3663d95f7a7780e94c1feb40ed80c53be9defc95c7cdde65427eb5900ae07915f9f0ad76e3740be08d8a3f4a678ac70237d9e80c437f627da5471e8198a"
     },
     {
       "path": "seats/workbuddy-hy4/persona_seed_v0.md",
