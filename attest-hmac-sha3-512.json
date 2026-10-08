@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T19:47:45.467Z",
+  "generated_at": "2026-10-08T19:50:07.152Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2282,
-  "merkle_root_sha3_512": "94d5f4fd13b07303bf867527c56761219e52327b14f8e5af4e0247933f256365a0e779a87e601698a5bda6ed864a19295744c2e6ffc5dd4192fcbd56103c371b",
-  "hmac_sha3_512": "2a6e4a4f7158e36eca6c0c21d79165cad52a06993f1b66414e1cee1cc0210466d721fbb3035f330d42a4d19ed8f775f4407c0c9b200ad5b9c07a0b3f40abe5d5",
+  "file_count": 2283,
+  "merkle_root_sha3_512": "83f7c7a366d3eaebb496b108e09b4d2207e231639f442448e15a34c93043aae39f058dc021bc1a9e7e897cdc282a1e86b395f16d44c8ab51bf5aef0b0bc78dc1",
+  "hmac_sha3_512": "d3d60558c637efd329e8cbb6224aa67320d9a777919865a5d1f022a51784246bd907e9bb5beb552dfefb00c6d2d2e0cf78d82d562f0af42dba8c0a519eec1e23",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1858,6 +1858,12 @@
       "size": 5342,
       "content_sha3_512": "40c2e84c262ebd72f422ef19e78388f62c69b1fa505b4abdbf677fe72572387030772a306f806c30f688f0a0c90f99c66a0e231d026594b85b0fb03f68fa77c0",
       "leaf_sha3_512": "69734ebb0c2ed9a07d05172914ed6444a4852e7d78fe0b4d06455849decd82678481409fe1b5eb3fc2c4490540d0fefcffaa20746c0bfe266873099e694dd14c"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/决策评分假阳性分析与夜班交接_DF-AI-20261009-CAIRN-05.otl",
+      "size": 7146,
+      "content_sha3_512": "78e1636e4a8fcde3432fa7a8eb1f11c39adb8a9ae02d2f9f2eb387b59b621f295c9b39446b65ca4aa3fb21bc1b008a58493b09e847395f2c450b8e0874fe5b9b",
+      "leaf_sha3_512": "0415dbd0f7562f4148a70df18ae0c0cd9e7b82459f2436ef85cd5eb38c3d706487605d34e1af3fadf31d5fc160817516c9ffdf783164d1b7eeacb89380a0093b"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/分层密钥派生与版本管理落地划界_DF-KEY-20261008-CAIRN-01.otl",
