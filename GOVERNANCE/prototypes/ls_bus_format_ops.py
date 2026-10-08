@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# SPDX-License-Identifier: AGPL-3.0-or-later
 """
 ls-bus-format-ops: 总线格式化操作
 将不同来源的上下文数据统一为标准总线格式，便于跨席位/跨系统交换
