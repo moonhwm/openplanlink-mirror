@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T01:00:44.642Z",
+  "generated_at": "2026-10-08T01:02:00.221Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2099,
-  "merkle_root_sha3_512": "888359069695e44013b97b0ffe2ea6bebfb354bf78e5ea8b2ba97a2fbc0ab635d5b0f9f09c856a2df151b207617a6c2c56699e1704723b782550fed2b69505f1",
-  "hmac_sha3_512": "b1452e2f00bd5b4e032e9780e35983044277f1216beaef1a58dfb9b7f1f468a82b57f3be33828f2cf3055ae9e8950f8c7f6fc40196c754a9023df09c8d39f34e",
+  "file_count": 2100,
+  "merkle_root_sha3_512": "35238324bed1a69b91b74e2f603d7bcea808f2d4d73a431ec7472cc74057709bde063aa9e62c07a33088a826da63d6d93817bf867ffd7fa8ef4d430fc546d671",
+  "hmac_sha3_512": "fec50daf77e93937243369b429ff203816afeb89f3d5ab0997127ef2bd793d4455243b352d0ef972d75648f43ee90dd29ff99e6995b160eaeaef75a8337b820d",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1618,6 +1618,12 @@
       "size": 9723,
       "content_sha3_512": "f575e9cdbb125b0a798918c63af974051229c638fc84085dff852ac1801bc57042e2ffb3a821c09ce38d0dc9983ce8e85311480516b37d363ea50e273e80e864",
       "leaf_sha3_512": "8dc9224e08d75cb06601e1d2db0bdcac976fbf2c14baec2012c88130241b7c63ce897978cffb5fad91becebe9a1dc305a6d34ab4f14a6297325b7ed7c411b5cf"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/方法论五则文档纪律与工具落实_DF-METH-20261008-CAIRN-01.otl",
+      "size": 6495,
+      "content_sha3_512": "b811bd2d4fd12586e89b407774694b1d76e5eb2b4339425cb4a92025f6fa93104dcbb5b99d68bcff190f3f27f34084c0f7f88a52e494cf9b3bd08da74e488ccc",
+      "leaf_sha3_512": "3ad633dbbabe1be75d028e5a167e13e4253d4416acb80efe12093d9e0407ecd9d665a5678829a3d2721b914e567d58668c56af874657dfee99150a7bb0bdca36"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/署名块五轮纠正与取代锚_DF-LSBUS-20261008-CAIRN-03.otl",
