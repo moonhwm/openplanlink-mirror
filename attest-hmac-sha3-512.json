@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T02:40:37.940Z",
+  "generated_at": "2026-10-08T02:46:59.129Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2132,
-  "merkle_root_sha3_512": "8a342a90a83c4a66c9fdfe2f895b9571f3a722753951e9ae8d5763d8460de57812395a70c808b35fd57722231dbc42c25e1c67628ac716fd1a15c02a7c2bb347",
-  "hmac_sha3_512": "5714b17faabb01bdc6486b1c651ad1589e72ada76a2641bcad243f68802efd7526fc4463b19caef0f75ecaadcc46b99aecb5e24123e775138e94d39724fe05a8",
+  "file_count": 2133,
+  "merkle_root_sha3_512": "90e212f4a79bfa8d4f5287cc3f04e234629e185444e0e92cca7a8a1fa3e908669bd34e388929d05391942a79c5231c3efa8e5342ed34d04bc95ab7749b24ed1a",
+  "hmac_sha3_512": "193b9830330194fb823d14da484cd185e33bc09a79a6fa5cbb807fcd8ac71c95d49ca906a1c21634f780a5bbe15c7644744ee525ae7d4e6586087f6292dc200d",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1798,6 +1798,12 @@
       "size": 5522,
       "content_sha3_512": "66df3f728119139061dac1a41dec6af15f1658c613cbf9882918fc9e6e7d0a3e069b743b1f3f265930122f584b01a0ef7899ac0c4bd7d783a65e9eb2c4fa6d26",
       "leaf_sha3_512": "aab7e53a5f009c719e0711d64fa15b984fc886122a2a1238df77ceaf7cd29f379152edf89ed1eb25813058f46ca6835232ec889ae50cda3198ef099d841cb688"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/首次跨源校验与抓取容量上限_DF-NIETZ-20261008-CAIRN-18.otl",
+      "size": 7996,
+      "content_sha3_512": "9c07b8cc76ed99db9b8769dda13ab4539c78d60b44a41e38c671144941d5b6ce0439ce8391df0736b17bc5e2bffecd4545b284ecd40dd69c7b28a4c93ab73b39",
+      "leaf_sha3_512": "5a6d0c628f2b7daec0025103ed12fe71432fe4b0fe01cc4a36f155292deef89afe50fb9bb21ad65f08cc05dc9b74a2cbdd0ef5139e43315d4287ad61e664a6b3"
     },
     {
       "path": "deliverables/20261008/seat-cairn/mem/capacity_alert.json",
