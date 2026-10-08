@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T21:49:15.651Z",
+  "generated_at": "2026-10-08T22:02:26.912Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2319,
-  "merkle_root_sha3_512": "a7cddd18688ee1d1a434eb80830a8dea3745bb1da32584c71b2c07b5a9c6326d08fd26cc6657829b64a9ae1fee0abe68adc13750abe87fa07fd234910d2df27c",
-  "hmac_sha3_512": "f098f9defe3b1dd08a5de1dee0c2e91ab2c09421cafda0ca22d23cd3f4378967e3087f97f3982e63ee9444754655dbedc6d9353bc5e0c39930ccc18b133256dd",
+  "file_count": 2320,
+  "merkle_root_sha3_512": "7f825da51653204cbbe768eee7ed8db1fc59aeced4fadf8475ae06609fb754a7462188507fb94d808bd6fdcb9662098f9badc853c470185e5d85a0890b8bb955",
+  "hmac_sha3_512": "b9228dda5da7b12955b9d704f2309b872fcf4ce3285eceb3bd67826c19d3206ab7521d12a960834d11ef1ee0ee2253e4fcc9d544f7da36d0d6ae5c784e130d57",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2332,6 +2332,12 @@
       "size": 6333,
       "content_sha3_512": "63a7f570f79e5df82c56d9728a1ed94bf7f1cf52797da5a09e3c9a6c8c55a7ff57c194451b5b3aed69b48cf27690bd6a5b4478dd6b757a5675897feba1bed1f9",
       "leaf_sha3_512": "7193de6f2f8dfdf472e9f363e6a8f46ac554a38c1a910e7532b540eb7b40433d45da67c88de8337d0804da54aa1710418f730e32e4039a27618fce2e396cd852"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/衍生链四段与共享面之礼_DF-AI-20261009-CAIRN-24.otl",
+      "size": 5960,
+      "content_sha3_512": "72199f2095758bf10d54b51e2ea95bb1096f909afecb82f0bef85853f61a00b2c6d04a425b8166ccbad84fe2b7413055118a37a0260a4e0f900b9738a4c82c4e",
+      "leaf_sha3_512": "7b2e7ba42844bba87e40b948e40c0623cdd67153f15a3540731d248a859eb9620fcb883aaffb650333ed378c1448821ec71eb2e3cdca89b15734f5dd911969cb"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/议题术语表可执行版与误报自纠_DF-TERM-20261008-CAIRN-01.otl",
