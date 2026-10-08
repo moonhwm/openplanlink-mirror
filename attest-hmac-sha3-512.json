@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T20:06:33.386Z",
+  "generated_at": "2026-10-08T20:11:13.869Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2287,
-  "merkle_root_sha3_512": "039045027a8e97f18dc8b335559632dac3d25bf92516c73add8b7b21462866f188d707f246cd058bcabcabde9003c257ca27ba7b691e61cacebca8cbd754afc9",
-  "hmac_sha3_512": "6bc5ed5e9ce5b2ba0c5ce6a7c7d213f7227924b4beb042b8e5dc5521830c96e0955e647cb73063eae1ff1ceb720f6d89b0996f53a41ff8aedd0bb95f20080535",
+  "file_count": 2288,
+  "merkle_root_sha3_512": "e01bcaaca68f0a43776df901f578c240dca9a1b2cc1c1c637a43818c391920b74a4652eac9c1b8aab47d0d9763605122f4f3fa3e17c6a8bb6596026d2caa9311",
+  "hmac_sha3_512": "b31f0a995ae7f2badc771a6db0db5ba552955b248314114f649c6e25449b904a10d105b4df367e3e3514396f1ff22d9bce7df1a2dbdb001d4fdef62399e498c9",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2176,6 +2176,12 @@
       "size": 6865,
       "content_sha3_512": "a7571fa428869804834bf6cf5ee86ed61628e38b72e48ca47d25da2de071259ef9997219b80ede58c3323084295f2186755664d2451bc45bcec9c603da482bb6",
       "leaf_sha3_512": "5a8f246d84de7b24a79290ae3da684211adb087bf020571dc32dca88181ff0fc7816d16a4e20acdcd504bcdd356c659996aa399b2fabaf144de60a182e77f931"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/游乐场根直取便利件_DF-OPS-20261009-CAIRN-06.otl",
+      "size": 3826,
+      "content_sha3_512": "1c2deb7e1c8583fd5aa076c0371118127f4e52525dde76f5745cd9083fc0294d1bcdcf3b8b021c23d50585de712509deca9ab1b98e7aaf6407d3b940a4e1326a",
+      "leaf_sha3_512": "00f47f550755fb5da88496f50695d724f15b548c28bf7f2cea0b789ce4a0a044cc84dbca4878edae047f3ec214220f00b0caa880f89eebfb5826b0b5268b722b"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/百炼四模块实战与资源效能_DF-AI-20261009-CAIRN-01.otl",
