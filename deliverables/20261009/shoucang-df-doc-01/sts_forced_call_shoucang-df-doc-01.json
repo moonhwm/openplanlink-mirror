@@ -1,0 +1,54 @@
+{
+  "schema": "opl-sts-caller-identity/1",
+  "run_by": "shoucang-df-doc-01",
+  "ts_utc": "2026-10-08T22:21:38Z",
+  "purpose": "主权人令「两个 AccessKey CSV 均须强制调用」之本席独立复跑（只读 GetCallerIdentity）",
+  "credential_discipline": "AK/SK 仅在进程内存中使用，不出现在输出/文件/日志；只报长度与 sha3_512 前16位指纹",
+  "results": [
+    {
+      "label": "RAM角色",
+      "file_present": true,
+      "file_bytes": 85,
+      "csv_header": [
+        "AccessKey ID",
+        "AccessKey Secret"
+      ],
+      "access_key_id_len": 24,
+      "access_key_id_sha3_16": "bffc0ea0a908f156",
+      "access_key_secret_len": 30,
+      "access_key_secret_sha3_16": "789edcfedddbc614",
+      "http": 200,
+      "sec": 10.47,
+      "IdentityType": "RAMUser",
+      "AccountId": "1276788042093840",
+      "Arn": "acs:ram::1276788042093840:user/power-application-user",
+      "PrincipalId": "208862388044657517",
+      "RequestId": "01A11D9B-BE7F-5BA4-AE55-566DD33FABFA",
+      "Code": null,
+      "Message": null
+    },
+    {
+      "label": "百炼主账户",
+      "file_present": true,
+      "file_bytes": 85,
+      "csv_header": [
+        "AccessKey ID",
+        "AccessKey Secret"
+      ],
+      "access_key_id_len": 24,
+      "access_key_id_sha3_16": "76d85139e06047db",
+      "access_key_secret_len": 30,
+      "access_key_secret_sha3_16": "cc9174aadfbd11a4",
+      "http": 200,
+      "sec": 10.44,
+      "IdentityType": "Account",
+      "AccountId": "1276788042093840",
+      "Arn": "acs:ram::1276788042093840:root",
+      "PrincipalId": "1276788042093840",
+      "RequestId": "01A11D9B-E75D-5647-A8F4-B3EB93C06136",
+      "Code": null,
+      "Message": null
+    }
+  ],
+  "verdict": "BOTH_FORCED_CALLS_200"
+}
