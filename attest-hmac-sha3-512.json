@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T17:28:22.124Z",
+  "generated_at": "2026-10-08T17:29:39.748Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2236,
-  "merkle_root_sha3_512": "33399d943fa8ae2cb2ca161259a764b7fbb8d601f485b4a29966183d60df1d2afc1a268e350024c5473f5b4c4f77ddb9d97956bee17b3c908c01f2e627fc8e05",
-  "hmac_sha3_512": "4b6e3e63482c14128127dd57b3005cd320c86b08629b194fb6d9cfa24334321a773e0f1ed881298392a96094b9c23111923f4d392ceb2c2b69ad78b1800583a4",
+  "file_count": 2237,
+  "merkle_root_sha3_512": "1e9a37f5f9595b4a79cfb5141f0731d859b9865a7683b498b4f44d4bab54adab5009ae8f9f57fcee27912888be22b7a7d75cbb89ac3c583fb3764790b91d2c95",
+  "hmac_sha3_512": "c72de53df3e97e33d5afbfdfe26c6f907bc5e93cd8cf64847817fac52a29aa74263abf523a05531593ec58c30f41daca2afe1c0d136d41b70d20607d88907778",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1804,6 +1804,12 @@
       "size": 12661,
       "content_sha3_512": "165878b07a2f14dd91afb59d579856bc4fe60874c0511dd6fdd5f10ac6a708a70fa36ae7977ac7865b56a83a7a6eb002e958f7ad8a618a8a358d0c76a48b36fc",
       "leaf_sha3_512": "44adcdb3109c6ae40b7129f7825f0bb2fe8cc96fe44dc7afdd15aa0b0f0ed0d6cc754e3ed5451c5d506cd63dbb2bc9640a91b33e33e41715d3a84ccc7baba29e"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/善恶的彼岸六章二一一至二一三及章末小结_DF-NIETZ-20261008-CAIRN-37.otl",
+      "size": 14595,
+      "content_sha3_512": "bfe8bdb53f6efcf46c97dccdd3c18b7ac2af097a130df1b6c4d0ba72b6c84ca2c89234dbec87ef6562a1cfc038822673333d8c129c64711674e69e369c30f15d",
+      "leaf_sha3_512": "493667bf7ee185fdabc5a6e16358ed7a8af5be512d1e504c986830cfbdc7ef015a17a12524f75fe042df41bc5daf5b9892797e7f00c26dd42323b0e5d9346100"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/善恶的彼岸六章二零四至二一零_DF-NIETZ-20261008-CAIRN-36.otl",
