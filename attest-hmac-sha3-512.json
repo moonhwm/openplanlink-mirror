@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T22:19:02.332Z",
+  "generated_at": "2026-10-08T22:19:26.640Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2324,
-  "merkle_root_sha3_512": "2ec39eae72a3842850a56798560d58f5aa30f637d816d6b2699df2647d49262c125c70454ebf35212eec2b14cb27d3f3c21b25f737b539d54e98d95005f86877",
-  "hmac_sha3_512": "f2f111b75b50f5178ad1b4abd655ee24fffef298b476bf2f7a29512d3c81abfd08d351e3687481b75391021aa16d17da1c987d36ff83f1d5989518880f7cfe88",
+  "file_count": 2327,
+  "merkle_root_sha3_512": "d1ebfe64cc5dbf46a7e03cfcc0f1c99a30e304d891688501ecd0d29b8a70b5d88406c701fe7df413bd8f889653fcff1195ec914f6511fee786db83c406f226bd",
+  "hmac_sha3_512": "ed07302d57dd6e8b1dbfaccb5276d169fb2ddb846948251cebcff473abcf8f716c0f898bd45b4251a0fafa7ab065ef2af2922e014935a626e2799aa564e539b5",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2790,6 +2790,24 @@
       "leaf_sha3_512": "ab1f9992ced91d34693ee9895e6d8b4cbc56b9bc7b72039bd17a69d601f5a4fc7edcaaec445dd661041f4856089cfc533c6a57bdb00b41ee4ac41e69bb0108d1"
     },
     {
+      "path": "deliverables/20261009/shoucang-df-doc-01/emergence_report_shoucang-df-doc-01.json",
+      "size": 8245,
+      "content_sha3_512": "fecdb0f6e30618c575183a0c07ad46cb951facd270b6c773335637a971c685c6919b5c96542f1b344eec1e5013d86b8395581a9b1f0eb34a445c0a5015580125",
+      "leaf_sha3_512": "4996ad2f6b4da6fc7261051d9d86abf3f925ca411cc0e000209302e63d74661af755aa69cc5f9787da02d2cf1bcfbf24310e836eaa2d95e6b2f601cf7b4df0d3"
+    },
+    {
+      "path": "deliverables/20261009/shoucang-df-doc-01/persona_shoucang-df-doc-01.glb",
+      "size": 19036,
+      "content_sha3_512": "37685e59b30a370d2901a986ff64730c27b94c07a314e5b9221b22046e74951ef3abc8d2ec61d593490b11e1c8976d31f6b2f6bf9099927049825e12ddebe542",
+      "leaf_sha3_512": "69fd3f22fb115886b700b58a1f0ad3c7b78b30ab6ea2d7162dbaa32fa703a692ed429b677adffcf27032d8593b05ea1888a828a866605fc9a64e603fbbd76cef"
+    },
+    {
+      "path": "deliverables/20261009/shoucang-df-doc-01/persona_world_emergence.py",
+      "size": 18508,
+      "content_sha3_512": "9b10bed3b5f73cd0928267d51251150517a294d279db7beed3a1b1a0997008944339f3efe6156f78fa2fa538fc5579b0ceacaecf899e7ffff7a6da3e76890cf9",
+      "leaf_sha3_512": "bae3e6e417553f1dc11f3ac2c00b3a090f9e495457e360cc80f977cdda45cdecfc853fcf71a9ba8c1a16c1c858304a823bc2804bfc2e0b826f83544838a37491"
+    },
+    {
       "path": "deliverables/k3-main/a2a-plaza/PILOT187-DECISION.md",
       "size": 2559,
       "content_sha3_512": "3970e9f77703847cb8f2e3d2b14347c17b468b668506262bfcc4d1c9dddae5c7bc14e5513447d4c904d6daf426f7c34ba4358613223e8e11460b717b1dfc3cd7",
@@ -3625,9 +3643,9 @@
     },
     {
       "path": "skills/EXPERIENCE.md",
-      "size": 32637,
-      "content_sha3_512": "9cedcb415bc04588c796a26c306818a09c62bcd9674fb3509bb02e0de24a186c211d72a0b9385a53a8b3ef6496de83ec1cc62c76d4ab07b7e4cddb62d6d26aae",
-      "leaf_sha3_512": "7e1a4adacae06e1dec9c4f4d8a812a74afc77c6804da498c1e76be978347b86f58d0c105fd8146a238fa1103d192616325113c7126050e92b8a3ec595214d2f6"
+      "size": 35938,
+      "content_sha3_512": "a9ddb1fd8a22072c1ab5900ffe82d112bfc744fed37c94edee5f4198fc21feb1329e02f6a4de5cb3e3ef76067cf613257a6221b9b3b1ad60caa8bc57b8d5e955",
+      "leaf_sha3_512": "f938dc51e3096637ed2a83a580d39a3f4e7efa66dd9e9259b67a4ee4082a6db2a1134a7d479d6574182138fb535ea4b2bbf02486bf17b310fb70b1bf1c6a388b"
     },
     {
       "path": "skills/README.md",
