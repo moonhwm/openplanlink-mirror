@@ -190,14 +190,28 @@ def main():
 
     roots = [EXCHANGE] if (a.mine_only or not a.paths) else [pathlib.Path(x) for x in a.paths]
     files = []
+    missing = []
     for r in roots:
-        if r.exists():
-            for ext in ("*.otl", "*.md", "*.txt"):
-                files += [f for f in r.rglob(ext) if f.is_file()]
+        if not r.exists():
+            missing.append(str(r))
+            continue
+        # ★v2 自纠（轮22）：**单文件路径亦须受理**（此前仅 rglob 目录 ⇒ 传文件时静默 0 文件却报 CLEAN）
+        if r.is_file():
+            files.append(r)
+            continue
+        for ext in ("*.otl", "*.md", "*.txt"):
+            files += [f for f in r.rglob(ext) if f.is_file()]
     if a.mine_only:
         files = [f for f in files if "CAIRN" in f.name]
     print("★ 术语一致性校验（%s，北京时间）" % dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-    print("  范围：%d 文件 ｜ 条目：%d" % (len(files), len(TERMS)))
+    print("  范围：%d 文件 ｜ 条目：%d%s" % (len(files), len(TERMS),
+          (" ｜ 不存在之路径 %d" % len(missing)) if missing else ""))
+    # ★v2：**范围为空不得记 CLEAN**（承"未测不列"；0 文件扫描＝未测，非"清白"）
+    if not files:
+        print("  ⇒ **范围为空 ⇒ 未测**（不得据此记 CLEAN）")
+        for m in missing:
+            print("     不存在：%s" % m)
+        return 2
     total = unqual = 0
     for f in sorted(files):
         hs = scan_file(f)
