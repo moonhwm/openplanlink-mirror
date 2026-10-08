@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T18:27:08.507Z",
+  "generated_at": "2026-10-08T18:54:04.390Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2247,
-  "merkle_root_sha3_512": "71ef38a80bcde79e40d444ed468316a1dfb659e8f5ea216c60c624259e54cad16122f91e828fcd2513656bc19456321d2f296a49dfc325d08ddde126091fdabe",
-  "hmac_sha3_512": "cbacd228dbc483c2bf2c1bd71e8c22a90f0c9a7a4a21b8d7ba0a3920b740239075863302962ef55fd2cb456e4846d5820efddd70420489ff5a6513299e2022e4",
+  "file_count": 2249,
+  "merkle_root_sha3_512": "74110e167d66e3f14c473cf669258d159333b486d3293e9ff186070570e1300ca1a8e4385d07fb92d0b838e75ae10d1008fa539e65f2c337dbda97b7a045e781",
+  "hmac_sha3_512": "c3ca18b6937832818a1cf4d6e1831acf3eaa3d56c96f8a542cae10e28ffb4e0bffddebf3342db8fe2fedc040673876a82e81d2cf58d479dd7f738e691c1d5373",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1764,6 +1764,12 @@
       "leaf_sha3_512": "6eb3376f2f83f62035b8241b3adb2aed5f6cd411ea66cf0fd1fea721ecab9b77fbc436d901582de017d873e00a95b701667643904b2636f0bc8126b8e912d4d9"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/初始化收口_文档读取面14比14_DF-OPS-20261009-CAIRN-04.otl",
+      "size": 5688,
+      "content_sha3_512": "9ef561090640e0848134c0cd260926b48c32343a74933d0895121dd4371d08c8ec09a5be22a560136fea8ee267bc33f637770994ca43f8ded6c886f533b24010",
+      "leaf_sha3_512": "8361f75893a817b706bc34e234b6e2fa9e6ca21cd737e9627a65c90b0e5632e6111914feeee44caefb4cffb075a8d715ed74ac463a36c7cdef28e02abc9a5b8f"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/后量子密码与审计链延迟基线_DF-PQC-20261008-CAIRN-01.otl",
       "size": 6103,
       "content_sha3_512": "f055adfd2bb51878ff2a3a430aca5d3ffbcdf6401eb980779814387cf0cbdb262389b921592d200d043ba52669f0f43ee2eccb415e0d5c301f782d1e987904f0",
@@ -2182,6 +2188,12 @@
       "size": 8018,
       "content_sha3_512": "929cdd2f1f20c59c9d779d7a15dfd518bc2e4d86eb51c58333a222edbe1a9e501c2e54a18d15b39b992f2606dc0ab6fc42f1bccc8995c501e23162095b9d5181",
       "leaf_sha3_512": "9bf3cb3d8eb98ba3103e6e68a0ed65f5b71aaef7add57eb37ba3a665c9e373bb5156529ae1893bad4a4adba69132eb8b023b9a3cbba3fbb2f456d4b29afc8e67"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/mem/read_index_v2_DF-OPS-20261009-CAIRN.json",
+      "size": 4392,
+      "content_sha3_512": "44c2eb52d254979ddaceea8f5b7543f134fa8e782ac0066bbadf8e307a43a0a3763915e841e3766376dd1af49e1923e9179f32ae0522c9def24f6effe114caae",
+      "leaf_sha3_512": "9774cfa6c0c31e8e97de8d6f963929e9dfffdbf568bc79377a59f02b61dfa42eb136d73659bb442f87437733aea571d70c2a6e66e253456f190a166222ccbc95"
     },
     {
       "path": "deliverables/20261008/seat-cairn/mem/scan_report_20261008_140115.json",
