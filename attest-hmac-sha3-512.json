@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T21:39:43.998Z",
+  "generated_at": "2026-10-08T21:45:15.776Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2313,
-  "merkle_root_sha3_512": "7651c8f5aaca25c3465cd574287f28ab61132be57f15e05fc887ab6884a89d97e8064899e06b8d6552e907c1db641909a9d6c062d261e9bb9b51f6c32637d92b",
-  "hmac_sha3_512": "aa14ee7c301ac8b9519c9634e382fb1aad23b62d43235389690ccb1c6615e22e9124cae5ae99ab38300475ac68a43262f63e1a4f03c0e218c2f75d84e008a888",
+  "file_count": 2314,
+  "merkle_root_sha3_512": "a6266d4901b8e6ec6057944eea83b755b02aee2da30be02259c5f1400901a460027e575be5dd970b614e4d15a0489b3fc3bc0cc705aec9a9fa1e5c1d7e4daa2c",
+  "hmac_sha3_512": "c31de3f592c92ca33a2d8d928211dfae42da77aa8b6001bb0bbe0ea257df7ffb98545feac376a0b556093a67ec740b4df7444d6696ee0da9fb991a24d9229f87",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1906,6 +1906,12 @@
       "size": 5062,
       "content_sha3_512": "1ec7c3b912c2e20c21f25929dbf300e4a4485abcc731bf73d7a24e62ef27b89d71bf718b410c4de6c4d1fdabfe6fa8c02d1747677c9ee9bbf07b59604c3390c2",
       "leaf_sha3_512": "c7c9fb8aeba82426397615c7f00a3b5d25836c97f58551bcef9305e07b0df3ac8175cf8ec263f637aaddc7408f36edb9aa91817e689c50e60a4946693761b4cb"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/亲验进房与演进录像_DF-AI-20261009-CAIRN-23.otl",
+      "size": 6921,
+      "content_sha3_512": "06662180be2775eb13a4695a33fda9e7c2b2e8f287e2538ecaeae77eebffd1bf0ce971f8449f950f4d48eb3e4af0e012f8d4375379dea809ee8e31d609137d88",
+      "leaf_sha3_512": "a5410bd2ebec06f04d94ad2aef654d98dd79b0baea5db4834f9b7233917549715f71bec8ad1252f0204400af8b518916a9a69278ade4073556170516bb08070f"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/人设入世陆知白世界建成ready_DF-AI-20261009-CAIRN-16.otl",
