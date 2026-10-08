@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T19:35:47.705Z",
+  "generated_at": "2026-10-08T19:37:50.726Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2275,
-  "merkle_root_sha3_512": "432a598bcb5fccc6d7c484187ed1527a6df4ec7cd1d9dd87312d49e498a4a1ee1e9aba63a6f11610494731f5bcea780ae70d9aacf396318bebb26fae61f57947",
-  "hmac_sha3_512": "bca151654defe081ee15645377d4f44938c830c799a605821c5bebfeac3498656009dd08af8f324313b549190f59f8efe7d3aef4014b7e323127fdeab3e42add",
+  "file_count": 2277,
+  "merkle_root_sha3_512": "4d596a387cccced250d6d6d317e22d15d89b087f6bbc822e2255bafc21c91b46f26215e25f6a56a26d48911a8deb0020e758962e5eb6fd828d9ed30744133a40",
+  "hmac_sha3_512": "4640831fce1d3863101a5be9f6077726eb5c14e74e4bd5cd707d743566a0c20543836a6659951acc9b1a8b2fd21f9aa406314f90297bad904837d95257037b76",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2142,6 +2142,12 @@
       "leaf_sha3_512": "b58e8d0ac7f05075ca2387c6b7c09a3ff8dea68543fbd37e77ffae0b104a8a2153f20b8095ef305e350589f313b36b2493d8c39ab37d4be89405af3513b1395c"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/百炼四模块实战与资源效能_DF-AI-20261009-CAIRN-01.otl",
+      "size": 7002,
+      "content_sha3_512": "00135094b31c93ceb53e59ac5783bddc55922d013e6d9aeae1ac9a15a77b6955ec0313a9828818b34da4ceb01444c442098c281e080cee8654e99c7bef63738f",
+      "leaf_sha3_512": "44c6c6593dd970b447e58f90d9322e1454541d3b099060bec7074414246241607854de22d4cc75b0ac0679afbcf70f4c9c79f46efa55737e78da3880d483e125"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/石敢当Cairn_A2A可交互架构图_20261008.html",
       "size": 8508,
       "content_sha3_512": "f8edb330796a5c326c0875ffa0700ea2d383f40ef8b08c28d33adb8946cda47e89377cf41ceae8f02774b59fb75283b2ba2bf81398dc511e3654142d047456ab",
@@ -2284,6 +2290,12 @@
       "size": 405,
       "content_sha3_512": "9c0a4ed041d938f7bce8c4c497cf7d101342b023e04ab76dc016974922ac9cc7bd48c628af54d1951f6a33ddf61707c81640135e33f91d156ec38fe88c00b7fa",
       "leaf_sha3_512": "9b4704b5a394ad980df193e90c9464658305bc9f1a745d1db6d9f2e01553c814cb9692cce24171f34c9e2b40d82960c7b87a1e0c8473717e070ccfbc8fa6b31a"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/mem/bailian_four_modules_playground_20261009.json",
+      "size": 6668,
+      "content_sha3_512": "f4de150d0ae142a610e3e2c14045b1564005d3b6b6f7b50d2dd89d05cfccfe0b4dd67ee0404c8890f6eedb7f2bf19c0f0fefc0317d87fe9f4dd5ed91962457d4",
+      "leaf_sha3_512": "60c81ba1849907f7db60c876bfe3dff0857628faa76ab11d45b3e1bd1e17d14c5793094d3d06b95a35680e93e252deafed3b05b406110b2d8a4a243357c1a5b6"
     },
     {
       "path": "deliverables/20261008/seat-cairn/mem/capacity_alert.json",
