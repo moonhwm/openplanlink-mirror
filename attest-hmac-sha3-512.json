@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T02:35:59.966Z",
+  "generated_at": "2026-10-08T02:38:59.938Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2128,
-  "merkle_root_sha3_512": "f0d06a51f8891f15cac93403ad23366f46986a11ddb6089844fa66acd1911e4ae283782105fd734c716b14913a8352f0341a4403e346a1f51eff7e0911828094",
-  "hmac_sha3_512": "0e24e2119c4905e3f892e971537e21b2419267252df34b3a63f4d503f4a8b0c814a0ab847ed3bba4062c4bb86eef437ed35b0f12fd647ae9d6c236ff154d9192",
+  "file_count": 2131,
+  "merkle_root_sha3_512": "8507855068bdeef6e7b6736332056e0317462f2587311130661ebf320ca50f20f5ef416a0edbace6001b0b675dcecac64ee77eadf372d04b3a150d6088c15b0d",
+  "hmac_sha3_512": "96c3ddd89189e8fa2d944f6a857ccb44819f0393686dc1e8fec82bf0fb071c67b3be1b274a523652d912e1d812f5807c50b963f7065f0fe9d1330c4eb8f6851e",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2569,9 +2569,9 @@
     },
     {
       "path": "skills/EXPERIENCE.md",
-      "size": 22854,
-      "content_sha3_512": "73feace6a1ecb4008186ba9a85f36edcf469e65343bae64587c0fd6c29e0d8076a2e36f93c63358f3fb8beb772f167c58a6fc26a69b88585651eb978e5cc1e61",
-      "leaf_sha3_512": "d5dbb4cfb9cf1aa45d5427d5967649fe3ae5d57ac634d00cac56ebc3ade35e5c035eb011876115300e7118e07b5e7f9e9f7b5c540f65b51f12d85a5b9efbdf23"
+      "size": 26217,
+      "content_sha3_512": "662402a00d647ff4451f44a1482a8c2e97053637d819ddd92213afab3e2877aa2fd0d2a7dadc1c979c2d0ad712f2380ac304c803a3e20910bcf0fbae0b40d446",
+      "leaf_sha3_512": "c092f6f39a5e78f6b724dad3eefaf4de3e130504d250054f758f5253530d49bb5b9c84954fc13f37836644f6cca151d5d11b49c78d6ff0a0daf73a659b29833b"
     },
     {
       "path": "skills/README.md",
@@ -8545,15 +8545,33 @@
     },
     {
       "path": "skills/opl-document-preflight/SKILL.md",
-      "size": 2126,
-      "content_sha3_512": "8edad7f294ef0606a6d624430cef9c3e92bef46cdeedf89398bcf1cbd813876a10accf1719f881f1aad7dc6d2bda2959720c90228c57883b15192e51de1b5340",
-      "leaf_sha3_512": "7d011076879002e36bc3336409ff66f5a5dc1225ffe97a804ba18c1d7b38cdea4bfa709f8e79f2bfcc2a24cf5df0ccac32fb5f33f647054261e19a522a961627"
+      "size": 3109,
+      "content_sha3_512": "9ae9828fc1d433f5b3eb4df4dd690e741b48cca96d7876d683858459c21a5720944f10d7f03f581bfc1fcbfa86853e225dc066dc6befbf43f7cf800fdb05d65b",
+      "leaf_sha3_512": "13f3f3b56916f8c15e85ac326b0e4b748baad543b85e78a71b9b07168ce5f77f019a091131c6ae90979ba427d5620affc7f9de7ec98e74a94197168ecc8876e3"
     },
     {
       "path": "skills/opl-document-preflight/references/review-basis.md",
       "size": 2657,
       "content_sha3_512": "d899c3c6670e0306bee97866876ea6ca4041bb778dee8364390b1e3216a810c26b7ea7766f90729b0f65975972a3b32b7f0c6d0445f6e27a9f94f3f21a5a1ada",
       "leaf_sha3_512": "21f5e89ac4ecf9c8574e02cf3bd84c5801e09e6d3494a9328e0617ed9aff5dcd3586977fcdadecd9b4a29d1e326d9aa25ea7366d635f2bec9e863b8e5f99485c"
+    },
+    {
+      "path": "skills/opl-document-preflight/scripts/corpus_refresh.py",
+      "size": 9787,
+      "content_sha3_512": "c7215a0022de5625eb4aab99ba7ef40b3e0f74d605eb2e68b836e263e203fa3d5ce48c1ab31fd9b1a148c0b9ec1e4a5565e2e3a5dcd3351b4fb31835fcef539a",
+      "leaf_sha3_512": "13bbef4322bf1f4c10ceb825426a3615ded685fa09cd99a74746c3cacc8dc69a224505c835aeb4c93789ddecc4da039e2bb31fedcc1cccbfa420fd05d67ae252"
+    },
+    {
+      "path": "skills/opl-document-preflight/scripts/ooxml_meta.py",
+      "size": 22197,
+      "content_sha3_512": "5360cec8378ad02787efa8c1cae07501befd9768d7a370af21d0d26ac9f159a4c3475f873233d07bda7ce90d054f4b8f6e897cc1158bfd6759b7ab6648d3f20b",
+      "leaf_sha3_512": "a3fac638aedcbaa01dc2020099efa7c15a03be03aba959c372b65bbd12431bf9cb86ac667eda165986e064cbb45a8f71685045174ac8803cbe89955460a32985"
+    },
+    {
+      "path": "skills/opl-document-preflight/scripts/p6_custom_probe.py",
+      "size": 3090,
+      "content_sha3_512": "9655e6ffc04f6c334fd57024d7f5c25df135354f9098a0c594a64c8a417c01b3e2400b000064a3d1c67fa69a9c5d5e4d6bc97793ee167a6facfb69228a64f10e",
+      "leaf_sha3_512": "5bf7b6591f0aea9db77ef7b679c0b5319bb115ca2c5b7c3bf1c82cce444182a8b98a4010405566b1a6fefc816b0241063da541e861de695b8cec7367d6d80edd"
     },
     {
       "path": "skills/opl-document-preflight/scripts/preflight.py",
