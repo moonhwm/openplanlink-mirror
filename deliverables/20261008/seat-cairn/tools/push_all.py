@@ -197,7 +197,11 @@ def main():
             else:
                 # ★轮17：**失败须分类**（承"未知≠否"与"报告值≠核实值"）——拒绝 ≠ 不可达 ≠ 鉴权失败
                 low = (out or "").lower()
-                if "non-fast-forward" in low or "rejected" in low or "fetch first" in low:
+                if ("pre-push" in low and ("未签名" in (out or "") or "禁止直推" in (out or ""))) \
+                        or "unsigned" in low or "未签名" in (out or ""):
+                    # ★轮33：**本地钩子阻断**之独立分类（此前误报为"鉴权失败"）
+                    why = "被本地钩子阻断（未签名提交）"
+                elif "non-fast-forward" in low or "rejected" in low or "fetch first" in low:
                     why = "被拒（非快进：远端有新提交）"
                 elif ("could not resolve" in low or "unable to access" in low or "failed to connect" in low
                       or "timed out" in low or "connection" in low):
