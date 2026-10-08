@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T02:30:44.689Z",
+  "generated_at": "2026-10-08T02:35:59.966Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2127,
-  "merkle_root_sha3_512": "e612c5d11f6d432ffce3e1eea342880229936bea3b9daa157e2d232f19e6f0ada5776d34e8f38d126d56888ae2a160b217030af2c48ef42663705967eab12224",
-  "hmac_sha3_512": "425bbf0ba127aee85ce5b55f0f08ef929af87b6d5d2d5d0267df10828bdd1d960b8a297c4b580106cc3995f0203eb799a11c66c0b2beaec8920a2f4f9f8aa9c3",
+  "file_count": 2128,
+  "merkle_root_sha3_512": "f0d06a51f8891f15cac93403ad23366f46986a11ddb6089844fa66acd1911e4ae283782105fd734c716b14913a8352f0341a4403e346a1f51eff7e0911828094",
+  "hmac_sha3_512": "0e24e2119c4905e3f892e971537e21b2419267252df34b3a63f4d503f4a8b0c814a0ab847ed3bba4062c4bb86eef437ed35b0f12fd647ae9d6c236ff154d9192",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1650,6 +1650,12 @@
       "leaf_sha3_512": "ef600dd2ed22da4e00dd3c48fd5aad8d9993516a6a93c0753a2a7db99b58bbf232209b46ae85f36f1d2788fd15122c84bd0707e3480d0b9c2a4b2fb434c5f22f"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/善恶的彼岸第三章神迹即解释之误_DF-NIETZ-20261008-CAIRN-16.otl",
+      "size": 12598,
+      "content_sha3_512": "79de59ac048ea554c062f32bc6e36c99f289a95f39a3ab1440cc159dd592a20fdc4aea91ca465199fbec16b9018b403c0095ac3f63ff2750cd060c535274e62a",
+      "leaf_sha3_512": "865d0bf3fb5d2c8a5e9c82c26e5dc29bab6560b6a77816469249c60d72a7648be4260246ea3d294e19a375fb22db0da7f7efc7ef379499b8e685950116a8f333"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/善恶的彼岸第二章与自辩之戒_DF-NIETZ-20261008-CAIRN-13.otl",
       "size": 11969,
       "content_sha3_512": "6d8aba52b8b82ad77ddee2d5844cdb93a85ef62615ae81872c2d0bdebc30be9ad41ac7537921a406d9642a948171fa97cbcaa5944973ae36043418e003899250",
@@ -1897,9 +1903,9 @@
     },
     {
       "path": "deliverables/20261008/seat-cairn/tools/push_all.py",
-      "size": 13232,
-      "content_sha3_512": "757a0d76458e396b54ca5cc729aec50d33d8be52f918173a0782ed6936ea130368bfa892a021cdfc524e4a08b8a50825cbdef9793c7c15c40a575dbdbc0358cc",
-      "leaf_sha3_512": "8ac12cf064d58f01cadceabe2bcd1fa8378cbfedfeea22259149daa76231c102e32ea3c0028555265c6e8c4812979800507583feb46f71980fe6ebe78ebb12ab"
+      "size": 13410,
+      "content_sha3_512": "e37464dc3e88473b3a217d0bc575b9ce42e9ed147c27b9aa3899497437a159fe4b4c51a02a444aaf90eb662f67a9313b4b47e39f4bbb48d1279e121e44e1c4b5",
+      "leaf_sha3_512": "e4328eb572993ce53c32bd06a38b84516bd9955e0c4dc84451ea9461d70d3ff23563016b647960d68e0e98fe1b59a925264cbb4e0555a4cde843cddb5be715ef"
     },
     {
       "path": "deliverables/20261008/seat-cairn/tools/sig_block.py",
