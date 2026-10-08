@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T03:20:38.729Z",
+  "generated_at": "2026-10-08T04:53:58.074Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2142,
-  "merkle_root_sha3_512": "ae75e9856edd52c90705d811b7325f02ce23426c4a2c07aede2266f0fe6c8be4561e7cfffe0614a28d3701646151aa331fa2291c4a83b01859621a35513fc49f",
-  "hmac_sha3_512": "93fcea8a1f3d296e9191035dbaeb09774df3cdf307ee5ee3ce46201b1d182e41dc04799b2802fd3c18ed77c12914d394939b8359b02943407c411f616a767dc7",
+  "file_count": 2144,
+  "merkle_root_sha3_512": "2634b36eea846d3f20f785c668a6b5a5395d747595c342474d41979332a5742ecd84bb921db0dd68a3eff309c34635c1b57dc072575227591720dbd825d53f80",
+  "hmac_sha3_512": "84ea9cfc7a056ab9b192b9b0c329f6fd3d6b7ef5bf7b3ffd7e04e42ebbea6909d031a6f2e85f856e8515e11121d57737f3d3db1157747b2243b38fc0ceef8238",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1576,6 +1576,18 @@
       "size": 742,
       "content_sha3_512": "7a265f289d664e1f2dd41758e997aae808f31dc0aa24cb73f92753ba97442e6dfdf0bb260cb2df579e887c65352b5ee2fcbc1f4ae62be8cddea11abefdb5340f",
       "leaf_sha3_512": "7f59c282142c95e688bccf955bdd636317182ca4eacb37ddc54f58fe4639dcc0aa73869ad08154662cca5b14b3a209d2cfea5aa79870c57a90f3739cd5eff737"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/bus/cairn-context-20261008.manifest.json",
+      "size": 1166,
+      "content_sha3_512": "d0b32a0a8e8da8480d2e839340240a255f13a226498783fbbfcb32ecf8b6d9089b4bf3d1749131679f7c2b9f1593c95dd105cef6ae32af2c21ef3895245cc47e",
+      "leaf_sha3_512": "ec4bbd6b17db2587bdbcd62a55804c5c419c83095d330f60615fa6443cf1eec8420d905173477fd0e4213f532cfbad06c43ab2eba67b7a73a4697f6d6019f1fb"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/bus/cairn-context-20261008.upack",
+      "size": 388513,
+      "content_sha3_512": "226ff00d2bcba51392aed162b8a60d9140b42abdf1856526a13b0154e86aef9f4c5cd3bf25a14d9426c2a86a73f8a13facf58c070743cb9e1e059dc49e021005",
+      "leaf_sha3_512": "7e916c97889cb0dc8bf86249f2a48698c358ceb3b4a62670191f6a883742403d4098fc05539a1170be327bcfa6872139a4f5a39f0e376f2ff016b76446ccf35a"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/ls监测探针与两周基线与技能下载结论_DF-LSBUS-20261008-CAIRN-01.otl",
