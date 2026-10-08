@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T17:31:04.393Z",
+  "generated_at": "2026-10-08T17:33:46.191Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2238,
-  "merkle_root_sha3_512": "b867f17ee4a96dd9199b5ee4a4f906c5ed40d6de049d9b36bbcd46595ba5ce29056a9a4a6a508e1fc7043e116bd36324e55ffcf7ba1a827f044ef32b2633d8de",
-  "hmac_sha3_512": "10a771476a1641189092ff31313e6358de30bd40d4eaf6be4013e2d05ead36f4fd487587dbccad1e0a62a3a7e72d7840461afaabb1e149cf4f4cbcf563565194",
+  "file_count": 2239,
+  "merkle_root_sha3_512": "67dcb8cf0fc9f8ea4b5427c742970c144cfe10784fb48d3ceee58c83592404b46e4babc8114b91fe3985d301412435a41b2a598427b7eec822fc93a5338be58c",
+  "hmac_sha3_512": "8654b22237b37b465c041f96bdd487ec478fc4175480e51a2705da69ac4d789544ca75c48bfcccc0b2b50606c210b8c1b1ae3750e099591475b394f42cb0d3ab",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1774,6 +1774,12 @@
       "size": 11899,
       "content_sha3_512": "ffa236d59a52298a4a7822b9be75ceffe70d04c43ca34294d0a8585f357e75c1737641abad8ee4a70cf88c69eb89aee35fb3c1d5b5f00e8583447f1f2dcc495e",
       "leaf_sha3_512": "5e990dc741b83ce8e5b8d2da9fab0d627ad17c3879d0e5e0de27f1544df8d63063227b03737771dcbf05cd164f34d7f8223079c0acaaceb26384f040700f8fb4"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/善恶的彼岸七章二二一至二三零_DF-NIETZ-20261008-CAIRN-39.otl",
+      "size": 28828,
+      "content_sha3_512": "dc792a55e8f777c3eea3bca9789f5be2cd9531373394eb95c4f5daa0ee591e5d0f32a3109cd02b47becd9808765b831550b431b698486261c7297b322b224c61",
+      "leaf_sha3_512": "e25119fcd404c962d84d2d2611c02f530d6ba5b2ad05da1c1e1369c01911210a25810826f04e4c3a1865841ccd8a12a6637db18032b3f5e89757e4006cb63454"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/善恶的彼岸三期五二至六零与浅表保生智慧_DF-NIETZ-20261008-CAIRN-19.otl",
