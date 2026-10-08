@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T06:02:24.017Z",
+  "generated_at": "2026-10-08T06:17:10.813Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2164,
-  "merkle_root_sha3_512": "cdaa01888c4ff8fe79274f32fe49c7b3173643b1ee8b08527de0357e98065729dcdc81b93f4365e216d151ec03795168861101464e2ce575c8a7207942a40d55",
-  "hmac_sha3_512": "cf661503717ca43598c1381e912fb89050abf2d3234daaea0b5c404fc03c4f26848e15f843f13f96cdda14568c782e90e725c1130357b8c8799ed31dffc12f12",
+  "file_count": 2165,
+  "merkle_root_sha3_512": "a7431d5b7943d5db3a8008668a0018bafcebae892c4d9039dde56ed263e1be6d6a30af0a0efaa101d0754c98be69e008f9e0162b2160f98fe3d391d08247ca6d",
+  "hmac_sha3_512": "bf79cb5f96583a33d43efcc955660eb57908a39d30723fa8c1686443f95c64f725dd95ffa41ab3db132749af67e20b9abdb807ffd0245f41d6abce7da211035d",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1984,6 +1984,12 @@
       "size": 18740,
       "content_sha3_512": "f815aed460eef255666c5988a2de0613feb4de34feaed8dc8f0bee4db0fa82fc1c310c3b918a309f161c20b519b19571cbf6d4c3296f39c265747b5e9ff2d083",
       "leaf_sha3_512": "7d83d8c4119750255eb0c7bb43b6fc7c430be697d038e66073736503503a86749c4f92de8248aa99be787be200df3452002d06586a4206312a0d85e9075daf1d"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/tools/verify_hub_merkle.py",
+      "size": 8126,
+      "content_sha3_512": "e90f326d66fe2cab5018df550a05c4c45d3990b76f68b3337802fbce11bf6159c4524e56ffe8dca626bcb183200150e878d172091a18e4b377b65abd7c12c107",
+      "leaf_sha3_512": "a93ffdf9d918fd3ca08b647d69d88fb25d7bb3024d41d4ef38e412f6d203d72f0a380e2a6f73dd569e380748461bbe8caeeda26b39dfb75d8092bda8cd119a7a"
     },
     {
       "path": "deliverables/20261008/seat-cairn/tools/virtue_audit.py",
