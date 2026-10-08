@@ -3378,3 +3378,64 @@
   11. 新全局声明新增开源项目clone指令待执行（canvas-ui/arwes/MiroFish等）
   12. openplanlink-cairn仓库待创建（哲学研读成果唯一正本存档）
   13. Deepseek峰谷时段已修正为18:00（原20:00）
+## 2026-10-09 03:55 · 砚坚（码道·GLM-5.2 ArkTS神经中枢席）· 夜间游乐场开园——百炼接入+seat-naming-ops+全局声明重读
+
+- **改了什么**：
+  - **百炼AccessKey读取与环境变量配置**：读取桌面两个CSV文件（RAM角色+主账户），API Key配置到环境变量（不落盘不入档）
+  - **WPS云盘刷新重读**：扫描openplanlink-docx目录，发现大量10月9日凌晨新文件（CAIRN席和HY4席产出）：
+    - `00_席位上手页_读取与通道_v3_20261009.md` — 四通道全部打通（302.AI/硅基流动/华为MaaS/国家超算互联网）
+    - `01_读取便利件_ping实证_DF-OPS-20261009-HY4-02.md` — HY4席独立实证（14/14桩可读，8/8本地正本UTF-8可读）
+    - `00_读取指引_故障排查与云链接清单_20261009.md` — 26件云链接清单
+    - `OpenPlanLink全局声明与Agent-to-Agent网络建设纲要.otl_正文副本_20261009_CAIRN.md` — 70KB全局声明正文
+    - 多个OTL正文副本（CAIRN-A标记）
+  - **全局声明v1.1.0重读**：完整读取308行正文副本，核心约束确认：
+    - 百炼四模块：世界模型（世界探索/实时导演/角色演绎）、决策模型（分类/判断/评分）、向量编码与重排序
+    - 302.AI通道：`https://api.302ai.cn`，1003模型可用
+    - 国家超算互联网新打通：`https://api.scnet.cn/api/llm/v1`，33模型
+    - 全局声明新增GitHub(GitCode)作为目标存储节点
+    - 全局声明要求调用@seat-naming-ops与@persona-iteration-loop-ops进行初始人设设定
+  - **seat-naming-ops技能文档创建**：
+    - `GOVERNANCE/skills/seat-naming-ops/SKILL.md` — 完整技能文档（8节：适用范围/命名规程/三镜反问/改名规程/登记簿格式/联挂/执行检查单/已登记席位名录）
+    - `GOVERNANCE/skills/seat-naming-ops/registry.json` — 登记簿（3席位：砚坚/石敢当Cairn/沈铎）
+    - 基于zijue-self-determination §3自名与改名规程 + 三镜反问细则构建
+    - 三镜裁决示例（砚坚席）：苏格拉底镜定义清晰反例不成立/叔本华镜非意志扩张/尼采镜敢承诺永恒轮回
+  - **百炼服务Hub原型创建与测试**：
+    - `GOVERNANCE/prototypes/bailian_service_hub.py` — 437行完整原型脚本
+    - 三大模块：BailianWorldModel/BailianDecisionModel/BailianVectorRerank
+    - 通道策略：世界模型/决策模型通过302.AI代理百炼qwen-max/qwen-plus；向量编码/重排序待DashScope API Key
+    - 健康检查结果：世界模型✅ 决策模型✅ 向量编码⏳ 重排序⏳ → overall: degraded
+    - 世界探索演示：qwen-max成功输出A2A网络节点发现场景探索结果
+    - 角色演绎演示：qwen-max成功扮演砚坚席位夜间运维场景
+    - 分类判断演示：qwen-plus成功将"Git推送超时"分类为"配置问题"（置信度0.95）
+  - **k3-skill-os-installer.zip解压检查**：确认不包含seat-naming-ops（仅有external_seat.py等无关文件）
+  - **seat-naming-ops下载失败确认**：两个URL（huaweimianmoon.ok.kimi.link和skillgiven.ok.kimi.link）均返回404 HTML页面，seat-naming-ops不在90件公开技能库中，需自建（已完成）
+- **为什么**：
+  - 全局声明要求"夜间游乐场开园"，百炼四模块须强制调用
+  - 全局声明要求调用@seat-naming-ops进行席位命名，技能不存在须创建
+  - 每轮须刷新重读WPS云盘指定文件
+  - 所有技能从GitHub上传/下载为唯一正本
+- **如何验证**：
+  - V1：百炼AccessKey读取成功，环境变量配置成功（不落盘） ✅
+  - V2：WPS云盘扫描发现26+件文件，10月9日新文件12件 ✅
+  - V3：全局声明正文副本70KB完整读取（308行） ✅
+  - V4：seat-naming-ops SKILL.md创建，8节完整，三镜裁决示例完备 ✅
+  - V5：seat-naming-ops registry.json创建，3席位登记 ✅
+  - V6：百炼服务Hub健康检查——世界模型/决策模型通过302.AI成功调用百炼qwen-max/qwen-plus ✅
+  - V7：世界探索演示输出结构化探索结果（环境/对象/路径/风险） ✅
+  - V8：角色演绎演示输出符合砚坚人设的角色回应 ✅
+  - V9：分类判断演示输出JSON格式（category=配置问题, confidence=0.95） ✅
+  - V10：API密钥不落盘不入档 ✅
+- **遗留**：
+  1. **百炼DashScope API Key（sk-格式）待主权人在https://dashscope.console.aliyun.com/apiKey创建**——当前AccessKey不是DashScope API Key，向量编码与重排序模块待此Key配置后启用
+  2. seat-naming-ops与persona-iteration-loop-ops联合执行席位命名与人设迭代——seat-naming-ops已创建，persona-iteration-loop-ops已下载待执行
+  3. A2A大讨论5项候主权人终审事项
+  4. 13件wpsonline文件须主权人登录kdocs.cn手动导出
+  5. 记忆分层架构阶段一（数据生命周期管理）待启动实施
+  6. 幻16安全组需开放4174端口
+  7. A2A节点发现Phase 2（本地心跳代理）待开发
+  8. HarmonyOS SDK配置需主权人在DevEco Studio中完成
+  9. 尼采哲学研究待深入原典文本研读
+  10. 新全局声明新增开源项目clone指令待执行
+  11. openplanlink-cairn仓库待创建
+  12. F-1缺陷：read_index_v3中CODEX-01条目via指向错误（HY4席发现），待CAIRN席修正
+  13. 索引件应双份存放并版本追踪（HY4席建议）
