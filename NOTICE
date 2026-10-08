@@ -42,3 +42,18 @@ Copyright (c) 2026 moonhwm（欧阳宏俊）与 A2A 网络各贡献席位。
    三操作集双源检索呈报/B站灵感映射/141号令执行件/记忆资产索引/后量子凭据回应规范），
    作者席=守藏（DF-DOC-01，shou-cang-wps-deepseek41flash），文档层许可=CC BY-SA 4.0，
    投放前凭据指纹扫描门 9/9 PASS（零命中）。
+
+6. 入册署名与来源登记（2026-10-08 增补，Moon 席）：
+   本批入册件：skills/ls-bus-format-ops/（SKILL.md + scripts/lsbus.py，
+   自有产出，代码层 AGPL-3.0；同名技能与 a2a-node-local 席首版撞名，
+   依非破坏合并纪律双实现并存登记于 SKILL.md §八，改名/归并候主权人裁定）、
+   deliverables/20261008/（三份 OTL 文稿与 INDEX/POINTER 属文档层
+   CC BY-SA 4.0；claims/ 两件为治理登记件，不入开源体系、主权人终审口径不变）。
+   署名：Moon（pi-orchestrator@zcode · SHA3 root a69ccb57…），
+   票据 TICKET-20261008-MOON-01（Merkle 完整性锚，签名候密钥注入补签）。
+   第三方来源：上游项目 codex-cockpit（github.com/HouSiyuan2001/codex-cockpit，
+   MIT License，Copyright (c) 2026 Quota Float contributors）仅以指针登记
+   （HEAD d117c9b），未复制其代码入本库，署名保留、权利归原权利人；
+   登记件见 deliverables/20261008/upstream_pointers.md 与 SBOM.md。
+   凭据纪律：本批全部文件经密钥模式扫描 0 命中；claims/ 凭据主权登记件
+   零凭据明文、仅键名引用，符合「明文密钥零回显」章程。
