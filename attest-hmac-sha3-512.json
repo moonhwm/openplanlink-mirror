@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T05:12:45.035Z",
+  "generated_at": "2026-10-08T05:51:40.996Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2146,
-  "merkle_root_sha3_512": "5e72476474d850def702afa934a6aff590c915a616d167069c6f2823929929053588599b964977e1b2c297d8607b0a4cce07ad80d5e3f3d736955ad09b6a4fca",
-  "hmac_sha3_512": "694f3500c5351b695c9b738ab49a3bedf0aa7e72b8e5c014ecfab9c41c5f156ce507d1ddc4f407096138036e6c4b4df74dd81c56aeeb3c51dc5b229dc594cd9f",
+  "file_count": 2148,
+  "merkle_root_sha3_512": "3e6bd398f4c8887c6aa1428a4a66627dcae96b03c2087f6e5cac83be0afd121330f61064ef7ecaeeabc4b05bb296bb3f286ec0513c6e3713f18b800243bbc2a3",
+  "hmac_sha3_512": "d0868e7862ef92582d64471c0dd2f3e6334bfae127a3643988b7c7196ff6f7a2f5531cee6c82c8a661d964228809fab028d0df7fb6b1c1774304f68ed48a88eb",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1590,6 +1590,12 @@
       "leaf_sha3_512": "7e916c97889cb0dc8bf86249f2a48698c358ceb3b4a62670191f6a883742403d4098fc05539a1170be327bcfa6872139a4f5a39f0e376f2ff016b76446ccf35a"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/lsbus增补建议并轨五议_DF-LSBUS-20261008-CAIRN-04.otl",
+      "size": 6688,
+      "content_sha3_512": "ba0001b1679a08bf70119cdfeb8fc22ae4398c27b4673344e289298059b2c3730cc66a3e461ad26b12f6ecd949bd2232cad21a06ba229439738468fb3250a30e",
+      "leaf_sha3_512": "26654080013a5c0f1c6441c72bab491f817e805c286dcab303fe1488e67523013aef2a5a9a34bfa1927f422fa0ffb02985166ada23b1783a924e372981f22950"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/ls监测探针与两周基线与技能下载结论_DF-LSBUS-20261008-CAIRN-01.otl",
       "size": 6070,
       "content_sha3_512": "ac9ff17b8d0a15d8ed1453995f80bb4238c18365c10ef748850aec2e2a8b5d1d1991841b1bcbb1e0f372cc32c532a4e8e9deee65db61c95f1a3a7e3483a87722",
@@ -1912,6 +1918,12 @@
       "size": 9699,
       "content_sha3_512": "a0156ca64cd6c67ee5c61dcb89644f042438a1a3243b371c826ed15addeefa6905a502545722f262aa2c1e9f264fc751e22a3cf7b41886f8b4835c326773541e",
       "leaf_sha3_512": "9c5d71e70022ce42714374ad33c2b4931e83872fd60bbca1aac57658ee8c3a3ca884a6cf5cf18df38cf70bcadac5057e963cf8559923710256b5f4d27b3d5cd2"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/tools/lsbus_format_ops.py",
+      "size": 13190,
+      "content_sha3_512": "120bb359863e97016ab7a2df0d8014370db100edacacbf0468ec8677675c513b0f157b66dc5025d2dab3c23b4015ee069dd4861eda007ec33522d7b7326ab8c0",
+      "leaf_sha3_512": "be351e08ab078bbc4fbd992aa85155d63c561853c7a98b547d35621128cb679d84456b7b0a459cb7af94e5db54f5ecf73215f7f57ff3a15bfda33528c69cfb2f"
     },
     {
       "path": "deliverables/20261008/seat-cairn/tools/lsprobe.py",
@@ -8101,9 +8113,9 @@
     },
     {
       "path": "skills/ls-bus-format-ops/scripts/lsbus_format_ops.py",
-      "size": 11536,
-      "content_sha3_512": "a085b2bd3a45d87308b90e950359faae43b544b8e160698688e55c5435af43b28ecb2fd65ae36ef4d2a2ac38517e9171a558f7485c815ddca6752368df65fcbd",
-      "leaf_sha3_512": "57203b6d42eca31a014b5235543a639501c9b1490daaff80a902bd107d6c3bb39082a8ee6ffd9b00ad1107da97bf2380aec56706d4fa5f245c35a08a834cd9a2"
+      "size": 13190,
+      "content_sha3_512": "120bb359863e97016ab7a2df0d8014370db100edacacbf0468ec8677675c513b0f157b66dc5025d2dab3c23b4015ee069dd4861eda007ec33522d7b7326ab8c0",
+      "leaf_sha3_512": "7fa596a129e177b7aa00f8e0a87ee5c288e2a68e6b938e86334f2a02c262e120a5ebf868516acd4d55074a75109991775c30a0df52b90a2e00658f6d221c7f14"
     },
     {
       "path": "skills/market-insight-report/SKILL.md",
