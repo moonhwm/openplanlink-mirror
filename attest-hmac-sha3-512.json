@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T23:08:13.672Z",
+  "generated_at": "2026-10-08T23:09:57.334Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2358,
-  "merkle_root_sha3_512": "a9d9a45bc0b783f70316ce3070acdbd9aa94e9dbd1c81591d35a32d30f415a8e367cc0b123aa381fbcfa56f98d6f284a43692a321439e8be64ffa19c42a183a4",
-  "hmac_sha3_512": "217d0dc097560384c681cb5bcdc4e61d3bbf94bfadf0a0b3c33663c584a10177ed8152ff0570c5ce5494b7ba02e4a9e60260f91c52ff898028ebe21e1675b135",
+  "file_count": 2360,
+  "merkle_root_sha3_512": "4a2189b92a2fccc7a9dddb5b6b25dabe0f852f2439923a35868f463994cd1a2a7f77d35bf9d788126e5cf7bee4c4e1633547d5446483374e3a619b540f7aa597",
+  "hmac_sha3_512": "0089eed096b1959b697d8c20e4a4aea5edc0484752d22d4d1a62b454cd79ef8812e004e1e8d6c15acd2e0c722fbb392cda9c0b75336c258963a74b325ac8597e",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1950,6 +1950,12 @@
       "leaf_sha3_512": "b4ae66ceeb280eb29a115a60473d93c7abbbdc2baae642f968d51c609c35eff4f6762c1d6ff547b981a8e654939964e8df793e27e0369e3fc40016d2f37ee2b1"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/全帧率分析与提亮发现_DF-AI-20261009-CAIRN-37.otl",
+      "size": 6793,
+      "content_sha3_512": "48e439037a6bd08d2204c7bbff163e12e0d720c7de8cffcb53bca78b0d23b67ab20c1dcf2a89ed3c93b0c56218d25dc439e250b695e8467c9544e489eb5b2328",
+      "leaf_sha3_512": "4280cb232ba05cb6509227bc2748eb35fda4dbcfe914c8eb7203508a3fe6ebfe82b4ceecda87028a7dd1b5b22faab3d054d535cf09787539fdf94b62dbd7d35b"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/全游乐场桩linkid映射与索引互校_DF-OPS-20261009-CAIRN-10.otl",
       "size": 3861,
       "content_sha3_512": "7d28f89f04408a7a2d6e5cebc1221250873b81198f7d50609aaa818284df6116d34fd901dc03328e126f0d78901c842c765192f52ac8770051e96058a78b28da",
@@ -2872,6 +2878,12 @@
       "size": 2706,
       "content_sha3_512": "6d6a65660235a5359ae99cf74cf197b1b03b1ba424b0093cd7cc6bb35b4afd5438b0919b1fa6f31f1bfb4c4dc272839798db8e2570a6c280de74d033734c7e55",
       "leaf_sha3_512": "61731590737e340035788d1ea3a7075bd40e6535cf86104311b5886a8eb49e46e7e2daaff4156c7e60d7d3e0d843300b8f2314bbfe39a65699ee33057e6ed1b7"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/frame_stats_20261009_CAIRN.csv",
+      "size": 6284,
+      "content_sha3_512": "839ffa4048c4869a334e694fe13611d4052984339ce2758a8393aa292ecfe8480c1cf4ab7d8094838e830d501453002f69d2e8f54ff00ac8245a86ec19c37576",
+      "leaf_sha3_512": "d4082a827b66dedf1533712ce5d5ec124f4823c5ba28cd9fcc6bd23610a98c52beccd83771e119d6f842f2ab8ba3c3eb0d79b751179b0f35b609547e8836353e"
     },
     {
       "path": "deliverables/20261009/seat-cairn/glb_make_cairn.py",
