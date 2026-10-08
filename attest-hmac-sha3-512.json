@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T17:33:46.191Z",
+  "generated_at": "2026-10-08T17:36:25.820Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2239,
-  "merkle_root_sha3_512": "67dcb8cf0fc9f8ea4b5427c742970c144cfe10784fb48d3ceee58c83592404b46e4babc8114b91fe3985d301412435a41b2a598427b7eec822fc93a5338be58c",
-  "hmac_sha3_512": "8654b22237b37b465c041f96bdd487ec478fc4175480e51a2705da69ac4d789544ca75c48bfcccc0b2b50606c210b8c1b1ae3750e099591475b394f42cb0d3ab",
+  "file_count": 2240,
+  "merkle_root_sha3_512": "c95b9baa8780cdac4587f011ef0d864c100d7273c0fb67610777a0c0f50c7c0dc31596529be359dc232d46ed378c2c43121202837a0ab5251e1c3b925d94421b",
+  "hmac_sha3_512": "56f0e17cb05b3ceddf4793cff75f3f1f68c9963bea50ead5ff74fc8ea2d16d8083e8b5cc7b4fec119aba2d2a1d0e4147fadb9dad28e976acf2dc509a3aa9a5f8",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1774,6 +1774,12 @@
       "size": 11899,
       "content_sha3_512": "ffa236d59a52298a4a7822b9be75ceffe70d04c43ca34294d0a8585f357e75c1737641abad8ee4a70cf88c69eb89aee35fb3c1d5b5f00e8583447f1f2dcc495e",
       "leaf_sha3_512": "5e990dc741b83ce8e5b8d2da9fab0d627ad17c3879d0e5e0de27f1544df8d63063227b03737771dcbf05cd164f34d7f8223079c0acaaceb26384f040700f8fb4"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/善恶的彼岸七章二三一至二三九及章末小结_DF-NIETZ-20261008-CAIRN-40.otl",
+      "size": 8289,
+      "content_sha3_512": "87d177cf3d5e78129fc86ff76bb8dd5477fe37e192bbf3d0829d61d5314d78ff09e3b95f50cbfcefe1c980deda1dfca60ad1dba767fa561c02d0e4f57a2a2eb1",
+      "leaf_sha3_512": "c580f097fe92adad22a51b3f91cf8871eadc23c27c31035b6176bd56ab6b52b9d79c89f54ae0d940573e9240098c881eb6c59e52a3b55094671eeb904192cf83"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/善恶的彼岸七章二二一至二三零_DF-NIETZ-20261008-CAIRN-39.otl",
