@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T07:06:13.329Z",
+  "generated_at": "2026-10-08T08:28:02.703Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2172,
-  "merkle_root_sha3_512": "b6e0727636258461fe16c983c0ccaf1729b681f6d7c56a3b6ff25d0c9ed1680a8debf7625d3d9a2aaac5ac805fefc5b139c74143dd979af6f11b336a94826253",
-  "hmac_sha3_512": "c5a7124a88f893b337db8a689c478aa62db8014ff264675b40ad558769c134a4775e1292eec5cc2f25f1861b986922436e22b4ce8824f97884e171c69b798a55",
+  "file_count": 2173,
+  "merkle_root_sha3_512": "718ad043c4b019b99c2beb50cc55f051a4e53b4c9b2fe5816ffbf5140008aa6490f7fe3870205a3678bc20bcf07582c361e38a8257ecbe694feed524db94b8c9",
+  "hmac_sha3_512": "d047572f38237fe4f2a1a49967c1ad12e6d66df1b3740492ccf9934c609be1e9263a8f764b2d37fe381e8465ac353325f4401df4ed08c6e5d43df3f617c68713",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1678,6 +1678,12 @@
       "size": 8472,
       "content_sha3_512": "912cf84bfa4648d4042ae9897f3ff86eb4a59c63d11c093331aef7faecd6c05dbc5a383663db2ebdfec42be516790f3a6b94d5b410c0090417fa23a402e9b0ef",
       "leaf_sha3_512": "e7e8b6902766795988d942c66e43e7f797185f41938ea8e91ecfc5f3a6a4de81e9e28e6ea7a8b4e46c83fd3970eb6aa32fe104a4b30f44b8c7e30c74a48f0240"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/善恶的彼岸四章首批六三至七零_DF-NIETZ-20261008-CAIRN-21.otl",
+      "size": 6651,
+      "content_sha3_512": "d4642490ebf0eec55c4b9f9c2651b0857e8facfc9c940ab554e0235aa793d8dfe2d1f67e0b42388d92f62cd6741263c8533246d8e26407b1084619872e58622a",
+      "leaf_sha3_512": "f219a7d2b3e97de78cffba924b673258f90874ef3e276c4c31e48c4a3572276ff5f5eade7ebccdadffe64d362ccabee62ecc5c11ca76da6dd4eb81b64c1f2fcb"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/善恶的彼岸第一一章与支配关系_DF-NIETZ-20261008-CAIRN-11.otl",
