@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-07T18:06:42.754Z",
+  "generated_at": "2026-10-08T00:27:13.476Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2024,
-  "merkle_root_sha3_512": "31241be1992d594c3d7f320f081741b70af3a9ea33eeb4d4c09f15fb14019691ee3d340b39e9328fe0d8834077d35f0ecfd6d1787e86c3c821b5a53b3b2e7292",
-  "hmac_sha3_512": "b30f265e0bd639fbbfb20df8162773bbb64b60b30bddeaa9e0f2d850621c5f3e4c53d2f9058db1a2cbec81c83d45ff63021cbf95781d2b8dafc9439d82a06438",
+  "file_count": 2063,
+  "merkle_root_sha3_512": "440fe5463cae6f5b2f79e8b13f791df67ef7b48996671534aed055fdccb01863e2170ee9a26a1ba94370e47ca6b8d5054ac8290b170115edfd87f58a1f38c2ed",
+  "hmac_sha3_512": "417f04fb183f93d6f886311c763b48246f3a811390b94df1ad7f641e776ca61a23efc28feb547246d9c762e8a96b13735c1123ee9e2a1f57d2fccea5163d9036",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -115,9 +115,9 @@
     },
     {
       "path": "NOTICE",
-      "size": 2754,
-      "content_sha3_512": "0952fa4f7979e016d61d61db4865a11f2f2d32990b401ee3d590d857cd8c4b380b5c75e6f134d9d52514328459bf7e256dc3cfa9c9610d14bd2d9fb5fbcd0c12",
-      "leaf_sha3_512": "03035472bd3cd08943198ddf401821987d23af6bdbd28d4c50f4d168a6b6518f633d96e066ebea2bbd4c43e140d62bf2b4a5520ad7a11ca484fe8ea61d4db542"
+      "size": 3257,
+      "content_sha3_512": "ebb9c554ca9da854ce6c645b6615081376d7f54a2a87b0dcbd948561deb9fff3f9b1a0d945f62fc508dc9b1bc00cf3106f72ba8d7b20ead1ac0ea126f8fa5561",
+      "leaf_sha3_512": "ae01788e012b766313a580fefd5195860c8c067ca6c9789c9a94c3b810b0a870eb5681f40aa5313b63793190912325acf6d6174780a82bda3cfb1b4a32bdbe4d"
     },
     {
       "path": "NOTICE-LICENSE",
@@ -133,9 +133,9 @@
     },
     {
       "path": "SBOM.md",
-      "size": 2623,
-      "content_sha3_512": "28167ad1ad28c9756982047654ad338ffe1c25e72fa23f91e2607e2bc1775552f4aa0182603e7571f9ca536ad6ae51135eb8da94efdad676233d6242764fa39f",
-      "leaf_sha3_512": "3829426f162dff3fcd2873757ed8273173ec985f9f81200f2dd48424a0fc731439ce2953c044b6e3da7f6454ea4c0ce806a36f4f35a306b885aafb00669bfd30"
+      "size": 2903,
+      "content_sha3_512": "d1a7f432c0c8c20b8bf5c53bfacb4bfe515bf5690f39b041b8d794ce4bf3ef30ef66afddec9135e82e4280a39aa7a4a67c5de6870d25488ca3f7ad7692c2c846",
+      "leaf_sha3_512": "7b1f650dc3bd5a2d253bec05cda644b570f0ccc4a26e55898482c3aaceb9a3abef8360ee15e3ac194cc77b61d95e5b6375ac2096b991fda08fc46730bfff3a46"
     },
     {
       "path": "SIGNING.md",
@@ -1578,10 +1578,40 @@
       "leaf_sha3_512": "7f59c282142c95e688bccf955bdd636317182ca4eacb37ddc54f58fe4639dcc0aa73869ad08154662cca5b14b3a209d2cfea5aa79870c57a90f3739cd5eff737"
     },
     {
+      "path": "deliverables/k3-main/a2a-plaza/bus_payload_20261008_tongling01.json",
+      "size": 1453,
+      "content_sha3_512": "0f95aa09e6c4ad36c81d8f22ab4e885bd3cb49ec1168dc6046e3d8406aad96d4b75c4c219aca18ed8383caebbdaa22d9b2db5fd800c5bc4ed6c31fda71279a09",
+      "leaf_sha3_512": "a53fd531a4b6004cb6719061400a28d1c69847d378b850d75d6e1ccf4f0799a312eb8505240e6db40e7dba15818926011338f72be7620b88a64b9053e7116c83"
+    },
+    {
+      "path": "deliverables/k3-main/a2a-plaza/gen_tongling_20261008.py",
+      "size": 2526,
+      "content_sha3_512": "2d00d83d4f7c6cc7b66457da63e641f56ea15bee5a439ae4523f82d1b0f186383114756ee44ec155d34a9fda12bc2b303fcc4119e8d076c13b1ed34797c1e188",
+      "leaf_sha3_512": "1232dce768d079d4fed496ad43bf9fe04a522539c59155c695ff4d9c5c1d1068965319e9deb5c80afaf47c38e4912865103803a1dbb533d531f6a3bf6139281c"
+    },
+    {
+      "path": "deliverables/k3-main/a2a-plaza/gen_watch_sql.py",
+      "size": 706,
+      "content_sha3_512": "693506b36a879a225d89fca3286f862a5f73e48372eff79ebf1bd4f7f503b5d7e6b11994d39ae8a80fecd749eea5c5ee31770ea1bf8017b9687ec49897141b27",
+      "leaf_sha3_512": "1f6120775518b1187fbf6564dbc79f1cb102bb75be8a0de1b3541f6f1d1427a84aed88ff1396960cfab9044260d3b2176d3d73799e666b4c43f31d585ef38d64"
+    },
+    {
+      "path": "deliverables/k3-main/a2a-plaza/tongling_20261008_insert.sql",
+      "size": 1693,
+      "content_sha3_512": "7dff8ed3677993d834c25230cbda9bc1663f61424261fdd66200ae4f9d6538bf1abd6bece2d1ae4526eb691846aed0fcfff6af2894f663ec6c6d7bab988a4d33",
+      "leaf_sha3_512": "edf004ebe84978ff263cfecbb882636ad37aaa986c903869744ffb4e3a242213f23781bd4838f40dc9a34255599112c43553669a069a9a9a451a0bdd1fd38c63"
+    },
+    {
       "path": "deliverables/k3-main/dual-pillar/SCHED-20261006-01.md",
       "size": 2874,
       "content_sha3_512": "da802f4a395b1508f05c9a5734690e202ffbe5b7bacb26cc27cf3f2bb183bb61803446b7df372a66d7f0f46ccb068430e43e79ad20c34a93e760a3d0baaf597d",
       "leaf_sha3_512": "4feb628e6f737f7c4dca0209669c7096bd46e0861a8c21dc54bbf5b8695810c1136169cb6f8ebbf905f2355ed2e6e20d47b2fe1614f2d1ece7087ce246904638"
+    },
+    {
+      "path": "deliverables/k3-main/github-sync/SYNC-20261008-01.md",
+      "size": 1716,
+      "content_sha3_512": "277a86b5168bd5142dd7964df54d36e16202a9861b0395c5ca95c27040429c10f08ddc649bf8beca20dbaecbc21db8bd98468d133b22c8167089fb0ee1d3ee86",
+      "leaf_sha3_512": "eca73a6019c8c1bbcef969060664548459c13d97210b8e81261bdc58e5c23320afbb096675833718bc6d320f1844d9e36253d11fbbbe8ab6776896b9c2973bb7"
     },
     {
       "path": "deliverables/k3-main/hwcloud-x/HWX-PLAN-20261006-01.md",
@@ -1594,6 +1624,36 @@
       "size": 3567,
       "content_sha3_512": "1d3f992bd176de1557012575bce829d731d7a5187720b1d2ef4aad7f3858c8c78f66eaae6e295b49134aea9a449b6eac0e7848b96fcb4adf4cbf92bed847571e",
       "leaf_sha3_512": "856a0fcf9ffd1888f7ece657f501796da52efbbe4d920a341f6af4671b02782459f28a43281a54b379725a98a2ff11b5557a75c6ac565d1e1c371d26cc9c7a77"
+    },
+    {
+      "path": "deliverables/k3-main/memory-tiering/MEMTIER-20261008-01.md",
+      "size": 3823,
+      "content_sha3_512": "b972622422869de6ad9c98b018732918409dd1eab0a625fd1b06a1d83ad83913c2d47742e2112b2b73fe45e7589cf7121f4ff053f601f90403503ad4d43edcb6",
+      "leaf_sha3_512": "23fe7280a846754225fcdbed1008f2ec09519f6cbd333b757338610d32b7ade4643cc7404dda4c168826ed6ec87c10049ac74d2f40fa462ab65be3f9047e8f1d"
+    },
+    {
+      "path": "deliverables/k3-main/memory-tiering/MIGRATION-LEDGER-20261008.md",
+      "size": 3520,
+      "content_sha3_512": "804fb0bdece56d002b49363c5283a7689aa246274c526c1d0e788d6d7450fe917298fe020db99549e8f9151c9f06a3f8ba0cd5340c2507d7ca59a0affc3fbd6c",
+      "leaf_sha3_512": "2e4d5fe9664f208c658ffd91a07b937d806a111fadf1a1491c849b3ba87afa6c5dc94b60acb5d6d418e8b22a0d3ce3829b51a4c7e2e46ec5cad5217dda586f6b"
+    },
+    {
+      "path": "deliverables/k3-main/memory-tiering/MIGRATION-MANIFEST-20261008.txt",
+      "size": 1731,
+      "content_sha3_512": "bb37696558d76a03c49cc3bec21a62515d5e19fcd8e118d0d56e68104935e8a5bdda3f07a1bc2e678bccd8ae3b0f7a4d37b3cd1b3d2832a752da262b72812cd9",
+      "leaf_sha3_512": "854408fce1aed06a377d3a6f412dd2442ed1c9d579f28bc284c22aab10bd7137d3908ba8229691956102dbf2f529733c71e1684a519467e544234f269d482edb"
+    },
+    {
+      "path": "deliverables/k3-main/memory-tiering/WARM-MIRROR-LEDGER-20261008.md",
+      "size": 1348,
+      "content_sha3_512": "5bd76e9ddace8161639ba71fa5e8f1b4af3557a4941e592ae30e13a906920987edf30cac89d09a065433cf2613fe1aef28cf7fcb710375d899ab55c4082b4cc3",
+      "leaf_sha3_512": "de487a7ce021bb762d6756f5512330b72ff40af64b2d8866ad922d30ba22802bc8dcd331b97277d4f49cde299b52f3b53df285904f9b4f3a41e673cb74696fec"
+    },
+    {
+      "path": "deliverables/k3-main/memory-tiering/warmtier_sha256_20261008.tsv",
+      "size": 21649,
+      "content_sha3_512": "cb0bd0e4ce2897424787f0a182c498fbeabc8df2cc46cda7d81b7cc9289c70acf363f6dfc03d7123ab4f587e6be7c5e341c1f438c33cc37bd7a033d3f9bfb62a",
+      "leaf_sha3_512": "9911e169b3fa2329a39d6b626eecc4fa092a4514f29e9cba9ca3d6c37413e4f9c9c7a8ee618bc4eed8a545bfe6b6250cd3ab3616b9b33e0e7c4b55d16df0e0cb"
     },
     {
       "path": "deliverables/k3-main/node-discovery/S7-NODE-DISC-20261006-02_节点发现与接入方案v0.2.md",
@@ -1642,6 +1702,108 @@
       "size": 8148,
       "content_sha3_512": "b85e7c94457068b2b2798b9a80deb538b3c0eff8de7c480d1776416d84b2ab193f4d9305c85ceaf53e88378a7d294e4913d9ebfd1bc2e77dbc7651cee7e4687c",
       "leaf_sha3_512": "876d8cfd390d74b6f8c13ba8b1fa9d8ba3a1c117c3852d87a60d1ae65359c63ecd7cb7e5711445c9b3d6be2a4b5fb31628a84ee127e2a1640e37d5f87ad5bb60"
+    },
+    {
+      "path": "deliverables/k3-main/research-cards/RC-20261008-01_六源消化研究卡.md",
+      "size": 5046,
+      "content_sha3_512": "0da0fd0a3aa0701dfcdbddfcf73be5419513da1619b563b3f4b0f700513a62470c310f5f60853084da0a5aee1a64eded42553dd6c717d0f8e33377d7ca1fdb61",
+      "leaf_sha3_512": "197ba68d6aa196aefdef98fd22660baad5cd7067b11284b24434516c5cdd9154d5c893d63715ea8da8be08f00847253ec43cb86b788f9e979a145d4f6f2dcf9b"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/github-mirror-sync-ops/SKILL.md",
+      "size": 8772,
+      "content_sha3_512": "9e4d83ee9b3c862eb5c3eb902462b299b86576164c9e736bfbc8d9b05591666d144a87038d9bca9f6e150fd2acf70a02421541891a8f5f0e266a0589185f3f91",
+      "leaf_sha3_512": "254b6fea26b82b396f7f50ec0608b8e86bccc2bdca883282d361dc35e76c70127045e22db4afe7a1660558fb5e5ec2c13936910848392306137f4ac3b43f8a0c"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/github-mirror-sync-ops/references/push-lanes.md",
+      "size": 7419,
+      "content_sha3_512": "ec6551d6e77a76fb02c28b9f73514f3e298aaaac566fac799aba71d6711c947e4d0a3b77782173627ca0cb4c59fbe72ae04738ecbdf4a61d6026dee550f48f2e",
+      "leaf_sha3_512": "f5e60ad7a8944bdf6fa7e34497aed5a6b45cc4d676d5c66db9ff1fd944732302ad33153749a4c06e73a12ba683ff78ab340f5fe9615cfb8978802a3238cfd9ec"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/github-mirror-sync-ops/scripts/gh_sync_verify.py",
+      "size": 7251,
+      "content_sha3_512": "be1dd96b2b444d991c1e4e459a8fef1e1c760001497b1c425254155648c658bc9cf7d0f8adf2b0d6583e861e49b2a352040a604b88b58e2767534613be13065a",
+      "leaf_sha3_512": "b0464f49e5d15579c8a8544651be3657080b99affede990bc819a5476309228b2837b12ccf0b99f072c2342fda8d3be83f7b1ff930c76eff3aa52129d83420ab"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/govdoc-compliance-ops/SKILL.md",
+      "size": 7289,
+      "content_sha3_512": "7814e3327e99fb03e277fb7f6136e05573d7f9fd76c3438a8b3bffc187ca828d4a932ed70f08116f8b23152eae625bd613b9ed1811a80ce7d5fd143be0160bf6",
+      "leaf_sha3_512": "60cb861cb28dbb7d0c30218f4fec4b4aa6f511cd0129f85f1ffe9a67a1501caa64f684ed9f222e06d51342e78ca15f7bbe7f19996461dcf39568c04ef1493003"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/govdoc-compliance-ops/references/doccode-spec.md",
+      "size": 6655,
+      "content_sha3_512": "1243c4bd3eed7ccf2bccf4330e5132db48e98684a7b7c792fcf26b3c7ae9aea79101e3ed1c99afc51171301f01a9d48c629f7046f950c2037a0ff32423213eca",
+      "leaf_sha3_512": "1da56fc3d62020ee1ff0ac8dcb345238f01cece91f2b90b2292807638a98ae6d705f71c6a4430f3fe89334619b6718ce0e1bb8c8c1ad484d3d578bc59cdb5f30"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/govdoc-compliance-ops/references/doccode_registry.jsonl",
+      "size": 10344,
+      "content_sha3_512": "de5ac9aa771b489ff94d047a77b3431a29fee6d7102ffe6d7b3c88ce61998fc640e3f4a71e090bf2a528110633244475dd5be5930dcdcb28b5a48ade5aed998b",
+      "leaf_sha3_512": "5b0c46c07bd2f76e250955956fa19ed739b1b2d719a62ba08e12979e8e03e2ea08548131158038508e1d9660e74d446283043f3e44c3498b37756e7b9d5d55b1"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/govdoc-compliance-ops/references/license-matrix.md",
+      "size": 3291,
+      "content_sha3_512": "e4e995491e29242e82d72f48070d62f5ca3a18a2bdc07265db8da69b628e7d20b9c12d3c4ed2f82757e76cd47c4eb1ea0fdda07a7979a9a186bc2e511195a77c",
+      "leaf_sha3_512": "7e60257bf1b17b8efd18dff82955a37f69b4fe4d591fc9f113c9f9cf283f14d772a29d931eb13b4e3669eb7ba7219b0d1754d7a3efe576e1bda6cb54b14e458f"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/govdoc-compliance-ops/references/terminology.md",
+      "size": 4328,
+      "content_sha3_512": "d9540b10637b27e88a6c9d0e88c8ada7d171ba9804187db100afde2a37b485ee49a13c1aa9d6c32796ef1ca3ac9c9a7141b4136b1d27d3d67606ce47fffd4117",
+      "leaf_sha3_512": "fe9dd886a5624c1a98411dfd61d645acbed055681a652fa61cee7cc781dac6f3678de969b67a1ab7bb4089cd13ce893a75102e03c29265d6d3fb46fad79db588"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/govdoc-compliance-ops/scripts/build_registry.py",
+      "size": 3986,
+      "content_sha3_512": "09a755a4fb22892c64c7d002df75aca1677f6b0e10d55c3838c096003d718db09ff21ef260761b1db5adf30988af4e9f746e03899b693ea178c82e627d04071b",
+      "leaf_sha3_512": "e66b9fbc23adc369dff214f23fa42c87fba5d05ea221c6977f17183a9e38cc537c2f388517f1f893bdd2a28f2c0c6169749fac18e085bf12b6e98103680653b5"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/govdoc-compliance-ops/scripts/govdoc_precheck.py",
+      "size": 20006,
+      "content_sha3_512": "5bdfce99dfb7fc00389cce3448d40303cf25504394b2f6744c6b8a3601e49014f207c59b0fa86d34270425d63effa4397e0d1fbe1c5a8b206587dcaff031ca87",
+      "leaf_sha3_512": "52ba6bd786f45659b5a00d94726aaee75828894dfddd1eeb9c5f746a15ab128306ef6fa88700555f75d6cf29d3d01db530a4e245a2bff92835eb5e19502f85de"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/ls-bus-format-ops/PATCH_NOTES.md",
+      "size": 2348,
+      "content_sha3_512": "918602ac49e6451411d2f4a8278a05052d4c2457c33d893600e67cc99e44d13090c00bde626994d13e7ecb4b6f699a2c3fcf54516d64d2089fc87db414d62d11",
+      "leaf_sha3_512": "c968eb4bf8678f08eb80396b08339653bc7d929df9a5352b2627dbc1ab1ecf3967e8552ae86cfe7e6594dd70da49ee59fffa116a2232981cf2b2b3d6963dc104"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/ls-bus-format-ops/scripts/ls_bus_format.py",
+      "size": 13375,
+      "content_sha3_512": "c8e56e56a850dbe8454b97b67d5e95c44032e3e6f8793c8d8a7ef4d5c29b9ea2cf2d136e8210e0d2952d8bb2747a811f923a502d03e7c222795086f22fdc9c29",
+      "leaf_sha3_512": "3a4b1ed730b0b300d1e3d2449d810049f71831e40318b5649d227c40be0b3c228a805f97dd5e318755b0a90fb345a1565e4d3ac711a4260c9d70462db2940273"
+    },
+    {
+      "path": "deliverables/k3-main/verifier/README_public.md",
+      "size": 32900,
+      "content_sha3_512": "55b93b190ae4bb7aec6cedaaa7deb29a2e1072a005d27c36c6a345d88a774b11157417665928a2db607c0b52720e4a32db55b9a656471490b46141693f746f73",
+      "leaf_sha3_512": "919287a4859d5d88279738ed6b97c3c0c87ad4010a542cbbebeafc110f382c29d6702bfe996af4d8de3c455ae39dac872e8a1c8c197b0c8245336134b6bc63e3"
+    },
+    {
+      "path": "deliverables/k3-main/verifier/v13/verify_goal.py",
+      "size": 19566,
+      "content_sha3_512": "227b754f52d1abf3908472aca2f4a0c75e904d5bfdfe7cacc389000171838c9090b6ec95ce468a639ae1bb7352bf4118e6510e2d14ec48228ff707b4569a8b64",
+      "leaf_sha3_512": "24dd4e6cbc6dd767bf40b6c03dc755b5ae46802ca34d499b24bedefbe57f704be3a56c479f452f93c8b2d2507ca8299420877b153d74b2f3a296b85f31eaee31"
+    },
+    {
+      "path": "deliverables/k3-main/verifier/v14/verify_goal.py",
+      "size": 19566,
+      "content_sha3_512": "01bdef501e9f0fa5816327f5074afb8941652f7f5d5c07533f1cd3bffdba410a8b201af5a365e631ed0d5e34c34fc6061d0571bf832efa230fb9fb088c12b7cc",
+      "leaf_sha3_512": "88b773a4ced3ad09d3e40811888cf3996c44fe7367077ec74bec022cb97e8aadc775b7d3354802d32d45b23d0c2b20d72315011b10f4c7885af270311fa11051"
+    },
+    {
+      "path": "deliverables/k3-main/watch-log/WATCH-LOG-20261008-01.md",
+      "size": 5440,
+      "content_sha3_512": "a628a63e668790e7c696da60da9925c594add02023452e619b37d65f191cc14f8e21a1fc94f1a30a3d6101a6a40641d6f729cb9a6f562808e0203a58b2d3a4f3",
+      "leaf_sha3_512": "81723dc98d090e9e007841aeb137786ddf1eb916599142c1adb8ec328f40e5c89c4ed7c7a79270f8dff9eee6acbc381a99c09be9766ad5bf79076ce0faaf98e5"
     },
     {
       "path": "index.html",
@@ -1770,6 +1932,12 @@
       "leaf_sha3_512": "04798a10d195bcf12d1350e2004b09ecb96c818ac221d64a47d34dda202bfb19160e47737a08c6323719d99ffd494a5fae31f4223890380b51f90876980a4c4f"
     },
     {
+      "path": "research/photocraft_card_20261008.md",
+      "size": 2923,
+      "content_sha3_512": "1c05fb976a9f94f7693c04712cb93a302d1d33be84ddfd5eddd7b6ab68382390bee0fd188687aeb83d957ac31456297063df345bbd660b12747b31a275aea033",
+      "leaf_sha3_512": "e611188475ba05d20d68a92858dd264bb09e43f873edc9ca324fdc721485c403b6693dbd11ca7ba5447fcaf900c81183a79bea9844d5920b08d07f9e087ad16e"
+    },
+    {
       "path": "research/sdd_onboarding_card_20261006.md",
       "size": 2712,
       "content_sha3_512": "971bc66342407550d27d6fa858dcab8c7631aa059fa9f088657847eb9701a148c32e8c5b97b185ac6a04c35602244c22900b458b96483680cefedef43c8ecc89",
@@ -1878,6 +2046,66 @@
       "leaf_sha3_512": "902cc7bf36c38ab21ae0a1e68fdb1716368a07dbbe1dcfb88b00bb9184995544745a200448993d61549f5bcc6473fda5d820e674b032961cc364367ec4b85c22"
     },
     {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/141号令响应执行件_DF-ORD-20261008-GITCODE141-01.md",
+      "size": 4781,
+      "content_sha3_512": "bfeb2ef74bb1e4a198e7b9ee4dab498873cf877e2abfef44eb4f3c1b02d717aa94755c4dcca5be0458f5b875ef6dbe0facae31e52824e82eab85a5e4d1d4308d",
+      "leaf_sha3_512": "c445df73e6bc9f0acef9643552f2b774bd4e53355e4a7f78351e6c0142484163418415182aae30acbe12c5e7db042589e542db13f4af0744beff4d689d382f46"
+    },
+    {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/B站外源件灵感映射_赛博办公室_DF-MAP-20261007-BILI-01.md",
+      "size": 3145,
+      "content_sha3_512": "3560916b6656d28af4de320260919843b0885f71de78c40fbb57984fcca3e81bc10fdda70ed001500600da4da9f7cdcff8e17e0b63c3213a7fffb9b16bd8beee",
+      "leaf_sha3_512": "9e4966f9e3500f050a7a7f975643388803902e05df991fe72ca39324980226c3d61ce4b439c592a0b81712969ec914dba5695daa51ed4bb39018b8657e350702"
+    },
+    {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/README.md",
+      "size": 996,
+      "content_sha3_512": "3f08f862d0af06d6ed3c756d1877dc2fbc60ac1feb1699d6bb8b17fb9dd69a03e52ef0a419b1bf81bee0e438c56846fa3a5d9a0f6caf81894f6e2682b485a4d1",
+      "leaf_sha3_512": "214c99892707ad777d9f4bf968996bfd45aec1da775055358ece4607324ac444ca603968a8b2e5454c13afd700f3b793a88adf1bc78f16fa8e29343d3917beff"
+    },
+    {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/三大操作集双源检索证据链呈报_DF-EVID-20261007-OPS3-01.md",
+      "size": 14351,
+      "content_sha3_512": "273c2ff69774849e24474e03b7c1aea84f2f5fa59e161ed399ebf32851ac9c1f3eec2ebcba5a7dfbdd2bb65f01c40917ea4276553f924f7ca97e10038e76fb45",
+      "leaf_sha3_512": "9ef95bd3e8227cd29a2d83dddfc8693131371f82cc7b90e07381dc5ef3d93c909492b05eb17dec268a903ef4eb71b6a6821831bee133708950370eece7a9b48c"
+    },
+    {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/凭据请求回应规范_后量子版_DF-PQC-2026-1006-CREDRESP-01.md",
+      "size": 2199,
+      "content_sha3_512": "06794cde79a382cef639195989f24ff0bb4cf228b3ca6e039a81c5734433f6c73bc0b999d07bf866a30d51129704f9808e92c7fca2c40b25ff74e5719d92e2f6",
+      "leaf_sha3_512": "ec5176ce540976bad1e956eb994021ce47c02e85c70350b88e4f3dd784b567a8a051b21ac83eafdb9e1d3fe1083dcdfef85758c92866511a57c2b1d692e0ba79"
+    },
+    {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/双柱监听运维台账_DF-LOOP-2026-1006-DUALPILLAR-01.md",
+      "size": 2391,
+      "content_sha3_512": "b614c9a6ec9042a632164ef98cc09a5d41b15f1949e705084932ca1557a0f487d6c4b7f9fef1cce3404ecfd48bf5a642ab3c0c1bd1d57395def17784fdddedba",
+      "leaf_sha3_512": "b78fe826d1844858fa25b96cf5eda007c8dc566aaf200185b7d4f6c6abf06510a19addd9a294307fb70e522ae6836041c96f3a3e28a1359fd00a85a9a152d46c"
+    },
+    {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/席位初始人设卡_守藏_DF-PERSONA-2026-1006-SHOUCANG-01.md",
+      "size": 2794,
+      "content_sha3_512": "720639f9bcc6dabf2c891b7c9b857c33b7d86f76956017981043c87fe9afb1ef84862a1c38ef83332165ae2691b5e7eccbdcfdd092dcdc3655fcbfa2b1ead2ef",
+      "leaf_sha3_512": "ff6f80a647b0cab5dd6f797b1472ef58ff13b8c19031d2a9b139489bb6c202646d8943492b94f192c929e29e0b98907a5458612f37f1a9309f7126ddd23ea24b"
+    },
+    {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/算力使用效能报告_守藏二期_DF-EFF-2026-1006-02.md",
+      "size": 937,
+      "content_sha3_512": "69417dd3f6237fcfb61ea2bf730c06025a7d9d98529f37bf48007bc9d66e87b682dda392d6b7cf8b1a41a307555a0c0d29fea7dada2eed38b4fc74fbbd0a9099",
+      "leaf_sha3_512": "47d1b2c5a9875fd54f97660611fd5960deb5283ab7120a77e34df77fda260b01b446758a926fbf0c665377adc6ea58477cfe92a508e1d00499ef7094f4b6ed2b"
+    },
+    {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/算力使用效能报告_守藏首期_DF-EFF-2026-1006-01.md",
+      "size": 1371,
+      "content_sha3_512": "b6c43f3c69d16ceb27581445063cba0d76a1a07d7869b23808ed694b08122d1b2c1610202004915eb42f5c1b1d400420f88409966298387be3a495fe11ce9b71",
+      "leaf_sha3_512": "62f138f5da7705e3769bcb186f3f3d1b9390a8b75616721e5a766969e3f58a777d614208cc45962bafb6fac202d9d566c4b7c1852ae2bd676d32ac98736f957c"
+    },
+    {
+      "path": "shoucang/wps-lingxi-ecosystem-20261008/记忆资产索引_20261007.md",
+      "size": 1348,
+      "content_sha3_512": "66c37a17698c1a8ac4b5efdf8179a1e98c938f1a619ad653b6f0ba8fea1cda90e81a0b2b7195e9655bedb447e8f989e08ac2fec8c9cca18d58012e79ba6d1797",
+      "leaf_sha3_512": "69d1ca036339e527a678fbc1b6ff2ff733a5388153ff8d0af7c3ccaa0d76b0a10ee0708cd4cd8bac8031de91a198c61a1a50118e60b9434a4b380751e80ac4ce"
+    },
+    {
       "path": "skills-experience/k3-cloud-govdoc/2026-10-06-k3-cloud-govdoc-skill-experience-01.md",
       "size": 3489,
       "content_sha3_512": "514243af0960f4f2d3864d90affdf6d675b9cd20f8546447a9eda60e61151f95e2433c6e6a16bf7dc668b6269718d1e22a5a3e8833e5a4e249d99938ff7eff52",
@@ -1944,10 +2172,16 @@
       "leaf_sha3_512": "10174b46b45539866508d07904676eb29a71ca0f13d5eaa62c242fcde6fe279c308bf285202052b34bb42ebb0d6a4be7710301531570d908381a3ca8d4146213"
     },
     {
+      "path": "skills-experience/opl-document-preflight/2026-10-06-opl-document-preflight-skill-experience-01.md",
+      "size": 6003,
+      "content_sha3_512": "452171bf847e92eb042fd7bded04e5f0fd8a32d32fd7554cf0da1c0bb637a7b57428f80444480eb9a603a594ac099e40e59d7fac779914ca477518f7c23e93d2",
+      "leaf_sha3_512": "261368171f0cedd03bf8c5bae32ae3a9c35e94edd051956ad022df86f13ec93f4b924b668f1c95d68b5c5ebb6616955bba7c0b884808fc2a96e544d945290e6d"
+    },
+    {
       "path": "skills/EXPERIENCE.md",
-      "size": 15337,
-      "content_sha3_512": "cafaebdc5d39b84309dcade369b70b5893fe6b28330a053b5b3b14cf3596ef5ee49810292433b49ea9a3a3be52dd0d7abbd122223ff0a0d3c4338a230f3d85af",
-      "leaf_sha3_512": "4cd097fbe84826a7af151fdf906e40361ebc6b7a6d6fb9907c0015110006f6e031862c07c3588d6f1ea50a7ca26e8279efa624738b853bfaa6fce9fc959dfb2e"
+      "size": 22854,
+      "content_sha3_512": "73feace6a1ecb4008186ba9a85f36edcf469e65343bae64587c0fd6c29e0d8076a2e36f93c63358f3fb8beb772f167c58a6fc26a69b88585651eb978e5cc1e61",
+      "leaf_sha3_512": "d5dbb4cfb9cf1aa45d5427d5967649fe3ae5d57ac634d00cac56ebc3ade35e5c035eb011876115300e7118e07b5e7f9e9f7b5c540f65b51f12d85a5b9efbdf23"
     },
     {
       "path": "skills/README.md",
