@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T22:58:39.437Z",
+  "generated_at": "2026-10-08T23:05:17.779Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2355,
-  "merkle_root_sha3_512": "861767827a34748765443b5177b4a432e0d53fadfa91ccb6aff5133c7c38802855c32af60579ca5c50cea86c3dcba14f598a0c53f99b64cc7beb96f5a5224678",
-  "hmac_sha3_512": "7d72a7ecdab8a79a0bae147763e66665a9b843686b2863a9e9192098027042e7d3fe504e3397959fdd2dc28b59b5c5067f9ddc736232afa2ac08ab32cedb45ad",
+  "file_count": 2356,
+  "merkle_root_sha3_512": "d824296c82e90dfdbd3d05a176326bdb72247e0518730b86e974a443948026588345deaae3fb8e27a4593913dfb138b30387e2c3d9846f755a46f8a6e09ad007",
+  "hmac_sha3_512": "1361c03a6b0f489c7b228a36d029bcec6e0ce3a048123376d01cc19064ec10d26ac1fee9b14a630cb8a3796e9b9d15f5f48362f02f7d7b72db32e07180c71360",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2488,6 +2488,12 @@
       "size": 6785,
       "content_sha3_512": "f3841d56e8a269ffe09d6be11a61e623741540b790e54ec743e62a5f5dd146a2c7b8f9d59b42a4ca2e4944257ea0e6a54f9650ba0eeab0df48da00b36854de4c",
       "leaf_sha3_512": "a5cdc38ec1599edc9519cadc14c3b855080093244918c9701523387aa275db04f87995e564da9be6bc9152c0d95ba2d010dce88f48b4bb0e3afac40e89d43164"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/跨席三模式对照与探针v6_DF-AI-20261009-CAIRN-34.otl",
+      "size": 7541,
+      "content_sha3_512": "c14726352270f913cdec537a5ede30e7fed87f5142473c28db74ed3e68ae29e48312992c4818bc21e1c266e9c4c2960e89fac71ff6cb0a289e8c3e842f9841a3",
+      "leaf_sha3_512": "5436cf248225a4ca46684af521de0c399bd0b3b19e564c56b5215cbb12c3e4e1d0201b66c4b6888fa8233c76551dae3dbed16cc70967893484688eede9656c88"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/跨席对齐人设glTF与涌现判定_DF-AI-20261009-CAIRN-27.otl",
