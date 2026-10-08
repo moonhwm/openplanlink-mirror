@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T20:49:57.011Z",
+  "generated_at": "2026-10-08T21:04:30.348Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2300,
-  "merkle_root_sha3_512": "a308704a1224ea5c2fb5420e93fe762394129c7fc08e3a8fd381eef7ca6b824c60a60a4e97c6aa355b81902372955717b5d85dec55d61c72313aef8df3df232b",
-  "hmac_sha3_512": "bf184cbf2fc87efb2fa8b022273a119fc9c52f3a418d18c3d0f0f0f5581f21fd015a608c5b6c9570cf869676627c0deed98d3ef75f6024994d0ea90d3198cb38",
+  "file_count": 2303,
+  "merkle_root_sha3_512": "e77289a311a533eee30dec9ef2b0f097e0f12d2a0ff3818edd873331ee90d51b09d7d3b7fad5a002cd766e02a960d1ba705d36597ff40e25073e993707525de8",
+  "hmac_sha3_512": "1ee17b7a8fd34388dae6b4af48cb44875b8b724a051bba46ad7422da1a30ef0549f5e6c0cbea600d6b6dee34edd9f309f077d8302e4d64bbbb5219f40ff6555c",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1902,6 +1902,12 @@
       "leaf_sha3_512": "b4ae66ceeb280eb29a115a60473d93c7abbbdc2baae642f968d51c609c35eff4f6762c1d6ff547b981a8e654939964e8df793e27e0369e3fc40016d2f37ee2b1"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/全游乐场桩linkid映射与索引互校_DF-OPS-20261009-CAIRN-10.otl",
+      "size": 3861,
+      "content_sha3_512": "7d28f89f04408a7a2d6e5cebc1221250873b81198f7d50609aaa818284df6116d34fd901dc03328e126f0d78901c842c765192f52ac8770051e96058a78b28da",
+      "leaf_sha3_512": "b4a11aba4b0d63cd7c45e5af4b83c6eaeae62442355aaaeb33faea3fd4e1eb88437148a508c7d553f3cfd172aa4cdb2bf2a5b0995203c8b1d1a882ff7de0db14"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/全面改用SHA3-512树_DF-SHA3-20261008-CAIRN-01.otl",
       "size": 5342,
       "content_sha3_512": "40c2e84c262ebd72f422ef19e78388f62c69b1fa505b4abdbf677fe72572387030772a306f806c30f688f0a0c90f99c66a0e231d026594b85b0fb03f68fa77c0",
@@ -2220,6 +2226,12 @@
       "leaf_sha3_512": "30d505a6a2f218566faed8f355d9f561e672345bfdadc5f56abe76556bd1c6011293670451d38990f5629f17e314240ac18a6f1a5c3bf7fe1e3d80c01620966b"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/时点行第二次补正与自动打钟器_DF-META-20261009-CAIRN-04.otl",
+      "size": 5642,
+      "content_sha3_512": "6f4b6d4021ecec14546244af61a8d62f31e8874742f0103e348b0a2004715f3ed933fc7eaadfae6a3f7bdfa0aef0b88d23dece646e8460d7034680fb2ceffc4c",
+      "leaf_sha3_512": "0f4b892c7a4f4bbe6474c1dece5e27d24318d1faaae9734780a847a8b53ae9dcf3f7b87faaead39a3e5c86a65be9263d340ec2f1bcb11fc9d51ba5665b60dd0a"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/术语表器v3三栏落地_DF-TERM-20261008-CAIRN-03.otl",
       "size": 6055,
       "content_sha3_512": "d3ce093afa98f1f031dd3f3cc8ad0873817ed8a1805d5fcde0aa9195c22e3b0901074e1c4554959b3c407544d867782a2ea1e0618d371394fbec41f2fdb5f8d6",
@@ -2518,6 +2530,12 @@
       "size": 2315,
       "content_sha3_512": "e733d1985367ca0ca3080c2c6f5e6b3e3b955b1d59da4d8611591ad4869c125d59e3e49774b7b2e47f582a2881e40d803fdd045af84bbc35c236aee8749eac64",
       "leaf_sha3_512": "87602478ccf3bad54f3a2b9e2d5cbcef7f71f9cbc978d4d0e4f697f6f531733f43d28b2924f0941502d76f8a6c3429f71da17c406172987cd7b8c258e42264d6"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/mem/wpsonline_linkid_map_20261009_CAIRN.json",
+      "size": 32258,
+      "content_sha3_512": "91761393126ebd78a9745184e20c7a079aa33faa8f480025084efe59975f1c8cc288e0e7e8ea4316d396f43110eb3f44a523dbaca54cfdcd5b272b92a21812e9",
+      "leaf_sha3_512": "26acb0860f3b634a4ed561002a6841b897aca3e9aeb3f630b6e899d90ef002692474d068cdcaa56a3ab51f8e9a77553a00b8526ac4691991f43025af85b7ecef"
     },
     {
       "path": "deliverables/20261008/seat-cairn/mem/夜间落盘审计_20261009.md",
