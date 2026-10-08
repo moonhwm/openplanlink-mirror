@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T18:01:28.848Z",
+  "generated_at": "2026-10-08T18:10:17.874Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2244,
-  "merkle_root_sha3_512": "0d747fba844be21acc0737c8487aad42af2021c0c6a99486ecbd8e58093a5bd90a85ffabbdf413877500ede6dff0e214d7802856b39919b4aa7c5cbc8a3e2c52",
-  "hmac_sha3_512": "f95510b79977996f4edf4bb36a117493b94a2f39fe0ce09c1f589af13c479be4694fdbe042511d3af4266072c930ef7469e24a7206c7d542baf9edb7958d25dc",
+  "file_count": 2245,
+  "merkle_root_sha3_512": "07db8bfc3440934cfde5d9c73fb9483f05d3b6275c5a38b2b1a222922916bf2543fdc620f7b96226fbbf72786b74a42bb33d9ecccbaa6f4773b8bd8b4c600215",
+  "hmac_sha3_512": "5df4e2ed932b4fbe91e2d52a31d7733142fe36fde7b4ed5779380359773d1a7e8e92f6c3af56222b938227bd37d30d371fe4a5499d892a213dc43066093402e7",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1974,6 +1974,12 @@
       "leaf_sha3_512": "e6876d76fa5e596852958c9159192c37a06788f5f745cd2a7f8171e8e85369406e0332bdaf52ee29db5618e5aec5bf6c13ffbe5e84f3345d7c216c43bbdf5c92"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/开源协议分层组合与引入纪律之登记_DF-GOV-20261009-CAIRN-01.otl",
+      "size": 6411,
+      "content_sha3_512": "384f8a7b81c609e1f20bbaa6610e0a2387d352e626a51a86651fdabda81f0259920453e1af85b5690530bab865dc5d36a98b5fa10ca06a0ec22cf5d1cec7fb74",
+      "leaf_sha3_512": "d1032e2bc1e9393eac336c889ef37d946df11fb68d09898c8870530e201a2045549d5fc14071fda04d427d24358c1506dc83fe630a8ce0642df6369a6f8f660b"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/德性自审220器与20候选_DF-SELFAUDIT-20261008-CAIRN-01.otl",
       "size": 6915,
       "content_sha3_512": "3ed56f22053e0ca23175e1d5cc4816d7542bfa7d450a6b656c5019ac569710a1f193554a3758e5529eb23314ff9dc7e35fd886ccc126aa8c5ad4b49c1a0fec90",
@@ -2233,9 +2239,9 @@
     },
     {
       "path": "deliverables/20261008/seat-cairn/tools/channels.py",
-      "size": 4007,
-      "content_sha3_512": "c0ea979fa6e705c81f0fc76789e9507d7f65ad392d08a42bb757b9728995533bdfba3212e01de0e5dd7d88353f80543ee6ea11e400f7001b1c44de8575c84e52",
-      "leaf_sha3_512": "5fadeac46aa7f8634bdd08c17556e129af16f9ac98ec8369b7a58c9cf1b4a2906ce124eee5759b389986880a5eb680632f65ae2bc58f11890a5fbe0da066760a"
+      "size": 4120,
+      "content_sha3_512": "b48f69728f5340518d7f1724e5314c6e80b0e3d46d0377c4d0b742211dede670e5f23a6eea3c56367ab34feb0d293d71aedc207afcce9f96c44f32db0d264238",
+      "leaf_sha3_512": "1751c5720e038edb7a7998ad7ac7c591e0eb135d15ccc36ca9443b2f9a81c09ce4137f75a0f7cf36a8e5a6a3f55102c572790facf3f7fd06d162573da1d36a84"
     },
     {
       "path": "deliverables/20261008/seat-cairn/tools/clock_stamp.py",
