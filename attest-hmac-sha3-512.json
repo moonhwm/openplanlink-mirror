@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T22:52:11.645Z",
+  "generated_at": "2026-10-08T22:58:02.575Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2349,
-  "merkle_root_sha3_512": "4e3a9b8e39fbccaa8402edec8f55d7b86ee991390293afeb11c9bf50b882af69c22ff998faba91b1c5d61f77c69d38bb2129996df05d3eb038b3aaf1b7d18150",
-  "hmac_sha3_512": "320d68c13ca4f720a1c6402da6def7bd2b732665395f7db1860684ac00ae740359023b76e39b726a02513416ed95968dc727f08d59d5c963e7ba66e6301cec90",
+  "file_count": 2353,
+  "merkle_root_sha3_512": "d4a7d7955f457d216bd7c4331ea0dfc9cdb51d95d503e4694283d0e87749b5b74fc051437247f944592fa0c63cd7b3dfb5a17294d8730489745037f36f10a1b1",
+  "hmac_sha3_512": "8ecf85b3dfbc90ab81e6bed642cada3ca23f21c43037a9abfc3f237e8ade3fc606995a6f8ba453a20f2dd2cfc7b425c3e884de7e71db16006a144b0b5f25644f",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2910,6 +2910,12 @@
       "leaf_sha3_512": "04d12754fe5c57f3fdc2d79188e2b2ed21d616a88c02088243afd8807c7b5bde27a5e8507b0c8dca135e925b3841c0a173aca989c0d4a1907513a6b5e201e873"
     },
     {
+      "path": "deliverables/20261009/shoucang-df-doc-01/WORLDMODEL-3MODES-20261009-SD-01.md",
+      "size": 5761,
+      "content_sha3_512": "f1b96edce1b9388bd482ffb09a1c1721d548e3b82bd730a30f253e330fa150711ca15d8430f748a3e3733649aec0571f2eb07a29c13837625c98f961aa71de05",
+      "leaf_sha3_512": "d35a10affe563c0d1c386c5e9045ee4376e5a17f4222b212f9d00a93057ce01f523ed4edb0eaf5f5c03f7b06c2d185e24863ab8ec1f0ee7fd1c29f5c8054e7c5"
+    },
+    {
       "path": "deliverables/20261009/shoucang-df-doc-01/decl_v3_consistency.json",
       "size": 3402,
       "content_sha3_512": "d2944662ca31951904e7bfaa6381d6ef9dd30a5452eb33a1e8ce033c84d30c0e59df7e4744bd3c677eea23584b3504ced024b3dae3b0a082b39237d13764694d",
@@ -2934,10 +2940,28 @@
       "leaf_sha3_512": "bae3e6e417553f1dc11f3ac2c00b3a090f9e495457e360cc80f977cdda45cdecfc853fcf71a9ba8c1a16c1c858304a823bc2804bfc2e0b826f83544838a37491"
     },
     {
+      "path": "deliverables/20261009/shoucang-df-doc-01/persona_world_modes.py",
+      "size": 17991,
+      "content_sha3_512": "f28ebdef45903bd5d06c2789df9c559f7ff8c1da6fca2fdd5ea734b25a060bd46b6ecc8d8d0d8098fc498f608bb178e3fcfd8945b3c0adec412d37239d02f08e",
+      "leaf_sha3_512": "10d75fdc685956f00a5e9c5559914ffc26a6e5480617f4d9e1d17d4e03a27c37207bcb7d2b27f60cf882474709b6c78a1d1d2250b53c32d7fd45be8c4062cc2d"
+    },
+    {
+      "path": "deliverables/20261009/shoucang-df-doc-01/roleplay_boost_sweep_shoucang-df-doc-01.json",
+      "size": 1218,
+      "content_sha3_512": "540a368b125fac0f0f3f216685688f69defed480741d0a2c25c37218c7c2c1dca5acaa5552d192b73be4b2b0bf1951df049e751496c1ffa09a5e50baa1db5e0c",
+      "leaf_sha3_512": "4e0d932b8bb212f342c53d8bf0fbde024feeba4850b3e1e90e607e75a964aa22c007608eca913b801697c9aa846ba79de093a57cfa51e3871f16164ff6a9c90b"
+    },
+    {
       "path": "deliverables/20261009/shoucang-df-doc-01/sts_forced_call_shoucang-df-doc-01.json",
       "size": 1761,
       "content_sha3_512": "40ea90078ab8b1672332475ecac698d784bb3d8da275dd4c2ba2a0ea6699027191d4a00cb19131cec7f9d756959d67f88a09843aa312ad5b999bd2168d47b037",
       "leaf_sha3_512": "910f3ff8e13e5798aa211df85af57e80247d4f36a3f7dd8ae494430e19ac660f65bd81815fae85b67949236450e59c80d6a4becf8c26356465cc408d05b5dbd1"
+    },
+    {
+      "path": "deliverables/20261009/shoucang-df-doc-01/worldmodel_three_modes_shoucang-df-doc-01.json",
+      "size": 3157,
+      "content_sha3_512": "b6ef693f8252367557d2a20b3b9df05f485579f8983e4a89ed191c2ac7f8a38fdba1c71c9156770855dec0f1b0bed379aaf57632a96dd811bd73ab1cfaf84bc4",
+      "leaf_sha3_512": "6ad67d6a4754fe4e30a089eac72f251e9591fbe3b7290da731c6eb1d9c0c43b74a6607166879b95f60fd483d406eecf38671daeeb18b1e23d75ac67ca4505a5a"
     },
     {
       "path": "deliverables/k3-main/a2a-plaza/PILOT187-DECISION.md",
@@ -3775,9 +3799,9 @@
     },
     {
       "path": "skills/EXPERIENCE.md",
-      "size": 35938,
-      "content_sha3_512": "a9ddb1fd8a22072c1ab5900ffe82d112bfc744fed37c94edee5f4198fc21feb1329e02f6a4de5cb3e3ef76067cf613257a6221b9b3b1ad60caa8bc57b8d5e955",
-      "leaf_sha3_512": "f938dc51e3096637ed2a83a580d39a3f4e7efa66dd9e9259b67a4ee4082a6db2a1134a7d479d6574182138fb535ea4b2bbf02486bf17b310fb70b1bf1c6a388b"
+      "size": 39224,
+      "content_sha3_512": "f05881545a85d1151026311e6dc6b8d9668d92dcdee17eb4fb37e7d38a50ca488ebf94ace87dbc2b50751421759ffc86113bd83f2b44b7d7afee96f4962e0be4",
+      "leaf_sha3_512": "b92f44e2f258cf9a5ac567dad75806c01607d27ce533a964d18ea1ae066375b6e880ba9d8fc5bfd710bf10ff4960e51a61529fc53277100a5807f5f914c2c18d"
     },
     {
       "path": "skills/README.md",
