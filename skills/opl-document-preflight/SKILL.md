@@ -13,4 +13,14 @@ description: 检查 OpenPlanLink 与 A2A 技术文档的术语、格式证据和
 
 部署报告分列磁盘安装、脚本实跑、Kimi Code 调用、Kimi Chat 自定义技能加载。没有对应产品运行证据时写待核，不从本地目录或群聊工具推断 Chat 已部署。
 
-结构化 OTL 候选中的文本节点使用 `type: text` 与字符串 `content` 字段；无法读取的节点、正文为空或只有标题时，报告必须保留待复核状态。当前维护版本为 0.1.2，历史包及其报告保留用于复核。
+结构化 OTL 候选中的文本节点使用 `type: text` 与字符串 `content` 字段；无法读取的节点、正文为空或只有标题时，报告必须保留待复核状态。当前维护版本为 0.2.0，历史包及其报告保留用于复核。
+
+## 监测层（跨轮漂移监控，0.2.0 新增）
+
+除单件预检（`preflight.py`）外，本技能含活体语料跨轮监测链路，三件套均在 `scripts/`、仅标准库：
+
+- `ooxml_meta.py`：核心门（读取、判据码、跨快照比对；`G.run(paths)` 产单轮快照，`G.compare_snapshots` 产首轮比对）。
+- `corpus_refresh.py`：参数化驱动。`python scripts/corpus_refresh.py --corpus-dir <语料目录> --evidence-dir <证据目录> --run runN [--prev runM]`；每轮自动捕获 P6 掩码基线，给前轮标签即产比对件（缺字段判 INCOMPARABLE，禁静默回落；DRIFT/TOUCH 二分只认内容键）。
+- `p6_custom_probe.py`：掩码基线探针。`python scripts/p6_custom_probe.py --target <docx> --out-dir <目录> --label <轮次>`；custom/core 属性只记名称、值长、值哈希，真值不落盘。
+
+监测结论只绑定被检件哈希；名称集合两侧不齐备时必须拒比，不得以零计数冒充已比对。
