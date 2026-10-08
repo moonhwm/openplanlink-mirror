@@ -25,15 +25,33 @@ EXCHANGE = SEAT.parent / "A2A共同体_共享交换区"
 DIGITS = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
 # 「则十三」= 则 + 十 + 三；「则十」= 则 + 十；「则一」～「则九」
 # ★v2 自纠：排除"原则五条""规则三"等**词内碰撞**（前字为 原/规/准/法/则/通 者不计；后接 条/款/项/个 者不计）
-PAT = re.compile(r"(?<![原规准法则通])则(十[一二三四五六七八九]?|[一二三四五六七八九])(?![条款项个])")
+PAT = re.compile(r"(?<![原规准法则通])则([一二三四五六七八九]?十[一二三四五六七八九]?|[一二三四五六七八九])(?![条款项个])")
+
+
+def int2cn(n):
+    """★v3.1（轮30）：整数→中文数字标签（旧渲染把 22 显示为"则十"，为显示层缺陷）"""
+    CN = "一二三四五六七八九"
+    if n < 10:
+        return CN[n - 1]
+    if n == 10:
+        return "十"
+    if n < 20:
+        return "十" + CN[n - 11]
+    tens, ones = divmod(n, 10)
+    return CN[tens - 1] + "十" + (CN[ones - 1] if ones else "")
 
 
 def cn2int(s):
-    if s == "十":
-        return 10
-    if s.startswith("十"):
-        return 10 + DIGITS[s[1]]
-    return DIGITS[s]
+    """★v3 自纠（轮30）：支持 十/二十/二十一/…/九十九（旧版**认不出 ≥20** ⇒ 误报"最大＝十九"）"""
+    s = s.strip()
+    if not s:
+        return 0
+    if "十" in s:
+        left, _, right = s.partition("十")
+        tens = DIGITS[left] if left else 1
+        ones = DIGITS[right] if right else 0
+        return tens * 10 + ones
+    return DIGITS.get(s, 0)
 
 
 def main():
@@ -65,9 +83,7 @@ def main():
         return 2
     mx = max(count)
     print("★ 方法论**则数之机器索引**（范围：本席件 %d ｜ 时点 %s）" % (len(files), "见台账"))
-    print("  机器判定之最大编号＝**则%s（%d）** ｜ 见诸文书之不同编号数＝%d" % (
-        "".join(k for k, v in DIGITS.items() if v == mx) if mx <= 9 else
-        ("十" + "".join(k for k, v in DIGITS.items() if v == mx - 10) if mx > 10 else "十"), mx, len(count)))
+    print("  机器判定之最大编号＝**则%s（%d）** ｜ 见诸文书之不同编号数＝%d" % (int2cn(mx), mx, len(count)))
     gaps = [i for i in range(1, mx + 1) if i not in count]
     print("  缺号：%s" % ("无" if not gaps else "、".join(str(g) for g in gaps)))
     print("  ── 逐则（编号｜出现次数｜首见件｜末见件）")
