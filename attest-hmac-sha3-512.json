@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T23:05:17.779Z",
+  "generated_at": "2026-10-08T23:06:37.910Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2356,
-  "merkle_root_sha3_512": "d824296c82e90dfdbd3d05a176326bdb72247e0518730b86e974a443948026588345deaae3fb8e27a4593913dfb138b30387e2c3d9846f755a46f8a6e09ad007",
-  "hmac_sha3_512": "1361c03a6b0f489c7b228a36d029bcec6e0ce3a048123376d01cc19064ec10d26ac1fee9b14a630cb8a3796e9b9d15f5f48362f02f7d7b72db32e07180c71360",
+  "file_count": 2357,
+  "merkle_root_sha3_512": "06eec54018155efa16c8db096a12fcc2928ebfa198011d1c1186a7948ace29e717637495d8e6b7318c53d7c6a550f761c1f9be4fddf826e8d543c5ebcabedf5a",
+  "hmac_sha3_512": "f6a544c1c1ad70fe5c74343ac8af68ec2641eac529f3a9f13b43ed2cf3179c7644deb317bf061cccfbc7665ab4b7f54779a3e94c75d833137eb77a1f2b553c38",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2290,6 +2290,12 @@
       "size": 6915,
       "content_sha3_512": "3ed56f22053e0ca23175e1d5cc4816d7542bfa7d450a6b656c5019ac569710a1f193554a3758e5529eb23314ff9dc7e35fd886ccc126aa8c5ad4b49c1a0fec90",
       "leaf_sha3_512": "e5621851dbbd26a545b0284a491fb3bf4531f1291dce729abd8d2eca67811cbcc5a8b7ab1c43e3a1a8c860bca6b08b86cc9bf8aca2f0b0f524418eadf9e51573"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/抓帧器关键帧局限自查与地板撤回_DF-AI-20261009-CAIRN-35.otl",
+      "size": 6766,
+      "content_sha3_512": "40d8e16a7cfe2ef385779d23cf6abcc4a2260e5f883111e3d9c515f23de2007d48d1e088ce1b7033a1b2ae5373976b20b8562926248c55bcd94f2a500cc4f1f9",
+      "leaf_sha3_512": "698b4c1be76a526a2fa016170c84dbef1094d5008656d4b2494fdc0991fce03c277b381e2defa452dbd3ea62eed285d76e7f1f8b00e26b1f34a9cfec990506f3"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/新周期接件_令条20261008扩写版_DF-INTAKE2-20261008-CAIRN-01.otl",
