@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T22:02:26.912Z",
+  "generated_at": "2026-10-08T22:15:03.123Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2320,
-  "merkle_root_sha3_512": "7f825da51653204cbbe768eee7ed8db1fc59aeced4fadf8475ae06609fb754a7462188507fb94d808bd6fdcb9662098f9badc853c470185e5d85a0890b8bb955",
-  "hmac_sha3_512": "b9228dda5da7b12955b9d704f2309b872fcf4ce3285eceb3bd67826c19d3206ab7521d12a960834d11ef1ee0ee2253e4fcc9d544f7da36d0d6ae5c784e130d57",
+  "file_count": 2321,
+  "merkle_root_sha3_512": "9ae968351b9d6c14d716e0d3006984c73d922c64211acefa6ad2536b0e48c4b9b6c86678a52f7524ff3975b76d1cc9ded618fcaa91adf4bc659ace1746144cc2",
+  "hmac_sha3_512": "78580563ad46f83d6ec32a8cf088c42a92ed27cf6bfe3d638d7f226e74fa78021109cb55cb577c58f21a8d1f06d09366e5d45c87b9a64ec625198f155a70baec",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1900,6 +1900,12 @@
       "size": 4389,
       "content_sha3_512": "c8b7813d260d5d0a43718cc630fa2302fa1f75115cbcca4643d9ab6a4252c6b6507ea6206d595cf2fcffb1560685bb9670e6f32c61a12efe9087c937fcd1ec8e",
       "leaf_sha3_512": "ccbf8fa83996712cdaa6d1afb0a19e94ad040fc1ba574a796b19ce855ab939cf2f295afcb14095ea45f7b5fa283dd7c51cceb7a1a756fc4be587d976d73667f4"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/世界演进定量判读与零安装抓帧器_DF-AI-20261009-CAIRN-25.otl",
+      "size": 6353,
+      "content_sha3_512": "f948d8b881c51693a66033524ffde24f077006667830ef7d529805bf46a1858449c38ff7ebc6616e39a847dc90864e062f56b16648be80bcf173e84e72c34eb9",
+      "leaf_sha3_512": "596d3f748cc65b20aa37f9856477bdda970418cd81fc6001777e65aafdc2200791fbfbcad50fd5a09452bc32bdb49d40183c0486ae17a01bfa5781d05b6d472b"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/事故整改_全扫越界与白名单制_DF-AI-20261009-CAIRN-04.otl",
