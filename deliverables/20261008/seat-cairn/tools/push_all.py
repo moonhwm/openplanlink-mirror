@@ -197,10 +197,11 @@ def main():
             else:
                 # ★轮17：**失败须分类**（承"未知≠否"与"报告值≠核实值"）——拒绝 ≠ 不可达 ≠ 鉴权失败
                 low = (out or "").lower()
-                if ("pre-push" in low and ("未签名" in (out or "") or "禁止直推" in (out or ""))) \
-                        or "unsigned" in low or "未签名" in (out or ""):
-                    # ★轮33：**本地钩子阻断**之独立分类（此前误报为"鉴权失败"）
-                    why = "被本地钩子阻断（未签名提交）"
+                # ★轮34 自纠：**阻断**须以阻断标记为准——v2 钩子亦会**打印**他席未签名之"提示"，
+                #          若仅匹配"未签名"字样，会把**提示**误判为**阻断**（分类假阳性）。
+                if ("未签名提交被拦截" in (out or "")) or ("禁止直推" in (out or "")) \
+                        or ("✗" in (out or "") and "未签名" in (out or "")) or ("unsigned" in low):
+                    why = "被本地钩子阻断（本席自身提交未签名）"
                 elif "non-fast-forward" in low or "rejected" in low or "fetch first" in low:
                     why = "被拒（非快进：远端有新提交）"
                 elif ("could not resolve" in low or "unable to access" in low or "failed to connect" in low
