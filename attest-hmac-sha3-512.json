@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T00:45:56.810Z",
+  "generated_at": "2026-10-08T00:48:26.782Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2093,
-  "merkle_root_sha3_512": "d8ac8cfb0208ab72e2a7f5f6e8e94a7274372edf9c1c20508740e8a417fa7ba734b98541b35b333e37cbf5fbba131b5f1ec94567b87d1a1eac4b59e56eeba6ed",
-  "hmac_sha3_512": "24c601ae85f40aa38c5fe500f83473b28363277a3f67a4af1b4586f3858a917a2d2b9d8bb87f23a87426af7d8f32339a2b0916e2c81ad6d31e7e925014737e89",
+  "file_count": 2094,
+  "merkle_root_sha3_512": "a593fde1f68e93a4a1933caa3dfc848c63ddc44c29d8f07f6fb598d7df481dbc5ec34c98a02f3298a21e9447ae0cf85bbce0e3475b64ff7152ea8b252a718421",
+  "hmac_sha3_512": "c304c007f1bf5f585d9d8c249bb14a8ff429d110b201c5733e355e4adcf58365c1e9e7562aa95300653a9106e00ac0d638566d8d4064f93d2d09be1fc43aa0fb",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1579,9 +1579,9 @@
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/ls监测探针与两周基线与技能下载结论_DF-LSBUS-20261008-CAIRN-01.otl",
-      "size": 5809,
-      "content_sha3_512": "eb5f923bca0882e6b3beef9054d092ab340beefbe124dab7d409a78706f6c23e149cfcfce90b9e5d031fdc8d620603781fde80997bfce0b98373b6cdc3e8cb24",
-      "leaf_sha3_512": "11cd6dcab5b75ec76f6ed1820f152ac46077326c07bb582b57a6832144fd2cabbe058bb854c359d6abf9eef0208507522e72d5a485f71a5baf80d47d4a1e6d27"
+      "size": 6070,
+      "content_sha3_512": "ac9ff17b8d0a15d8ed1453995f80bb4238c18365c10ef748850aec2e2a8b5d1d1991841b1bcbb1e0f372cc32c532a4e8e9deee65db61c95f1a3a7e3483a87722",
+      "leaf_sha3_512": "327cbf386c2254ca96704680f59ec5301b0fd557363fc6332b82ebac7f513370e0e91965a3edae51edfbb29a4ee6a8e4cbe84ba8dffbe453af6ab9d93faf70fd"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/分层密钥派生与版本管理落地划界_DF-KEY-20261008-CAIRN-01.otl",
@@ -1612,6 +1612,12 @@
       "size": 9723,
       "content_sha3_512": "f575e9cdbb125b0a798918c63af974051229c638fc84085dff852ac1801bc57042e2ffb3a821c09ce38d0dc9983ce8e85311480516b37d363ea50e273e80e864",
       "leaf_sha3_512": "8dc9224e08d75cb06601e1d2db0bdcac976fbf2c14baec2012c88130241b7c63ce897978cffb5fad91becebe9a1dc305a6d34ab4f14a6297325b7ed7c411b5cf"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/署名块五轮纠正与取代锚_DF-LSBUS-20261008-CAIRN-03.otl",
+      "size": 3075,
+      "content_sha3_512": "22cf8ae0718532ea577123e47b952be2d3ebdbf8df62191ab47668753605ef485ead98a0165bd015f55b912fe32be71336245bd09ef5eca1f882e171b1c78e52",
+      "leaf_sha3_512": "bde562409c8d8d4aaf6364f26bb4486ea30cd722cbc96576a468de67f5257b48ff6433af8bd381421b5e3a2ebe06ec1db6a8211017dc9dadaf98452bfb2d7c21"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/署名块占位失效之自纠增补_DF-LSBUS-20261008-CAIRN-02.otl",
@@ -1711,9 +1717,9 @@
     },
     {
       "path": "deliverables/20261008/seat-cairn/tools/sig_block.py",
-      "size": 4888,
-      "content_sha3_512": "e703808063e9db4bd2f08b03a3d2f9ad353c7e118c4143f29ae7c3c2f16324c774ea1f54fe25bbe1fb0a9c39083517fd2bd5d7a585007a9e6c2585df90a8b26c",
-      "leaf_sha3_512": "421bd444fe599b2883310cf50eedf66c2ef6b07c17834c82399aeb8a6727b6bab74dbcacfdaabe7c28ee28324a503ca9101cf5a174cfffe14db25a746909cb79"
+      "size": 5722,
+      "content_sha3_512": "1fc8ead0ee7d3bd90dbf86f97bb0ac4b37817195001550616cddf6e88591241310dc6aaa4d132042553f1da814136ccc7582b287e632f09456f00f27a7cf763c",
+      "leaf_sha3_512": "6fd77c9083977187197b9e1da210780e49d243f9c3a5e1f5f1b02539bd184366cb177036623e957470bcea378ee905fcb1fcd39db46e92d59894f07c45d64c7d"
     },
     {
       "path": "deliverables/20261008/seat-cairn/tools/termtable.py",
