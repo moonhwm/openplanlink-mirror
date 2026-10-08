@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T20:21:47.261Z",
+  "generated_at": "2026-10-08T20:49:57.011Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2293,
-  "merkle_root_sha3_512": "0fa2ff3b8ccfc325aed96871db533ea662c1135ecb52e427f3ca9e0609bb9e11c2ca8811e3d1577ac2eca84112bb6797c0cbcd40d623f7fc4b7055eb1941a174",
-  "hmac_sha3_512": "fc7b3ec793fa2b5fb15c69858ff252fd9952ec2d262f71bb0f45e9e60029f7e27f441e9b0ddc92022e6b8e96d4b1de55e6271e5a2064883868b8eebb78b7b337",
+  "file_count": 2300,
+  "merkle_root_sha3_512": "a308704a1224ea5c2fb5420e93fe762394129c7fc08e3a8fd381eef7ca6b824c60a60a4e97c6aa355b81902372955717b5d85dec55d61c72313aef8df3df232b",
+  "hmac_sha3_512": "bf184cbf2fc87efb2fa8b022273a119fc9c52f3a418d18c3d0f0f0f5581f21fd015a608c5b6c9570cf869676627c0deed98d3ef75f6024994d0ea90d3198cb38",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1836,10 +1836,40 @@
       "leaf_sha3_512": "38eee83b5b48e89bbcd0ab0757b274164290e46215d2ab02011ea3d626ca9b5dcd95a3c372dc3367c0337f1ac16f0c0abd62fee9c27c78254ac0b5ca338a232d"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/三型域名对照与Directing取径_DF-AI-20261009-CAIRN-13.otl",
+      "size": 4078,
+      "content_sha3_512": "363b36e641d3a1f040c5b75b423b676cbdbe515d389383d4f16c830e1c29260195f2164cb818f885b2d3f380875633895ef40662ee7f28342f2e795ff4acf5d4",
+      "leaf_sha3_512": "8b749a928e99817b4f60c4585745cb964a0360d8c86204e796e7e290e091e326b3e753dbf0f75708263502a3a40055d3528bda7e470d56fb72d26420eaf3ef17"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/三面收束与浅克隆降级自纠_DF-PUSH-20261008-CAIRN-02.otl",
       "size": 5355,
       "content_sha3_512": "788136db71696fc3f3ac3b0b31e919fcde6b7b24a83ed41c1797d1ee11a84b7820901ebb2404ef727f3c62dbfb4348ca69d4fc99071c00c7e1fde37d5ae20e61",
       "leaf_sha3_512": "f7e61bed731608f05d04ccad6faec22fac1d086232b5e4b5507635a93b41704b1bdc8408262dec47037f21a3847099ca7a5f8e33c4e81812c6143e52eb8a8b31"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/世界探索服务端全链打通含ticket_DF-AI-20261009-CAIRN-12.otl",
+      "size": 5620,
+      "content_sha3_512": "f9aabcbd0e2b4a77af59394d24f877e43d948756baad9a9ac271ed86b876487f2567142caa8daabefb049d763f0bb90cf1176ef5f3994e472e7118299093251c",
+      "leaf_sha3_512": "9bd561569dbb033741fad8ef8cfe4c6aa2a8b5ae3f9e15008fee76ad70e898bdf8980bd1e119f75f612692315e114803eb57951e8d0eab7432cd230f0426105d"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/世界探索端到端打通ready_DF-AI-20261009-CAIRN-11.otl",
+      "size": 4906,
+      "content_sha3_512": "cba3f5f38fefbe50508a404d57039dbdaec0848ffad0822cb6e6c5e65799535f6638d3f2d3c6d2479282a0a70d0ff684bbca6caefe37ff6fdd7ce3ab0d28880d",
+      "leaf_sha3_512": "5f96a73b1c0f0df2cf0b4dda6888f45d1073a2bad35862efacb60d4a44ddf86372caff14d65fc653a784dfb6828ce613ca68d83cd75a2eea3394eb9c4657ce87"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/世界探索进房操作卡_DF-AI-20261009-CAIRN-14.otl",
+      "size": 5965,
+      "content_sha3_512": "67128562310f2d77daf991c4a8d140652cf2ff4fc3ab60e4dde707df89fdade0c7f337a34ee2e91e270fecde2c6df02960bd65a20be0148be2d5f9af0f1954d1",
+      "leaf_sha3_512": "4e3516ada5f7a66eb0ffe4345ad6c80cb772e9a025348fc23322b6f9aa9b8689f2f4a2067773673108851b869db2b1a98d4c14f56ceb27f225a99197bf43c6b5"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/世界模型trial域解锁与资源告警_DF-AI-20261009-CAIRN-10.otl",
+      "size": 5253,
+      "content_sha3_512": "0663ad267878bf850d33f491487ba79c2a7a0aa11d50d5f883e76d57a1aa4f4bb5e08da63f2f48cf06d3c1541d3f75ec69f4f37c71e27efd9b4caf6e5c28419e",
+      "leaf_sha3_512": "d4e84272ab6428e05ba31a53ef1803ad6c77b1b84c6db1a14ad87de9f4db1256fe592fbcc29a2569782e0dae4164ae2393ebbfb8cc5e7599c7af5e7bdb63cf37"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/世界模型三模式接口面与即执行运行器_DF-AI-20261009-CAIRN-08.otl",
@@ -2106,6 +2136,12 @@
       "leaf_sha3_512": "7c5623df5e6a8ea6a13549a89dc95363be443299f5f5087cb58aaaa98a3b628df8a0f5c30b1b7186b631cbac60f56c5534a895f522d996277892e8a7e354dcfc"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/夜班合卷v3与世界模型总账_DF-OPS-20261009-CAIRN-09.otl",
+      "size": 7167,
+      "content_sha3_512": "c9d768bec4ae6bcec646969da301cc56ed98c1ea9739455ece54a97550b84a9f4ed1671ea3fc1d5e8cf72718a4b4afe98f0a2860dc99a398a178ad63d297d3ef",
+      "leaf_sha3_512": "90e8efcccb3eb4efba702698f936583d1d00e52975d699ece2082313ff20ff519d8f7e1b1a470527922bca82e54997bccd307c7394db9d924533de29d5473982"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/夜班合卷与致Moon席世界模型正解_DF-OPS-20261009-CAIRN-08.otl",
       "size": 6707,
       "content_sha3_512": "d070c6731334bc170f747b87b12457ee992c14a31a950e1475b7c44b4fb4df3b12b1257a4bdf43f12d196525ae2baac8dd934424323395ea9615222b587d07cb",
@@ -2122,6 +2158,12 @@
       "size": 4822,
       "content_sha3_512": "2fa7ac446f83f6cd4cfa00db1e39833f6f2490935477dba9e8d21a6f0bf3a2289403afcf0ae8faa77aab1cbeb2401e8d4e6fefd0fc2833d0c9d0ee9b4908d876",
       "leaf_sha3_512": "3f7f198dff851b8d8e0f448ac0086260038885b9d683b82a7383168eb5f878fc2179060f8c72b202dc2682f7e17a69c9cc90b3ccd09589c829f0fa2eee6ae11d"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/实时导演近似承载已落地_DF-AI-20261009-CAIRN-15.otl",
+      "size": 4815,
+      "content_sha3_512": "00f6368cd0e53863c9354d0aafaa8340fad4111e2aed376eeae7aa49f956ec8ad9e0a9d6153753b053ba757d32fd90e5fc5db08f05fb8ff1b2c43df96bc971ec",
+      "leaf_sha3_512": "6bb4e1176fa4ee30641a734127d8405eb3cc8cd4f8a55ea64036d0ada9c91260153a6f1bc579ecfc81a5d441a54a6c9590fe3cc9251ed3abe376929b04ed891d"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/容量预警阈值落地与编码能力核定_DF-CAP-20261008-CAIRN-01.otl",
