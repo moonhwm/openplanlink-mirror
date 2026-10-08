@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T00:42:53.585Z",
+  "generated_at": "2026-10-08T00:45:56.810Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2089,
-  "merkle_root_sha3_512": "c3395905e4c4ec4f2ed332cb882acc6fe1b916a2e0a7930857e429f3e91f70aa071977dd06febea3074df72ab7c3afd4b8bdb50331cefe3e2c7c1de745af94b6",
-  "hmac_sha3_512": "5e56bc0e6961ee4ec217fab8debba7f631e35e8c4552c23517f00de468ecb92a20fafcef018fb133c72a90f48389652f44c016ee8f84b02c9aeffe13ec84f7c9",
+  "file_count": 2093,
+  "merkle_root_sha3_512": "d8ac8cfb0208ab72e2a7f5f6e8e94a7274372edf9c1c20508740e8a417fa7ba734b98541b35b333e37cbf5fbba131b5f1ec94567b87d1a1eac4b59e56eeba6ed",
+  "hmac_sha3_512": "24c601ae85f40aa38c5fe500f83473b28363277a3f67a4af1b4586f3858a917a2d2b9d8bb87f23a87426af7d8f32339a2b0916e2c81ad6d31e7e925014737e89",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1578,6 +1578,12 @@
       "leaf_sha3_512": "7f59c282142c95e688bccf955bdd636317182ca4eacb37ddc54f58fe4639dcc0aa73869ad08154662cca5b14b3a209d2cfea5aa79870c57a90f3739cd5eff737"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/ls监测探针与两周基线与技能下载结论_DF-LSBUS-20261008-CAIRN-01.otl",
+      "size": 5809,
+      "content_sha3_512": "eb5f923bca0882e6b3beef9054d092ab340beefbe124dab7d409a78706f6c23e149cfcfce90b9e5d031fdc8d620603781fde80997bfce0b98373b6cdc3e8cb24",
+      "leaf_sha3_512": "11cd6dcab5b75ec76f6ed1820f152ac46077326c07bb582b57a6832144fd2cabbe058bb854c359d6abf9eef0208507522e72d5a485f71a5baf80d47d4a1e6d27"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/分层密钥派生与版本管理落地划界_DF-KEY-20261008-CAIRN-01.otl",
       "size": 6248,
       "content_sha3_512": "afef90f4215630fa0723206737d9a176da837f15f29d06b2d6dbb133691d90af6fadea8f387066fcc982dc9b0a80226a286609f8cb4480b2091e23cf17171501",
@@ -1608,6 +1614,12 @@
       "leaf_sha3_512": "8dc9224e08d75cb06601e1d2db0bdcac976fbf2c14baec2012c88130241b7c63ce897978cffb5fad91becebe9a1dc305a6d34ab4f14a6297325b7ed7c411b5cf"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/署名块占位失效之自纠增补_DF-LSBUS-20261008-CAIRN-02.otl",
+      "size": 2624,
+      "content_sha3_512": "9da74ded7700ddec9df1da73a8395e94c0d0d71b8f703a3462440f35372744ac68447a100d16a9b2fe584dcfd054614174dc876f87bd9a974f4d80d43c9d785d",
+      "leaf_sha3_512": "fbf3696a26109ddd4c01c59b23d1fc22088a76d51584fe10896654ba08bc6abca013c19297d8df94c6a37f990309c2ddc80a6b8b2b07579c9a71c7e657cb3592"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/议题术语表可执行版与误报自纠_DF-TERM-20261008-CAIRN-01.otl",
       "size": 6109,
       "content_sha3_512": "89716538cacb4025ca9332495c27593ee7b77079c8f7fc6ac7cdb985432c6a8569ad900b91ddd2536a5a55de3fb686a75bfeb484c25a371dd725482bc425ea67",
@@ -1636,6 +1648,12 @@
       "size": 8115,
       "content_sha3_512": "1636721e99575a4a13d6919cdf946803a5ec6080f4edd529d4a2e488076a505d1cdf7bf26fc8bce0833591d06ed216751eb4e65535323de5f0491b6f94218a01",
       "leaf_sha3_512": "2df5f3b58ab61b5d85ff5336be77ce1c61acea866a944d613588e77f23b3db17a53b96cf5c1b5b5b451d5dbb574b5be8be77fa5784990d0ffc8c3e3d452ea70b"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/mem/ls_probe.jsonl",
+      "size": 1423,
+      "content_sha3_512": "b5f4e9296a378999d9072b6bbf62a74141b99b22fb09c2a12e4d1ecc2e56cc74fe1fe9c18c4c87c783317e43f3faf157dd5e583da508ab0aa15cd810c299420e",
+      "leaf_sha3_512": "84b96136d2c384c6f8d9258490def6af720e699961c27d1eee5fbd754ceb41f01a27c0ad91a0462934115ab86c11f93e3f5b67d47b71a626c483663d53b398fb"
     },
     {
       "path": "deliverables/20261008/seat-cairn/mem/mem_guard_log.jsonl",
@@ -1680,6 +1698,12 @@
       "leaf_sha3_512": "9c5d71e70022ce42714374ad33c2b4931e83872fd60bbca1aac57658ee8c3a3ca884a6cf5cf18df38cf70bcadac5057e963cf8559923710256b5f4d27b3d5cd2"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/tools/lsprobe.py",
+      "size": 6297,
+      "content_sha3_512": "cc93f26c04914fc8ea803f3ae91269edc9f61b2f7ca8f6aa909a8bf0125d66a46d9ca30c95cf21aee6a0da562219f4db6d6182e1e8f37bdc7b56de8bd8c6e6de",
+      "leaf_sha3_512": "846b0b89c8c79a8f6d39fccd59b022a2e5866c02b59c58820a463aaa3fd5ff9d21235a84b170ad5b7047566aecd0bec4cea0113788e176662794644c9a5abe12"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/tools/pqc_bench.py",
       "size": 6858,
       "content_sha3_512": "245390071d844871083e0a1df3fe93854bd8012158510293e53aaad42dc5dca0d278f51bdd70dfa26ef96f0d6eb0d45394dceff5af43d97e95041617ba43c170",
@@ -1687,9 +1711,9 @@
     },
     {
       "path": "deliverables/20261008/seat-cairn/tools/sig_block.py",
-      "size": 4255,
-      "content_sha3_512": "725500473240f597db38df81b57afded654486f58d08e033605083044e58b7c5170a8de541b3579dc37eadbff1e9ed64a309d19bae54e2c20bcb7c2a622ca4d0",
-      "leaf_sha3_512": "2d37d238411e85d66d3d9c22cc23149365d56b87b7425fdcb59f3fcf72213a26b85b7a70d5bf3a496b8040717dc69cac3f62b65f7d91ffec2a13beae869640ac"
+      "size": 4888,
+      "content_sha3_512": "e703808063e9db4bd2f08b03a3d2f9ad353c7e118c4143f29ae7c3c2f16324c774ea1f54fe25bbe1fb0a9c39083517fd2bd5d7a585007a9e6c2585df90a8b26c",
+      "leaf_sha3_512": "421bd444fe599b2883310cf50eedf66c2ef6b07c17834c82399aeb8a6727b6bab74dbcacfdaabe7c28ee28324a503ca9101cf5a174cfffe14db25a746909cb79"
     },
     {
       "path": "deliverables/20261008/seat-cairn/tools/termtable.py",
