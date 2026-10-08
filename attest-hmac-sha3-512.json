@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T10:06:58.302Z",
+  "generated_at": "2026-10-08T10:23:29.506Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2195,
-  "merkle_root_sha3_512": "d32bc4b297445322e3e606ca785cc734618041b36c5acecd657330af6fe56249cf22e991c91f08e44c5c67d9e7129ce8da4d30f471611364f445a994c738b794",
-  "hmac_sha3_512": "599eb399277207324dee1dfbea17d59e62b16ed86cda994d6ceba72ba41a6e68e5e4a0324454c8e42a4e352d95b1223db9a935cbf95a17e322651b6de92e3da1",
+  "file_count": 2196,
+  "merkle_root_sha3_512": "712e29af62d51346c2dc5265e12c6e6dbe7b4cadec65a675bf30ea750d20d2658a1157ed5c8a5ee7caab538445f4cf997f5e03688639612414e2c9e0370809a0",
+  "hmac_sha3_512": "5d3f03f47e871bae635d51f84f9d7acff6d14bcf7210739a0647048bf2ca99aa989ea2c46cc2fd1a289d65508b9f9c71df22b6024f14e063905ca5e5a322e860",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1948,6 +1948,12 @@
       "size": 3517,
       "content_sha3_512": "dff715c637dd41dc08cfeddfbbc0a17cdbdd2ec9a11334518888d22ee49d1f29062d617d9b11668459cf0e50b9dcb0391e77f04db7b5c048697f10b1a5eaf202",
       "leaf_sha3_512": "db3a94bbdc7977b851d3e2ce0234f072bc18fcfa5f309bea00bc4c6d6476c8de4ea19fd3a2c57cdb18934510f9fd176939a0115dddd3b37c7064c217f0ca084f"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/tools/bailian_ops.py",
+      "size": 6129,
+      "content_sha3_512": "bc240a317a731e2649d5f3f9b3965a241e607e2cb2d112d2c2063444bda3e923ef28a18ed36646bf9edc18293da6500051563ada4dcf36265dfd646b43cd774d",
+      "leaf_sha3_512": "26795ad6a0ae33ec1a423ecf8b1144a962a65e5f5c55f3142ff099d42117c72c36c405788a82b3f80b68b80fceb42006a3e818dec07d9120fa15f779a5456c1b"
     },
     {
       "path": "deliverables/20261008/seat-cairn/tools/capacity_alert.py",
