@@ -5,6 +5,7 @@ import io
 import json
 from pathlib import Path
 import sys
+import tempfile
 import unittest
 import urllib.error
 from unittest.mock import Mock, patch
@@ -84,8 +85,15 @@ class RouteTests(unittest.TestCase):
         self.assertFalse(result['inference_verified'])
 
     def test_key_file_quotes_and_presence_do_not_assert_authentication(self):
-        with patch.object(h.os.path,'isfile',return_value=True),patch('builtins.open',return_value=io.StringIO('AI302_KEY="fixture-credential"\n# comment\n')):
-            values=h._load_keys()
+        # A real isolated file works on a runner with no managed key file.
+        # Patching isfile did not cover exists and concealed that dependency locally.
+        with tempfile.TemporaryDirectory() as directory:
+            fixture=Path(directory)/'fixture.env'
+            fixture.write_text('AI302_KEY="fixture-credential"\n# comment\n',encoding='utf-8-sig')
+            with patch.object(h,'KEY_FILE',str(fixture)):
+                values=h._load_keys()
+                fixture.unlink()
+                self.assertEqual(h._load_keys(),{})
         self.assertEqual(values['AI302_KEY'],'fixture-credential')
         with patch.object(h,'_load_keys',return_value=values):
             result=h.status()

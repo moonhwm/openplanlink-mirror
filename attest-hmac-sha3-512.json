@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T19:47:49.244Z",
+  "generated_at": "2026-10-08T19:54:00.124Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 896,
-  "merkle_root_sha3_512": "13106c92418ce01fa13452a510146dea7c6ca7931be930c2f22c222df63a29c58c71556388f88ded42ac5301348f17c80394473ee44aa9bcf254ef0dcdc13a1a",
-  "hmac_sha3_512": "a7d7b027e13944b9db0cf66a1d93ef24a5fafc70516fae376a2103627459646a4b1de01ee00cfbcf4546d971b50febe3f818db36f3f6fc43d4fe313de7996e64",
+  "merkle_root_sha3_512": "2b2a37fa69ca0f4d2c2b7f7a8651e6b82acfee4bf0050a74b4e346b9832300d7ff9e6e6c87cd15f0051f84f9ba9ae018c2415c885655cce206bcb1b1068552ab",
+  "hmac_sha3_512": "b7f973a67e692a9d7b237379fcec50137e47bc62d1b4831ab42f9a281731383f5dde347c2536cee4da239b69d8f1fdc18dc86a85d57063507bc9f107d8537d20",
   "files": [
     {
       "path": ".gitattributes",
@@ -415,9 +415,9 @@
     },
     {
       "path": "docs/bailian_night_execution_20261009.md",
-      "size": 7643,
-      "content_sha3_512": "34bc0b52d3a29b22261dc56248c66ffb8fe2f3f94e6176f11e78bd4f8b79ca4292330af9745ac0242cd6444881d210ed9417850e771e3dd0b60d451f74163112",
-      "leaf_sha3_512": "4b0adbd5565d0f187d9999b182a0f595e76b85c8e6434f4e645d5d9d5eb08b92cfd28131129336cc7d7fb78ac3e785a64aa35da23255461c530e043257d1de41"
+      "size": 8226,
+      "content_sha3_512": "c537e27e6ad5901a21c444bf4cc47a2f1ace6e4387700e16fcf5887f8c777667df7bc18245cf11066fb95d4d8580b9300f6fec9ce9427b3534f6055bff72cbe0",
+      "leaf_sha3_512": "323206c911bf852986fd6161e7b9ff2ddd68e22cd52fe563958acb788fdbf156ac4162ed4bf7a969d7d36ff13e1880cf89575669f31050d6648de8c12f1dda77"
     },
     {
       "path": "docs/chatgpt_ecosystem_results_20261008.md",
@@ -4771,9 +4771,9 @@
     },
     {
       "path": "tests/test_hetero_models.py",
-      "size": 5839,
-      "content_sha3_512": "ccaa2c3f69f0f8fd650713112de9caa60fdb43ae79a1eae90bafcd532fe142da16c3b298c1e23633d793ac52986a1fe701a0a28b9e38e30e49ffce634aba70cf",
-      "leaf_sha3_512": "057363ec562798917a1c34e78c9ba339889162f4897c7d7fe697a0965341408853a1be952a39568492d01d7fa1c5a79651979e6f6ffd9e3183e4988d887f2ef8"
+      "size": 6209,
+      "content_sha3_512": "13e18ed4de93b26e98e87bf3ae4d2d6e538c39d034298f44a36bd0359a5a4d6d4801c0917a5d8b46a2c68d239d9b4e65205164eac9d3b070393719315922c807",
+      "leaf_sha3_512": "be8c634549e57fe692f6420fba3e6f90146ddf6b00df2c81f771050482acbf4d65a1699b8c4581f55050f76767e9fa1c0894f355e11161d41241b5f68422dbee"
     },
     {
       "path": "tests/test_memory_sample_audit.py",
@@ -4921,9 +4921,9 @@
     },
     {
       "path": "tools/hetero_models.py",
-      "size": 7011,
-      "content_sha3_512": "72570f0bfe64e77db3bfb14d398e7f0eb9f7c2abb1e52a924f4a0af4231923fc913ead09634ac213d9d7a9e47214855922ef78f8f2bc958b733a4acf1311dbfa",
-      "leaf_sha3_512": "375d669d722f6d964dc4f9a5a2451106e5b9f8ac381b27f56c11d28366edd71f23a343b0624ef84125dac3e1457184786cf0ad8ab93c397d763c627f7960bc3d"
+      "size": 7074,
+      "content_sha3_512": "96569f2c80051cfd123d468d0c851964d20c1fbc0f31336674b427b23842f9afa08617014cf3469775c88ef2030d396c7f8b0c5a7769daaa4a74e7f890bd0301",
+      "leaf_sha3_512": "dfa949d7c67a72c65ca1fa16a9142ece5f297a7b9f4693b8a1b9deb25c25929cd05e99f90976cd98bda01ae79d66b4a6ebc55b81940dbfa2cd2accc7ca9cde6d"
     },
     {
       "path": "tools/hmac_key_policy.py",

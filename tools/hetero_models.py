@@ -31,14 +31,15 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
 def _load_keys():
     keys = {}
     if os.path.exists(KEY_FILE):
-        for line in open(KEY_FILE, encoding="utf-8-sig"):
-            line = line.strip()
-            if line and not line.startswith("#") and "=" in line:
-                k, v = line.split("=", 1)
-                value = v.strip()
-                if len(value) >= 2 and value[0] == value[-1] and value[0] in ('"', "'"):
-                    value = value[1:-1]
-                keys[k.strip()] = value
+        with open(KEY_FILE, encoding="utf-8-sig") as source:
+            for line in source:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    k, v = line.split("=", 1)
+                    value = v.strip()
+                    if len(value) >= 2 and value[0] == value[-1] and value[0] in ('"', "'"):
+                        value = value[1:-1]
+                    keys[k.strip()] = value
     return keys
 
 
