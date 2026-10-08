@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T23:39:11.510Z",
+  "generated_at": "2026-10-08T23:40:12.847Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2380,
-  "merkle_root_sha3_512": "68bbdab85254c2217637248d0fe8a46e1732d49f71b95af5cfa6f0a7fe28ffdd61db679f653964ea2899463b6e1716a36517d1aabe36aeb6d1c881bcaa056ec4",
-  "hmac_sha3_512": "ad98c0b689a01b98b5d4fc2be5375c7c07b569c01ae55e7c3d99b984adb5e65564d830f797bed5f965692bda4d3206f85d36a073c1cd070a26c8ad4885064bd9",
+  "file_count": 2381,
+  "merkle_root_sha3_512": "87949f68ddb6b2d8a3990da84d9d3d3fd4fe9d2a0e0a6b394a831e6cd3af1c41ed1c8cc33d78759eaa0e0cfa91fcc0d71d822ebb3c7e002f78566a8a65983869",
+  "hmac_sha3_512": "854c11dd03231420dcc2f24973ed123dc0e3189c87a5605f2748c5212279dac67567336cf16f86dec36be7472e8c4df152dbb79b95238c0761cb5471747bae45",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2464,6 +2464,12 @@
       "size": 6006,
       "content_sha3_512": "393219920094e357aadbf3271ad0bbf7415fa65c9cb1435bae283d19eef4d36d70296c3170da562695abb1107c9de55a28f631f4c282ed09d69cf6456d5a026c",
       "leaf_sha3_512": "6977892443de187a30ecd2af243b16bf8bf510d4965111eff2e2594957e0020c1396da27859d41eb4362e48e53cb8900041f65f000cf947f357574ffbb8c61da"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/自相关须去趋势之方法补正_DF-AI-20261009-CAIRN-46.otl",
+      "size": 4257,
+      "content_sha3_512": "bc189d01d357eaae37c0310bf00210aa7ef8f56ac7c86a7827048e98d5730c229a8eba4cf8235e1e8ad87dfc8e99a0150c9576a7e9f15e1af0c391a5074650b1",
+      "leaf_sha3_512": "64c62128d382ce830894e6ac71f7fb2fad6f7747f503a2315ace3f0c1c9189392cb25a749e9822cf761c946120f5be8ee2cebc4c11d8ba15ae285f6b32df23de"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/衍生链三段与第一人称与探针修正_DF-AI-20261009-CAIRN-22.otl",
