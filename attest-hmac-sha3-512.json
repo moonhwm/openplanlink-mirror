@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T22:22:38.466Z",
+  "generated_at": "2026-10-08T22:23:59.143Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2329,
-  "merkle_root_sha3_512": "16b9e63c22ba654732d5fb6de1e398d112867d4d32aa6eda177a72ca4d3b1cd6a823c053e97d796f3de1b9f80af2597c1b2d39021c002568e84fe7083335b405",
-  "hmac_sha3_512": "dfe3d28c49deec6d01f6b665bcf12f511f19004ace0cda9da264549fe2759fc6b8d7a2ff733b2eff8a7e25d88ef7e2b12cf083c938512484a27a89ff458a3d0b",
+  "file_count": 2330,
+  "merkle_root_sha3_512": "f9f4c5c86fc9dd0691fd3435053f7145295ad0ae951e257f009122a62ef9ee0b0e3cffc4defa94505861accec2ecf968f12ae298a164de8b9882c038990fa36e",
+  "hmac_sha3_512": "f2d24bdc389079da3b056de8b50f0ea18ce249a1684139fda3407bb3f4f16b4a018853fd517c98d05e3496866b4ae864a3a733309daf1ceefa9fdd87f5c4a0d7",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2818,6 +2818,12 @@
       "size": 18508,
       "content_sha3_512": "9b10bed3b5f73cd0928267d51251150517a294d279db7beed3a1b1a0997008944339f3efe6156f78fa2fa538fc5579b0ceacaecf899e7ffff7a6da3e76890cf9",
       "leaf_sha3_512": "bae3e6e417553f1dc11f3ac2c00b3a090f9e495457e360cc80f977cdda45cdecfc853fcf71a9ba8c1a16c1c858304a823bc2804bfc2e0b826f83544838a37491"
+    },
+    {
+      "path": "deliverables/20261009/shoucang-df-doc-01/sts_forced_call_shoucang-df-doc-01.json",
+      "size": 1761,
+      "content_sha3_512": "40ea90078ab8b1672332475ecac698d784bb3d8da275dd4c2ba2a0ea6699027191d4a00cb19131cec7f9d756959d67f88a09843aa312ad5b999bd2168d47b037",
+      "leaf_sha3_512": "910f3ff8e13e5798aa211df85af57e80247d4f36a3f7dd8ae494430e19ac660f65bd81815fae85b67949236450e59c80d6a4becf8c26356465cc408d05b5dbd1"
     },
     {
       "path": "deliverables/k3-main/a2a-plaza/PILOT187-DECISION.md",
