@@ -1,0 +1,353 @@
+{
+  "schema": "opl-persona-world-emergence/1",
+  "generated_at_utc": "2026-10-08T22:13:41Z",
+  "seat": "shoucang-df-doc-01",
+  "persona": {
+    "source": {
+      "ledger": "EXPERIENCE.md",
+      "bytes": 32865,
+      "sha3_512": "8b5129d0c2199ea61aed06512c9b1d9ecada16b302105bc285fe4f5de83d159e27ef623546a1d0b564f2ffef86e86687b8d4ae1451a7b78793e29a8defd1f858",
+      "sha3_512_16": "8b5129d0c2199ea6"
+    },
+    "seat": "shoucang-df-doc-01",
+    "seed_sha3_512_16": "2d48a6878ea712d7",
+    "measured": {
+      "ledger_entries": 27,
+      "entry_ids": [
+        "E-01",
+        "E-02",
+        "E-03",
+        "E-04",
+        "E-05",
+        "E-06",
+        "E-07",
+        "E-08",
+        "E-09",
+        "E-10",
+        "E-11",
+        "E-12",
+        "E-13",
+        "E-14",
+        "E-15",
+        "E-16",
+        "E-17",
+        "E-18",
+        "E-19",
+        "E-20",
+        "E-21",
+        "E-22",
+        "E-23",
+        "E-24",
+        "E-25",
+        "E-26",
+        "E-27"
+      ],
+      "seat_signed_blocks": 6,
+      "self_report_hits": 6,
+      "gate_hits": 20,
+      "errata_hits": 14,
+      "credential_discipline_hits": 18
+    },
+    "vector": [
+      27,
+      6,
+      6,
+      20,
+      14,
+      18
+    ]
+  },
+  "model": {
+    "rings": 27,
+    "vertices": 648,
+    "segments": 24,
+    "base_radius": 1.3,
+    "twist": 0.42,
+    "z_step": 0.16,
+    "ring_meta": [
+      {
+        "entry": "E-01",
+        "radius": 1.632596,
+        "phase": 0.714558,
+        "z": -2.16,
+        "hash16": "f41d29333039f431"
+      },
+      {
+        "entry": "E-02",
+        "radius": 1.626886,
+        "phase": 0.61712,
+        "z": -2.0,
+        "hash16": "f208baf94fde630d"
+      },
+      {
+        "entry": "E-03",
+        "radius": 1.141553,
+        "phase": 4.191032,
+        "z": -1.84,
+        "hash16": "48883368a3c4b002"
+      },
+      {
+        "entry": "E-04",
+        "radius": 0.993098,
+        "phase": 1.26,
+        "z": -1.68,
+        "hash16": "1400794956511a83"
+      },
+      {
+        "entry": "E-05",
+        "radius": 1.158682,
+        "phase": 7.766066,
+        "z": -1.52,
+        "hash16": "4ef7e819c4b3a49e"
+      },
+      {
+        "entry": "E-06",
+        "radius": 1.07018,
+        "phase": 7.816467,
+        "z": -1.36,
+        "hash16": "2fe88d25523e6c45"
+      },
+      {
+        "entry": "E-07",
+        "radius": 0.990243,
+        "phase": 4.934714,
+        "z": -1.2,
+        "hash16": "1362d663121b7bcc"
+      },
+      {
+        "entry": "E-08",
+        "radius": 1.341396,
+        "phase": 7.10415,
+        "z": -1.04,
+        "hash16": "8ea93865574418a6"
+      },
+      {
+        "entry": "E-09",
+        "radius": 1.295718,
+        "phase": 8.731507,
+        "z": -0.88,
+        "hash16": "7eda16d46f49c003"
+      },
+      {
+        "entry": "E-10",
+        "radius": 0.94171,
+        "phase": 8.855828,
+        "z": -0.72,
+        "hash16": "02cedd62cfd574d2"
+      },
+      {
+        "entry": "E-11",
+        "radius": 1.23291,
+        "phase": 5.801596,
+        "z": -0.56,
+        "hash16": "68414929cc90eb1b"
+      },
+      {
+        "entry": "E-12",
+        "radius": 1.395639,
+        "phase": 7.527513,
+        "z": -0.4,
+        "hash16": "a176a0a20c6d47cb"
+      },
+      {
+        "entry": "E-13",
+        "radius": 1.095875,
+        "phase": 5.754558,
+        "z": -0.24,
+        "hash16": "381d6519de532d95"
+      },
+      {
+        "entry": "E-14",
+        "radius": 1.095875,
+        "phase": 8.416793,
+        "z": -0.08,
+        "hash16": "387802a9b4a569c4"
+      },
+      {
+        "entry": "E-15",
+        "radius": 1.484141,
+        "phase": 6.224959,
+        "z": 0.08,
+        "hash16": "c00ec9301ab30ed0"
+      },
+      {
+        "entry": "E-16",
+        "radius": 1.175812,
+        "phase": 8.443675,
+        "z": 0.24,
+        "hash16": "54577426433e0777"
+      },
+      {
+        "entry": "E-17",
+        "radius": 1.646871,
+        "phase": 11.771188,
+        "z": 0.4,
+        "hash16": "f9cd9065362a7b99"
+      },
+      {
+        "entry": "E-18",
+        "radius": 1.449882,
+        "phase": 9.850394,
+        "z": 0.56,
+        "hash16": "b46ed912c82d9089"
+      },
+      {
+        "entry": "E-19",
+        "radius": 0.987388,
+        "phase": 13.719986,
+        "z": 0.72,
+        "hash16": "12fa3f19f9c49eea"
+      },
+      {
+        "entry": "E-20",
+        "radius": 1.08731,
+        "phase": 8.990238,
+        "z": 0.88,
+        "hash16": "3529473ba5fb46b1"
+      },
+      {
+        "entry": "E-21",
+        "radius": 1.235765,
+        "phase": 10.149436,
+        "z": 1.04,
+        "hash16": "6947a7909999b1f2"
+      },
+      {
+        "entry": "E-22",
+        "radius": 0.995953,
+        "phase": 10.470876,
+        "z": 1.2,
+        "hash16": "15435aa4df4552ca"
+      },
+      {
+        "entry": "E-23",
+        "radius": 1.569788,
+        "phase": 12.122873,
+        "z": 1.36,
+        "hash16": "de7551b71a8920b8"
+      },
+      {
+        "entry": "E-24",
+        "radius": 1.167247,
+        "phase": 12.666073,
+        "z": 1.52,
+        "hash16": "517a81491db52562"
+      },
+      {
+        "entry": "E-25",
+        "radius": 0.961694,
+        "phase": 14.638389,
+        "z": 1.68,
+        "hash16": "09b9de7be9993bf0"
+      },
+      {
+        "entry": "E-26",
+        "radius": 0.964549,
+        "phase": 11.904477,
+        "z": 1.84,
+        "hash16": "0a39dadb4c8196e4"
+      },
+      {
+        "entry": "E-27",
+        "radius": 1.2272,
+        "phase": 15.601589,
+        "z": 2.0,
+        "hash16": "66be92a0450f8c86"
+      }
+    ],
+    "glb_file": "persona_shoucang-df-doc-01.glb",
+    "glb_bytes": 19036,
+    "glb_sha3_512": "37685e59b30a370d2901a986ff64730c27b94c07a314e5b9221b22046e74951ef3abc8d2ec61d593490b11e1c8976d31f6b2f6bf9099927049825e12ddebe542",
+    "glb_sha3_512_16": "37685e59b30a370d",
+    "glb_magic": "glTF",
+    "gltf_version": 2
+  },
+  "emergence": {
+    "world": {
+      "steps": 60,
+      "dt": 0.02,
+      "softening": 0.35,
+      "cluster_eps": 0.22,
+      "n_points": 648,
+      "deterministic": true,
+      "initial_spread": 1.75859,
+      "final_spread": 0.706194
+    },
+    "clusters": {
+      "initial_count": 481,
+      "initial_gini": 0.225379,
+      "initial_largest_share": 0.074074,
+      "final_count": 103,
+      "final_sizes_top8": [
+        493,
+        9,
+        7,
+        6,
+        6,
+        5,
+        5,
+        4
+      ],
+      "control_initial_count": 63,
+      "control_final_count": 116,
+      "control_final_sizes_top8": [
+        471,
+        10,
+        8,
+        8,
+        5,
+        4,
+        4,
+        4
+      ],
+      "final_gini": 0.822066,
+      "control_gini": 0.799596,
+      "determinism_replay_identical": true,
+      "final_largest_share": 0.760802,
+      "control_largest_share": 0.726852
+    },
+    "criteria": {
+      "E1_structure_appeared": {
+        "pass": true,
+        "rule": "末态基尼 > 初态基尼 且 末态最大簇占比 > 初态最大簇占比（吸引动力学下结构=合并成团）",
+        "gini_initial_to_final": [
+          0.225379,
+          0.822066
+        ],
+        "largest_share_initial_to_final": [
+          0.074074,
+          0.760802
+        ]
+      },
+      "E1_legacy_rule": {
+        "pass": false,
+        "rule": "（首版误用）末态簇数 > 初态簇数 且 > 1",
+        "counts_initial_to_final": [
+          481,
+          103
+        ],
+        "note": "吸引动力学下簇数必然下降，此判据与物理相反，故弃用但留痕"
+      },
+      "E0_determinism": {
+        "pass": true,
+        "rule": "同初值同种子重跑末态逐点相同"
+      },
+      "E2_attributable_to_interaction": {
+        "pass": true,
+        "delta_vs_control": -13,
+        "rule": "与本组末态簇数之差 >= max(2, 5% 对照簇数)，即结构不可仅由动力学解释"
+      },
+      "E3_nontrivial": {
+        "pass": true,
+        "rule": "末态基尼 > 对照基尼 且 最大簇占比 < 0.9（非全塌）"
+      }
+    },
+    "EMERGENCE": true,
+    "effect_sizes": {
+      "gini_margin_vs_control": 0.02247,
+      "largest_share_margin_vs_control": 0.033951,
+      "cluster_count_delta_vs_control": -13,
+      "note": "余量小即效应弱；弱效应不得表述为强涌现，只报数值与方向"
+    }
+  }
+}
