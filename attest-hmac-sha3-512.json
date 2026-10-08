@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T22:35:21.614Z",
+  "generated_at": "2026-10-08T22:37:31.018Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2333,
-  "merkle_root_sha3_512": "1fe075c47170e06268214499537814af57267181bbca9f7c42b630a42efb51901f27566189382be07afa87a999fe59e60a00f6993c3c1878184446d4a0a54fca",
-  "hmac_sha3_512": "5ed2ad2b1a9585b68d99646c9aa0c1e68d4625a89b664c8b4ea36dc7a543d8fac8eb3b15f00e861501d7afce13b22da1adc4f4db8edd7a26fdad5cd53db791ad",
+  "file_count": 2334,
+  "merkle_root_sha3_512": "c2705c227e5c9aa27c4d25d1ce0e82e4da58ce6f6b251d8d778ad6437f9ca133991541b8f6754a2dc4939ffe83de17d6714f72c28ef372125c06fd365802f308",
+  "hmac_sha3_512": "cf6a775b671e634414c0f6d007f356ba3c7aa255b4fcfc7baae5be482646c7702c2ff359b11b9964e4607c69cda88d8cffcb6298e68fb479d01076bfa6f62a46",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1846,6 +1846,12 @@
       "size": 4078,
       "content_sha3_512": "363b36e641d3a1f040c5b75b423b676cbdbe515d389383d4f16c830e1c29260195f2164cb818f885b2d3f380875633895ef40662ee7f28342f2e795ff4acf5d4",
       "leaf_sha3_512": "8b749a928e99817b4f60c4585745cb964a0360d8c86204e796e7e290e091e326b3e753dbf0f75708263502a3a40055d3528bda7e470d56fb72d26420eaf3ef17"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/三模块齐动与交叉验证闭环_DF-OPS-20261009-CAIRN-14.otl",
+      "size": 5491,
+      "content_sha3_512": "f1559e1a9c420a3913bc01239318e905b93380e31aaa559278130374b345f36c47f3eebbda71eb25766f84ba8d0c7c2650b3c489249c30695818bcf443884f72",
+      "leaf_sha3_512": "8ec2f29d741b52e9fa63810ea8ebe1e45399fd383807cec47dd64e4ecc7176a635a9c1ca15dfc312cb8daf5b468eb75be01734318df0b4d95ddbbc23cec61772"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/三面收束与浅克隆降级自纠_DF-PUSH-20261008-CAIRN-02.otl",
