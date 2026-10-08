@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T16:30:03.616Z",
+  "generated_at": "2026-10-08T16:31:42.095Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2224,
-  "merkle_root_sha3_512": "b55dd0f846a8ef8c57d14edd91edbedefa47abac46cbf26b1438a21e6f18bb5d0dd143278b012aa03f76f855e376d8b2b76277517a91be27c6ea969bcaf16e69",
-  "hmac_sha3_512": "f13f5349e4a8613e0e29d5d11d9a046fdafaadf7cee93947dae7aa0f3edf2b7df7a0688c94ad8a6781f035de29c4f74c51562644f511ab872310c2435027b75e",
+  "file_count": 2225,
+  "merkle_root_sha3_512": "1c5ea7f823935ad48ae40b5c6f7e0e6859e01faaddbc89210f84edabdde45ef7afee19df7bf941b24a75a391ee9897734d36e50c7bdc019b8ddbeebfd1dc3669",
+  "hmac_sha3_512": "aa19fbb7686c4e8452c463d9f4b17d559b929154fa6400be1ea031f39643a8e60096cafa15b66c63c1c0e457d5abc4d57244f1e998d3b4ee94059548b7b5afe8",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2086,6 +2086,12 @@
       "size": 3085,
       "content_sha3_512": "1f180d0aa57e909257e603e1d91af7db531bf5f3cb56394e19c619a7bdb67b421b0532bcdbf5ac21320a2b14adec50bf59dbe2fe80d4a4db709f6d528dbe1cd4",
       "leaf_sha3_512": "693577fe708fe83fc6a8a7e20fbf4effcca4a4aec661eb7b6dc524fc6eead347cc828e50e4325b77b1613c7168e41c94621f347811d9785bff97e334f1c4ab9f"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/mem/晨报_20261009.md",
+      "size": 1552,
+      "content_sha3_512": "baf0c3abe125453cecccd82e7376b52fa32981a89623ef7bf790c8a08298cf643186c8a11779dbb0b5f14bc9b03ced33197472885768fe943cc1dd87b0b6c9c3",
+      "leaf_sha3_512": "46c10921c524625344161c10e586f77aaa119f84c7462394bcc3a809af6f5dfb1501415c7fa07b386acc5c2ac19b3f999b646090fe0b9fbfb4948f5c0f24760b"
     },
     {
       "path": "deliverables/20261008/seat-cairn/mem/运行审计报告_A2A小分队_20261008.md",
