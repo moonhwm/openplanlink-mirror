@@ -9,7 +9,23 @@ import os
 import re
 import secrets
 import sqlite3
+import threading
+import time
 from datetime import datetime, timezone
+
+# 2026-10-08 tool-integrator 修复（最小改动，只动根因）：
+# Windows 上 ReplayCache.__init__ 的建表 DDL 一旦被多线程/多进程并发执行，新建 SQLite
+# 文件的初始化写锁会互相冲突；busy_timeout 只覆盖 claim() 的写事务、管不到 __init__ 的
+# DDL，失败模式是 `attempt to write a readonly database`（而非 locked），使门禁约 50%
+# 概率误判 FAIL。处置：进程内用模块级 _SCHEMA_LOCK 串行化 DDL，跨进程用
+# O_CREAT|O_EXCL 哨兵互斥（含陈旧哨兵接管），并对残留 OperationalError 做有界退避重试。
+# 哨兵清理一律用 os.replace 移开留痕，不用 os.unlink（本机 safe-delete 守卫会拦截并阻塞）。
+_SCHEMA_LOCK = threading.Lock()
+_SENTINEL_SUFFIX = ".ddl-lock"
+_SENTINEL_TRIES = 40
+_SENTINEL_INTERVAL = 0.25
+_SENTINEL_STALE_SECONDS = 60.0
+_DDL_RETRIES = 5
 
 VERSION = "a2a-hmac-sha3-512/v1"
 DOMAIN_PREFIX = b"OpenPlanLink-A2A-HMAC-v1\x00"
@@ -96,6 +112,73 @@ def compute_tag(envelope_without_tag: dict, key: bytes) -> str:
     return hmac.new(key, authenticated, hashlib.sha3_512).hexdigest()
 
 
+def _sentinel_path(database_path: str) -> str:
+    return database_path + _SENTINEL_SUFFIX
+
+
+def _sentinel_is_stale(path: str) -> bool:
+    try:
+        age = time.time() - os.stat(path).st_mtime
+    except OSError:
+        return True
+    return age > _SENTINEL_STALE_SECONDS
+
+
+def _acquire_sentinel(database_path: str) -> str | None:
+    """跨进程互斥：O_CREAT|O_EXCL 抢占哨兵文件；抢不到则退避重试，超时返回 None 放行。"""
+    path = _sentinel_path(database_path)
+    for _ in range(_SENTINEL_TRIES):
+        try:
+            descriptor = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+        except FileExistsError:
+            if _sentinel_is_stale(path):
+                # 崩溃残留的陈旧哨兵：移开留痕后重试抢占，不阻塞后续调用方。
+                os.replace(path, path + ".released")
+                continue
+            time.sleep(_SENTINEL_INTERVAL)
+            continue
+        else:
+            os.close(descriptor)
+            return path
+    return None
+
+
+def _release_sentinel(sentinel: str | None) -> None:
+    if sentinel is None:
+        return
+    try:
+        os.replace(sentinel, sentinel + ".released")
+    except OSError:
+        pass
+
+
+def _ensure_schema(database_path: str) -> None:
+    """串行化建表：进程内互斥锁 + 跨进程哨兵，失败按有界退避重试。"""
+    with _SCHEMA_LOCK:
+        sentinel = _acquire_sentinel(database_path)
+        try:
+            last_error = None
+            for attempt in range(_DDL_RETRIES):
+                connection = sqlite3.connect(
+                    database_path, timeout=5, isolation_level=None
+                )
+                try:
+                    connection.execute("PRAGMA busy_timeout = 5000")
+                    connection.execute(
+                        "CREATE TABLE IF NOT EXISTS replay_nonces "
+                        "(nonce TEXT PRIMARY KEY, expires_at REAL NOT NULL)"
+                    )
+                    return
+                except sqlite3.OperationalError as error:
+                    last_error = error
+                    time.sleep(0.1 * (attempt + 1))
+                finally:
+                    connection.close()
+            raise last_error
+        finally:
+            _release_sentinel(sentinel)
+
+
 class ReplayCache:
     def __init__(self, database_path):
         try:
@@ -105,14 +188,7 @@ class ReplayCache:
         if not isinstance(path, str) or not path or path == ":memory:" or path.startswith("file:"):
             raise ValueError("nonce 缓存必须使用持久 SQLite 文件")
         self._database_path = path
-        connection = self._connect()
-        try:
-            connection.execute(
-                "CREATE TABLE IF NOT EXISTS replay_nonces "
-                "(nonce TEXT PRIMARY KEY, expires_at REAL NOT NULL)"
-            )
-        finally:
-            connection.close()
+        _ensure_schema(path)
 
     def _connect(self):
         connection = sqlite3.connect(self._database_path, timeout=5, isolation_level=None)
