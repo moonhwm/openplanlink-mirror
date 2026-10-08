@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T02:47:47.348Z",
+  "generated_at": "2026-10-08T02:49:30.914Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2133,
-  "merkle_root_sha3_512": "89f489f20777de43a7cf126792f7639708103e4dc901398927065217273adc0c047ce0705bbee3b114852e9318550aabc33039f96f9b96e0f85285cedf443438",
-  "hmac_sha3_512": "33f75f96ed351d73b40bbfab4b3ad981de055686c83af30ccdf87dd2e27f3f44497ef2c57d7a77fd164fe4b346ad3ac4184b5836703b6e5187d4393e960b4348",
+  "file_count": 2134,
+  "merkle_root_sha3_512": "a07d0c01c71d014b51fbffa3dad4d931e967a330394f72269cab793d5f6ad1b0dee75565fab42a82576c9286ac7c47393ceafffa7751607538b0dbbaad6f1467",
+  "hmac_sha3_512": "557667f7597afe34dca26776f6c3ba7510cd7101c66bc1be36a398949d9965bc547120d8f2a25e6a46df4ecfc1efdf585673c3208cbd4e012303855cb1f99c1c",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1624,6 +1624,12 @@
       "size": 6103,
       "content_sha3_512": "f055adfd2bb51878ff2a3a430aca5d3ffbcdf6401eb980779814387cf0cbdb262389b921592d200d043ba52669f0f43ee2eccb415e0d5c301f782d1e987904f0",
       "leaf_sha3_512": "2eaf4af4aa12b3faf4e3a641a2ca720b6536c08106181d101089ad6bf07161bd77dc5ee8636d83505926bb83e9d4687fff0c6de45bc00da0f0d84a13ddd72d29"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/善恶的彼岸三期五二至六零与浅表保生智慧_DF-NIETZ-20261008-CAIRN-19.otl",
+      "size": 12185,
+      "content_sha3_512": "45d9deaba10fdf72ef00632f0f9f40f741a95c645ca349b3bac8ca79fc6ca041296c10fd5c1ae869356505ad1cbfb0d181422efd6faa8e8f986fd472b9118f77",
+      "leaf_sha3_512": "424db5d2265c5020fe500a4ae85ba13280c2fe018cb1aba81de5946c8e927db4ae047b825b7d1d95d8808d46e8d23dc43d1d4eaf7926f17c5da1af8a57a0a035"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/善恶的彼岸三期第五一节与origin强推修复_DF-NIETZ-20261008-CAIRN-17.otl",
