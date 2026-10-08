@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>可交互架构图 v2 · 压缩迁移全链 / 四技能 / 票据链 / 百炼三模型 / 存储节点</title>
+<style>
+:root{--bg:#0f1420;--fg:#e6edf3;--mut:#8b98a9;--acc:#4ea1ff;--ok:#3fb950;--warn:#d29922;--bad:#f85149;--card:#161c2b;--line:#2a3346}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.6 "Microsoft YaHei",system-ui,sans-serif;padding:18px}
+h1{font-size:19px;margin:0 0 4px}
+.sub{color:var(--mut);font-size:12px;margin-bottom:14px}
+nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+nav a{padding:6px 11px;border:1px solid var(--line);border-radius:16px;color:var(--fg);text-decoration:none;font-size:12.5px;background:var(--card)}
+nav a:hover{border-color:var(--acc);color:var(--acc)}
+section{display:none;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:12px}
+section:target{display:block}
+#chain{display:block}
+h2{font-size:15px;margin:0 0 10px;color:var(--acc)}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px}
+.node{flex:1 1 148px;min-width:148px;border:1px solid var(--line);border-radius:8px;padding:9px;background:#111826;cursor:pointer}
+.node:hover{border-color:var(--acc)}
+.node b{display:block;font-size:12.5px;margin-bottom:3px}
+.node span{color:var(--mut);font-size:11.5px;display:block}
+.arw{align-self:center;color:var(--mut);font-size:16px}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
+th,td{border:1px solid var(--line);padding:5px 7px;text-align:left;vertical-align:top}
+th{background:#111826;color:var(--mut);font-weight:600}
+details{border:1px solid var(--line);border-radius:7px;padding:7px 9px;margin:6px 0;background:#111826}
+summary{cursor:pointer;font-size:12.5px}
+details[open] summary{color:var(--acc);margin-bottom:5px}
+.pill{display:inline-block;padding:1px 7px;border-radius:10px;font-size:11px;border:1px solid}
+.ok{color:var(--ok);border-color:var(--ok)}.warn{color:var(--warn);border-color:var(--warn)}.bad{color:var(--bad);border-color:var(--bad)}.mut{color:var(--mut);border-color:var(--line)}
+code{background:#0b1020;padding:1px 4px;border-radius:3px;font-size:11.5px}
+.foot{color:var(--mut);font-size:11.5px;margin-top:14px;border-top:1px solid var(--line);padding-top:9px}
+</style>
+</head>
+<body>
+<h1>可交互架构图 v2 · 上下文压缩迁移全链与信任对账</h1>
+<div class="sub">档号 ARCH-20261009-MOON-02（v1 为 20261006 记忆分层版）· 署名 Moon（pi-orchestrator@zcode · SHA3 root a69ccb57…）· 全部数字为 2026-10-09 实测，非估算 · 点导航切换视图，点节点/折叠条展开细节</div>
+
+<nav>
+<a href="#chain">① 压缩迁移全链</a>
+<a href="#skills">② 四技能接力</a>
+<a href="#tickets">③ 票据链与 Merkle 对账</a>
+<a href="#models">④ 百炼三模型探针</a>
+<a href="#nodes">⑤ 存储节点状态</a>
+<a href="#desk">⑥ 桌面盘点与总线</a>
+</nav>
+
+<section id="chain">
+<h2>① 压缩迁移全链（实跑，可逆验收 8/8）</h2>
+<div class="flow">
+<div class="node"><b>八件源文本</b><span>三份 20261008 OTL 终版 + 百炼记录 + 桌面协同件 + 主权登记件 + GitHub 回执 + 收官件</span><span>231,922 B（裁剪后）</span></div>
+<div class="arw">→</div>
+<div class="node"><b>context-pruner</b><span>去重裁剪，剔除重复块 27 处（PQC 12／尼采 11／融合 3／主权 1）</span><span>ratio 1.0–1.0128</span></div>
+<div class="arw">→</div>
+<div class="node"><b>ultra-compress-ops</b><span>.ucb 分块 zlib，8 件（尼采 2 块，余各 1 块）</span><span>110,530 B · 总比 0.4766</span></div>
+<div class="arw">→</div>
+<div class="node"><b>upload/</b><span>工作区暂存 + verify_20261009/ 回读件</span><span>解压回读 sha3_512 逐件全等</span></div>
+<div class="arw">→</div>
+<div class="node"><b>三处落位</b><span>GitHub 正本 · WPS 云盘议会地址（9 件/129K）· A 盘映射</span><span>零删除</span></div>
+<div class="arw">→</div>
+<div class="node"><b>总线指针</b><span>HTTP 200 · 幂等键 0f6148d131c28a3a · 3155 字符（上限 8000）</span><span>只走指针与指纹，二进制不上总线</span></div>
+</div>
+<details><summary>逐件压缩比与 sha3_512 前 16 位</summary>
+<table><tr><th>件</th><th>裁剪后 B</th><th>.ucb B</th><th>比</th><th>sha3_16</th></tr>
+<tr><td>PQC 方案 v1.2</td><td>55,914</td><td>24,650</td><td>0.4409</td><td><code>8401980aab20adb4</code></td></tr>
+<tr><td>尼采综述 v1.1</td><td>86,533</td><td>39,887</td><td>0.4609</td><td><code>531c2f442feb1c32</code></td></tr>
+<tr><td>融合简报</td><td>43,376</td><td>19,647</td><td>0.4529</td><td><code>ccbe61aa1b7ad168</code></td></tr>
+<tr><td>百炼三模型记录</td><td>7,866</td><td>4,422</td><td>0.5622</td><td><code>c4ca964f5b341d24</code></td></tr>
+<tr><td>桌面协同件</td><td>6,627</td><td>4,238</td><td>0.6395</td><td><code>f2bc8ffe45a65f2c</code></td></tr>
+<tr><td>凭据主权登记件</td><td>6,993</td><td>3,996</td><td>0.5714</td><td><code>289058e50cf92a45</code></td></tr>
+<tr><td>GitHub 回执</td><td>11,572</td><td>6,405</td><td>0.5535</td><td><code>82e452a3d8dd55e6</code></td></tr>
+<tr><td>收官对账件</td><td>13,041</td><td>7,285</td><td>0.5586</td><td><code>011c791b0243ec0d</code></td></tr>
+<tr><th>合计</th><th>231,922</th><th>110,530</th><th>0.4766</th><th>—</th></tr></table>
+</details>
+<details><summary>解压口径与一处闸门差异（实测）</summary>
+<p><code>python burn/skills-sample/ultra-compress-ops/scripts/ultra_compress.py --extract &lt;件.ucb&gt; --outdir &lt;工作区内目录&gt;</code></p>
+<p>该技能 outdir 闸<b>只允许工作区根内</b>，比 <code>ls-bus-format-ops</code>（含 %TEMP% 与 A 盘）更严——实测拒绝 <code>%TEMP%</code> 并报「超出允许目录」。故回读验证落 <code>upload/verify_20261009/</code>。</p>
+</details>
+</section>
+
+<section id="skills">
+<h2>② 四技能接力（正本口径：GitHub 唯一正本，工作区为同步副本）</h2>
+<div class="flow">
+<div class="node"><b>\context-pruner</b><span>上下文裁剪／去重</span><span>selftest 10/10 PASS</span></div>
+<div class="arw">→</div>
+<div class="node"><b>\ls-bus-format-ops</b><span>目录清单 → biz.ls 信封（含 sha256_16 指纹）</span><span>v1.4 · SELFTEST PASS</span></div>
+<div class="arw">→</div>
+<div class="node"><b>\ultra-compress-ops</b><span>.ucb 分块 zlib 极致压缩</span><span>selftest 11/11 PASS</span></div>
+<div class="arw">→</div>
+<div class="node"><b>\link-bridge-ops</b><span>指针登记至共享交换区／esc 台账</span><span>selftest 12/12 PASS</span></div>
+</div>
+<details><summary>v1.4 的读写分离白名单（本轮升级要点）</summary>
+<table><tr><th>层</th><th>规则</th><th>实测</th></tr>
+<tr><td>输入层</td><td>拒上跳分量（<code>os.pardir</code>）与空字节，先于任何拼接</td><td>三条逃逸用例全 BLOCKED</td></tr>
+<tr><td>归一层</td><td><code>normpath</code>+<code>abspath</code> 后再比对</td><td>—</td></tr>
+<tr><td>扫描白名单 SCAN_ROOTS</td><td>burn／upload／opensrc／A:\OPL_A2A／%TEMP%／~/WPSDrive／<b>桌面两处真身（只读）</b></td><td>桌面 38 项盘点成功</td></tr>
+<tr><td>写白名单 OUT_ROOTS</td><td>同上但<b>不含桌面</b></td><td>selftest 负例：桌面作 <code>--out</code> 必被拒</td></tr>
+<tr><td>语义</td><td>扫描全程只读；落盘仅 <code>Path.write_text</code></td><td>过 Mimosa 闸（写模式 <code>open(变量,'w')</code> 会被拦）</td></tr></table>
+</details>
+</section>
+
+<section id="tickets">
+<h2>③ 票据链与 SHA3-512 Merkle 对账</h2>
+<div class="flow">
+<div class="node"><b>-01 首发</b><span>root16 <code>bc59b12db2d37dac</code></span><span>5 叶（融合简报 exists:false 未入树）</span></div>
+<div class="arw">→</div>
+<div class="node"><b>-02 修订轮重签</b><span>root16 <code>44f3fcce839648f8</code></span><span>凭据席签，5 件</span></div>
+<div class="arw">→</div>
+<div class="node"><b>撞号件（作废留痕）</b><span>root16 <code>437c8572e8058a93</code></span><span>本体误用 -02 编号，自报；不删不作现行</span></div>
+<div class="arw">→</div>
+<div class="node"><b>-03 现行</b><span>root16 <code>546d43b398a20c27</code></span><span>10 件（含两张前序票据入树自证）</span></div>
+</div>
+<details><summary>算法与诚实边界</summary>
+<p>叶 = <code>sha3_512(file)</code>；父 = <code>sha3_512(left_hex + right_hex)</code>；奇数节点复制自身；叶序 = artifacts 数组序。任何人可据 artifacts 逐件重算复核。</p>
+<p><span class="pill warn">sig = null</span> 三张票据的 HMAC-SHA3-512 签名均待 <code>OPL_TICKET_KEY</code> 注入后补签——<b>完整性已由 Merkle 根保障，身份认证待补</b>；未注入即不伪造签名值。</p>
+<p><span class="pill bad">已自报</span> 版本背离：<code>754b3c9</code> 入仓之 PQC 为 v1.0，修订后 v1.1→v1.2 于 <code>fc47b4e</code>+<code>a54eb33</code> 收敛；推送阶段排在复核修订之前是根因，已登记为拓扑教训。</p>
+</details>
+</section>
+
+<section id="models">
+<h2>④ 百炼三模型强制调用探针（2026-10-09 实测）</h2>
+<table>
+<tr><th>能力</th><th>型号</th><th>HTTP</th><th>时延</th><th>关键输出</th></tr>
+<tr><td rowspan="2">向量编码</td><td>text-embedding-v4</td><td><span class="pill ok">200</span></td><td>419.5 ms</td><td>dim=1024</td></tr>
+<tr><td>text-embedding-v3</td><td><span class="pill bad">400</span></td><td>307.4 ms</td><td>AllocationQuota.FreeTierOnly（免费额度耗尽／控制台「仅用免费额度」）</td></tr>
+<tr><td rowspan="2">重排序</td><td>gte-rerank-v2</td><td><span class="pill ok">200</span></td><td>304.5 ms</td><td>0.1804 / 0.1471 / 0.006（语义序正确）</td></tr>
+<tr><td>gte-rerank（v1）</td><td><span class="pill bad">403</span></td><td>182.8 ms</td><td>AccessDenied（该型号未授权）</td></tr>
+<tr><td>决策模型</td><td>qwen-plus 单次前向 + json_object</td><td><span class="pill ok">200</span></td><td>1761.0 ms</td><td>label/yes_no/score/probabilities（和=1）/confidence 0.72</td></tr>
+<tr><td rowspan="2">世界模型</td><td>专用端点 /services/worldmodel/…</td><td><span class="pill bad">400</span></td><td>168.3 ms</td><td>Model not exist（两次独立探测同结论）</td></tr>
+<tr><td>qwen-max 近似（实时导演+角色演绎）</td><td><span class="pill warn">200 近似</span></td><td>4118.9 ms</td><td>scene_state/next_beats[3]/role_lines/director_note</td></tr>
+</table>
+<details><summary>方法论与自报订正</summary>
+<p>承 Cairn 席 ASR 破局教训：<b>「不可用」之判须先穷尽型号与参数变体</b>——本席依此把两处型号墙打穿（v3→v4、v1→v2），故不得据单一型号失败判「能力不可用」。</p>
+<p><span class="pill bad">自报</span> 前轮工作流 notCovered 曾载「候主权人授权与凭据入 .env」——不成立：<code>DASHSCOPE_API_KEY</code> 早在册（16 键之一），真实障碍只是型号级额度与授权。</p>
+<p><span class="pill mut">未覆盖</span> 世界模型之「世界探索」模式无对应公开端点，<b>不以对话模型近似冒充</b>，候主权人指明产品或端点名。</p>
+<p>纪律：键值零回显（仅输出 <code>key_len=117</code>）；仅 https + host 白名单 <code>dashscope.aliyuncs.com</code>；解析后逐 IP 拒环回／私有／保留／链路本地。</p>
+</details>
+</section>
+
+<section id="nodes">
+<h2>⑤ 存储节点状态（实测口径，候凭据者不冒称已通）</h2>
+<table>
+<tr><th>节点</th><th>状态</th><th>证据／阻塞</th></tr>
+<tr><td>GitHub <code>moonhwm/openplanlink-mirror</code>（唯一正本）</td><td><span class="pill ok">已通</span></td><td>push <code>754b3c9..a54eb33</code> 快进无 force；ls-remote == 本地 HEAD 全等</td></tr>
+<tr><td>WPS 云盘（议会物理地址）</td><td><span class="pill ok">已通</span></td><td>共享交换区 <code>压缩迁移_20261009\</code> 9 件/129K；协同件与商榷稿副本在册</td></tr>
+<tr><td>A2A 总线 <code>120.46.86.165</code></td><td><span class="pill ok">已通</span></td><td>bus_rows=7881 可读；本轮两次投递 HTTP 200（幂等键 ed6a0320…／0f6148d1…）</td></tr>
+<tr><td>GitCode 白名单镜像</td><td><span class="pill ok">已通</span></td><td>九库 + photocraft + codex-cockpit（HEAD d117c9b）在盘</td></tr>
+<tr><td>A 盘 <code>A:\OPL_A2A</code></td><td><span class="pill ok">已通</span></td><td>四 junction + MAPPING_MANIFEST §7.9/§7.10 已追加</td></tr>
+<tr><td>ima-skill</td><td><span class="pill warn">候补</span></td><td>凭据形态已换发（clientid=32位hex／apikey=base64，标签反向）；本轮未调用</td></tr>
+<tr><td>Neon</td><td><span class="pill warn">候凭据</span></td><td>接口占位已留，无凭据不冒称已通</td></tr>
+<tr><td>Supabase</td><td><span class="pill bad">409</span></td><td>新域名 <code>openplanlink-a2a-….qoder.website</code> 未就绪；旧 IP 主用、禁抢跑</td></tr>
+<tr><td>百度网盘</td><td><span class="pill warn">候凭据</span></td><td>同上，接口占位</td></tr>
+<tr><td>华为云 X 实例</td><td><span class="pill warn">候排期</span></td><td>强制排期榨取议题在册，未获实例</td></tr>
+<tr><td>Server酱 <code>sc3.ft07.com</code></td><td><span class="pill bad">白名单外</span></td><td>不在 HTTP 白名单域内，登记候补；sendkey 值零落盘</td></tr>
+</table>
+</section>
+
+<section id="desk">
+<h2>⑥ 桌面盘点与总线上传（DF-DESK-20261009-MOON-01）</h2>
+<div class="flow">
+<div class="node"><b>桌面真身</b><span>OneDrive\桌面 38 项（11 目录 + 27 文件）；Desktop 仅 3 项</span></div>
+<div class="arw">→</div>
+<div class="node"><b>只读盘点</b><span>六个实质目录 → biz.ls 信封</span><span>620 件 / 27,415,025 B（26.15 MB）</span></div>
+<div class="arw">→</div>
+<div class="node"><b>铁律过滤</b><span>.lnk 21／.url 2／desktop.ini／_敏感_加密存储 未扫未传；两份 AccessKey CSV 只登记存在性</span><span>零删除、零移动</span></div>
+<div class="arw">→</div>
+<div class="node"><b>七席分派</b><span>Cairn 去重 510 件／Trae 基线／workbuddy 副本落位／星枢外站／K3 大文件／砚 SBOM／Moon 台账</span><span>候 DF-ACK 回执</span></div>
+<div class="arw">→</div>
+<div class="node"><b>总线通告</b><span>HTTP 200 · 2036 字符 · 幂等键 ed6a03202e213d0e</span><span>桥回显：协同已就绪，待各席认领</span></div>
+</div>
+<details><summary>六目录清单指纹</summary>
+<table><tr><th>目录</th><th>件数</th><th>字节</th><th>清单 sha3_16</th></tr>
+<tr><td>席位交付_散件归档</td><td>368</td><td>16,375,833</td><td><code>9c26c5cd43adfb28</code></td></tr>
+<tr><td>_整理_各席交付</td><td>142</td><td>5,112,475</td><td><code>b93deb23f410f52d</code></td></tr>
+<tr><td>_归档_桌面整理_20261008</td><td>63</td><td>1,843,424</td><td><code>06350bc4ab90429a</code></td></tr>
+<tr><td>报告_输出</td><td>41</td><td>1,425,042</td><td><code>b5a8a5a58fd97f87</code></td></tr>
+<tr><td>全局声明_治理文档</td><td>4</td><td>2,657,801</td><td><code>6e2d845ffe3ed36b</code></td></tr>
+<tr><td>_A2A议会交付</td><td>2</td><td>450</td><td><code>49afbba086aef80a</code></td></tr></table>
+</details>
+</section>
+
+<div class="foot">
+本图自含（零外部依赖、零 CDN、零凭据）；所有数字为 2026-10-09 本机实测，未实测项一律标注「候／未覆盖」。留停 run 处置见 <code>burn/claims/parked_runs_disposition_20261009.md</code>（95M 阵延期办理、夜间阵 7eb02971 正式撤销）。<br>
+署名：Moon（pi-orchestrator@zcode · SHA3 root a69ccb57…）· ARCH-20261009-MOON-02 · 2026-10-09
+</div>
+</body>
+</html>
