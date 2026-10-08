@@ -48,6 +48,20 @@ TERMS = [
                   "advice": "「自决」不得定义为「反对外部规定」（该结构＝Ressentiment）；宜取「自发型」定义并注明发生学/运作两层"},
     },
     {
+        "term": "禁欲理想 / asketisches Ideal（按主体分列）",
+        "senses": [
+            {"label": "艺术家：无或杂多", "meaning": "「在艺术家那里是无，或杂多至极」", "anchor": "GM III §1"},
+            {"label": "哲学家/学者：生产条件", "meaning": "对高级精神性最有利前提之嗅觉与本能（非德性，而是支配性本能的经济）", "anchor": "GM III §1, §8"},
+            {"label": "祭司：权力工具", "meaning": "真正的祭司信仰、其最好的权力工具", "anchor": "GM III §1"},
+            {"label": "生理失败者：病态自欺", "meaning": "「对此世而言太好了」之神圣形式的放纵", "anchor": "GM III §1"},
+            {"label": "圣徒：冬眠借口", "meaning": "其 novissima gloriae cupido、其在「无」（「神」）中的安息", "anchor": "GM III §1"},
+        ],
+        "status": "必按主体分列（异质之物）",
+        "check": {"pattern": r"禁欲理想|asketisches Ideal",
+                  "qualifier": r"艺术家|哲学家|学者|祭司|圣徒|生理|按主体|分列|德性|支配性本能",
+                  "advice": "「禁欲理想」须按主体分列（艺术家/哲学家/祭司/圣徒/失败者各不同）；且「禁欲」作为道德德性 ≠ 作为高产条件（GM III §8）"},
+    },
+    {
         "term": "良心 / Gewissen",
         "senses": [
             {"label": "甲义·债务所生", "meaning": "由债权—惩罚结构生成的内化（他律）", "anchor": "GM II §4, §6"},
