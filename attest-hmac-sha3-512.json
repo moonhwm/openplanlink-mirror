@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T02:00:11.885Z",
+  "generated_at": "2026-10-08T02:02:39.456Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2119,
-  "merkle_root_sha3_512": "fee5c72a4953dbd5e6c50056381ba873099c221370d3b1b160aae9fe1c05a93adb9a15bbbb60242883a3ed8bc8da59898ce9b79d3b1831d716d0b34385d40203",
-  "hmac_sha3_512": "3a17b4e7e0d5827b0e6f880c1598ba0548e851e7b05dc2d3f4922f26f5a9376ec6674c8a9cb00599586ca16ae6567e9a4a260af4644964efdb5419d3ca7a943a",
+  "file_count": 2121,
+  "merkle_root_sha3_512": "58a9276eb7bc13890911dd2ae6ac65cc8f82b32066498a8e7df4a1b9dacf9070779367e4d2360cf9b75214ba8c937971b8577bc4de7e1c4a7f26c7c4fe48eec4",
+  "hmac_sha3_512": "320f557bb8ae853ca9176c8ae004fa26f97fbde76aab0d1db4eb0145eb3c9e83e7f8d03860459e906ae35c10de69e288a6399e17e22bec8ad7689f4ab77ab75f",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1644,6 +1644,12 @@
       "leaf_sha3_512": "86bc8ee5901209bcc4392cce345cd135e96bb7f696f34933d404c6a2215419fb77698336fed549e3e688d1dde37f252901ecdc4fdfffc68d32a1a50ddd653814"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/善恶的彼岸第二章收官与时点口径自纠_DF-NIETZ-20261008-CAIRN-15.otl",
+      "size": 10787,
+      "content_sha3_512": "7fa1f87c31a5fd91f5eea04e0d5561349a1874b04362da00efdede451941db3d8a5502a3aa48fa11c9ea3be96b47f0e1f021960e48f721515719d435a6119fd6",
+      "leaf_sha3_512": "a517f5493aed61b80caaf693cb34f66134115d8bc15c6f05ce278861cd6d82864348b91cd4bfe7b861b5f9c77f0850857741d832ff504b138899bb48c26ef0c0"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/善恶的彼岸超道德三期说与自决意图论质疑_DF-NIETZ-20261008-CAIRN-14.otl",
       "size": 11687,
       "content_sha3_512": "90b17b74d5c5f2ab669adb2600d16baf3948a9a91fa3a6d9b4ca1b3ccfc182eb423750ac2eaa4cbb578876470d0e4df64f63d81133ad2a1544b0e26fae0f8697",
@@ -1828,6 +1834,12 @@
       "size": 5779,
       "content_sha3_512": "eda0bd587929cd12df61eaea507c958309b7c2a891f85051347af1b82087bacbc939eabd9ecf1191537cf819bec9e04dd03d0b6b57f3b4afa2df919e3193014b",
       "leaf_sha3_512": "2b5cc3f1471fd1fe857b079ea8478fa831397fa3367c001784125d2bbf6d75b80f687821dd0f5f1168180875e03ed8bb1cdc469f97779a13d4a2c60af83e5c29"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/tools/clock_stamp.py",
+      "size": 1957,
+      "content_sha3_512": "aaa7193ff2dd44107e2002969d9f4541f39cd40d534083fbd6d1b563da095f3b41e8c9f143f06b36cbedb47a94c40d956b49a71a38888caf845864d72f805a9b",
+      "leaf_sha3_512": "74da64b42a365b5927bf1f86ce458cfc46c259f99a65dcbbd221d7a695b055eb6a8b8d400e81ea17b02c072c7da28b72d17f34d7e290e7c985bbaa7964f8688d"
     },
     {
       "path": "deliverables/20261008/seat-cairn/tools/keyderiv.py",
