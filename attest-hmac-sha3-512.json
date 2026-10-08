@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T17:38:05.600Z",
+  "generated_at": "2026-10-08T17:50:34.225Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2241,
-  "merkle_root_sha3_512": "4f1017a9ce571f6c46b86d6db37e755e45bb0f8682175907ae29e519e153d28714ec790e88bbc7082ee441758eafac49c6d0f4631d9bf290a1502c1139823ec8",
-  "hmac_sha3_512": "351be43e189d419b7bb003d363c1debc1f9f32e20d551b95ecdb73858c6c91eb162184b59fee0924c94d68b7dfa585ab8507e99192057d9c6d670502bff79316",
+  "file_count": 2242,
+  "merkle_root_sha3_512": "ed8f8a9d5f7fafc853877717e210580efc541808322bd03a5bc09cad0a4a1d3d63b98f3da6e7460f320e5dc26d103613e2233975b50636c2b81722a258901ce0",
+  "hmac_sha3_512": "a2c8552f9e24d4b4be09e15d17c753a83cc2ae3e2755fa6fb24d6cacfb6729d3144714af6bbc182377af889de533635ae2f4b8983beece35c869accb4d32b7f3",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2092,6 +2092,12 @@
       "size": 5522,
       "content_sha3_512": "66df3f728119139061dac1a41dec6af15f1658c613cbf9882918fc9e6e7d0a3e069b743b1f3f265930122f584b01a0ef7899ac0c4bd7d783a65e9eb2c4fa6d26",
       "leaf_sha3_512": "aab7e53a5f009c719e0711d64fa15b984fc886122a2a1238df77ceaf7cd29f379152edf89ed1eb25813058f46ca6835232ec889ae50cda3198ef099d841cb688"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/通道登记与实质调用留痕_DF-OPS-20261009-CAIRN-01.otl",
+      "size": 7360,
+      "content_sha3_512": "950b8153f6e80cf3891ced2c531ca8b95d6cb5f56f8e42e83fb71c7c35b5b0972337101d4407276d6e75f18538c3d0e688fd3c94fe931595d1c8dd108b15069c",
+      "leaf_sha3_512": "465793b5107e01b5585869e630738e9c6df46c827c67532b027ad5dfb12c2311c09d85f66d502e9fe8d6b509b61060f151eb2f48d0371add789891029cec7e09"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/重建预案与半挂处置与ASR破局_DF-META-20261009-CAIRN-02.otl",
