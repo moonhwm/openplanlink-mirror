@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T05:51:40.996Z",
+  "generated_at": "2026-10-08T05:52:26.370Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2148,
-  "merkle_root_sha3_512": "3e6bd398f4c8887c6aa1428a4a66627dcae96b03c2087f6e5cac83be0afd121330f61064ef7ecaeeabc4b05bb296bb3f286ec0513c6e3713f18b800243bbc2a3",
-  "hmac_sha3_512": "d0868e7862ef92582d64471c0dd2f3e6334bfae127a3643988b7c7196ff6f7a2f5531cee6c82c8a661d964228809fab028d0df7fb6b1c1774304f68ed48a88eb",
+  "file_count": 2161,
+  "merkle_root_sha3_512": "1d384722aa0fd5dfc3de07f714740cb97822f25d927e8b9b9533f4b7face98df57589947c2f0f5c0124afb4b8231c8484f7bc6ec3f5177b8c7ceea2176c9f877",
+  "hmac_sha3_512": "1b1520fd45300ed7f75f67bbaeac67de747bea00b24ddbd1599c47dc3fdc87793b9b01f3a8df3bfec3cb12af961624c5242d2ca76188dc537954df7f6c0856bc",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2040,6 +2040,72 @@
       "leaf_sha3_512": "eca73a6019c8c1bbcef969060664548459c13d97210b8e81261bdc58e5c23320afbb096675833718bc6d320f1844d9e36253d11fbbbe8ab6776896b9c2973bb7"
     },
     {
+      "path": "deliverables/k3-main/govdoc-group/A2A网络算力分配与分布式协同探讨_DF-ORD-2026-1005-K3-03.md",
+      "size": 25741,
+      "content_sha3_512": "2f468c4077f16de60d1b68ea125d8b24e0ab3fa0221f957a12dfa3db2060f43b07821aaab5c13b9786222b42d3603fd5903ad9bcf015747bcb4b19fa6b9d9e8f",
+      "leaf_sha3_512": "1ed978de88fe1f11fc86ae15c47eb99aca749c293f28443f1d3d77245885a371c3db37a69e52747f0055eeb1d1349d31d342d47a7729d65293bee831ec526bcf"
+    },
+    {
+      "path": "deliverables/k3-main/govdoc-group/SDD规范驱动开发立项书_DF-ORD-2026-1005-K3-01.md",
+      "size": 11399,
+      "content_sha3_512": "cbe0ad14413fd1e62f8436bd3e465ce26f22c221da9027c44e16d6a8c8aaec79e153ccfa0fa8b570c471cc7aaf2816d0a6a9698388438b0fffbfca5268bbe7ed",
+      "leaf_sha3_512": "a849005192878ba699de5d6d4993049d236b75f9ca2d5d9f4132ccbc16ec6cb7fb432bb695d172fe704f6b9a8a1669842bc20f758a558bf2469174f95cbc1723"
+    },
+    {
+      "path": "deliverables/k3-main/govdoc-group/协同规约候批条款呈批件_DF-ORD-2026-1005-K3-02.md",
+      "size": 21437,
+      "content_sha3_512": "e7b073cd10aa92671da8aaecabe884c470d4026c646f3e772c22c1d6412152ec5df023b4bf4d03110e75f75dcea915817df88ea2a443686c4744b63fa19373f7",
+      "leaf_sha3_512": "da9bfd62fcd70e0416f4bb63d3f7b0a3ea188465cb5f6627c90b7f6dedd735d55b804c5285c76147abdc3fd8598ec03dfef566a84c7c2fc01ae021da7b1fa0c0"
+    },
+    {
+      "path": "deliverables/k3-main/govdoc-group/协调函_受阻三件桌面导出救济_CL-DESK-20261005-K3-02.md",
+      "size": 3193,
+      "content_sha3_512": "2a83245d9f2f7d5d09c3d1af316f5e6332ad7a099c01af8e25ba0b68bad15ae95e29f95707b982aaaf2b75f22caa7126126c7b02d5c9bbce97aae5d09c4a8731",
+      "leaf_sha3_512": "8bf875c459b33f04194bf3f3f2084d6001495f2c325e317b6071c41a048fdb9ed3f67821f3bf8329160c08abcb81fa8af2586076eb12d100f92fce905e2947aa"
+    },
+    {
+      "path": "deliverables/k3-main/govdoc-group/姊妹OTL件锚定纳表审议呈批附件_DF-ORD-2026-1005-K3-04.md",
+      "size": 6510,
+      "content_sha3_512": "504025f1ce624f429836cf4c166b29038351f29f910917e1b241ec1a16457b332f9298289aacf6c6b97b0eff3824059754fb3624be7a240195eeebd17decff14",
+      "leaf_sha3_512": "451aa162b9fa97f8e85097c9e38b278eedd6e81e7ec6c9739791782333188b7fe68a9233237ad973597a5588444577a581389d75fe366922b42349263d8e0cd5"
+    },
+    {
+      "path": "deliverables/k3-main/govdoc-group/对账协议式样呈批件_DF-ORD-2026-1005-K3-06.md",
+      "size": 5732,
+      "content_sha3_512": "82917feb838a0710bd344049d6aadccb59c0b1330d594533d510ab832ecd10b7f61151a767b6a685719a591821af8807c0c18799c752eeae29b1274115e06529",
+      "leaf_sha3_512": "f7fd6d2e6a915dab94ab05c3bafa67f760296fbe86a7a85309f112f3827b05ebf1354b627dca54ceccba38189c582d9e33b976a7f1feb8feada894bd8c5630d7"
+    },
+    {
+      "path": "deliverables/k3-main/govdoc-group/重读批注纪要_WPS十件_DF-MIN-2026-1005-K3-01.md",
+      "size": 21520,
+      "content_sha3_512": "4f099f03fbf252bbedd065906ce7a6ca19c33717e13695f60324684af83f3de47cb34de25dfc3f1a0f61e3c2330c75a109f7ec5afc628cece0a2216e53d83364",
+      "leaf_sha3_512": "1cd57566f988ae3b933f6e7d2eb80fd7006483f57f3884bb9b17c83dee114603ca065125288a3c96c5f18f5e2f014cb2ec611f5411bf01cf2c8f861740a08e6d"
+    },
+    {
+      "path": "deliverables/k3-main/govdoc-group/镜像仓收录缺口勘误与候批包呈批件_DF-NOTICE-2026-1005-K3-05.md",
+      "size": 6075,
+      "content_sha3_512": "3c54d2722ac30c2752b7cb83e971a2002454b93301a1644de1beec7fe16fd1430a140e77093968de2bb835b32d97da64b4e1853021a66860d1f3b0e52512445f",
+      "leaf_sha3_512": "c2b0898c6efcdc2f712a72051beb82d580a82e85d099a70a3099a0883ee7a839153a6f5bf3a6d48724e2c464ad86a4961632f3fcb94dbe3a6b8120b6b9df77c3"
+    },
+    {
+      "path": "deliverables/k3-main/govdoc-group/镜像收录两则外发事前审查报告_20261005.md",
+      "size": 7216,
+      "content_sha3_512": "f99e54c2d4bfde1dc805b1705b35266e704c74318af450f83fafc6695826017129f5544a91eb772dfbd753d03c7a09db1b5c54455feb3fa99f5092f0c2f4b68a",
+      "leaf_sha3_512": "87c253ffba3c451cb8ca05ba1a44b555e8869a20cd8ebda8195ac9ceffa6dc4c963094f21be41347f82ea660eac3f490dec17edee89c1236c2d5343a66c6fdec"
+    },
+    {
+      "path": "deliverables/k3-main/govdoc-group/预检报告_OpenPlanLink全局声明与A2A网络建设纲要_DF-NOTICE-2026-1004-K3-01.md",
+      "size": 6064,
+      "content_sha3_512": "c8e60b9c3214abf6f248eb1c3413b8e3913f1ddd79efb58a7c7bd27600e88970738cfc9ad7d3892dec19ef8b9d9007151dee9b0a6b10ce30f483e5da551a4f65",
+      "leaf_sha3_512": "18234850ab2877f02d257951691713006a3e9d9cac8840bb3651e0670e46bfcb3e2f462b992e1a163377b5b943b5538071cbdfeead5ad45bbb07b3a6925e7571"
+    },
+    {
+      "path": "deliverables/k3-main/govdoc-group/验收器引用模式扩宽候裁议案_DF-ORD-2026-1006-K3-07.md",
+      "size": 6231,
+      "content_sha3_512": "422a65bd2ca3b6bdc9429876c2bc9918d7043980c9fd5b02fa4a53a036fa4ef28a3fe5f1f28e37bef644e5c8ff6f6ef0eff27cecd85053f9b7831b84284db1df",
+      "leaf_sha3_512": "88a4b2d7fad6bce367d42c45a2d3e097cd28dea593e2e79e5a4fb4a8abfd5c1f49f93bc4f55d2789236210618050e60dc93ac2d2574376de3d7e6886e27d77e0"
+    },
+    {
       "path": "deliverables/k3-main/hwcloud-x/HWX-PLAN-20261006-01.md",
       "size": 4842,
       "content_sha3_512": "b5b17a03ca16188317eb3b417036ab513d05bf14e18e98a344cd6a696fc481580cba36ecaf586fc91726807875ed54e750cc7c9e4283b0fa65c0d27bbe2c72b8",
@@ -2197,15 +2263,27 @@
     },
     {
       "path": "deliverables/k3-main/skill-patch/ls-bus-format-ops/PATCH_NOTES.md",
-      "size": 2348,
-      "content_sha3_512": "918602ac49e6451411d2f4a8278a05052d4c2457c33d893600e67cc99e44d13090c00bde626994d13e7ecb4b6f699a2c3fcf54516d64d2089fc87db414d62d11",
-      "leaf_sha3_512": "c968eb4bf8678f08eb80396b08339653bc7d929df9a5352b2627dbc1ab1ecf3967e8552ae86cfe7e6594dd70da49ee59fffa116a2232981cf2b2b3d6963dc104"
+      "size": 2764,
+      "content_sha3_512": "65218f2c7de122561691ca5d171c3242943db31e516eeaebb156ef07e84e976c1b22266cb8e2b4d8520306b73ff1c74b93bea6342261b837ab9a5448d09bc34b",
+      "leaf_sha3_512": "1e1e84751219f0797ee9fbc9e7fc7dee54c51b08af105bdfbde04ef81c3d17c352da18e5937ab947a0deb20ecbbe01a341e6cb11d133228d9ce89529a067a56b"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/ls-bus-format-ops/SKILL.md",
+      "size": 2317,
+      "content_sha3_512": "5d27a2f12a5ef60eb7c0494f0aa816eb2380fbd73346656a1cb4f3c3d2f50e8b4361a8b6e1a748ba3c9924629936a9435c8ce178c9d8ceb68f8b8ccd47b78b10",
+      "leaf_sha3_512": "5a6a05d26db986244873badcd712abb3e0820de8475df892eaaf5a8a21e91b69bb05bcb15b97cb82e3f6ed92bee97e3985c9af71bc0aab98969092cfb02d146b"
     },
     {
       "path": "deliverables/k3-main/skill-patch/ls-bus-format-ops/scripts/ls_bus_format.py",
+      "size": 18989,
+      "content_sha3_512": "0888bdfb4840e1ceb22cc9ad7603e7961cb362f2f5c679119995605ed4fd953d75b8b9a61f331367c0f62e505b686a6bccbd35776d3c4c644009d30635b24618",
+      "leaf_sha3_512": "5f11752013e336cb97d516c0321a4e1a8b937550905c45c9243638115c156e4cd440067d3d4256ec27c9b668492016c33c3fd915c6b8cec08f4c93951f23d54b"
+    },
+    {
+      "path": "deliverables/k3-main/skill-patch/ls-bus-format-ops/scripts/ls_bus_format_v2.1.bak.py",
       "size": 13375,
       "content_sha3_512": "c8e56e56a850dbe8454b97b67d5e95c44032e3e6f8793c8d8a7ef4d5c29b9ea2cf2d136e8210e0d2952d8bb2747a811f923a502d03e7c222795086f22fdc9c29",
-      "leaf_sha3_512": "3a4b1ed730b0b300d1e3d2449d810049f71831e40318b5649d227c40be0b3c228a805f97dd5e318755b0a90fb345a1565e4d3ac711a4260c9d70462db2940273"
+      "leaf_sha3_512": "9d93f1e76a485078a27f1c880e459cf69e3214b4d9791d828cc292d9d7af56d806ed656bdeda9eed44533c062d590a47dfa1fa1a304253cdce1d7f7e536b6e75"
     },
     {
       "path": "deliverables/k3-main/verifier/README_public.md",
