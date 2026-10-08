@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T01:24:52.529Z",
+  "generated_at": "2026-10-08T01:26:55.242Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2103,
-  "merkle_root_sha3_512": "66037e47381bdce3208a39aae5f8f1f102bf170f213815618f28ffd88f4c66a1ace1fbb423476a3ec8299ef29e52d2fe204edb7a77bdebdef13c2c85c78f9be8",
-  "hmac_sha3_512": "da13cce9a99fc92c854ec7fbd6f7787c79db02ad1854e21cc33edf28fd944081f8493de095d300e2431eec0cf537002f7508d0a1efb8b018fe3daa2cc054471e",
+  "file_count": 2104,
+  "merkle_root_sha3_512": "99974283402da70101fe7db6ac87b76a9ce37b82a867c10f24ffa49b90a527eb706ecd99d214521f2754ff18aa0e3ee78f724858fbf477c9b0484547e3138eec",
+  "hmac_sha3_512": "8d5cca400c517692710ebc293d834d31f9346bc0f41ef7fbd44c6bec5c1539f8275035b646b40d7298da318cba8fe29e5aaa63fafec5d044b095a8d906e49773",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2230,6 +2230,12 @@
       "size": 2450,
       "content_sha3_512": "b5a3353da4a2d3df7bdf33292c76c3461a006f6aa1741865d0132665a9e99b0f59d79aab934f777d1657ced9cefcc70cd848c6ce210c79145c7786d7a1ffecfc",
       "leaf_sha3_512": "144dc3663d95f7a7780e94c1feb40ed80c53be9defc95c7cdde65427eb5900ae07915f9f0ad76e3740be08d8a3f4a678ac70237d9e80c437f627da5471e8198a"
+    },
+    {
+      "path": "seats/kimiwork-selector/persona_v0.1.md",
+      "size": 1773,
+      "content_sha3_512": "445f636a58cce14399dd171cb5efdb59581b904c5184ff76c60b8e1c256b1a699c3a94608cb9aeee0fb914a56f656cef20611f35e57671679d576e24ae957d81",
+      "leaf_sha3_512": "2e1a5b1641baddaf2a30ad87132932d829289137b185dd9b91121bc3d54f61211c36cd20c2380172623f4ee47f5d91172bcd5c4e4710dc37cc8911fc0e1a3642"
     },
     {
       "path": "seats/workbuddy-hy4/persona_seed_v0.md",
