@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T10:58:54.002Z",
+  "generated_at": "2026-10-08T15:58:07.846Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2206,
-  "merkle_root_sha3_512": "ae05326d03a4c0e87f80585b451b518349359210b9da018d8999cbaaf33c831c790164f9abdfa0e725ee59270ca6b9ddeddb1b40bf829423944b4e8ad64f15d9",
-  "hmac_sha3_512": "3a2bce42ca45e804712743ca28fcbd026a536ddcc83b93bf4196ea7203ad4d684987fec0f1286205ddb7cad253f0fcc987dcc123c19f43a087dece42c5e0a072",
+  "file_count": 2207,
+  "merkle_root_sha3_512": "8ad29a48f87e68c324b140d369af2e2a822a003efa906524b8ca3c9ecdc5afb5e12bd5f21d53cb83c09833fac23d2f442bc1dfb94daecd835b71694d775e1ff4",
+  "hmac_sha3_512": "8a0db21e41c04414927a2d7fb80a2547ebd1639108bc6fb3be215733a9430036cd6c584ce6730b03e7108895392ba5c48751ebb671c1e6fb081e21bfc883921b",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1936,6 +1936,12 @@
       "size": 8115,
       "content_sha3_512": "1636721e99575a4a13d6919cdf946803a5ec6080f4edd529d4a2e488076a505d1cdf7bf26fc8bce0833591d06ed216751eb4e65535323de5f0491b6f94218a01",
       "leaf_sha3_512": "2df5f3b58ab61b5d85ff5336be77ce1c61acea866a944d613588e77f23b3db17a53b96cf5c1b5b5b451d5dbb574b5be8be77fa5784990d0ffc8c3e3d452ea70b"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/mem/desktop_tidy_20261008.json",
+      "size": 17161,
+      "content_sha3_512": "c44f68e42ab76cd4055e04678ea7e568fa90840366c9552ef335c3d5e08c909f6d1da467c75ba04647a5cc0299bd0f80d19c50d865674031c83bb9363fe33ee4",
+      "leaf_sha3_512": "670ed5b7c9e8f36fe595f105f25484d3fa19d3543d574d9747a342501c4ff6343404794dfad0ad9056b587a8e6490c08f2f996972223a2fc86212b03de95b133"
     },
     {
       "path": "deliverables/20261008/seat-cairn/mem/git_shallow_backup_20261008_092733.txt",
