@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T21:14:20.692Z",
+  "generated_at": "2026-10-08T21:22:16.538Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2304,
-  "merkle_root_sha3_512": "7b9e645d19e3564d1aca11140d84dd781d3c7aabd421f6381d67245d2525fac5452723aa70d8ee2f64289e984eab356c705a70c9272784e7194a2d8d24bf8190",
-  "hmac_sha3_512": "37b814654e6a9412966e49d093a9cdff9c3e9366f755aad10a55d0afe3148b7fc4dcbab8ec9c0266c7056a08d6d5c08cbe00472817b15a98c760823eb165419d",
+  "file_count": 2306,
+  "merkle_root_sha3_512": "c16e2c92bec3503eb5c0a4d1a2c29bd61d98b41d11cd9545f72bcf3a13f93e13eeb2f0ddd4693a688db9b2d1669a571fa7ced55d0f8cfba0a4cf9f0199be7366",
+  "hmac_sha3_512": "eac53c684178674ba91233f6e1e334156e4e786f9a1439e86059cf035ddcfd9e0f8b23987ac2ef6909cc07ff657cdfb628718a06e9c595504c171376dae94ed0",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1950,6 +1950,12 @@
       "leaf_sha3_512": "8361f75893a817b706bc34e234b6e2fa9e6ca21cd737e9627a65c90b0e5632e6111914feeee44caefb4cffb075a8d715ed74ac463a36c7cdef28e02abc9a5b8f"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/动态完善实证v1v2两版世界对比_DF-AI-20261009-CAIRN-17.otl",
+      "size": 5426,
+      "content_sha3_512": "6f5b975fa524b67c85aa9773ac630fe940eedf28c5e99b58e273acda078f1f2083ea4fc01fd60aab4c7eb73ab87fbe68a14da5f027b0413551b5e37430609145",
+      "leaf_sha3_512": "5563a9e543f152827cd980ddd977bb81cd1fb4fd4616991f56e602a9963fa61147d5370b2503ae1784c982f8aa3443644d648708f5459cc5551210a441744044"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/后量子密码与审计链延迟基线_DF-PQC-20261008-CAIRN-01.otl",
       "size": 6103,
       "content_sha3_512": "f055adfd2bb51878ff2a3a430aca5d3ffbcdf6401eb980779814387cf0cbdb262389b921592d200d043ba52669f0f43ee2eccb415e0d5c301f782d1e987904f0",
@@ -2374,6 +2380,12 @@
       "size": 4136,
       "content_sha3_512": "6aaecc2e0ad6f5433e07f59d47200c7d324363be55f798fd694048ac843c96e91a2268bb7acd0680c033ca30d31b62855d61948ba81b3b6c1cec237df671b4e5",
       "leaf_sha3_512": "e0cd5051f2c156efc3fee55f618559abf9215b2908ad7539c293c0b528100a03a62e6c7fd035851e1670b263e80303db424f764201dcc5760de255b37b496cfa"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/陆知白人设v2增量由行迹而生_DF-PERSONA-20261009-CAIRN-01.otl",
+      "size": 6040,
+      "content_sha3_512": "7fcb901a364cadecbc63b85457e3049ef87bc7777cf0255f02a0ff93be0e5b1f2e17eda9af5acbd62eee2e6e803cd0a3b34078df73221f3290730ba2ebd1fc01",
+      "leaf_sha3_512": "9c42f6f1dfde115c4ee1218f4d7c6db5ec9a497bec8da3e22d919508378b8078557169034476d93fb4f00a7eefc55f559d406a76a049722808f928990ad8bd2b"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/首次跨源校验与抓取容量上限_DF-NIETZ-20261008-CAIRN-18.otl",
