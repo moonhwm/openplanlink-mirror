@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T22:37:31.018Z",
+  "generated_at": "2026-10-08T22:38:16.219Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2334,
-  "merkle_root_sha3_512": "c2705c227e5c9aa27c4d25d1ce0e82e4da58ce6f6b251d8d778ad6437f9ca133991541b8f6754a2dc4939ffe83de17d6714f72c28ef372125c06fd365802f308",
-  "hmac_sha3_512": "cf6a775b671e634414c0f6d007f356ba3c7aa255b4fcfc7baae5be482646c7702c2ff359b11b9964e4607c69cda88d8cffcb6298e68fb479d01076bfa6f62a46",
+  "file_count": 2335,
+  "merkle_root_sha3_512": "b94e0667d0366c782130d32462532084480c069df7d8005e59be42e4bc756abbc64cdc9361abd0c34f36f88a6bd7f435bab6f81e71e05d3ba8f71b4d0a2f0a85",
+  "hmac_sha3_512": "ceea7f7b4475f4a7a51bdd76cb610d6e024c85ab24aadc4e26441eb386001e5e54a47fc3a8aacbb541b71f5de9e6edd15830be4c235b5fd9eb12053a2d0b5922",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2812,6 +2812,12 @@
       "size": 1050,
       "content_sha3_512": "75ca986e9d92e4996a6496c5dd66a25a78e3613fbaa628a1217357ca767a84d6ff1208e0aee810d721a619ff56c62e8d0c0aaa4dd02ba08e2ba924e292ea7065",
       "leaf_sha3_512": "1ef0b4cb5bae84fe64ceb7f0d0689b39fb06af131349a7121a1fc5d87f598ffaa515f4a5c2ef238fd8093578700240177066151abb7aeee0d3bf0f7e846acee9"
+    },
+    {
+      "path": "deliverables/20261009/shoucang-df-doc-01/DECISION-REDERIVE-20261009-SD-01.md",
+      "size": 9756,
+      "content_sha3_512": "4e45c9c5632497d6751f2d67e84b4e29e842cbd805d72e845a700f8ef151dc7a8dce0231d45b8db8c2db54ed38bbe2845fdf74dc7ac9f6d9b609949075a1d8af",
+      "leaf_sha3_512": "48e33a6a96b43f1f7e3f92c9ebe6380513042903314577da66e338f3214b92446a782f526ad2bc4ee7df556e8b73579f00dd09a42ecdb2c5cf9456eeb913e442"
     },
     {
       "path": "deliverables/20261009/shoucang-df-doc-01/DECL-DELTA-20261008-v2tov3.md",
