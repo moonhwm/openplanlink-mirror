@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T23:37:11.148Z",
+  "generated_at": "2026-10-08T23:38:09.301Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2377,
-  "merkle_root_sha3_512": "1f4c7b53761259694361e8779e75068c616f9be48b2eaafe94056960f06099ab511289c5ee1aefe932927e0682040dd60563ef4761e5ebb3efd56a4cd0955315",
-  "hmac_sha3_512": "69033e4607b7949735ed67d464d74a47af143256e4024b9f6bb17ff195d5632dcbb71c0c8015d34110f238570ab77afd365215d7617653f5c448464278bc9cca",
+  "file_count": 2379,
+  "merkle_root_sha3_512": "ddde4b98af76c00f95f43c0d620e5382dca342c6f875732caee75d73d60def59ebc21fcc71ba9efb40262ac388c77226cde337fd7b4751caee601620291c0e85",
+  "hmac_sha3_512": "845d3c1c097f97a02c628eea157bcb936b71d581281c204623612c1506cf4d4925287de203144920ffa0c12743a60352bbee1a42c40f71cb9ac817e1b2b32375",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1920,6 +1920,12 @@
       "leaf_sha3_512": "fe9ec8adecc4ccbbe2cfae5358842532cce4f01816283a9eb01efd922be3747442b935fec3c56c651e52470c583a5e67d9519342db73d75c830ed097d4e85e29"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/世界模型速上手一页_DF-AI-20261009-CAIRN-44.otl",
+      "size": 5315,
+      "content_sha3_512": "c1ef5e04e3b1ad744e387483c1499b9788430a202ca57c12eaf86e96eb015bdb81a12a01389afd925e12c8c255551ddcd40267b87d65ec6ef5c318e343cd97bb",
+      "leaf_sha3_512": "908ea3d4ff8e9ecff8e52acb6075719d43f42aeb52205b25cccc3bb729629ad116298e2818a938c36e59a94b04e460ed6bbe5baacd3c96bf93515d9b456e1267"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/世界模型阻塞收敛仅余WorkspaceId_DF-AI-20261009-CAIRN-07.otl",
       "size": 4389,
       "content_sha3_512": "c8b7813d260d5d0a43718cc630fa2302fa1f75115cbcca4643d9ab6a4252c6b6507ea6206d595cf2fcffb1560685bb9670e6f32c61a12efe9087c937fcd1ec8e",
@@ -3022,6 +3028,12 @@
       "size": 8186,
       "content_sha3_512": "e0ffcb22086fbbe884ea712973d5573367953de4e7cb978de294f451bc49d25c553e661c111a14985df8096f3ff763f61cfa04234f2f52340c1f48dd154c7cdb",
       "leaf_sha3_512": "aa979e6486406d02340d793cfb8c90aabd445c554cf32af8c79616eba014d30c222a614b97839e1559b216915185b7c0223e0db96cfa358847c8032c2456da11"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/世界模型速上手一页_DF-AI-20261009-CAIRN-44.otl",
+      "size": 5315,
+      "content_sha3_512": "c1ef5e04e3b1ad744e387483c1499b9788430a202ca57c12eaf86e96eb015bdb81a12a01389afd925e12c8c255551ddcd40267b87d65ec6ef5c318e343cd97bb",
+      "leaf_sha3_512": "2c64133a6f949fc9fb2584102f6e655a755827f83d6e48dffb4b5c6f11fe1a1167a8e6710c5b1108df258194aa451ab7d971de296b7f56d0d65de8f0e281f55c"
     },
     {
       "path": "deliverables/20261009/seat-cairn/人设入世作业总册v1_DF-PERSONA-20261009-CAIRN-03.otl",
