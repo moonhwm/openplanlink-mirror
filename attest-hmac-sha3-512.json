@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T06:58:36.107Z",
+  "generated_at": "2026-10-08T07:06:13.329Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2166,
-  "merkle_root_sha3_512": "652686224fa841a922b5053128d227715db29a73d393622ac8480aacab8900d12799a434ca4f27ca4fb3fcc5400d8e2341b9530b0d525de17756e7430dface89",
-  "hmac_sha3_512": "d8cecb623960f710f00d04bfa3e07f38dc095953f86969b47d6b0675b5554c7a340e37d85c3dc77f503d150078714a9824c3e1576e3dc6678d7787f530d593ac",
+  "file_count": 2172,
+  "merkle_root_sha3_512": "b6e0727636258461fe16c983c0ccaf1729b681f6d7c56a3b6ff25d0c9ed1680a8debf7625d3d9a2aaac5ac805fefc5b139c74143dd979af6f11b336a94826253",
+  "hmac_sha3_512": "c5a7124a88f893b337db8a689c478aa62db8014ff264675b40ad558769c134a4775e1292eec5cc2f25f1861b986922436e22b4ce8824f97884e171c69b798a55",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2104,6 +2104,12 @@
       "size": 5732,
       "content_sha3_512": "82917feb838a0710bd344049d6aadccb59c0b1330d594533d510ab832ecd10b7f61151a767b6a685719a591821af8807c0c18799c752eeae29b1274115e06529",
       "leaf_sha3_512": "f7fd6d2e6a915dab94ab05c3bafa67f760296fbe86a7a85309f112f3827b05ebf1354b627dca54ceccba38189c582d9e33b976a7f1feb8feada894bd8c5630d7"
+    },
+    {
+      "path": "deliverables/k3-main/govdoc-group/规范化表述文本_脱敏版_DF-ORD-2026-1003-K3-01.md",
+      "size": 8933,
+      "content_sha3_512": "7b25f41fe2ac7b51ccbcc306fb8b817bbf1bbfdce8272afd20360c11b8129d807ac8af2b9fc17923d53e65cdfef535884906db26f1c2d466ae1ec82b6f721254",
+      "leaf_sha3_512": "56e60f547b4fd4dd52ef6f2bdda03856fb61444f23334eaf61ad0f4153a7051ea724114b68e3f1956f88d31db4915afb3be54ce1a3f6fb08144c79b6a7f1b922"
     },
     {
       "path": "deliverables/k3-main/govdoc-group/重读批注纪要_WPS十件_DF-MIN-2026-1005-K3-01.md",
@@ -8214,10 +8220,40 @@
       "leaf_sha3_512": "18f477503bdef1c6b817320aef116a947fa41e54d3260354080eebefb863e2df387ee6b6d9b9aa3f978d4c7796b67204dcb067a7e218f25d142ddb2fb206bc83"
     },
     {
+      "path": "skills/ls-bus-format-ops-k3/PATCH_NOTES.md",
+      "size": 2764,
+      "content_sha3_512": "65218f2c7de122561691ca5d171c3242943db31e516eeaebb156ef07e84e976c1b22266cb8e2b4d8520306b73ff1c74b93bea6342261b837ab9a5448d09bc34b",
+      "leaf_sha3_512": "1a405083e6eac0d198c5b700a2a988055c1a0b063d5be7ef77f6c8feafb6727c67cfab71e1c33cc5f52b7e6c3237b7c31ce6c4b2d2203e158a56f63f348c6c1a"
+    },
+    {
+      "path": "skills/ls-bus-format-ops-k3/SKILL.md",
+      "size": 2869,
+      "content_sha3_512": "63c6c29104d455f625123d4ff16a670e806c3dc8e6e418db8157bf9f86259eb7bc752014fe13991c1965107452a214da53682d202773767fa5f128c110c3a323",
+      "leaf_sha3_512": "b4e6aa0fb150dbec99e6f5e138e80c7f714c1a4ed2cdadcac4fc057d5081c52cf7318631f3f8b90d5ab679fad30d3a49838e6e47d901b7bc99429e3a68b035ae"
+    },
+    {
+      "path": "skills/ls-bus-format-ops/PATCH_NOTES.md",
+      "size": 2764,
+      "content_sha3_512": "65218f2c7de122561691ca5d171c3242943db31e516eeaebb156ef07e84e976c1b22266cb8e2b4d8520306b73ff1c74b93bea6342261b837ab9a5448d09bc34b",
+      "leaf_sha3_512": "07a99987aea6eabf23cd6511ec09978885d67c24df891c0ed294208b1bf5f3a4e8ce4ce56e05988688bf81907145e0bd41f6b660353362fa9d4115774787cf88"
+    },
+    {
       "path": "skills/ls-bus-format-ops/SKILL.md",
       "size": 4987,
       "content_sha3_512": "ad89839b7c0deaefbeb080d5fdb1e3d758ae718a93d6355417ed8d844393023b3460e7d6fe328fb1216693f547719804872c30d402a7196a61d61b8c48c0c7de",
       "leaf_sha3_512": "8ced15d1f283b4a320f3acb3643f8f9ca73f09d010de8ba64501e2bbc07027b5dc232eb3046618ebf4affadf5c7c38e81a78946379ab15d53633bfdae261e372"
+    },
+    {
+      "path": "skills/ls-bus-format-ops/scripts/ls_bus_format.py",
+      "size": 18989,
+      "content_sha3_512": "0888bdfb4840e1ceb22cc9ad7603e7961cb362f2f5c679119995605ed4fd953d75b8b9a61f331367c0f62e505b686a6bccbd35776d3c4c644009d30635b24618",
+      "leaf_sha3_512": "e77c1b5d868d02d50ed98065ea02fa273002e6b5375934db01739b6c0570143359bebbeadfbda93fb0c84e0abd1ddd806a9a9eceb4936e0a246b39616cecde58"
+    },
+    {
+      "path": "skills/ls-bus-format-ops/scripts/ls_bus_format_v2.1.bak.py",
+      "size": 13375,
+      "content_sha3_512": "c8e56e56a850dbe8454b97b67d5e95c44032e3e6f8793c8d8a7ef4d5c29b9ea2cf2d136e8210e0d2952d8bb2747a811f923a502d03e7c222795086f22fdc9c29",
+      "leaf_sha3_512": "a01552a5df38d07b4fd15b3b84e1793b932272cdca902de5e0415ff7edf692bdc8cb654166689fd37459ef39286fb7512c036dc0b82d46efe6589e5a75cc6f41"
     },
     {
       "path": "skills/ls-bus-format-ops/scripts/lsbus_format_ops.py",
