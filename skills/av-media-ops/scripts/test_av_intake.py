@@ -701,7 +701,7 @@ class CodecProfileTests(unittest.TestCase):
                 generated.write(b'encoded')
                 return 0, ''
 
-            def mutate_after_probe(generated, format_name):
+            def mutate_after_probe(generated, format_name, executable=None, executable_fds=()):
                 generated.seek(0)
                 generated.write(b'changed')
                 generated.flush()
