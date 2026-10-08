@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T22:58:02.575Z",
+  "generated_at": "2026-10-08T22:58:39.437Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2353,
-  "merkle_root_sha3_512": "d4a7d7955f457d216bd7c4331ea0dfc9cdb51d95d503e4694283d0e87749b5b74fc051437247f944592fa0c63cd7b3dfb5a17294d8730489745037f36f10a1b1",
-  "hmac_sha3_512": "8ecf85b3dfbc90ab81e6bed642cada3ca23f21c43037a9abfc3f237e8ade3fc606995a6f8ba453a20f2dd2cfc7b425c3e884de7e71db16006a144b0b5f25644f",
+  "file_count": 2355,
+  "merkle_root_sha3_512": "861767827a34748765443b5177b4a432e0d53fadfa91ccb6aff5133c7c38802855c32af60579ca5c50cea86c3dcba14f598a0c53f99b64cc7beb96f5a5224678",
+  "hmac_sha3_512": "7d72a7ecdab8a79a0bae147763e66665a9b843686b2863a9e9192098027042e7d3fe504e3397959fdd2dc28b59b5c5067f9ddc736232afa2ac08ab32cedb45ad",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1986,6 +1986,12 @@
       "leaf_sha3_512": "f89872e8dc3f4e15635e344693d6144b5a456b49144ee1cff30a26f3c6219deb694824eb26ddd1fed4c3c83f834666b45f37c80270e6925832ace5d7e41c2762"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/分幕世界链与导演近似_DF-AI-20261009-CAIRN-33.otl",
+      "size": 5587,
+      "content_sha3_512": "d6d3c02f03fc5329205e5047a45b4cbed5b2f9f364e901863815677d47430d32760a1b90bb4f0ed83b872b4f66be2aabcea21a0e0d33e79b55438ac7fd6c50d6",
+      "leaf_sha3_512": "3bd284b8d6b4bf4f11817f67bbd32452746c20f0a9b25cd7ed02ca13eb81ece02d70c45561f04659be782a24d0945436253c4a8bd0c4ae82fbec9db3e03799b1"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/则三则四并入术语表器与扫描判读_DF-TERM-20261008-CAIRN-02.otl",
       "size": 4646,
       "content_sha3_512": "539243f4c67957fd58ce1adeed80dd5c050c676a2e06aff81d0ea6da90771b9942bb58fed521e5c963d218cb644279e640252329eeba3cc0fd86e2e33938cb61",
@@ -2872,6 +2878,12 @@
       "size": 40444,
       "content_sha3_512": "6e227bfd0290f21e5bc99861f59ae30fe62513dc1c0dc7252277652b305fb1a31c2d153bbb62d03c0acd12c6b300e3c69de58c2348accc49a17735d63c2b665f",
       "leaf_sha3_512": "7b99caa1d30a981be2c9473616d7bb104422f6f61fe25f96301033ccf7ec7f0539a6932d0b366ac033587538198ee2e79e72365ec346278717d289b4b9264e01"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/storyboard_chain_20261009_CAIRN.json",
+      "size": 1089,
+      "content_sha3_512": "04444c73f18989ac3f706281b653245c54e9e618dadb2d90fbd97fc26e7a49d1a3ee593d5f63cf28db099b2f5826884eb273a8047a9b3d8f86231e3ffa7bb592",
+      "leaf_sha3_512": "2107a4f2c350aa6d4d451e4e293484996aa973126d0ca8563353d29c81998312ba5faaa8b023813370563cf317d3d98dc85e5802390a755e00a4d81e036ad201"
     },
     {
       "path": "deliverables/20261009/seat-cairn/wm_create_generic.py",
