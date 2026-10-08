@@ -33,3 +33,10 @@ python3 _skill_patch/ls-bus-format-ops/scripts/ls_bus_format.py scan \
 ```
 
 bussql / execute 用法与三重闸同 v1。执行属高危写操作，仍须批准令牌与当轮批准纪律。
+
+
+## v3.0 追记（2026-10-08，主权令授权自我革命）
+- 底座=v2.1 逐字保留，叠加 emit/validate/norm/--smoke 命令组与 TOOL_VERSION 烙印。
+- 全量回归：output 全目录 25.7s（对照 v2.1 基线 23.3s，增量开销≈10%，可接受）；
+  validate 抽验 15 件 full 档全 PASS；manifest_sha256 复算一致。
+- v2.1 原件备份为 scripts/ls_bus_format_v2.1.bak.py（可逆）。
