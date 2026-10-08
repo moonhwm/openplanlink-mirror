@@ -19,12 +19,15 @@
 - **订正-02（台账行数与粘连复发）**: `burn/security/SECURITY_MASTER_REPORT.md` §四载 esc_trace 台账「现 11 行 bad=0」（2026-10-01 口径，trace#8/#9 双对象粘连已按 append-only 修复）。本席 2026-10-08 实测（`wc -l` + 逐行 `json.loads` 校验）：`burn/scripts/esc_trace_ledger.jsonl` 现 **42 物理行**，其中**第 12 行（含 7 处 `}{` 粘连标记，char 207 处 Extra data）与第 13 行（含 12 处 `}{` 粘连标记，char 387 处 Extra data）单对象解析失败**，另有 7 行空行（第 17/26/30/34/37/39/41 行）。判定：**追加漏换行缺陷在 10-01 修复后复发**，且规模大于首例（首例双对象粘连，现单行最多约 13 对象粘连）。本稿不改台账（台账修复权属审计局流程），仅在 §7 给出对账共存规则并登记为 P0 待办。
   批注：引用 SECURITY_MASTER_REPORT.md §四「本体蓝队残余」第 39 行；实测命令与输出见 §7.2。
 - **订正-03（指纹自指回避）**: 本稿自身 SHA3-512 指纹不能内嵌于正文而不产生自指悖论（哈希覆盖含指纹字段的文件则指纹永不自洽）。处置：修订记录表「唯一标识符」栏只填文档编号；文件指纹于定稿落盘后外部计算，随 esc.trace 回执与审计局对账登记。
+- **订正-04（§4.2 脚本块缺段，独立复核 high 级意见承认为本席自报）**: v1.0 §4.2 号称「脚本全文（可重跑复现）」，实际仅含 HMAC 段计时全文；SHA3-512 纯哈希与 AES-256-GCM 两段（占实测表 5 行中 3 行，且 §10.2 M1/M2「达标」结论依赖之）在脚本块中缺失（AES 仅剩一行注释、AESGCM 导入未用）——文内自供脚本不能复现文内自报数字，属「结论不被文本自身支撑」。v1.1 已补全三段计时全文（与 2026-10-08 两遍实跑的计时逻辑逐段一致），并将补全后脚本整体重跑一遍验证可执行（输出见 v1.1 修订摘要；数字为同机重跑，µs 级抖动属正常，实测表数字以 2026-10-08 首跑为准、不变）。按「bad 自报=0、他揭=1」纪律：本条系他揭（独立复核），如实登记为他揭=1。
 
 ## 修订记录表
 
 | 版本 | 日期 | 署名人 | 唯一标识符 | 变更摘要 |
 |---|---|---|---|---|
 | v1.0 | 2026-10-08 | Moon（pi-orchestrator@zcode · SHA3 root a69ccb57…） | OTL-20261008-PQC-01（文件 SHA3-512 指纹落盘后外部登记，见订正-03） | 初稿：十节全量（算法选型/后量子迁移/分层密钥/性能口径/ABE/HSM与透明加解密/审计链/一致性窗口/合规与主权/路线图），含自指订正区三条、本机实测性能底表、粘连复发实测登记 |
+| v1.2 | 2026-10-08 | Moon（pi-orchestrator@zcode · SHA3 root a69ccb57…） | OTL-20261008-PQC-01 | 独立复核 medium/low 意见修订（订正-05，他揭=1）：①§9.2 SM10 口径与 §1.1/§1.4 统一——SM10 非本稿选用算法、仅列观察项、发布状态以国家密码管理局正式文本为准；②§9.3 法名规范化《出口控制法》→《中华人民共和国出口管制法》。其余章节零改动。**并修正版本背离**：GitHub 正本 commit 754b3c9 所录为 v1.0（51931B/sha3 9427d799…），v1.1→v1.2 之收敛于同轮第二次提交完成，票据以 TICKET-20261008-MOON-02 重签 |
+| v1.1 | 2026-10-08 | Moon（pi-orchestrator@zcode · SHA3 root a69ccb57…） | OTL-20261008-PQC-01 | 独立复核 high-1 意见修订（订正-04，他揭=1）：§4.2 脚本块补全 SHA3-512 纯哈希与 AES-256-GCM 加解密两段计时全文（v1.0 仅剩 HMAC 段与一行注释，AESGCM 导入未用），实测表五行与 M1/M2 结论的复现口径文内自洽；补全后脚本已整体重跑验证可执行（同机输出：sign 6.0/27.9µs、verify 5.8/28.3µs、sha3_512 25.6µs、enc 1.1/2.2µs、dec 0.8/1.9µs，@1KB/8000B，N=20000——µs 级结论同向，两遍间抖动属机器状态正常波动）；实测表数字维持 2026-10-08 首跑值不变。其余章节零改动 |
 
 ---
 
@@ -203,21 +206,45 @@ L4 数据加密密钥   AES-256-GCM 用钥 · 每消息唯一 12B nonce · kv �
 **测法口径**（python hashlib/hmac 计时脚本）：`time.perf_counter()` 包裹、N=20000 次迭代取均值、报告 µs/op；验签口径 = 重算期望签名 + `hmac.compare_digest` 常量时间比较（与 SPEC §1.3 校验规则一致）；AES-GCM 加密计时**含** 12B 随机 nonce 生成（`secrets.token_bytes(12)`），即工程真实路径。脚本全文（可重跑复现）：
 
 ```python
-# pqc_bench_20261008.py 口径（本席 2026-10-08 实跑）
+# pqc_bench_20261008.py 全文（本席 2026-10-08 实跑，分 HMAC/SHA3 与 AES-GCM 两遍执行，
+# 计时逻辑与本脚本逐段一致；可整体重跑复现）
 import hashlib, hmac, time, secrets
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+N = 20000
+
+# ── 段一：HMAC-SHA3-512 签名 / 验签（验签 = 重算期望签名 + 常量时间比较，SPEC §1.3 口径）
 key = secrets.token_hex(32).encode(); seat = "moon@zcode"
 for size in (1024, 8000):                       # 8000 = 总线字符硬上限口径
     msg = (seat + "x" * size).encode("utf-8")
-    N = 20000
     t0 = time.perf_counter()
     for _ in range(N): sig = hmac.new(key, msg, hashlib.sha3_512).hexdigest()[:32]
     t1 = time.perf_counter()
     for _ in range(N):
         exp = hmac.new(key, msg, hashlib.sha3_512).hexdigest()[:32]
-        hmac.compare_digest(exp, sig)           # 验签 = 重算 + 常量时间比较
+        hmac.compare_digest(exp, sig)
     t2 = time.perf_counter()
-    # AES-256-GCM：encrypt 含 secrets.token_bytes(12) nonce 生成
+    print(size, f"sign {1e6*(t1-t0)/N:.1f} us | verify {1e6*(t2-t1)/N:.1f} us")
+
+# ── 段二：SHA3-512 纯哈希（Merkle 叶/审计面口径，§7）
+h = b"y" * 8000
+t0 = time.perf_counter()
+for _ in range(N): hashlib.sha3_512(h).hexdigest()
+t1 = time.perf_counter()
+print("sha3_512 8000B", f"{1e6*(t1-t0)/N:.1f} us")
+
+# ── 段三：AES-256-GCM 加密 / 解密（加密计时含 secrets.token_bytes(12) 随机 nonce 生成，
+#     即 §1.3「每消息唯一 nonce」的工程真实路径；cryptography 50.0.1）
+aeskey = AESGCM.generate_key(bit_length=256); aes = AESGCM(aeskey)
+for size in (1024, 8000):
+    pt = b"m" * size
+    t0 = time.perf_counter()
+    for _ in range(N):
+        nonce = secrets.token_bytes(12)
+        ct = aes.encrypt(nonce, pt, None)
+    t1 = time.perf_counter()
+    for _ in range(N): aes.decrypt(nonce, ct, None)
+    t2 = time.perf_counter()
+    print(size, f"enc {1e6*(t1-t0)/N:.1f} us | dec {1e6*(t2-t1)/N:.1f} us")
 ```
 
 **本机实测结果（2026-10-08，Python 3.12.10，Windows-11-10.0.26340-SP0，本席工作站，N=20000）**：
@@ -398,12 +425,12 @@ https://pclhahaha.github.io/base-theory/#1-2-BASE-%E4%B8%8E-ACID-%E5%AF%B9%E6%AF
 
 ### 9.2 算法备案与产品认证
 
-- 本稿选用算法全部为已发布标准算法（国际：SHA3/AES/HMAC/FIPS 203-205；国密：SM9/SM10/ZUC 在国家密码管理局发布体系内），**无自研密码算法**——HMAC-SHA3-512 与 AES-256-GCM 的组合使用属标准算法工程化，不构成新算法，无需新算法备案；若未来引入自研原语，先备案论证后使用（红线）。
+- 本稿**选用**算法全部为已发布标准算法（国际：SHA3/AES/HMAC/FIPS 203-205；国密：SM9 标识密码算法、ZUC 序列密码算法在国家密码管理局发布体系内），**无自研密码算法**。**口径统一（订正-05）**：SM10 **不属本稿选用算法**，仅列观察项，其发布状态与标准号**以国家密码管理局正式发布文本为准、本席未核验**——与 §1.1、§1.4 免责声明同一口径（v1.1 前本节曾与之矛盾，兹予订正，他揭=1）——HMAC-SHA3-512 与 AES-256-GCM 的组合使用属标准算法工程化，不构成新算法，无需新算法备案；若未来引入自研原语，先备案论证后使用（红线）。
 - 采购 HSM/QRNG 等密码产品时，选用国家商用密码产品认证目录内产品（目录**以现行有效文本为准**），认证证书编号入 MANIFEST 登记。
 
 ### 9.3 出口管制边界
 
-- 商用密码物品（含加密产品与技术）的跨境转移受《出口控制法》（出口管制法）及两用物项/商用密码进出口清单管制（清单**以现行有效文本为准**）；本稿为内部治理技术文档，不构成出口行为。
+- 商用密码物品（含加密产品与技术）的跨境转移受《中华人民共和国出口管制法》及两用物项/商用密码进出口清单管制（清单**以现行有效文本为准**）；本稿为内部治理技术文档，不构成出口行为。
 - **触发点前置识别**：① 实现代码对外提供（含开源发布——本网络代码面 AGPL-3.0-only 的开源承诺若覆盖密码实现模块，须先过出口管制与协议适格双评估，治理文本不入开源体系的现行纪律为此留有闸口）；② 跨境部署（境外节点/境外云承载）；③ 向外籍主体提供技术。任一触发点激活前，走审批链：责任席提案→筹备组审议→主权人拍板，未过链不得对外承诺。
   批注：开源协议五层与治理文本不入开源体系口径引用 AGENTS.md「跨生态基准」前「治理与协议口径」章及开源协议五层条；审批链引用同章「审批链」条。
 - FIPS 203/204/205 为美国 NIST 公开标准，标准本身使用不受限；但具体实现库（含美源代码库）引入国内承载系统时的供应链合规边界**候法务评估**（挂账 P2）。
