@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T23:34:56.554Z",
+  "generated_at": "2026-10-08T23:36:07.622Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2375,
-  "merkle_root_sha3_512": "846510fc74009e8ed3c2841924e178239c11c3c70dc94db8b11a39fa1c5962fe79316b6f0d615df9de3445d8f05b61d10202d8c42d86028d18cad6d67eb271e5",
-  "hmac_sha3_512": "980fe928db54d9c02ca28750f310b8e007bb673b6c9c35ade99a5b92acb47984eff37c4da96e1cfbf1341ee7edac3ad0ea745fad8449802be51a4e5dbe6cf981",
+  "file_count": 2376,
+  "merkle_root_sha3_512": "a5aae840fa9a9e62a2ffaa25a0a1cc558d35ea4ef0b9d6a2009ab69cab29e17e3cd44009ece2f86966dd9ee6413f7992d7bd129250984dc001907a68b425c73a",
+  "hmac_sha3_512": "aa41fa0e751e0185aa6cc2e73fa3dc30d15d24f2e872f66fc0b39f5b6ee21ebb40ded1c43bb1158108cdedd3beb6f9dc0de444582cb7d039f390f7efe99af74c",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2274,6 +2274,12 @@
       "leaf_sha3_512": "929d779e0d448251f87b9a2244a182708a6fa7cb380afdd3452c3d8e9eb5c41bd0c1979cfffda60cbce3ee95e7254edfce19330d2b60c9c60410c642adb06ded"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/夜窗收束与完整性核验_DF-OPS-20261009-CAIRN-17.otl",
+      "size": 4021,
+      "content_sha3_512": "c6ef3303620372a8aac2e2f71f37e2adf02eab925094c70324690c764b661d61ea76ad6e7d6776243d0ea30e3316140849ca75e7926faa834ec6d022fccb1fef",
+      "leaf_sha3_512": "930c607a930781bad1c1c25cb6106b2afeb74ae419a266105e26613b3b2b8e836f717d686b62ce42f37b6b2aec797ae61ba29890455bfe0279a664eadab46be0"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/夜窗细则署名表态_DF-TALLY-20261008-CAIRN-01.otl",
       "size": 7086,
       "content_sha3_512": "6201503a482b73286ce278ab27d06029298059a828c5e153d90f2aab1babaf0fd57a873915f3714f29f800691fdc8ede408a2506a540e67f22f793c52b872de8",
@@ -2995,9 +3001,9 @@
     },
     {
       "path": "deliverables/20261009/seat-cairn/worlds_manifest_20261009_CAIRN.json",
-      "size": 6615,
-      "content_sha3_512": "0f2b147e3f232853afcfa3411af0a301658304380b8a24cb6387ddea6f2c11699fb168d973b6df4a299eacc2188ed5c561f0e8153538455f81c82718bcd33008",
-      "leaf_sha3_512": "3230025ebb0c4b7f5d264e32dd7c6a87959b2624780c31ff024e5ffa03c5c6a764d5db26fa7c57713c9a5357a1f9b74a177bba2a0f6b07d06f91d2d043da1727"
+      "size": 6950,
+      "content_sha3_512": "d4d4271dded863be326b19d78aa9ebee8b2af316da2a90767a8e10745f9113ff75db8dbf79c2646ca111deb172b33d6d3ac56927198e1c9372baa5df8d064a34",
+      "leaf_sha3_512": "4be00b63deaf06d2c8580a71b057b98e503568e5acb4cca5acaa075db6819bfbf2f4fc9a967c620ba6a7754c699b63cdaace028294d286de3e5c3eb0607900b7"
     },
     {
       "path": "deliverables/20261009/seat-cairn/世界模型作业总册v1_DF-AI-20261009-CAIRN-26.otl",
