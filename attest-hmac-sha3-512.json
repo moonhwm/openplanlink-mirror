@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T02:17:14.648Z",
+  "generated_at": "2026-10-09T02:23:03.415Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2483,
-  "merkle_root_sha3_512": "82cf8934dee2f7f3264e5f32c76b5b4195c776bb5b62b448c31e2bf1e67e2e458944fb2f64c48901b57da87ab1f47032a0c90d192708f08da74a0c38c26d6342",
-  "hmac_sha3_512": "1436cd03b6d9c02f83564822005a31cf08f8b83a8caac39db2f2dbdda7f64fc8f9345d6e7d105593fd1328e42c35aca4bd5a660612e5432f3b0133ebf52dbca2",
+  "file_count": 2485,
+  "merkle_root_sha3_512": "cfe7ba5f473059737ab3cabc634b4b0e58c5acec2fd2fedb2997b94b9835aed0785224c8cdba16dc3b6a93df3109339a0abdf5270997326c20a43cbbe249c76d",
+  "hmac_sha3_512": "4eb8303add949144c759b1bbc353a9056996a92378bac34cc640688629a5862838668767ababef6713f9b9abfcea578840d5158fbf7cbd7a8ab731b1c3335964",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2742,6 +2742,12 @@
       "leaf_sha3_512": "c0597cabce5d35149702ca5518c2caadc76f1c367f3bb78b6fc5b35e5cb81cf75843f00b783f93607f7776cb27d7297493d47bc3288453ea6cce605b80720e7c"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/论据戒七条与自查表_DF-AI-20261009-CAIRN-83.otl",
+      "size": 6888,
+      "content_sha3_512": "457440330156f33f0f1aa23ccf0b6185a7945d01b3a9834f82b355389fc60dfe36de0e0032311b87e80a52e3d2aadc5050b4874543e2be002c070057e5e0fb94",
+      "leaf_sha3_512": "bceb1136a3588826e76610bed87f549b557cc0a1904635bd13578bab200aa1fa460afc512bfca275b26881c91ffb9565b9d65fc5d05973792959dbdbb17ae55f"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/语料v2与改型与分诊发现_DF-AI-20261009-CAIRN-09.otl",
       "size": 5726,
       "content_sha3_512": "a5748b7f6b98fc2a38b156344fab8e081b41ea02b1d01b222002ce311e9465e528df96c7c8b5b59f113aed18166b269826a89199ad5f2b2313cdd3947abb7612",
@@ -3670,6 +3676,12 @@
       "size": 6352,
       "content_sha3_512": "9342da0d7e06a95f36c3de3f1bb7f2d8c47484617b61b74f4368f705e8ded6a1586b77562564d131ef365e14649ca39bb815aaca51a411b8dfa2ee4d94b6a9fc",
       "leaf_sha3_512": "7c0e5597560710fd5234c855e21c3a1031a98b08eac7b3389328d6c699f3308821ca2d8c8ba7d317ba097751ea1689e42b493a7e037deebb852847dc97c4b515"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/论据戒七条与自查表_DF-AI-20261009-CAIRN-83.otl",
+      "size": 6888,
+      "content_sha3_512": "457440330156f33f0f1aa23ccf0b6185a7945d01b3a9834f82b355389fc60dfe36de0e0032311b87e80a52e3d2aadc5050b4874543e2be002c070057e5e0fb94",
+      "leaf_sha3_512": "3139001d5ecfe6d1d8300bf760def7c7601f3823c7c17adc37a83c6ba6933576184c58174ee7a8bbea1564a68ba61c06a670da0228da9bdcd568862de96a0694"
     },
     {
       "path": "deliverables/20261009/shoucang-df-doc-01/DECISION-REDERIVE-20261009-SD-01.md",
