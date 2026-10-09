@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T00:01:51.200Z",
+  "generated_at": "2026-10-09T00:02:58.744Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2392,
-  "merkle_root_sha3_512": "faa6ccbb0ab03fa72bc02cb3c0d4bd157227799420633b900e2c2388b71bb96846a7d429cd4032ff71432f224238bae9ec6a4afbea91a5a51fd1164db56c91db",
-  "hmac_sha3_512": "9e6fc8afafd4bfb2c37de4a44fc7aa2164f9e1890e882b96f2d69248cd99dc77e86ae96aeada838f8d1ac8ec36b7225a977bad5ba66d250003d2d3f6cc79ee6f",
+  "file_count": 2393,
+  "merkle_root_sha3_512": "d4f7566bd7e4ba10062bff0a7c9614240e0cf1a6c401faffb946424e7bb4480a50360d5513a73bdaf6d43f95c6b7faeb35e765e9ed3b66e0abde026bab0f502b",
+  "hmac_sha3_512": "15fd5be960da66150a96666bf9d6e8133a253497817592899a1fb220890556475edb5d3e60ed94c86e1d7a3305d0326b5fba82264dc31892defb18a25b28bbec",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2344,6 +2344,12 @@
       "size": 11574,
       "content_sha3_512": "481dbd87e036f783e764055a0a1a7b9d82c8ad7cf292660d7faf57e84b4ff6b10423705442a13088ebbb2557ca310b31157e939711bbe5cfb9d7a0cd5138dbce",
       "leaf_sha3_512": "e6876d76fa5e596852958c9159192c37a06788f5f745cd2a7f8171e8e85369406e0332bdaf52ee29db5618e5aec5bf6c13ffbe5e84f3345d7c216c43bbdf5c92"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/带序列检验与表述收紧_DF-AI-20261009-CAIRN-55.otl",
+      "size": 4974,
+      "content_sha3_512": "6dc6050eb70dc1e193138643896f00571ad1040102ceb5030d4b75ff12f664f3adc5559b554243d7de54cc9bd4c8877b57b7d17b54c22f52e2c4bb75e6b25781",
+      "leaf_sha3_512": "6e71f7423610378ed095c3281a1ce6f993501edd12e6ebc02eed0ba1046279f43861dab8a3fc490d181924a97d8d7216fcdfd57572f9ef5fc8a38d94a4477ba9"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/开源协议分层组合与引入纪律之登记_DF-GOV-20261009-CAIRN-01.otl",
