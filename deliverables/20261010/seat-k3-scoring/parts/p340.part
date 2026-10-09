@@ -28,7 +28,7 @@ addEventListener('resize',draw);draw();
 const tb=document.querySelector('#d3-tbl tbody');
 Object.entries(EXTRA.d3brief).sort().forEach(([k,v])=>{
  const[nm,cd]=splitName(k);const tr=document.createElement('tr');
- tr.innerHTML=`<td>${nm}<small style="color:var(--muted)"> ｜${cd}</small></td><td>${v.zh1_q10_s55}</td><td style="color:var(--cyan);font-weight:600">${v.zh1_q50_s55}</td><td>${v.zh1_q90_s55}</td><td>${v.zh2_q10_s55}</td><td style="color:var(--mag);font-weight:600">${v.zh2_q50_s55}</td><td style="color:var(--mag);font-weight:600">${v.zh2_q90_s55}</td>`;
+ tr.innerHTML=`<td>${nm}<small style="color:var(--muted)"> ｜${cd}</small></td><td>${v.zh1_q10_s55}</td><td style="color:var(--cyan);font-weight:600">${v.zh1_q50_s55}</td><td>${v.zh1_q90_s55}</td><td>${v.zh2_q10_s55}</td><td style="color:var(--mag);font-weight:600">${v.zh2_q50_s55}</td><td>${v.zh2_q90_s55}</td>`;
  tb.appendChild(tr);});
 bindFilter('d3-q',null,'#d3-tbl tbody tr');
 })();
