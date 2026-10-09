@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T03:21:52.834Z",
+  "generated_at": "2026-10-09T03:22:59.567Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2513,
-  "merkle_root_sha3_512": "4ab63faeccbd93fa1f43b17bcc4bfeabdd8dfd6ebae4678f8e53c85d5011833001a9b6364c8a9c823dd6cc3c44ded3f4b4d1571414b656dbb5ec33b51d69aae4",
-  "hmac_sha3_512": "7145977659697dcb8380e53b9cb076a38d72ce9d8408d2e2fbdef0e202c20b34c6dbb9c4910d87a95fd5c9e839983566c07c1cf75be23fd4608bb0117a286848",
+  "file_count": 2515,
+  "merkle_root_sha3_512": "327fcb56f7eca586e73bb22b4e886a84a0567468fa4e82a2033edce08c3c56c4c773d90ccc509f105a9933a9cb4e8c8d1dba752953968b5691c8c4a69ace479b",
+  "hmac_sha3_512": "933ce0e62508bca5b983cc764a9cf8edf65799a19d75561b4e6c6618b6804042b092f56db6841fce890bd92502c35f573a00b1302b77a26aaadca21bd0e86245",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2688,6 +2688,12 @@
       "leaf_sha3_512": "5a8f246d84de7b24a79290ae3da684211adb087bf020571dc32dca88181ff0fc7816d16a4e20acdcd504bcdd356c659996aa399b2fabaf144de60a182e77f931"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/涌现判别实验器_DF-AI-20261009-CAIRN-98.otl",
+      "size": 5449,
+      "content_sha3_512": "35826e4053e75f3b746f7e0f24809c540ff03e348b85af78db51cca5af0d94815f90aa50963a9ec39e772690b34be6c9960dce7d08c13c035cda310fec55cd2b",
+      "leaf_sha3_512": "10c2889c2ad10dc357ba5d8e2d208656e12326d7ecfb999fa35ec03a068b0032e75cf0f58f4929dfce8f3212e855ae09d1a1936223c7e3c89a8a790a6dcdc436"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/涌现判据与证据链v1_DF-AI-20261009-CAIRN-80.otl",
       "size": 7151,
       "content_sha3_512": "bd7cee5eaf45beac629977d45a1d2cf24ab6a180df4bb3ada2b5c5e4c09709bb2a79f8267a6f2618fdaa5118f1f6ac9069ccb63fcba71d4f3c9a640e49769c96",
@@ -3508,6 +3514,12 @@
       "size": 5161,
       "content_sha3_512": "ba222b2733a97f3905b3cb507e1f423ae6f36620fc48fc3f7e9284ef8846300be818aa1c20e6498f72891151c7c1b2d35f9638d5e931a1e40938b506722bba2d",
       "leaf_sha3_512": "9ad998c37b236e1a68d32a12340c9298be681e26dbcb92ae48bd2b7c62a5bda9589b26c9fd5ed9a5b1d795237cf4b1b63dbe5c4cd2cf5668e31bc677d52e94fe"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/emergence_discriminator.py",
+      "size": 7279,
+      "content_sha3_512": "a3f525b99edcb9e57d3443f78ae89db7b3a8c3dfd9a9e553699501a7b27a643955ca53fac958f36926addb095367f6e9d7e099ce93488f42cf4a964db5814141",
+      "leaf_sha3_512": "6e2d3e21dd0eb191bfc08b2d0a4f705a55957d4de8ae602b04d253a527b1aabb2db3044d9daf2510da5004ab4d15747195a6141ca50f0e48276e1eda42ead5b7"
     },
     {
       "path": "deliverables/20261009/seat-cairn/frame_stats_20261009_CAIRN.csv",
