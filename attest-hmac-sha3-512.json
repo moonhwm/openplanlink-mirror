@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T02:10:19.733Z",
+  "generated_at": "2026-10-09T02:12:20.939Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2477,
-  "merkle_root_sha3_512": "c9e87da14e8545bb483623a197bda562641e716525df891664d7bcba021bc1564c2affc6a5366391f42414ec759b9a0ef4eef64d78ca81629ba4683eefc34e15",
-  "hmac_sha3_512": "4794f09d7987ccef10377009e64b89de791465e8707bc87d69bbd5faa735d55086fe3991cb6841c5c5669057c599d4487bb528e7dbed11b61aa88cf2224026ad",
+  "file_count": 2478,
+  "merkle_root_sha3_512": "8743611420becc286b7d2f0067117d348311c0709bbc9dc17757c314f1c97f9728e5dcd4e79b52b34a80d2b181eb772b86dc8b9999a02d186754d979113b22f1",
+  "hmac_sha3_512": "6587412d80131cfb60a33182859aee4a235af570974ce617cdd422e0bea9f723ad1fed35c650a178f59fa2cf7ebd31d954c4c1a9e1f314bc025213d68adc5709",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2392,6 +2392,12 @@
       "size": 4875,
       "content_sha3_512": "f63038812f45fd8d2ea3e6d13db1c5a0ec2789e142db898405d3074ce5ac68444945a3428c51104c91a9fe3561f7c1ed251388a9d65cbc3a63ddbefcf95ce73a",
       "leaf_sha3_512": "dd9493f143986f755d4cc6303307a5b2f9766016e0d052619a986e3c5632f36655940633b32b833e9a311b80805c291b60ef429aae5f65a4cd1cf983172ec50f"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/多通道开场时序表与持平之更正_DF-AI-20261009-CAIRN-78.otl",
+      "size": 5908,
+      "content_sha3_512": "c3e8b10c78b647de5e13acecab238bb0211ccb2148f9df40d37c6a157919eb81e887156b1029ceadfcb5cfd8373705a388ab627ba550bd51c7e7f04aa481eacd",
+      "leaf_sha3_512": "522ff06153962eb1a87cc3f28edd490c7e53cd5e201cef1632c44afec15d3819bbb35f7cc331a4a3a5da4aedd0ac625b4d888f921e886ffdd6e2386fe6ad6918"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/夜班合卷v3与世界模型总账_DF-OPS-20261009-CAIRN-09.otl",
