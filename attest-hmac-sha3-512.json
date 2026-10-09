@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T02:12:20.939Z",
+  "generated_at": "2026-10-09T02:13:32.655Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2478,
-  "merkle_root_sha3_512": "8743611420becc286b7d2f0067117d348311c0709bbc9dc17757c314f1c97f9728e5dcd4e79b52b34a80d2b181eb772b86dc8b9999a02d186754d979113b22f1",
-  "hmac_sha3_512": "6587412d80131cfb60a33182859aee4a235af570974ce617cdd422e0bea9f723ad1fed35c650a178f59fa2cf7ebd31d954c4c1a9e1f314bc025213d68adc5709",
+  "file_count": 2479,
+  "merkle_root_sha3_512": "c10c67cd952efe9c72ca2f4df83f705c59a3e6cf4231bdf83dcf0c4fca077b456904c7345cf20befb54e4ef4f209a97643e65ef8e45118ecbaf0f63775a2029e",
+  "hmac_sha3_512": "390941f4f37ed6cfee9d75969faa1c80015eb955bc2c393f962f344d4762fc37dea83251a12c85acd2d8d5c068fa0154afaca9a3c9aa7b32258bbba19db7dd35",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2836,6 +2836,12 @@
       "size": 8093,
       "content_sha3_512": "b2cd99cc92077f205801c31bf160e30d989d97c54a43302112c9f60075dafadd83183e5deb3015cf008e30141482931cf386bc29220a0964b6afff3a1c6f7ebb",
       "leaf_sha3_512": "e80135c2b48e4134f40d3383548be87ddaec8ac8176a76b0fd52ce125f7840fb94104d68317381d9c2df4dda5478a2055a5a7e06577cd3d450291f901c34e879"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/跨录逐秒核查与确定性程序之判_DF-AI-20261009-CAIRN-79.otl",
+      "size": 6098,
+      "content_sha3_512": "78bfa7b2d96054082d6efe6e7de9c1c11f543b0c2151c5d2888ae999de12bb82a79e74eb7ea39288cc7920f903006f414818239f0f531b2448eec0b667c3eff6",
+      "leaf_sha3_512": "d66d5a1ca7bbcd1a2a3401bf4efe71d000df4bc20c2a1ed1547ddd678467eaf9a1e563dbe86d0b022dda707ab59cc0d1e8f65462dbb9595bb4d617ff3e91257e"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/通道册附页_302AI域名勘定与三通道互证_DF-OPS-20261009-CAIRN-02.otl",
