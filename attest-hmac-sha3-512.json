@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T00:13:39.459Z",
+  "generated_at": "2026-10-09T00:14:45.676Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2407,
-  "merkle_root_sha3_512": "1c2fa7ae8199ae8de58c728187bebb7299847b043d065883c0d5533882ca39c236b9acea44e86af93be3e95e9cc642c6403e2a3a7c3d9a4d75ed51709d3a0965",
-  "hmac_sha3_512": "28869e4d35ed9ca7d179d5570d82153e3f6a050a0676465900ea57e7a9b3da8c7e4efd79bd505ebeea9e5c8324dad6b58ecf01d2e0b0511fb59080e1bd65f34a",
+  "file_count": 2409,
+  "merkle_root_sha3_512": "ed54e9d9394c4eb3ff7b5e98c39bcd3e81b863b29940d5c60d085ad5babdddfdcc547e6003aa6e31191f2a192315717e337dbbc9cc39d19a9af07961a1768d19",
+  "hmac_sha3_512": "6c22175ccceac1932ac6bf165e63bb48b57b915310cebafdf0ad9dc6f34d8d54d178ccd74bc483820152e7ecf6f535c8bd650ccaa3f752a9fc246f63205e0517",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2358,6 +2358,12 @@
       "leaf_sha3_512": "6bb4e1176fa4ee30641a734127d8405eb3cc8cd4f8a55ea64036d0ada9c91260153a6f1bc579ecfc81a5d441a54a6c9590fe3cc9251ed3abe376929b04ed891d"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/客户端交接一键器_DF-AI-20261009-CAIRN-63.otl",
+      "size": 3907,
+      "content_sha3_512": "8a58ff8345a91ad64e310b7ccc8c63ba1209105095f96e7e545bef275b330b0cc6013fe460192cc23f33ee0410b2604d01868e474659a13612978ca440082d44",
+      "leaf_sha3_512": "eb28c7dfb09cabe6f3bcc38af9173f5ead6dc5842cee75a386f4eb088ca5bdbc261e51c2b1e57bf6e488bfc9d7bca12e6ed10fb11871c38a60afc88c5940f64e"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/容量预警阈值落地与编码能力核定_DF-CAP-20261008-CAIRN-01.otl",
       "size": 5011,
       "content_sha3_512": "57945c44a8818244ffa5861bfa4e2b36b3449380bdefcd7afd8dcf3db554af2038e4d2b709021ae87aa5fe77fe6dc4c14b183d63fc91c7931bf6c73cf7e4d763",
@@ -3058,6 +3064,12 @@
       "size": 1340,
       "content_sha3_512": "5a0c5eaeac9e781b60cd2aac74bde9e0f2066db10ed43da5a53d0ea9c29f20ea542adf7c63f05482b48fd4f509da495d136a2f545290bda2043e8d69d1dde9cc",
       "leaf_sha3_512": "ed554c508cbb94b1d6411f343a08145ed49b5d5e124c1407cf0cce39cecade71c6159bf77bc5ae2ffc817e42f8131660a5f499dc77fd4df6bc5180231b9cd34b"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/client_handoff.py",
+      "size": 3986,
+      "content_sha3_512": "db5cb2d662daa5343d9a4c3d4ac7eba64df0b867d38262066f4be62efc408c32a4ab4b1574004d1bf756ec61873ff297768dbfaac300ebc1b24702506523b7c8",
+      "leaf_sha3_512": "98f172c1301ed4dd377059429f4d8cdb34f273f2ed8ad338ce47165b2551b08c42b7dce089bb5368abce30f6c1f95c5842021cab66851080c5af55c122a2bf69"
     },
     {
       "path": "deliverables/20261009/seat-cairn/corpus_v3_retrieval_20261009_CAIRN.json",
