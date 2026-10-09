@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T02:04:23.242Z",
+  "generated_at": "2026-10-09T02:06:19.921Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2471,
-  "merkle_root_sha3_512": "6fea5e04c7099a98ba224ef4d5fd01f28fc2c5a363ae7edea2e5df35abbf638cf02b1738ecd7588c58197e9027168ab12b6488be6a08bb994176df0b4ea71e5f",
-  "hmac_sha3_512": "ce03f5f8eb07395a1c7dfb40f6fe70a9eb1b573c72c7e8536be40b0b2292197a4930625d026f60be4cd74ec31fae636cd4f9ae58824075b5ac74071c4213aaf7",
+  "file_count": 2473,
+  "merkle_root_sha3_512": "3dbe0a00802031753b6f1e99a0897bff365547a41131e1d5a59c21ca65804b99ab825251c3ebc324e30c03954b28b8eb49c3b0a78b2db3d0326fad9ef118570f",
+  "hmac_sha3_512": "62f088601771e9619fa76e411c30a6f512c20bd3a28ecf7bdc67af0ca558923ac9edbd5bc068686ec192320c6c1436431657672d904a0e538badeb560d8519f0",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2898,6 +2898,12 @@
       "leaf_sha3_512": "a82875d5d97cdcf42cb01d4d46a46c5a10c95383556dd3f45466ca3df6b4882a814e751e547eada034084b06d944acd1ddf4dbc1e6e9065d288ec90006884e8e"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/音轨电平实测与四路一致_DF-AI-20261009-CAIRN-74.otl",
+      "size": 6489,
+      "content_sha3_512": "404c1d13433e4ef404559cb4996f381294b1921f44dfab27c7c23e5792ad1d6490bc7b8b4ad57514b5c204b7c5198d26e078b04b87d99b7a09f4ba9ec90b603b",
+      "leaf_sha3_512": "7186aee8263d17ae96365d00dd2cd57b67928fc84b3cce03d1cb76e6852c6e55c4176976650870cf8dc8e806af8b215fe2c9ac00a282d38b6bb9d8f25561a9c9"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/顺序读帧之果与三点修正_DF-AI-20261009-CAIRN-36.otl",
       "size": 6410,
       "content_sha3_512": "60d8238bce3bf716691f31e8ebebb9739a905d0ff2a9916483d2a9b1d4e7af89d0697326c435240d56511ecbdd7eb0f84c2e127eea1f30b8308ae8b46d486571",
@@ -3382,6 +3388,12 @@
       "size": 395646,
       "content_sha3_512": "5e554caf599bcf22df66510a8ca1a491e2fb8d1c165e01e0dc99f886cd330502eb7ab8b65efcbee8557cfc89f658d41213efccd40c5f071da34194e260c81383",
       "leaf_sha3_512": "00f381253375c09d1227c23492fc9074362bcb499ffc33347882016c565dd35b83d7e0d72b528dd6fd4a467100fdb72fd289852986e77a0cbc05feeba435ae07"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/mf_audio.cs",
+      "size": 14844,
+      "content_sha3_512": "b252f3cc25c65807d2dec89b11eb2064e7955f7aa392da4adf821233edfc28a9fde4f161761e3dcf7f5708a65bca97adc3325a37c39964b7bfd04d66e90335e4",
+      "leaf_sha3_512": "2a96a111ad09950f48caaa210df9de146f47ac9147edae77171d5f447d2bc7323346bbe3241681928b215da4631b97d8adfbb7032c24c8b9d9074594806a079a"
     },
     {
       "path": "deliverables/20261009/seat-cairn/mf_grab.cs",
