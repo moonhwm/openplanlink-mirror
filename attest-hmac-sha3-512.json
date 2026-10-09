@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T03:34:19.119Z",
+  "generated_at": "2026-10-09T03:35:48.987Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2526,
-  "merkle_root_sha3_512": "7b0d9ff2bade125a38c9682b4ce61b3926836421bc2e602bcbbd26dd7d58140f1b21628c96d73b61313b8722fcbbcdbab301095a7fcd2131ee1c94d0736ea403",
-  "hmac_sha3_512": "4986530a2cc30884bc1673cb4a0ca20d612ba0cd44e71af2425b5d8881cd9c252af62371bf14548570f3a1a6f5d84229d5ebb1aaa84d75b81599435c1cb292b0",
+  "file_count": 2529,
+  "merkle_root_sha3_512": "69906ef069b5be9c021c159125aa514c5125693d066f38507ac7c73b12a903ee253e6d0d1b1ce18c0cc441a3e8bd76203c3e6778ef226df4d9bef92c490d0fe2",
+  "hmac_sha3_512": "a66b48db55cb9577e680c26ac248d59c17131dd1839ea619c4a39f7a756f029cd7ec0439293fad089e026443b71def27e4eac265980573e6675ee6cdd94a6c30",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2184,6 +2184,12 @@
       "leaf_sha3_512": "3bd284b8d6b4bf4f11817f67bbd32452746c20f0a9b25cd7ed02ca13eb81ece02d70c45561f04659be782a24d0945436253c4a8bd0c4ae82fbec9db3e03799b1"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/分身行走循环v3_DF-PERSONA-20261009-CAIRN-18.otl",
+      "size": 5377,
+      "content_sha3_512": "b80314abb5441e8420ebbad11ee5b799e37b81d643d46a3ec486e5f16b14a5f9a45c9140b2c832f8c2e7cdba873b2171b24f8e94d060e38365ee18195f5f8175",
+      "leaf_sha3_512": "2545cf771f7925bd48fbe964c1e75b83336cb80a107709a1ea6eb1a96b7fa1b8a4b226426436e69c0039bbf8348ca4b2deb4aead44798d92c49a942d70889c38"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/则三则四并入术语表器与扫描判读_DF-TERM-20261008-CAIRN-02.otl",
       "size": 4646,
       "content_sha3_512": "539243f4c67957fd58ce1adeed80dd5c050c676a2e06aff81d0ea6da90771b9942bb58fed521e5c963d218cb644279e640252329eeba3cc0fd86e2e33938cb61",
@@ -3490,6 +3496,18 @@
       "size": 148487,
       "content_sha3_512": "4b6415df785dff72dc3b504909a39f86c548ac4ca0ab0de0ef35488e43b9493e1d3f89f027591bf3009b63fec03af15b20e0b6b21fe800fecd330588dc7092b6",
       "leaf_sha3_512": "614d58b5db1a749a0ddcba6fbfef6754be484774d7ec1b8eeea1c1358c76ea12437d6275adb995cc90b8762727b382a972679356161a8275fc9f0dc349dbedb0"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/CAIRN_avatar_walk_v3_14frames_20261009.png",
+      "size": 238155,
+      "content_sha3_512": "1c671f0d44e482a9b8682ebdadf7f6aeb30555f8484086db1c3f0b024eac345f7559d211753d20c70e90b94258c7be98467fb8de61e4ad1610d6ffe899910012",
+      "leaf_sha3_512": "749ef209fed93ac9d2f6478e52a98c81b71dba9ea8c89245614061e2cfb463faba5c90780fe69b0e42157d72176bd06a625cfff857b7ab6341e5ffe1ae54c6e6"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/CAIRN_avatar_walk_v3_20261009.gif",
+      "size": 371167,
+      "content_sha3_512": "751d9b3bf821c7074d2ebb18643cd0bea05bd65164885f6d49aa6c9e97abe5d4feec5e59f04a49c9f14a3a3f590b7554564371f797182e993db8eb0a7939fa09",
+      "leaf_sha3_512": "db7de89e00ec8d35b8a5d96843a0f4b194b64b1e3e7c088bbe4755af97de6715c4c58ba410f613d73e3ec60da8adba583d5ac59361a3d0d13135ec910eb1b6d6"
     },
     {
       "path": "deliverables/20261009/seat-cairn/NOTICE_AI_CONTENT.md",
