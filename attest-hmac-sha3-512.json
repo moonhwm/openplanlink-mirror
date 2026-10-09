@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T03:01:48.542Z",
+  "generated_at": "2026-10-09T03:03:00.953Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2501,
-  "merkle_root_sha3_512": "11e49e618c6dcf3be71021b7db13713d333d40a0ed0688cc00eb9cf841adf4764ab94697ddb6bd0d5bc53333ed6207555220af7d3376c1960adb11fb2ec216a6",
-  "hmac_sha3_512": "853e9fb7fe3f162d2ddce225c51a1ac4590a1245c598b18253ace5b3c1714e1afc1704a6006d9e92778d350f91033a72d7cac1c2c48a41f582573a2e01176b3f",
+  "file_count": 2503,
+  "merkle_root_sha3_512": "a089ca20b891c43a5f198319834521102588af51ac3f89aaa13ca882db280ec8cba3f18716a1710d4bd9c7d2bbca6c9ab261c9c34e90bdc202a27333f0401464",
+  "hmac_sha3_512": "69155e2fd8d08756a657dbb27d25fac9245f154dfaaf3635de5b1fff3d7774dab0ea4a2fe02abbfcfbb29a4d3c7f9884ab36a188f0457dce800b4b34b4a4c6f2",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2172,6 +2172,12 @@
       "leaf_sha3_512": "5563a9e543f152827cd980ddd977bb81cd1fb4fd4616991f56e602a9963fa61147d5370b2503ae1784c982f8aa3443644d648708f5459cc5551210a441744044"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/午前续报20261009_1105_DF-OPS-20261009-CAIRN-23.otl",
+      "size": 6696,
+      "content_sha3_512": "a992cb0b333c12395cd8b666c053bbfb4563235eb98a98ca7184957e0440bb6217c07f7628a41bd0f286e348c91b46ef5b8c56fa369774b5bc9b9abfd06ef9f5",
+      "leaf_sha3_512": "30d9b88468db75276eccd170c29c093909278e3e1c7bccf2def8cbed383dfd0db91814081767c3b02acf88cd4e670c08ef05718b3b5d59a12741932832aff87e"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/去趋势复算与假设否证_DF-AI-20261009-CAIRN-47.otl",
       "size": 5279,
       "content_sha3_512": "17a8076aded3d2a70668e5edba84553ac75459c03038c20065b2b7088057bf3d0c6555667288722d019aec84b9977004e0aaa7bda56a6e3e502696af99b3f592",
@@ -3682,6 +3688,12 @@
       "size": 7604,
       "content_sha3_512": "7503ba2917cd8b08f7649519f0c132195c92b2eb44abe0fdb4277b445cbdbcc70c3af660ad7a0e1683d3375c9b0c9182e5bdfcbdfb9ea04727035ab7e7ec4c10",
       "leaf_sha3_512": "fea96720888f47d3dd87b33b1be00366040fa54104552e9c6047eecf556e02f159d0676394f624258ce9860c28b87bf6aae18622c01279266ee53ceed218d687"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/午前续报20261009_1105_DF-OPS-20261009-CAIRN-23.otl",
+      "size": 6696,
+      "content_sha3_512": "a992cb0b333c12395cd8b666c053bbfb4563235eb98a98ca7184957e0440bb6217c07f7628a41bd0f286e348c91b46ef5b8c56fa369774b5bc9b9abfd06ef9f5",
+      "leaf_sha3_512": "bbf371cc94dbecd92d174ed621bb827ab68d5ba8d4eed61f2d7924097638f5e682004b034c85e37b6b78505d8716b01e1381e4ad516ef96ba86449be984810ac"
     },
     {
       "path": "deliverables/20261009/seat-cairn/四层墙之精确定位_DF-AI-20261009-CAIRN-71.otl",
