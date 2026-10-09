@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T00:07:02.069Z",
+  "generated_at": "2026-10-09T00:08:35.809Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2398,
-  "merkle_root_sha3_512": "243fbf45cccaeb141d35dc6122fb9218411475d6e5443a20cd689cfdffb10f1f0c9e565f8641d19e50fa2f7ed1ccff335003b75ea7102a1e66f91faeaaaa6ac8",
-  "hmac_sha3_512": "324851ef07bddeda30deff34568f8aa7e78d492fcd646a3d04703954886c989a3117b9a3d78dbee0da362bebd607ef77e78ba0132701b480c67db84e46d159d9",
+  "file_count": 2399,
+  "merkle_root_sha3_512": "2dc37431127cac6b3236e64aed0ffff015fe6934d3df77efe3ac8e326eb89e0712616390244f5e81a47d77d960df48708557917e32f5ee5bb8820fa3fc977c4a",
+  "hmac_sha3_512": "6ab8859071b8cf4075cdaa660f37c8c2564fa551f545546f92854c7dfe5ca84acd4928fdbe64fb5f82511d962fb84a8d5da605848746e39a0cb7a5c9cc442b1e",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2098,6 +2098,12 @@
       "size": 5360,
       "content_sha3_512": "2e0155608e7be57e33454ecf2a2d7a5ed3409c571a0f14b56b30f64e0813da2b5ad5fa37aa8522169cb9d8d8eed8ca94dd5ff1faf60b4165730b33683a7e8c4e",
       "leaf_sha3_512": "f81cdac7b67845a730876201bdd10a14a7d118d13ee31e7b14eee14b7fbcfdc34665771a95024f55f4463fa91aea1b609d61d8efb21e854bd1b73570bea1b4e7"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/命名补测与模型确证_DF-AI-20261009-CAIRN-59.otl",
+      "size": 4727,
+      "content_sha3_512": "edbf5f4b792a2898a233a8873f6bb35524f54e9b52499ab5c3773adab7698e14b3208e8e67e89677390988cdbf215f10eae2b4851fb6dcb228280b38dc64bec7",
+      "leaf_sha3_512": "e713bb280495c1973e32aa52022b8755867b1561c82c028c16907d89c4ebc13ebf5fa2f939dfa4bec4cdd03d2edef08a42e5fbcea955c8662e67c4c9eda0be1e"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/善恶的彼岸七章二一四至二二零_DF-NIETZ-20261008-CAIRN-38.otl",
