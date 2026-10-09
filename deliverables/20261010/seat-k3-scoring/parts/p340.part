@@ -28,7 +28,7 @@ addEventListener('resize',draw);draw();
 const tb=document.querySelector('#d3-tbl tbody');
 Object.entries(EXTRA.d3brief).sort().forEach(([k,v])=>{
  const[nm,cd]=splitName(k);const tr=document.createElement('tr');
- tr.innerHTML=`<td>${nm}<small style="color:var(--muted)"> ｜${cd}</small></td><td>${v.zh1_q10_s55}</td><td style="color:var(--cyan);font-weight:600">${v.zh1_q50_s55}</td><td>${v.zh1_q90_s55}</td><td>${v.zh2_q10_s55}</td><td style="color:var(--mag);font-weight:600">${v.zh2_q50_s55}</td><td>${v.zh2_q90_s55}</td>`;
+ tr.innerHTML=`<td>${nm}<small style="color:var(--muted)"> ｜${cd}</small></td><td>${v.zh1_q10_s55}</td><td style="color:var(--cyan);font-weight:600">${v.zh1_q50_s55}</td><td>${v.zh1_q90_s55}</td><td>${v.zh2_q10_s55}</td><td style="color:var(--mag);font-weight:600">${v.zh2_q50_s55}</td><td style="color:var(--mag);font-weight:600">${v.zh2_q90_s55}</td>`;
  tb.appendChild(tr);});
 bindFilter('d3-q',null,'#d3-tbl tbody tr');
 })();
@@ -69,7 +69,7 @@ document.querySelectorAll('section .wrap, footer .wrap').forEach(function(w){
 }catch(e){}
 /* ② 数字灯牌 tick：仅纯数字 .num（10,893 / 64 / 298 …），rAF 700ms，保留千分位 */
 try{
-var nums=Array.prototype.slice.call(document.querySelectorAll('.stat .num')).filter(function(el){return/^[\d,]+$/.test(el.textContent.trim());});
+var nums=Array.prototype.slice.call(document.querySelectorAll('.stat .num')).filter(function(el){return /^[\d,]+$/.test(el.textContent.trim());});
 var io2=new IntersectionObserver(function(es){
   es.forEach(function(en){
     if(!en.isIntersecting){return;}
