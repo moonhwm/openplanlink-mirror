@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T00:04:00.880Z",
+  "generated_at": "2026-10-09T00:05:36.798Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2395,
-  "merkle_root_sha3_512": "30d54eec9dc34420f1c8023d9c02f6d6f596cdf0de2defdaaaa7b0c164881d7cf7fe9aadc2c1892a05e374b7b17c9b43b7167af58efdd3c153003ab3d0cea095",
-  "hmac_sha3_512": "19e8f7ab0d1c07a4369a0741c0650c61f67e55d3161ca284c3ad23f73a917cf6a1fab3b1cb847a80678e31a171d4f6add63860306550985f0b1d700c21e8a837",
+  "file_count": 2397,
+  "merkle_root_sha3_512": "eb3fa7e246e485cef660a09aff497be5bb45b0700f9b386d7983ec30e93367f349c0961772a7518638d27ef9f118f8d2da8073b5419f8db14e81f0ba6997520f",
+  "hmac_sha3_512": "8e9386f09e75df451c576ae3132001a1e2ec2c20f63f666eacb72f7e54d835f16676886b4b114dc6a6cc5326959c67ca3fe2df07c862d2e54613c175ba69a459",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2652,6 +2652,12 @@
       "leaf_sha3_512": "66301ec118ae9629f5e62424de1ab403589c30b10a15706f095773cfcb17bcdd3c1e319dd3f68119472b8a6fb270a09142138a1d76a58d90e04fcd4903bc610d"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/陆知白v7由行迹而生与命名可复现_DF-AI-20261009-CAIRN-57.otl",
+      "size": 5307,
+      "content_sha3_512": "ddb140a8d2942e8c49f93527f66dade0114d48233252523234489908f2e2453ab3cba434af56e18aca9fc1424293ebce7b4e82e9c50776da74429b2c2fa15634",
+      "leaf_sha3_512": "863a88ffea9eff157f5861caad224c13783fb277e6851460f723ecfcf8fcd0731791a39fc3770bc8769eca55be64f8359a08b04cd8f277794a5c091549f7a2b4"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/陆知白人设v2增量由行迹而生_DF-PERSONA-20261009-CAIRN-01.otl",
       "size": 6040,
       "content_sha3_512": "7fcb901a364cadecbc63b85457e3049ef87bc7777cf0255f02a0ff93be0e5b1f2e17eda9af5acbd62eee2e6e803cd0a3b34078df73221f3290730ba2ebd1fc01",
@@ -3082,6 +3088,12 @@
       "size": 40444,
       "content_sha3_512": "6e227bfd0290f21e5bc99861f59ae30fe62513dc1c0dc7252277652b305fb1a31c2d153bbb62d03c0acd12c6b300e3c69de58c2348accc49a17735d63c2b665f",
       "leaf_sha3_512": "7b99caa1d30a981be2c9473616d7bb104422f6f61fe25f96301033ccf7ec7f0539a6932d0b366ac033587538198ee2e79e72365ec346278717d289b4b9264e01"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/persona_luzhibai_v7_20261009.png",
+      "size": 101845,
+      "content_sha3_512": "1fab228f337cae1d01b7e9fbaf8451c92f027ac690cc61ea1e96827ac8ba1b28854882fbfa1fc39a1108ac1bc64dfcac60f1f54adb546e246aac12d5cec68ef5",
+      "leaf_sha3_512": "8c95b3951418305b91b6d75447d64aa9f9acc1cf80770c9eba096f6ef2dc3136c08799fda86d0dd125ef1ffd9120c98a6a550b55e6493e29d14c7992ea5b7cf2"
     },
     {
       "path": "deliverables/20261009/seat-cairn/storyboard_chain_20261009_CAIRN.json",
