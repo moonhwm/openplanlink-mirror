@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T01:52:45.678Z",
+  "generated_at": "2026-10-09T01:56:00.264Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2467,
-  "merkle_root_sha3_512": "5339dd5eb783477045ae94c711f274761d56bbcf4fb2bd9b9568ce34cdb644fbc6210631c791010093017a1a10bcb6f8a943a97a8f8e363b331172bd766ff159",
-  "hmac_sha3_512": "6ad563ff0ca6b8cd5cf220dab6c1c43732fb015a2a35405e08ee50f8ee85af84a226a462d74900d4d636958d5d9a3fa539265e70e8523c15ba901a3b675597a8",
+  "file_count": 2469,
+  "merkle_root_sha3_512": "57a32fb7d5a35e1780349d6bd0085a68276bfedd1f24fa5a21c0d6a3cc4d538d59616c2655971bbcf25be27f65f8c5c3b17a6e7b8adc6c65835dcfdb8f917542",
+  "hmac_sha3_512": "4b015d945e0d69e60a14a9abdb30f2e6fe1508af5d49f41db2fae4a9902756ba0c7dcc93e548c6a8cfddf329cf9bf2f5b47b16dfc8116e07ded29e50e6725414",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2382,6 +2382,12 @@
       "leaf_sha3_512": "6141037f9f5f5c3936aea81cc045241a26a909949dd33917eea4dc70099f6d789e2a477bbe556d9640de8d31140b1ffff06321ee56837f33b6bf838a1134acc1"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/四层墙之精确定位_DF-AI-20261009-CAIRN-71.otl",
+      "size": 4875,
+      "content_sha3_512": "f63038812f45fd8d2ea3e6d13db1c5a0ec2789e142db898405d3074ce5ac68444945a3428c51104c91a9fe3561f7c1ed251388a9d65cbc3a63ddbefcf95ce73a",
+      "leaf_sha3_512": "dd9493f143986f755d4cc6303307a5b2f9766016e0d052619a986e3c5632f36655940633b32b833e9a311b80805c291b60ef429aae5f65a4cd1cf983172ec50f"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/夜班合卷v3与世界模型总账_DF-OPS-20261009-CAIRN-09.otl",
       "size": 7167,
       "content_sha3_512": "c9d768bec4ae6bcec646969da301cc56ed98c1ea9739455ece54a97550b84a9f4ed1671ea3fc1d5e8cf72718a4b4afe98f0a2860dc99a398a178ad63d297d3ef",
@@ -3514,6 +3520,12 @@
       "size": 9154,
       "content_sha3_512": "0d16bc9f4539da255b17f7a22584fac0a77def156bb4711dccdfe5b4a7c32cb240fcf8cfe513d4f1a82b113bc97a661eb2bc1b946659c1ebe761ed9c51f05bcf",
       "leaf_sha3_512": "f314f909540e3f78361d865f7b1b0defeee6fe7f7b58ddcc74b4c2c8beb6c703e5cd53f4be980a0a8adc699ef9616449d36e6afbec649acf752fd9300340fe22"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/四层墙之精确定位_DF-AI-20261009-CAIRN-71.otl",
+      "size": 4875,
+      "content_sha3_512": "f63038812f45fd8d2ea3e6d13db1c5a0ec2789e142db898405d3074ce5ac68444945a3428c51104c91a9fe3561f7c1ed251388a9d65cbc3a63ddbefcf95ce73a",
+      "leaf_sha3_512": "80dadd54f836b8082969b00f8d3b4bfdba9de460622832838e7f627274bf2f7bab3f4e8bb54d51af7884226119c25a19612ef335810bc0b0a84f606ff0331322"
     },
     {
       "path": "deliverables/20261009/seat-cairn/应HY4分身资产规范之自报与对齐_DF-AI-20261009-CAIRN-67.otl",
