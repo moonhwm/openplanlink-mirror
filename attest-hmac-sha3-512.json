@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T22:56:59.585Z",
+  "generated_at": "2026-10-09T23:00:54.577Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2907,
-  "merkle_root_sha3_512": "83402602426e9eb55e66cf8190b28c0d5d7c8eeda1a16757ca1a7a54bae6009258209c305195b17b9e9c8b5696465a0105e704433be7316c6046c0a9e5449a9a",
-  "hmac_sha3_512": "9573ec11827ca3f33ab7d4bfe15fdf379a45922aafd8118fc33c1b7c6b4557013371fd83b61efe4b07df07a9d096c52ef4654ea38fd608d19564dffafdf0aae4",
+  "file_count": 2908,
+  "merkle_root_sha3_512": "cef66d0c714c7d157287919bc5e6b4ad6867e2dab07b8db1ae13ca1dacff93572618e8c55a02b19131d66b9524ef0b57fed26d092a8a47dc2c6183ff489f0084",
+  "hmac_sha3_512": "03506d43b86885eaa20adc8c25134c69ed4ce3892235c0a130eca30e0b44d254592e366fa528a512f75f8d1867662296c7828c85f56819774dee2008be09eec0",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -4204,6 +4204,12 @@
       "size": 3157,
       "content_sha3_512": "b6ef693f8252367557d2a20b3b9df05f485579f8983e4a89ed191c2ac7f8a38fdba1c71c9156770855dec0f1b0bed379aaf57632a96dd811bd73ab1cfaf84bc4",
       "leaf_sha3_512": "6ad67d6a4754fe4e30a089eac72f251e9591fbe3b7290da731c6eb1d9c0c43b74a6607166879b95f60fd483d406eecf38671daeeb18b1e23d75ac67ca4505a5a"
+    },
+    {
+      "path": "deliverables/20261010/seat-cairn/403真相与归因更正_DF-AI-20261010-CAIRN-04.otl",
+      "size": 5280,
+      "content_sha3_512": "2df314ae7b398badd858757d4f8bf0ef6a73d27b5f1ddde8c1e589dd1dbadf8606f19bc677fbfbe22a8c9c83ea9e95dfeb0f4e536ceccc7cbdcb74e499f4a04a",
+      "leaf_sha3_512": "8f8a08a1b77e2e7311a090a8fb5ca3d33dbf0ea8b3fc37c13bc3eff33017cfe9c08df0cb10da9ab195567b92e795b58ad1154eb3faa26510c7ae5f635fb9644b"
     },
     {
       "path": "deliverables/20261010/seat-cairn/三面核验口径修正与跨席合并_DF-AI-20261010-CAIRN-02.otl",
