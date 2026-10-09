@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T00:12:40.673Z",
+  "generated_at": "2026-10-09T00:13:39.459Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2405,
-  "merkle_root_sha3_512": "0af4f0194b39a052e647de55a50c2b83541550cb20053977dd29945d520e08be640ae05459dbf301a5c55b5c3ffce5d5b5940c287edc2b06b3a73e5fb31b10b4",
-  "hmac_sha3_512": "910889685ae45862a163a0fd55a4e47d3edecc298763ff0433408cc510ffd5cc00336ebb732421516e2c197319aa5c836675ad0fbcaf3a12d2dcd2f11117a521",
+  "file_count": 2407,
+  "merkle_root_sha3_512": "1c2fa7ae8199ae8de58c728187bebb7299847b043d065883c0d5533882ca39c236b9acea44e86af93be3e95e9cc642c6403e2a3a7c3d9a4d75ed51709d3a0965",
+  "hmac_sha3_512": "28869e4d35ed9ca7d179d5570d82153e3f6a050a0676465900ea57e7a9b3da8c7e4efd79bd505ebeea9e5c8324dad6b58ecf01d2e0b0511fb59080e1bd65f34a",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2502,6 +2502,12 @@
       "leaf_sha3_512": "4a8f8fac8124d33ec1e4168a307e2e1587e1e94621f013edaacf31f9a7b0a1557267fc0239ca812863465cc867c67362b3a59487815221aee02d5ec7fcfd350c"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/真实进房作业包v1_DF-AI-20261009-CAIRN-62.otl",
+      "size": 6352,
+      "content_sha3_512": "9342da0d7e06a95f36c3de3f1bb7f2d8c47484617b61b74f4368f705e8ded6a1586b77562564d131ef365e14649ca39bb815aaca51a411b8dfa2ee4d94b6a9fc",
+      "leaf_sha3_512": "123b37bdba9ce0502e68bdfb238c539325fef69bd99af56cd0e9775670b0b633edb3935fdda6a8b84a3dd9a303162bf0a2597a06fdb3083e10fd9217ae01c228"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/石敢当Cairn_A2A可交互架构图_20261008.html",
       "size": 8508,
       "content_sha3_512": "f8edb330796a5c326c0875ffa0700ea2d383f40ef8b08c28d33adb8946cda47e89377cf41ceae8f02774b59fb75283b2ba2bf81398dc511e3654142d047456ab",
@@ -3202,6 +3208,12 @@
       "size": 6648,
       "content_sha3_512": "15c6000eb9594f1d4199c2edcbe9024d19c8bf2ed352935952c5997f680e6069d8fa96ace665571d4f1ec208d20a459712b168144f465c8647410b3aa56a1b1e",
       "leaf_sha3_512": "328f038bbabab7c532e4865e355348942ff4dfc06e0a68f239580fd9082443a326db8796b75c9a6861955d73a22c965544db48006e6dad2520057c426e7bf629"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/真实进房作业包v1_DF-AI-20261009-CAIRN-62.otl",
+      "size": 6352,
+      "content_sha3_512": "9342da0d7e06a95f36c3de3f1bb7f2d8c47484617b61b74f4368f705e8ded6a1586b77562564d131ef365e14649ca39bb815aaca51a411b8dfa2ee4d94b6a9fc",
+      "leaf_sha3_512": "7c0e5597560710fd5234c855e21c3a1031a98b08eac7b3389328d6c699f3308821ca2d8c8ba7d317ba097751ea1689e42b493a7e037deebb852847dc97c4b515"
     },
     {
       "path": "deliverables/20261009/shoucang-df-doc-01/DECISION-REDERIVE-20261009-SD-01.md",
