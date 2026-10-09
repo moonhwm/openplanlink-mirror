@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T00:34:04.307Z",
+  "generated_at": "2026-10-09T00:35:40.223Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2418,
-  "merkle_root_sha3_512": "2cc25752cf83563d0d1b722734f6c3ba441cf5c6083c9ed6be4db4ffb0ff70a48408f85290ad6aabdc5a2f60c93b91095ac45c68cf70387d39a7579beba7441d",
-  "hmac_sha3_512": "30b1109ed869099b411bd4f8912814409f1a798646c6f0ccd79279ff79bb08555a4769cbb24551b31be0ce10a24cf06f79515c0821d566cf8b84709aa217fa3d",
+  "file_count": 2421,
+  "merkle_root_sha3_512": "22b2b985db86a47e354aa49d0e2a9fafb20d2e1b33939e9f6fd50b4a85f474c28c85cdd6c3ef5226f7ed1bcc0c4c978f81541ec5e73b234f81d0137cc13992e9",
+  "hmac_sha3_512": "89ad8c1720375774c2e78201ebfa9314be96650186bb0dc5eabf20344e9ddad50624d03b826aa40835f202dbcc176f6169e3465d5a23ae8f3a8ed42fa5a45efd",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2724,6 +2724,12 @@
       "leaf_sha3_512": "66301ec118ae9629f5e62424de1ab403589c30b10a15706f095773cfcb17bcdd3c1e319dd3f68119472b8a6fb270a09142138a1d76a58d90e04fcd4903bc610d"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/陆知白glTFv2多节点两动画_DF-PERSONA-20261009-CAIRN-05.otl",
+      "size": 4648,
+      "content_sha3_512": "e5ca2fc31422049aac97da05e1b52bcd73dba49cd96bad83b493d8b9e4748b7655eec50dc1d6cd74d772e558148a664ebf84c6d1386eb38dcb54e9e59527b8d2",
+      "leaf_sha3_512": "a74af9582ab62efc14adc7ba9408a297046284809dc8849db799a3fc95e154d2ac81a9529960f55d4dd4c0be99d2c354b0b06aafc6c014f36bdde515f4f2e5d9"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/陆知白v7由行迹而生与命名可复现_DF-AI-20261009-CAIRN-57.otl",
       "size": 5307,
       "content_sha3_512": "ddb140a8d2942e8c49f93527f66dade0114d48233252523234489908f2e2453ab3cba434af56e18aca9fc1424293ebce7b4e82e9c50776da74429b2c2fa15634",
@@ -3168,6 +3174,12 @@
       "leaf_sha3_512": "e8b78aad4bcc7b915f76815bb65d0d16b1635f6c28c45576ce1f37c8b0d0827b9eba179e43ea00a6e99117ccec0dfac6ff2dd955acd5477cb04152bfed3b1138"
     },
     {
+      "path": "deliverables/20261009/seat-cairn/persona_cairn-dsh-anim-v2.glb",
+      "size": 52512,
+      "content_sha3_512": "948988c94540e2aa007836857359d5e8727d52231131e08263af9af8e591cf76e50906729869f97341feb2344c97755e475ee0687363ac4268fce3e163a7712b",
+      "leaf_sha3_512": "7a756a5af44ee93bbb9029e5525bb93a544d558dc10cdbab3ea990f449bcabef2dfbaf9b418e4f285f73d37d16264dc87aa86ea519b3b60b643df6b5c4b616ee"
+    },
+    {
       "path": "deliverables/20261009/seat-cairn/persona_cairn-dsh-anim.glb",
       "size": 40928,
       "content_sha3_512": "637343bb23b3079403098b4947c771ef38bc9043a5c4052a0fcd286b33c396158c5c6a72feef9990add7335dd86173f211b5e55c2170d8dffbcfd41ba12ed2b2",
@@ -3184,6 +3196,12 @@
       "size": 142272,
       "content_sha3_512": "01b9d28546462b6e0a157cf36247e48400426ab05e35d236c38cfc21d1b3c6d1d9eaf9f631967625d43a8b388b9a8e7ce4600fe7d41a067b1e76c805af66342e",
       "leaf_sha3_512": "0f7a3a7ddcfd27ac18f7cea5c9e02567f28f5744c01038822a06885b0939d5fd9f63d2fc14241244920df4332a1f54d02efac6906cc13604e77e43c14755779b"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/persona_luzhibai_gltf_v2_4phases_20261009.png",
+      "size": 185136,
+      "content_sha3_512": "8c581389677b901440287a32cd2aa6aed86753df3e57689a6bf83159482fca39293eae1437698ec5a1285a8b1517dce4f3ea5611dd759af555cc9d94630159a2",
+      "leaf_sha3_512": "cd83caefda124a3b76b0d09c03642d27672bc64e22f7d228c288863c5c41849b44cd047a1ef54b60cc30c5355fba914fffa97b621d804ab478d6f132c22d9596"
     },
     {
       "path": "deliverables/20261009/seat-cairn/persona_luzhibai_v7_20261009.png",
