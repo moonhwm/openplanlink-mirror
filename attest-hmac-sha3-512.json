@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T03:07:11.739Z",
+  "generated_at": "2026-10-09T03:12:19.027Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2505,
-  "merkle_root_sha3_512": "a3e18ce60ef4f6cc15ffc49eb8306ab1c389e717cca2e979b404417eb59f258d98e7ead66f6b24ef2b429a1579c5d0d396603f6a6b5be7284c44e063bb77fa8a",
-  "hmac_sha3_512": "74cc93d4927cc189a5413cb0a9ed1ee070af4fd64e0cce4d876084d0e8391156675d7619d6d4337a0a162c2da5e4e758b8927da9d32241f8f2b684bd37142a25",
+  "file_count": 2506,
+  "merkle_root_sha3_512": "a6ec60ba015555a5455b6934c1ddd96c0153e4802a6b1cf47561d35a8c15a0b776f9b38b04aa3420dce89ded6737115d040ffdaa1ce6304945b2ad073580476a",
+  "hmac_sha3_512": "517f31439bbf2ed9f5c2016a587ede0b3560425d5b46c17550a06eeab6a0c3b5a9118ec5482337b4d3b8c05d3d82c609843665a03616612a4ad3463deb66c418",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1828,6 +1828,12 @@
       "size": 283,
       "content_sha3_512": "9fa0f5165ca1eb7fff53d42f68555bcb7bcecb8b4a4824511c67abc1dd9f8462b95d8ae3d230d13ddb3d8986ca3ec0c733ac0f87d9e14f265536f91ba6d30c04",
       "leaf_sha3_512": "636b2c0c7af01c159a0dc464cba7e6075a8def4a8a86d77b7ecff9d21a9b63c39b72f919affb4ef0b9c306d8a880601abaa11ec8b479a2a11a75f2c2683df494"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/acting规范不可探与判据修正_DF-AI-20261009-CAIRN-92.otl",
+      "size": 4841,
+      "content_sha3_512": "f0b5136c6a4dc8cf04585e872edb46a5ba6910abd02b03cd26015367849fbbb2c8808831aeb707f411fb8f7347e7b74f794bf6e5a8b4168e5ce33215fdf0d028",
+      "leaf_sha3_512": "9a5776df9a41f4ead35303bef045b234b2656443879ffa81c81eb28527eb006d5e07da76f5f6f73f84d33557be24d65b24ce95c650290c1707fdb8e0b2bffa5e"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/avatar2r2四项处置与核实_DF-PERSONA-20261009-CAIRN-09.otl",
