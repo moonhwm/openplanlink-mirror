@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T03:19:33.895Z",
+  "generated_at": "2026-10-09T03:20:50.501Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2510,
-  "merkle_root_sha3_512": "b95cc58646e3e2b151e41d6711266b3b5b9c76026526b7da94c32d02f0978e8fdc82ce64368c323041517f3036f5c935c330b781ef3c396332b62f4e2a6693fc",
-  "hmac_sha3_512": "9b4df0fe9536f2f5bb2662b397c623a1531b68e00a5f89ba83e36db04aa38d6c376f59874ed359e27bfdb3b022ffd628e3508a7bb11c972aee0837bb2116bc22",
+  "file_count": 2511,
+  "merkle_root_sha3_512": "82404a23cf90848dd7eb198c2ba07da13eecb1695d1c7cbbc23f7114d2061329a00a86bc45a1bb07bffd3ff00d2e1acc995706d568c964eba1c20e587e3a0a65",
+  "hmac_sha3_512": "5b106375460b382791d1612ed2d218fbf9238993e7c7e0e26fc3c9d8f338b03b71eaa1f2f25b732637d255da0e7ec755f4cc3f4439f3bd3b301e10855624f7fd",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2086,6 +2086,12 @@
       "size": 7604,
       "content_sha3_512": "7503ba2917cd8b08f7649519f0c132195c92b2eb44abe0fdb4277b445cbdbcc70c3af660ad7a0e1683d3375c9b0c9182e5bdfcbdfb9ea04727035ab7e7ec4c10",
       "leaf_sha3_512": "659837ee1ea2a025d8a2362e56235d96b88e89e366873f10d28a2d29a4a7b0e866439ffeaa452e3c177c6b71caf4fd63795c033cbd7a2e9934e50115d6193684"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/位置匹配复算与精细化_DF-AI-20261009-CAIRN-96.otl",
+      "size": 5859,
+      "content_sha3_512": "6b741ae1444f263c4111ea468a26193f6c625e57347062bf45549cafb96a84d5168222fd64f401464d8552b48a3ca0e316c1c723a6de9458d3b443202de09cab",
+      "leaf_sha3_512": "e634d7b8fd6145dd7b91074ebc3d869695b8ea0db6e6fd5ff9383b9325f910e04d23d715b341016383fcbcaf2b19150bce2761be2b2c678bbc3963e1cc41792a"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/元处理口径细则_DF-META-20261008-CAIRN-01.otl",
