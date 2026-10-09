@@ -1,0 +1,77 @@
+48a40ec30f2", "main": "4569349d140c3d7f8157aa8910f1b763e7b633451a57b73d2a3bec071aefcaa3", "a302": "4443a6e2f4f6635d3aa9084dacc5a7a66422b370536930d880fad78592ecb451"}} /* SCAN_EXEMPT: EXTRA 内三枚摘要同上，展示用途零明文 */
+
+/* ============ 开园词池（≥2 + 反重复） ============ */
+const PROLOGUES=[
+{t:"开园词 · 其一",by:"K3 评分系统席",src:"",note:"文字序章(无外部素材)",x:"夜色合拢，灯先亮。\n这座园子不售票，只陈列事实：一万余行逐生数据是地砖，四轨 Lane D 是四座游艺机，呈批台是园心那座未揭幕的主建筑。\n所有数字冻结在 2026-09-09；钟摆归你，数据归那一日。\n请进。"},
+{t:"开园词 · 其二",by:"K3 评分系统席",src:"",note:"文字序章(无外部素材)",x:"欢迎夜访。\n摩天轮转的是总账，射击馆挂的是门槛 τ，望远镜望向 2027，占卜屋只给分布不给宿命，旋转木马量的是宽松与严苛。\n园规一条：知之为知之——凡不确定处，柱上已写明。\n主权人未拍板之前，园里一切设备只演示、不执行。"},
+{t:"开园词 · 其三",by:"K3 评分系统席",src:"",note:"文字序章(无外部素材)",x:"灯检完毕，准予开园。\n本园由评分系统席连夜搭设：242 条参数是铆钉，589 项测试是安检。\n凭据只留指纹（哈希），不留钥匙；游客隐私零采集。\n祝你游园愉快，也祝主权人拍板顺利。"}
+];
+(function(){
+ let idx=0; try{const last=localStorage.getItem('opl_park_prologue_last'); const pool=PROLOGUES.map((_,i)=>i).filter(i=>i!==+last); idx=pool[Math.floor(Math.random()*pool.length)]; localStorage.setItem('opl_park_prologue_last',idx);}catch(e){}
+ document.getElementById('pro-title').textContent=PROLOGUES[idx].t;
+ document.getElementById('pro-text').textContent=PROLOGUES[idx].x;
+ document.getElementById('pro-btn').onclick=()=>{document.getElementById('prologue').classList.add('gone'); window.__gate.phase='park'; window.__gate.state='open';};
+})();
+/* ============ 授时双相 LIVE ============ */
+setInterval(()=>{const d=new Date();const p=n=>String(n).padStart(2,'0');
+document.getElementById('live-t').textContent=`${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;},1000);
+/* ============ 阅读进度 ============ */
+addEventListener('scroll',()=>{const h=document.documentElement;document.getElementById('prog').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+/* ============ QA 钩子 ============ */
+window.__gate={state:'boot',cam:{x:0,y:6,z:26},orbit:{yaw:0,pitch:0,roll:0},phase:'prologue',nebula:true,pro:true,texturesOk:false};
+/* ============ 摩天轮（three.js CDN → 2D 兜底） ============ */
+(function(){
+const holder=document.getElementById('wheel-holder');
+let yaw=0,pitch=0,drag=false,lx=0,ly=0,zoom=1;
+holder.addEventListener('wheel',function(e){e.preventDefault();zoom=Math.max(.55,Math.min(2.6,zoom*(e.deltaY>0?1.09:0.92)));},{passive:false});
+holder.style.cursor='grab';
+holder.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;ly=e.clientY;holder.style.cursor='grabbing'});
+addEventListener('pointerup',()=>{drag=false;holder.style.cursor='grab'});
+addEventListener('pointermove',e=>{if(!drag)return;yaw+=(e.clientX-lx)*.005;pitch=Math.max(-.5,Math.min(.6,pitch+(e.clientY-ly)*.003));lx=e.clientX;ly=e.clientY;});
+function fallback2D(){
+ const cv=document.createElement('canvas');holder.appendChild(cv);
+ const ctx=cv.getContext('2d');let r=0;
+ function rs(){cv.width=holder.clientWidth*devicePixelRatio;cv.height=holder.clientHeight*devicePixelRatio;cv.style.width='100%';cv.style.height='100%'}
+ addEventListener('resize',rs);rs();
+ (function loop(){
+  r+=.004;const W=cv.width,H=cv.height,cx=W*.72,cy=H*.5,R=Math.min(W,H)*.3/zoom;
+  ctx.fillStyle='#0d1220';ctx.fillRect(0,0,W,H);
+  const nebA=Math.max(0,Math.min(1,(zoom-1.7)/.8)); // 缩到最远：银河穹顶淡入（远端语义）
+  if(nebA>0){ctx.save();ctx.globalAlpha=nebA*.7;const g2=ctx.createLinearGradient(0,0,W,H*.7);
+   g2.addColorStop(0,'#1a1440');g2.addColorStop(.5,'#3a2a60');g2.addColorStop(1,'#1a1440');
+   ctx.fillStyle=g2;ctx.beginPath();ctx.ellipse(W*.5,H*.24,W*.75,H*.3,-.25,0,7);ctx.fill();ctx.restore();
+   ctx.fillStyle='#cdd6ff';for(let i=0;i<90;i++){ctx.globalAlpha=nebA*.8*((i*7%10)/10);ctx.fillRect((i*131)%W,(i*197)%(H*.5),2,2)}ctx.globalAlpha=1;}
+  window.__gate.nebula=+nebA.toFixed(2);window.__gate.cam={x:0,y:0,z:+(26*zoom).toFixed(1)};
+  ctx.fillStyle='#fff';for(let i=0;i<120;i++){const sx=(i*97%W),sy=(i*57%(H*.6));ctx.globalAlpha=.3+.5*((i*13%10)/10);ctx.fillRect(sx,sy,2,2)}ctx.globalAlpha=1;
+  ctx.strokeStyle='#56d6e0';ctx.lineWidth=2*devicePixelRatio;
+  ctx.beginPath();ctx.arc(cx,cy,R,0,7);ctx.stroke();
+  for(let i=0;i<8;i++){const a=r+i*Math.PI/4,x=cx+Math.cos(a)*R,y=cy+Math.sin(a)*R;
+   ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(x,y);ctx.strokeStyle='#2a3760';ctx.stroke();
+   ctx.fillStyle='#f2b950';ctx.beginPath();ctx.arc(x,y,6*devicePixelRatio,0,7);ctx.fill();}
+  ctx.strokeStyle='#e06ca8';ctx.beginPath();ctx.moveTo(cx-R*.25,H*.95);ctx.lineTo(cx,cy);ctx.lineTo(cx+R*.25,H*.95);ctx.stroke();
+  requestAnimationFrame(loop);
+ })();
+ window.__gate.texturesOk=false;
+}
+try{
+ const s=document.createElement('script');
+ s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+ s.onload=()=>{try{init3D()}catch(e){fallback2D()}};
+ s.onerror=()=>fallback2D();
+ document.head.appendChild(s);
+ setTimeout(()=>{if(!window.THREE&&!holder.querySelector('canvas'))fallback2D()},4000);
+ function init3D(){
+  const W=holder.clientWidth,H=holder.clientHeight;
+  const scene=new THREE.Scene();scene.fog=new THREE.Fog(0x0d1220,30,90);
+  const NEBULA=new THREE.Mesh(new THREE.SphereGeometry(95,24,16),new THREE.MeshBasicMaterial({color:0x241a4e,side:THREE.BackSide,transparent:true,opacity:0}));
+  scene.add(NEBULA); // 远端语义：缩到最远，星云穹顶完全显影
+  const cam=new THREE.PerspectiveCamera(55,W/H,.1,200);cam.position.set(0,6,26);
+  const ren=new THREE.WebGLRenderer({antialias:true,alpha:true});ren.setSize(W,H);ren.setPixelRatio(Math.min(devicePixelRatio,2));
+  holder.appendChild(ren.domElement);
+  const sg=new THREE.BufferGeometry(),sp=[];
+  for(let i=0;i<600;i++)sp.push((Math.random()-.5)*160,Math.random()*80-10,-Math.random()*80);
+  sg.setAttribute('position',new THREE.Float32BufferAttribute(sp,3));
+  scene.add(new THREE.Points(sg,new THREE.PointsMaterial({color:0xaaccff,size:.18,transparent:true,opacity:.8})));
+  const grid=new THREE.GridHelper(120,60,0x1c2650,0x141c3a);grid.position.y=-4;scene.add(grid);
+  const wheel=new THREE.Group();
+  wheel.add(new THREE.Mesh(new THREE.TorusGeometry(8,.09,8,64),new THREE.MeshBasicM
