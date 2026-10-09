@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T02:07:31.183Z",
+  "generated_at": "2026-10-09T02:08:39.367Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2475,
-  "merkle_root_sha3_512": "d1145fd6f2c743658e1c0e4045765dd3f61ee8542594b3c00ef1b100f1f4cb9fbb44fd84a7b32f45008e97e4ee13e30ce64615d5372820ff32069e263f12f08a",
-  "hmac_sha3_512": "6f58f2c04c7885fd49fa603010f907aafe472affa569a2c5ba7aac334d1c248e5c0d4e469d69dfc63e027ce06f43a7ee654148db6064744df0b60fbe1a5f400f",
+  "file_count": 2476,
+  "merkle_root_sha3_512": "538dc17c5c1ea70832c4d47dd4a94f83cc20430a54ff1976c8c5449fee08c42a581813306205af51fc967d0bd2793f29661425219fa55e18d29fbb2b7f70572f",
+  "hmac_sha3_512": "d958072cb546fb6eac2de750c420cb8e83f032ce804e0bf34356904c24588fde9179fb17a233f077302cff907426b3d4b9e116f00abab34909102e0895223854",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2896,6 +2896,12 @@
       "size": 5900,
       "content_sha3_512": "c258b8ad1b20d7e60d5bba1f476c7f6a855996524bda05a49f9ec04cf5a7b055a3cecacc0e5d5e58b64e74b1b4bd45958cdd56a0c7ebe1a68392d68f38d2bac0",
       "leaf_sha3_512": "7dc5d080c75e0d99c2791bdabc8efd50ae87d1bd9ab263863057e3c05da74153202574c5ee3c90043a243d1ebde43c3d0b2d96378208066575d1c4bec011e24f"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/静音头普遍性与常数指纹法_DF-AI-20261009-CAIRN-76.otl",
+      "size": 4742,
+      "content_sha3_512": "89a8d1030629dfc20a8bf1c790b28858ed7b410cf56d8bef89cf9dd016ef615103809b2b8a5bbd0ad23d339120de9c9f86196b4de57999b39e89f0c9b51df693",
+      "leaf_sha3_512": "20cb87a157323e4766e0797f5dfd187865004fe9db7539ef2603f47cdebd5fcb476fc1ade4fbdf77e8af5877349c3d14d79093df4074f34f894238785b274e97"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/音轨剖面代理审计_DF-AI-20261009-CAIRN-73.otl",
