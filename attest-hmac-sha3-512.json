@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T01:50:34.735Z",
+  "generated_at": "2026-10-09T01:51:44.728Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2463,
-  "merkle_root_sha3_512": "88b21b7424989e59116ee226ea87f92f3cdf476571c26f12d639b8ddbccd5808d78f787f2a449482a871712526f9bf9e7153d6df65665b8de00a289cfa8768a3",
-  "hmac_sha3_512": "e70e1180db73a912df50bc116541be676f78bde1de12c401c7ca0281b7950381d19841b622333b6c58d0267379875b959925b638e385b10a7053fb6f364bdc37",
+  "file_count": 2465,
+  "merkle_root_sha3_512": "5a468366985b938b2f39a09b3b972d44ac684257a445162c0e1aa930453abd7c90ce6abc9a8fd74f2e31f844839cdda3f01034bb904c77398a8a6208d255d445",
+  "hmac_sha3_512": "3038549b7e7d110500a39e6cbede27f3cd2d5a4ac642e62cf7f2b2a7b608d121f09c3f3928fc4e783646cfde6901f8e74d55f90bad537837b7c4e3f09924c905",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2370,6 +2370,12 @@
       "leaf_sha3_512": "7c5623df5e6a8ea6a13549a89dc95363be443299f5f5087cb58aaaa98a3b628df8a0f5c30b1b7186b631cbac60f56c5534a895f522d996277892e8a7e354dcfc"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/器物全量指纹清单_DF-META-20261009-CAIRN-10.otl",
+      "size": 4594,
+      "content_sha3_512": "f78dfc823408808aeda65f2ce491f10b40c615dfa99846598c517094d1935d8f801cdfb4fd37753da3517262f29375de03c69633770db685eed9bece14c79d80",
+      "leaf_sha3_512": "6141037f9f5f5c3936aea81cc045241a26a909949dd33917eea4dc70099f6d789e2a477bbe556d9640de8d31140b1ffff06321ee56837f33b6bf838a1134acc1"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/夜班合卷v3与世界模型总账_DF-OPS-20261009-CAIRN-09.otl",
       "size": 7167,
       "content_sha3_512": "c9d768bec4ae6bcec646969da301cc56ed98c1ea9739455ece54a97550b84a9f4ed1671ea3fc1d5e8cf72718a4b4afe98f0a2860dc99a398a178ad63d297d3ef",
@@ -3424,6 +3430,12 @@
       "size": 1089,
       "content_sha3_512": "04444c73f18989ac3f706281b653245c54e9e618dadb2d90fbd97fc26e7a49d1a3ee593d5f63cf28db099b2f5826884eb273a8047a9b3d8f86231e3ffa7bb592",
       "leaf_sha3_512": "2107a4f2c350aa6d4d451e4e293484996aa973126d0ca8563353d29c81998312ba5faaa8b023813370563cf317d3d98dc85e5802390a755e00a4d81e036ad201"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/tools_fingerprint_manifest_20261009_CAIRN.json",
+      "size": 41439,
+      "content_sha3_512": "53a2c40987ff3d6d7df154317fd05a747ba8056a5b981621ed16e164325b98bc99e3d12b0749ef8e91381eba66b5c83e49c85e13b4814f432f39f1561526f3cb",
+      "leaf_sha3_512": "ab36a5245e2f63b0b5d0da43cf5198dc7919105d712b362c42240eb930b822d494e492d76846a2148f2ab50657bb0933dc991d0c281ca2edadf86ce85582da69"
     },
     {
       "path": "deliverables/20261009/seat-cairn/trace_driven_surrogate_20261009.png",
