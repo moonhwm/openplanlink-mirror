@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T00:32:08.469Z",
+  "generated_at": "2026-10-09T00:34:04.307Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2417,
-  "merkle_root_sha3_512": "9880ee9ed3674324aacb5a38b6877444a85f2368abb7dfae8c9de5b11e067925dc6702e1c5e8af8afd8471c9cfd1d1319e5a76b9913df01acedd7d76831fdee6",
-  "hmac_sha3_512": "d4096caefdc7ea5714e0602405b71e2d1298da4b174676c9bbd4bcb5b7df6892e1980cfa2c5d5d931ccb98d967bb768e46d9f0df34c720c352fade5435e90853",
+  "file_count": 2418,
+  "merkle_root_sha3_512": "2cc25752cf83563d0d1b722734f6c3ba441cf5c6083c9ed6be4db4ffb0ff70a48408f85290ad6aabdc5a2f60c93b91095ac45c68cf70387d39a7579beba7441d",
+  "hmac_sha3_512": "30b1109ed869099b411bd4f8912814409f1a798646c6f0ccd79279ff79bb08555a4769cbb24551b31be0ce10a24cf06f79515c0821d566cf8b84709aa217fa3d",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2530,6 +2530,12 @@
       "size": 6352,
       "content_sha3_512": "9342da0d7e06a95f36c3de3f1bb7f2d8c47484617b61b74f4368f705e8ded6a1586b77562564d131ef365e14649ca39bb815aaca51a411b8dfa2ee4d94b6a9fc",
       "leaf_sha3_512": "123b37bdba9ce0502e68bdfb238c539325fef69bd99af56cd0e9775670b0b633edb3935fdda6a8b84a3dd9a303162bf0a2597a06fdb3083e10fd9217ae01c228"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/知识单点依赖盘点_DF-AI-20261009-CAIRN-66.otl",
+      "size": 5282,
+      "content_sha3_512": "6f397a1852f518dd544ccbef52743186493ded539776cadfa3e73607932608976a84af5e66fc2347e57b6d5ab9331f0fedf02eef00dad914e3c32af4d8b7d238",
+      "leaf_sha3_512": "95fe7042ce4b3389ad6db1afbe399fbced9336b42446ba9aa1b1372418f0cf1d66127a91b9b7491e253ae7f286d21a2378c4fab760ceeab6e36e5807bf70922e"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/石敢当Cairn_A2A可交互架构图_20261008.html",
