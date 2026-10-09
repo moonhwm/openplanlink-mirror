@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T01:37:00.095Z",
+  "generated_at": "2026-10-09T01:40:16.811Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2454,
-  "merkle_root_sha3_512": "ef5fbbaa1575d2a909d766b5d5e8feda0efc86e20be535c1ebcf7af048e716ae2453933591d9c09318c29f3e6881f98fe5f3df1aa0018a3dcafee79e0c334d0a",
-  "hmac_sha3_512": "9a02cca0e136e0c4c562b0de3e5be3f389c7e3480a59795a1496f27841e3efac06af3c62918bec045bf60d37f61074d84b5d9d2af536ecfeae5c0b85bbe4b826",
+  "file_count": 2456,
+  "merkle_root_sha3_512": "ce5f8c0cad1826e65fc9ae3b0f286f5cd2c9354c9b429f759e0a48bc627a5b37bba53fb2a77c567b668e4e83ab0c424f1a2ed5ee397e0892c33f157949190de3",
+  "hmac_sha3_512": "69c5b80e3d898d86681dac106884b5804ebacf4fe90c57e132a7e778f929cf1726d0981eeaf9c6505b417fd0b1c68c5d19aa4cf96248f183326568469a3b2cb9",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1812,6 +1812,12 @@
       "leaf_sha3_512": "336cef575d6047cfb74de177b022d869b47268e551a12acf890ec11d3dc93642cfd1ef3a33fa3d94f37ca0e52845eb45000de556a5f286c79e59a3200bbd88b7"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/SBOM初稿与标准对齐待核_DF-META-20261009-CAIRN-06.otl",
+      "size": 7307,
+      "content_sha3_512": "8700375947bff06ffc4db3c16d86a23c508d57e6d0494ec90cda0252be9551b469a936dde9cfdc527d02dc7e0df7b3b9f0bb17aea7e95605b9791df4804fe934",
+      "leaf_sha3_512": "a96ebf3802714bfcb706977d74778c997fa1e5b1a1e297bc6d8217811e9d541e3aa222ff86076a457ae91b26deca5f0c9db2346183e550e896be16f850641342"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/_HANDOFF_20261008.md",
       "size": 283,
       "content_sha3_512": "9fa0f5165ca1eb7fff53d42f68555bcb7bcecb8b4a4824511c67abc1dd9f8462b95d8ae3d230d13ddb3d8986ca3ec0c733ac0f87d9e14f265536f91ba6d30c04",
@@ -3238,6 +3244,12 @@
       "size": 1340,
       "content_sha3_512": "5a0c5eaeac9e781b60cd2aac74bde9e0f2066db10ed43da5a53d0ea9c29f20ea542adf7c63f05482b48fd4f509da495d136a2f545290bda2043e8d69d1dde9cc",
       "leaf_sha3_512": "ed554c508cbb94b1d6411f343a08145ed49b5d5e124c1407cf0cce39cecade71c6159bf77bc5ae2ffc817e42f8131660a5f499dc77fd4df6bc5180231b9cd34b"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/SBOM初稿与标准对齐待核_DF-META-20261009-CAIRN-06.otl",
+      "size": 7307,
+      "content_sha3_512": "8700375947bff06ffc4db3c16d86a23c508d57e6d0494ec90cda0252be9551b469a936dde9cfdc527d02dc7e0df7b3b9f0bb17aea7e95605b9791df4804fe934",
+      "leaf_sha3_512": "b1e0a6f3039d5b50ebbf2215467d9ce60ec7247139f79597fae8a7c70ff5ab1b7dd52eab39a7586e1e41d2151af681529dfe249c24869160a93bfe80951e6ec0"
     },
     {
       "path": "deliverables/20261009/seat-cairn/client_handoff.py",
