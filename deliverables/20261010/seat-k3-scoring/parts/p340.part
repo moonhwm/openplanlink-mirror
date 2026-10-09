@@ -1,0 +1,102 @@
+k);const d=document.createElement('div');d.className='row';
+ d.innerHTML=`<span class="rk">${i+1}</span><span class="nm" title="${r.k}">${nm}<small>${cd}</small></span>
+ <div class="band"><div class="rng" style="left:${pct(r.p5)}%;width:${pct(r.p95)-pct(r.p5)}%"></div><div class="mid" style="left:${pct(r.p50)}%"></div></div>
+ <span class="vl">P50 <b>${r.p50.toFixed(0)}</b> ｜ <b class="${r.slope>=0?'':'neg'}" style="color:${r.slope>=0?'var(--mag)':'var(--cyan)'}">${r.slope>=0?'+':''}${r.slope.toFixed(1)}/年</b></span>`;
+ box.appendChild(d);});
+bindFilter('d2-q',null,'#d2-rows .row');
+})();
+/* ============ D3 ============ */
+(function(){
+document.getElementById('d3-show-name').textContent=EXTRA.d3show_unit;
+const cv=document.getElementById('d3-cv'),S=EXTRA.d3show;
+function draw(){
+ const{ctx,W,H}=setup(cv);ctx.clearRect(0,0,W,H);
+ const pad={l:56,r:24,t:30,b:48};
+ const scen=S.pub_scenarios,qs=[0,2,4];
+ const vals=[];['zh1_mean','zh2_mean'].forEach(f=>S[f].forEach(row=>qs.forEach(q=>vals.push(row[q]))));
+ const mn=Math.min(...vals)-4,mx=Math.max(...vals)+4;
+ const x=i=>pad.l+i/(scen.length-1)*(W-pad.l-pad.r), y=v=>H-pad.b-(v-mn)/(mx-mn)*(H-pad.t-pad.b);
+ ctx.font='12.5px sans-serif';ctx.fillStyle=C.mut;
+ scen.forEach((s,i)=>{ctx.strokeStyle=C.line;ctx.beginPath();ctx.moveTo(x(i),pad.t);ctx.lineTo(x(i),H-pad.b);ctx.stroke();ctx.fillText('公共课 '+s,x(i)-26,H-pad.b+20)});
+ for(let v=60;v<=mx;v+=20){if(v<mn)continue;ctx.strokeStyle=C.line;ctx.beginPath();ctx.moveTo(pad.l,y(v));ctx.lineTo(W-pad.r,y(v));ctx.stroke();ctx.fillText(v,22,y(v)+4)}
+ [['zh1_mean',0,C.cyan,1],['zh1_mean',2,C.cyan,0],['zh1_mean',4,C.cyan,1],['zh2_mean',0,C.mag,1],['zh2_mean',2,C.mag,0],['zh2_mean',4,C.mag,1]].forEach(([f,q,col,dash])=>{
+  ctx.strokeStyle=col;ctx.lineWidth=dash?1.3:2.6;ctx.setLineDash(dash?[5,4]:[]);ctx.beginPath();
+  S[f].forEach((row,i)=>{i?ctx.lineTo(x(i),y(row[q])):ctx.moveTo(x(i),y(row[q]))});ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle=col;S[f].forEach((row,i)=>{ctx.beginPath();ctx.arc(x(i),y(row[q]),3.4,0,7);ctx.fill()});});
+}
+addEventListener('resize',draw);draw();
+const tb=document.querySelector('#d3-tbl tbody');
+Object.entries(EXTRA.d3brief).sort().forEach(([k,v])=>{
+ const[nm,cd]=splitName(k);const tr=document.createElement('tr');
+ tr.innerHTML=`<td>${nm}<small style="color:var(--muted)"> ｜${cd}</small></td><td>${v.zh1_q10_s55}</td><td style="color:var(--cyan);font-weight:600">${v.zh1_q50_s55}</td><td>${v.zh1_q90_s55}</td><td>${v.zh2_q10_s55}</td><td style="color:var(--mag);font-weight:600">${v.zh2_q50_s55}</td><td>${v.zh2_q90_s55}</td>`;
+ tb.appendChild(tr);});
+bindFilter('d3-q',null,'#d3-tbl tbody tr');
+})();
+/* ============ D4 ============ */
+(function(){
+const rows=Object.entries(DATA.d4).map(([k,v])=>({k,...v})).sort((a,b)=>b.g50-a.g50);
+const mn=Math.min(...rows.map(r=>r.g5)),mx=Math.max(...rows.map(r=>r.g95));
+const pct=v=>(v-mn)/(mx-mn)*100, z=pct(0);
+const box=document.getElementById('d4-rows');
+rows.forEach((r,i)=>{
+ const[nm,cd]=splitName(r.k);const d=document.createElement('div');d.className='row';
+ const b=pct(r.g50),left=Math.min(z,b),w=Math.abs(b-z),col=r.g50>=0?'var(--mint)':'var(--red)';
+ d.innerHTML=`<span class="rk">${i+1}</span><span class="nm" title="${r.k}">${nm}<small>${cd}</small></span>
+ <div class="band"><div class="zero" style="left:${z}%"></div><div class="rng" style="left:${pct(r.g5)}%;width:${pct(r.g95)-pct(r.g5)}%"></div><div class="bar" style="left:${left}%;width:${Math.max(w,.6)}%;background:${col}"></div></div>
+ <span class="vl"><b class="${r.g50>=0?'':'neg'}">${r.g50>=0?'+':''}${r.g50.toFixed(2)}</b> <small style="color:var(--muted)">n=${r.n}</small></span>`;
+ box.appendChild(d);});
+bindFilter('d4-q',null,'#d4-rows .row');
+})();
+</script>
+<script>
+/* 园刊第叁版 · 动效层（motion-anything 蒸馏纪律：transform/opacity only、小组 stagger、reduced-motion 闸、IO 用完即收） */
+(function(){
+var reduced=false;
+try{reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}
+if(window.__gate){window.__gate.motion=reduced?'off':'on';window.__gate.halls=11;}
+if(reduced){return;}
+/* ① 滚动 reveal：各 section 内直子元素，小组 stagger（≤4 档 ×60ms） */
+try{
+var io=new IntersectionObserver(function(es){
+  es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('on'); io.unobserve(en.target); } });
+},{rootMargin:'0px 0px -8% 0px',threshold:0.06});
+document.querySelectorAll('section .wrap, footer .wrap').forEach(function(w){
+  var k=0;
+  Array.prototype.slice.call(w.children).forEach(function(el){
+    el.classList.add('rv'); el.style.transitionDelay=((k%4)*60)+'ms'; k++; io.observe(el);
+  });
+});
+}catch(e){}
+/* ② 数字灯牌 tick：仅纯数字 .num（10,893 / 64 / 298 …），rAF 700ms，保留千分位 */
+try{
+var nums=Array.prototype.slice.call(document.querySelectorAll('.stat .num')).filter(function(el){return/^[\d,]+$/.test(el.textContent.trim());});
+var io2=new IntersectionObserver(function(es){
+  es.forEach(function(en){
+    if(!en.isIntersecting){return;}
+    io2.unobserve(en.target);
+    var el=en.target, final=el.textContent.trim(), target=parseInt(final.replace(/,/g,''),10);
+    if(!(target>0)){return;}
+    var t0=null;
+    function step(ts){
+      if(!t0){t0=ts;}
+      var p=Math.min(1,(ts-t0)/700), v=Math.round(target*(1-Math.pow(1-p,3)));
+      el.textContent=v.toLocaleString('en-US');
+      if(p<1){requestAnimationFrame(step);}else{el.textContent=final;}
+    }
+    requestAnimationFrame(step);
+  });
+},{threshold:0.4});
+nums.forEach(function(el){io2.observe(el);});
+}catch(e){}
+/* ③ 序章打字机：读取既有脚本已写入的全文 → 清空 → 逐字复出；点击序章任意处立即补全；开园按钮行为不变 */
+try{
+var tt=document.getElementById('pro-title'), tx=document.getElementById('pro-text');
+if(tt&&tx){
+  var full1=tt.textContent, full2=tx.textContent;
+  if(full1.length+full2.length>0){
+    tt.textContent=''; tx.textContent=''; tx.classList.add('type-caret');
+    var done=false;
+    function finish(){ if(done){return;} done=true; tt.textContent=full1; tx.textContent=full2; tx.classList.remove('type-caret'); }
+    var i=0,j=0;
+    function tick(){
+      if(done){return;
