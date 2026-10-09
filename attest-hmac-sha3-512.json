@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T02:29:10.471Z",
+  "generated_at": "2026-10-09T02:30:49.698Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2493,
-  "merkle_root_sha3_512": "816f2c1c20e0621eda6f8db28ec525b0dee628851c22360e13630fd402f216b87c7b69005affe286fc91d7536b7192700e0e91ce137d2c19db5192cadd487499",
-  "hmac_sha3_512": "0ac70836a6285d164d09f64de78d30eeb04d454a17d8a8383239902098b629bbda1785ca383da0a90152375e29bfbe67e3d901dac443a5bc727f10c007a93367",
+  "file_count": 2494,
+  "merkle_root_sha3_512": "6799166311eb5aa8db25d698e620c787d9232d5659f80934492810e19d352049b407d2b49d04dcef0dcd33438a6a0a8c413d0c62779c572c555e2da9cc5853b7",
+  "hmac_sha3_512": "35632859fd887e567a1f1c28e47299b21b5234db491b8d6509be404e7570c5fe7b2e6220a1c46fbd09db70c4cfaefb0b6a840069cf316f974134ba149037733d",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2704,6 +2704,12 @@
       "size": 6359,
       "content_sha3_512": "3d539e15a71f982cfc0ddc34e46167e625d893584197ca45081cc7b513a82a3dae504d66b16c113e10f4562fb4fac24b9c8a67fb73f048bc35bde294b287ab8f",
       "leaf_sha3_512": "a48f9b64b937fb85a52c8981b7f1b68114eedf5c63fad32c7cf259be38ba14c689e1cbbdf1e260620e03128a26253126bfc431937d796a600c214e63159157c5"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/第八戒验证与一处作废_DF-AI-20261009-CAIRN-86.otl",
+      "size": 5899,
+      "content_sha3_512": "373568478afa7c48dc97c80f055526bebdcebd3b7b28c75ee642f14bb0014b06568de96064bd096d2bf34c19f7e3ce5c03a50d021f412d2d63fa964f5a6e9775",
+      "leaf_sha3_512": "8719555dccf089dfc15ed2253f3420fa36cdd28729d068763f343356ed695aea8df8ff8a650e7649f4faa4024a9ed34b0638eef64e4e24a21f99740f21dc2883"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/署名块五轮纠正与取代锚_DF-LSBUS-20261008-CAIRN-03.otl",
