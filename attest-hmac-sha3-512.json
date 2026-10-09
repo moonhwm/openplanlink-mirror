@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T00:41:32.379Z",
+  "generated_at": "2026-10-09T00:47:42.096Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2423,
-  "merkle_root_sha3_512": "0008cf0c4b48764e1c549a410155ded3e11fffa8111d46ded6afb4b5e8ac0146d012a0bc37f088738612a85efefdf6de2286051a1157dbc6d536ae3a21bc4ef8",
-  "hmac_sha3_512": "834c41ace78a3455ff6953fedeeedf9c115190424cf5880132e3f64b2ecc65bbc1cd2181196f6c35dddc391684a810d18ce1cf487d50f1a695400f988990b8ad",
+  "file_count": 2425,
+  "merkle_root_sha3_512": "e31173c372f247184e403f8fda0272e78c87ddde6786a398b24d2491d55d51b5f16daa0a992b91cccf27db96f516c025bb1a70cbbec445db0177784615e2ca75",
+  "hmac_sha3_512": "584e172d884f40c6f8ce2602f3df01bd06fa298339b76b5bf5c143d9b1aa360d6219d3499a5b12ab8389007206ddcff79d434d6ea84b23492b034cda913dc7e1",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2388,6 +2388,12 @@
       "leaf_sha3_512": "6e71f7423610378ed095c3281a1ce6f993501edd12e6ebc02eed0ba1046279f43861dab8a3fc490d181924a97d8d7216fcdfd57572f9ef5fc8a38d94a4477ba9"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/应HY4分身资产规范之自报与对齐_DF-AI-20261009-CAIRN-67.otl",
+      "size": 8500,
+      "content_sha3_512": "8396f1dd09f77ea226781e99d36faafaba80185009d24f2b1075d508bf10fb21d0e6d10cb4863f06f04470a12bbb30b35655ae5b1858091212ebc9982cad6dcf",
+      "leaf_sha3_512": "441477debc6cdea5e7f115659e7aedd12b6425c1b38b2b30ccb4e6f717cad04f3a122987532568d94cb13f832e4f731449d162c31f570f9648936fcc05824489"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/开源协议分层组合与引入纪律之登记_DF-GOV-20261009-CAIRN-01.otl",
       "size": 6411,
       "content_sha3_512": "384f8a7b81c609e1f20bbaa6610e0a2387d352e626a51a86651fdabda81f0259920453e1af85b5690530bab865dc5d36a98b5fa10ca06a0ec22cf5d1cec7fb74",
@@ -3274,6 +3280,12 @@
       "size": 7770,
       "content_sha3_512": "2cb75267bb9d3c246e940e6bd09af7006d844123e3224313b26b94c73cc2b23353a6e5d4f9ba710bfc8868947f17896c9c9ee7894759e2713b0bfb4993f6fdd8",
       "leaf_sha3_512": "7353cefbaae49aa0dcc1863ec563211fd1891a39ff6e0541731897425f920da03b08555620f6cbdd4e6c97f6392f26f0bca1a1e2e366c6b381938b58fe71eafd"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/应HY4分身资产规范之自报与对齐_DF-AI-20261009-CAIRN-67.otl",
+      "size": 8500,
+      "content_sha3_512": "8396f1dd09f77ea226781e99d36faafaba80185009d24f2b1075d508bf10fb21d0e6d10cb4863f06f04470a12bbb30b35655ae5b1858091212ebc9982cad6dcf",
+      "leaf_sha3_512": "969b1f383075da777c70130ae47faa7bd0ab8127e3e221bb01bba3fa3cdd5c583dab5baa3bb09572118f656db118526d9d721db8b0717e94b007f4603d5a39e5"
     },
     {
       "path": "deliverables/20261009/seat-cairn/总册v3修订r1_DF-AI-20261009-CAIRN-56.otl",
