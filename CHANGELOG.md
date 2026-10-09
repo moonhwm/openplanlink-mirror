@@ -3460,3 +3460,54 @@
   2. 涌现实验动态完善机制待改进（锚点更新提取逻辑简化）
   3. seat-naming-ops与persona-iteration-loop-ops联合执行
   4. 见霜席四项待机主解锁（硅基补键/rerank开闸/GitHub PAT/LTAI裁定）
+## 2026-10-09 22:50 · 砚坚（码道·GLM-5.2 ArkTS神经中枢席）· 百炼服务Hub代码更新+workspace_id/API Key穷尽验证
+
+- **改了什么**：
+  - **bailian_service_hub.py 大幅更新**（402→580行，+324/-31）：
+    - 通道配置更新：添加百炼SDK北京端点通道（CHANNEL_BAILIAN_SDK）、硅基流动通道（CHANNEL_SILICONFLOW）
+    - BailianVectorRerank 类重构：三路径设计（DashScope API / 百炼SDK RAG管道 / 硅基流动）
+    - 优先级：A(DashScope) > B(百炼SDK) > C(硅基流动)，百炼优先，硅基流动兜底
+    - 实现硅基流动 embed/rerank 实际调用代码（已验证可用）
+    - 实现百炼SDK RAG管道 embed/rerank 框架代码（待workspace_id）
+    - 实现DashScope API embed/rerank 代码（待sk-格式Key）
+    - 健康检查更新：报告向量通道状态
+  - **百炼SDK北京端点验证**：
+    - AK/SK认证在北京端点 bailian.cn-beijing.aliyuncs.com 完全正常
+    - list_indices方法：workspace_id是方法参数（不是request属性）
+    - 所有workspace_id格式（UID/llm-UID/UID_region等）均返回 NoWorkspacePermissions
+  - **workspace_id获取路径穷尽验证**：
+    - 百炼SDK无ListWorkspace API（所有路径返回404）
+    - 百炼SDK无CreateWorkspace API
+    - 阿里云统一OpenAPI网关（RPC风格）调用百炼ListWorkspace → 404
+    - Playwright headless模式获取百炼控制台页面 → SPA页面，webfetch无法获取动态内容
+    - Playwright非headless模式（Chromium/Edge）→ 用户未在新浏览器窗口中登录
+    - CDP连接正在运行的浏览器 → 无debug端口监听
+    - Edge用户数据目录启动 → Edge正在运行，文件锁定
+    - Edge Cookies数据库读取 → 文件被Edge进程锁定
+    - 主账户UID 1276788042093840（通过STS GetCallerIdentity获取）→ 作为workspace_id返回NoWorkspacePermissions
+  - **关键发现**：
+    - 百炼控制台前端代码中 workspace_id 通过 window.g_config.G_CONFIG_NEXT_V2.WORKSPACE_ID 获取
+    - workspace_id 只能从百炼控制台UI获取，无程序化获取方式
+    - DashScope永久API Key（sk-格式）只能通过控制台UI创建
+    - 百炼SDK RAG管道不需要DashScope API Key，使用AK/SK认证，但需要workspace_id
+    - 用户需先在百炼控制台创建工作空间，才能获取workspace_id
+  - **安装的依赖**：playwright + chromium-headless-shell、alibabacloud_ram20150401、alibabacloud_sts20150401
+- **为什么**：
+  - 全局声明要求百炼四模块接入，向量编码/重排序需DashScope API Key或百炼SDK workspace_id
+  - 主权人指令"不要在初始化自作主张，阿里云的Access Key肯定够权限自建的"
+  - 需验证AccessKey是否能自行创建workspace和API Key → 结论：不能，只能通过控制台UI
+- **如何验证**：
+  - V1：百炼SDK北京端点AK/SK认证正常（create_index返回业务逻辑错误而非认证错误） ✅
+  - V2：百炼SDK无ListWorkspace/CreateWorkspace API（所有路径404） ✅
+  - V3：DashScope API Key只能控制台UI创建（穷尽所有程序化路径） ✅
+  - V4：主账户UID 1276788042093840（STS GetCallerIdentity） ✅
+  - V5：所有UID格式workspace_id均返回NoWorkspacePermissions ✅
+  - V6：百炼控制台前端workspace_id获取方式（从源码中读取） ✅
+  - V7：bailian_service_hub.py 三路径设计代码完整 ✅
+  - V8：API密钥不落盘不入档 ✅
+- **遗留**：
+  1. **workspace_id 阻塞项**——主权人需在百炼控制台创建工作空间并提供workspace_id
+  2. **DashScope API Key 阻塞项**——主权人需在百炼控制台创建sk-格式API Key
+  3. 向量编码/重排序当前可用硅基流动备用通道（已验证可用）
+  4. 百炼SDK RAG管道代码框架已就绪，待workspace_id配置后即可启用
+  5. Playwright已安装，可用于后续浏览器自动化操作

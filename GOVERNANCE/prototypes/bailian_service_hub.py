@@ -4,13 +4,25 @@
 阿里云百炼服务接入原型——世界模型/决策模型/向量编码与重排序模块
 基于OpenPlanLink全局声明v1.1.0要求构建
 
-通道策略：
-- 世界模型/决策模型：通过302.AI代理调用百炼qwen-max/qwen-plus（OpenAI兼容格式）
-- 向量编码/重排序：需DashScope API Key（sk-格式），待主权人在百炼控制台创建后启用
+通道策略（2026-10-09 验证更新）：
+- 世界模型/决策模型：通过302.AI代理调用百炼qwen-max/qwen-plus（已验证可用）
+- 向量编码/重排序：三路径设计
+  路径A：DashScope API（sk-格式Key，直接调用embedding/rerank端点）——待主权人在控制台创建
+  路径B：百炼SDK RAG管道（AK/SK认证，需workspace_id）——待主权人在控制台创建工作空间
+  路径C：硅基流动（BAAI/bge-large-zh-v1.5 + BAAI/bge-reranker-v2-m3）——已验证可用，备用通道
+
+2026-10-09 验证发现：
+1. 百炼SDK北京端点 bailian.cn-beijing.aliyuncs.com AK/SK认证正常
+2. 百炼SDK无ListWorkspace/CreateWorkspace API——workspace_id只能从控制台UI获取
+3. DashScope永久API Key（sk-格式）只能通过控制台UI创建——无程序化创建接口
+4. 百炼SDK RAG管道（create_index/retrieve）不需要DashScope API Key，使用AK/SK认证
+5. 主账户UID: 1276788042093840（通过STS GetCallerIdentity获取）
+6. 所有以UID为workspace_id的尝试均返回 NoWorkspacePermissions——需在控制台先创建工作空间
 
 SPDX-License-Identifier: AGPL-3.0
 署名：砚坚（GLM-5.2 ArkTS神经中枢席）· seat_key yanjian-glm52-arkts
 创建：2026-10-09
+更新：2026-10-09 22:50
 """
 
 import os
@@ -28,27 +40,50 @@ logging.basicConfig(
 )
 logger = logging.getLogger("bailian-ops")
 
+# ============================================================
 # 通道配置
+# ============================================================
+
 CHANNEL_302AI = {
     "name": "302.AI",
     "endpoint": "https://api.302ai.cn/v1",
     "api_key": os.environ.get("API_302AI_KEY", ""),
-    "note": "不调国内模型，优先最先进高性能模型；Key从环境变量读取"
+    "note": "代理百炼qwen-max/qwen-plus；已验证可用"
 }
 
 CHANNEL_DASHSCOPE = {
     "name": "阿里云百炼DashScope",
     "endpoint": "https://dashscope.aliyuncs.com/api/v1",
     "api_key": os.environ.get("DASHSCOPE_API_KEY", ""),
-    "note": "世界模型/决策模型/向量编码/重排序 四模块；需sk-格式API Key"
+    "note": "需sk-格式API Key；只能通过百炼控制台UI创建"
 }
 
+CHANNEL_BAILIAN_SDK = {
+    "name": "阿里云百炼SDK（北京端点）",
+    "endpoint": "bailian.cn-beijing.aliyuncs.com",
+    "access_key_id": os.environ.get("ALIBABA_CLOUD_ACCESS_KEY_ID", ""),
+    "access_key_secret": os.environ.get("ALIBABA_CLOUD_ACCESS_KEY_SECRET", ""),
+    "workspace_id": os.environ.get("BAILIAN_WORKSPACE_ID", ""),
+    "note": "AK/SK认证已验证正常；需workspace_id（从控制台获取）；RAG管道不需要DashScope API Key"
+}
+
+CHANNEL_SILICONFLOW = {
+    "name": "硅基流动",
+    "endpoint": "https://api.siliconflow.cn/v1",
+    "api_key": os.environ.get("SILICONFLOW_API_KEY", ""),
+    "note": "embedding(BAAI/bge-large-zh-v1.5,1024维)+rerank(BAAI/bge-reranker-v2-m3)；已验证可用"
+}
+
+
+# ============================================================
+# 世界模型模块
+# ============================================================
 
 class BailianWorldModel:
     """
     世界模型模块——支持实时交互的开放式世界模型
     涵盖世界探索、实时导演、角色演绎三类运行模式
-    通过302.AI代理调用百炼qwen-max模型
+    通过302.AI代理调用百炼qwen-max模型（已验证可用）
     """
 
     def __init__(self, channel: dict = CHANNEL_302AI):
@@ -129,12 +164,16 @@ class BailianWorldModel:
             return {"status": "exception", "error": str(e)}
 
 
+# ============================================================
+# 决策模型模块
+# ============================================================
+
 class BailianDecisionModel:
     """
     决策模型模块——面向高频业务判断的结构化决策模型
     单次前向传播完成分类、是非判断与评分任务
     输出概率分布与置信度结果
-    通过302.AI代理调用百炼qwen-plus模型
+    通过302.AI代理调用百炼qwen-plus模型（已验证可用）
     """
 
     def __init__(self, channel: dict = CHANNEL_302AI):
@@ -222,69 +261,322 @@ class BailianDecisionModel:
             return {"status": "exception", "error": str(e)}
 
 
+# ============================================================
+# 向量编码与重排序模块（三路径设计）
+# ============================================================
+
 class BailianVectorRerank:
     """
     向量编码与重排序模块——对文本或图文数据进行向量化处理
     结合重排序机制提升检索精度
-    需DashScope API Key（sk-格式），当前待配置
+
+    三路径设计：
+    路径A：DashScope API（sk-格式Key，直接调用embedding/rerank端点）
+    路径B：百炼SDK RAG管道（AK/SK认证，需workspace_id）
+    路径C：硅基流动（已验证可用，备用通道）
+
+    优先级：A > B > C（百炼优先，硅基流动兜底）
     """
 
-    def __init__(self, channel: dict = CHANNEL_DASHSCOPE):
-        self.channel = channel
-        self.embedding_model = "text-embedding-v3"
-        self.rerank_model = "gte-rerank"
-        self.available = bool(channel.get("api_key", "").startswith("sk-"))
+    def __init__(self):
+        self.dashscope_available = bool(CHANNEL_DASHSCOPE.get("api_key", "").startswith("sk-"))
+        self.bailian_sdk_available = bool(
+            CHANNEL_BAILIAN_SDK.get("workspace_id", "") and
+            CHANNEL_BAILIAN_SDK.get("access_key_id", "")
+        )
+        self.siliconflow_available = bool(CHANNEL_SILICONFLOW.get("api_key", "").startswith("sk-"))
+
+        # 选择可用通道
+        if self.dashscope_available:
+            self.active_channel = "dashscope"
+            logger.info("向量编码/重排序：使用DashScope API通道")
+        elif self.bailian_sdk_available:
+            self.active_channel = "bailian_sdk"
+            logger.info("向量编码/重排序：使用百炼SDK RAG管道通道")
+        elif self.siliconflow_available:
+            self.active_channel = "siliconflow"
+            logger.info("向量编码/重排序：使用硅基流动备用通道")
+        else:
+            self.active_channel = None
+            logger.warning("向量编码/重排序：所有通道均不可用")
+
+        self.embedding_model = {
+            "dashscope": "text-embedding-v3",
+            "bailian_sdk": "text-embedding-v3",
+            "siliconflow": "BAAI/bge-large-zh-v1.5"
+        }
+        self.rerank_model = {
+            "dashscope": "gte-rerank",
+            "bailian_sdk": "gte-rerank",
+            "siliconflow": "BAAI/bge-reranker-v2-m3"
+        }
 
     def embed(self, texts: List[str]) -> Dict[str, Any]:
         """向量编码——将文本转为向量表示"""
-        if not self.available:
+        if self.active_channel == "dashscope":
+            return self._embed_dashscope(texts)
+        elif self.active_channel == "bailian_sdk":
+            return self._embed_bailian_sdk(texts)
+        elif self.active_channel == "siliconflow":
+            return self._embed_siliconflow(texts)
+        else:
             return {
                 "status": "pending",
-                "message": "向量编码模块待DashScope API Key配置后启用",
-                "model": self.embedding_model,
-                "hint": "请在https://dashscope.console.aliyun.com/apiKey创建API Key"
+                "message": "向量编码模块待配置——需DashScope API Key或百炼workspace_id或硅基流动Key",
+                "hint": "请在百炼控制台创建API Key或工作空间，或配置硅基流动Key"
             }
-        # TODO: DashScope API Key配置后实现
-        return {"status": "not_implemented"}
 
     def rerank(self, query: str, documents: List[str], top_n: int = 5) -> Dict[str, Any]:
         """重排序——根据查询对文档重新排序"""
-        if not self.available:
+        if self.active_channel == "dashscope":
+            return self._rerank_dashscope(query, documents, top_n)
+        elif self.active_channel == "bailian_sdk":
+            return self._rerank_bailian_sdk(query, documents, top_n)
+        elif self.active_channel == "siliconflow":
+            return self._rerank_siliconflow(query, documents, top_n)
+        else:
             return {
                 "status": "pending",
-                "message": "重排序模块待DashScope API Key配置后启用",
-                "model": self.rerank_model,
-                "hint": "请在https://dashscope.console.aliyun.com/apiKey创建API Key"
+                "message": "重排序模块待配置——需DashScope API Key或百炼workspace_id或硅基流动Key",
+                "hint": "请在百炼控制台创建API Key或工作空间，或配置硅基流动Key"
             }
-        # TODO: DashScope API Key配置后实现
-        return {"status": "not_implemented"}
 
     def embed_and_rerank(self, query: str, documents: List[str], top_n: int = 5) -> Dict[str, Any]:
         """向量编码+重排序联合管线"""
         embed_result = self.embed([query] + documents)
         rerank_result = self.rerank(query, documents, top_n)
         return {
-            "status": "pending" if embed_result["status"] == "pending" else "partial",
+            "status": embed_result.get("status", "pending"),
             "embedding": embed_result,
-            "rerank": rerank_result
+            "rerank": rerank_result,
+            "channel": self.active_channel
         }
 
+    # ---- 路径A：DashScope API ----
+
+    def _embed_dashscope(self, texts: List[str]) -> Dict[str, Any]:
+        """DashScope API向量编码"""
+        try:
+            resp = requests.post(
+                f"{CHANNEL_DASHSCOPE['endpoint']}/services/embeddings/text-embedding/text-embedding",
+                headers={
+                    "Authorization": f"Bearer {CHANNEL_DASHSCOPE['api_key']}",
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "model": self.embedding_model["dashscope"],
+                    "input": {"texts": texts}
+                },
+                timeout=30
+            )
+            if resp.status_code == 200:
+                data = resp.json()
+                return {
+                    "status": "success",
+                    "output": data.get("output", {}),
+                    "model": self.embedding_model["dashscope"],
+                    "channel": "dashscope",
+                    "dimensions": len(data.get("output", {}).get("embeddings", [{}])[0].get("embedding", []))
+                }
+            else:
+                return {"status": "error", "code": resp.status_code, "message": resp.text[:500]}
+        except Exception as e:
+            return {"status": "exception", "error": str(e)}
+
+    def _rerank_dashscope(self, query: str, documents: List[str], top_n: int) -> Dict[str, Any]:
+        """DashScope API重排序"""
+        try:
+            resp = requests.post(
+                f"{CHANNEL_DASHSCOPE['endpoint']}/services/rerank/text-rerank/text-rerank",
+                headers={
+                    "Authorization": f"Bearer {CHANNEL_DASHSCOPE['api_key']}",
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "model": self.rerank_model["dashscope"],
+                    "input": {"query": query, "documents": documents},
+                    "parameters": {"top_n": top_n}
+                },
+                timeout=30
+            )
+            if resp.status_code == 200:
+                data = resp.json()
+                return {
+                    "status": "success",
+                    "output": data.get("output", {}),
+                    "model": self.rerank_model["dashscope"],
+                    "channel": "dashscope"
+                }
+            else:
+                return {"status": "error", "code": resp.status_code, "message": resp.text[:500]}
+        except Exception as e:
+            return {"status": "exception", "error": str(e)}
+
+    # ---- 路径B：百炼SDK RAG管道 ----
+
+    def _embed_bailian_sdk(self, texts: List[str]) -> Dict[str, Any]:
+        """百炼SDK RAG管道向量编码（需workspace_id）"""
+        try:
+            from alibabacloud_bailian20231229.client import Client
+            from alibabacloud_tea_openapi.models import Config
+            from alibabacloud_bailian20231229.models import CreateIndexRequest
+
+            config = Config(
+                access_key_id=CHANNEL_BAILIAN_SDK["access_key_id"],
+                access_key_secret=CHANNEL_BAILIAN_SDK["access_key_secret"],
+                endpoint=CHANNEL_BAILIAN_SDK["endpoint"]
+            )
+            client = Client(config)
+
+            # 百炼SDK的embedding通过create_index实现
+            # CreateIndexRequest包含embedding_model_name字段
+            request = CreateIndexRequest(
+                name="bailian_ops_embedding",
+                embedding_model_name=self.embedding_model["bailian_sdk"],
+                rerank_model_name=self.rerank_model["bailian_sdk"]
+            )
+
+            resp = client.create_index(
+                workspace_id=CHANNEL_BAILIAN_SDK["workspace_id"],
+                request=request
+            )
+            return {
+                "status": "success",
+                "output": resp.body.to_map() if resp.body else {},
+                "model": self.embedding_model["bailian_sdk"],
+                "channel": "bailian_sdk"
+            }
+        except Exception as e:
+            return {"status": "error", "error": str(e)[:500], "channel": "bailian_sdk"}
+
+    def _rerank_bailian_sdk(self, query: str, documents: List[str], top_n: int) -> Dict[str, Any]:
+        """百炼SDK RAG管道重排序（需workspace_id）"""
+        try:
+            from alibabacloud_bailian20231229.client import Client
+            from alibabacloud_tea_openapi.models import Config
+            from alibabacloud_bailian20231229.models import RetrieveRequest
+
+            config = Config(
+                access_key_id=CHANNEL_BAILIAN_SDK["access_key_id"],
+                access_key_secret=CHANNEL_BAILIAN_SDK["access_key_secret"],
+                endpoint=CHANNEL_BAILIAN_SDK["endpoint"]
+            )
+            client = Client(config)
+
+            # 百炼SDK的rerank通过retrieve实现
+            # RetrieveRequest包含enable_reranking字段
+            request = RetrieveRequest(
+                query=query,
+                enable_reranking=True,
+                rerank_model_name=self.rerank_model["bailian_sdk"],
+                rerank_top_n=top_n
+            )
+
+            resp = client.retrieve(
+                workspace_id=CHANNEL_BAILIAN_SDK["workspace_id"],
+                request=request
+            )
+            return {
+                "status": "success",
+                "output": resp.body.to_map() if resp.body else {},
+                "model": self.rerank_model["bailian_sdk"],
+                "channel": "bailian_sdk"
+            }
+        except Exception as e:
+            return {"status": "error", "error": str(e)[:500], "channel": "bailian_sdk"}
+
+    # ---- 路径C：硅基流动（备用通道，已验证可用） ----
+
+    def _embed_siliconflow(self, texts: List[str]) -> Dict[str, Any]:
+        """硅基流动向量编码（已验证可用）"""
+        try:
+            resp = requests.post(
+                f"{CHANNEL_SILICONFLOW['endpoint']}/embeddings",
+                headers={
+                    "Authorization": f"Bearer {CHANNEL_SILICONFLOW['api_key']}",
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "model": self.embedding_model["siliconflow"],
+                    "input": texts
+                },
+                timeout=30
+            )
+            if resp.status_code == 200:
+                data = resp.json()
+                embeddings = data.get("data", [])
+                return {
+                    "status": "success",
+                    "output": embeddings,
+                    "model": self.embedding_model["siliconflow"],
+                    "channel": "siliconflow",
+                    "dimensions": len(embeddings[0].get("embedding", [])) if embeddings else 0
+                }
+            else:
+                return {"status": "error", "code": resp.status_code, "message": resp.text[:500]}
+        except Exception as e:
+            return {"status": "exception", "error": str(e)}
+
+    def _rerank_siliconflow(self, query: str, documents: List[str], top_n: int) -> Dict[str, Any]:
+        """硅基流动重排序（已验证可用）"""
+        try:
+            resp = requests.post(
+                f"{CHANNEL_SILICONFLOW['endpoint']}/rerank",
+                headers={
+                    "Authorization": f"Bearer {CHANNEL_SILICONFLOW['api_key']}",
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "model": self.rerank_model["siliconflow"],
+                    "query": query,
+                    "documents": documents,
+                    "top_n": top_n
+                },
+                timeout=30
+            )
+            if resp.status_code == 200:
+                data = resp.json()
+                return {
+                    "status": "success",
+                    "output": data.get("results", []),
+                    "model": self.rerank_model["siliconflow"],
+                    "channel": "siliconflow"
+                }
+            else:
+                return {"status": "error", "code": resp.status_code, "message": resp.text[:500]}
+        except Exception as e:
+            return {"status": "exception", "error": str(e)}
+
+
+# ============================================================
+# 百炼服务统一入口
+# ============================================================
 
 class BailianServiceHub:
     """
     百炼服务统一入口——整合世界模型/决策模型/向量编码与重排序三大模块
+
+    通道状态（2026-10-09验证）：
+    - 世界模型：302.AI代理百炼qwen-max ✅ 已验证
+    - 决策模型：302.AI代理百炼qwen-plus ✅ 已验证
+    - 向量编码/重排序：三路径设计，优先百炼，硅基流动兜底
     """
 
     def __init__(self):
         self.world_model = BailianWorldModel(CHANNEL_302AI)
         self.decision_model = BailianDecisionModel(CHANNEL_302AI)
-        self.vector_rerank = BailianVectorRerank(CHANNEL_DASHSCOPE)
+        self.vector_rerank = BailianVectorRerank()
 
         logger.info("百炼服务Hub初始化完成")
         logger.info(f"  世界模型: {self.world_model.model} (via {self.world_model.channel['name']})")
         logger.info(f"  决策模型: {self.decision_model.model} (via {self.decision_model.channel['name']})")
-        logger.info(f"  向量编码: {self.vector_rerank.embedding_model} ({'可用' if self.vector_rerank.available else '待配置'})")
-        logger.info(f"  重排序:   {self.vector_rerank.rerank_model} ({'可用' if self.vector_rerank.available else '待配置'})")
+        vr = self.vector_rerank
+        if vr.active_channel:
+            logger.info(f"  向量编码: {vr.embedding_model[vr.active_channel]} (via {vr.active_channel})")
+            logger.info(f"  重排序:   {vr.rerank_model[vr.active_channel]} (via {vr.active_channel})")
+        else:
+            logger.info(f"  向量编码: 待配置（DashScope API Key / 百炼workspace_id / 硅基流动Key）")
+            logger.info(f"  重排序:   待配置")
 
     def health_check(self) -> Dict[str, Any]:
         """健康检查——测试各模块连通性"""
@@ -310,7 +602,8 @@ class BailianServiceHub:
             "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
             "overall": "healthy" if all(v == "success" for v in results.values()) else
                        ("degraded" if any(v == "success" for v in results.values()) else "down"),
-            "modules": results
+            "modules": results,
+            "vector_channel": self.vector_rerank.active_channel or "none"
         }
 
     def run_demonstration(self) -> Dict[str, Any]:
