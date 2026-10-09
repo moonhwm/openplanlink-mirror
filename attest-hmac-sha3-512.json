@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T03:36:56.766Z",
+  "generated_at": "2026-10-09T03:38:10.676Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2532,
-  "merkle_root_sha3_512": "63eab19b619c0a752b9fdd1f3db37719550756e26682e43587c1cc083631ad5f037ae51069b3661318136570ca5e3e26cf667fbf7a26625bc8dd2d2b172e2f63",
-  "hmac_sha3_512": "592e672b6fcdcbfb5994197820022073d71eb250960520ff7d5d5c649e5d9a65785eb98c65b87b1210450da64eee77c813fd6bf9a60f7fc67762bb0f7fc04ae5",
+  "file_count": 2534,
+  "merkle_root_sha3_512": "c6f7c9b21ed3d2f075ee71ebe7931b25efea0fbd6be75f73e9048638e8d8046e3bd2305280551a8b8b9a430e7c11986a110135f8fd59a240625ab55baa370f92",
+  "hmac_sha3_512": "825c3b34ee20c9eeb36bd8e37a6d1d0f8b708ff30cbc6cec8052a4edd5ac58fa69d13833ad278cb4443bbb73b2dbe1c82a34da7b00376451197062da9b21df8c",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2844,6 +2844,12 @@
       "leaf_sha3_512": "d438e26361ac5f6ff44a20345f8050f1edd1701935760df53831a2d5ba4c80cee204e8795347e9222f3d77aa8eef34357c045ea27fc3e84ae988f015d8162c61"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/行走烘入资产_DF-PERSONA-20261009-CAIRN-20.otl",
+      "size": 5103,
+      "content_sha3_512": "98b9b195ad1cd4b283d0493f85d692b4eda682c91bd6e4a77da248edd38ed52363ac32d06e7d7e1a434da1bbf20c3166d3ba58aab1255fe5a7f090eb14d37e10",
+      "leaf_sha3_512": "cb5784d2f94f6fe3fd37362db1873595ff9d92c9f70f2ce3c709116553b28451820eb90571d7bc9c1289e50cd8bc680118fbf3eebcc0f4b5404c588b452482c3"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/行迹驱动之替身世界_DF-PERSONA-20261009-CAIRN-15.otl",
       "size": 4915,
       "content_sha3_512": "1474ace54f00c949e691adc5bf172165e7757588c58109b58352d487f5080387a021a3c2596a2b0f1ce6e607d00505b779ea2e537d89aad9babd74a2a6e7b8cf",
@@ -3502,6 +3508,12 @@
       "size": 148487,
       "content_sha3_512": "4b6415df785dff72dc3b504909a39f86c548ac4ca0ab0de0ef35488e43b9493e1d3f89f027591bf3009b63fec03af15b20e0b6b21fe800fecd330588dc7092b6",
       "leaf_sha3_512": "614d58b5db1a749a0ddcba6fbfef6754be484774d7ec1b8eeea1c1358c76ea12437d6275adb995cc90b8762727b382a972679356161a8275fc9f0dc349dbedb0"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/CAIRN_avatar_v3_LOD1_walk.glb",
+      "size": 53548,
+      "content_sha3_512": "f3bc695b17abaec36daa54c298950c64a6dd45dbe646711007cb8faef4785996c0babb0fe9861e3c13ac0474c8fada8c193f341622e041e395426ae674dce024",
+      "leaf_sha3_512": "fd19d91d658527880c817938dbf30f76da3cba11033689467fc0da3fc4463a176f26295529e4309dbe78f2731c8585fa30567c1d555a08b1a6726a689fbd2a23"
     },
     {
       "path": "deliverables/20261009/seat-cairn/CAIRN_avatar_walk_side_v3_14frames_20261009.png",
