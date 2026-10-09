@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T22:23:19.450Z",
+  "generated_at": "2026-10-09T22:31:44.079Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2560,
-  "merkle_root_sha3_512": "72b44d2a0ae8588560aa76fc7e5efb9054ce65b3cd91bc3b919eaeeb21ef989d9382f38388d6d2675685595124814e56288f3d40bf7503c6519bea879e4b0f75",
-  "hmac_sha3_512": "cd651018ee05290eb92267a3dc1678ed8d939ddc79280792bc5ac8590b31b6a69b71ff9b479ef348a9487e84c8b9dc88e7e0d624e177de8ff2811f36ea492ab3",
+  "file_count": 2904,
+  "merkle_root_sha3_512": "0eb2b3735f6eabe44a726feb56e4bb0fd7ed33fd65214220318618b8fb971557e099c95784c90b016575661ada039c2e78c4f6026ac10a3a8020e311b6af6df6",
+  "hmac_sha3_512": "c8ed92065aebf1413e38b86d1ead1c149762f813c341db420872a58ba6f47bae91dc68246fa0ecd1c489f38c65a4d561630d11fc7d1e5db512416fb0b6514eb4",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -4204,6 +4204,2070 @@
       "size": 3157,
       "content_sha3_512": "b6ef693f8252367557d2a20b3b9df05f485579f8983e4a89ed191c2ac7f8a38fdba1c71c9156770855dec0f1b0bed379aaf57632a96dd811bd73ab1cfaf84bc4",
       "leaf_sha3_512": "6ad67d6a4754fe4e30a089eac72f251e9591fbe3b7290da731c6eb1d9c0c43b74a6607166879b95f60fd483d406eecf38671daeeb18b1e23d75ac67ca4505a5a"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/README.md",
+      "size": 1972,
+      "content_sha3_512": "8cf16dd714e71e193fc56fd63902178e9b63bc031dcda67303169bc71359aad98521828308cea2c2664e45ca110d4ae974afd83abec843c689c861cf957ba8b4",
+      "leaf_sha3_512": "9570bae65511aeb832c0b262453181d371344fd7f528c16d4fe2b5332150c81f9f98e4ccc80c8b91af2cc1ca8b0864e350e8401891f0b5857e6520bca002fe5f"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p0.part",
+      "size": 21364,
+      "content_sha3_512": "0f27371dadc3ee1238413f0622b1cc10c0e00e1a8d10a6c5b7b292646b849b39702b9487196c7e1f9c2cac19d35d0d9c8e6cc79f13e0958561ed67c4c772d0ec",
+      "leaf_sha3_512": "51f69ac408c15876c543a662e039c9c9dc48a717d14ad6ee35aff70c3f6edd49f56c108d7f75e7972d5febc9693897b3af6e8f738b15bd9b7a04c6b96cf11e5d"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p1.part",
+      "size": 8777,
+      "content_sha3_512": "6337c6f3cdcaeafa8c7d9fc5ec7c64d5496a2726f2cae83eff384ec0d330958b24ad40723bc8750a9f5af1e3a50f738f6bc829d7df5a4bed6d7ef032cf28d6f2",
+      "leaf_sha3_512": "2fa73cc34072aa1522dd0c3ebf3384ce1d88a8de546f553eb8c9ed8f147c5908bc14e6bb9e3aac82b11c346ea8464ef6801c717054abf8759c9e572a786e2ff9"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p10.part",
+      "size": 731,
+      "content_sha3_512": "393b1853b6dde32dd4bf4cf41c13760463d88075d716966e69c85e891635db739f14a41f3ec35c4128ac422750890bb1041ba6b8680f139475d19b5bf3e79acf",
+      "leaf_sha3_512": "72104f6644886e1fd9522e28d78959bbc098211b0bb8ed56b5dc9abb433b576b37f7958e7ec2de9d9197ddad0ad57b076f4e66c009c28d531ee5a2b8e0652d38"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p100.part",
+      "size": 96,
+      "content_sha3_512": "84c2044dc7885a8800c0147ce72ba4957f352e8c7d09aca25c4c85cf8f9a73d8d5e7fa0c71693ba5972affa35fcd931649fbb16a2f04cb2c1d0d58d2fddddacb",
+      "leaf_sha3_512": "81ef006603bdd3c4c77848c8dbeeb5ed5201038711343a99fbcd22a50156c4b6c033495980b031073933aa7261f95832597da761193b79e8e21abcfac6098425"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p101.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "760807b830657127950b9a9f5185e1355ee3d6523be0f65a7cff1bba70689de09d57a2229d45fd8b3b2bbd10153f2d1b8a0d0c595507538002feeaa162ae539a"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p102.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "39401fd5c1c03858d05dad0d6f8733c4c7529e56e10d35fa3503f66ab59f0d567b18463859c5dc7a7ffc2d79c23fcc4805acafe738451bf1a3591245aed05ba9"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p103.part",
+      "size": 573,
+      "content_sha3_512": "efbb42b1fa45abf99710df57f518e617a014021472220f4e44aae85bc22161ec19bf24d55f6287e53883948ba7801d09b60ba2494e00c5ebb03b49f0586d27b9",
+      "leaf_sha3_512": "2c53ed904a50a9dc447799f62b32b6fc2afcba7f9782233d28befc00029b7bef7ebcca09e85af7c4d312fbbbd778c10db5c25021fde44a0434b74109c48cdd18"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p104.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "b1d5a7dd0be3473e7e2c02d847b9cf8296f9f433929fb860ecda5e0181dae13b0ddba2b1b491af6f0f2d8ce50bc4933b8ffe195e8c6640150444f77f932b0c31"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p105.part",
+      "size": 85,
+      "content_sha3_512": "87f3d94533c08de1c2c4b936b035ddc26625ca6c82eaf86f5144e2a592a03c35e7978008f3631f77a365f28f99551e675e9500bf1dab0b552c0cf6fc1c3f1318",
+      "leaf_sha3_512": "421a667c15c5a779f39dc0dbf9d77efa38c09c820ed71d2c1e97e1ab657cbe2b64b21dfee5ce0a326e690245f7ca92342e42e2fbe604286483048061aa95c408"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p106.part",
+      "size": 47,
+      "content_sha3_512": "8083c7671b7cd65f0d26bc9e451d348097b7d773f8b35315c41d7380fef530e4b098cd6479e3619aaa3b926c7835b1b178ee732ce23750972606b06d6fa4a170",
+      "leaf_sha3_512": "a1b76dcc4e1a6bb61b1667768d847fc8d0012e65c9f0da08a27d64fb8db6a715518c31b35bcbab257c35a5899fc906be9387628ecf5ada103471daf1e5c205f1"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p107.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "4e46e4a743717f76a65e0290c66f438935eca7478b4003edf0343c1f43856051c335c47731cd9e7f4efb3c953410aa58a47c9e639d2281167962eaca97b38955"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p108.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "086af80c6ab367aeabb63ec83de067439f4721272852067aaf306f900099d150262e6c0da116cc550483f5ab6c4a5c5bbd86c74a32e60870b87c92f691d090e2"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p109.part",
+      "size": 10,
+      "content_sha3_512": "b5712326aec123aa7644299b2a18519cc56e83763c411bcbd7ef76eb157495d1fd7b7943d40e6c0a3b6bbc88a69e88fc0fe719c6bb229dc05b27cd59bff498d6",
+      "leaf_sha3_512": "6fa4ed07726d31379764a6aa3b807656854904d2a1c206184a700713b77240530f2af5a5da885abe56da2b1f907d629f994b002c979b1bffac8b26ab6d5d1f86"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p11.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "fefbc56b18d71216b465b79ef418fe01df9579cdf8dab1996abfa0a863627fd19e3049529409734a3ab484a6d4c779c0463a4d630b8c253079820fbef0d0939b"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p110.part",
+      "size": 573,
+      "content_sha3_512": "f6d15bb3bf88240ff74952a0a059d3360aeb78ae9efdf3a966d056c729a708a3f159592503842fa5f60fa3bb97984cf284e2a1e0a199c7b18868ad62037d10ba",
+      "leaf_sha3_512": "6c6c5d9c348fcab4dedc43695e5aa76cf83c9204f524b794a8830af9aac8049b1040a350c0d3be648e720747f2a84abeb3191e97b55104ff20b3e35c25a0b0a3"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p111.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "4dce4b28cee98718f1f951926ad92af6877c82a51f7706452d79e88d233615bc8461bd809e2f4cbf89cc8d0322ffedff593f780f54a396ef544970d7861aefc7"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p112.part",
+      "size": 50,
+      "content_sha3_512": "8fe3170d078f1f7ecee632776822c54a2807e559a7c8d80fb65292f30f6bef8704f7cbb18133613d4ade51306556567fe01afda1fc6829420aaf1abb62fff7f8",
+      "leaf_sha3_512": "eb4daff0586d686927c8ab6b0e6c63f961efd480721f61312afcec2a8198ae0882f4fbd13462a3b2a85b6b865a18893c0b9c8e50d73ef426c8188b5a963e1c58"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p113.part",
+      "size": 150,
+      "content_sha3_512": "75c10e450b55248a875a05b6fc31c718929d93f30dcf2c7953bbffdc98d569e5f48467cd3c87e278501b8a8742419f46a6ee4ad498b64d1685a67171059a7253",
+      "leaf_sha3_512": "6faa39c96cf718d5e0f9378d8e1357ea30d8f4162d079ebc7bb77f06fa6d751886ce718bcc2ea11d045fca2e1540e288831b4585adf4d8ed6850d01fa31951b8"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p114.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "6bd10bca27393f5c628f913e77ee21ad04fd067b3660b9c85b6b824f8477aac2ece06bb83e66b14f5bf7b30aa9d3630b88eaf41629c6c16a7ad8b0d7f9f9460d"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p115.part",
+      "size": 80,
+      "content_sha3_512": "06ddd78c83d8f661568501d1227d95158838f6bfd8c74aaa6d830bacb09a0505c3de9805ec470cfc762d78a9f79b2b47ebdf396c4b0af504952ed2be84172ee9",
+      "leaf_sha3_512": "66aa058beb2a00ce2037e6f2edd5233c4d56e1b1523e85b65263b3ce5414093c36615a6082f2f83516ff6b343b93cba2c7b70826a3a3c0507cdf0ffc3e8d90f2"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p116.part",
+      "size": 722,
+      "content_sha3_512": "eb01a928b6d4460352d859356840f4b83794f65033f3768798d1df04e5c95613fe135f0dc6ac9f68bf11f0550ac28bddfad47e0696fff8bf62112b7a2e1f8396",
+      "leaf_sha3_512": "c25ce351887982759f47f7e74e857bc000283d1520c451c5682180e775005e508560a7b7d2467bdb212685e1984436b406adfa3156e3791797b30f46429c0bc6"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p117.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "68487abde65c8de69d1eae637fbd3ced7b80c35ac3bf88ecf0b3cfbbe834420f04aa6e1aaa7cd7b0ce4c73bda89155940e75bd1d6321870a1545bca7786ab962"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p118.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "86dceeb754a64ddc09a3b06ec653c0d5ea664c97531c4e4d6026933a0a487d5c81296b1aed260cefed2db1fcb3dc254b4ae0a35cd8f36d86a9ddf23df49cd2ae"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p119.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "13f10852e8bf82e13b1227f6625ccd6f79d196ff3bd6713a5285ba563f05b1a631ac066ca913ea26e7f400f2661541c1a978aac466fb7de64b29974a45531da5"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p12.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "1c40e0e29a6adeb1d0f2d0d4030fd7627227e80861ca0ab399ae9de0582ba5a43fe1da05524da0c511d57e250dea0cc1f65f9c63afe6b724d5579ac56b831799"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p120.part",
+      "size": 5,
+      "content_sha3_512": "1193db52c3bb4a0b91f9211db4486f6b0b770e3e0981f84c8122e4123a43b66d870709f29543a04c196dbc9a08660454b775b3c3d8434f2cf2e11d554da3580e",
+      "leaf_sha3_512": "922f29008f4ecad8cd643b776bdaa1f458db981b4114826033012e1419791bfcffb0df688cd394a3c7dab8832f971c5fa1802f0255d666ef80930d1a6ae81d90"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p121.part",
+      "size": 564,
+      "content_sha3_512": "79b53ee97353a93392454f26206583c1168febee3b0f9fffc00ce5d37b5f64a898adc5155872b65cabb71bac37ee8fe7bacb67f28a1667e8088a0eba3e425311",
+      "leaf_sha3_512": "c772ef2867e04e5dec507acdac4cd5b344f72d4a9b8adf515a9f63e15da9ade796a172825b7a389cc9b093123e795eccdae2f0ac74825dc5fd0b3baf6a2b7159"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p122.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "e9465b971843f5042ac98f6f9d9732a708cef33e9a252a9358093a12110d5b06f405ab54f003da32e0b89d4170f794d104aedac262f492744fceae847a80fc02"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p123.part",
+      "size": 90,
+      "content_sha3_512": "5e23930e648c27a0f1379a8789653c9a019fd9e766b2e7039a3eed795130c7f4ff587e8669cd9fa36fb35a9228ad5d105e21a5d49db2766b98d8f6c7cc15f473",
+      "leaf_sha3_512": "9089dcae62e185af7530c4ce8818d596ae4fe85fcf400c0903137445302bc94c137ca08487726d8551f8b04d39dc3bfdb90009f43a33a9536e4bc3262c495fd0"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p124.part",
+      "size": 72,
+      "content_sha3_512": "3ab1d17e3aa83b8542476f084febc33532c5143c9b69b4aa7ca6cfd5b6bae2e4e5b57c454165ccade69043edc9ad91f5203313144b91e58704c20e0a083d0e14",
+      "leaf_sha3_512": "df464aad4ee5fa97e7483b879466162fa37421b7ef4435ca49904a3ae8067937a9169e779c65a172a8fb2abb75e5bda0fd108c99d35da28c902025e9099250fe"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p125.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "351dcdf2e49693adbfebae304e98c9b5823448b7423e09e7bc0bbe52693bf56cfcb6a832bed9801474a369ab2ab0fbf75c3be03fbd86ec919488afe67b16ac7f"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p126.part",
+      "size": 90,
+      "content_sha3_512": "68bfaea34e5b5761296b58d456c2480e6e95d906d9f95902ef44e7c92ae3180d306d79c720d90bf4338cf11388e585ea3c5ce2e5d8f28e525cedd076c3c93249",
+      "leaf_sha3_512": "7e99a66ed813f1592dafad6f76dc3950cbc27d94129db08d3ff5eff298ea7d1cfdcc0b7d9ed2541a65c2c87eabe96de1fc00fa465c7baba81111a8fa73edbd4f"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p127.part",
+      "size": 552,
+      "content_sha3_512": "7cc8622a64dd5302658c02f22140e717d4f979d02a618301e0a6aca56323f9823425d290d8a3c8245d771c0b557895d98be369a52b011eeba5612c2a340a2948",
+      "leaf_sha3_512": "2ce591b386f7634cce61f1b1cd32e181d186ae46c92e9c882a70d80244d53ce82ce89bf16a565ae5c843ed0c84f429a85f29d2428052b36cc2b72a2d9db2b42f"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p128.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "54a7962573ed9e4bd355085a3498ada78660d5212887acafe3846aade09a02a7522f587126df633efbd3da59f6daec7c5d96edccf01078fbb349376739a07520"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p129.part",
+      "size": 45,
+      "content_sha3_512": "4e905d3c9d2f147eef0f4a9e20f4c2aae28fdf42bfc9539b203e39a84e31940d2f6162ef333eb98452ee310533c7365c70faa87984cc3d7a342475cd28712315",
+      "leaf_sha3_512": "cf42f7a58596cf9ab36f71f71f608020a58ee6cfe0c0d75990ee052b20734469300601bfa7ac02c39c1447582f3c833f57eec7f859a7ed433c1ca83d27c1061d"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p13.part",
+      "size": 95,
+      "content_sha3_512": "b72c9bb092198d155665e38e6bf4a022c8ef51943d75ca87aa8bc0e7fac573e46348d62796d99890d7fa71db348646f4c1f275a0901061b3beb2675d46e5df06",
+      "leaf_sha3_512": "6053090cbded48df93b1bc2148ff5b89fb185bd20906a843b0f013436f6e297b316708f5dd6424de622040be61389443e25115485dd238d368d9678c129ea112"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p130.part",
+      "size": 188,
+      "content_sha3_512": "15ecb0a7d14dbcb343705f97be15d3ff60a90af9fc241fb0bbac83c4158a7f26b5e7fb9cc76b5eafc7e4ef19abe5840e56d65a8581d4ab7b450d83f27c0d4fd3",
+      "leaf_sha3_512": "2ba498c6dc2faf8c264c2561fe0f1e71a4c0941e5a50676e152421404d536f84b3e4f6785aeac74560700d149041aab3d221bac9a642d5489a5a9ee2f6e0da8b"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p131.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "519ea8505d7b4447993f2dde169bb7955c65c062cb0815a56badfbfa5deb3cbd73d38a39d103d14fcad51d33b16f3828b1535f46521bf95c34f9764f1eceaca5"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p132.part",
+      "size": 60,
+      "content_sha3_512": "a3089e72f6f8dfda9d216c6dae57e589e4c5a0f93a737b146dc4c8afb874f1f1d96c46fcdfd93b780720ca3d8696d6d6bb0aff007d4e5025879edf301c0aa83f",
+      "leaf_sha3_512": "fd2c51a0856b74585dd4c92418b6797c77b72504a48065c84c891c7860a3af4cba4b1685f16f3f9ec429b44f2f3e5b2fe54447932b45b6d42236361f1dad60ba"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p133.part",
+      "size": 570,
+      "content_sha3_512": "9e677184fbf486f1c7d0c79b4bedb5a2d8362648efa624d2c01c8747c367905cef12a6ec8c246a15e8f478d52f92aff7292714f4440551262799b28b166f84f3",
+      "leaf_sha3_512": "5c1a50a73f9cd5c7fba87a0f4f3418baa5d2428b8ac8f21b59fb4f52d21ff1a7c0d6877266c9a30ead4f2be53b5e47ce6eeaabb12ec0797a0e580dfde8205389"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p134.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "20ae1e52c3773704769a7d32a6a9674aa29a858c6f7b6afff903e04bdf6f359c4ef35b0e18c9adc9a92e7166ec7559e2fa464b133f22189dd9db2924a96ce76c"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p135.part",
+      "size": 95,
+      "content_sha3_512": "42a15c48c661f3b72a7bed56b03a6a8779a0e10f77bc1f12c96a8a9e62904aacb685ab87c80857d478120410d189faa646c45ad64f7f72568359c4b906c6658f",
+      "leaf_sha3_512": "5bb6d3d6a48cf4a5cf2df1238b829e749d6c9af4f6d5283473e9e160510c494b41075c267175fee35d409684af137e496301c96b7655ca8e48f7bdf15a7df4a0"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p136.part",
+      "size": 72,
+      "content_sha3_512": "b2d4d4861a5766a0b4c8a519a409d7fdc08b6da5610e652f034eb3c2855ec7b5705184091e3bd2345dc213baba4cc3ef772092d8fac0565e25547c41c85fbe5d",
+      "leaf_sha3_512": "b2cde3062a64783e22b31888c7cae716394483a461174ab618caaf5745f230042d97ca6058fecce0a33a09c7ed2cbd04318dfce2f72bf45837b318ed570ab655"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p137.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "c0f142d4d434da47f9156063bcafce80344645475762ca02a536e6c127e44dc3119d048654738b5d78911e0494559bca2f2eda030767c5b331533f6bdc47022a"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p138.part",
+      "size": 85,
+      "content_sha3_512": "ddc9469bb1080185c196062bc046c6ef00e581b91a8d1c79af8433426a8bd6b696c33ce6fbaef184942a088d1a1170adb28d783e0c7bb7c7a79afc2840167be0",
+      "leaf_sha3_512": "497e16b78fd4e09161c986e7339da11b70dd7e1437b0a53b43fdbd169bbf17c1ac849e48f47f8b751adb0318d447717efebc4a82781cdd60333a5aac06daf2ae"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p139.part",
+      "size": 730,
+      "content_sha3_512": "271e988ec5a75c1a6127be25c53dee59a6bce2f5c0ee5204cbb7aa4ac0efe4c7033b4eb4953e2e00add401ddbc4e34e58d13c9f07bc3b7f21e01d69416f9d5e5",
+      "leaf_sha3_512": "82e0e8eb68d1a2b9a758c0f930ade0e59658a16374516f055b2f13f81465011eedf05f752dba90368e9d0097b446d28d72839912f0416f251cd918cd2207ad78"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p14.part",
+      "size": 576,
+      "content_sha3_512": "81bac1321d042a68e2328ba0f6c143e4a58e01b3afe1e84568c94f847583c0985a89d4ddf95e9e712c1b58500717cf3c15438dff2e953b76b51993fea28bef0c",
+      "leaf_sha3_512": "dfab9f623934d189ab2d90eaf253a521803a1c973621c5d522e30dfb819b29e1de44947db5b6c17d16e4cedd56e1b396c1c47e1a9a2289331c0a206330fc239d"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p140.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "98206c082de1be4b5d124966aeef1609214feee4762481c12673679c178f30804ef534db03e6f10d3acb09c0d8f35d380d311b27020d0d2bf4c89339d1809d04"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p141.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "4270f9485c80f2f5dbbb49b8a3a7543effebbe099746d2270935bedafe076f2f83c82f0ccbc18e5cb1bbb6ece908e7366bba569bb269eaec2a7dacb5853ac3c5"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p142.part",
+      "size": 90,
+      "content_sha3_512": "68bfaea34e5b5761296b58d456c2480e6e95d906d9f95902ef44e7c92ae3180d306d79c720d90bf4338cf11388e585ea3c5ce2e5d8f28e525cedd076c3c93249",
+      "leaf_sha3_512": "ae7168d99ec655ef2f1bdeec578a113604169c1427d42a6283af8298c51132adb615d91b4d65f7b794c831fc160bc41cce519d71dacfe732f5daedfb32973ff7"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p143.part",
+      "size": 702,
+      "content_sha3_512": "37275c7cc7b0a29d566d363ad957285d2f80a0faf0327d51246346a0a387921d8fcc607e7ca69dfc230be2fb8fbce16748b34eb10c0526f796633c054dbf7113",
+      "leaf_sha3_512": "c88944b1eab91aeab65b11b033b887fe325920b09799ff746c57bf77ac1f04e5a790110fa71bd01f754cecf9de13e2362df63280df9d9e4bada6bc985c8251e7"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p144.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "ca4e5ece43aadf59d020a528308b1c2b52ee3f2d2c82a405c5c4072817327d873c9888a5d63b4ae47b4f577d8e4717a2ba3358cd5b0a99f417e1fdb4b2381d14"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p145.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "1243c18f472d8b1be04601a1eec24b86ca813430d9f5359b0d2f3d702cecd13385ed34c675c3d790fda1fd4cb92247ad71d66e18c0f124e63577826c33753be1"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p146.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "4a02c5e1e42a6d23c94b310916c809b6cc1611d2b3d9bc0f0ec088644ad2adcb19b78e511f6a7d139f7c0ebf6ee3275b53cf7052781b199f47f328dcb66ad0d0"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p147.part",
+      "size": 5,
+      "content_sha3_512": "1193db52c3bb4a0b91f9211db4486f6b0b770e3e0981f84c8122e4123a43b66d870709f29543a04c196dbc9a08660454b775b3c3d8434f2cf2e11d554da3580e",
+      "leaf_sha3_512": "b999046eb1503bb4f34922c575bc7f0f0a562a27c2346c884d8a697f3d2ba7cd6f1e439de7214ea6c1208594182487e3260174d93f8737a42318703ea75d0088"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p148.part",
+      "size": 742,
+      "content_sha3_512": "35378a727ece95506833e16b9e86de5168a5bee7b7a50f3184c70a75d31b27ce5ffef3e186e4c0da924a9d67ec1ec4c15e254f7e1bce7c592b1f6e2eeb9d2b7d",
+      "leaf_sha3_512": "7f238ad259a00cd4929d6c06be40dbe8945c546bd6dca9e616aea119e93f13e41c6efb4aead4a864102fc9f69e3d9a908be8adf68833919ab03708c9f738f219"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p149.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "d07f206da0e6afaa4427550d8ffe12a2c4672cc4d61174d65ef738a987ce0d9e257cfbf6b3ddc36546752fc8c800e4770fd8f15fa88e0163a9e2458c8b81567e"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p15.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "c80b3d7fbd0d49cbd6c3f9a2350fac168cbbc7e2d8c007efb84adcc365233e3941cd46199c55078f96b7696de89a5d0bf62914e7778ea2786a0e96e345fa1c93"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p150.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "1842a2ece877782997aa3af98a17d675388f39799ba8825ead8811eede4286e65ed4cc4bac4821e6f2ec3a8da17b94b9a08b489e8f7b468d491f9fd163719214"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p151.part",
+      "size": 80,
+      "content_sha3_512": "06ddd78c83d8f661568501d1227d95158838f6bfd8c74aaa6d830bacb09a0505c3de9805ec470cfc762d78a9f79b2b47ebdf396c4b0af504952ed2be84172ee9",
+      "leaf_sha3_512": "06beaaef629a468735f2ef7116cbdfaa12c267e1f75f12a28ef74aed9ce758981a4108c51f96af806f8b4a7c63e2641b32e5b604662019d1dde93cc5559dc239"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p152.part",
+      "size": 752,
+      "content_sha3_512": "b82aa76e80666fad64eb082dc0d8932ef34ff1c14362395bb9b417a2faa40a3def0cc99ca1cd1524bedb891a396b2cd2208d48e329271ba78f8b323926e0c574",
+      "leaf_sha3_512": "f67bc2985530019590e6780feef5567f5ffbc11151d1e6f51013b242b55d6f8a7f616e9a413e6e034d6456e030f7220a4f12e9151aeeb74dec465b89106533aa"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p153.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "6a9521005fdef0e441f1619cc710fccd21f0c28d87a73c1fa46f0047dbeb51b561cffa438479797108044e90609df1774a1ebd8c6b03fc0d3eb096e7c8fb429d"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p154.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "96a770b042106f0e1d2d8afcd120d93feeccd28ed510aba6e46eeffd34b7ae8d3fdb392b3fbd8eee74537a33d3f23f13e45d8388f8512cf9e625c214e69dd024"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p155.part",
+      "size": 70,
+      "content_sha3_512": "a39657c6c0a95e7c132b4d10a74d2d3f6e10672ca38352e6c18beb62b1b3b0cd59e6128bfcbbe0bfc780c19fca519af8f98a3d1c6fc3e4abaf139aa64b429780",
+      "leaf_sha3_512": "c50ce78a3e4f18847dd8b7539da16db1360889cc5c77e2333769e476135aa6d7053d3a0f9270ef0af735a874a564eb596f8da59078a9e664a7665624bb268003"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p156.part",
+      "size": 564,
+      "content_sha3_512": "47b2de9870dd67240f3f53f7a0acbd32874d93a1cc204a17b1b480156be652867ed504a995ee86da8b5157da6ce20224e69e11b3cf8c9509bd0511c82841630d",
+      "leaf_sha3_512": "3a34f28c5c050fd292adbc199336913689e93bf811669e75330f5920500780d59fc48756875ca837f73d4ec8d6488a0794ef8a6670f64f88c08233c8156b0dac"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p157.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "88c5df0984b465613cf765742b3d1888f3f44c2f6090b4c9007a688f73ce8c1f8a3a4bcca9034b993a10727df9e613b594f5503cf5a3142b8834e59430d1eb8a"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p158.part",
+      "size": 40,
+      "content_sha3_512": "3a5c8e17406a4cd60ed2d6b47da658cdbc3f84314447d02110c1ac928c37ebabea344b605f47ee0e00acc696431088d90e4177eab724ab0f46facd01060943c8",
+      "leaf_sha3_512": "2d1735bf89a70c991a8a4e915e0b1bee0b3c620c8d75667093b4a10945bc3051f9140b69ee55c8b9842ac8f6aa3d68bb7365211f6e072b72498cce8212272bfd"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p159.part",
+      "size": 134,
+      "content_sha3_512": "e7642110e246d201baaf71047c80b5081048059191c01df289b0bf7aed730fe6966dcf097733f14aa11a14aaa1231e7a1724b3aed167d2e3d15c7138dc3b013c",
+      "leaf_sha3_512": "57918d3a57e341b8f440c4f68819fb3c8f31e178a92c179728bd07ca6c59937e39f750984e2f3d68852f6032d79198762860de8543dbe830aa0598992047562f"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p16.part",
+      "size": 70,
+      "content_sha3_512": "881ae7efdfd126a27b980ad6a939acc9e5314abff70f3ef83c35fa2c575100e3bd76521293bf0028ea0baec86b8d21cb6ad16422001fed7c3ed4181d798b6a5a",
+      "leaf_sha3_512": "7083f013d70dbd3c02ef53bbd1fa30717b9ac3c3eda45813b9921cb664d7c3bffdbb005c1594f7502f204e485a8f290cf593d90781cac7daa5a71dc2e1a33dd4"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p160.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "26df350fb7a9d9c57e4dffd87c6021b66e701e1c66140510092317d07614907a516f74dc6767dbcde25d87b02bfbdf6905618c6661bf717778973fd519bad615"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p161.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "524e09278eda4f3974059586ae7de865ca847bd1da2ed48e5512e176bf34edc4fdfff58dd4c8f65ece1aaabf8e3add4c0680e051f1513d4e6e63b105166d02fb"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p162.part",
+      "size": 753,
+      "content_sha3_512": "0f1158f89b0fa9e31fd78935243ec8876d5c1a0d6677b36a411e5470490d0edc1a0062a57d3e299ecc59f3e8ac27877045f91be5bb0d176bbcd519fc9949abcb",
+      "leaf_sha3_512": "7f630f292b03c69b52f37674aa0a7b8f35af502719b6da8c67303d0efd40b967353c3e8c16972169ebc42d0f12bcee96100539170ac9db6423c972c635051d11"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p163.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "b1404d174e22bb116cd4cb8d01de244a34c9bac7fb4c3107a621f016dccb6b4cce77af6d155fda6bbf142c6850cd4a748b86e00fd2449edbe5b72ba1e761f3f3"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p164.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "9f2faaf5aa116e73f39383eb4728d560bedf5450706a020d5ebee8089187465d073019111e6319dd5b3a9e539ed2fb222e42ffbbee03c9799b8d2bce79549ea1"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p165.part",
+      "size": 65,
+      "content_sha3_512": "fa440184264fbca60e612ad47f76f9cf338d95fa23842762516ab62f6e4064db157354b99535f9cb8805aee909dcb468846e43d6d8f347cd1c8435696cde3e78",
+      "leaf_sha3_512": "67d23deb5b1fb4de59ebfd3e9d2fbd6292758fc672a8bae363e1393675bb33bea5d095c68d314c1c46b4325175deffaaa0884abc62030fdb68ab84b2a50d4119"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p166.part",
+      "size": 770,
+      "content_sha3_512": "ec109ed7fb70d9adfb50e768f67b535d91bd3625512242acda5995af3c016709913fe22ae6c5498d1f5cc93952c925f28d6619040a6d5a199b29907235b01a5e",
+      "leaf_sha3_512": "bdcf0992329c6a94b3797d4eec0216971b470cdbc7eaaf4ebdb284b97734c3460caa2dce198513be7395e66757aeba454854a8b646120a319a26ed2f6973cdb0"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p167.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "01a78708890eb8f9380a1fc916f40722852eedb0bcb0151966f2d9a832811a037f51c51f4d5d1e729dbb42180acf01042cd86861c9d32ea5dd689e41aa919b0d"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p168.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "d305e456e86a01ece55da8094e4de499d9aec44a687d01b2a06915828bee723f34b9883d451f89f65e44af1800882ac07732d9d896d4a2058f3432737fb11671"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p169.part",
+      "size": 60,
+      "content_sha3_512": "a3089e72f6f8dfda9d216c6dae57e589e4c5a0f93a737b146dc4c8afb874f1f1d96c46fcdfd93b780720ca3d8696d6d6bb0aff007d4e5025879edf301c0aa83f",
+      "leaf_sha3_512": "d27f64042aa2ac927242d825a238d40dacc29949e2b98c965f5abec7836a98efa7b187e15d5b1cf8b9c5348e78dec7fdb3741db052d8904ebbf5264c11e554c2"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p17.part",
+      "size": 56,
+      "content_sha3_512": "c30e7031633aede1419b267371be79f2a5e62a2ed4380f1404c425f06b86f45f5305dfbe562c72c584ce82810d5c7d9d04bacaeb26c359c1a3d8aa30f61d955a",
+      "leaf_sha3_512": "870afe10bf8a442fd3f213f699b0ba6689f86bde34f4eb0546a4cb5e0a3b5482c83a681184b6b67f34fb9438cfa73180bb0ade9828d63e47ce0ad98ff2a0244b"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p170.part",
+      "size": 657,
+      "content_sha3_512": "99aacd9af2196e9271be7a4090c63081fa0606276e9940fcc32833e7f0ee3f96b7c43a87fe23ed0b8cc8a5e353be2355604f9f84e35670939add71c1507e7d87",
+      "leaf_sha3_512": "4a6c7416139308a9b56c0f7c3ea0bc3ba6e325af78327af65ba85123097ccb46c66fe49dc0044a5d9bf2222e6c098bce17d9e16ca04decf51ff0ce5e17308e29"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p171.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "25760ce57bb74f3a14a8ca0614c31bc3206316d752ed9ac6f14c71d60747eda7c57f438fb48f4ebb9d5dd03ff9d73be9d7ff4759a21bca8c2175a211b5c4a3ea"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p172.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "023966767b562b5231acd76a705c44a9084ef488bffb007071b62ff96d5b5c4fcbf61260673bec3d712aaced815585c52dc262da69334e1e231e4ce9aed19bf4"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p173.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "095698017b4fa86a74f650d9421ef3bbd8fe8a4b94739aa8c3802520745aa86bd454bebaa0eb9d7cdfb9fc67cdcfb87e2751b32fad2180e1de9c90672bc9838e"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p174.part",
+      "size": 50,
+      "content_sha3_512": "3095b7b90dd3985c732825b3d8a37b7f0e5c9c555e0265df7dfb75f2975d6ed7796ee54554fd7639cc7aadcb83a24db5cdda2612b891c5223972274b3f4e5ea2",
+      "leaf_sha3_512": "39005f0a2ca0ae7c6777b092bad7715297cf325195b1daee719768d4f52f5619212580d6fc90b3aec11714385aae35e9846e251ca63c0e9a0c55a35fd302b810"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p175.part",
+      "size": 622,
+      "content_sha3_512": "285afdf94406ed4e3eef5e2a184c86988aa2754d3f62386ed9267ec0f1190ac2e6a73cf23120751728a54c2b411b364679aba3f02617af3e69081fe568814ad0",
+      "leaf_sha3_512": "d8cdcb055ecc5ce3879585c0ebc005ab49a45d69c5368faf25a759faf99e6543e244038d5ec6308c509260cc9c63b581a35d9fc891a3cab3e30230ad22738d0d"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p176.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "bd2fba5cac9950888ab76c913a961edbe0afd219cff6656ed621d15e4a99d32f8d7c36819eb1a6c33846ba41103e2f8eec21996672fba84d79b590216cde0a56"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p177.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "d1331768a284c91f70ff5603f83f099b321875eb81ca784cee31932057b503b6d9f674d1480863d2c9bc721847b2a355c8a373af8e8e29d78d46097a3538683e"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p178.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "3ad759f9b317dbc8a6db3edc1d0646125017fb8e9fd449e76bb1bbae8f80d5f8f7958100eae80ca0144ae5b02a0ad39d2bbbd7be512b74868a757a0a17f0e89b"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p179.part",
+      "size": 70,
+      "content_sha3_512": "a39657c6c0a95e7c132b4d10a74d2d3f6e10672ca38352e6c18beb62b1b3b0cd59e6128bfcbbe0bfc780c19fca519af8f98a3d1c6fc3e4abaf139aa64b429780",
+      "leaf_sha3_512": "de90d820e30d2d8cc851a8501d5de8ea8b93a81af5e52da2b864f0c36830468435dff53d3e8129456b20233121648a9be3c2b6e893b20a6321443f6f618c56d8"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p18.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "105dbafc310a6f91dbdf4e4c55a22810dbdafd6502d73f65af7625914a4de87cdea991e81af9324c6080e1a20c84d5ea1046b710227fa92f606e2a221fbfb14e"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p180.part",
+      "size": 564,
+      "content_sha3_512": "4022fefd9326ad10070106994a9b5ecdab3ec48e01f1f1b1ce61728f6773a7a0295b498987e0a318853ea9a46931f1faf850d9da4fadaeb570f0b8d17fb9ddf5",
+      "leaf_sha3_512": "219afd6e1c25dba5d3cac0fcd012029fa7657aea3aabd44b7de0ab9d841af0f1933a37baa753fa9686ce19959cc1d7a34444829ec43919aaff447f5d3b84b15f"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p181.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "ebd5258f6643e5ef50f86e99ab0f92ee7fff3d0d52482601e9c517534b3d449db692f3b54fa3f1abf97fa5265a0e040afe7ab0cb241899aa7594a9124741a893"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p182.part",
+      "size": 25,
+      "content_sha3_512": "45890f0c8c26b46f2ca0f98651f7308c5e5b9ce654c329d93142944d4da7690a07c9a118b79a7229e8f7c0a60394f4ca95f34b68411b07ced1653ebd0a17f5ef",
+      "leaf_sha3_512": "32d602f8a0b2781dd319424e5a41ab067bdca9e74062cdb5fd8ff02d7555e9564d63228d701b6a249ed09b8f24ca0da018b8b1c8d18915a5a907f9a2713e7096"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p183.part",
+      "size": 96,
+      "content_sha3_512": "4b9b8d046904bcf3183d568b29a84d630e012a5e0ba53167127e06010a76f9984f5b5bf46dc367f32198dcfb2ab093127fe484b3d94e9b2795c670e8d0fd0535",
+      "leaf_sha3_512": "ad4f4a5922edb17a7a9341ef7098bd798a1107242d2a73407e53fd4af8a05796338191ebc9699d5d95dfc043a2609ba583f77fd06a40ed2726b131eb38451dc2"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p184.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "da28051b72d1c4dbec388b09dd6e1c5bdf9e8b007e4e02aa4dccccb6b27f6f8e8c01f1cff13761d84bce7e56a47059204640d9df86c5dc2b4dde255087c9bfa3"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p185.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "fa9e08248b2cf3a2f880edb0e9384bccb9bf889ba4ce64acabb01ebf9b2cdfc7a33015f6f5232e27f8adb06bd1b2fcb0db2afac6fe5edd7b2ab064bb93a40302"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p186.part",
+      "size": 40,
+      "content_sha3_512": "495c40f3d4ec12fcb0ad1669eaebd900d8e77fc0f579b03f7318f54ed9a7c990da87b2b6883cbda57ec04e16e75ed9a3b5f4bdc6045d0138e0ab48f63e2f880f",
+      "leaf_sha3_512": "0b4ca5d56f9ae5e27c8f4516e2848e408cb053a4b27ff388577ae2188d6efda0a8c8e6f5e2639a64cac1c45e96e8ae455cf729a118b18bd7e9fb692c64fcefeb"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p187.part",
+      "size": 721,
+      "content_sha3_512": "81c0f6fad38653cdcf5aedc457035bb58774b9f44310c1c577d07085cbcc01f40cd29c0ac6daba271f631e73c0f4f1a7bb1e93dc9eeef3713f8ca2afb9ea33b4",
+      "leaf_sha3_512": "e717bd51e1544ab98ede6607c065578872800081bf5e87ab7586ac04a1a94301ef1d0b0b4950190436e19536a5fe49aabd94558c15f8eccb1d526f98e9075ed9"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p188.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "858967c78d757e7ca2be83465e07f2f82b177bc37f5057e79c1f81b369b808304bb3c3826d2373c1033dbeb3aece74e8c9ef8e4de9a4f175bd0c5e001f765cd7"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p189.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "6329886c65ed5b711af8dc8155cb31a3bbdb76e6fe3d9b99053373ab92ede6c38fde3193ef4e8a5f4293ec47b494f6c68a84b250eb64eb97a1d8444dbfcf730c"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p19.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "c03b122592a9de50d332e0573d5bd2dce674f95d82f66bcf7b70f109399cba81b026ce040ec7e74359adaeb657f34a566c0721c77c3d49747b364297c4208b83"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p190.part",
+      "size": 95,
+      "content_sha3_512": "b72c9bb092198d155665e38e6bf4a022c8ef51943d75ca87aa8bc0e7fac573e46348d62796d99890d7fa71db348646f4c1f275a0901061b3beb2675d46e5df06",
+      "leaf_sha3_512": "9252bfc2835c7e9faa9da15e0905fa38ec87fa4f3514781261e8b04fb01ce14a95626ef2c9e02bac9aeb8a1dd16720298c3c10ceb623ef587cc514dbcabb5397"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p191.part",
+      "size": 756,
+      "content_sha3_512": "867eedfb224bc326816e032569445f892c957ea5825871990866d8211a943cd491b28a06a9e111a61dae1eb113c8623ff7a1889cea8a436f268e4c0edd06b32f",
+      "leaf_sha3_512": "7165a083e86d98c231358dfcf4575db6ac171a7fa1bdd2337d5da58b44824ebbe77df7983a4a5d27f1843ade9d6c75bee86778d905c340226257cfa3e85c1e08"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p192.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "743e9aace9baa79b4fdfcadf08b8b7d80d8c70a2b4afc57d2f7a9bffa221bd499ffe95cee7c916e2a220023ba4ee0a17474b0eb1376fa0e05dfa975968d98ccd"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p193.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "514aaa22d4fbde17a6c3d0d5bbf4fc6f56c4a5de2b5a9982869573487170868d817a582c6ae9db1e08c5ac6f44514c30c4eb50a481185ead311308b50ca757a2"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p194.part",
+      "size": 70,
+      "content_sha3_512": "a39657c6c0a95e7c132b4d10a74d2d3f6e10672ca38352e6c18beb62b1b3b0cd59e6128bfcbbe0bfc780c19fca519af8f98a3d1c6fc3e4abaf139aa64b429780",
+      "leaf_sha3_512": "0c68c536001cc508a0610cbadbad9ee44dfe87b1ca2c70781c299661624952c035874d69fadce5c7255743810d997a2b82d093675362cdfed9f32b3d55682651"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p195.part",
+      "size": 764,
+      "content_sha3_512": "b80bf330c7e87f6a3dd1d7c1412304610ff9774848938b714df9bfe1bc0cfd42290d7c3a420579c76f6851d3be82bb38a361c10dd19d9e8dffb6d016f682a390",
+      "leaf_sha3_512": "24bb27b933290e046544c78615d5e1a791abc0d00fad4d1fb1f51bdfca328639ff1de17e28ee67e92515385a0ebd4902b60a4d095851bc97ae50d2ced0b8bd88"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p196.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "dddba8fa7fa3b1da36777fdff9921506d7f941b8806b18cc162c330d0f9ff82aba81a699cb0d910e14896052cbac1ca65f77bb0ce4e43ddd6c90bdd05257c1a6"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p197.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "25b2389363c3cb14b0532f08ce55def876356c14ba15e7259fdfafb8cf58235c21ff373154eff5ac457cf454428a126ceb623985ed9554c2501f36486fd43026"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p198.part",
+      "size": 65,
+      "content_sha3_512": "fa440184264fbca60e612ad47f76f9cf338d95fa23842762516ab62f6e4064db157354b99535f9cb8805aee909dcb468846e43d6d8f347cd1c8435696cde3e78",
+      "leaf_sha3_512": "0e9142a4dd1d053721c290c3f919310177aaf44bb84822b398141e22bc71b9f28e9f05e67e6154343a906e08f42318998356b09523b47c9257f1be7d4cddab8e"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p199.part",
+      "size": 775,
+      "content_sha3_512": "68fb0ba44e06eb0adb6f97b0ff2298be4da030bfc514a6ab438b1c7d58c7ce5a1fc0352ec0177c0b8c1139df9cbff68c951a549231890f5903cde56a5de89754",
+      "leaf_sha3_512": "153217f5728bc580c8e6a238c653e21ce21b3b0f9eeb3a9d31ee070a4147c6615c0d74a597b54b2af578eb436961efd567b874ce75014e98011b08e58f2cc7e4"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p2.part",
+      "size": 7263,
+      "content_sha3_512": "8cd9d66ad950f348573836aa07be24545e62609a1081e621ad19b89cd664d61868ccb3c7515fa8f914518a2378d9a575efda080427145c2eb4ace3e5b4a44cd4",
+      "leaf_sha3_512": "a5de23fd970e087a2d430ceee747b86d2d4b34d723b66df0ebed51580acfeba60116620ef5e9dd66e2f3f85bc5b8a33a7515f96de548a7f91299f76e4dff2cbf"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p20.part",
+      "size": 20,
+      "content_sha3_512": "d24dff9219baf27885bb3d39ca5fd565142b2ffdb2ffc90595b55a65934cab8b722f1e63f0286fc4589edcd6041dd527c90dc0a8fd6bc9a5ff96cfe870097e66",
+      "leaf_sha3_512": "505efd51a22f4a5471c9548211df7b80b45add60d9997b0229fad94d0875608f01fc49be7025ee95442f96721ceec3a97095cca9466eaac6c8472b9df91af930"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p200.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "9214e4c882a271cebc24561277c7619303759e5add89e2a7c190552c86a2c467c9deb67b217e261147f3ce67b2b6ee30849a7c54598939da2c0f6f958bbade9b"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p201.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "bc63f380654194bdf71f8443de2210ea55dc03a8ce91714b8bdeac7e9029d6aa6748312d5bcfe1ac933297e83c3ebc9f9ac49c6c69f30984863fe7ebe82fa34f"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p202.part",
+      "size": 65,
+      "content_sha3_512": "fa440184264fbca60e612ad47f76f9cf338d95fa23842762516ab62f6e4064db157354b99535f9cb8805aee909dcb468846e43d6d8f347cd1c8435696cde3e78",
+      "leaf_sha3_512": "d806d4767b880c596eb1976fa6a5e406f539975f597236a40f2b58f464d960ac148c91f2c09b2b7e089cd32907e8e73904264b570393b37ac991651eef3a5dca"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p203.part",
+      "size": 731,
+      "content_sha3_512": "ecd7d0dacb3a21efcf0603dfec5079501d0f26b8db50d4d985ab82b50f66e3acf9ea9978421503fe4d9e93c2811334e289fdc9355448bef41ce7aec53651d336",
+      "leaf_sha3_512": "772962d185bfcc8bae7c25550ab1baf8212fc7fb949d07340b159791635bfa6f1fa932e3c5099feded202a767ee0cdb3ac2870cca45eedae5054ae5b17f3cd5e"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p204.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "6e859f23bd93d577c7cbd55b27358e6b01b9d68ad3108c87268d338e4b1086522db09876973ba99e294c03d9d458927220e0bf07f04533c5f01aab04f01544ef"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p205.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "2be25b9606f563c640e2d88b1eaff7bbf86d96a53e173940daffa0e2cde8c5b45bc9d953a6b147a2cf54a0bd78569ed5089d5e2a6b5e13c1ca41eda4083487bc"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p206.part",
+      "size": 85,
+      "content_sha3_512": "ddc9469bb1080185c196062bc046c6ef00e581b91a8d1c79af8433426a8bd6b696c33ce6fbaef184942a088d1a1170adb28d783e0c7bb7c7a79afc2840167be0",
+      "leaf_sha3_512": "85443b95bf6a265ec9c7c7b2c8036cc42caf2cf73ffc02dbe7ba1c3a1711e6148a73965ecc2e26cf3f22c246109abc602ba1dc3eb991f58f21346ed09b3340c4"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p207.part",
+      "size": 862,
+      "content_sha3_512": "7106afe7680ba058b051136b2f9cbc9c1dbf70cd96c13496712dcc4be225614275be75bc0d6b928dfb9ddd48e6e71f858c555a371a0df2e581a5fdb3022b8057",
+      "leaf_sha3_512": "664f6364830e937fc6107a2f2fafed71cdea1eb2a93478531ecaa3f3c657add797309e069e559d587ef19e4fe7a6054f735438b3fd035056377f38eec93c64e5"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p208.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "bd5e8f3bb2dcb5b96682e3bacfb7eaf0745f7206cddff84f5c411007eb795caa1ba08eb3979bffae0acc925c3a97b018b5893c35a9a8a8d4c3ac3e17d3552eca"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p209.part",
+      "size": 95,
+      "content_sha3_512": "b72c9bb092198d155665e38e6bf4a022c8ef51943d75ca87aa8bc0e7fac573e46348d62796d99890d7fa71db348646f4c1f275a0901061b3beb2675d46e5df06",
+      "leaf_sha3_512": "34418dafbfdeb07ccc9b3ce33cbd213d5b4f5912a0ef71ace45ba03536d2b6fdb171a5e16f7a5cb13a2c0c462648a6eafd6bdb28f935ca882a491c393501e192"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p21.part",
+      "size": 626,
+      "content_sha3_512": "de42b17ef706d5302ea42852a87d86d2a4a953ec06033fb21688c7bb0d736f4d801d97eef4cd5950efeef601e99c22842a841dd05eec9dbc9740e21facd05c61",
+      "leaf_sha3_512": "760489dfeefc2c8c162702c8019f01109b27731def62a8ef36d42a879b5dc6d2481adc504db3f6a8abd14d20b0b6b6940624e141b93657003e9b0b0cf2b5f107"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p210.part",
+      "size": 558,
+      "content_sha3_512": "beb81e5e2776dcf8921ca6ff83336b2e687a2e8eafd649df62dcb910d4d291e9d05c2537f8ee657a8bf2806c49c89e1cf3a67b1f39c95b68095103af5c2232bc",
+      "leaf_sha3_512": "a36fd45789b131d2a43f86d7509a3f551ae8994ba85f2310311befd32db4f545bf31d98421265bcc12f39f6aa839615abb32882788db5655478a67ae0f9c2a2b"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p211.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "4fdda2cc3ff9f0610c229d65e43f525e797bd94a6dfbdb58eede0e5edfdf2bba13e3882d6dd6c09ff5bbbd9950d71458cddf1f56df2f4d87badfe16de37700fd"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p212.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "094f533987e0d7fc26a5d8427babad57070ed2422adb6cf9148cbc0b1523889ffa38b242b5fce829e53374a985cb0a15d10389b0005a74a0d1ea40a4b68555ab"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p213.part",
+      "size": 78,
+      "content_sha3_512": "a31f8e2612fab56aa42f2fe4455758aa2ab0aef59408788b7a9c34c8e41614508ac256a76d29c9f2577663baad8a7506d6661c4003b636466d362bbed1974e23",
+      "leaf_sha3_512": "480d3f158e759f437bf45e6b1048ee7a06ced3c56de9a0cbecc16c673ef36cc7ac57e1de0830850a364feebba02399dd8a6ddeaf94e2fcbc53df640a0ed8c7ca"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p214.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "0767a76fa25dd92479b5f365086a93a2756f32d2260056668fda942acf40564637c8a85477895ca0218f3cf7e29d7dcd18ff1ecf928e6fef5d021d0185455469"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p215.part",
+      "size": 75,
+      "content_sha3_512": "60213768a42b2ddb6b1101ef09ae230e2c8a32dfb010e17ed3bf3b61043e4b2c5ce86632ff38c627f0fd32c09076a8cdba75166163bd75a0f8528a7c1c6d3ae2",
+      "leaf_sha3_512": "19ce8b639ac81ba30ea0ebeb7eedbf2f0dc2812d3795116e192c9b1afe1baa9666b81c4100eeb129147a0332b9c95d1be90335efedd1f0c10abd4bf601f9cb35"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p216.part",
+      "size": 564,
+      "content_sha3_512": "7c186a812980af1c2fda15853a540201e9a7adb088b2623847962e000adf36ded56d73788f452cee417109c7ea9804aef606c840b8ba8aae63f9d915954fe398",
+      "leaf_sha3_512": "2483ef227e9c6c9287d85ac21d141e0eaabe33cac705f015470b2b997d23208a7b15e1e84e8ccdbcd8b1ce3b732726fe7bba97b998eb980569d8d4e765db74d0"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p217.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "ffecd6c6f2c496179fd4903a268850b4c5ece04abe198a6b25e47bbecda7e475f467fb3d392e50ecbb351a945022ccd69f4fdfaf814b356ba022f1de7eb9665d"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p218.part",
+      "size": 25,
+      "content_sha3_512": "45890f0c8c26b46f2ca0f98651f7308c5e5b9ce654c329d93142944d4da7690a07c9a118b79a7229e8f7c0a60394f4ca95f34b68411b07ced1653ebd0a17f5ef",
+      "leaf_sha3_512": "81658b0fa88949a68e5857ab6e28db631fefcba7ff553afdce306c770f8950180b212ec4e33c020551815c7a534bdecb8219281e13d492d331cea2d6606580cb"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p219.part",
+      "size": 103,
+      "content_sha3_512": "39a5638e81ebd28454f31967d7db4703fd2f8915e10a60943d23ce3fd4fad38fc53d0e9a8bc32a54e14cd886a6668c274e56c9552728e9fa8155fba8a7b62017",
+      "leaf_sha3_512": "2bbd6261eb24de48597d3a68c04412d13862252136e692bd238914c2c7903c8e3b4c492f96dc6b30f8645ee7b511b4aa12b7b8aabcee6d658ca9dda8a06aaf7a"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p22.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "0d2b9496fe85062c1882c025536c199962a5983943cab322517dc85379720467415d548f10228fa07f6605cce7f7e86937279cfe96bc67f7c8f1bd594ecdbac3"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p220.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "5f765f44ee25b724008e2667a6f4ece1b9e0ee812c56552e8649966ecd0a91d9d5b6c0ebac096165750e1171321ef74ddea2a8a9992adeed4fe03449f8abd35a"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p221.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "db870226fe16c821a0cccb5f37070f599781ca584c5f036a69ece2964b416fc36b95901401e930f509951e8ebeea9045b616a6d4a63992edc7992e013ac9b685"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p222.part",
+      "size": 35,
+      "content_sha3_512": "3750162bd097a9afd4257d8648fe4952e9a912046dd4a037098fc920773ea302f8355e42994883f67bfb2f9936d20133ea516d1c73c96f8d443409205e6c60e4",
+      "leaf_sha3_512": "6ed3300dc6b29196f4b44d85c965a71bc412913acf4c28dc1df358b1b89907125f154df37e444d2289c11b036a2587104d8f428a53a3024b08043b73efc2d8cb"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p223.part",
+      "size": 699,
+      "content_sha3_512": "eb991fbfe07f0eb9c0fcddfde193b6e74c0a2248a89f97fa5a86769a60756b39598e05924eda9338f1ae98bbe3bc9c8643030bde15691f00a9a8d858cdb9b398",
+      "leaf_sha3_512": "dd3778aa145cb903a513f2de42c830c16690144e27df431045f28aa6c5c187e7356da95bfb912af0b1fd7668d8166ef35066096cd0456a0b52e6535ce8addd84"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p224.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "fead2f26709210657495dacc8b80d3a05531165ee0340e8aa4ef4443d5e71dc19a5f3d241dd3f1c6f8c6094616a3035bd5fb41e2723b2594b33babe634a48083"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p225.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "b68434234290786914b2a0b9251a540b53ab60e5edcc39e53f4424358d80d36011d6430a79eda01421421b032ef985d0a04fa9734861686fe696d52a0497c014"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p226.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "7f9bff67a17be03a07941beffae56acb6c06203a2aa5a9559159deb6d6a46c0a2e20ec96a9ff65c0b15ef478a313301c91f900ad208e8ce9232157a87a8b3ea2"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p227.part",
+      "size": 5,
+      "content_sha3_512": "1193db52c3bb4a0b91f9211db4486f6b0b770e3e0981f84c8122e4123a43b66d870709f29543a04c196dbc9a08660454b775b3c3d8434f2cf2e11d554da3580e",
+      "leaf_sha3_512": "0f85f2533f8a3d669b4ba55da047e6635eea43e4cdf7274ade66d4ea78d7e2bd8ed12ef57cc89955ddc7781ed21fd96c792557b3a885533e94148bf10093cbcb"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p228.part",
+      "size": 772,
+      "content_sha3_512": "ecfa9b62115c015026d7f05f6add3229752c4ab0af004598ca447ee4b09a3c7a79675401cbaded1e82e40174efb29d92d44b9c7b3373af60e06b978d3c6069c1",
+      "leaf_sha3_512": "b55400db8cb92f8f7c020118ce669952e95ec9afa718c37ec0245e21738bd65fa94acad6bc54240f4d78006ab938b310c6519d87ae5058131dd43a26b7c436f1"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p229.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "aabee6013a67fc04bb8ef6cb263ab849bcf803a85557d641c45db71eea11523b0c303b52da8a080d8c7a30df842c074f1206e9bd84ffeec043e5130dcc7e6b7a"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p23.part",
+      "size": 40,
+      "content_sha3_512": "3a5c8e17406a4cd60ed2d6b47da658cdbc3f84314447d02110c1ac928c37ebabea344b605f47ee0e00acc696431088d90e4177eab724ab0f46facd01060943c8",
+      "leaf_sha3_512": "d695cd220990cb6e11c3e4d63d815344f3d15e1c8eabbeadb2899addcbb11be89d3bb0bab25d4293c00cabe04a09b193df5f8c04f66d8cca774bb0400f86886e"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p230.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "a0d16227caae74f5382c838279bccb2c895a9056667b06987fb1a9ad43db06847c11d3db44be8494e453dd47b0bdb34f1f86a67a4f7d69de7bb069ef35545df8"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p231.part",
+      "size": 45,
+      "content_sha3_512": "3c6228399b91eee199344c065fa6f78c337bf164b24f94968c1b04b2e109b198c71b52237a9fc36a7f3b19ccae1faa160d76c29af49ec6d104d134046f6dfa27",
+      "leaf_sha3_512": "631f84e3b2c0b2fc7a47f1f33bcecc0a1e733734a6f895b0c347ab63701198ec86303dd4549ad03f36fb7511a01fc05903c06b4656c5025c09c4264ee1359235"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p232.part",
+      "size": 784,
+      "content_sha3_512": "af1ab1bd9f6742b13b3c1304c5a7934775937599938f2541d9b978f93f098313daa47d27c7123fd983108f3b07a8d3223825c0af233228c879668b6b92920852",
+      "leaf_sha3_512": "8d89e2497877c69ecf717f94394c5b12504543c86b12254ec4adf0ba5d59b5ad479927d1375ec76588b56e7938c0dd9262572419007623c6a6c01f2d2c4ee523"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p233.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "74de546aef9a155090aa2d4bf558049ec155c1d55dd5a0e8a4dab7f25ddd8b6835779f0c6a8f74d5a5397377b09708519f5e1339cbac991d87ca2fb2f2ad15aa"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p234.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "6fcb80f058d627bf51bda3dd0e6ae3a3d6d44f17168c827c3f437ad018a985600e376396aead67a8881cc264088a2b30f662d2bab738e07ae22ae4a3f6704091"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p235.part",
+      "size": 45,
+      "content_sha3_512": "3c6228399b91eee199344c065fa6f78c337bf164b24f94968c1b04b2e109b198c71b52237a9fc36a7f3b19ccae1faa160d76c29af49ec6d104d134046f6dfa27",
+      "leaf_sha3_512": "e6d9f3524bd51dd2c0ec6a7ddf831ddb9bc1f3b8ea3d0462c06faa8d7432ff4f3b7e59534102175dac215d10746124b8bdcf7a42ea673e0f6a442a52902b43b8"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p236.part",
+      "size": 724,
+      "content_sha3_512": "5b58f138e0a2e319dc4e6f91ba16e1fc4cf7a192831bb69d91c8a41150e9f41cb3097e13bdad2d57a6cfd56acc4af63bec80c1cf4866674bfef99ef435dd26c4",
+      "leaf_sha3_512": "f4083eaf8765348dbc21d34b11266d383e43099a7c45fb516d80c8a250ac59aaf55c602ae0a54382c7978361cd37f95fa0e66d7b8212f60ede0be20ce107fef0"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p237.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "a8ac7fd998c34911b660eb3af44d0b0ef5449c3ef88da9d305afe2773d04ebeff4392ca6ce97dd2b4b2987612a1a4b117c913fbb8e677e8abfe0fbfe95fc3add"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p238.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "045912cace813534b2f99104f6f841a5aeec5cac78e7c702d227649a92b99b15246df7f664b22cf6df9ca5c2d351073abd0f6949cd077a0a7cd45417658f7b65"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p239.part",
+      "size": 85,
+      "content_sha3_512": "ddc9469bb1080185c196062bc046c6ef00e581b91a8d1c79af8433426a8bd6b696c33ce6fbaef184942a088d1a1170adb28d783e0c7bb7c7a79afc2840167be0",
+      "leaf_sha3_512": "4a0ab3073dc567f5d97f4d544d5bd81d9a475573bde24e511fd1720435441691633045366e66263f7259dec2afbfadfeb8652b895441beb5b58daa9629c796ae"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p24.part",
+      "size": 70,
+      "content_sha3_512": "ce0c332ad9b0f45fecdb4a0b39aa8ddac2f5f77442d9d587992045bbf64cb2f5e659a596f5d76c425b4ecf61c98a5491322b4c27128787b66a40ee13debdad28",
+      "leaf_sha3_512": "866ef9b64cfb7fe4e0c6ff518822b9e422a9e186a3392b30f8072c2c4786b4d6739041002123d283af3e3cc2c202268247da0f024f91f0549c1e8abdf47391b2"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p240.part",
+      "size": 564,
+      "content_sha3_512": "976341c23e08e304e1718271b5425eeca4125487ef21dfcf5ffa76e423adb437fa024a4bfdd31e69b87e5a59fbd4af7f960c0a0e13b6702bd1e5907ff2c21b0e",
+      "leaf_sha3_512": "9a864000250e71793e7887ad640d18043ee3d0a3ffe61fc929fc119a93eead265834a1b93776e7a76fa692d849f633439e3c94c7aa34caecba46961d972d6d7a"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p241.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "a68b27fcc6d688436c83a175b4649096aa153dd3cc4441a30a30ced73a9488f692177909df2bf170f6c37564cf11c928a42c396dbee0e22b3abf57ac72077306"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p242.part",
+      "size": 30,
+      "content_sha3_512": "ed34a8e31f9105995955105cbb056af8d0ffac891945dd8a7a961121bc3e4c587dae6111dc4b672eee83272ccd73d448e55eedf4d1cc09abb71b9d11e52acdf7",
+      "leaf_sha3_512": "9ed56e597f0d4f6dad5a8b5507fde853bca1571fe8e2f9988aeff8e16f6d4389fb936f77ae6fc234c11553ba12767a5b5ac3fb2a79720c67d4af3fc5e2ed4169"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p243.part",
+      "size": 80,
+      "content_sha3_512": "50740fb6cb2125a759950be4b60cd68bad0a893f216725c7328e3d8dbcffbbeb8e0dbc006209e90103f596751fa8f92dfe65a0a934fabfa803b0d11bf78b08ba",
+      "leaf_sha3_512": "25f55a7f627840a0860c61060705706deb0a28b1476ef5830b1852bbf4a2489ced9f0b60d2f40dec2037e15b223b310674394d948dd3b76358d8ae407e1b405a"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p244.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "df981deb736451558600ab96b5e823ea3b02cefbf31661c9a281381fadcd458633f8cf5a9eb313db8f06fca0298740493e2f9f5fb4c11ccf8c6d129acbc36d89"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p245.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "a41805f0dd5b70e61b54724e6ebe4af20f000e3237b6783af3cca3deee6efbfd7941aa5f0456d88cb8ee69654d03af7dd94a1cdebb9c70decf5268e9d4e85bb8"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p246.part",
+      "size": 45,
+      "content_sha3_512": "3c6228399b91eee199344c065fa6f78c337bf164b24f94968c1b04b2e109b198c71b52237a9fc36a7f3b19ccae1faa160d76c29af49ec6d104d134046f6dfa27",
+      "leaf_sha3_512": "2a6c8f5d59b56b3fb2394bb7d4edda5d1779e4464af7e9e088f97941421266aa29fa0b116003171bbd66fdcd677fe9e5d2f8fe316977e05e77696e84aba0ea13"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p247.part",
+      "size": 723,
+      "content_sha3_512": "0387741c8ed0e78d5387fabd8001a4a146294ba65b02bb64e19190f4321368452779c21c80a283c227675f602c300b931e8f933658e9cdad4c077d39aa105f20",
+      "leaf_sha3_512": "0077fd510d0d95c6ef0fc593257e3225214bc2651a964e21012e6ffe690dd3c2dc4ea2a75aaebc17756529ca29d2d0c04b5698b5420df72f8b19261005cbd38e"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p248.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "c4ebd71799194ae1359422901c904da522a8ac99ee29cc84b834c64ddc650c91afe54b6879ec06f28dc3ac696d2bf5f63e1ec6f58e6c3954252cd53d47e2e8a0"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p249.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "676f70c948329af51cd03a3d57ef1740410e8f00aeea2d432d5ac618f49eed26cd64f15ed99a5a8bbdfbead91a52a0af2bebf3440db50e2dc4803f18e1e520a6"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p25.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "6ed9750fe012f08a66255c97d0f2b12b9e1384a2e7af22cf3abba21cde57119697b1ab9ce8ef4119f8eb62069983201adbff6af93d1e2ba58f4a81c712ad3d6f"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p250.part",
+      "size": 90,
+      "content_sha3_512": "68bfaea34e5b5761296b58d456c2480e6e95d906d9f95902ef44e7c92ae3180d306d79c720d90bf4338cf11388e585ea3c5ce2e5d8f28e525cedd076c3c93249",
+      "leaf_sha3_512": "9df45ce3d6563f4a5eb539feb4ffa9b5ac2b524f2a7e1a0fa65b75d68afdf670f98a5791216f248cd10c9892ba1750a47813dfe536139eb25c20e9fea1f375c6"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p251.part",
+      "size": 723,
+      "content_sha3_512": "1f20150612f3de67b700d5b1446557cdc98e2a02c39248467d8d47de63a1ba45d46c3ff04488248c18cec3cf366c41e54d1fde46ac01906677f9ca9198ddbbca",
+      "leaf_sha3_512": "a17eeba661328a872f52474c1124ea570b12c42415fc3f6095203d68d3bf13c395df245fb921d7d245d72214669591af2ad3d9af8e4b8e0dd71146923af36c88"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p252.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "fd2a7aad990997091b350a1acfd6010cc96e1aeeec3e961798356782c2b1ab5d8729c0122a08d4afbc9507eaa827d28a25b77a2cf20e15910412d71ec7afaffd"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p253.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "5454ef3c01ed5667bf405f29b34e117a9768a7a7511a9926048a5b4d9398831e60243d985e3e890ffe62af9176d9c16bb6850af973f3e080c00d97b3f8d74a9d"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p254.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "e56668b129d9f9e41bb5195420dfb59c9570089ae8ebe6c56157e7548fd4c89e2c08db70b02e35ae8a927c9570b5724991d3519e0f82e6aeeac102006283124f"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p255.part",
+      "size": 564,
+      "content_sha3_512": "780c2c55857f089669e5a4211e29284f82b67b6016b2cae04b1b63fce738a2d33d94b67fab3bb8200f02dcb8668cb385d508f3b59879d651dc46b0e3be118fed",
+      "leaf_sha3_512": "39ee4a3e52a63b8d8c5383477135d9155607716144e0b6ea908ceefbde2d1c31453228abbaa95b38cd3b450077aba24cad8276b78c6ea63be76e15f53af0ca59"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p256.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "841e86d09fd07afa90597a3fbe9b3b8c0d9890145a0937b32582a41a9f45f914e1adb36a2e8cb9d091410bab8bfd3ddfd4ebaddcd3f75f1a0bacb7eb53109ac1"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p257.part",
+      "size": 35,
+      "content_sha3_512": "f8e3c4a2528a055f76537e195b6e651f4c3a14911a1ffa2aa9a2a3ee0addc8de95e96ad887193d433134869ff3e6461b198cb35b5232fc12b5aa203988770e23",
+      "leaf_sha3_512": "5f618eb2394e340b48a2ef3426b70a4f59187cf66cd7cdac80d85d10b880b040d71197bb9f429db5c7cc917474551457fc614281ac72f77dcf5732986c75d77f"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p258.part",
+      "size": 79,
+      "content_sha3_512": "d4365d2a8c1a079a99eb8b09818c1ce33941f602a8889cb334d736f4302cbfed076c72841c071b7b78b106b03a6d436c778957da35ab78a9e16dbafc4e2748ad",
+      "leaf_sha3_512": "fbd7899d7c24f5cb201e2a908d349fb1e8a8c74284a32a905ff533ee8f81786aae3d1a58ab330089290069405364ea49464a674d7d5db3e78414116c5105893b"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p259.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "d066642cb25e6e59951faee3b028c4692e2e26cd9ae722c1a93c8887640d1451cd50d1c73810659bba8a2a5e73475a4814ef713ea07f60e3b47b9ec20c57759f"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p26.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "5e74efe44ac586c45f82c81d3a704fde40ab2d119827b4b6888a03b7d9f2d73af978e71113c482c135d57168c3509c726cb70a20c7675be6661d4af5dc861154"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p260.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "787159f5068da3efadbfe91b7b62aa22e7b07875538d86aa517ae81b3341f168acb514768fd0d4eff31d3a425c531999b3acea81afe1c03ea399bcc6c617dcda"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p261.part",
+      "size": 40,
+      "content_sha3_512": "495c40f3d4ec12fcb0ad1669eaebd900d8e77fc0f579b03f7318f54ed9a7c990da87b2b6883cbda57ec04e16e75ed9a3b5f4bdc6045d0138e0ab48f63e2f880f",
+      "leaf_sha3_512": "a4240aff38cbe4c58b790fe342c6ec2c4dbdc949423f4079b6d7609a0a6fc0fb5f9c9866358f3e7ae614e2b2d54a4aba14c6618197b3a05c20b1cf2898a14f28"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p262.part",
+      "size": 724,
+      "content_sha3_512": "a1f8b4502e9d5887490a217d086b9616b5312f3660e272c46a7648e72107c3da6369edf19762f5a9dd366ae5034e9db77767b24b3329a89e31426eef4a9b869e",
+      "leaf_sha3_512": "f269c24c8ce66f959a872f9a4889c7d281196dc7daa41e4d6f7eb7bffaf8d457d7acb09afb4af87cb06209628821117dc59cee7f556b47f7c681e0a1abf5b479"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p263.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "20633d2a4602b24f9e9529dcf511de6ac8439a7fba24f7147b3f0df082f381545ba98a24b7eedb11f4728a4e93f07b2875a3c48a87301c76f3118ec851850a4e"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p264.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "01a7f3fac3a611570df7cdd89e0562044e29f0f78fc0724f7f8ef67587d7a6a61f34dd9e7f7b624b9a8c643ff15fb8cc1d189224dbbc1fbea5bedee70fcace5f"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p265.part",
+      "size": 95,
+      "content_sha3_512": "b72c9bb092198d155665e38e6bf4a022c8ef51943d75ca87aa8bc0e7fac573e46348d62796d99890d7fa71db348646f4c1f275a0901061b3beb2675d46e5df06",
+      "leaf_sha3_512": "b1e2e021f6756d058ac1da2138d3f1bfc8be664fc4d25a3a5496459dfc596a30f6ce7146396dbd29e3f0001452c1008c941dedcd9198ef4f4284b21f67d512ed"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p266.part",
+      "size": 564,
+      "content_sha3_512": "3954e211765dfd966b8787d810103d2bf929dc1ad0df60dd218eb152be173dfbf57f26714700889c40000f2deb4feb820adb1335471b44f8644e00cd167a64d8",
+      "leaf_sha3_512": "174f69efc9aecc40ecb2ef9895e0292ec53fcbe7f120336da17b2c3f0cd3ac77608614b7b6c6d2ef2a7b5f4cbdbd61764bf8cf0a95c901bcb86e461b98343125"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p267.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "53206ad4834d1564b18279acaaa95f55cf748de77cdd749787806036036af26c72e3dc808e335769440204d3511ab6a9412ed6d3c1d4432855c58f93ae0f6611"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p268.part",
+      "size": 60,
+      "content_sha3_512": "c3596ed3fc408561bb1e3c6cd25f62e65e2ead6fca9ef1396131759cc693c52ef2183c0fd49f6386e2952e377003134a187e990d12d7647d84f7db8997fc0327",
+      "leaf_sha3_512": "0676564904f74b583acdcfff531addd0670bdeca27ac91606e85c0ddf61c24129d3c8801e9721e6fbc1c1b4a6e70b538f26fad6e8400c6e3909651c095d7fbb9"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p269.part",
+      "size": 48,
+      "content_sha3_512": "2d5b6fae1d3e95e8806713b6501c17957a97f1c3003a44056895d9a29df6560d45bc135c4f144acd1f13561e38c6d6ed906b91958bf063a244474f093ef27007",
+      "leaf_sha3_512": "9989f8e35e72205282428866bd991c94997ac8f71134bdb880da7db866b8ec2b948cd1547dde2c13277b5632618ba60882e98575bd15e47ed05368e713a685b7"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p27.part",
+      "size": 40,
+      "content_sha3_512": "495c40f3d4ec12fcb0ad1669eaebd900d8e77fc0f579b03f7318f54ed9a7c990da87b2b6883cbda57ec04e16e75ed9a3b5f4bdc6045d0138e0ab48f63e2f880f",
+      "leaf_sha3_512": "0ed709cb64912a30c85370021ced5f5dbe52608dc86ec18588e3f07cc3c32ff822757f7f108762bbb3bcbb90f4083d150ca52a1f1824ef9b0a9d24d2fa3a9548"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p270.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "7b09230ff6140e19bede43885712b1fbe27329180674b42d3e766e77be50e57c8b70d6c50add67343bd33deabfa1bf90fd0ce7494bc348096a301736d35e8d2d"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p271.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "33fae04310ce5e74d40ac8f756332e4af0988a97e4d5c5233fbd963a4c7f8361c08a682b6f4bf2d4a5e22b8f3a63684e54c718ac6377df350d4234ea68c0f802"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p272.part",
+      "size": 35,
+      "content_sha3_512": "3750162bd097a9afd4257d8648fe4952e9a912046dd4a037098fc920773ea302f8355e42994883f67bfb2f9936d20133ea516d1c73c96f8d443409205e6c60e4",
+      "leaf_sha3_512": "6a28097fd6192378d5fe85d6ea44f2c0ca15f37e6f354ab9b4a2d0473c4e9d7dc547191a76bc98065da43f9b89f45bb3618ca2b15a543467ef630757ef8c82d8"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p273.part",
+      "size": 773,
+      "content_sha3_512": "37ee06a990c43dea5c5564a5e271ebccba323a9b942e4de1d01e50a23d98d2ee643361f3d772a9ff925a111428a992fcffc0336b9444f7ebb15ce16ae85fc414",
+      "leaf_sha3_512": "7f30e1b8c749e265c9462e426e32a7d8e17d37ea1e530376602ae23ecf1c7ecf2139b8d917035ad79d7d73a5bdef86da11d950c51e327e3b45de573504544ce0"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p274.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "fc7b4f26dbb3bbdb1703829a01580992dfe9ae8ec9b91438c8355ebcbb2922ac9f5fe6748841ef7bf02194c8f926f76d6b4b8053ce21b8396c25f3c58c6c4267"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p275.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "14c1e61855df67618fdf6f665a5c8687719b09ffbc8063d2a2b75f76dd515712b1de0e74f23647ebf1cc7317eca70ae176f3abeff0dce819fff6d421744a2fea"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p276.part",
+      "size": 65,
+      "content_sha3_512": "fa440184264fbca60e612ad47f76f9cf338d95fa23842762516ab62f6e4064db157354b99535f9cb8805aee909dcb468846e43d6d8f347cd1c8435696cde3e78",
+      "leaf_sha3_512": "2d73e83731eb36fa7a32622915180e4b4470d177208220a7a51cd070cae3f3b8c3985f223acf82d4a3b232cf58ea6e5e18781121e9dd5a7216cf565ced0f841f"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p277.part",
+      "size": 570,
+      "content_sha3_512": "c3c5f47d0712617a303d41c689eb42061f63f8190d3a0df3fcb659eb2f658d3ce01709289b4f7cf04a0d3aeab32b1e0595f36987b02c5caaea56077535f8884a",
+      "leaf_sha3_512": "9320efa002274d56c49a842308256814d300504f57f4731b56a0667cd85a8616f5ce09e9a792b7d10324397ea94b9da59a2b5d2736dd9f0b2e3f72830db34bca"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p278.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "254fb156fafbe672b5696bc0422e123d17d0f8de662ca0c06d771cbe4a7910579577d363c2f5b7e798b9165779de25492d64e2cb773dbd70bf59b18be4944a2b"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p279.part",
+      "size": 65,
+      "content_sha3_512": "54a02e1f904b9825b1d015eb8743d027d67cfdcc18459a8188d88b49579c4d1ebd63502d5bb9fcf340ecae0c5568cc2da194f6d4190e9f792e8e69c8bfe3871b",
+      "leaf_sha3_512": "9c47a7358938525d62fa7d3fe8c8af8a78135f9661baecd49bc67d9d117771504405556867cc60966b85df71727d1bf6bc1627c1c7e4ff3469cf108fa51ef2b6"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p28.part",
+      "size": 747,
+      "content_sha3_512": "f3233f7ee9b9b3d8db17bcb64caeb8df2b9f3707d46ea444c3e1aef2b58db2affb19cc5c57393b0e20ab42cea1e7378321796cf505bf8610182520453747ac83",
+      "leaf_sha3_512": "5dd940155112d76b4b5d43f576f0fe0f387023dea6572096af02989db2aa969bfb361fcc7991388ea05c8b7e787971b682f9f69a6eed1e854225f154f6ec16b1"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p280.part",
+      "size": 48,
+      "content_sha3_512": "2453ce312f839cf31b33e88afbde039335d902301803ecfb29f594e09aac1994f456125c2d9bccb5ecf7177f601b72f53e8468d58ad1a8d1c222b7f6f418fdee",
+      "leaf_sha3_512": "bb7cfa673d55598ed4960f554b1351d2c4554d99741c8d9275085ed86c6efeb28a21a9f4033b460b52bc8ef1fa39a4c44143eee8f36e3ed8359cbce060e93fab"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p281.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "96aeefd6b592f6dd46a54980714812697a7a736774b54b6df47f9fdd68393369efcec5ff5bf30919f390771fa92b4b5649cbb9b5748bd573a8014d55f35e8659"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p282.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "0e987f77a416c36b236b562276c3737bfdbbb6ec57657ef9e08273a17cdc52c0192766f54ad662a357dd591045bcd187135d411c68f4277d2a5bd361fffb0ea2"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p283.part",
+      "size": 30,
+      "content_sha3_512": "9df0f6d06bdeec5829f89a1ba72a825864afb32ba524b1809ed15d2d27290f4d5e15c465f37e249d88119530f8de18534af3dc13ae29de4e9dd2d9c0a7c18408",
+      "leaf_sha3_512": "e58a91b6be820674de0af15af90d843802f91077237fa96a82775a04480edbfba6c0e70641b35059d626d638ffead2b50fd73719693999d1b3b73e222b4e12e6"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p284.part",
+      "size": 564,
+      "content_sha3_512": "e1d2a4b60c831eccfb4402cfa9b5e7a9aad91b15aa1f2bbf04ca64dca728465b1b6744bc866d3d08483b4c76f9fc5146d73897190b3cf460e5a0a24a4986e6d2",
+      "leaf_sha3_512": "8e595e4a0f94f39d8c36388bcb1f240c653a148cb8eaf4c2bd4a6b37e0ca7367eeeeecf9588a50812c565436c95554c28d419cc88017620e375e09e2c5325892"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p285.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "1ab7ab5d195922492407711e8bc8f19f0b595840c477944bfc49946edc864dba98e4932facfdaf6bbdbdad66281c4bb29489377349a41b541c0b0b11b05efcdc"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p286.part",
+      "size": 80,
+      "content_sha3_512": "c0f3a3a753731f78b9293ca364ff1cec86e656bb81dc619b782219a8ca7e05a9c5ede2f7975d8bece810e3aa815b8ed06da90adcd0a7955ced6f6f4db1be4d8b",
+      "leaf_sha3_512": "27bb73717cdbab00edb5d67360222c80657fd911cf6f309173865f1c120dc689c4db9edfcc239c4cd82fe10f20e8d7c043cb113ecc0df15a72afb87d83a55199"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p287.part",
+      "size": 63,
+      "content_sha3_512": "a707d75e817635d784d99f2f7c9af836dc3edf251e878e884cb33991b6ffb76f04554e6b0ac8a20b432dbee46a2ac368b1db9cbb18accbbbaf3e38ae6a0bf366",
+      "leaf_sha3_512": "51b39587459d5827f1d276af48c1463b62007ffb1565d045e701ced80f653938d9b87fb927d4102ae4998fb757673af7c1d2fcd51a79da7c3d0468b463c7add2"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p288.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "1c5a9cc382d9041738ffe02e35234aac0dcd65c321afaf76a11b5e381c5986f067df18f4d7366416f88f6eb72027fcc7aca9bc39e0bdb97e473728f4a82f1022"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p289.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "1b441f6e77b8e126804ea49e5801aa485559e98ffa9d50156674f10da830b9b9a395091bf5e5382da52522af0052c358584ddeb04f03d3eb299e1333a6f33233"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p29.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "3c0dd6ad8db5311a13ea06c5ae0c23f2e82bbef2be8c50d0ce61d1caf86774e16e5126131790d6a6282b4102c7569c62a9d417cc11184705faa63e5c2078c2e6"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p290.part",
+      "size": 5,
+      "content_sha3_512": "1193db52c3bb4a0b91f9211db4486f6b0b770e3e0981f84c8122e4123a43b66d870709f29543a04c196dbc9a08660454b775b3c3d8434f2cf2e11d554da3580e",
+      "leaf_sha3_512": "42c2304ad9e2229556157c4392f12791d367cc5fe3003bd2df355def7d96b04f1f0a4a6cf76dba17135ca8ec6f845b09d389148dc55a620c1be9c611a08a1aef"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p291.part",
+      "size": 782,
+      "content_sha3_512": "f2d3fdf6fd14175171a12da03247e2919ccc96df2a27b660877cd89ba9cd0258d170d5e694f724feb75a04c85c33a2f7b4c1655d99674830a84acb33e45e5236",
+      "leaf_sha3_512": "0610f29ebba412f4db435013ca0a3f2ad98149f66b11e45cd6d07a00e9f1a2594cdc9395068ff507134fc6cce25c059c4239c59f4126ca424411a4330fe4c1ef"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p292.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "4d49d90a01ecd75ec98468c0da9fbe141822732e30c9df60d37d95ae752308bf6d552fc87059b6149e7e13ec7ce917b63a3f4cac0a8b7cc87eec1ec656d7bf30"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p293.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "fa59cf62a9b1e57228c8fc2a8141fa87b7dbedb17c82da4a5b0ccbb955f2957cc137065d033c30eb5f5fc0fa20c0a399a2109a89c7dccdabf3c296d18d64e65f"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p294.part",
+      "size": 55,
+      "content_sha3_512": "6d9905d3006a6de7e437ca3cca28c1198938687158c911218c20b8e8423a7faf079d1d14a329d34f8a58a1deb84942bfd34d2b43f4a38ee7200740e5ab65c865",
+      "leaf_sha3_512": "83f6dbe09f45dac64232e1e910c252515c8b3c6bea99d467835b394f5810087a97a5606556c73c9a8b06c555af1570bf6590479b373b4c4e77a8ffe7e3da5752"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p295.part",
+      "size": 697,
+      "content_sha3_512": "5c5223eed874523e5e3c3d28af73d07de6a49069721e44ea87ecb73b670dd435bd880b659db60f7e820e6906c885673bb21699acf07abc745e413ccf2e568cb5",
+      "leaf_sha3_512": "afcfc5ea226143713e961c0466c0c666d1199b29d30be73714317a01c00e4d5951f2defd7efc475f286e8945a6a95e95f8427ada4a0c52f515ac69d9d3c2e6ac"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p296.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "5a3f4a711f70f957f7e2c897acaac59adc82c6d580223993e23ec0cb9a10ad2573456611df789401ac23709276d39c7917e607ceda5c2a917df3479c37d3c43c"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p297.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "fd204c182ea3e7b196932fad7e9f2007a4bd3c72fc444e7796223535a13a08818f1fd45e124d93aabcfe8cb7821b4a671aefea791bc826f49db29eb5cb5653b3"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p298.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "6e82bf483a2ae06a8d995f26c36ef82c2bb2d420550c2e4e6cf0d8423d30a64594845aee227c9e5585813317807aa8af845c11b3feeea6359f3a7324c0569404"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p299.part",
+      "size": 20,
+      "content_sha3_512": "d24dff9219baf27885bb3d39ca5fd565142b2ffdb2ffc90595b55a65934cab8b722f1e63f0286fc4589edcd6041dd527c90dc0a8fd6bc9a5ff96cfe870097e66",
+      "leaf_sha3_512": "f10d6c53ee78971d0f7e5dd3fe2b0b010b33a287840e489e9e81a9dc9c0251f809245316fface018d29ac6fe00d393d8c6faa20fec44010a8827a420829cb0ec"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p3.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "dccd5f5d97481fffc7b7c452ee4ba1419dadc20042e48b20e610fcf7eb086d641d7afc1242770a66b6ea0b5ecd46d56c1a63a8cc5e18bfb13ecc0358c792e97d"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p30.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "9ea80d94b7517fcd98dd5ccfd1119dac02cecfeeed48e535291a5c0c7d717751952600898c07769ed4da39ec70bef4e7e040a4e05ff20deb9b4da8ca2b54f08b"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p300.part",
+      "size": 727,
+      "content_sha3_512": "84d939f9500652cb933d7b4ce31accff73055f1ab50e018b995e3d200182e21798cfd35f75ee0f30c92690d40313c17389b9231f030b4b5194d0313aac619a4b",
+      "leaf_sha3_512": "d1b546615a357b3cb07902ba2d954470424f513b479d5a4ddbf8c1d0407fd5bf41a8b16adb498b13819890469cd0f2ef2065b16d620de628f8a4e561e01d3650"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p301.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "9fa8b6375e9ef2d755aa82338f236637cd2db837870ce0a20290e11f9ed1d0e469f8ce07960a38b016fbf42b012d2520a4307266ff8a74ae14e7a69ce20b060a"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p302.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "d0ceffcc0f3afddd47c9a46faed643ce016b28ace24027eb2bce416e05f6005a70756e3098c63354af30a14ed2d2df240cc03801d5f8cee8b2e32ef3f4784dc9"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p303.part",
+      "size": 95,
+      "content_sha3_512": "b72c9bb092198d155665e38e6bf4a022c8ef51943d75ca87aa8bc0e7fac573e46348d62796d99890d7fa71db348646f4c1f275a0901061b3beb2675d46e5df06",
+      "leaf_sha3_512": "b8f2f377c6294d776c05e5f25a1cc724df63b6884e6a3b25156ea1f7175bf9c572d92f43671851f50732f0b1173b08a26c137afb19c9eef9b60ef9aba3843be9"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p304.part",
+      "size": 564,
+      "content_sha3_512": "090ebafd6a89d592c061b722bbf23cc1a15679e98aa316f0f957dcfb3fb1bdfe1abbd086e034a431077ea38b736f3db44726bd94bf001cb3ee3e0134d4362742",
+      "leaf_sha3_512": "4cc108b63921039dc6df00fade51d28d09378de725524571e581123f5084a2d8e26ac8eda5f4a5d14cf5b63a93b39f36de0164da83f5fb8f5abc8011d0ee8986"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p305.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "b13c37322f267a88c77df8e506f2bd66d983761a96779c5568c6fd2ccd2541caa7e489936b4230f739cf8c7dcf7389d5618ac2b3796713e8264830c87be0e429"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p306.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "dfbdbf9dad310d292442eeefee78da0f0cd5a550e7ee9ba43754f3c17c78ea683897306fa75e5d4e7457bc922b6ec635f7913a3031f3fbf353c8bc6460b20449"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p307.part",
+      "size": 94,
+      "content_sha3_512": "03e803e14dcae34f2885df0fbff8bebc5f411fa1355da75aee11383ad98797bdce098339acd0317ffd7d5d0b81859a45024ed580d8825272c14580aaee209512",
+      "leaf_sha3_512": "0ed1cf07830e149012a8e6032285f3484344cd094fcc85c7ba8ada2493432bce3105e21f79554ea01107bf44e7eeba906b6657119b53cd4ee7756f756c4b1b28"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p308.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "6e6ead58fe8c0d6d79f681862095a99ae7ccb079ad66296ad14515dfe0085538f5942abb64d17be8da7a06c0beafe9c2e74128ad00a1717c19ccac334435ff6b"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p309.part",
+      "size": 65,
+      "content_sha3_512": "fa440184264fbca60e612ad47f76f9cf338d95fa23842762516ab62f6e4064db157354b99535f9cb8805aee909dcb468846e43d6d8f347cd1c8435696cde3e78",
+      "leaf_sha3_512": "8510b0a5347e3befac963fccfcc7254179d0fac2729359b8a5b32bc48ab22ec94e93d9f49ee1774d18cc9a5e3ebd55f9f2d4d62312f6ded32c9b6965cc1d7440"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p31.part",
+      "size": 75,
+      "content_sha3_512": "60213768a42b2ddb6b1101ef09ae230e2c8a32dfb010e17ed3bf3b61043e4b2c5ce86632ff38c627f0fd32c09076a8cdba75166163bd75a0f8528a7c1c6d3ae2",
+      "leaf_sha3_512": "0e93a39963b7482372849eeaa0a0f307ce0c1ad12158bfd9483089255b89d8dda5badfe9f001399090d17ca8cd062708f99b2a982a72a6dcfe2ed652268786ec"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p310.part",
+      "size": 564,
+      "content_sha3_512": "a7dbf0791a099c8230f8d5de5336c0033cd830c798f5496266d69d04db43ff1e0986917c39cd9eadbd9ef8bbdbe4bafb6d7296aac5d636a2b49b174c560b4ae4",
+      "leaf_sha3_512": "2f235a922aab43a7c186663d195a2eefc6dd863b78cc7f465a8bfc4663fe0cca14b79e50d631dde6d1f38b9bedffbaba245b47a2bffe9542b48c2bc13c32737b"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p311.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "8a55f23a2ba70afb8340954befcb5fb8321a1086a603226a51d85419925c25f4a72dc19e75087e06190480b000027bd6301da3f92ac1ce9c3a156f4459c781e9"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p312.part",
+      "size": 55,
+      "content_sha3_512": "de981950d67e70ceaa669718d8a384810c8ec5151f3689e838d177ae819c09502f2ec0542f5df98613523679e72012cfb581a1230f659896f21b49b4fa63e98a",
+      "leaf_sha3_512": "5d4c4f22de7783f09762c250ba7d764940864e681eebd1a9da882bb516906fe725f7a9c021757c9d2e13c0f85a5193ac5f3b86e9f8dea3ef12b90db0a67233ba"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p313.part",
+      "size": 104,
+      "content_sha3_512": "80c5611d0cbfbbed0039800df91e8e39fea48da706c564d4c0a175321fb8b7ae6d241056cfa6ebf5bfe1606b7c78143503fc8b5cdf7ecae4d8880c9aaeb4dd4a",
+      "leaf_sha3_512": "97c81e9e5332216d6c9d71400f89085456b827b1dd7d1d7325f44ee17fedfad4b1c55e86f4a1c96d5e9a7d67f7a1dc7967425673a925d373d8999e7ecdd398c4"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p314.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "912214a29db5e729c7eb9b1417578f7971e1b8589d02e267707ca74194ab2c5a49bcf62e22b2a497ed6de36bba66808883f8116e63c0d2f4d1603cce74c1f6ce"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p315.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "3beea1d3328d514bbeadd7104e30bf32982d8054cc018df96d159bee39a571c513551f0ddb506df0a3a89c6ed37e043d579185a7e62627f449ad397d5baebc03"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p316.part",
+      "size": 5,
+      "content_sha3_512": "1193db52c3bb4a0b91f9211db4486f6b0b770e3e0981f84c8122e4123a43b66d870709f29543a04c196dbc9a08660454b775b3c3d8434f2cf2e11d554da3580e",
+      "leaf_sha3_512": "73ef66d4a2c338ec02d63bd531c71bd0de8b7e4e07d7f36ba4753e96052d56077587369eefffa170f9813cb6720695793e543a42bdaa08a7dfde76bc51b6c9ab"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p317.part",
+      "size": 564,
+      "content_sha3_512": "a81d7c8e82e486dbb5ec8e7fc7ec9a0cfda555a112b4da04c81ca9122c491d387b8fec83bad71af6357a3463e468faca3fca9e56789d312fd38e19a5c05416cc",
+      "leaf_sha3_512": "c1e9d1682362f5f3b76a5539c6a3391fed77fa07a3994caf661d9531aed964766222b902ea03bb53bd7f23e2c83861605011041db8fd6c1654b27a8086fd0b0f"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p318.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "63b104c15e80b87096aa0474992142ff6bbf460455a157749e6c7624c6534df28d9d36fd571c723e2e096390ff16d1f6a2efa8ff8b78712d80b4a8e7b1eb0b8b"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p319.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "08278ad63e7300c30220b1c95c0df5ae32fd1bde914d67dedc57f6dabc48271dc029067543486c4f59bd0f751816036cbdfdf043124f8cbe648ff30584280f3e"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p32.part",
+      "size": 661,
+      "content_sha3_512": "cbc8c804bb7f2698f4fae7c31179e2cb1c3633f6da0219163e257e69ad9447b3d18ad3013ce99959e9144ae4db07e50d4e5c748fe6e3367044be8d2b42058a6e",
+      "leaf_sha3_512": "5c7f7a393b34fe041645e699bc5a8b7d232606394cf855649ea8086b3b85f3edc9da610d253b9699d65683e32790b8ea2a740b5d43252aedd17df4a4582ddef9"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p320.part",
+      "size": 35,
+      "content_sha3_512": "f8e3c4a2528a055f76537e195b6e651f4c3a14911a1ffa2aa9a2a3ee0addc8de95e96ad887193d433134869ff3e6461b198cb35b5232fc12b5aa203988770e23",
+      "leaf_sha3_512": "a09223b7a66c382dbab39b73efe07f4cccd4a37941a75514f1268c1be9b1d9f858ec4334d2b66b03f7b1c7e248d03171692ee30e27cb45f02c009738fe8c340e"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p321.part",
+      "size": 55,
+      "content_sha3_512": "29473b40cc31136d65e07908c3dd04c2c277d61cb6927b55b99d5220d46dcca946a8781e59d8d71a5eb3bc5600ec91dab13a44770ed0627ca6e384657b090d7f",
+      "leaf_sha3_512": "4c4e20ac9a74bf5cc1bedda703ce5fd0a97aaf43757615c65d35dbc91f6bdbb8e0d46e1fa8ccc4fe31233ad122decd6332161e3db7a424784eb142364b35a296"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p322.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "344178f2325534584e677a95fb6a676cf8ea184706ef178c67368ff43da80de9f32f8ed1032fcf055e9d2044d5683ee4dfdd74289a62ef60d8049d08934d78f4"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p323.part",
+      "size": 55,
+      "content_sha3_512": "6d9905d3006a6de7e437ca3cca28c1198938687158c911218c20b8e8423a7faf079d1d14a329d34f8a58a1deb84942bfd34d2b43f4a38ee7200740e5ab65c865",
+      "leaf_sha3_512": "785baa3838976b6a87e4d26bb9aa2a8aceb27a9ac2c70f0a5233c6674b8a674bfdddcff059305093785b7ff3b5673ed2133a05e4f2d49fa09e62fbdd48704266"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p324.part",
+      "size": 570,
+      "content_sha3_512": "8dad9c2166f8f1e6108f86cc733c3026e5131973103504f71d9a079b7082d1669b042afa69372ab029f7152bd0a920f7349702201cec04f42d79f29c2c2be43e",
+      "leaf_sha3_512": "b401a4da32b1ef9104f3f4e81284e75ab62e48f808e80bb19c1f1f6a722708d520c29ee8a4c2ae840676dd6b59bf5a1c453d5214003c02bc0933072ffdc47a42"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p325.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "5753f75866f1ffc4ac8428d96cbe404fff20c2306d646b2860d3fbdd8cec91105c33abb01a164b962387732e6c1e3e173316af67c647ea550b2415f39d8b17d0"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p326.part",
+      "size": 50,
+      "content_sha3_512": "8fe3170d078f1f7ecee632776822c54a2807e559a7c8d80fb65292f30f6bef8704f7cbb18133613d4ade51306556567fe01afda1fc6829420aaf1abb62fff7f8",
+      "leaf_sha3_512": "599e906f1067bceba78ee471c198f51694e62dea4e8b4199626904ffab9b02fa23f1133fabcd6e7388ede1bb11496aaa2722a4d1a9deedcea415037e8f44f642"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p327.part",
+      "size": 47,
+      "content_sha3_512": "bb1fb7d0b85722b0bb6969f3c3799490bb56a042dbeaf80b6528a8daaf8d2c2ba672282e4dd09a76c8a16119aead0aa545db19148c900a4accae0cb469d68da6",
+      "leaf_sha3_512": "8636daefeae9027c9460ce3cf0c7d60727efb3a5c614ec665737327ef1f49284fe1cbb0a34108015f53f378bb0d9699a605717110feeddd6c377500c2fbb3097"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p328.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "99c23030186a0a221fdd38d67ea01f8c6619040e0ac444461e5048e2691a5bcd9ad0b71ceb603119949f7001d9ab127ec09eb75f7990b673c7e4f4c5dba4b8fb"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p329.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "95b6dd03ea53e9dd7b8f98f19bb56a0f1f30aeee9619fccb2a7e360a379e2d28a2984d6e54a86a2ab055b19196303d46c07e5e850fe45da5985e3b1be3aab96f"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p33.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "f956b789654e2a812de6ba31cddc3fea89972319087bb278824404d0c0f0d4efea21e69133295422f78018eb220ba7dbe20bd782c9a9cf8e41e6922ebbd89209"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p330.part",
+      "size": 45,
+      "content_sha3_512": "3c6228399b91eee199344c065fa6f78c337bf164b24f94968c1b04b2e109b198c71b52237a9fc36a7f3b19ccae1faa160d76c29af49ec6d104d134046f6dfa27",
+      "leaf_sha3_512": "8eaad877e50a0745a0ccd2da2c01d453ed25cc9d84622622c3ca7f2b4ec7332aa05f2ebf52d924ed2964883328a53eab497d504b9a59c3f90981c2e96f9268bd"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p331.part",
+      "size": 747,
+      "content_sha3_512": "545a563f35577a4d8b7f1e678fdc575ce91877377b7ff7ed7da5e4918898117f950d791af803c36183f98dd31260e3fc780796f062d5c5a06961db879f34b6ec",
+      "leaf_sha3_512": "8f1a309bf2dcd6b2d4bcbe9c37791a54cf6d8457588634ced55772a9ae61d5ff488231e15e28e81f70a2a3f0799ac24d2fc8e786ac97472f2927352fbec1934e"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p332.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "7bd691a6e65b34b9389f98b03728a16fd33a96f0cacd23a03eb48a15edafea922b5c95544df9d44e0ebc3ae22622c46555c661f3c8862af3433f05e905b40cd8"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p333.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "0658e818d214a279136b95f4297fd1b47728b959640673b086a5be24c7a7a46f57de35342186b7a40c68502c817a1fece824fd80451f695bcc63066da8029c7b"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p334.part",
+      "size": 75,
+      "content_sha3_512": "60213768a42b2ddb6b1101ef09ae230e2c8a32dfb010e17ed3bf3b61043e4b2c5ce86632ff38c627f0fd32c09076a8cdba75166163bd75a0f8528a7c1c6d3ae2",
+      "leaf_sha3_512": "f8b89848327d005b8adfd0f65b6f519c88069897b6293a4d460372ebfba31b4e53d03e9a5a5bebc9c1f657038c89abaa4a4970ab6416491f89583fe1ae063315"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p335.part",
+      "size": 6878,
+      "content_sha3_512": "6202f6cdadba72c76f4d057de2ea5f9950a72ceb2b75f258ce1a636116d0996189aeec3b7bbd3222ddd1796bac104a66d02acbfa1abf71d815a52e1d76c4d451",
+      "leaf_sha3_512": "aa28c0448a8530cde44c462b4edc04bb284feb858e650bd02c636aa901f23502dbbf6a5e64e66dc039a0fd32c4175a2d31cb834f1727e5deed152e652ba98214"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p336.part",
+      "size": 6594,
+      "content_sha3_512": "f2158c3b76e09a9048bca652c6d3b6d1ce2f1c01590fa339e42bc2758f3c354d8efee8c8ed55ba17d90188337eea14cf8ba85a26bc7315b2bf13014cd5bdb927",
+      "leaf_sha3_512": "fa4429f98fc0780e519e307b48cacdc9d75333daf1754d2770a067f7daf0a83e04355779459ee4ddeb6cec2a306d9d3f752fb9279f6cdb084a5d3fc9962d2ad4"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p337.part",
+      "size": 6394,
+      "content_sha3_512": "cb9933ed725510147ad0243b37c6aafd69df3a11fb87ffe75165de7c1f13bf58798637cccede3c2473fcd896f8b6aa066ca7544ea0f72cbc75647314914f4972",
+      "leaf_sha3_512": "eab736cd2a21642cd2c0a184c667e3dea9eb7ffbc1028bc82a1902b6b4b2314c327bfcee7b8ef075b7adf229362d7214b64c2f274506785fad46ea3ca9957103"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p338.part",
+      "size": 6798,
+      "content_sha3_512": "cb62264c4ec20097463733aeb43d01a35dbd0a125250a5abb19f2147a234668d399bc550600f6167163131daaeb4572ef46d43c744f72012a94147a975c3b9fc",
+      "leaf_sha3_512": "23e96f318246d4e5a9c0e482880e31ed8696ee8b2dfdad6a9f4b574293245aa999946de9442cbce9d03a7f574880d6e1698466d434b761b51b09b6eda81f2104"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p339.part",
+      "size": 6099,
+      "content_sha3_512": "d46db61a6e3615f01bf543fd331a7088a8408f7a391c53033ec06896b37f6d970d5f74b31ec9e270fbd23fbf2b2d344dba8c5711a5afb388715d86db873fa3d6",
+      "leaf_sha3_512": "661dc9b0e0df35a1efc159b00c473883c030cca2907e03f2ddd1c1f5138d61a45c5335ec0eae9b4bc3692fe4b9786ec3181b25e8d827588c45238f93656469e1"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p34.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "72c4909f1de78392e1f787681b1af058e7c84cde52557488eb8cdbcae17c57b5ea396d0d80130be5f8fb5d96c81adbed96737d4f314d70f98e6fe67d462471d2"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p340.part",
+      "size": 6234,
+      "content_sha3_512": "84fb0198dd76133ff5f2d4857211fc86e42b6494b16282e9b331646f6b188fc9070952cfd96523c28555d054c6bc1220967c303ffe860b44801488f4751f5f95",
+      "leaf_sha3_512": "d2561d82c2e3f6a0e2e61a998acca2e5b31cd12a78f1965e87accfe6891142d2b57cfc3b5a6bd30760e814f58e8a6a33e5d3136ceb3b5abf31980ca6cf18709e"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p341.part",
+      "size": 406,
+      "content_sha3_512": "4278b99b4bfbfbd0ffd774c547d52edd5f7c6fb09ea43978de25fc65884eda790022101c1f17ff73549e3f09cace2e6a06dcb9b5226ed638e0780b44818053df",
+      "leaf_sha3_512": "b42209520a65c0e47007dc3c4de6c862194dfbb861bb36dde4699c6f83977c2f21f2351a557689c9fea007357c75480a58b2ae895d060dae57034fa4c60406c8"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p35.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "1d95c9c22fb0f23a9fc2a6cd55ed9f0eb8b50816750ed302e6800fcc7ef9948ebe77195ed2e5e99e9dbd80b4b174dee9e4a4f88cba91647c40c4691caa76f8da"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p36.part",
+      "size": 40,
+      "content_sha3_512": "495c40f3d4ec12fcb0ad1669eaebd900d8e77fc0f579b03f7318f54ed9a7c990da87b2b6883cbda57ec04e16e75ed9a3b5f4bdc6045d0138e0ab48f63e2f880f",
+      "leaf_sha3_512": "8b763da7b11e298f1d19b35e0163316d8da9fd1db6d7889863a0008364d6989c4c5a9705c76565d38fa628211ec2948a70c9f601308cc6753e8165568e20c40d"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p37.part",
+      "size": 728,
+      "content_sha3_512": "664355c80f950f564f1d97490b63ab66c55bfd9a4ddbcec090dfc55dd465ac536c0f03ebfd0ebeade19a9d67107c5b6e3b223c6a8f2c16ae95a50b1599c44dd8",
+      "leaf_sha3_512": "bbef0ec9067d78ff0a7e07eef9cfa9a280316a84d20358d9a8a06921d630e27d5b51c114dde50e3eae01ff35e7e8f973b131b50a9e28ccd4a06ed0cf102e9b86"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p38.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "50e1b492073ee6ccdbc3239531fc9ef35b0684a68fd4ed13ab02be51152a7d6554b5cef0c9482e540d1d81b7fb45cfa0bfd2f0b81eaa5734ac846a2647051fd8"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p39.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "74cb507cbc36eb78a0d5a3123c9615b9ca45d21fff0dc179de328c663c02e13998db3e8920e01d887185331f96e4fdaa3203d65e6601348e31d89caca85b0763"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p4.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "fa858e0514ab3760134366baec32bced6e02f4073e7aa4b0943ef3a14f0ceb478f5422664097587502cd020a2ccf434785afe0a6d2a306b5e5323497b2a41700"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p40.part",
+      "size": 85,
+      "content_sha3_512": "ddc9469bb1080185c196062bc046c6ef00e581b91a8d1c79af8433426a8bd6b696c33ce6fbaef184942a088d1a1170adb28d783e0c7bb7c7a79afc2840167be0",
+      "leaf_sha3_512": "37634cea96e3222b39919d8d4b318c561cd58a7565ee6855c8286001e0e556f9fda8d2203e8a908a8c965d001fa8d12ac5c3a3d5f989a6481f0c8f1e11cf0c83"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p41.part",
+      "size": 564,
+      "content_sha3_512": "4fb18e5b0fa6b7cbd125aed8b87a92d8473f049478067cb30529954ece8c305b6424d0616e584780e399e28a70af85afe14ddb93e2097f6749e63958366a75ce",
+      "leaf_sha3_512": "5f9925a51ae71167bf0fcd1f61b864a1945ad3560c0208f9f0810517c183bc426c3f0b2a96f255f1162bf5f894446e426f09ca6887dc25ec842ae8b5bfcf767c"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p42.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "84c22681e82d62d8563d886a14d9a459233ce1de9370597d484c0413eb874b01c34bc83a5dfb1edbe936c8d4602abc4fd7dd5bb161901d7144183dc0e9d825e2"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p43.part",
+      "size": 40,
+      "content_sha3_512": "3a5c8e17406a4cd60ed2d6b47da658cdbc3f84314447d02110c1ac928c37ebabea344b605f47ee0e00acc696431088d90e4177eab724ab0f46facd01060943c8",
+      "leaf_sha3_512": "4ecd3014151550ce65453da94019d5366ad6136e3d2c2dc2b8bfd1f0f87c4fd6af7e356e9606646fe525f31a9809731f819fc5fbd85487b28048c88a61c8f6dd"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p44.part",
+      "size": 119,
+      "content_sha3_512": "71779e914dcefc9333bd3ffb62dd314e18a68f2247a172fa1d784cb4d4a29edd6a4a9db014b0fb4c5996f92e4b8319d1cdae879e86ca7e79efc71689514e9ea1",
+      "leaf_sha3_512": "5e81e67ef622c41ac1f63fc8811515808f3b2764f0daa8c38c6c4d71cd0a5e769656ae44161ce44544891e8c5ebb6f8c0d1590ba7e4d705b4c48990105c976eb"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p45.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "3a6405b2392de21402d2f685ed182d5aead8d8c9411bb4baef3a598546d2a63ab961f9543659d98b3f58a4bf880e00db432e50e98e4614855010cbe2812278bf"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p46.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "77f21d728075627599e5e9391193ef0172384c0a7e49e8c670954dc8386793d4ba7f57bbb0a450c825d207565ada296b97c8ee890ef8fd3a7ee253a9bdcf4907"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p47.part",
+      "size": 10,
+      "content_sha3_512": "b5712326aec123aa7644299b2a18519cc56e83763c411bcbd7ef76eb157495d1fd7b7943d40e6c0a3b6bbc88a69e88fc0fe719c6bb229dc05b27cd59bff498d6",
+      "leaf_sha3_512": "9fe20755662b565b7e8209d35199e73bd704d7cd3457f3c8d4ce7f34448afdfd56745b0620bb7353168980e973c570e631788c2af93550ce15b659db4cde36b1"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p48.part",
+      "size": 570,
+      "content_sha3_512": "ff5b60e4edda6b1496b64cd937ea34869f696a2544e8b2a87c84c459376ae25159dc3d1dcf6f8b8729b14e65dc6d37da5e157b0f828685642e5411bedff6c2e2",
+      "leaf_sha3_512": "aa6aea010e9c47a3e0876051baa4573f1099eb5ee5541746ed8f82a020c3c124553bb74c8ef55852409cadc990586f2c0cec09e64f1f5bef393d1f4fac66f0e7"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p49.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "5ec36e21ce8ce0ece3671a9a98e208fa985953af0146f91f02b85571f9e7cfeae696063a4496feb40d94c6503039ee6f11f0daaf46816944192f33dae2e97896"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p5.part",
+      "size": 80,
+      "content_sha3_512": "06ddd78c83d8f661568501d1227d95158838f6bfd8c74aaa6d830bacb09a0505c3de9805ec470cfc762d78a9f79b2b47ebdf396c4b0af504952ed2be84172ee9",
+      "leaf_sha3_512": "57cd90a78ddb2f056a8d42968a1b2bd53ca6fb29854b67802d2802f3d078abd3336651f8348287e37290138b2023570735b148dee5e4735823ebca1b0d12128c"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p50.part",
+      "size": 40,
+      "content_sha3_512": "3a5c8e17406a4cd60ed2d6b47da658cdbc3f84314447d02110c1ac928c37ebabea344b605f47ee0e00acc696431088d90e4177eab724ab0f46facd01060943c8",
+      "leaf_sha3_512": "6551ae540e2e770374f7e849b9524e0e500192ba2e4d96d8f55fae2f40937730471c69f2341911dfb9521af20db7fe919d56684d2b6d9eb02fe3f66b6a8287a1"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p51.part",
+      "size": 95,
+      "content_sha3_512": "7864ce264f3d03d1cebac972a51a8517c202cf637ca7449c40ed75553d8f1952857cbe548fbac67630340a8e3f04f80352868161bb947881f67029856195b6fb",
+      "leaf_sha3_512": "5018793f3514ce19edb8c9ea0b3f346e56d87581a00110364bf0393efca75d87bb38484e8c84b7102c32e766de000c0e124d3be6dea451cc8b1cbd2cd6bfc032"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p52.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "82a3030eced8053256c2779d2e837c6f4c940212caa4b39f3d72302346d7aca2ccc63d6e6379d90f9d3563d53930b4bbd9c3c17cda99436da516a352d4b4a3c1"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p53.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "ed9775bb678d774de46f785a4c70242ca02ddbdaa2293f45c25e344026d5b1008d809ff24135f96f387f6022570adaa58c4808141d75c1dde9b81d455d09d60a"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p54.part",
+      "size": 25,
+      "content_sha3_512": "0a243bbe3b26ec2a9791971ac8b6a716d15d3d7134848c8942be31debeb10cfbf5a1ca640077697c0d9843e9b92530dd9f956a6e8cd22df201c58f2d1fc39b3f",
+      "leaf_sha3_512": "44b19130d41841d720d8474a5220f65bda734976b5b36926a42fef63248fb8eb210d56dab4347fbc66a104fa0b633df805ed1ef5d8f73f7400dd7276755ee8b2"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p55.part",
+      "size": 761,
+      "content_sha3_512": "320309d20c88e54fd665c206c516e5d3f351cffb4d1f9b71e76e545e485ed71a4ebd05b08404521c394636590e13997aa42d3a3138a79d1a4ab7148f805c5372",
+      "leaf_sha3_512": "3e92d149058caa6dccfc5a4bd50b613a12013de0887ae868dc4f020d8367969a959ba73409157f23e28cba1851ceb6639fa8ac1a0c0b2b8ee7bfeedfab4cab62"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p56.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "0a9ae0a33520e8519005d2b01ec1f5ef1875d00887cd3fea4b86b3e70baa56e6e02ad0ae4abd458369c639fbe5478347096ea590ac8f5e942b5af11093c71e7d"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p57.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "bac8cfa735254d4e61bcf20f7044cc74971d17fb9373b754e4b58bb3590bbc7d017b60dd3af45e68b3f6921b9731dddc2c4b1d9c433f969bcd3368bc6b35f7a6"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p58.part",
+      "size": 55,
+      "content_sha3_512": "6d9905d3006a6de7e437ca3cca28c1198938687158c911218c20b8e8423a7faf079d1d14a329d34f8a58a1deb84942bfd34d2b43f4a38ee7200740e5ab65c865",
+      "leaf_sha3_512": "a23e92209fba63de13eb17d0569f64b57d154ff084a8a2d5eaaf895e3699788addf0efd2e4f1853aa4859c2df7bad0d49976f42c38baf614516c4fc7a0cde434"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p59.part",
+      "size": 564,
+      "content_sha3_512": "254a568f7ebc1b14077caa109aecd73d1a7b90688744f91cbc6ec88a7a45c4cdd62b4d91c181fc58de9430ee9ab27a4d00bd230fbfed5896b8d728e5735d9392",
+      "leaf_sha3_512": "3afc20533af640b19952af9f2a770e37872d3e89e5e929dda164e92b3a201376f4d1d98be0fb682d4c6a945fa7e903472a59824e382bd5628eaa6d5010cf0a18"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p6.part",
+      "size": 767,
+      "content_sha3_512": "31f454156dbc0284559cedc2d51dacaa965ae673c6b7ad47e5200fa34250691eacf197b8fb5b57963bb164d3daf32152dd2e1d6ac89f5a277340ca6f721b034e",
+      "leaf_sha3_512": "ed6574b5267e70c621e8ba0ea66d1097fa3324e768bff52b429caeca94560b52fcfc6186ee2c65047e102d64519712227f870ec3ab044c4163033abdaea0e349"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p60.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "9978e403603d136ef71665c00efb3c37b00d99b1856b68564fb8efc69c109c08733e73fe7c228ffdb013ae80624d342339db8d24df69585f061aebc9baf6f714"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p61.part",
+      "size": 90,
+      "content_sha3_512": "5e23930e648c27a0f1379a8789653c9a019fd9e766b2e7039a3eed795130c7f4ff587e8669cd9fa36fb35a9228ad5d105e21a5d49db2766b98d8f6c7cc15f473",
+      "leaf_sha3_512": "f2a39140f5d9827bcc2fa613f16548eaf73d0bbc4ec91c93ae6a0d69ef01e6c1de062b4845eafcd6ac109cd51b4cd7f41a346fda2b8e60d887e3e8f2b4c5ff8d"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p62.part",
+      "size": 72,
+      "content_sha3_512": "e2e1d6005de91bc84c3354c29ed2fe3ddb15a7ee139c60fbbc3bfac218ab64ca4661467dd306ed9623f97c5037f78db5a3b1e5e9942c090f489dbd75bbf6133a",
+      "leaf_sha3_512": "a9065e4ce7863e9464019c622bb48f57426ebb94451125eca49dcc78cdadb9c1ba1cab8a9e18bb28259a6c0bebfc1eb828749fd1927b5c28a36927608bfbe292"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p63.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "af254f0fc227aee7161b153d210421d4e57d10c9413f8ae9348a726b2f8b7aac1a0b9ebb3ed6f2e6632303dcd192b942cea6472d12a06bdabc6b471f1fe42bd5"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p64.part",
+      "size": 90,
+      "content_sha3_512": "68bfaea34e5b5761296b58d456c2480e6e95d906d9f95902ef44e7c92ae3180d306d79c720d90bf4338cf11388e585ea3c5ce2e5d8f28e525cedd076c3c93249",
+      "leaf_sha3_512": "fb5b7871de1d81c41b30d060d73814aa34ffe1841f2cc0cd7c7a265ab1cd698601687e926e051484e4add7273ab933a516b2a92791b9b6d487c20db266374bf6"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p65.part",
+      "size": 570,
+      "content_sha3_512": "84dd08d0105bd0027ad862dba78275af6a6b1f550eff97e41e53fcea07d99975c761185c40ef715f4d1a499a71369bd716d357163828b568e2ccaa8e1d2b99ba",
+      "leaf_sha3_512": "3a132113c8f1cbb9a868059279825265cf9ea6f2e0ac521e6ed4f521cfc2433328d13e34b394e0a6c94c90d63172d558b600c57945ee25b7663270806b46e59b"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p66.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "488f8365eb4f46ce7f5b83eecda76f3a1dd8c91e39ed60b82c7aee1058fa6af91f277da66be420f62ee709f0c52ef6e8912e5ab45cf13e540078b029fe0bbb60"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p67.part",
+      "size": 60,
+      "content_sha3_512": "c3596ed3fc408561bb1e3c6cd25f62e65e2ead6fca9ef1396131759cc693c52ef2183c0fd49f6386e2952e377003134a187e990d12d7647d84f7db8997fc0327",
+      "leaf_sha3_512": "be17315c47f80234dfafdce79d5b605f4a781a88ead1a4f973c33f72411d4e0c3cde940d42c2eca5f7b15729e2ceb7c1dd57dc045517846b8a2f7ccefa362145"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p68.part",
+      "size": 96,
+      "content_sha3_512": "5add8b40975e6de1e68f0bc048039a23cc9956fec328e449c80cd94dfaf342db29e4cdcf4f919888526d2c914ac2ad8a0b1d32d586a3d94be6afe5f284f99c4b",
+      "leaf_sha3_512": "e91296d9f356d3e1a26badd704bedc45610dc2a3c3fde6d865b76710d590d244288e8ec79c23d1406cc4579c40840a2904052028a3596e75dc91787e60b475a9"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p69.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "566df8d4b4ea8b4420b168e10485aaf400f1b312ff96bb5387d4f64311a3c42e6a4530d49eb8455432cccb707ccec66869528876a427ba39a5dd1be1607fd2b2"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p7.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "0d5a2dd835f56e98d60db6d610b704a80871622a8f12cd973e6acc5e75f0d18df44d069aae3231e87536a695d274cdf33a61db5ad8fdd03f52a03abe2d735eef"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p70.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "44d83f96a756d68af9d568b7e7fc9eaf6573ad2fadd8286425025a81f5a313b644ee18b348b4d2b55ef505af4c742ca255a865c6a6077354b2a4a1428e237a4e"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p71.part",
+      "size": 5,
+      "content_sha3_512": "1193db52c3bb4a0b91f9211db4486f6b0b770e3e0981f84c8122e4123a43b66d870709f29543a04c196dbc9a08660454b775b3c3d8434f2cf2e11d554da3580e",
+      "leaf_sha3_512": "8a24392dfe7ca9892338da0120a4539a6f8a1c7a75a26fc43f07e07d2ccb608b078e650ded9aec15e66bc7081900263f0c39f10a6b3635645cf92937387a6d93"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p72.part",
+      "size": 576,
+      "content_sha3_512": "db575f59ff7fc73d787c70f18669b8709568835175f3bd5eb4265e411ce8cfd7588b3b1223fc71a57db9477bf44bdbf0dc5d21a92495e68b86c31a5a93f8e134",
+      "leaf_sha3_512": "1e7d71f49336facd1f83bb1cb56994349b54d07ffdd01f82befb57586681b1865a163a75bcb685e520ca306945bd02298841bcc6457d7e80b9ae14f7c80ca1ba"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p73.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "26e358cd452838e4328d46963b2e360f6751fbaed4b0d3c08e195724562c94ed4d3e532b90817557091ce9018aa945315bd93dcb51b566d7fd823005782ce5c0"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p74.part",
+      "size": 70,
+      "content_sha3_512": "881ae7efdfd126a27b980ad6a939acc9e5314abff70f3ef83c35fa2c575100e3bd76521293bf0028ea0baec86b8d21cb6ad16422001fed7c3ed4181d798b6a5a",
+      "leaf_sha3_512": "4a2a606fd2bad3ac3052af3b8bb2efd39bfc80855cd6ea16c56cce0ce188b543c42ed971a34d2f33c9f702176aea2ad697fa7d0777f65cc6c4c0f8ba9c17feb8"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p75.part",
+      "size": 102,
+      "content_sha3_512": "ba7d1567ce0f74adcc3e6bbb0b47de8c30d1d0fcd4f525a3b0142d1716e7d3edaadcac998a9266ac6c14d3585aeac1e89fc1abd073a66d42253efd4b42901435",
+      "leaf_sha3_512": "cd4bbed86dad24c8faa7106c0f3f8db3bcad9e6ca03d9b945960e662c54aa52e0dda779b9cbcf1f9cea71879fc7ea54378cb700ba16a4b69ff28233a2b267907"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p76.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "9bf571e425898ed9415ef18a20ecb001dbf6f8f5db3f3cd1e0fabf5d0a3c040c958faf6e33c6fa7ed381ed6e4e3794334cebc6bf38d01fd715ebbac4953de17f"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p77.part",
+      "size": 90,
+      "content_sha3_512": "68bfaea34e5b5761296b58d456c2480e6e95d906d9f95902ef44e7c92ae3180d306d79c720d90bf4338cf11388e585ea3c5ce2e5d8f28e525cedd076c3c93249",
+      "leaf_sha3_512": "1ccac209b93cbc4834cbd7ce352029e0390511000c399e3c7fa2ae393b5d3b4edb9dd0269a6069cf8003d3d06bd10099ec2ed93e32d5145a7c655b853b4b0128"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p78.part",
+      "size": 695,
+      "content_sha3_512": "1b49008c0c9395bfdbdfca019d4cd4c50a8c2b6b101bc727b2ecffb2e613e8db9eabd5262b65fea3a72582271864fca0839b3aeb99f8e9b1978f44d79e4b7f9c",
+      "leaf_sha3_512": "edf22316718ba95f993ff79aeba6c04d18353664fa210590d5aec05fbd92838f9bfbac0f6d6acfff597bb50a7fffd79f1f8950832d004587def8a85da2b4fedc"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p79.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "0f718015b12c40edbda457f3b2fed4206571a1caac3e241148c98b2350cbb3807b7c2ed778d92bc9dff4825e1f50bbef2044570210c811c2da1305097ae93020"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p8.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "0ba20609c5a4ac784b9d6a3a8ae3dbff9ab8fea49e019a550585ec7e069ef1ed48c7ef8d651d74f6324d182ab90c14f0aaed2a20b64e8a4d309144c489402ed4"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p80.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "29fb5850348a08d540ddccd74b6e947667b3f846a1a017f30fbf559dc8922189108c7968281084c404431d7423d8e3c10841fb9344630aa62e38e2b962d0a5e1"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p81.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "d8e5c4a825ecdfabb311e3bbadb11dc78f5ec387b73db237c45d2d0e5ad500f20f571170160483275b3e66547f9198c81c24f00ec67cac5706c60c455ad63e14"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p82.part",
+      "size": 30,
+      "content_sha3_512": "9df0f6d06bdeec5829f89a1ba72a825864afb32ba524b1809ed15d2d27290f4d5e15c465f37e249d88119530f8de18534af3dc13ae29de4e9dd2d9c0a7c18408",
+      "leaf_sha3_512": "d3b452de4382df3fa5f9c01f0fc5c60b27452cbac487f9de4dc6b4dad8c77a4e6ee4f2611c659a37a3d43229453a958b619654ee67c93a72df3301c2d3d7e8fa"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p83.part",
+      "size": 564,
+      "content_sha3_512": "3c23cd83c4e197452a6eac1aa78fd337ce24c08225ee3640c429968ac2da1cd83d82565f4de460b238a908b3a8735ccdf145b51c3fa93ac0a1e67c0695d1d28f",
+      "leaf_sha3_512": "3b3852b5e898465f954a425b977bf884b77af35183a5c608c520e3fa1b3fdd95d773172b0636a8b38db5af01acb82fc08529eef0365e1371696752a8eb128eb2"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p84.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "cdaf2544de615dcdadbc51b00db634be7992ade043dff24a0386a2cbbcb739a8f071ac10b8f4a69912338175f0a60191c543fdcebecb5ba1b5194d9da1e963f9"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p85.part",
+      "size": 85,
+      "content_sha3_512": "87f3d94533c08de1c2c4b936b035ddc26625ca6c82eaf86f5144e2a592a03c35e7978008f3631f77a365f28f99551e675e9500bf1dab0b552c0cf6fc1c3f1318",
+      "leaf_sha3_512": "2a567a99c575e95fdb5a5a9e094f5cc93f07c69f250269d608f9e5de87ed90240b8edc46f458615c6e19b95173476e96c2c765ee3104fe5a0301abfa1883c11e"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p86.part",
+      "size": 47,
+      "content_sha3_512": "8bdb8fed3a1b73986f8c14030cc44bcb318567cff67fd75054393f4a89d375b6a33bcd1be96a014eabc5f1ec12d950ad1770f76720ff8349a22ff6d0bcb11aa4",
+      "leaf_sha3_512": "6e62ae280552d92919833a8236b3a6fdbf94c3a595a10bfadd736e98f0f41f1fe13dbe6910537243786daa33c48fbd09d959f37e8005798a3a2d94225310e79e"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p87.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "04e44cfe4c35db04d93cd5aaf52563f1feca8668e0a6944609a42dcfa94f8f170d75d010b9ddc56fa6c478748e538d743f80a4548682653bbc857098b9436b7d"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p88.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "1254433898564ba0873e2eaa855bd800059f17e611ed708b800b06e8af6de0a091256bef3385634a7fb2e5f06694a1fa1f58483b191e69b0278d7b152657ca76"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p89.part",
+      "size": 10,
+      "content_sha3_512": "b5712326aec123aa7644299b2a18519cc56e83763c411bcbd7ef76eb157495d1fd7b7943d40e6c0a3b6bbc88a69e88fc0fe719c6bb229dc05b27cd59bff498d6",
+      "leaf_sha3_512": "8f9dd4856c2ae1bc31d3ed10467265111324fe9ebc179928d82ee95008ed77b464f65d8c9558aafbc2f916c3c9c101dd67379d54ea52ace0d401531998847de7"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p9.part",
+      "size": 60,
+      "content_sha3_512": "a3089e72f6f8dfda9d216c6dae57e589e4c5a0f93a737b146dc4c8afb874f1f1d96c46fcdfd93b780720ca3d8696d6d6bb0aff007d4e5025879edf301c0aa83f",
+      "leaf_sha3_512": "4ae078e8671e26fed5d12a19e7f946d867d78581a3cbdea15239fc7af9bb3b9183c6288e7cbab21e5696f3a980b0a6e50e6f5707512e9593f760f0d5baca0aa6"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p90.part",
+      "size": 564,
+      "content_sha3_512": "cd5e8a01f5573b8c56472b704e660ee78434036d6405ab2e54f09a162f6ea5e91052a879aa98cff85757bef84a87c06e66619648b39c223b9f179445f990cff4",
+      "leaf_sha3_512": "f6761bd7498a16814e730e708dc7ec52a273219ae70950ba3b25dda3dd9bb99706c0b99beb28a359b3bf19fb80466c3dbcc52b886e096a7c99bb0ae117e37f2c"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p91.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "645983cd1bfda6682098567cf328580b22f50ef559ae9ddbe720fccd7515fcadea8949732333381f3550175fd544558e88c86f1ae53107c866ed8e320a457883"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p92.part",
+      "size": 15,
+      "content_sha3_512": "8bad85176291725f9c09bd23eaafdd5b82486be1760fa3a3eba665589b6bdcbd2728b21e978ab4efcb0d0d735dab6ec4dc21c1a1a232b09686053ef6b01bfc38",
+      "leaf_sha3_512": "e1b3d37773d8136be297483fae906c51cf0d28e75072fbc6b538e8a2f3b2b4db3eafefcfa927ca7114bfa14097b6f969c9cde57f3755db4446138e8ccca91555"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p93.part",
+      "size": 135,
+      "content_sha3_512": "4d525c73b52c0b99b2863ef22d8743ecd63ac9d8147c9ae9e48294fde7c150d85e407b7efb16d40f64815da8deaaa65c6cc192daecff20c0b1707c3feb54630d",
+      "leaf_sha3_512": "62dba7edef0b2e55cb51d9c6e9182634a47492db4971438e6bb782cb7aa4159f39bfc616db42593e877a452995d15fa2ceffe4a2cbc4f6502b48200e7889fab6"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p94.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "5b6d3a695bdea21fcd7898ee6efbed677cfc62381f0b3a8c5a9777b267b3feb70fe1b33e1a5cf0c8d6b0bffaf64653b1e31e39a444977b96f51a5b1f81f9b0b7"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p95.part",
+      "size": 100,
+      "content_sha3_512": "e56d5791a949baa3816511b7f2baa117d5106f72b606819500ec947a77d2ba146775ab7bc8cb5918137fe9a9ac93fcc053501e5272716aa55da4820dfd05da3b",
+      "leaf_sha3_512": "87265ecd1bb334941c1cd1a04ed8eb5066cd5e12b1ee7e1e20488d2ed0c569a6b4ff5ec2e42cbb86d1a9ca881d4fc02fe53cca7787bdd0fa591832e570621747"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p96.part",
+      "size": 25,
+      "content_sha3_512": "0a243bbe3b26ec2a9791971ac8b6a716d15d3d7134848c8942be31debeb10cfbf5a1ca640077697c0d9843e9b92530dd9f956a6e8cd22df201c58f2d1fc39b3f",
+      "leaf_sha3_512": "47ad267c07dedcd98a79dfe3e74d6907f71fc2af51a40afdc0002dc5540487340b831797ba96a659333ca6edff27a6320721be3ea1bb438c6367e05d80d34330"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p97.part",
+      "size": 570,
+      "content_sha3_512": "6244e1d6019690c3dfefececf5c42a35873f91155f42ae6108c93ab0c3f77c399bf16b18d2fb2309e53a59dd2790b206f8f8122e3fe227b9f3585fc3279d43f7",
+      "leaf_sha3_512": "f6bc5b80c178cd1944638ab07781104127be6e261f51938ad5705ffa426dfd84210f30b5614752e3dac51464b6ad4b578ec14dca1a3de582c2b685e0c2012f06"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p98.part",
+      "size": 100,
+      "content_sha3_512": "35b3d60c2dce2159257c16858322d31431d6af85a49779fc415db824eb40f86987489608546b1cd7f2358553b25c857236a81da37133128ab5bea44ed8dc9b4d",
+      "leaf_sha3_512": "eb4499d415c27ff611eb4020fa6c105cb56db7af87d7083b5d9f7ec15d90c834d605cdb815fc5ae97529f616aea0f0119bd0b3e81a9d39fd4cfe973d8deee732"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/parts/p99.part",
+      "size": 65,
+      "content_sha3_512": "54a02e1f904b9825b1d015eb8743d027d67cfdcc18459a8188d88b49579c4d1ebd63502d5bb9fcf340ecae0c5568cc2da194f6d4190e9f792e8e69c8bfe3871b",
+      "leaf_sha3_512": "9b908c00960aca13c54ecf7f06ce0b269d972e7237d4bf3df1e0ebd81bb67af5c0ce6e08e112116e4c1494a93d52ff422f5913d8bda2bc99440250e6d9d9b735"
+    },
+    {
+      "path": "deliverables/20261010/seat-k3-scoring/园刊第叁版_全园在册_20261010.html.PARTS.md",
+      "size": 34980,
+      "content_sha3_512": "fce22b4ee8b8791fc4723359b5cfebf12615d723b39417870160e23561c13d99464288c39f9aa876da0e877b0c55055048536d862762c2d5f7108be95011d3d1",
+      "leaf_sha3_512": "277881258769aaa07151493018df74630509e71813314346dac3584652779665994e09030ab1381c9c4429772dd0145fbe75c99ec5143c91279c75423f99ca8f"
     },
     {
       "path": "deliverables/k3-main/a2a-plaza/PILOT187-DECISION.md",
