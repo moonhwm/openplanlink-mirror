@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T03:48:40.489Z",
+  "generated_at": "2026-10-09T03:49:34.336Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2553,
-  "merkle_root_sha3_512": "46bfd9b0592c8053e402b670efd3789c6b96ae1ed72b1b3a16489e7288af66ec885a4e5835468194d46c0990b6de41393bedb8ca8efaf93843676b00949ff77d",
-  "hmac_sha3_512": "3c2b4606aa470ce4d935692b1dfa7b07305258e5d35923af7f0390d0dcd83351d8f3f168cabc266656de0c635c76f2873bfd995401542bca6c4e8cda9a43e8ab",
+  "file_count": 2555,
+  "merkle_root_sha3_512": "9f2ce1d9e0c1d3703e3e3e413f15db96372b0ddae32fbb992a69f9fc8aae3f3741147d2871de1a758afb368e7ee31ca137c08ea12cf096e3bbd9b617611c6bbc",
+  "hmac_sha3_512": "e57e1b44b1d17cc25740de5b3bc168891dfb30cdaa0513752c39fcddd9b6572e15841f69c2e1e71e722608ae5c60d4d38abc0f5524152c67b2ca59f3e5beaced",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2106,6 +2106,12 @@
       "leaf_sha3_512": "659837ee1ea2a025d8a2362e56235d96b88e89e366873f10d28a2d29a4a7b0e866439ffeaa452e3c177c6b71caf4fd63795c033cbd7a2e9934e50115d6193684"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/人设总册v3修订r2_DF-PERSONA-20261009-CAIRN-28.otl",
+      "size": 5103,
+      "content_sha3_512": "41eaec03b9800b7142a2fd143b4656a590a7d1b238cfb404ff6636bf7aadbace87e773913b34a3144ab39f72fad3638e5cfec6127e191660993fde9fbfc4301c",
+      "leaf_sha3_512": "54c9dc07cd70e94a21ca9c90e6de4132e0eee19d5313cf71647e3bebe6c2df9a68d8cf060d408567bf9532c34b6d290dfee497db96049382a2261050da145358"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/件库检索入口_DF-AI-20261009-CAIRN-99.otl",
       "size": 6021,
       "content_sha3_512": "f32af6972146780956debf4f8e9d0039b51c332b133fb2dc862a81510319341a2e8e75e60c7ae74c9ddb9793ed71ec68284c480018fe73c3335d4de1878cf00e",
@@ -3976,6 +3982,12 @@
       "size": 7604,
       "content_sha3_512": "7503ba2917cd8b08f7649519f0c132195c92b2eb44abe0fdb4277b445cbdbcc70c3af660ad7a0e1683d3375c9b0c9182e5bdfcbdfb9ea04727035ab7e7ec4c10",
       "leaf_sha3_512": "fea96720888f47d3dd87b33b1be00366040fa54104552e9c6047eecf556e02f159d0676394f624258ce9860c28b87bf6aae18622c01279266ee53ceed218d687"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/人设总册v3修订r2_DF-PERSONA-20261009-CAIRN-28.otl",
+      "size": 5103,
+      "content_sha3_512": "41eaec03b9800b7142a2fd143b4656a590a7d1b238cfb404ff6636bf7aadbace87e773913b34a3144ab39f72fad3638e5cfec6127e191660993fde9fbfc4301c",
+      "leaf_sha3_512": "50f94ce4f7e9aaad0e746eda0eee24422a94184d890966ee205ae6556d480a532fdf33d04c9c6a7ed79e8edb26cb98dda9409feeeba80264f601c4e93a798e26"
     },
     {
       "path": "deliverables/20261009/seat-cairn/午前续报20261009_1105_DF-OPS-20261009-CAIRN-23.otl",
