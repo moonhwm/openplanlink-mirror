@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T00:54:04.062Z",
+  "generated_at": "2026-10-09T01:05:57.217Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2437,
-  "merkle_root_sha3_512": "01d3c130b6ddc6ba2026eddfb1d7971c9d53b1ba8a92c2bc387e254be9c23ab3ac74341c17d4eee506c0bf2d8216753457213f556d824425ef09bf93a78edd3d",
-  "hmac_sha3_512": "a7afb44e960a183e80f7148d32d22db131291c52ea1756303fce1b59a4f5811bd54998ecf17c77d2000d03704e3cd3cd16522e4e81d2311fa6d57335c87232c3",
+  "file_count": 2438,
+  "merkle_root_sha3_512": "60a308d855bbddca9de15fdc819d765ef7dcdbcfdff0a72b38217868a25452bfd3601ea84a67bc2fb314ffdc635ff6465453adfdb406efb1822e77be6fe6f7aa",
+  "hmac_sha3_512": "aa7f550d88906398a711ac4651a3d43b4607ac0351758dd2aafb0bb203e29eef178465910c65146f33d551afbd36c9c55e87596551a2eb7ef6db967ce7213f8f",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1818,6 +1818,12 @@
       "leaf_sha3_512": "636b2c0c7af01c159a0dc464cba7e6075a8def4a8a86d77b7ecff9d21a9b63c39b72f919affb4ef0b9c306d8a880601abaa11ec8b479a2a11a75f2c2683df494"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/avatar2r2四项处置与核实_DF-PERSONA-20261009-CAIRN-09.otl",
+      "size": 5251,
+      "content_sha3_512": "759b1431bcf84d12bde69121aff5a33aa968231f0b2e215c2c54098e108c7613f2cee1e09254a02c958bbfc469c71b20d739a2e785c201e578ac971ace317d0d",
+      "leaf_sha3_512": "fedf02c5f273fa94e5953c7826157c5567654ebcffddae4a1743e76c6a0381648beae7fff573ae7c570a454376241d81b6f3fcd0829d048dab75668b271a8e35"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/avatar2与独立读取器自检未过_DF-PERSONA-20261009-CAIRN-07.otl",
       "size": 5721,
       "content_sha3_512": "7d5983f913290d4860ab4a27c4138b0ce3210f4b17e4b77bdd2c8c8e4343fc14c0d86c3d0ed5713bd481691630f29cd7a8bf8d91d273bf16e3857baff540db13",
@@ -3151,27 +3157,27 @@
     },
     {
       "path": "deliverables/20261009/seat-cairn/CAIRN_avatar_v2_LOD0.glb",
-      "size": 55852,
-      "content_sha3_512": "08fdad3eae1aafbc2ff25ca356ea6d70353a47d91ff9c3e1451b60e578220feaf9746a16be8466b71c25eeb7f2b7ca3d97835b16b8cf352a575ff48e2c77c3f9",
-      "leaf_sha3_512": "e5c2d994d100c5b7afed8610bc4399d6c911586feff7561c4b052b0bd09535b87d75b36895ec222eb2f8383d9c89be6c9e1c14d48900f8a745046c723e8f5472"
+      "size": 55836,
+      "content_sha3_512": "85b99055b12232c6c85da644c9bbee4fe89030d5d042ccdcc5a0cde1df64fbf7be90e2d86c43b661ed26ba21cd3a29bc5c6d5a8665586ef26359ec9a585da91e",
+      "leaf_sha3_512": "041e25179107d7cd60f6e02a1102d00fa4329715f0cc2623b8a8530bd83ad6d6693f8b13cd4feed2fdcd2739df568c8deb1e8a0a5dd999c33b3eb37bc5a9ad38"
     },
     {
       "path": "deliverables/20261009/seat-cairn/CAIRN_avatar_v2_LOD1.glb",
-      "size": 45788,
-      "content_sha3_512": "f63a62945afdd9b57f2de2bc29927a656c0a009469d4c958a50a29868a01cfa7255b0a4c11d5979f07ecf1a543195aeee0bc9b87ceced5659fca40135506aad3",
-      "leaf_sha3_512": "e32cd500447a44b9cdd992817352e8d1f5757b99597040dbf99e57ffc3e2186cfeb1d9bf35affe59d8d8ddad929eb63f3478231c5ae21987baecc10728442e3f"
+      "size": 45784,
+      "content_sha3_512": "cbd16c432bf9a3bbc5639dcd8e6fc924598ea5060aa614f1e92d76d111ab714949f347c282812b1388358ef4af26a82f66177b66a9a4eef1c7a56e259976b1da",
+      "leaf_sha3_512": "5849bec7dbfe7bb5f8f4b0d7271878cd399e75c455ef55c26b3aecccddbdc314e84462fc66d33843c698418e8b7b26fcc484830254d9896cb22925a99c03946b"
     },
     {
       "path": "deliverables/20261009/seat-cairn/CAIRN_avatar_v2_LOD2.glb",
       "size": 23944,
-      "content_sha3_512": "bbc7bcec7930fb0a09cb3d596df3ab80bb87e96cebea463dd4ad23324a3fbf025b17636ab5057d18e6f0956fffd1c7080f91f84b43d652ba101c87ce571927b2",
-      "leaf_sha3_512": "74be047cdf7eee9895e6325914c167f4025f7df2e4e1c93a6c17ca8767f21f19f224e9ce66d1bfbeceb95c5e7080b79ec02b9272e6c99cb8d490da6b13129fd3"
+      "content_sha3_512": "271a5d2b70859a96f75312e9b24c8850dc0f31865adc22adac707177482fb34bc0a9eac0d2cb6b7c432335e4a255513d049b620a8952d096fa9f5a50600a5ac3",
+      "leaf_sha3_512": "296a7e2b97f9ca9f9468699712d4a4c292e3baf8504e3dd4dab3e3f2724b3053b7a54c29eb5a2d7720162c309c0ecb1981905a63e473c858452bff654798b9e2"
     },
     {
       "path": "deliverables/20261009/seat-cairn/CAIRN_avatar_v2_five_states_20261009.png",
-      "size": 150423,
-      "content_sha3_512": "45d008bbc17f18747fde42aeb804acdf423c59a71b52f0c3ba56fa4831fc71dcbcd0fe5b54f5cee413e60731a5c4867fb808dbeb0290010e4e383aafb10e66ab",
-      "leaf_sha3_512": "b31310ea1ddc65f8044ac5452460b4635b516a8f05cd1ba75c1f0772b21c1ef66433dda92aebe9388bcdd4f0feae882f85187e36bfcf5554a1dc0815c24f25c1"
+      "size": 151485,
+      "content_sha3_512": "afd05ef8818583f6f1c6e780d50f36f2ae2eba40079240e818fbc90551bce99b7e432919b1e5e3430514c26e85ce3ded03f4dac225fecec03ff8a8012adea879",
+      "leaf_sha3_512": "9ad173f346637ece147b871b0c6a1cb40aa9cc0f1b8b849a93666a35e44a3e96f566fb85780c35005871c478002f8e6e73f02d91de9c348ee74a2f4413965ff2"
     },
     {
       "path": "deliverables/20261009/seat-cairn/README.md",
