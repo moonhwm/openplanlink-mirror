@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T01:17:11.771Z",
+  "generated_at": "2026-10-09T01:22:11.955Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2451,
-  "merkle_root_sha3_512": "616a2c3a00b3e6413911e814411f0f175b7126caa1e833a7498a8a7ebab9043123db955798ec2d2bf37b9fc73ce5d5abf2425188542535d5458960e8ea6f495b",
-  "hmac_sha3_512": "45b96a580fd3e78f1cee4ff7f93b35cb8a3bdecbedebafbfba44307a5c4134e728da6e53d0badf17531e0886586d36eeb96f0bbc4cf8ac91f124205d9f41f262",
+  "file_count": 2453,
+  "merkle_root_sha3_512": "48fbc7b174f872585a5d3bb2a395773adda18224f518f2a71d11e86f0a20105732daaf69055d243e0d12af80390b56d2be2e456430ed7d71ae8804a1460bc9f6",
+  "hmac_sha3_512": "cfdcade6102d7e3f0d8b38d9909b2bd595078271bc76b80f005f07c8fda34245f5da8e9e7f85a3532be46d8005fba7db35e634ae36d8f35523e01849ec06b773",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2640,6 +2640,12 @@
       "leaf_sha3_512": "64c62128d382ce830894e6ac71f7fb2fad6f7747f503a2315ace3f0c1c9189392cb25a749e9822cf761c946120f5be8ee2cebc4c11d8ba15ae285f6b32df23de"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/行迹驱动之替身世界_DF-PERSONA-20261009-CAIRN-15.otl",
+      "size": 4915,
+      "content_sha3_512": "1474ace54f00c949e691adc5bf172165e7757588c58109b58352d487f5080387a021a3c2596a2b0f1ce6e607d00505b779ea2e537d89aad9babd74a2a6e7b8cf",
+      "leaf_sha3_512": "a64ea545c6ade0ab3e561e09904911dd22e9fdc5962415cf3b953350889f2a06318fc9ac05d4e5a09fe68ed04a48187b55bf275e7512120cefba6301b8b954f9"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/衍生链三段与第一人称与探针修正_DF-AI-20261009-CAIRN-22.otl",
       "size": 6333,
       "content_sha3_512": "63a7f570f79e5df82c56d9728a1ed94bf7f1cf52797da5a09e3c9a6c8c55a7ff57c194451b5b3aed69b48cf27690bd6a5b4478dd6b757a5675897feba1bed1f9",
@@ -3370,6 +3376,12 @@
       "size": 1089,
       "content_sha3_512": "04444c73f18989ac3f706281b653245c54e9e618dadb2d90fbd97fc26e7a49d1a3ee593d5f63cf28db099b2f5826884eb273a8047a9b3d8f86231e3ffa7bb592",
       "leaf_sha3_512": "2107a4f2c350aa6d4d451e4e293484996aa973126d0ca8563353d29c81998312ba5faaa8b023813370563cf317d3d98dc85e5802390a755e00a4d81e036ad201"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/trace_driven_surrogate_20261009.png",
+      "size": 174253,
+      "content_sha3_512": "374e574657cff36002c945291d6415e632d09ff086d542bea281b112ec17dc66b5ed6835933f6ed240ee1875a91e1b5b929a4c2914fee68508f00841d9db0b03",
+      "leaf_sha3_512": "4caee4e6df5f5144eb963a63777f45730a3db3683c9c29d56b96aefac24579945008012f3c009f20ecceea2ad7099226ab19989d414e6f46969a92ed3c468d57"
     },
     {
       "path": "deliverables/20261009/seat-cairn/wm_create_generic.py",
