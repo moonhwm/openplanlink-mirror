@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T00:09:31.223Z",
+  "generated_at": "2026-10-09T00:10:20.489Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2401,
-  "merkle_root_sha3_512": "11c973580c359a5f981e97c4196780149bee90159f5aee9fd053588ca2aa969949c04f02ad42bdc12d48703d46e09733a04e46566e4bbfd61e7c4c93169b36e1",
-  "hmac_sha3_512": "85510aa0f94e097529f4e0ac6ccafa2fe6d602054dc4c3422157448ceb91971707cdfd7666d90799b8104f7809dee2cb1301892080ce95c99c39e2b58d7aa00c",
+  "file_count": 2402,
+  "merkle_root_sha3_512": "7951c1adeea9f3f5ea89dd063b601d6580846a128b12c57232f645048d10f5ac8f1877d087c92795df1b4bdac2808de8e8765465ec7c71ada68da44ec443df9c",
+  "hmac_sha3_512": "0566676aaaeb109015642e44f1d630ef75acbc2fed031e8dad322195b8d0c21f8a6cf433cf3dfedabdf5d51f10efbe7ccd4a7357933333744aa97659252bee58",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -3108,6 +3108,12 @@
       "leaf_sha3_512": "7b99caa1d30a981be2c9473616d7bb104422f6f61fe25f96301033ccf7ec7f0539a6932d0b366ac033587538198ee2e79e72365ec346278717d289b4b9264e01"
     },
     {
+      "path": "deliverables/20261009/seat-cairn/persona_cairn_anim_4phases_20261009.png",
+      "size": 142272,
+      "content_sha3_512": "01b9d28546462b6e0a157cf36247e48400426ab05e35d236c38cfc21d1b3c6d1d9eaf9f631967625d43a8b388b9a8e7ce4600fe7d41a067b1e76c805af66342e",
+      "leaf_sha3_512": "0f7a3a7ddcfd27ac18f7cea5c9e02567f28f5744c01038822a06885b0939d5fd9f63d2fc14241244920df4332a1f54d02efac6906cc13604e77e43c14755779b"
+    },
+    {
       "path": "deliverables/20261009/seat-cairn/persona_luzhibai_v7_20261009.png",
       "size": 101845,
       "content_sha3_512": "1fab228f337cae1d01b7e9fbaf8451c92f027ac690cc61ea1e96827ac8ba1b28854882fbfa1fc39a1108ac1bc64dfcac60f1f54adb546e246aac12d5cec68ef5",
@@ -3127,9 +3133,9 @@
     },
     {
       "path": "deliverables/20261009/seat-cairn/worlds_manifest_20261009_CAIRN.json",
-      "size": 6950,
-      "content_sha3_512": "d4d4271dded863be326b19d78aa9ebee8b2af316da2a90767a8e10745f9113ff75db8dbf79c2646ca111deb172b33d6d3ac56927198e1c9372baa5df8d064a34",
-      "leaf_sha3_512": "4be00b63deaf06d2c8580a71b057b98e503568e5acb4cca5acaa075db6819bfbf2f4fc9a967c620ba6a7754c699b63cdaace028294d286de3e5c3eb0607900b7"
+      "size": 8058,
+      "content_sha3_512": "4deb556a3bd3d7da568c013fcda31bb9c7fd7e12a81a59e0d612be93625d66bdbf038457d59a7ce66e1864369c25e03450ad51c631f5dfeb7714c88f51083b28",
+      "leaf_sha3_512": "43f22f027bf4e65b5bf1d8f6ffcd1347043423c9100e310ddea487d9b1fc8a213da728eb86b63a56f077f6196dbe41d13aa3adffd51afcc21464592099533579"
     },
     {
       "path": "deliverables/20261009/seat-cairn/世界模型作业总册v1_DF-AI-20261009-CAIRN-26.otl",
