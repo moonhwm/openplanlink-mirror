@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T03:29:11.391Z",
+  "generated_at": "2026-10-09T03:30:19.154Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2518,
-  "merkle_root_sha3_512": "5c636311ad64db32670e0d370ba1ce7d1003326e872838f4f30f4da9b710ebd047bca97015534d385e78cd5d33a375c1c40bfc6fa785664049057299d5f62bda",
-  "hmac_sha3_512": "da42616ab958dfd2ff0c2a9517ee2bfe42a2c33e24ed74e7d1da0a2bd70e3caf00a10746f24ad34176f3a83d5bbe7ddd8ab6743257b558689ac136ed56fb5f90",
+  "file_count": 2520,
+  "merkle_root_sha3_512": "ea54f891be3e9c516a8b97c6f103861be903d37ab65e36b85574d7385961ab73ab6bf4c340603a446227721ddaf1bf48bb7aa7713d8f785ec70e7b7faf515894",
+  "hmac_sha3_512": "4c785e630c22861573b21a86d8a87abbefb759c5a583cd6c96baa5d24e2bdade4039bf4a08bb918848e052e9b0f40ac9043e7b841da8b2e75d063fd9d39ece15",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2106,6 +2106,12 @@
       "leaf_sha3_512": "b4ae66ceeb280eb29a115a60473d93c7abbbdc2baae642f968d51c609c35eff4f6762c1d6ff547b981a8e654939964e8df793e27e0369e3fc40016d2f37ee2b1"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/全局件名册v1_DF-AI-20261009-CAIRN-101.otl",
+      "size": 5579,
+      "content_sha3_512": "9575d2e3ed1598fa2c574bcc1684e3b8bf1eddc760e061c8a5609990f7eccd579291eec0fb38ab1ec4d3a38368a323796ac44e52539e847425187558acf16c72",
+      "leaf_sha3_512": "d16a864ab8c6896a1e793518519c1c7027da4f397f02f84d155944dc6297c1421d39c0ecbae2b360b1bbbd92f630d57d6515cc6300f2d0c5ca0784017c609171"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/全帧率分析与提亮发现_DF-AI-20261009-CAIRN-37.otl",
       "size": 6793,
       "content_sha3_512": "48e439037a6bd08d2204c7bbff163e12e0d720c7de8cffcb53bca78b0d23b67ab20c1dcf2a89ed3c93b0c56218d25dc439e250b695e8467c9544e489eb5b2328",
@@ -3508,6 +3514,12 @@
       "size": 2942612,
       "content_sha3_512": "f40c69399cc57be9dee84d89b7fb82738e6df92066a4a3ab2646f7d2827299493c8da9cb7209264a09ef7ca2b91a060676311d1fd2f8c581fd66cf8633e6991f",
       "leaf_sha3_512": "32864947e0d0d938913cc07ec09e9a61e75ab520474a1344018f55ab6adb58eab60c370bdfadc2a9b96c9d7a2af92f7dfb276104dec21660307512ac688329be"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/cairn_nameregistry_20261009.json",
+      "size": 106366,
+      "content_sha3_512": "eaf9067b07d061afbeddb3dd98ee62f65c39510c49cd7412d2726162cbb5a5391becdf898d0d7d92e391b6fa82aa6e965b935606fb405a144589c92defe2e33d",
+      "leaf_sha3_512": "5e16c3735011ca791c9a3f00c1484f527e22b42dd1e96781b10be2c00d6559dda0e763d8e1ab938a8d70d29672cd06e161a324a6e3c4b7bb332caf16d789c1f4"
     },
     {
       "path": "deliverables/20261009/seat-cairn/client_handoff.py",
