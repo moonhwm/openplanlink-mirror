@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T02:47:40.486Z",
+  "generated_at": "2026-10-09T03:00:51.536Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2498,
-  "merkle_root_sha3_512": "37275040a963134037fb4dc5de99bffa40454f716c9153e6e4f3fe1c15270c50a9fa4401fafe1fd637a8798f6b097173734513238893ba76aeeb4de606937a15",
-  "hmac_sha3_512": "26f3b2039bfc265d908f6bf26e64dff7c04008bbf95caa4c0d5035226b91b43ea3887a72185cef4ad6e3e76c040a9b5e5e7a9ce995a8f80812a187aa761d3ffb",
+  "file_count": 2499,
+  "merkle_root_sha3_512": "52a061f46172afae6fd8a8685b7d895db410c69daca1f36f261ee4464f054995928debfb49afbd11f75c6b60325a41663d5fe9cb27b6b34f647b06f811862c30",
+  "hmac_sha3_512": "854bf3fb47bfe35fd2bafd1b4740d2045d3089a6a91ac8102939bd37333bb2b382afe6472c8b9ff11ca2b3d5809ef16a1da239c84e565c6a6f8a426a2dcbfb84",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2104,6 +2104,12 @@
       "size": 7453,
       "content_sha3_512": "cc9b494266c2e601ae931e0d6def05b19eb7786a6095607a680b3d4b8b12e02d0cfc1a57e6f2a9bee33c89c0243ff243dc5e4e23307c43190e73df3a25ba9d72",
       "leaf_sha3_512": "c317c0f0cfe33b382a210959392103bce5604c3f3c2b4f4d5f9ac56ac92be0edc78a365b718287befecaa55b460a02db649d10baf823eb84d1453b663b90ab57"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/决策模型对照与第九戒_DF-AI-20261009-CAIRN-89.otl",
+      "size": 5406,
+      "content_sha3_512": "00b7064f04e99dd7b3430e43398b80d127912e74cc75ca42fde10c227b4eebef29d0523cb502866dce3e3e65e4be9ceb678bc5ac42a32122e0fe5908f1c10b2d",
+      "leaf_sha3_512": "434be2557913e95019c9acd89fb42a9d15eca4519c4d173f07b10840051e6f85723630765a555bf46bbf6a75bed3a3fa95ce5c27b6e4fb7385daca289c0a0d01"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/决策评分假阳性分析与夜班交接_DF-AI-20261009-CAIRN-05.otl",
