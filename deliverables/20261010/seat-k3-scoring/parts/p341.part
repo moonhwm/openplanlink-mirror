@@ -1,0 +1,14 @@
+}
+      if(i<full1.length){ tt.textContent+=full1[i++]; setTimeout(tick,26); }
+      else if(j<full2.length){ tx.textContent+=full2[j++]; setTimeout(tick,13); }
+      else{ finish(); }
+    }
+    document.getElementById('prologue').addEventListener('click',function(e){ if(e.target&&e.target.id==='pro-btn'){return;} finish(); });
+    setTimeout(tick,350);
+  }
+}
+}catch(e){}
+})();
+</script>
+</body>
+</html>

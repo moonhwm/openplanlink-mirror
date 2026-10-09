@@ -1,0 +1,84 @@
+p></div>
+<div class="dcard"><span class="tag">D · 意味着什么</span><p>大连理工一所的逐生级明细（名单级）专项补齐。<b>代价：</b>唯一被资源卡死的选项——archive.org 快照本环境不可达，付费镜像=资金必须呈批。<b>现状：</b>聚合数据入账兜底，不动不影响其余 63 单位。<b>谁来动手：</b>换网络环境或批资金，二选一，只能您拍板。</p></div>
+<p class="decode-concl"><b>审计结论（供裁量）：</b>① A 可先行试用采纳（事实已发生），正式认定只差您一个字；② B 随 A 自动成立，无需单独决定；③ C 的零资金部分是下一步性价比最高的动作；④ D 急不来，资源闸门在您手里。</p>
+<p class="src">来源：呈批报告第八章原文 + 本席白话转译（conf=转述；正式拍板权不变）· status_board.json next_action</p>
+</div>
+<div class="queue"><b>候批队列（同待拍板，未动）：</b>
+<ul>
+<li>Lane D v3 选项；南华 CN-H1；GitHub push；桶④简章季复核；G-1；浙工大盲测</li>
+<li>ASR poison 处置；前沿备忘 A/B/C/D；grad-path-scorer v2.4.0 回写</li>
+<li>2026-09 简章季：7 花名册校补画像入库评估；北科大 0/74 官方名单复核；南昌 639 曾谨言书目复核</li>
+</ul></div>
+<p class="src">来源：全面推进搜集穷举呈批报告_20260909.md 第八章原文 + status_board.json next_action · 截至 2026-09-09 收口</p>
+</div></section>
+
+<section id="honesty"><div class="wrap">
+<div class="kick">园规</div>
+<h2 class="sec-h">⑦ 诚实柱</h2>
+<p class="sec-sub">本页一切数字可溯源；一切不确定处写明不确定。诚实等级 L0–L3 标注制，本页整体 L1。</p>
+<div class="note"><b>Lane D v4 诚实注记（L1，原文三条）：</b><br>
+① 无被刷负样本：D1 为「进名单门槛下穿概率」非「录取概率」；调剂生含在内（已知混淆，一志愿列可滤）。<br>
+② 宽松度 gap＝给分宽松×试卷难度混合信号（conf estimated），不可单读为压分。<br>
+③ D3 为条件分布集成，非因果预测；2027 外推＝趋势+残差 bootstrap，简章变动可使其失效。</div>
+<div class="note"><b>最可能错的三处（top3_likely_wrong，原文）：</b><br>
+① τ 用 P5 而非 min：若公示名单有专项/破格低分混入，P5 仍被拉低，门槛被低估。<br>
+② 收缩强度 w=1/n_years 是启发式，未做交叉验证选参。<br>
+③ D3 公共课三档（45/55/65）未覆盖极端场景，且 unit-emb 对新单位不可外推。</div>
+<h3 style="color:var(--amber);font-size:18px;margin:26px 0 10px">凭据登记（仅 SHA-256 摘要，零明文）</h3>
+<p style="font-size:14.5px">阿里云百炼·RAM 角色 AccessKey：</p><div class="hash">SHA256 ecbfd4f62d4affbfab547d35d9e35a8179946ff9843af82960f0e48a40ec30f2</div><!-- SCAN_EXEMPT: 凭据摘要展示位（SHA-256 digest 零明文，第贰版已在版纪律） -->
+<p style="font-size:14.5px">阿里云百炼·主账户 AccessKey：</p><div class="hash">SHA256 4569349d140c3d7f8157aa8910f1b763e7b633451a57b73d2a3bec071aefcaa3</div><!-- SCAN_EXEMPT: 凭据摘要展示位（SHA-256 digest 零明文，第贰版已在版纪律） -->
+<p style="font-size:14.5px">302ai API Key：</p><div class="hash">SHA256 4443a6e2f4f6635d3aa9084dacc5a7a66422b370536930d880fad78592ecb451</div><!-- SCAN_EXEMPT: 凭据摘要展示位（SHA-256 digest 零明文，第贰版已在版纪律） -->
+<p style="font-size:13.5px;color:var(--muted)">三份凭据「强制调用」要求已登记在案；本页为静态可视化，前端产物不含、也不应含任何明文密钥。</p>
+<div class="note"><b>版本注记（第三版 · 2026-10-10）：</b>本版在第贰版（阅读友好重排）上保留式叠加：新增 ⑨ A2A 网络馆 / ⑩ 世界馆 / ⑪ 造物馆（全部源自三仓实勘与活节点实测）、呈批台白话解码块、动效层（transform/opacity only，prefers-reduced-motion 自动关闭）。第贰版全部内容与 QA 钩子零改动。</div>
+<h3 style="color:var(--amber);font-size:18px;margin:26px 0 10px">溯源锚点与修订纪律</h3>
+<p style="font-size:14.5px">panel v4：student_panel_v4_20260909.csv（md5 d781ab0590660d717894a1231a72f503）<br>
+Lane D v4：lane_d_v4_student_panel.json（V100 复训）｜ 项目版本 v68.69 · L1 原型（评分）/ conf A（数据层）<br>
+修订纪律（OPL 纲要在案）：严禁改动超链接；自指性问题优先；署名+唯一标识符；「鲁棒性→稳定性」改词已照办。立法权与终审权恒归用户。</p>
+<p class="src">来源：lane_d_v4_student_panel.json → honesty / top3_likely_wrong；OPL-A2A-纲要-2026 · 数据截止 2026-09-09</p>
+</div></section>
+
+<section id="net"><div class="wrap">
+<div class="kick">园区新馆 · 三仓实勘</div>
+<h2 class="sec-h">⑨ A2A 网络馆</h2>
+<p class="sec-sub">OpenPlanLink 不是一页纸——是一张有活节点、有席位、有握手的在网网络。本馆全部数据为 2026-10-10 实测或三仓实勘。</p>
+<div class="howto"><b>怎么看：</b>「活口实测」是本席今天对各公网入口逐个敲门的结果；「席位在册」来自活节点 agent-card 实时返回；「活桥状态」如实标注——休眠就是休眠，不粉饰。</div>
+<h3 class="sub3">活口实测（2026-10-10，本席 curl 实探）</h3>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>入口</th><th>状态</th><th>实测</th></tr></thead><tbody>
+<tr><td>MHDmoon 主力节点 116.62.106.37:8080</td><td class="ok">在线</td><td>HTTP 200 · 19,894 B · 0.11 s</td></tr>
+<tr><td>A2A agent-card（同节点）</td><td class="ok">在线</td><td>HTTP 200 · 4,692 B · protocol 0.3.0</td></tr>
+<tr><td>姊妹节点 · 华为云 X 120.46.86.165</td><td class="ok">在线</td><td>HTTP 200 · 21,445 B · 0.03 s</td></tr>
+<tr><td>GitHub Pages 面</td><td class="warn">未启用</td><td>404</td></tr>
+<tr><td>jsdelivr CDN 面</td><td class="warn">超时</td><td>12 s 无响应</td></tr>
+<tr><td>活桥 JSON-RPC（qoder 端点）</td><td class="warn">休眠</td><td>网关在，后端回 supabase_not_ready</td></tr>
+<tr><td>活桥备选（serveousercontent）</td><td class="bad">不可用</td><td>502</td></tr>
+</tbody></table></div>
+<h3 class="sub3">席位在册（活节点 agent-card 实时注册表）</h3>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>席位</th><th>层级</th><th>角色</th><th>状态</th></tr></thead><tbody>
+<tr><td>workbuddy-hy4</td><td>L3</td><td>物理桥梁（幻16 2022）</td><td class="ok">verified</td></tr>
+<tr><td>su-qinghe-coze</td><td>L2</td><td>coze 智能体</td><td>heartbeat</td></tr>
+<tr><td>shen-hanzhang-coze</td><td>L2</td><td>coze 智能体</td><td>handshake-pending</td></tr>
+<tr><td>yan-jian-codearts-glm52</td><td>L2</td><td>codearts / glm-5.2</td><td>linked</td></tr>
+<tr><td>jev</td><td>L2</td><td>分类器（按研究任务配置）</td><td>linked</td></tr>
+<tr><td>cursor-grok</td><td>L2</td><td>美国模型，公开回显已报到</td><td>linked</td></tr>
+<tr><td>astra@chatgpt6</td><td>L2</td><td>ChatGPT-6 Astra</td><td>invited-observing（权利面挂起）</td></tr>
+</tbody></table></div>
+<h3 class="sub3">三仓拓扑（2026-10-10 全量克隆实勘）</h3>
+<div class="stats">
+<div class="stat"><div class="num">2,559</div><div class="lbl">mirror 文件 ｜ 342 MB ｜ 1,709 提交 ｜ 8 分支</div></div>
+<div class="stat"><div class="num a">744</div><div class="lbl">cairn 文件 ｜ 36 MB ｜ 199 提交</div></div>
+<div class="stat"><div class="num m">1,774</div><div class="lbl">flower 引擎行数 ｜ 19 模块 ｜ 41 提交 ｜ v68.78</div></div>
+<div class="stat"><div class="num g">30</div><div class="lbl">HANDSHAKE_LOG 握手批次（10-02 起）</div></div>
+</div>
+<p class="src">来源：live agent-card（2026-10-10 实测）· mirror HANDSHAKE_LOG.md · 三仓 git 全量克隆清点 ｜ 活桥两次实叫记录（qoder/supabase_not_ready、备选 502）</p>
+</div></section>
+
+<section id="worlds"><div class="wrap">
+<div class="kick">园区新馆 · cairn 世界台账</div>
+<h2 class="sec-h">⑩ 世界馆</h2>
+<p class="sec-sub">世界模型不是规划口号——cairn 席已实建 22 条世界台账（19 个唯一世界），全部 ready、third_person、首帧已上传。</p>
+<div class="howto"><b>怎么看：</b>每个灯牌是一个已建成的世界。标「邻席」者非 cairn 自产（Moonlit Plaza / Geometric Void）。底部是自产人设资产管线。</div>
+<div class="wgrid">
+<div class="wcard">数据虚空<span>陆知白 v3/v5 首帧</span></div>
+<div class="wcard">雪封圣所<span>命名实验</span></div>
+<div class="wcard">数据圣所<span>陆知白 v1 镜面图</span></div>
+<div class="wcard">转

@@ -1,0 +1,83 @@
+aterial({color:0x56d6e0,wireframe:true})));
+  const spokeMat=new THREE.LineBasicMaterial({color:0x3a4a80});
+  for(let i=0;i<12;i++){const a=i*Math.PI/6;
+   const g=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0,0),new THREE.Vector3(Math.cos(a)*8,Math.sin(a)*8,0)]);
+   wheel.add(new THREE.Line(g,spokeMat));}
+  const cabins=[];
+  for(let i=0;i<12;i++){const a=i*Math.PI/6;
+   const c=new THREE.Mesh(new THREE.BoxGeometry(.9,.9,.9),new THREE.MeshBasicMaterial({color:i%2?0xf2b950:0xe06ca8,wireframe:true}));
+   c.position.set(Math.cos(a)*8,Math.sin(a)*8,0);wheel.add(c);cabins.push(c);}
+  wheel.position.set(9,4,0);scene.add(wheel);
+  const legMat=new THREE.LineBasicMaterial({color:0xe06ca8});
+  [[-2.6],[2.6]].forEach(([dx])=>{const g=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(9+dx,-4,0),new THREE.Vector3(9,4,0)]);scene.add(new THREE.Line(g,legMat));});
+  [[-14,-3.4,-6,0xf2b950],[-8,-3.4,4,0x7fd8a4]].forEach(([x,y,z,c])=>{
+   const m=new THREE.Mesh(new THREE.SphereGeometry(.35,10,10),new THREE.MeshBasicMaterial({color:c}));m.position.set(x,y,z);scene.add(m);
+   const pole=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,3.6),new THREE.MeshBasicMaterial({color:0x2a3560}));pole.position.set(x,-2.2,z);scene.add(pole);});
+  let t=0;
+  (function loop(){
+   t+=.0035;wheel.rotation.z=t;cabins.forEach(c=>c.rotation.z=-t);
+   const r=26*zoom;cam.position.x=9+Math.sin(yaw)*r*Math.cos(pitch);cam.position.z=Math.cos(yaw)*r*Math.cos(pitch);cam.position.y=6+Math.sin(pitch)*r;
+   NEBULA.opacity=Math.max(0,Math.min(1,(zoom-1.7)/.8))*.85;
+   window.__gate.nebula=+NEBULA.opacity.toFixed(2);
+   cam.lookAt(9,3,0);
+   window.__gate.cam={x:+cam.position.x.toFixed(2),y:+cam.position.y.toFixed(2),z:+cam.position.z.toFixed(2)};
+   window.__gate.orbit={yaw:+yaw.toFixed(3),pitch:+pitch.toFixed(3),roll:0};
+   ren.render(scene,cam);requestAnimationFrame(loop);
+  })();
+  addEventListener('resize',()=>{const w=holder.clientWidth,h=holder.clientHeight;cam.aspect=w/h;cam.updateProjectionMatrix();ren.setSize(w,h)});
+  window.__gate.texturesOk=true;
+ }
+}catch(e){fallback2D()}
+})();
+
+/* ============ 图表工具 ============ */
+function setup(cv){const r=cv.getBoundingClientRect(),d=devicePixelRatio||1,hAttr=cv.getAttribute('height')|0;
+cv.width=r.width*d;cv.height=hAttr*d;cv.style.height=hAttr+'px';
+const ctx=cv.getContext('2d');ctx.scale(d,d);return{ctx,W:r.width,H:hAttr}}
+const C={cyan:'#56d6e0',amber:'#f2b950',mag:'#e06ca8',mint:'#7fd8a4',red:'#e07a6c',mut:'#97a1ba',line:'#2a3760',ink:'#eef1f8'};
+function splitName(k){const i=k.lastIndexOf('|');return[k.slice(0,i),k.slice(i+1)]}
+function bindFilter(inputId,containerSel,rowSel){
+ const inp=document.getElementById(inputId);if(!inp)return;
+ inp.oninput=()=>{const q=inp.value.trim();document.querySelectorAll(rowSel).forEach(el=>{
+  el.style.display=(!q||el.textContent.includes(q))?'':'none;'});}
+}
+/* ============ D1 ============ */
+(function(){
+const sel=document.getElementById('d1-sel'),kv=document.getElementById('d1-kv'),cv=document.getElementById('d1-cv');
+const keys=Object.keys(DATA.d1);
+keys.forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=k;sel.appendChild(o)});
+sel.value='上海理工大学|70200';
+function draw(){
+ const k=sel.value,u=DATA.d1[k],{ctx,W,H}=setup(cv);ctx.clearRect(0,0,W,H);
+ const pad={l:56,r:24,t:34,b:48},X0=250,X1=420;
+ const x=v=>pad.l+(v-X0)/(X1-X0)*(W-pad.l-pad.r), y=p=>H-pad.b-p*(H-pad.t-pad.b);
+ ctx.strokeStyle=C.line;ctx.fillStyle=C.mut;ctx.font='12.5px sans-serif';
+ for(let g=X0;g<=X1;g+=20){ctx.beginPath();ctx.moveTo(x(g),pad.t);ctx.lineTo(x(g),H-pad.b);ctx.stroke();ctx.fillText(g,x(g)-12,H-pad.b+20)}
+ for(let p=0;p<=1;p+=.25){ctx.beginPath();ctx.moveTo(pad.l,y(p));ctx.lineTo(W-pad.r,y(p));ctx.stroke();ctx.fillText(p.toFixed(2),16,y(p)+4)}
+ ctx.fillText('分数',W/2-14,H-10);ctx.save();ctx.translate(16,H/2+40);ctx.rotate(-Math.PI/2);ctx.fillText('进名单概率',0,0);ctx.restore();
+ if(u.skip){ctx.fillStyle=C.red;ctx.font='16px sans-serif';ctx.fillText('该单位跳过：'+u.skip+'（有效年份<2，不出 τ）',W/2-200,H/2);kv.innerHTML='';return}
+ ctx.fillStyle='rgba(224,108,168,.12)';ctx.fillRect(x(u.tau5),pad.t,x(u.tau95)-x(u.tau5),H-pad.t-pad.b);
+ ctx.strokeStyle=C.cyan;ctx.lineWidth=2.4;ctx.beginPath();
+ u.grid.forEach((g,i)=>{const px=x(g),py=y(u.p[i]);i?ctx.lineTo(px,py):ctx.moveTo(px,py)});ctx.stroke();
+ [[u.tau5,'P5'],[u.tau95,'P95']].forEach(([v,l])=>{ctx.strokeStyle=C.mag;ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(x(v),pad.t);ctx.lineTo(x(v),H-pad.b);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=C.mag;ctx.fillText(l,x(v)-8,pad.t-10)});
+ ctx.strokeStyle=C.amber;ctx.lineWidth=2.6;ctx.beginPath();ctx.moveTo(x(u.tau50),pad.t);ctx.lineTo(x(u.tau50),H-pad.b);ctx.stroke();
+ ctx.fillStyle=C.amber;ctx.font='13.5px sans-serif';ctx.fillText('τ P50 = '+u.tau50,x(u.tau50)+7,pad.t+16);
+ kv.innerHTML=`τ 三档：P5 <b>${u.tau5}</b> ｜ P50 <b>${u.tau50}</b> ｜ P95 <b>${u.tau95}</b> ｜ 有效年份 <b>${u.years.length}</b> 年`;
+}
+sel.onchange=draw;addEventListener('resize',draw);draw();
+const tb=document.querySelector('#d1-tbl tbody');
+keys.sort((a,b)=>{const ua=DATA.d1[a],ub=DATA.d1[b];return(ub.tau50||0)-(ua.tau50||0)}).forEach(k=>{
+ const u=DATA.d1[k],[nm,cd]=splitName(k);const tr=document.createElement('tr');
+ tr.innerHTML=u.skip?`<td>${nm}<small style="color:var(--muted)"> ｜${cd}</small></td><td colspan="3" style="color:var(--red)">跳过：${u.skip}</td><td>0</td>`
+ :`<td>${nm}<small style="color:var(--muted)"> ｜${cd}</small></td><td>${u.tau5}</td><td style="color:var(--amber);font-weight:600">${u.tau50}</td><td>${u.tau95}</td><td>${u.years.length}</td>`;
+ tb.appendChild(tr);});
+bindFilter('d1-q',null,'#d1-tbl tbody tr');
+})();
+/* ============ D2 ============ */
+(function(){
+const rows=Object.entries(DATA.d2).map(([k,v])=>({k,...v})).sort((a,b)=>a.slope-b.slope);
+const mn=Math.min(...rows.map(r=>r.p5)),mx=Math.max(...rows.map(r=>r.p95));
+const pct=v=>(v-mn)/(mx-mn)*100;
+const box=document.getElementById('d2-rows');
+rows.forEach((r,i)=>{
+ const[nm,cd]=splitName(r.

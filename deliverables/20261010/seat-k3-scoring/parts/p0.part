@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:,">
+<title>夜间游乐场开园 · 园刊第叁版（评分系统 × A2A 全园在册）</title>
+<style>
+:root{
+  --bg:#0d1220; --paper:#121a2e; --card:#151f38; --line:#2a3760;
+  --ink:#eef1f8; --body:#d8deeb; --muted:#97a1ba;
+  --amber:#f2b950; --cyan:#56d6e0; --mag:#e06ca8; --mint:#7fd8a4; --red:#e07a6c;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--body);font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;font-size:16.5px;line-height:1.85}
+h1,h2,h3,.serif{font-family:Georgia,"Songti SC","STSong","SimSun",serif}
+a{color:var(--cyan);text-decoration:none}
+.wrap{max-width:880px;margin:0 auto;padding:0 22px}
+/* progress + header */
+#prog{position:fixed;top:0;left:0;height:3px;background:var(--amber);width:0;z-index:200}
+header{position:sticky;top:0;z-index:100;background:rgba(13,18,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.hd{max-width:880px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hd .logo{font-family:Georgia,serif;color:var(--amber);font-size:17px;letter-spacing:2px}
+#live{margin-left:auto;font-size:13px;color:var(--mint);border:1px solid var(--line);border-radius:999px;padding:4px 14px;cursor:help;white-space:nowrap}
+#toc{max-width:880px;margin:0 auto;padding:0 22px 10px;display:flex;gap:6px 18px;flex-wrap:wrap;font-size:13.5px}
+#toc a{color:var(--muted)} #toc a:hover{color:var(--amber)}
+/* prologue */
+#prologue{position:fixed;inset:0;background:#070a13;display:flex;align-items:center;justify-content:center;z-index:300;transition:opacity .9s;padding:20px}
+#prologue.gone{opacity:0;pointer-events:none}
+.pro-box{max-width:620px;padding:46px 40px;border:1px solid var(--line);background:var(--paper);border-radius:6px;text-align:center;box-shadow:0 0 80px rgba(242,185,80,.06)}
+.pro-box .kicker{font-size:12px;letter-spacing:6px;color:var(--muted);margin-bottom:14px}
+.pro-box h1{font-size:26px;letter-spacing:3px;color:var(--amber);margin-bottom:20px}
+.pro-box p{color:var(--body);font-size:16px;margin-bottom:30px;white-space:pre-line;text-align:left;line-height:2}
+.pro-box button{background:var(--amber);color:#1a1405;border:none;padding:13px 44px;font-size:17px;border-radius:999px;cursor:pointer;letter-spacing:5px;font-weight:700}
+/* hero */
+#hero{position:relative;height:460px;overflow:hidden;border-bottom:1px solid var(--line)}
+#wheel-holder{position:absolute;inset:0;-webkit-mask-image:radial-gradient(ellipse 90% 88% at 50% 46%,#000 62%,transparent 98%);mask-image:radial-gradient(ellipse 90% 88% at 50% 46%,#000 62%,transparent 98%)}
+.hero-txt{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;max-width:880px;margin:0 auto;padding:0 22px 34px;pointer-events:none}
+.hero-txt .kicker{font-size:12.5px;letter-spacing:5px;color:var(--cyan);margin-bottom:10px}
+.hero-txt h1{font-size:36px;letter-spacing:2px;text-shadow:0 2px 20px rgba(0,0,0,.75);color:var(--ink)}
+.hero-txt p{margin-top:12px;color:#c9d1e4;max-width:620px;font-size:15.5px;text-shadow:0 1px 8px rgba(0,0,0,.85)}
+/* sections as journal */
+section{padding:64px 0 56px;border-bottom:1px solid var(--line)}
+.kick{font-size:12.5px;letter-spacing:4px;color:var(--mag);margin-bottom:8px}
+.sec-h{font-size:30px;color:var(--ink);letter-spacing:1px;margin-bottom:6px}
+.sec-sub{color:var(--muted);font-size:15px;margin-bottom:14px}
+.howto{background:var(--paper);border-left:3px solid var(--amber);padding:14px 18px;font-size:14.5px;color:var(--body);border-radius:0 8px 8px 0;margin:16px 0 26px}
+.howto b{color:var(--amber)}
+.src{font-size:12.5px;color:var(--muted);margin-top:14px;border-top:1px dashed var(--line);padding-top:8px}
+.src::before{content:"◆ ";color:var(--cyan)}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:8px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 22px}
+.stat .num{font-size:32px;font-weight:700;color:var(--cyan);font-family:Georgia,serif}
+.stat .num.a{color:var(--amber)} .stat .num.m{color:var(--mag)} .stat .num.g{color:var(--mint)}
+.stat .lbl{color:var(--muted);font-size:13.5px;margin-top:6px;line-height:1.5}
+/* controls */
+.ctrl{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:18px 0 14px}
+.ctrl label{color:var(--muted);font-size:14px}
+select,input[type=text]{background:#0d1526;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px 14px;font-size:15px}
+canvas.chart{width:100%;display:block;background:#0d1526;border:1px solid var(--line);border-radius:12px}
+.kv{font-size:14px;color:var(--muted)} .kv b{color:var(--amber)}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:12px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:6px;font-style:normal}
+/* readable bar rows */
+.rows{border:1px solid var(--line);border-radius:12px;background:var(--card);overflow:hidden}
+.row{display:grid;grid-template-columns:34px 210px 1fr 92px;gap:12px;align-items:center;padding:9px 16px;border-bottom:1px solid #1c2745;font-size:14px}
+.row:last-child{border-bottom:none}
+.row .rk{color:var(--muted);font-size:12.5px;text-align:right}
+.row .nm{color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .nm small{color:var(--muted);margin-left:6px;font-size:12px}
+.row .vl{color:var(--body);font-size:13.5px;text-align:right;white-space:nowrap}
+.row .vl b{color:var(--mint)} .row .vl b.neg{color:var(--red)}
+.band{position:relative;height:16px;background:#0d1526;border-radius:8px}
+.band .rng{position:absolute;top:5px;height:6px;background:rgba(242,185,80,.45);border-radius:3px}
+.band .mid{position:absolute;top:2px;width:12px;height:12px;background:var(--mint);border-radius:50%;transform:translateX(-50%);border:2px solid #0d1526}
+.band .bar{position:absolute;top:3px;height:10px;border-radius:5px}
+.band .zero{position:absolute;top:-2px;bottom:-2px;width:1.5px;background:var(--ink);opacity:.5}
+.scrollbox{max-height:480px;overflow:auto}
+/* tables */
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th,.tbl td{border-bottom:1px solid #1c2745;padding:9px 12px;text-align:left}
+.tbl th{color:var(--amber);font-weight:600;background:var(--card);position:sticky;top:0}
+.tbl td{color:var(--body)}
+/* decision */
+.opt{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--cyan);border-radius:10px;padding:24px 26px;margin-bottom:16px}
+.opt .tag{display:inline-block;font-size:12px;border:1px solid var(--amber);color:var(--amber);border-radius:4px;padding:2px 10px;margin-bottom:10px;letter-spacing:2px}
+.opt h3{font-size:21px;color:var(--ink);margin-bottom:8px}
+.opt p{font-size:15px;color:var(--body)}
+.queue{background:var(--paper);border:1px dashed var(--line);border-radius:10px;padding:20px 24px;font-size:14.5px;color:var(--body);margin-top:8px}
+.queue b{color:var(--amber)} .queue li{margin:6px 0 6px 20px}
+/* honesty */
+.note{font-size:14.5px;color:var(--body);border-left:3px solid var(--mag);padding:12px 18px;background:#191230;border-radius:0 8px 8px 0;margin:12px 0}
+.note b{color:var(--mag)}
+.hash{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--mint);word-break:break-all;background:#0d1526;padding:10px 14px;border-radius:8px;margin:8px 0}
+footer{padding:52px 0 70px}
+.pillar{border-top:2px solid var(--line);padding-top:16px;margin-bottom:18px}
+.pillar h4{color:var(--cyan);font-size:17px;margin-bottom:8px}
+.pillar p{font-size:14px;color:var(--muted)}
+.warn{color:var(--red)}
+@media (max-width:720px){.row{grid-template-columns:26px 140px 1fr 76px;font-size:12.5px}.hero-txt h1{font-size:27px}.sec-h{font-size:24px}}
+</style>
+<style id="v3-layer">
+/* 园刊第叁版 · 新增馆样式 + 动效层（保留式叠加，不动既有规则） */
+.sub3{color:var(--amber);font-size:18px;margin:26px 0 10px}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:12px 0}
+.tbl{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px}
+.tbl th,.tbl td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;color:var(--body)}
+.tbl th{color:var(--muted);font-weight:500;background:rgba(255,255,255,.02)}
+.tbl td.r{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink)}
+.tbl .ok{color:var(--mint)} .tbl .warn{color:var(--amber)} .tbl .bad{color:var(--red)}
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:14px 0}
+.wcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 12px 10px;font-size:15px;color:var(--ink)}
+.wcard span{display:block;margin-top:5px;font-size:12.5px;color:var(--muted);line-height:1.5}
+.wcard.alt{border-style:dashed;color:var(--muted)}
+.eng{font-size:14.5px;line-height:2;color:var(--body);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.decode{margin-top:26px;border-top:1px dashed var(--line);padding-top:18px}
+.dcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 16px;margin:10px 0}
+.dcard p{margin:6px 0 2px;font-size:14.5px;line-height:1.85;color:var(--body)}
+.dcard b{color:var(--ink)}
+.decode-concl{font-size:14.5px;line-height:1.9;color:var(--body);background:rgba(242,185,80,.06);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-top:12px}
+/* 动效层：transform+opacity only，控件 140–220ms，reduced-motion 强制回退 */
+html{scroll-behavior:smooth}
+.rv{opacity:0;transform:translateY(12px);transition:opacity .5s cubic-bezier(.22,.8,.32,1),transform .5s cubic-bezier(.22,.8,.32,1)}
+.rv.on{opacity:1;transform:none}
+.stat,.opt,.pillar,.wcard,.dcard{transition:transform .18s ease,border-color .18s ease}
+.stat:hover,.opt:hover,.pillar:hover,.wcard:hover,.dcard:hover{transform:translateY(-2px);border-color:var(--amber)}
+#pro-text{min-height:3.2em}
+.type-caret::after{content:"▍";color:var(--amber);animation:caret 1s steps(1) infinite;margin-left:1px}
+@keyframes caret{50%{opacity:0}}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1!important;transform:none!important;transition:none!important}
+  .stat,.opt,.pillar,.wcard,.dcard{transition:none!important}
+  .stat:hover,.opt:hover,.pillar:hover,.wcard:hover,.dcard:hover{transform:none}
+  .type-caret::after{content:none}
+}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div id="prologue"><div class="pro-box">
+<div class="kicker">OPENPLANLINK · 园刊第叁版</div>
+<h1 id="pro-title"></h1>
+<p id="pro-text"></p>
+<button id="pro-btn">开 园</button>
+</div></div>
+<header>
+<div class="hd"><div class="logo">夜间游乐场 · 园刊</div>
+<div id="live" title="判决依据：页面时钟＝访客本地时钟（实时跳动）；数据时钟＝panel v4 冻结于 2026-09-09。两相分离，互不冒充。下次重算：数据层以用户拍板 panel v4 采纳与否为准。">授时 LIVE <b id="live-t"></b> ｜ 数据冻结 2026-09-09</div></div>
+<div id="toc">
+<a href="#ledger">① 总账</a><a href="#d1">② D1 门槛馆</a><a href="#d2">③ D2 望远镜</a><a href="#d3">④ D3 占卜屋</a><a href="#d4">⑤ D4 旋转木马</a><a href="#decide">⑥ 呈批决策台</a><a href="#honesty">⑦ 诚实柱</a><a href="#pillars">⑧ 三支柱</a><a href="#net">⑨ 网络馆</a><a href="#worlds">⑩ 世界馆</a><a href="#forge">⑪ 造物馆</a>
+</div>
+</header>
+<div id="hero">
+<div id="wheel-holder"></div>
+<div class="hero-txt">
+<div class="kick">评分系统可视化 · 阅读友好版</div>
+<h1>夜间游乐场开园</h1>
+<p>「物理硕士择校评分系统」当前一切结果的游园式可视化：panel v4 学生面板、Lane D 四轨、以及等待主权人拍板的呈批选项。本版为阅读友好重排——正文 16.5px、图表文字 ≥12.5px、长榜可检索、每个数据块带来源铭文。摩天轮可拖拽环绕、滚轮缩放——缩到最远，银河穹顶显影。</p>
+</div>
+</div>
+
+<section id="ledger"><div class="wrap">
+<div class="kick">园区总览</div>
+<h2 class="sec-h">① 总账</h2>
+<p class="sec-sub">项目当前总账，一圈看全。</p>
+<div class="howto"><b>怎么看：</b>八张灯牌就是八笔账。panel v4 已于 2026-09-09 深夜收口、质量门全过；param_registry 误删后已从 V100 副本+CHANGELOG 精确重建至 242 条，registry 测试通过。「Δ=+0.00」表示 v3→v4 换版在共享 57 单位上门槛中位数零漂移——换版无污染。</div>
+<div class="stats">
+<div class="stat"><div class="num">10,893</div><div class="lbl">panel v4 学生行（逐生级）</div></div>
+<div class="stat"><div class="num a">64</div><div class="lbl">招生单位（学校｜专业代码）</div></div>
+<div class="stat"><div class="num m">298</div><div class="lbl">单位×年份格子 ｜ 四科覆盖率 72.9%</div></div>
+<div class="stat"><div class="num g">120</div><div class="lbl">schools.json 在库学校</div></div>
+<div class="stat"><div class="num">242</div><div class="lbl">param_registry 参数（缺解释=0）</div></div>
+<div class="stat"><div class="num a">589</div><div class="lbl">pytest 测试通过</div></div>
+<div class="stat"><div class="num m">Δ=+0.00</div><div class="lbl">共享 57 单位 τP50 中位偏移（v3→v4）</div></div>
+<div class="stat"><div class="num g">177.1→264.5</div><div class="lbl">广西科技 τ 去污修正（v3 污染值→v4 清洗值）</div></div>
+</div>
+<p class="src">来源：评分系统_优化版/status_board.json、panel v4 CSV（md5 d781ab0590660d717894a1231a72f503）、v100_runs_20260909 呈批报告 · 数据截止 2026-09-09</p>
+</div></section>
+
+<section id="d1"><div class="wrap">
+<div class="kick">Lane D · 第一轨</div>
+<h2 class="sec-h">② D1 门槛射击馆</h2>
+<p class="sec-sub">τ = P5 bootstrap ｜ 63 单位出档 + 1 单位跳过</p>
+<div class="howto"><b>怎么看：</b>选一个单位，曲线给出「考多少分，进名单概率多少」；琥珀竖线是门槛中位 τ P50，两侧粉虚线是 P5/P95 不确定带。<b>注意：</b>这是「进名单门槛下穿概率」<b>不是录取概率</b>；调剂生含在内（已知混淆）。τ 取 P5 而非 min，防专项/破格低分拉低门槛——但 P5 仍可能被拉低（诚实柱①）。</div>
+<div class="ctrl">
+<label>选择单位：</label><select id="d1-sel"></select>
+<span class="kv" id="d1-kv"></span>
+</div>
+<canvas class="chart" id="d1-cv" height="400"></canvas>
+<div class="legend"><span><i style="background:var(--cyan)"></i>进名单概率曲线</span><span><i style="background:var(--amber)"></i>τ P50</span><span><i style="background:var(--mag)"></i>τ P5 / P95</span></div>
+<div class="ctrl" style="margin-top:26px"><label>全部单位 τ 三档（可检索）：</label><input type="text" id="d1-q" placeholder="输入学校名筛选…"></div>
+<div class="scrollbox"><table class="tbl" id="d1-tbl">
+<thead><tr><th>单位</th><th>τ P5</th><th>τ P50</th><th>τ P95</th><th>有效年份</th></tr></thead><tbody></tbody></table></div>
+<p class="src">来源：lane_d_v4_student_panel.json → d1_threshold（逐单位 years / n_per_year / τ 三档 / p_enter 网格）· 数据截止 2026-09-09</p>
+</div></section>
+
+<section id="d2"><div class="wrap">
+<div class="kick">Lane D · 第二轨</div>
+<h2 class="sec-h">③ D2 2027 望远镜</h2>
+<p class="sec-sub">初试总分 2027 收缩趋势外推 ｜ 58 单位</p>
+<div class="howto"><b>怎么看：</b>每行一条横带=2027 预测 P5–P95 区间，绿点=P50；右端数字为收缩斜率（分/年，粉=看涨、青=看跌），按斜率从看跌至看涨排序。<span class="warn">外推=趋势+残差 bootstrap，简章变动可使其失效</span>；收缩强度 w=1/n_years 是启发式、未交叉验证（诚实柱②）。</div>
+<div class="ctrl"><label>检索：</label><input type="text" id="d2-q" placeholder="输入学校名筛选…"></div>
+<div class="rows scrollbox" id="d2-rows"></div>
+<p class="src">来源：lane_d_v4_student_panel.json → d2_subject_2027 → init（pred2027_P5/P50/P95、slope_shrunk）· 数据截止 2026-09-09</p>
+</div></section>
+
+<section id="d3"><div class="wrap">
+<div class="kick">Lane D · 第三轨</div>
+<h2 class="sec-h">④ D3 占卜屋</h2>
+<p class="sec-sub">torch N=512 pinball 条件分位集成 ｜ 64 单位</p>
+<div class="howto"><b>怎么看：</b>给定公共课情景（45/55/65 三档），读专一、专二的条件分位曲线（实线=q50 中位，虚线=q10/q90 包络）。<b>这是条件分布集成，非因果预测</b>；三档未覆盖极端场景，unit-emb 对新单位不可外推（诚实柱③）。下表为全部单位在情景 55 的分位简报。</div>
+<div class="ctrl"><span class="kv">示例单位（全量曲线）：<b id="d3-show-name"></b></span></div>
+<canvas class="chart" id="d3-cv" height="400"></canvas>
+<div class="legend"><span><i style="background:var(--cyan)"></i>专一 q10/q50/q90</span><span><i style="background:var(--mag)"></i>专二 q10/q50/q90</span></div>
+<div class="ctrl" style="margin-top:26px"><label>全部单位简报（情景=55，可检索）：</label><input type="text" id="d3-q" placeholder="输入学校名筛选…"></div>
+<div class="scrollbox"><table class="tbl" id="d3-tbl">
+<thead><tr><th>单位</th><th>专一 q10</th><th>专一 q50</th><th>专一 q90</th><th>专二 q10</th><th>专二 q50</th><th>专二 q90</th></tr></thead><tbody></tbody></table></div>
+<p class="src">来源：lane_d_v4_student_panel.json → d3_cond_quantile（N=512 集成均值表；简报取情景55档）· 数据截止 2026-09-09</p>
+</div></section>
+
+<section id="d4"><div class="wrap">
+<div class="kick">Lane D · 第四轨</div>
+<h2 class="sec-h">⑤ D4 宽松度旋转木马</h2>
+<p class="sec-sub">generosity gap ｜ 57 单位</p>
+<div class="howto"><b>怎么看：</b>中线为 0，右伸（绿）=偏宽松，左伸（红）=偏紧；横带为 gap P5–P95。gap = 给分宽松 × 试卷难度的<b>混合信号</b>（conf estimated）——<span class="warn">不可单读为「压分」</span>（诚实柱②）。按 gap P50 从宽松到紧排序。</div>
+<div class="ctrl"><label>检索：</label><input type="text" id="d4-q" placeholder="输入学校名筛选…"></div>
+<div class="rows scrollbox" id="d4-rows"></div>
+<p class="src">来源：lane_d_v4_student_panel.json → d4_generosity（n / gap P5/P50/P95）· 数据截止 2026-09-09</p>
+</div></section>
+
+<section id="decide"><div class="wrap">
+<div class="kick">园心主建筑 · 未揭幕</div>
+<h2 class="sec-h">⑥ 呈批决策台</h2>
+<p class="sec-sub">按审批链（责任席提案 → 筹备组审议 → 主权人拍板），四个选项已全部呈上，<b>本席不越权执行</b>。</p>
+<div class="howto"><b>怎么看：</b>A–D 为 2026-09-09 深夜收口呈批报告第八章原文。主权人一句话，对应设备才启动。</div>
+<div class="opt"><span class="tag">选项 A · 推荐</span><h3>采纳 panel v4 为训练基准</h3><p>10,893 行 / 64 单位 / 298 格，QC 全过，Lane D v4 即以此复训。</p></div>
+<div class="opt" style="border-left-color:var(--mag)"><span class="tag">选项 B</span><h3>v3 / v4 双轨并行</h3><p>保留 v3 复现链，v4 作前瞻轨。</p></div>
+<div class="opt" style="border-left-color:var(--amber)"><span class="tag">选项 C</span><h3>Wave-2 派单</h3><p>按 C6 分级，先收 A/B 级校（吉大 / 中山 / 武大等），预计 20–30 校可直达；C/D 级转 archive 环境专项。</p></div>
+<div class="opt" style="border-left-color:var(--red)"><span class="tag">选项 D</span><h3>大工 2022–2024 逐生级专项</h3><p>仅存于 archive.org 快照 / 付费镜像，本环境不可达；需换网络环境，或放弃逐生级、以聚合入账（现状）。</p></div>
+<div class="decode">
+<h3 class="sub3">白话解码（本席转译 · 每个选项到底意味着什么）</h3>
+<div class="dcard"><span class="tag">A · 意味着什么</span><p>把 2026-09-09 收口的 10,893 行 / 64 单位面板正式认定为「标准底版」，此后训练、预测、可视化全部以它为准。<b>代价：</b>零资金零新采集，只是一次认定。<b>风险缓冲：</b>QC 全过，v3→v4 共享 57 单位 τP50 零漂移。<b>谁来动手：</b>您一个字；执行侧零成本。<b>本席试验：</b>本页全系已用 v4 渲染，属试用态，不等于正式采纳。</p></div>
+<div class="dcard"><span class="tag">B · 意味着什么</span><p>旧版 v3 不退役，与 v4 同时维护互相对照。<b>代价：</b>双倍维护。<b>审计要点：</b>B 不是独立选项——A 采纳后过渡期双轨自动存在；只选 B 不选 A = 不做认定、维持观望。</p></div>
+<div class="dcard"><span class="tag">C · 意味着什么</span><p>Wave-2 扩校：按 C6 分级再收 20–30 所 A/B 级校（吉大/中山/武大等），面板从 64 扩到约 90+ 单位。<b>代价：</b>采集工时，零资金；C/D 级校需 archive.org 环境（本环境不可达）。<b>谁来动手：</b>本席可组织采集代理群，但属新采集动作，照章候您放行。</
