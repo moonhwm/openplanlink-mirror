@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T01:48:20.543Z",
+  "generated_at": "2026-10-09T01:49:35.745Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2458,
-  "merkle_root_sha3_512": "75e601780be100f2c982dac8306fcb715a3810f45bb8b41a1b7ca00ed69489acd8bdb6fbe13c718619ff59730e573ab89036e3603bcb3be5d9453a7f5ad41583",
-  "hmac_sha3_512": "262aff7bc3c324723928de0c084307b3e7f171612143efbfae526ff3be3671e97fbf4d736c32d23bd7d2405e3178d767b70104f6313ba0a5afbb093201bda0f7",
+  "file_count": 2460,
+  "merkle_root_sha3_512": "06c15e13da7d3ac2877ec2257d83b436df46a3c9f89d4ca6642838c08f762b11d24fe2c56a1601749f10f6fbddb28ee0d6ae70499778fe50a199d032547566bd",
+  "hmac_sha3_512": "26797750de1e7ce4017c519a3faf3d380597f5d6ebe3640ba5a17ba057831a17ddfe8e930737714bb084bb60fc15d6adeb76639af9fe215a41e6acd5222e5f73",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2586,6 +2586,12 @@
       "leaf_sha3_512": "25e67f432847d37576bb2750ec75a8a49d8eb86017777cc25537c7b6c8c29bcb8229a1d164f2ccc195f5400d8bf9c0bc6a426f9faadbdf8923c773b0d0f705a4"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/生成式AI备案预研v1_DF-META-20261009-CAIRN-08.otl",
+      "size": 6225,
+      "content_sha3_512": "947bc3f857198228bd568d2b02eba37be18985a1305736a9b0c8464b53328dadeecd137d96f8cb693ba9c23faa9ee8519d986f553d734e8eca8984108073cc11",
+      "leaf_sha3_512": "75c7fd99a79e64fb90fc95f374187d22d1f4322ff0446dd083163c14c307bbb6dc97c4a3699be957a2aa5aebb073f07847c2ce344044fecfc5a192a7bb7acdd5"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/百炼四模块实战与资源效能_DF-AI-20261009-CAIRN-01.otl",
       "size": 7002,
       "content_sha3_512": "00135094b31c93ceb53e59ac5783bddc55922d013e6d9aeae1ac9a15a77b6955ec0313a9828818b34da4ceb01444c442098c281e080cee8654e99c7bef63738f",
@@ -3514,6 +3520,12 @@
       "size": 6648,
       "content_sha3_512": "15c6000eb9594f1d4199c2edcbe9024d19c8bf2ed352935952c5997f680e6069d8fa96ace665571d4f1ec208d20a459712b168144f465c8647410b3aa56a1b1e",
       "leaf_sha3_512": "328f038bbabab7c532e4865e355348942ff4dfc06e0a68f239580fd9082443a326db8796b75c9a6861955d73a22c965544db48006e6dad2520057c426e7bf629"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/生成式AI备案预研v1_DF-META-20261009-CAIRN-08.otl",
+      "size": 6225,
+      "content_sha3_512": "947bc3f857198228bd568d2b02eba37be18985a1305736a9b0c8464b53328dadeecd137d96f8cb693ba9c23faa9ee8519d986f553d734e8eca8984108073cc11",
+      "leaf_sha3_512": "b6e4bc77aa3f7fe66400fcb4a06feb9d40081edbd3651b9da8a790b63e3b3d149ff00333fb1d7f9b9392fa66bc3e37d51280fbf908dbce1a6f0f97766b4eb900"
     },
     {
       "path": "deliverables/20261009/seat-cairn/真实进房作业包v1_DF-AI-20261009-CAIRN-62.otl",
