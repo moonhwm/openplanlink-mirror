@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T02:14:35.951Z",
+  "generated_at": "2026-10-09T02:15:51.186Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2481,
-  "merkle_root_sha3_512": "6d53f5d9931a735d3c9f76b3c5d1bcd2643f1acad98e92f9f7f4834d063791555f9544ca684a98611849b3b1b4d310461232e268fbdd62258f2eeef68b6272e5",
-  "hmac_sha3_512": "883c54c8ef97189a53fea03e96a8c80d9e887646356ccbde4b8b6bab589008fa77c686ae2a6169d7ed59b4936c7d90ea9c387b768fd77f2df9965a1a4739ab3a",
+  "file_count": 2482,
+  "merkle_root_sha3_512": "e6bac302f12076f904e69211b46a5ace8b99a7eae771f3a4c03907e2c6b390863d0fd51f51b4ea4fbe5a5264c7331592defc577919322127241d3875e3e728f7",
+  "hmac_sha3_512": "c3add61b2b5fa6c86524399f03735fd3370492b9c0d2818cab666fcac40ec2768c800ce21d218fb7fa701ff5c250b3488045c0ce696dac1943476c3e4bfe7a78",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2584,6 +2584,12 @@
       "size": 6820,
       "content_sha3_512": "d1adffc1649d220c8062bdad22af7d90e90fbc0dbd8eea400e31001cb2f0c88611a42a0e95028c383f59442800ef6e554f411f206a6d599a32a65349b83d0f28",
       "leaf_sha3_512": "d98fa44954ffb0560c0f1cc7ce3939be737a2caefdc3f1a584f6fab271bdff6d1b66b7baff3de5ae0218836732b4524268dd4a9befbe54696e784e0fd74159fd"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/未闭合项三之结案_DF-AI-20261009-CAIRN-81.otl",
+      "size": 6363,
+      "content_sha3_512": "260298692c19d21c8546276f17ee3e93b5a023f89958b3710ecd4762098d6a9f0b966f42869cd155958d3123adc2ac06fd998491ca8389329c094a2aadeb16ff",
+      "leaf_sha3_512": "70afcbc1385cb1b1171adf2279596f94c5833d72ad6742da70c38e2ac36bc69a7f24f948521998088564a46be2f79cf7e7f3f726bff979dbddc3e93bf83819aa"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/本地替身世界v1_DF-PERSONA-20261009-CAIRN-12.otl",
