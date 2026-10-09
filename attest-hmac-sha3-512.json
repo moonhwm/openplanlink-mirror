@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T02:38:25.210Z",
+  "generated_at": "2026-10-09T02:47:40.486Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2496,
-  "merkle_root_sha3_512": "9f8a56c4e1290306d6d341c82ac9cd8e16c3ae0e3764b2924f213f21f1083088df4ac27ae6b419f9744de1216a170a7f745f21cbcb7918cb2029da04304e742f",
-  "hmac_sha3_512": "4956a22b75e801de788e9e1942c1e2b8f2e76ed930756b925ffa52f73c1e6433fe558e61f42d5fd9f237930b9ee42008ed61c4c5cef525ece0c85564e76441b6",
+  "file_count": 2498,
+  "merkle_root_sha3_512": "37275040a963134037fb4dc5de99bffa40454f716c9153e6e4f3fe1c15270c50a9fa4401fafe1fd637a8798f6b097173734513238893ba76aeeb4de606937a15",
+  "hmac_sha3_512": "26f3b2039bfc265d908f6bf26e64dff7c04008bbf95caa4c0d5035226b91b43ea3887a72185cef4ad6e3e76c040a9b5e5e7a9ce995a8f80812a187aa761d3ffb",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -3000,6 +3000,12 @@
       "leaf_sha3_512": "6d5b2ec5e23ff2d26e8550265dd6103d1c442a77edbba0f990a3163061a90acb3ef0c654d324428aaa845a13ef93a02c05396d3ccac405376db41e4dab801665"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/预算墙分组图_DF-AI-20261009-CAIRN-88.otl",
+      "size": 5329,
+      "content_sha3_512": "6e6cf9dbb097b4aca8ce48b6caefdb85482b71d3f43976bb10d93e2a38195805f5b2497d77d8923a90df0f956ca17dec0c7bd65a2db60937a3a7413609a8a813",
+      "leaf_sha3_512": "0255ccbe8d98bc29912fa7f7d69aa6fee75a8aa7f805517230bf99672108e57ef61cb7b9bf31d1271be22fef14df89793f92dbe35021bcd58f7bd423eed06779"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/预算墙域分区补正与三模块恢复_DF-OPS-20261009-CAIRN-12.otl",
       "size": 6810,
       "content_sha3_512": "1937d98722d5deb5c5c20b673b28b10ae1eb7960e2385ad67b4666a9b5ed04a5d5176e4fc1f3b10a8ddffdfefacc3b957babce7614d766e5aaace46c1fc71d96",
@@ -3406,6 +3412,12 @@
       "size": 1346,
       "content_sha3_512": "a76e22ffec2c0500b2c89b7634d9648f85b148369bdddd93b790762f5130fb0a227b3d739232e1e657ad933afd7583991a5cd60c9e1b4ba97ac0137521d0cd1d",
       "leaf_sha3_512": "cc8b3922312629a1c0a8230a11b3775708ede1d19068bcab418892db2c153ef8c19553136f145a0e7cb33ca237ff44784df5a88e362bd559e9d95ad1204f90f0"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/budget_wall_map_20261009_CAIRN.json",
+      "size": 2005,
+      "content_sha3_512": "f43e0d9a6da9a1056fdcc3ba2f4845515fee349bf3b75778c497a4829ccb62901c79f3676988ece765a86a216cfcfcf9919151db9493d6ad4bdae4018d0bb07a",
+      "leaf_sha3_512": "4f10c005005d5829a612d1b96e685a58ffeecc7afeeb5744ef59620360800647ca959ae24fe1bb835706701311ee11433d290a040085293415a4515e8edcc37f"
     },
     {
       "path": "deliverables/20261009/seat-cairn/client_handoff.py",
