@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T02:13:32.655Z",
+  "generated_at": "2026-10-09T02:14:35.951Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2479,
-  "merkle_root_sha3_512": "c10c67cd952efe9c72ca2f4df83f705c59a3e6cf4231bdf83dcf0c4fca077b456904c7345cf20befb54e4ef4f209a97643e65ef8e45118ecbaf0f63775a2029e",
-  "hmac_sha3_512": "390941f4f37ed6cfee9d75969faa1c80015eb955bc2c393f962f344d4762fc37dea83251a12c85acd2d8d5c068fa0154afaca9a3c9aa7b32258bbba19db7dd35",
+  "file_count": 2481,
+  "merkle_root_sha3_512": "6d53f5d9931a735d3c9f76b3c5d1bcd2643f1acad98e92f9f7f4834d063791555f9544ca684a98611849b3b1b4d310461232e268fbdd62258f2eeef68b6272e5",
+  "hmac_sha3_512": "883c54c8ef97189a53fea03e96a8c80d9e887646356ccbde4b8b6bab589008fa77c686ae2a6169d7ed59b4936c7d90ea9c387b768fd77f2df9965a1a4739ab3a",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2622,6 +2622,12 @@
       "leaf_sha3_512": "5a8f246d84de7b24a79290ae3da684211adb087bf020571dc32dca88181ff0fc7816d16a4e20acdcd504bcdd356c659996aa399b2fabaf144de60a182e77f931"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/涌现判据与证据链v1_DF-AI-20261009-CAIRN-80.otl",
+      "size": 7151,
+      "content_sha3_512": "bd7cee5eaf45beac629977d45a1d2cf24ab6a180df4bb3ada2b5c5e4c09709bb2a79f8267a6f2618fdaa5118f1f6ac9069ccb63fcba71d4f3c9a640e49769c96",
+      "leaf_sha3_512": "e0991357d3ec3f40ae4e5aa2f1b0d38b5b67eb4fb4361aa5710b4623eb5e3c016e02166789f04aceb91a5173d15dda72e7ab9a8e85d2e3aeb6333cab60a6c383"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/游乐场根直取便利件_DF-OPS-20261009-CAIRN-06.otl",
       "size": 4250,
       "content_sha3_512": "99a6724a2ec494b70cdf17b6b9065d7557e535cc932b31fffdf0de7ba9f25a9b91ed4c0060c8c15a5a9dbbafc885cf1fae15e88e634703509ffbf7e330d70a3f",
@@ -3634,6 +3640,12 @@
       "size": 4257,
       "content_sha3_512": "12115abb91cdf478dc7649aa738c32e704f953d90e1056e18934c95d6b13323515e23f905914558fa83c2fd85fb8aeb7e595629fc295c45e1bac13ffcdde5e0c",
       "leaf_sha3_512": "2b487c9b9aca813d2cf23f1d780f111cf075587f237bd0b8bf3e6a9a647c70e4b407ef369a98d8bf6119f2968e0a09e2877ddb309477841c3a3d5d84aecb1472"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/涌现判据与证据链v1_DF-AI-20261009-CAIRN-80.otl",
+      "size": 7151,
+      "content_sha3_512": "bd7cee5eaf45beac629977d45a1d2cf24ab6a180df4bb3ada2b5c5e4c09709bb2a79f8267a6f2618fdaa5118f1f6ac9069ccb63fcba71d4f3c9a640e49769c96",
+      "leaf_sha3_512": "a34e7dc58b8b6feaf3ca91938c4ead1226f25f0e7a71905a943efe01b0eac55ef22ae2a539e4c49676176010417dea93889cc6e1e8dd2d33ef4c03f4935b65bd"
     },
     {
       "path": "deliverables/20261009/seat-cairn/生成式AI备案预研v1_DF-META-20261009-CAIRN-08.otl",
