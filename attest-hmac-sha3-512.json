@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T01:22:11.955Z",
+  "generated_at": "2026-10-09T01:31:42.008Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2453,
-  "merkle_root_sha3_512": "48fbc7b174f872585a5d3bb2a395773adda18224f518f2a71d11e86f0a20105732daaf69055d243e0d12af80390b56d2be2e456430ed7d71ae8804a1460bc9f6",
-  "hmac_sha3_512": "cfdcade6102d7e3f0d8b38d9909b2bd595078271bc76b80f005f07c8fda34245f5da8e9e7f85a3532be46d8005fba7db35e634ae36d8f35523e01849ec06b773",
+  "file_count": 2454,
+  "merkle_root_sha3_512": "ef5fbbaa1575d2a909d766b5d5e8feda0efc86e20be535c1ebcf7af048e716ae2453933591d9c09318c29f3e6881f98fe5f3df1aa0018a3dcafee79e0c334d0a",
+  "hmac_sha3_512": "00a178924358e90cc43839796982a6f50fd18542605e5396ec00cc46fa8ba23952a56284e9d8f85375db56f09e81ed75ee3e3587f2b5838b7aa71ad1464e70b9",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2680,6 +2680,12 @@
       "size": 5169,
       "content_sha3_512": "88703668febdde4407e7b3e0721fe8fd372dc40685c56062fa802701d7c102a857059cb3de48f565f1ad916aaf91ad1b19c687a4f7ffb619ed62dacd3d0a1713",
       "leaf_sha3_512": "cad07d7ca1c916e2a60d29234cb6fbd8a74f6b3502ad4ce0eec36c115a57680f7e631a8be1ca2e882234e2dc05e7971565798ffb455b60e16489b63ee7b820e3"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/语料v5三模块复测与单点方法论_DF-AI-20261009-CAIRN-70.otl",
+      "size": 4766,
+      "content_sha3_512": "e7a26062a54bb8866d0c77b4eb3756fe9787de2200031fb972665322ed38afd0f278ea2da97c66fab05ba34cb1d9fd26cac6f18c44255740198d2c95d050e23a",
+      "leaf_sha3_512": "840ada4c76eaf387e31399598b50ffd82bee65a0509b90f5603e4cb43c15fe2828523f536fffc1f3497ccf2aa573176d3ca269d822be8ac6be2b801c20fe7835"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/语料缺口闭环与往返归因_DF-AI-20261009-CAIRN-03.otl",
