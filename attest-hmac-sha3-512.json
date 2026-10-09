@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T09:11:21.914Z",
+  "generated_at": "2026-10-09T22:23:19.450Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2558,
-  "merkle_root_sha3_512": "c734c96296ce6cad4e0af9d1eaf89839357bc47f04548b9fd8c95a6cbc0c9bd4f92707732a69dce095637490ecd61a076894087090c2fff7621f94c6b1198331",
-  "hmac_sha3_512": "6a922644a567cd3b8124737f4524ae36bea54233c96f55237a4a2d14bcfd29a981bcda8f24332d5d8aeff80c68180f6f14e59e4bcb309f015435e6167b275506",
+  "file_count": 2560,
+  "merkle_root_sha3_512": "72b44d2a0ae8588560aa76fc7e5efb9054ce65b3cd91bc3b919eaeeb21ef989d9382f38388d6d2675685595124814e56288f3d40bf7503c6519bea879e4b0f75",
+  "hmac_sha3_512": "cd651018ee05290eb92267a3dc1678ed8d939ddc79280792bc5ac8590b31b6a69b71ff9b479ef348a9487e84c8b9dc88e7e0d624e177de8ff2811f36ea492ab3",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -3084,6 +3084,12 @@
       "leaf_sha3_512": "45184820f128490a218303647372114727e944bcd91dfdbda84c16390425148d3defdb9211682e8a31c0ad6e1ae9b34ad41cb854e2e038e26ae9589577ad74f7"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/通道勘察v1_DF-AI-20261010-CAIRN-01.otl",
+      "size": 6310,
+      "content_sha3_512": "32884a2bdba07910d65a319f7fc98e408d522632f0e343a7e130c6b6f6c3d20ba5f646667a2e2461a6e57a7b2e10605baea5e2b0fac3f9baa95a3f566e00a604",
+      "leaf_sha3_512": "dab33b551750c34f1aff55c1d2b0348c9a588c722f40477538d846598fdfe54ea0bc01b89ca99ceb2dfe466744773f26b30dcc849b484386790eee20505eb40f"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/通道登记与实质调用留痕_DF-OPS-20261009-CAIRN-01.otl",
       "size": 7360,
       "content_sha3_512": "950b8153f6e80cf3891ced2c531ca8b95d6cb5f56f8e42e83fb71c7c35b5b0972337101d4407276d6e75f18538c3d0e688fd3c94fe931595d1c8dd108b15069c",
@@ -4120,6 +4126,12 @@
       "size": 7729,
       "content_sha3_512": "64878ee91ee7b322d431b562e052c6ead269e8e0d6b8fe6d179faa7782c1e980d6bda0005c8fdccb7a3fe87b083c4c9e061c995a9a4f5028f7206164405c342b",
       "leaf_sha3_512": "89e1da40a1c42e865e0900cf950224568f705e72bcc98f0db1837b66a54f074cad2acfa62c0e0b80a7dd454b27abec7526e83fad3c2e2debbf4dde5a3a533093"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/通道勘察v1_DF-AI-20261010-CAIRN-01.otl",
+      "size": 6310,
+      "content_sha3_512": "32884a2bdba07910d65a319f7fc98e408d522632f0e343a7e130c6b6f6c3d20ba5f646667a2e2461a6e57a7b2e10605baea5e2b0fac3f9baa95a3f566e00a604",
+      "leaf_sha3_512": "066530bddb524a02da5194dcc7e4a75a74a81a0142019ad0f3b484de58ae367bd31cc5732d41a349c1ac8eb0315991a032b529430deca87427fd1333db9836ab"
     },
     {
       "path": "deliverables/20261009/shoucang-df-doc-01/DECISION-REDERIVE-20261009-SD-01.md",
