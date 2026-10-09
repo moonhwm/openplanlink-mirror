@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T03:12:19.027Z",
+  "generated_at": "2026-10-09T03:17:09.258Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2506,
-  "merkle_root_sha3_512": "a6ec60ba015555a5455b6934c1ddd96c0153e4802a6b1cf47561d35a8c15a0b776f9b38b04aa3420dce89ded6737115d040ffdaa1ce6304945b2ad073580476a",
-  "hmac_sha3_512": "517f31439bbf2ed9f5c2016a587ede0b3560425d5b46c17550a06eeab6a0c3b5a9118ec5482337b4d3b8c05d3d82c609843665a03616612a4ad3463deb66c418",
+  "file_count": 2508,
+  "merkle_root_sha3_512": "09dd65fc635b642309ce94f1a78e7921c452f7f480fd193702407a969356b6c774634500e2240b28c2b7b9671c08b017570b783906f7994f2eb8dd858a76a32b",
+  "hmac_sha3_512": "0173af6467e3185da81587bd3779eb7b95942204d78aff044b6d1f7f8749bf58d2240042d246c9571d19e17484df48cfd66a94e0a47498c6d590bd8f3dffbe26",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2916,6 +2916,12 @@
       "leaf_sha3_512": "a5cdc38ec1599edc9519cadc14c3b855080093244918c9701523387aa275db04f87995e564da9be6bc9152c0d95ba2d010dce88f48b4bb0e3afac40e89d43164"
     },
     {
+      "path": "deliverables/20261008/seat-cairn/exchange/跨厂商独立审查与即时回应_DF-AI-20261009-CAIRN-93.otl",
+      "size": 8739,
+      "content_sha3_512": "33e8be4081c91f509706b417aaa2295c3b004efffdb47a3686a1f4e3e0e98c495e41acb7ad9f594e27bee5b57be66036825f16bab3e0e93b39d76b778ab6f97a",
+      "leaf_sha3_512": "2b444c1f9784ca3c029ed300b18ceb7ad07e5e94f684ae2480880bd29f8e664c4c92585e563e417760475084b797073cda03d4b61adda201fdd4f3e373c21da4"
+    },
+    {
       "path": "deliverables/20261008/seat-cairn/exchange/跨席三模式对照与探针v6_DF-AI-20261009-CAIRN-34.otl",
       "size": 7541,
       "content_sha3_512": "c14726352270f913cdec537a5ede30e7fed87f5142473c28db74ed3e68ae29e48312992c4818bc21e1c266e9c4c2960e89fac71ff6cb0a289e8c3e842f9841a3",
@@ -3472,6 +3478,12 @@
       "size": 4401,
       "content_sha3_512": "4151e945a2fc739293ef5c678ab2ef3e8d610b914dccc2203afd615d95c316fdfa8158f3f62d4d6cac531f8bbd53f47a29ec909beea44a1386e4bf4a37acfd86",
       "leaf_sha3_512": "343842368525c157ae8e6e5f38a4d7ee053d23d0c198f831bbe25f2eb4182911c9c9e7f40bad29c3b8006230304dda656127c523517b3993b7583fdde4ba27f4"
+    },
+    {
+      "path": "deliverables/20261009/seat-cairn/cross_vendor_review_20261009_CAIRN.json",
+      "size": 5161,
+      "content_sha3_512": "ba222b2733a97f3905b3cb507e1f423ae6f36620fc48fc3f7e9284ef8846300be818aa1c20e6498f72891151c7c1b2d35f9638d5e931a1e40938b506722bba2d",
+      "leaf_sha3_512": "9ad998c37b236e1a68d32a12340c9298be681e26dbcb92ae48bd2b7c62a5bda9589b26c9fd5ed9a5b1d795237cf4b1b63dbe5c4cd2cf5668e31bc677d52e94fe"
     },
     {
       "path": "deliverables/20261009/seat-cairn/frame_stats_20261009_CAIRN.csv",
