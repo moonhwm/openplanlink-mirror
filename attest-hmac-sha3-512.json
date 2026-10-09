@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T03:42:10.965Z",
+  "generated_at": "2026-10-09T03:44:13.424Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2542,
-  "merkle_root_sha3_512": "dcd2c61c5d9ab867982c47d424d1a28de033e9961baa45f13e0773e6dc1385ca7fce597e719264e06144d1860b953e066ec8c7d77c2859d6fdf7232b8311d6c7",
-  "hmac_sha3_512": "1bbe612e5b6b1c0863de5a7bf5f347ee183853157c35dbbab677f75487f5d845201d218bbffff1d30d78f290b7ae7a6cabbae3172c67b6e313c6c1d01351195d",
+  "file_count": 2543,
+  "merkle_root_sha3_512": "f586ffb8ff1c6840681abc491224ee84e1f355501a1cdca0f190f51eb818d8b814d5b2fb324e6dbf770ed0c6b80c9b2cb832688d9549558755cfc0aef661913c",
+  "hmac_sha3_512": "f99da91b286aea457bf6e2479d567d8321f4e51c77caeb3d025ab10c6e4af94bd0f815e44e50fa678c2eebb79bbc0c4a51180ce519d48f844853163508e5937f",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -1912,6 +1912,12 @@
       "size": 4906,
       "content_sha3_512": "d5580cb8f19df223179ca88d7e1fb310ce35455a5536fec08ea2d31e85ead3dc9fcb3ca4ae261bdf5ac4a7852ffd2f776616e2f00404879001e7607dec77a34d",
       "leaf_sha3_512": "3185827d190287018cacd48baf44b778cf628ee567b837adedec2216f16a462e5e99b4af172f54b43ba1f3eed411cbc04fa62d5db7be3d0166b129ce1f3bd377"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/v6失败定位与校准_DF-PERSONA-20261009-CAIRN-24.otl",
+      "size": 5509,
+      "content_sha3_512": "1725784e501ea4bb1449ba9605d275d82a40dc8004a946269dd451e6e9f31fd11e965c7cec98db167f982f69e1d5ff8017f0259ea7d614e46a0791c37b1249aa",
+      "leaf_sha3_512": "da55e01b9c6f288cae9f136b9a7edf4ecd33e7d68574d3033f75f8487795959bb58564bde6685831a718cb617fa1195c96b9845e18e66fc4d1679bf2810abbf4"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/一页操作手册_DF-AI-20261009-CAIRN-103.otl",
