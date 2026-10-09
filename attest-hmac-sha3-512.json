@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T03:17:09.258Z",
+  "generated_at": "2026-10-09T03:18:20.654Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2508,
-  "merkle_root_sha3_512": "09dd65fc635b642309ce94f1a78e7921c452f7f480fd193702407a969356b6c774634500e2240b28c2b7b9671c08b017570b783906f7994f2eb8dd858a76a32b",
-  "hmac_sha3_512": "0173af6467e3185da81587bd3779eb7b95942204d78aff044b6d1f7f8749bf58d2240042d246c9571d19e17484df48cfd66a94e0a47498c6d590bd8f3dffbe26",
+  "file_count": 2509,
+  "merkle_root_sha3_512": "ca7913297bb9a951ccdf0924b3758ddd3fd27f87051a84269edaded988a24391ef54606e51dde82d2e386ced6aa280276dfeff37c2cc86beefd47e1e291195ec",
+  "hmac_sha3_512": "d4a29ac898050508a2f935ee38c39dec379659125a325cbd93f98612d20ee278ba490e856a354f26459dad90201feef66d3a08d8ab513714fb829c2f79adc929",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -2728,6 +2728,12 @@
       "size": 8508,
       "content_sha3_512": "f8edb330796a5c326c0875ffa0700ea2d383f40ef8b08c28d33adb8946cda47e89377cf41ceae8f02774b59fb75283b2ba2bf81398dc511e3654142d047456ab",
       "leaf_sha3_512": "3b735a96b4a63d582825de7adf1ecfbdd3dcc66e36c9552a360e08d4cd8e864576acd7da1d8b3a22e2aede8165dab154de84eb670b1b0e1685dad26fb7677890"
+    },
+    {
+      "path": "deliverables/20261008/seat-cairn/exchange/空间结构层复现性_DF-AI-20261009-CAIRN-94.otl",
+      "size": 6722,
+      "content_sha3_512": "b7349989ee34f8f3f08dc48e5ba9b42bddbcc7c0395f26b35c6807e9d3d9a2a0537689a91008daec66a3b9fb7697c6a44bc514bce6d56c244718062c58d619ec",
+      "leaf_sha3_512": "263aebb0d332b2e710416e1822c9b43d396dcf85a8403f03ba72d997bec03ca44313a8af76c279bbe76541b0c8f6a7a00e7c77c60bc5a849f4d941f8355c1a6d"
     },
     {
       "path": "deliverables/20261008/seat-cairn/exchange/第二次活动期之性质与抓帧之戒_DF-AI-20261009-CAIRN-82.otl",
