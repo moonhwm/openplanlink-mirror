@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-10T20:51:29.560Z",
+  "generated_at": "2026-10-10T20:53:41.444Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2925,
-  "merkle_root_sha3_512": "b31df1ff6400c87f5372ea8e25f76360e6ffb328dbba7173d44786f92848c564638ee76318ecdc93a065b51522d11f32faf74b556f59c253405485db7451531e",
-  "hmac_sha3_512": "994b06083c10350eb5c7c71aba60fc6a21dde86e3a4829e7b3f0e8dcb89407a80ac54825006e33270142e019c1d6df78da90854d3b262483624bd9f630384bb2",
+  "file_count": 2939,
+  "merkle_root_sha3_512": "702602afd7cac0e2a57caaf8e75a967cfc7243bb97df6d54dc034823ecacab9e4caa8df3a495d20fbefec1a04cb90e3d83203a41bb8bf05af7eb055c1c9da155",
+  "hmac_sha3_512": "5b997bb97d93364e189078f012df4ba181c00967bbb7a6d2838c6ceb528ce1490aa3d8fb9f742588d9e4275a8dbb47745fb5315aca50df2550925523ce872987",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -6388,6 +6388,90 @@
       "size": 7509,
       "content_sha3_512": "a48c2dbcdc65bb6d4b3e8696b8286f2dd37710c193b5337b25071f6a150491113e97099916e6d34932248617cdc5bc09d5121bde7553ec4ff1afffa8cb753f86",
       "leaf_sha3_512": "a01d5b85b823a36020dd000962687f8bfb0ef6d94d0e72ae13a3ac13357e4cd433dc22e12406692cf163c74695da76b12c1a1cb4b135ae6d4e5a6d85cf03847b"
+    },
+    {
+      "path": "deliverables/20261011/seat-k3-scoring/README.md",
+      "size": 3610,
+      "content_sha3_512": "80be93a101406188ba1c8e5e7da5979c07dc029c7c26bdea3693232339c797801efd797574f1258527b77915be8c08a172d4f6c0028b9e92f04714d659f5c7e3",
+      "leaf_sha3_512": "4c5e4f945dc86a8060754f87026958a3af81a0f080f8bb6de797757dc89e33ca8a6c84fa4630699139fb4a6502b56618bf100a4582200334a9428398be7c2610"
+    },
+    {
+      "path": "deliverables/20261011/seat-k3-scoring/Stage7收官报告_世界模型原型与百炼适配器_20261010.md",
+      "size": 4494,
+      "content_sha3_512": "cd1e68d21717e9af05ab29646a4c4db5bc021b842f481cd4366bf9a17b637b6a8efb595d443567961e25a9d0a1f6edd248836f07838639b3fd6b2dd73281c93d",
+      "leaf_sha3_512": "15e3089753ebc2a0432e0b1f9d3fc736861be03fd20d47e58f347c115031d6b67981cafe1bf51fec6b99c39b16a18f623f005881961d08cdd06b980c3ab3abf8"
+    },
+    {
+      "path": "deliverables/20261011/seat-k3-scoring/bailian-adapter/README.md",
+      "size": 2072,
+      "content_sha3_512": "37bf26ed389cdef1f2e6158adf5cef148a45600a581421b8450ec2946d64e1f36c62b980cb1b4a0b40637cbaf87db799dd1df21a66202aa20367fb741e9dabf1",
+      "leaf_sha3_512": "43a01fa1db2f11bf6bb4d446c1115d830cef86c011dc3a51a09405ee67fd70a750b31249a93b7346bdf56d120f7f7222fc668ac63c9ed360eafec4d81d788ff1"
+    },
+    {
+      "path": "deliverables/20261011/seat-k3-scoring/bailian-adapter/adapter/__init__.py",
+      "size": 654,
+      "content_sha3_512": "161762c198d755f23c75b0bb601b9a402ab0929c0e5cfb6202eaa80088ed39c461409345561c85e1178b6e4eb4da8bf50727188d94569c065609e9a9667a47be",
+      "leaf_sha3_512": "024d5704305f10c5a973b43ac9b11acb7d06caba5a0ee037048283c04aa6d650ae521c1e806c92eaab46e7f430283244d6b265a3da3a3918d280c44e106628e3"
+    },
+    {
+      "path": "deliverables/20261011/seat-k3-scoring/bailian-adapter/adapter/config.py",
+      "size": 1668,
+      "content_sha3_512": "8683996c9301503341d801ef46be0c90695c2dbc98a3f77ae1650961e91896c47959f2e3f3add98d3db85624ccbfe508587bae0497bce7d10983899d6292a728",
+      "leaf_sha3_512": "25640d050e5a9b04c554bf40a6844c39f1dbcfaa0199f18371260469e03293a79fabd70e9818d46b0531dcddc2907c44853ced7fa11ac60897b49669911b993d"
+    },
+    {
+      "path": "deliverables/20261011/seat-k3-scoring/bailian-adapter/adapter/decision.py",
+      "size": 3743,
+      "content_sha3_512": "a3495091900b62177c68a9f8713566f650f6598d4a0144f68d3ea26333a221b8f14cf26fb3a38d47dcb9ace667d6c472a54cf87ddd115aed777c58f519b01c56",
+      "leaf_sha3_512": "415b5f90621703e9cf02f79862f5610e369791c3463c26d5c79ff442586956bbe19d5563989694f6b98f76d5fe402a135bc916b1cdc1edb7fa1a31a4b58defd4"
+    },
+    {
+      "path": "deliverables/20261011/seat-k3-scoring/bailian-adapter/adapter/embed_rerank.py",
+      "size": 3696,
+      "content_sha3_512": "64312286dfaeeba24d51bc16943a057c62c2ecf3afae273ff4a7d4d06aac80d08dd342c6b70de82e4f2ff171d1ced0a6db7fc28347727276dc86bf0ff2256f81",
+      "leaf_sha3_512": "19b4fcf8ebd3a0ffa35ac161ccf8e78584dcef016c77e77a9768b2c4f2b3e853d64ae7e5e99c570c7362e48f31005d18b6792be033fc9bb4c58fdd2abc52eaf0"
+    },
+    {
+      "path": "deliverables/20261011/seat-k3-scoring/bailian-adapter/adapter/telemetry.py",
+      "size": 1028,
+      "content_sha3_512": "c1ae3ec1430d1c3ea85514473de1029128e11239ef9e45086e395a90d627d07b1b6df69b9fac24568baece3a004588847d077f156023c3767e3a32019d8ab253",
+      "leaf_sha3_512": "0335d5a24ae38581252b188be69753cb6c0cdf8e2df105362a5b55fad4c2d56406d7519ca1269ced73d693f1c473fc9311ea208cd7c12095b5f5e8616eac57ec"
+    },
+    {
+      "path": "deliverables/20261011/seat-k3-scoring/bailian-adapter/adapter/world_model.py",
+      "size": 3648,
+      "content_sha3_512": "b2a568550faa72681bb4386a1d61f07de37bc4e4b0d45d4346acc1808d358f73f70a2e2bb257ac558899db7f21bf8167d05d9d03830e78786b8e74e59a613c92",
+      "leaf_sha3_512": "e16808d75f204177aefaacc179d723db5456f09ddaf81f4b987a831d3811ed6e2ad209356b61e57aa0efb0aa04e63137420e0d6cdacaf05b0acd0b108f685e36"
+    },
+    {
+      "path": "deliverables/20261011/seat-k3-scoring/bailian-adapter/examples/demo_offline.py",
+      "size": 1866,
+      "content_sha3_512": "f2b8111bebcc06b64919627d4848618226a1f1a93053bbe378d68f065ed670684d6db65de2cb8b46cadec0eaf1b60881c8a89e3dc16e76f42a2799c9f4f952ee",
+      "leaf_sha3_512": "7804f5f02c4da78c50a41439eaaa0ce855e8dcc341087d5ab73f5de7d9db80957385c66bd5c39d49b98070e52bad243f63fb75c7cf40e2c1e78e241fcbca68ee"
+    },
+    {
+      "path": "deliverables/20261011/seat-k3-scoring/bailian-adapter/tests/test_contract.py",
+      "size": 2669,
+      "content_sha3_512": "a42222ff9b142c6fbbb1998430bb2d2f026b99dad65df1349e336d276407414c9f137a18ca87229e84db6a115a6814a74fce7f42fd199087127adc11d3d0b7f2",
+      "leaf_sha3_512": "54c620ade03cc93ba59bdd94a82b549d826c6008bfbd22422c9cb67e01bd2deb3d75fed6cea5fe8117823482d47233ec57959c9e9b54b2c8d95d701aadb307c1"
+    },
+    {
+      "path": "deliverables/20261011/seat-k3-scoring/world_verify.json",
+      "size": 512,
+      "content_sha3_512": "a105634149e3bc3cff5c68562db54da6e4254586816e4bc1b144081cc859467862a3f1c25a80d94e8cf5c0fe64eef12ebea828cf62dda131c879f36f275ad68f",
+      "leaf_sha3_512": "8602c73e63a934eb5100d9c879fa698b2c54c8855654219a946b2b010897a05c4cf9a21023fa9695e72fbe7bbd2119edd829faf07c9b5246b5b0c1a954ad65fa"
+    },
+    {
+      "path": "deliverables/20261011/seat-k3-scoring/world_viewer_snapshot_20261010.html",
+      "size": 14196,
+      "content_sha3_512": "58827395fb413638ce3e5aaf87116604f5834ca3f17ec533615414d2eb2356217170165205509db2b79f72ac8f1f87a020327545d5e218315c56bad6b0db3a87",
+      "leaf_sha3_512": "cc2a56f0461f4adbab12d727234acde624a242774fb54689ca054872894a9348ed3442bd41d7162d4832f1f450dcbdecfe354e00aa784957d78bb5dafa282a8e"
+    },
+    {
+      "path": "deliverables/20261011/seat-k3-scoring/评分系统说明_grad-path-scorer_v2.4.1.md",
+      "size": 2390,
+      "content_sha3_512": "7e8ef6895759d6b7f7b7a70327e8e30965ef30ed49ef6f8ce02eeadef54f6f42350a809104c073b50d8fa192aa20ea5850d9e18c01f5395d98f8040f804a20a9",
+      "leaf_sha3_512": "64e8f5a9ce0c8bd67dcfc924e7daabb0ab210ee5f7318c739168f69d24c198610116bcbf07ca0d145acbf6fc2b2b564d88c9a4921ad543af782dc417110e58f8"
     },
     {
       "path": "deliverables/k3-main/a2a-plaza/PILOT187-DECISION.md",
