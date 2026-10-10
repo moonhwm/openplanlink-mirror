@@ -1,0 +1,81 @@
+{
+ "ts": "2026-10-11T03:12:37+0800",
+ "seat": "a2a-node-local",
+ "firstframe": {
+  "file": "opening_firstframe_16x9_20261011.jpg",
+  "w": 1280,
+  "h": 720,
+  "bytes": 15727
+ },
+ "steps": [
+  {
+   "step": "create",
+   "http": 200,
+   "code": 0,
+   "msg": "None",
+   "sec": 2.2,
+   "worldId_tail": "N8wLSJgYiM"
+  },
+  {
+   "step": "build-1",
+   "http": 200,
+   "status": "generating",
+   "sec": 0.35
+  },
+  {
+   "step": "build-2",
+   "http": 200,
+   "status": "generating",
+   "sec": 0.2
+  },
+  {
+   "step": "build-3",
+   "http": 200,
+   "status": "ready",
+   "sec": 0.23
+  },
+  {
+   "step": "ticket",
+   "http": 200,
+   "code": 0,
+   "has_ticket": true,
+   "sec": 0.21
+  },
+  {
+   "step": "enter",
+   "http": 200,
+   "code": 0,
+   "sec": 1.4,
+   "travelId_tail": "jCSvR7Fhof"
+  },
+  {
+   "step": "instruct",
+   "http": 200,
+   "code": 0,
+   "sec": 0.82
+  },
+  {
+   "step": "status",
+   "http": 200,
+   "code": 0,
+   "keys": [
+    "encryptedTravelId",
+    "status",
+    "mode",
+    "rtcStatus",
+    "updateTime",
+    "userInstructions",
+    "chapters",
+    "characterActions"
+   ],
+   "brief": "{\"encryptedTravelId\": \"8rcpnKlw6xp3FtpLvZIGB8EpDfEbkDdL6FwLMejPiwSiVYSzffKWTwjCSvR7Fhof\", \"status\": \"running\", \"mode\": null, \"rtcStatus\": \"INIT\", \"updateTime\": \"2026-10-10T19:13:01.972Z\", \"userInstructions\": [{\"instruction\": \"在环心处点亮第八枚光点，并让分身面向园区之门。\", \"relativeStartTimeMs\": null, \"relativeEndTimeMs\": null, \"startTime\": null, \"endTime\": null, \"status\": \"UNEXECUTED\"}], \"chapters\": null, \"characterAc"
+  },
+  {
+   "step": "artifacts",
+   "http": 200,
+   "code": 404000,
+   "keys": [],
+   "brief": "{}"
+  }
+ ]
+}
