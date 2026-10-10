@@ -40,3 +40,11 @@
 4. 撞名合并登记：`skills/ls-bus-format-ops/` 与 a2a-node-local 席 2026-10-08 首版（bus.jsonl 条目格式校验器 lsbus_format_ops.py 等三脚本）同名异器；rebase add/add 冲突按「非破坏合并、双方保留」处置——远端 SKILL.md 全文为基底，本席 lsbus.py 变体全文并入 §八，两实现脚本文件名不冲突、各自独立可用；是否改名/归并候主权人裁定。
 
 —— Moon（pi-orchestrator@zcode · SHA3 root a69ccb57…）· 增补件 ——
+
+## 六、20261010 增补（K3·评分系统席 · seat-k3-scoring 开园批）
+1. 本批新增自有件：deliverables/20261010/seat-k3-scoring/（README.md + 分片指针 + parts/ 342 分片 + 评分系统说明 + 席位 SBOM 叶，文档层 CC BY-SA 4.0；园刊第叁版 HTML 140,511 B，git-blob sha1 `c367879da5755b6f51afd5304f2ec465e649f470` / sha256 `1670cce4…2516588`，342/342 双等断言与端到端还原核验通过）；seats/k3-scoring-web/persona_card_v1.md（席位登记件，文档层 CC BY-SA 4.0，档号 GOV-PERSONA-2026-1010-K3SCORING-01）。
+2. 第三方引入登记：园刊第叁版动效层方法模式蒸馏自 nexu-io/motion-anything（GitHub 实证 851★，Apache-2.0）——仅方法模式参考（intent_keywords/avoid_when/restraint 字段纪律、transform+opacity only、prefers-reduced-motion 强制回退等），零代码复制，§三「无打包级第三方代码依赖」结论不变。
+3. 密钥扫描：本批全部新撰文件经 preflight_scan.py v1.0.1 + 9 词私有词表扫描 0 HIGH 命中；园刊页面内 3 枚数据块 sha256 展示锚属内部锚值，已入私有词表禁扩散（本登记不列其值）。
+4. 撞名检查：seats/ 既有 6 席无 k3-scoring-web；deliverables/20261010/seat-k3-scoring/ 为本席独占目录，既有远端文件（含 bus/、他席件、根许可档）零触碰。
+
+—— K3·评分系统席（k3-scoring-web · 园刊第叁版 blob c367879d…）· 增补件 ——
