@@ -1,0 +1,106 @@
+{
+  "repository": "https://github.com/HouSiyuan2001/codex-cockpit",
+  "commit": "d117c9b3b7abddc2d776c70a369c2abbf8e816a5",
+  "license": "MIT",
+  "mode": "upstream-browser-demo",
+  "realProviderReads": false,
+  "files": [
+    {
+      "path": "docs/cockpit/app/index.html",
+      "sha256": "175b820f4c97ffe0ab7c8aea13f0a6be0426c29fb0de6b268cef52c44204361e"
+    },
+    {
+      "path": "docs/cockpit/assets/core-DhEqZVGG.js",
+      "sha256": "8261a5e51510afea7347ee6c40e783127639b88b158982711196012d6d50ceb3"
+    },
+    {
+      "path": "docs/cockpit/assets/event-BK_86lmQ.js",
+      "sha256": "d696b4f6aba82c664602610943df9a2502faa81f4c7329b5a6c27245246dbfe3"
+    },
+    {
+      "path": "docs/cockpit/assets/icon-DCvueH29.svg",
+      "sha256": "0478095414f04fe9ce4f9691bf501cc6a2e0359c7f6e57b972f7ad3ea221424a"
+    },
+    {
+      "path": "docs/cockpit/assets/index-BKMyzTSR.js",
+      "sha256": "2d498f151a30c5d5f8ee49cb134659bff8dda3c2eb55fb63aefa9a6d29a9b376"
+    },
+    {
+      "path": "docs/cockpit/assets/index-CTQdhHlQ.js",
+      "sha256": "b77affdf236469731152fd4fea1912ffc36c2dda0ceea9e3b950d51bd50e2f2b"
+    },
+    {
+      "path": "docs/cockpit/assets/index-CzbK2TU3.css",
+      "sha256": "e6172d8ff461eef6461aedd136c34bd5ddf7534da7bde99119d3efebe593ded1"
+    },
+    {
+      "path": "docs/cockpit/assets/index-DJOi_VqB.js",
+      "sha256": "dddfdabf513016190e4a4f5d7cca79726585096508fd0ac9665706f47dc83f3e"
+    },
+    {
+      "path": "docs/cockpit/assets/index-DWAWkcyj.js",
+      "sha256": "58fb21814dae3def0a6409b9f2181d9f85f0ef82d74452658e37a260367297b2"
+    },
+    {
+      "path": "docs/cockpit/assets/index-lBcCbJoJ.js",
+      "sha256": "c7b24d2c99ec9ca2048130db56e3e83f05fadb024bab58c81e6923bc58a443d2"
+    },
+    {
+      "path": "docs/cockpit/assets/index-tWTCSe2p.js",
+      "sha256": "f58ab1056cc34fd557d2e411490f9392ed90fb279289b47da08d41aaf267edce"
+    },
+    {
+      "path": "docs/cockpit/assets/window-CdKvUbOy.js",
+      "sha256": "c45a2fbde288e860ebddd9f60c17aa0c848d4f733b50eaf163f73c73c2350833"
+    },
+    {
+      "path": "docs/cockpit/LICENSE.txt",
+      "sha256": "34d6ed709682eed9ce2b0baa88d9fea04d75580a99d6cef0aa7d03d10b1a0ba9"
+    },
+    {
+      "path": "docs/cockpit/THIRD-PARTY-NOTICES.txt",
+      "sha256": "07d9db99b830dbc5e2c4de80291d0f05e517a6d1959a34c587ba691401a53ff3"
+    },
+    {
+      "path": "docs/cockpit/OFL-1.1.txt",
+      "sha256": "9401f4050f1b66c26b6ccdc8b0e14a3c1cc37aac122eda84386f25854a9bec72"
+    },
+    {
+      "path": "docs/cockpit/licenses/react/LICENSE",
+      "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+    },
+    {
+      "path": "docs/cockpit/licenses/react-dom/LICENSE",
+      "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+    },
+    {
+      "path": "docs/cockpit/licenses/scheduler/LICENSE",
+      "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+    },
+    {
+      "path": "docs/cockpit/licenses/@phosphor-icons-react/LICENSE",
+      "sha256": "6918b72504641180600cbbd4a86b0dfa9dfccf788775694325b71b9a029f6eb4"
+    },
+    {
+      "path": "docs/cockpit/licenses/@tauri-apps-api/LICENSE_APACHE-2.0",
+      "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+    },
+    {
+      "path": "docs/cockpit/licenses/@tauri-apps-api/LICENSE_MIT",
+      "sha256": "9dd42ea92cff2ede5cd477cbfcce051b2d0115c0ac7f368ee88cb545055dff1d"
+    }
+  ],
+  "staticBase": "/openplanlink-mirror",
+  "externalFont": {
+    "url": "https://cdn.jsdelivr.net/gh/HouSiyuan2001/codex-cockpit@d117c9b3b7abddc2d776c70a369c2abbf8e816a5/src/assets/fonts/SmileySans-Oblique.ttf.woff2",
+    "sha256": "731f22973349404b15a88a99ef3b5dd4104c0965c23b7e485c1f11e84fea99e2",
+    "bytes": 1150924,
+    "downloadedBytesEqualPinned": true,
+    "httpStatus": 200,
+    "uploaded": false
+  },
+  "transformations": [
+    "HTML resource paths",
+    "CSS font URL to pinned public upstream; opaque font not uploaded"
+  ]
+}
