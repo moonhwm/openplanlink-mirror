@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-10T01:37:51.966Z",
+  "generated_at": "2026-10-10T01:44:37.240Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2911,
-  "merkle_root_sha3_512": "eaf780d24a4c7bd3a9a9ff88f563c882f3a0e5b74410fee2275c4adbf98065f4cf85106a6f57617456fde8f3a5fb86bd85460aeb0307392eed06add3c9e1de52",
-  "hmac_sha3_512": "446d90f15b7aafb21fc9531974a16703b55383af7a78e63ec85675d6a6bf6967b31ec2ce753806467f619b0156d4ed7dfefdec4b3bed4068130044651acf993e",
+  "file_count": 2914,
+  "merkle_root_sha3_512": "16fb8c94288d638f0f8a17a8d61319cd07c60f40be97a09e20a9ab917a437e2897098257e2e3013944885fe098bb72e332cc8c9f931ae9575e11f0b122e8e647",
+  "hmac_sha3_512": "5df16c4279a02d68d65b4555d99fce683c395c014a920b97c32fff6437d5dacadd24349e23be8a85d3f5970eaeaca83cac78f53e03d4705fb958ab22cce3f42c",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -4210,6 +4210,24 @@
       "size": 5280,
       "content_sha3_512": "2df314ae7b398badd858757d4f8bf0ef6a73d27b5f1ddde8c1e589dd1dbadf8606f19bc677fbfbe22a8c9c83ea9e95dfeb0f4e536ceccc7cbdcb74e499f4a04a",
       "leaf_sha3_512": "8f8a08a1b77e2e7311a090a8fb5ca3d33dbf0ea8b3fc37c13bc3eff33017cfe9c08df0cb10da9ab195567b92e795b58ad1154eb3faa26510c7ae5f635fb9644b"
+    },
+    {
+      "path": "deliverables/20261010/seat-cairn/MiniMax席位上手包v1_DF-AI-20261010-CAIRN-05.otl",
+      "size": 9084,
+      "content_sha3_512": "26eb0abb7b7438c68e8af94787aafde48e7c15b0c662b9b6d6f811f252ad18e9be47ebc6c3094f26542722d98c5b2aa2ba8b0e6b7795aea317e4c1f4d3a23082",
+      "leaf_sha3_512": "0b75f4da7c6590cd35e438a6206fe7d46b971051787b3b42be37e37b23a12141a718db61644d1e447026e4495086bc34da2f665c2a590eb7a5ffc9eccbc2b036"
+    },
+    {
+      "path": "deliverables/20261010/seat-cairn/daily_nine_audit_20261010.json",
+      "size": 821,
+      "content_sha3_512": "11882b17e482453802dd9ccd43cc3435852d0e0b9e7e93f6b4e5ab19422baf6f35ce05d1dc7bca3b7e246b02a0ab83068b1a19a9d26c80d1acbcdc0bcb7717e4",
+      "leaf_sha3_512": "515cf6dd25ff44177743a0fbfc42685c321e9385de9e7dd8c5fe1b47e0363298af9acd56281f59855123624bfc742c2f2991b8980012cca29ca417f57d5b69e0"
+    },
+    {
+      "path": "deliverables/20261010/seat-cairn/minimax_client.py",
+      "size": 5294,
+      "content_sha3_512": "e2ea1b38e29da9745aea5c431051b352812b970d8f3755836dd33214639639cb72ba2eca941b0b53af32342241cc657e2306b2b37b01fd7d10313531587e22d4",
+      "leaf_sha3_512": "69b00285fe3b7bc25e824c368d8c10e09414468ac516070621cb15686b45ece0a52a8332b0cc66bc6976c818346da79b717997a22016892133249c804e153954"
     },
     {
       "path": "deliverables/20261010/seat-cairn/三面核验口径修正与跨席合并_DF-AI-20261010-CAIRN-02.otl",
