@@ -6198,10 +6198,22 @@
       "leaf_sha3_512": "581708ba1dc4ebfdcf17a413600e7a5f12b53d1fae2d7e0192fbaeedc62d5cc4609ea66e0764dc0b36aa02b3403c1bd9a1f51208ff0791700af6dedf4b3651fc"
     },
     {
+      "path": "deliverables/20261011/seat-cairn/doc_archive.py",
+      "size": 6570,
+      "content_sha3_512": "e7c1783e02cdf5afe9f45874368181bb8690773d237516278d1c4708170198bfaad634b16cf215326ee6e8b5fd8f971925d668a878472722736bbc4594904e52",
+      "leaf_sha3_512": "06c5c2ee7ff257b672239bf5b60777986fddaa7001091e05a4f412bbdd446a09dda2c40238dd4976f37aacffcc14a775cd68e6ca52f71ccac953ff37b2dcfd05"
+    },
+    {
       "path": "deliverables/20261011/seat-cairn/doc_update_diff.py",
       "size": 3833,
       "content_sha3_512": "47a01594cc734f7d535edc734c5a675acb7d7eb8e5d5a3587085690baf1deee2f3535ed682bc1df403d0829817dfb6ec072bb793ca18589f85bc7c5425e037a6",
       "leaf_sha3_512": "7284456475d3d966c117914075439f7c69af52956e13d4e4e0aa00bd2af4bf8d895195c2367a4474b8829446b1b16cb47dfa5422b04e722628716ae2c9234cd4"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/docs/index.json",
+      "size": 2114,
+      "content_sha3_512": "2901fc8448c9de02e7b1c0ffcc95b4d237844845a944d382792c0841c54493d9b536b092e08b3c616b6cf129045b451f94ec321a90070a259fea526a9469d4f9",
+      "leaf_sha3_512": "9b3fc28326d4784977ecf2f52c017cf4455bb424a81894f8cc150f522c1964ee4198c2330380e30dc61398a80d3a571eb466fbe9aa747ec35bb14e241d13f52e"
     },
     {
       "path": "deliverables/20261011/seat-cairn/minimax_client.py",
@@ -6262,6 +6274,12 @@
       "size": 7509,
       "content_sha3_512": "a48c2dbcdc65bb6d4b3e8696b8286f2dd37710c193b5337b25071f6a150491113e97099916e6d34932248617cdc5bc09d5121bde7553ec4ff1afffa8cb753f86",
       "leaf_sha3_512": "a01d5b85b823a36020dd000962687f8bfb0ef6d94d0e72ae13a3ac13357e4cd433dc22e12406692cf163c74695da76b12c1a1cb4b135ae6d4e5a6d85cf03847b"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/文档结构化档案v1_DF-OPS-20261011-CAIRN-01.otl",
+      "size": 5378,
+      "content_sha3_512": "233447d7c2927b64c68b177dfd699277cb72cb9c0d3290845ef8a8f5e6615ffbce38a21f187a330d7cfe108bdc446f0cdab65252a79cf785c6dfeff1d3473468",
+      "leaf_sha3_512": "b7578c5bc8eea126548cb7c2f40bfbd60738162074ead2b4c2c87c2dda1617108715a64f0301d2cd432b49024b5bfd51cc8cdf64c46020652db1d2a929bfe881"
     },
     {
       "path": "deliverables/20261011/seat-cairn/纲要更新之核与额度守卫_DF-AI-20261011-CAIRN-04.otl",
