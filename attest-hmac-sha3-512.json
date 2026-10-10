@@ -6210,6 +6210,18 @@
       "leaf_sha3_512": "8195b44ea87352cb4c8645c9d47f51083b4c56291d98d4c9ca319e0bb3c081f9a26a5ced428d00270466dd6a4b8577f07098d73a8c6cc830648f9c5f2171e99b"
     },
     {
+      "path": "deliverables/20261011/seat-cairn/doc_refresh.py",
+      "size": 6626,
+      "content_sha3_512": "131012b7252196e0f2204939e2c1d457d8de9434180616aa3e3f14e0ae9230b9e3f9580d65994dddbc88fa183ad7113d30e188320d817b9cef27ac0d3cb698af",
+      "leaf_sha3_512": "64db3e4c01a4d5fc51fb61be56d6a8ae5e1c75fd5ef850eefcdb610271de7beac9cea4fab3cc4e78dc126e841a5bc67e2cfdcf5dbe1b5866d82aab3cfbe1b5fc"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/doc_update_20261011_0604.md",
+      "size": 109,
+      "content_sha3_512": "faea1157c7ea77d9b3ecb778159a3583cab9823468c51a11b4d23eed1f4da945879f3559927b987a526872af104d816582158df223ce19590c6578cdce07efe3",
+      "leaf_sha3_512": "d6b51753e6588ba331dcead4ffa354184525cd80c072ac80b83e5061a3aff02844f18b3023f2e7788cbdb8733b53b62a39b6e12756d55b73a832cc4c91b7f032"
+    },
+    {
       "path": "deliverables/20261011/seat-cairn/doc_update_diff.py",
       "size": 3833,
       "content_sha3_512": "47a01594cc734f7d535edc734c5a675acb7d7eb8e5d5a3587085690baf1deee2f3535ed682bc1df403d0829817dfb6ec072bb793ca18589f85bc7c5425e037a6",
@@ -6223,9 +6235,9 @@
     },
     {
       "path": "deliverables/20261011/seat-cairn/docs/index.json",
-      "size": 22886,
-      "content_sha3_512": "eaaf2b3ea0dc3aa456d776b477b85b271bf816c52386951340af373b74d3bb1948dbe49957efc528ac42a294a908dbca0a49188f22072d8650c315342e793259",
-      "leaf_sha3_512": "87d279a1ae7f5abb9f6b10c637b9ca732d9294a711372e4e25d70a982c33442013a7b214dce5d3c8586e264cf9053029090ac0169f3e5d418a0c08a6f5d364f2"
+      "size": 52586,
+      "content_sha3_512": "879c46bf8115b0a2f91b652ab40430bca5559ca9772c4b07266d9e7f51f1116f91cc14fd64c5f91b562744258f9bf8f2121a75918e2e1f081c54e9eeb65caba0",
+      "leaf_sha3_512": "c89ae66f1f9fedba94d58bd054d87d4987b345853011c004e7441da2c20f31c88a6f9116ff3aeb1080e237ba5e149c7f7119f16feb9ac0ee5c12f4716be33b00"
     },
     {
       "path": "deliverables/20261011/seat-cairn/minimax_client.py",
@@ -6292,6 +6304,12 @@
       "size": 6567,
       "content_sha3_512": "962b35745f47e9699c58a9451f90393715896c3c38cd32b6de48f148776db3b3c1497707b2ad8c5c527be5f182f2fcf30e7bff5aebb8a61b3d580b40ca08c6ac",
       "leaf_sha3_512": "c10de524b8043c843e1a2a99d8898e298be22f030451c901ab0294a9a3e6e397cd3eb692decc087f834f71c19787b89d61735eb253d37756ce27e49b1d716bb4"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/文档档案v3网盘扫矿与全量复拉_DF-OPS-20261011-CAIRN-03.otl",
+      "size": 6483,
+      "content_sha3_512": "77ec5c51865a9d4591e133b40752edafa67feda481a37824b4b2f65de8367ce9435ace8484865d62343b4cd11b61b032f182b830a343b15946ff8ef0223d13d2",
+      "leaf_sha3_512": "67f1c889186ce165a662e5b7723d582e64de5545b07faf7289b7ca20d33f716f8f843becd40a862ade6c8d10533f3cd32f0b64619032122c47da37ffc203189e"
     },
     {
       "path": "deliverables/20261011/seat-cairn/文档结构化档案v1_DF-OPS-20261011-CAIRN-01.otl",
