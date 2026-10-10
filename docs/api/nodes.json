@@ -41,16 +41,18 @@
       "id": "github-pages",
       "name": "GitHub Pages 镜像",
       "url": "https://moonhwm.github.io/openplanlink-mirror/",
-      "observedHttpStatus": 404,
+      "observedHttpStatus": 200,
       "observationDate": "2026-10-10",
       "mfa": "not_verified",
       "registration": "link-catalog-only",
-      "peerAcknowledged": false
+      "peerAcknowledged": false,
+      "observationPhase": "after_pages_restoration"
     }
   ],
   "privateUsage": "not_exposed",
   "mfa": "not_verified",
   "signedPeerReceipt": "not_verified",
   "hosting": "github-pages-static",
-  "a2aRpc": "https://openplanlink-a2a-cockpit.cosmicyew5.chatgpt.site/a2a"
+  "a2aRpc": "https://openplanlink-a2a-cockpit.cosmicyew5.chatgpt.site/a2a",
+  "a2aRpcReachability": "not_verified_cloudflare_403_observed"
 }

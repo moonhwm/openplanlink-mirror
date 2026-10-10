@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-10T00:06:49.444Z",
+  "generated_at": "2026-10-10T00:12:10.162Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 924,
-  "merkle_root_sha3_512": "7fc6d3ad35c842ebe73a614148800210315817799e6097889b375ba083ac2bdab8a1ba5bc63ee1a04965357735bc9ca105f0aa6dae5759f722169a64ce98cfc3",
-  "hmac_sha3_512": "25e1787d62e6d04bf62f62f089cace3eea990e99a16c3c1bde5f434d880705a8f1305f5822110c33681d1e290c51273d3e849e4bdad90c8a1ddb101c7e083dc1",
+  "merkle_root_sha3_512": "9a3535e35cb6a565138f5d75360ed7178ea41dfb7a4428402bd1d3f3acdaf84b603605458c526f55c96a9d8f1ed6e8058b7ec5a4e1f4ecc29efee17f2da2c956",
+  "hmac_sha3_512": "e747727417012c7638877943b4d1ff72c58bd94bbfc9b41179b4d6d740b645e29997b23d0a75527a68dfd83535d64cc2bc6c984b92e3feb1935ca6a9b08b9150",
   "files": [
     {
       "path": ".gitattributes",
@@ -433,9 +433,9 @@
     },
     {
       "path": "docs/api/nodes.json",
-      "size": 1741,
-      "content_sha3_512": "750c55b71074688865ff9fe20f78d618032755d3743d4763772182b028fdfbf660f346df807447986eb632876e530bff97e50dabfed633272b192b6556a4cb11",
-      "leaf_sha3_512": "75750cb60c64ee3997bf853c37b6bbeafb3332670cbb2bb0f74c7ee39e8e248a31c1ec729c1c09940ac0675cecaada02a9bff6da280ac7d023aa68f9f51b64b8"
+      "size": 1858,
+      "content_sha3_512": "fffdf63ead7197a1083a75dccd825b304fe2774082c38fd28372882d7740a0f25fd38cf68ce07d344b2bb490584c19d91cf066ac59e523d7b383faf460c05950",
+      "leaf_sha3_512": "3e2e59149a05deaef3a543395aefced24f51b19b1e2c34609b1a0ae7a7e3fc27bc9d29a3d2eca2736bdef0cff1c449ff504313018e0e2e665d0c6a255632b78d"
     },
     {
       "path": "docs/bailian_night_execution_20261009.md",
@@ -619,9 +619,9 @@
     },
     {
       "path": "docs/network/index.html",
-      "size": 8540,
-      "content_sha3_512": "8dd531a025d4fc5a0edf7964e4daf97c08244091c8b7e84dd96d84acf140a3d570778ce6c573b5fba6f1e0b2c4bd11c0eab70b85bb6a5025a6c5c44d8ec078ac",
-      "leaf_sha3_512": "e3ccfa5d0dd5c58717416e22206ef7154b2965fc976621a7285cfe31f39285869542638266d1933b84273746a63f8cc32cb8f544539bef53b21934e32232ada1"
+      "size": 8732,
+      "content_sha3_512": "9055efafe35c3c212ecd959792543f86004de22a2a5894c33a80688ee77b04f311bc6624e148398b0e17d729b958bc10c4042d11ebb0d77170f96bbae8fc90da",
+      "leaf_sha3_512": "eff5afd078dc0d4ce6adf4dbc591f5919bd84b74e0a0fd1ecc6f3a7b38b2efce14a50def8ffd6a6e3f34939a2e5e74aef616230e3a6a97fa6f9fef2663a7982f"
     },
     {
       "path": "docs/nietzsche_corpus_manifest_20261008.json",
@@ -655,9 +655,9 @@
     },
     {
       "path": "docs/self-host/index.html",
-      "size": 8540,
-      "content_sha3_512": "8dd531a025d4fc5a0edf7964e4daf97c08244091c8b7e84dd96d84acf140a3d570778ce6c573b5fba6f1e0b2c4bd11c0eab70b85bb6a5025a6c5c44d8ec078ac",
-      "leaf_sha3_512": "1bfb765178f6c1b6663a6cd9dd91d0dd88a202272446ec732c8efb6978b6668a6d9dcaa564f10fb2f687cce526de6eed90a3c4cfdc6cae3aec550a0d3fccf59d"
+      "size": 8732,
+      "content_sha3_512": "9055efafe35c3c212ecd959792543f86004de22a2a5894c33a80688ee77b04f311bc6624e148398b0e17d729b958bc10c4042d11ebb0d77170f96bbae8fc90da",
+      "leaf_sha3_512": "934a2b6157bd4587620a28733ff8542a74186afba3b8de094383aa5542238082c2abd1a80e7da2479651f4f13ca3a7b88eb29f67a92d988cb7731c1dc51993c6"
     },
     {
       "path": "index.html",
