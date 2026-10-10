@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-10T01:44:37.240Z",
+  "generated_at": "2026-10-10T01:52:07.973Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2914,
-  "merkle_root_sha3_512": "16fb8c94288d638f0f8a17a8d61319cd07c60f40be97a09e20a9ab917a437e2897098257e2e3013944885fe098bb72e332cc8c9f931ae9575e11f0b122e8e647",
-  "hmac_sha3_512": "5df16c4279a02d68d65b4555d99fce683c395c014a920b97c32fff6437d5dacadd24349e23be8a85d3f5970eaeaca83cac78f53e03d4705fb958ab22cce3f42c",
+  "file_count": 2915,
+  "merkle_root_sha3_512": "b066c0e3a19d3c7804bf2fa5c0b3820336fe5dff72f2fa8336c50436ea77be162b53975f59ecd86d91b7bf1e1e449eb60680e0cdf6d1f5ec6682e8946c75bba1",
+  "hmac_sha3_512": "f0870f4f087d12e14ccb180b99e84bf3374e30eaf9bd3ee03d51fea9040453e97428278468f4149d237f50525842399270749ed02cf44618e48f5b45727ee107",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -4246,6 +4246,12 @@
       "size": 5977,
       "content_sha3_512": "4b169bcc9d7cf86bbd8b9becdcfd579be6d95d62a442695f6c6431e16a7a67ef622692701846dd9a3e12d233abfca2908f54bbdbf0fc263c6de707c94569682f",
       "leaf_sha3_512": "636e0b0cfce99cf8b2f70f7d2b05645e579f2e3667fb178b45439025912aff82c0a177b25633bf56a65a49558e581e04c61d1f4a45d546d4e7f97ebe54e269f5"
+    },
+    {
+      "path": "deliverables/20261010/seat-cairn/计费面勘察与购券建议_DF-AI-20261010-CAIRN-06.otl",
+      "size": 6251,
+      "content_sha3_512": "17136e28424311c64395bb18ba1a36a459eadfcf3295dd55f28969b4c31afc38e85fc8469ec0ac91e6db2605daa04be459f16a4ad0749941e044261967b18114",
+      "leaf_sha3_512": "c0a0fc430ab1d9502a7894ae3f1ecde13ebf5818de52a5fef5519b3782a32071a650a112d20959dad76b658510277ca4378d2ddf49ce0941ef5b51add7500f2a"
     },
     {
       "path": "deliverables/20261010/seat-k3-scoring/README.md",
