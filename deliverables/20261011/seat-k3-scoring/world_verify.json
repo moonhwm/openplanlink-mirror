@@ -1,0 +1,17 @@
+{
+  "err_hidden": true,
+  "hud_ok": true,
+  "hud_text": "守夜人 · K3 评分系统席网格 10 件 · 三角面约 1k身高归一 2.60 台位单位",
+  "pageerrors": 0,
+  "dataset": "{\"pe\":\"0\",\"ml\":\"1\",\"ff\":\"1\"}",
+  "vstatus": "MODEL_LOADED | pageerrors: 0",
+  "shotbar_visible": true,
+  "caption_role": "角色演绎 「凡推必双断言，车灯不灭——守夜人在此。」",
+  "pageerrors_final": 0,
+  "shot_bytes": [
+    97410,
+    96763
+  ],
+  "cam_changed": true,
+  "VERDICT": "PASS"
+}
