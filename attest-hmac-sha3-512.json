@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-10T00:12:10.162Z",
+  "generated_at": "2026-10-10T18:03:48.803Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 924,
-  "merkle_root_sha3_512": "9a3535e35cb6a565138f5d75360ed7178ea41dfb7a4428402bd1d3f3acdaf84b603605458c526f55c96a9d8f1ed6e8058b7ec5a4e1f4ecc29efee17f2da2c956",
-  "hmac_sha3_512": "e747727417012c7638877943b4d1ff72c58bd94bbfc9b41179b4d6d740b645e29997b23d0a75527a68dfd83535d64cc2bc6c984b92e3feb1935ca6a9b08b9150",
+  "file_count": 932,
+  "merkle_root_sha3_512": "85da85766598d3bb2a2b96617f43fda3d8aa31a9cd6d7ccc75516931dac3008c6e5a7d1f9195496fea3809fcb678cfa0e776d8b19d4e143ad529c18862a9f32a",
+  "hmac_sha3_512": "873757006c196ad753ea41960f94e3f6c481355482e9e2589c079d163eb23708b45336c27ed18563802573a8505a790e28a32fb365d9eea9d05dbd06d39596be",
   "files": [
     {
       "path": ".gitattributes",
@@ -168,10 +168,22 @@
       "leaf_sha3_512": "b485a23bf08f6e576d9312a51541b11dcb44a0a47e9d5ea827c611db8587626081ba1148da24a1a4fc6e49c22ae0dd526267c1d072c41532e668ecd2d94a2910"
     },
     {
+      "path": "assets/integration.css",
+      "size": 1342,
+      "content_sha3_512": "fa60e39c6ee1c74184d3a0872458cb8918ce867b9189abc5c2206142f5c5c9cba84ee82fa35b872142845dddea482509b2f5ac6580b9b1e1eea33eb7f3bca7ba",
+      "leaf_sha3_512": "9646de3401a29d1993d9d02f5312ec061cbd740cf576a8732bb136b0e5c81ab840cb938745b061f7976bf0f03203bac79c0b886c6d22023e75c1c41eebc9f96d"
+    },
+    {
+      "path": "assets/integration.js",
+      "size": 2059,
+      "content_sha3_512": "7b9718dddebab2e3fe11b15d587fb6a1a809ba85b364e7133a5478039bfb24e1f3f1f8fe313440f9019d142633dd094c8c5f152a1d98bbeb7483164c39c3ae62",
+      "leaf_sha3_512": "fe9eb047f43810b5a28030a53a7cd23c2e3699572b62b433e8ed661dc5bbb73ad8d359c3fb71579517f859f5a620d5d6562a94254d90f3d5c9baabd7a8f747a1"
+    },
+    {
       "path": "assets/main.js",
-      "size": 12586,
-      "content_sha3_512": "783743fdad237c64b2753b7e2673bd73eec50281fd1cf794a51a8fe13837a27cb46ce0cea0b77f875ae28962a60b71c70bd135dc727521b2aa6e4b4d79885948",
-      "leaf_sha3_512": "7a98cb627b4d0652abbee7134a9dbff4221730b3a168dffb03be7fae90a9977b8942c286f68bc4ea222da3d87529ae6d09577fc023dc83f757c2a02510766d52"
+      "size": 12855,
+      "content_sha3_512": "737df87b34890d4f1aff42a5b8363a2a5f45ecbb43fbffc8b93b7468aa78d571b887f0babb9a5a3a2a8a45d94d8600aefde0b783d971dd40db36ab0c6798831b",
+      "leaf_sha3_512": "707db28eb6dd4786982648cb2fa6e5ba211a66619861fa3386d7bcd0fbc7c0ea0b83444b9ed0bd67b08e4ef50275b69d453f09be03b875878dd1f9b3c8bb005b"
     },
     {
       "path": "assets/style.css",
@@ -217,9 +229,9 @@
     },
     {
       "path": "cockpit/index.html",
-      "size": 1196,
-      "content_sha3_512": "0ce5da13873c5b0a38235f576f1003991ef593360fb84d638a83c9d7ec7073161d1bcfcbc1df7e350476e39849f11994f8cce48b3e7d2f1f4f956523fbe6481d",
-      "leaf_sha3_512": "07f26de25305664a6f2de954579f83cd01f34e151ee0b3b719b20ecbeef0706a86a407095a88ae76965d0932f7b018c363f364f9c0ca2295c4cb97274f83d64f"
+      "size": 406,
+      "content_sha3_512": "320b52e60ca4977eb748f9809e10636753b542a489c2df71eeedb4aff63c9418117d813f58e3e565ce85dced151b1e81254046ce722451d0e9d59a58e16c9220",
+      "leaf_sha3_512": "9c1d4b3667e7faa497faf2967338139c302ab6fc0b7ab77bd7eff5eaa4dd1afbdac5651867716b8d95dc08d3ce09cc228d655095fd6849d97151c0cd7ef80eac"
     },
     {
       "path": "data/shelf.json",
@@ -438,6 +450,36 @@
       "leaf_sha3_512": "3e2e59149a05deaef3a543395aefced24f51b19b1e2c34609b1a0ae7a7e3fc27bc9d29a3d2eca2736bdef0cff1c449ff504313018e0e2e665d0c6a255632b78d"
     },
     {
+      "path": "docs/assets/icon.svg",
+      "size": 750,
+      "content_sha3_512": "cf21554453ed6307e7d1b62ff4bdfaa5d747e02d011a9bb1cb17ebbf994636f9090179b8e71ec0bb5ece5e03178ff1b0cf63d3ed4264a79d843c7dd4a9a1e57b",
+      "leaf_sha3_512": "68bb97fdca90866eaa4a520d861d9254966a7831cd5e7c12c47d734b961b26bf95a234d0a99a77d642e9798d524fab1c838ebe57058737e84436ad4c6e3d1a76"
+    },
+    {
+      "path": "docs/assets/integration.css",
+      "size": 1342,
+      "content_sha3_512": "fa60e39c6ee1c74184d3a0872458cb8918ce867b9189abc5c2206142f5c5c9cba84ee82fa35b872142845dddea482509b2f5ac6580b9b1e1eea33eb7f3bca7ba",
+      "leaf_sha3_512": "c677ad9ddda8f883a890b340721318606e6281e91ee5ea29a8bdf89eeb71666564b254f9657f5f3c253ee6b2c566ac2c7a96ebd54283ec304e05a9374ca2330e"
+    },
+    {
+      "path": "docs/assets/integration.js",
+      "size": 2059,
+      "content_sha3_512": "7b9718dddebab2e3fe11b15d587fb6a1a809ba85b364e7133a5478039bfb24e1f3f1f8fe313440f9019d142633dd094c8c5f152a1d98bbeb7483164c39c3ae62",
+      "leaf_sha3_512": "78a2200bc2cbad6f4afcd904cebb57562f63736e3dfe999dad5242176349f48481c99e923914fbc4bfb0321a276a63323b39e550535cd9a13c3e28c75aa3c64b"
+    },
+    {
+      "path": "docs/assets/main.js",
+      "size": 12957,
+      "content_sha3_512": "bf21df61bad7ec1e68e5c598dc1c91496cf1c8ab851d4b4fe19bb50a37403e6e4cf61e5aa49fdd560ca96fad07ecdcdee4022d16a96b9fb76adaba338160604d",
+      "leaf_sha3_512": "0bf3db8b901b1f1fa3162ce5d496b0452c5e90176dd10320edd227ae705a253429a76476eeb671b74c0a10cfcb33f9450ae3330484d5b87caa923c8c55e86492"
+    },
+    {
+      "path": "docs/assets/style.css",
+      "size": 11867,
+      "content_sha3_512": "61cdcc25ccf9a892f33433e24995a94f4ec1e6a8e63e864547553dd7c869069c4c0c94a49c31cd386aca4f56dcd47804fb3a5e9c3913bedd7b2434e56ed5c8f8",
+      "leaf_sha3_512": "160a60dc6203e7474c7654e7c58c0651cc9fe33430839a7a91474abc82bc7cfa28a48dc2e8cf631f0f6aaff21b7f0b4528e0ffe9367478d84c0d7554542dfa20"
+    },
+    {
       "path": "docs/bailian_night_execution_20261009.md",
       "size": 8226,
       "content_sha3_512": "c537e27e6ad5901a21c444bf4cc47a2f1ace6e4387700e16fcf5887f8c777667df7bc18245cf11066fb95d4d8580b9300f6fec9ce9427b3534f6055bff72cbe0",
@@ -552,6 +594,12 @@
       "leaf_sha3_512": "2f7192efa095ae6faae2c922a79c7583656f0fbdecab73632ed502116cc41861b6a57af96a57a9f8c6cf0dfb08bd01eadac9fccee51901c355c0e51bf5725beb"
     },
     {
+      "path": "docs/cockpit/index.html",
+      "size": 406,
+      "content_sha3_512": "320b52e60ca4977eb748f9809e10636753b542a489c2df71eeedb4aff63c9418117d813f58e3e565ce85dced151b1e81254046ce722451d0e9d59a58e16c9220",
+      "leaf_sha3_512": "a3c70759a688effec8742d4b483fbee3d4cb2ffa41cb4689993cac044a9be81688cb05fbcab3cebd89129fda2ed18408b810dc8b550c1a386bd12002b6255a2a"
+    },
+    {
       "path": "docs/cockpit/licenses/@phosphor-icons-react/LICENSE",
       "size": 1071,
       "content_sha3_512": "5defd275d0a05b2e04caa705086eace743aa3bc26b9743980b361ed7504f33c2e1e36ccd6a6490d5062f2acc3fdff4bd13ba759ebb4eec9fb3c1406bd220fb3b",
@@ -607,9 +655,9 @@
     },
     {
       "path": "docs/index.html",
-      "size": 1714,
-      "content_sha3_512": "bb7f5c8f0037eb91ca4f2d09ad3ceba223b50a5a9fbd81fb2f43d670e83264fdc173ee4263fdb92e6c82d23fea4a1729b4c3aefe787e3e46d4264b52f76ad573",
-      "leaf_sha3_512": "500d0337b062c4946bb3f8eb8c2702c51a091323f021263539baf83d35795a1c39f3b9454e88ab2a247aa1d8f05f2e4b8583e39f425aba094828626b3b3fa9a7"
+      "size": 19658,
+      "content_sha3_512": "32b3509c3b5d76e3a0c6b15c7bf5c544106036eb199a2f0655145c9a65fed54e96b8bfddbece92aa5bf6f93b6620a946c85fafb3763c186e6c6cf86a8381f9fe",
+      "leaf_sha3_512": "8cea08bf9df4eaf0fb1ef101fbce8873186c7186c89a38eade5ee220fb59bc2204cbb3b6e76c94ff61e738636f8ce9d214a7fff663b83a0d3de46ffc89251290"
     },
     {
       "path": "docs/memory_tier_pilot_example.json",
@@ -619,9 +667,9 @@
     },
     {
       "path": "docs/network/index.html",
-      "size": 8732,
-      "content_sha3_512": "9055efafe35c3c212ecd959792543f86004de22a2a5894c33a80688ee77b04f311bc6624e148398b0e17d729b958bc10c4042d11ebb0d77170f96bbae8fc90da",
-      "leaf_sha3_512": "eff5afd078dc0d4ce6adf4dbc591f5919bd84b74e0a0fd1ecc6f3a7b38b2efce14a50def8ffd6a6e3f34939a2e5e74aef616230e3a6a97fa6f9fef2663a7982f"
+      "size": 427,
+      "content_sha3_512": "c1097d5461891d878b7b38e752425982ecbe38f6f79de93f051e7c1c91df962a8cf174f15463a03ae1d0e7b6516ef5ff00f36182fd8b15c9e216f3772c830f8e",
+      "leaf_sha3_512": "85f8aca93ec7018256ea3a1f2283f2e29410d86160fbf0ac7f269f03092d9abfdf0432f140126955e9358a113350f1de97191273b3c51b6b18ae3614adbd22f8"
     },
     {
       "path": "docs/nietzsche_corpus_manifest_20261008.json",
@@ -655,15 +703,15 @@
     },
     {
       "path": "docs/self-host/index.html",
-      "size": 8732,
-      "content_sha3_512": "9055efafe35c3c212ecd959792543f86004de22a2a5894c33a80688ee77b04f311bc6624e148398b0e17d729b958bc10c4042d11ebb0d77170f96bbae8fc90da",
-      "leaf_sha3_512": "934a2b6157bd4587620a28733ff8542a74186afba3b8de094383aa5542238082c2abd1a80e7da2479651f4f13ca3a7b88eb29f67a92d988cb7731c1dc51993c6"
+      "size": 427,
+      "content_sha3_512": "c1097d5461891d878b7b38e752425982ecbe38f6f79de93f051e7c1c91df962a8cf174f15463a03ae1d0e7b6516ef5ff00f36182fd8b15c9e216f3772c830f8e",
+      "leaf_sha3_512": "cec4b5a5f0ece49de565fcb9c3c6a0e4f148b00b49481252a538eea37493d9540f0c137fa5c5d73b05545de6e5bda0a99bbdca15a2b59c1e80195d70f606e8c4"
     },
     {
       "path": "index.html",
-      "size": 12371,
-      "content_sha3_512": "9b584a2b4a3fc757d045e435320ead45bc978e06f1fbffd980e327d31ba9a2eee01302f9bf87b0e03357d980741e2e04e6f11a720764e7318e4873857ccd1afb",
-      "leaf_sha3_512": "3c3e865c61e96f724397552e5f6b607f6c07168bdff2e16741a3287e80297c66e920fe80481bfc775151e71c8852e0f39baac7832625a0420b70491f214ccc8d"
+      "size": 19214,
+      "content_sha3_512": "2516b6a7ece1bb59a5b2ab737e309bda06a67a6a6c99dc7f38e6b0ce79b6dc42b7138435211fbcd6f528785e0654f06e3002f63afd142276379fbc1d9e30d204",
+      "leaf_sha3_512": "1a084bf12018e720b2346a64185a78bf228ceb8313ec65a540c3d55f506e2083b2c77acd98c9184f7ba36138c1ddea869a5c8ddd7d4ebaeda3a99fa1e571d4b1"
     },
     {
       "path": "llms.txt",

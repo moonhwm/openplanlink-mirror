@@ -285,7 +285,7 @@
   const row = document.getElementById("folderRow");
   if (!row) return;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  fetch("/videos.json")
+  fetch("https://raw.githubusercontent.com/moonhwm/openplanlink-mirror/2565ef5c5efbf4c8cf828de936bd8fccdafad411/videos.json")
     .then((r) => (r.ok ? r.json() : Promise.reject(new Error("http " + r.status))))
     .then((man) => {
       const groups = {};
