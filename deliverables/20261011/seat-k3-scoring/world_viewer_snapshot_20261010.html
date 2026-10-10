@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>守夜人 · K3 评分系统席 — 观模台</title>
+<link rel="icon" href="data:,">
+<style>
+:root{--accent:#ffd489;--accent-dim:#8a7f68;--bg:#050810;--ink:#e8e2d4}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:var(--bg);color:var(--ink);font-family:"Songti SC","Noto Serif CJK SC",serif;overflow:hidden}
+#stage{position:fixed;inset:0;display:block;cursor:grab}
+#stage.dragging{cursor:grabbing}
+header{position:fixed;top:0;left:0;right:0;padding:22px 28px;display:flex;justify-content:space-between;align-items:baseline;pointer-events:none;z-index:5}
+h1{font-size:17px;font-weight:600;letter-spacing:.35em;color:var(--accent)}
+.sub{font-size:11px;letter-spacing:.18em;color:var(--accent-dim);margin-top:6px}
+nav a{pointer-events:auto;color:var(--accent-dim);text-decoration:none;font-size:12px;letter-spacing:.15em;border:1px solid rgba(212,196,168,.25);padding:6px 14px;border-radius:2px;transition:color .3s,border-color .3s}
+nav a:hover{color:var(--accent);border-color:var(--accent)}
+#hud{position:fixed;left:28px;bottom:26px;font-size:11px;letter-spacing:.12em;color:var(--accent-dim);line-height:2;z-index:5;pointer-events:none}
+#hud b{color:var(--accent);font-weight:600}
+#bar-wrap{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(420px,72vw);z-index:6;transition:opacity .8s}
+#bar-wrap.done{opacity:0;pointer-events:none}
+#bar-label{text-align:center;font-size:12px;letter-spacing:.3em;color:var(--accent);margin-bottom:14px}
+#bar-track{height:1px;background:rgba(212,196,168,.18)}
+#bar-fill{height:1px;width:0%;background:var(--accent);transition:width .2s}
+#bar-note{text-align:center;font-size:10px;color:var(--accent-dim);margin-top:12px;letter-spacing:.12em}
+#err{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);display:none;max-width:70vw;text-align:center;font-size:12px;color:#c98a6a;letter-spacing:.12em;line-height:2;z-index:7}
+footer{position:fixed;right:28px;top:158px;max-width:36vw;font-size:10px;color:rgba(138,127,104,.75);letter-spacing:.12em;text-align:right;line-height:1.9;z-index:5;pointer-events:none}
+#tip{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);font-size:10px;color:rgba(138,127,104,.6);letter-spacing:.2em;z-index:5;pointer-events:none}
+
+#modebar{position:fixed;top:76px;right:28px;display:flex;gap:8px;z-index:6}
+#modebar button,#shotbar button,#shotbar .cue{pointer-events:auto;background:transparent;border:1px solid rgba(212,196,168,.25);color:var(--accent-dim);font-family:inherit;font-size:11px;letter-spacing:.18em;padding:6px 13px;border-radius:2px;cursor:pointer;transition:color .3s,border-color .3s}
+#modebar button:hover,#shotbar button:hover,#shotbar .cue:hover{color:var(--accent);border-color:var(--accent)}
+#modebar button.on{color:#0a0f1c;background:var(--accent);border-color:var(--accent)}
+#shotbar{position:fixed;top:112px;right:28px;display:none;gap:8px;z-index:6;align-items:center}
+#caption{position:fixed;left:50%;bottom:58px;transform:translateX(-50%);max-width:72vw;text-align:center;font-size:12px;letter-spacing:.14em;color:var(--accent);line-height:2;z-index:5;pointer-events:none;opacity:.92}
+#vstatus{position:fixed;left:28px;top:76px;font-size:10px;letter-spacing:.15em;color:var(--accent-dim);z-index:5;pointer-events:none;font-family:ui-monospace,monospace}
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+<header>
+  <div><h1>守夜人 · K3 评分系统席</h1><div class="sub">GLB OBSERVATORY</div></div>
+  <nav><a href="../index.html">← 返回</a></nav>
+</header>
+<div id="bar-wrap"><div id="bar-label">载 入 中</div><div id="bar-track"><div id="bar-fill"></div></div><div id="bar-note">night_watcher_k3.glb · 61.0 KB · 程序化建模零燃烧占位</div></div>
+<div id="err"></div>
+<div id="hud"></div>
+<div id="vstatus">BOOT</div>
+<div id="modebar">
+  <button data-m="explore" class="on">世 界 探 索</button>
+  <button data-m="direct">实 时 导 演</button>
+  <button data-m="role">角 色 演 绎</button>
+</div>
+<div id="shotbar">
+  <button data-s="wide">全景</button><button data-s="near">近景</button><button data-s="lamp">灯下特写</button>
+  <span class="cue" data-l="dusk">暮色 cue</span><span class="cue" data-l="star">星夜 cue</span>
+</div>
+<div id="caption">世界探索——自由轨道巡游；拖拽旋转 · 滚轮推拉 · 双击归位。</div>
+<div id="tip">拖 拽 旋 转 · 滚 轮 推 拉 · 双 击 归 位</div>
+<footer>世界模型原型 · 探索/导演/演绎三模式 · 百炼接口预留，Tripo 生成件候批（余额 0）<br>night_watcher_k3.glb · 61.0 KB · 程序化建模零燃烧占位<br>渲染：three.js 本地 vendor · 零外部 CDN<br><span id="foot-renderer"></span></footer>
+<script type="module">
+import * as THREE from './vendor/three.module.js';
+import { GLTFLoader } from './vendor/GLTFLoader.js';
+
+// 页内自证仪表：pageerrors 计数 + dataset 旗标 + 截图内状态行（验证证据自携带，非仅笔记声称）
+window.__pageErrors = 0;
+document.body.dataset.pageerrors = "0";
+const vstatus = document.getElementById('vstatus');
+function bumpErr(){ window.__pageErrors++; document.body.dataset.pageerrors = window.__pageErrors; vstatus.textContent = `pageerrors: ${window.__pageErrors}`; }
+addEventListener('error', bumpErr);
+addEventListener('unhandledrejection', bumpErr);
+
+const canvas = document.getElementById('stage');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:false});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x050810);
+scene.fog = new THREE.Fog(0x050810, 18, 60);
+const camera = new THREE.PerspectiveCamera(38, 1, 0.05, 200);
+
+// 三灯：暖金主光 + 冷补光 + 背缘光
+const key = new THREE.DirectionalLight(0xffe9c4, 2.6); key.position.set(3,4,2); scene.add(key);
+const fill = new THREE.DirectionalLight(0x8fa7c8, 0.9); fill.position.set(-4,1.5,-1); scene.add(fill);
+const rim = new THREE.DirectionalLight(0xd4c4a8, 1.6); rim.position.set(0,2.5,-4); scene.add(rim);
+scene.add(new THREE.AmbientLight(0x2a3040, 1.2));
+
+// 地台金环 + 暗面
+const ring = new THREE.Mesh(new THREE.RingGeometry(2.2, 2.23, 128),
+  new THREE.MeshBasicMaterial({color:0xd4c4a8, transparent:true, opacity:.35, side:THREE.DoubleSide}));
+ring.rotation.x = -Math.PI/2; ring.position.y = -0.001; scene.add(ring);
+const disc = new THREE.Mesh(new THREE.CircleGeometry(2.2, 128),
+  new THREE.MeshStandardMaterial({color:0x0a0f1c, roughness:.9, metalness:.1}));
+disc.rotation.x = -Math.PI/2; disc.position.y = -0.002; scene.add(disc);
+// 星尘
+{
+  const n=900, pos=new Float32Array(n*3);
+  for(let i=0;i<n;i++){const r=26+Math.random()*30, t=Math.random()*Math.PI*2, p=Math.acos(2*Math.random()-1);
+    pos[i*3]=r*Math.sin(p)*Math.cos(t); pos[i*3+1]=Math.abs(r*Math.cos(p))*0.7-2; pos[i*3+2]=r*Math.sin(p)*Math.sin(t);}
+  const g=new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos,3));
+  scene.add(new THREE.Points(g, new THREE.PointsMaterial({color:0xd4c4a8, size:0.035, transparent:true, opacity:.5})));
+}
+
+// 自制极简轨道控制（不引 OrbitControls addon）
+const orb = {theta:0.6, phi:1.15, dist:6, cx:0, cy:1, cz:0, auto:true, autoSpeed:0.12};
+function applyCam(){
+  const sp = Math.sin(orb.phi), y = orb.cy + orb.dist*Math.cos(orb.phi);
+  camera.position.set(orb.cx + orb.dist*sp*Math.sin(orb.theta), y, orb.cz + orb.dist*sp*Math.cos(orb.theta));
+  camera.lookAt(orb.cx, orb.cy, orb.cz);
+}
+let dragging=false, px=0, py=0;
+canvas.addEventListener('pointerdown', e=>{dragging=true; px=e.clientX; py=e.clientY; orb.auto=false; canvas.classList.add('dragging'); canvas.setPointerCapture(e.pointerId);});
+canvas.addEventListener('pointermove', e=>{ if(!dragging) return;
+  orb.theta -= (e.clientX-px)*0.005; orb.phi = Math.min(2.9, Math.max(0.25, orb.phi-(e.clientY-py)*0.004)); px=e.clientX; py=e.clientY; });
+canvas.addEventListener('pointerup', ()=>{dragging=false; canvas.classList.remove('dragging');});
+canvas.addEventListener('wheel', e=>{e.preventDefault(); orb.dist = Math.min(30, Math.max(1.2, orb.dist*Math.exp(e.deltaY*0.001)));}, {passive:false});
+canvas.addEventListener('dblclick', ()=>{orb.theta=0.6; orb.phi=1.15; orb.dist=fitDist; orb.auto=true;});
+
+const fillEl = document.getElementById('bar-fill'), barWrap=document.getElementById('bar-wrap'),
+      hud=document.getElementById('hud'), errEl=document.getElementById('err');
+let fitDist = 6, model = null;
+new GLTFLoader().load('./assets/night_watcher_k3.glb',
+  gltf=>{
+    model = gltf.scene;
+    const box = new THREE.Box3().setFromObject(model);
+    const size = box.getSize(new THREE.Vector3()), ctr = box.getCenter(new THREE.Vector3());
+    const s = 2.6/Math.max(size.x,size.y,size.z);
+    model.scale.setScalar(s); model.position.sub(ctr.multiplyScalar(s));
+    const box2 = new THREE.Box3().setFromObject(model);
+    model.position.y -= box2.min.y;
+    scene.add(model);
+    const h = box2.max.y - box2.min.y;
+    orb.cy = h*0.52; fitDist = h*1.9; orb.dist = fitDist;
+    let meshes=0, tris=0;
+    model.traverse(o=>{ if(o.isMesh){meshes++; const g=o.geometry; tris += (g.index?g.index.count:g.attributes.position.count)/3; }});
+    model.traverse(o=>{ if(o.isMesh && o.material && o.material.name==='lantern_glow') glowMat=o.material; });
+    boxH = box2.max.y - box2.min.y;
+    hud.innerHTML = `<b>守夜人 · K3 评分系统席</b><br>网格 ${meshes} 件 · 三角面约 ${(tris/1000).toFixed(0)}k<br>身高归一 ${h.toFixed(2)} 台位单位`;
+    barWrap.classList.add('done');
+    document.body.dataset.modelLoaded = "1";
+    vstatus.textContent = `MODEL_LOADED | pageerrors: ${window.__pageErrors}`;
+    // 页脚补运行时实测渲染器串（证明真实渲染通道；读取失败则静态铭文兜底）
+    try {
+      const gl = renderer.getContext(), dbg = gl.getExtension('WEBGL_debug_renderer_info');
+      if (dbg) document.getElementById('foot-renderer').textContent = '渲染器实测：' + gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL);
+    } catch(e) { /* 静态铭文兜底 */ }
+  },
+  ev=>{ if(ev.total) fillEl.style.width = (ev.loaded/ev.total*100).toFixed(1)+'%'; },
+  err=>{ console.error(err); barWrap.classList.add('done');
+    errEl.style.display='block'; errEl.innerHTML='模型载入失败——资产未就位或格式不兼容。<br>如实登记，不粉饰。'; });
+
+
+// —— 世界模型三模式层（原型：探索/导演/演绎；决策与向量重排接口位留百炼适配层，凭据未落位）——
+const caption = document.getElementById('caption');
+const shotbar = document.getElementById('shotbar');
+const mbtns = [...document.querySelectorAll('#modebar button')];
+let camTarget = null, mode = 'explore', glowMat = null;
+const LINES = [
+  '「凡推必双断言，车灯不灭——守夜人在此。」',
+  '「权重落位，扰动关闸；终榜之外，留一盏灯。」',
+  '「平原内移动需主权人拍板——我只是提灯的。」',
+];
+let lineIdx = 0, lineTimer = 0;
+const SHOTS = {
+  wide: {theta:0.6,  phi:1.15, distK:1.9,  cyK:0.52},
+  near: {theta:-0.5, phi:1.30, distK:1.05, cyK:0.60},
+  lamp: {theta:0.35, phi:1.42, distK:0.62, cyK:0.68},
+};
+function applyShot(k){
+  const s = SHOTS[k]; if(!s) return;
+  camTarget = {theta:s.theta, phi:s.phi, dist:fitDist*(s.distK/1.9), cy:(boxH||2)*(s.cyK)};
+}
+function applyCue(k){
+  if(k==='dusk'){ key.color.set(0xffc98a); key.intensity=3.1; rim.color.set(0xd4a86a); scene.fog.color.set(0x0a0c16); scene.background.set(0x0a0c16); }
+  else { key.color.set(0xffe9c4); key.intensity=2.6; rim.color.set(0xd4c4a8); scene.fog.color.set(0x050810); scene.background.set(0x050810); }
+}
+function setMode(m){
+  mode = m;
+  mbtns.forEach(b=>b.classList.toggle('on', b.dataset.m===m));
+  shotbar.style.display = (m==='direct') ? 'flex' : 'none';
+  orb.auto = (m!=='direct');
+  orb.autoSpeed = (m==='role') ? 0.20 : 0.12;
+  if (m==='explore'){ camTarget=null; caption.textContent='世界探索——自由轨道巡游；拖拽旋转 · 滚轮推拉 · 双击归位。'; }
+  if (m==='direct'){ caption.textContent='实时导演——机位与灯光 cue 即时生效（点击右侧镜头/灯光）。'; }
+  if (m==='role'){ lineIdx=0; lineTimer=0; caption.textContent='角色演绎 '+LINES[0]; }
+}
+mbtns.forEach(b=>b.addEventListener('click', ()=>setMode(b.dataset.m)));
+[...document.querySelectorAll('#shotbar button')].forEach(b=>b.addEventListener('click', ()=>applyShot(b.dataset.s)));
+[...document.querySelectorAll('#shotbar .cue')].forEach(c=>c.addEventListener('click', ()=>applyCue(c.dataset.l)));
+let boxH = 0;
+const mclock = new THREE.Clock();
+(function modeLoop(){
+  requestAnimationFrame(modeLoop);
+  const t = mclock.getElapsedTime(), dt = Math.min(mclock.getDelta(), 0.05);
+  if (camTarget){
+    orb.theta += (camTarget.theta-orb.theta)*0.07;
+    orb.phi   += (camTarget.phi  -orb.phi  )*0.07;
+    orb.dist  += (camTarget.dist -orb.dist )*0.07;
+    if (Math.abs(orb.dist-camTarget.dist)<0.02) camTarget=null;
+  }
+  if (mode==='role'){
+    if (model){ model.rotation.y = Math.sin(t*0.5)*0.09; }
+    if (glowMat){ glowMat.emissiveIntensity = 3.4 + 1.4*Math.sin(t*2.3); }
+    lineTimer += 0.016;
+    if (lineTimer > 4.2){ lineTimer=0; lineIdx=(lineIdx+1)%LINES.length; caption.textContent='角色演绎 '+LINES[lineIdx]; }
+  } else if (model && model.rotation.y !== 0){ model.rotation.y *= 0.9; }
+})();
+
+function resize(){ const w=innerWidth, h=innerHeight; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+const clock = new THREE.Clock();
+let firstFrameDone = false;
+renderer.setAnimationLoop(()=>{
+  const dt = clock.getDelta();
+  if(orb.auto) orb.theta += orb.autoSpeed*dt;
+  applyCam(); renderer.render(scene, camera);
+  if(!firstFrameDone){ firstFrameDone = true; document.body.dataset.firstFrame = "1"; }
+});
+</script>
+</body>
+</html>
