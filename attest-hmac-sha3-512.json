@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-10T19:17:24.811Z",
+  "generated_at": "2026-10-10T19:29:44.765Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2919,
-  "merkle_root_sha3_512": "73545ec031d1db0d86f22a4e3d39e6df2a296c26e2bc1b106d3d914cf0ddc5c6ab953eb5f594fbde0e8cd1b3946250908ffad3004a6054c2d59e0400e4470430",
-  "hmac_sha3_512": "5b67204a67c1995c30026f8ba5bb0df2e5de7b77f84168e6b06634bdf61a0833b599fbf10c7a9c9eb73969a3898acdd472ac21d37f8f027d778b3920700e5156",
+  "file_count": 2923,
+  "merkle_root_sha3_512": "5d9a8576db0949aad554dedb19f481d15f6c96a61e56c6a822cfc36aa27fafa65529452e164dd054f8a67a482b433825ff7afa065ea3c68a7da52e8200fdc092",
+  "hmac_sha3_512": "a931f46cbdec7f2a6a1fff956d1a69b4f868f338d5e46686a08398d1cf0c7c07f73e192a00aad58ba9a57d6294c2dbb1d7736bd6b580038636d684448cd44ab2",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -6330,6 +6330,24 @@
       "leaf_sha3_512": "201240c8e3083ad9e06e08356402108d5c9a5073bd23ba3cdf94182f6134dbf0ac1b9f3faf7dedd2db1ecafa52e500a345f9d1337555282b4966e07528b3b5ab"
     },
     {
+      "path": "deliverables/20261011/seat-cairn/MiniMax技能包v1.1_DF-AI-20261011-CAIRN-02.otl",
+      "size": 7435,
+      "content_sha3_512": "0f36770b61e8ab89ccbeffec3931a4394bc434fb1a52e58dedd6c207d7e16c483200998339cfeb1fe61647f1b3f32ac195fb55e92f7943bb128771daf52750f3",
+      "leaf_sha3_512": "9d58f1550c58f58505a5519ff3c82b9f06bc6c300fcd862e947bc6d95098cad491d886246bb05f9e3c4a5430c6033a6cc4e7c69ca76e1c70b86b572abb958ae5"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/minimax_client.py",
+      "size": 5294,
+      "content_sha3_512": "e2ea1b38e29da9745aea5c431051b352812b970d8f3755836dd33214639639cb72ba2eca941b0b53af32342241cc657e2306b2b37b01fd7d10313531587e22d4",
+      "leaf_sha3_512": "a05e36c8244f4222e1529f3a831b9b670925847577b8c7892980c6be9f3f2b3290c47e5ae68acaad3b2c6651651e210390ca52becb7f3966dda51f0ab1495c79"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/minimax_skills.json",
+      "size": 7785,
+      "content_sha3_512": "8c7a1a28ecffaaf8e076b04c83895e1a3f78fc0d971ee624218fb6c7af0ba852148c36947259db8d0b9dd4302d3d579990558e854cf132d1ce97545438f79a8d",
+      "leaf_sha3_512": "97f7a94d521a15b616649cf53c614f7e7a9089572d88a3cf3fb7aec9fd663e44c6aecf63fa135669fe135c0d01c6fc57afaa399ced211653a2a5835ceede9880"
+    },
+    {
       "path": "deliverables/20261011/seat-cairn/opening_firstframe_16x9_20261011.jpg",
       "size": 15727,
       "content_sha3_512": "ed1df8470582ea15d58eced047e5fdc0e67d5d7ce5110a5a8df39c92e6f22316eb4f23c6091f58604896e0c7fa6cea05cb9dce9cbc8ae0ca310e5ef0e63755ec",
@@ -6346,6 +6364,12 @@
       "size": 1688,
       "content_sha3_512": "b6112decfde818952b8dbbc9e1f83c822071ef79241ffefb7a0b82b365a7198acd420cc7028add5df07f33aacf3a22bdbdfe6035954eaad5888088f27c12dbe1",
       "leaf_sha3_512": "a31a1652705cb789780ea86874878293236782244c57706bc5bcb3f47da6df05c7e7a7789718d77d0875c0f46e25688872dfbdad0fb0ca29b0d8d2897624de57"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/skill_runner.py",
+      "size": 5038,
+      "content_sha3_512": "bb2f0859aa9d9c37e86ca55ffd6cbf39aab372c729b4438063961280e91d0abd756e0f13d19c8d296c1fd76299676ca81666b92910a007668cabed1acdbacd07",
+      "leaf_sha3_512": "04e4705a0f367159f0f5790044182685338ea30d5840faa701bdd22ccec753a9b6cfb09143acaadb72f3cc33663a224dc0d18046b0d162b43ea578da976d2a89"
     },
     {
       "path": "deliverables/20261011/seat-cairn/开园实证与MiniMax初始化_DF-AI-20261011-CAIRN-01.otl",
