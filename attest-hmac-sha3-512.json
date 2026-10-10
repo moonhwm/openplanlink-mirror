@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-09T23:06:53.178Z",
+  "generated_at": "2026-10-10T01:37:51.966Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2908,
-  "merkle_root_sha3_512": "cef66d0c714c7d157287919bc5e6b4ad6867e2dab07b8db1ae13ca1dacff93572618e8c55a02b19131d66b9524ef0b57fed26d092a8a47dc2c6183ff489f0084",
-  "hmac_sha3_512": "038a985858e48d1e1cdf7b2e3f62bd6831fcdcfd8aeb88b503aaabf03329ed25b9fdc5c0d28bc17e77fd8d3ce100ff1e4718b721f6d3ecfa818bf39bf7adbd22",
+  "file_count": 2911,
+  "merkle_root_sha3_512": "eaf780d24a4c7bd3a9a9ff88f563c882f3a0e5b74410fee2275c4adbf98065f4cf85106a6f57617456fde8f3a5fb86bd85460aeb0307392eed06add3c9e1de52",
+  "hmac_sha3_512": "446d90f15b7aafb21fc9531974a16703b55383af7a78e63ec85675d6a6bf6967b31ec2ce753806467f619b0156d4ed7dfefdec4b3bed4068130044651acf993e",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -145,9 +145,9 @@
     },
     {
       "path": "SBOM.md",
-      "size": 4502,
-      "content_sha3_512": "51ae91ddc73fe67f274fc08e65f48d50c832518cdc0ee2daf33d2b348bd3c0f696bc04cea9375790bf29d4b198eb2afb912f9f68d1997cd37f3e6b81777b50dc",
-      "leaf_sha3_512": "dbb40630b9c36e1ded154a5676b88c0c6fbdaf91ec9f265bf1ed340473e2b2c1593c8272e2119331b6c481b9811819b7ce1c22c0c8b1026ca70f5e19f4739301"
+      "size": 5967,
+      "content_sha3_512": "63ef26270367a43c23217d62be6ecc177a6fb461040a9ec7342933eff0e1943bd07fcd759a0842acd9a252188d611f816453fdbb255b8d9a931b0a997624d7d8",
+      "leaf_sha3_512": "ef1315747a0eb1ada37d6f099ab82bd0b096eb7b853eea15906663bf13c59c9b9e8ef9e47686efd9d16d912214e77352e4519866f1f1d0eb2e608afe89d44fb7"
     },
     {
       "path": "SIGNING.md",
@@ -4236,6 +4236,12 @@
       "leaf_sha3_512": "376eccf2fdb4526a55d47f2094f67fa82424bb1578664493b30638e2d410561ca8de712ea3df471f8ab142c817c78cf80a00ce98aa9741e5f51e44076cbf32a0"
     },
     {
+      "path": "deliverables/20261010/seat-k3-scoring/SBOM.md",
+      "size": 2030,
+      "content_sha3_512": "24c8d5fd97ade6f3fe72e55a21f08ed05c5d85cca2f62bfcb980cfa7b993c3541b2b33f5625264d0c9e9458b6d5ed9b3ae2334001938223666c4c9147d557de4",
+      "leaf_sha3_512": "df457c4f02b41b82e28dd47fdd073aa91d5b84058e55763dffdac67eddb26874f29f880a4df5817edcf30b354ad02cea6d2f0d52922c71e1a060f11c6fab9f82"
+    },
+    {
       "path": "deliverables/20261010/seat-k3-scoring/parts/p0.part",
       "size": 21364,
       "content_sha3_512": "0f27371dadc3ee1238413f0622b1cc10c0e00e1a8d10a6c5b7b292646b849b39702b9487196c7e1f9c2cac19d35d0d9c8e6cc79f13e0958561ed67c4c772d0ec",
@@ -6294,6 +6300,12 @@
       "leaf_sha3_512": "277881258769aaa07151493018df74630509e71813314346dac3584652779665994e09030ab1381c9c4429772dd0145fbe75c99ec5143c91279c75423f99ca8f"
     },
     {
+      "path": "deliverables/20261010/seat-k3-scoring/评分系统说明_grad-path-scorer_v2.4.0.md",
+      "size": 2198,
+      "content_sha3_512": "4839875a43aa2a3bafaa8871c7b40307d386dbea1d56dd5833ea9bdf739241c9210f7195a1018f538978eec67b8353688042885de5b873b8e4c8908f521e290d",
+      "leaf_sha3_512": "201240c8e3083ad9e06e08356402108d5c9a5073bd23ba3cdf94182f6134dbf0ac1b9f3faf7dedd2db1ecafa52e500a345f9d1337555282b4966e07528b3b5ab"
+    },
+    {
       "path": "deliverables/k3-main/a2a-plaza/PILOT187-DECISION.md",
       "size": 2559,
       "content_sha3_512": "3970e9f77703847cb8f2e3d2b14347c17b468b668506262bfcc4d1c9dddae5c7bc14e5513447d4c904d6daf426f7c34ba4358613223e8e11460b717b1dfc3cd7",
@@ -6886,6 +6898,12 @@
       "size": 1322,
       "content_sha3_512": "c8cea671affc728394a3b1dd75abd391048f430183bb5058ebe1e88a35909a2dcd18be7960fdc41daea2f3b899a517005c3123461a651a41435a334a84064540",
       "leaf_sha3_512": "b0fa33c5ee7fa7a7753b083d790ec295057949ff505034923cfdaa2c53b22ca14d8a77f72b22a22ce2485e1c39d8c66962d13e749f59274b3cd59b92a5c8113a"
+    },
+    {
+      "path": "seats/k3-scoring-web/persona_card_v1.md",
+      "size": 2422,
+      "content_sha3_512": "21ef82ddbf385c2e992a841de040beb8b65335b9af56e275b9c02eecf0d3bf7723559fff4ba225c65dc539cc25673ce22244f6b25b0095d73048ed4f616d89be",
+      "leaf_sha3_512": "a5fa015a174710d434e82fd5c5d1bc0bff7c06b6cc5e625a1c9cab169a10633391cca3f9969d94ab617e960382827e68e514b8b4d2f46bda63a8c48d5f48ac5c"
     },
     {
       "path": "seats/kimi-code-quantlab/persona_card_v1.md",
