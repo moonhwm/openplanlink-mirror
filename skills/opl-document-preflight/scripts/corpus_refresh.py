@@ -28,7 +28,7 @@ CONTENT_KEYS = {"sha3_512", "sha3_512_16", "sha256", "bytes", "zip_crc",
 
 # 默认观测名单（声明语料文件名）；可用 --names-file 覆盖（每行一个文件名）。
 DEFAULT_NAMES = [
-    "2026-9-25-OpenPlanLink 润色-1 (3).docx",
+    '[withdrawn-document]',
     "A2A网络全面优化整合架构方案.otl.wpsonline",
     "A2A项目四件套完整文字记录_上.otl.wpsonline",
     "A2A项目四件套完整文字记录_下.otl.wpsonline",

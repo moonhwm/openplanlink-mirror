@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-08T15:58:07.846Z",
+  "generated_at": "2026-10-11T01:54:55.303Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2207,
-  "merkle_root_sha3_512": "8ad29a48f87e68c324b140d369af2e2a822a003efa906524b8ca3c9ecdc5afb5e12bd5f21d53cb83c09833fac23d2f442bc1dfb94daecd835b71694d775e1ff4",
-  "hmac_sha3_512": "8a0db21e41c04414927a2d7fb80a2547ebd1639108bc6fb3be215733a9430036cd6c584ce6730b03e7108895392ba5c48751ebb671c1e6fb081e21bfc883921b",
+  "file_count": 2195,
+  "merkle_root_sha3_512": "1b6068e11587f3cba3d97bd0f7752aedc1ccff83563158b07d487c475ae820490ecc2554583d68b72bcc96c0aa9503ae7d72fbe0cfcad6bd639edad7c112bde5",
+  "hmac_sha3_512": "4aaf330c63ae98e6f92239d86fe7ecf072305cff5a70c5851f9394eaa7925958fc4b12107642b892dca8b3bd4af74be047d29257e2212b9577e3ac33c46d5e44",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -91,9 +91,9 @@
     },
     {
       "path": "HANDSHAKE_LOG.md",
-      "size": 44111,
-      "content_sha3_512": "39cb3fdde5778b6b7d5decb3f7a9bc3238bfa6644c216909c21bbcccdb31553a664a4fa9b2c72fe0592fafc8840d848dae4c4e7e2a957db6751c01b135b95d43",
-      "leaf_sha3_512": "8c836172c2f1d9962109d32ae9b79ba17e76b858dc80301debba6bf24842ff0287ae0e420c1dea836cd3256bcb3901c65bdc9c3a0c435698b38c3cacb21ed3d3"
+      "size": 43699,
+      "content_sha3_512": "5dba47e5a59e88585ff5aa042b3d4a661bbb2bd56dfe4f11d90cd4ad3f05a0be060285b15c6fef30471896246c8db4abb3fac2eb862bde6955651cd1eb4cc29e",
+      "leaf_sha3_512": "2ddf4435b91f0fb28149cb75412f67d0888522eb48e625ca23f715770f837c80ab790affc704706aaa84b5a45ed1b443effddf7c7cebe9696c43dba5eae64acf"
     },
     {
       "path": "LICENSE",
@@ -228,12 +228,6 @@
       "leaf_sha3_512": "bbd5c632cb64a7e4fcc5afdb7ab09004337085e66ab05a930054f75b6cf9456f86326920ccbb927d7c70bbe528fe8331a8af8fafeda16d25129a3b5c994cb5f0"
     },
     {
-      "path": "deliverables/20261001/A2A核心产出包_20261001.zip",
-      "size": 375265,
-      "content_sha3_512": "b2286707eefff74f54f551b0f3fefa053f93d46e9478f6ff844831b4d368cc64c4c730ec4d669f089b7c84d60ab1b18a85905b73efd957c94240f498f3a413ce",
-      "leaf_sha3_512": "484f20b2e0f4d4dc765e8976773418bed3df394d302a49bb3bb09b1577a9b9fb3172f1735f9fdc035f5fdc2211c9154f0eb2b603997942af46c3a4702a28d539"
-    },
-    {
       "path": "deliverables/20261001/A2A议会交付包_20261001.zip",
       "size": 5699,
       "content_sha3_512": "270970e64a4770228ebd5188025129443281576034403346be371434d63fbee150d36f286f6c2bcdde048c5e09d19c49008c988ec331186ede1ff3e89bd09971",
@@ -343,9 +337,9 @@
     },
     {
       "path": "deliverables/20261001/handshake/sandbox.html",
-      "size": 46586,
-      "content_sha3_512": "230c54c4fb097ab57c829984551560fbc5aec69cc806cd670668fec1df0b8c33ad755982632c871e2536bbfb0d353925b29c31a8aa67dcc6b96748bd17f2f93b",
-      "leaf_sha3_512": "fb8628335d8df3efdcb77f7374fe8e178a90f6554a891c385f5c5bfc1edb4b282e845d367f597fd44da568d3afea431085dd09404ae02f68bdac69d83354b231"
+      "size": 46372,
+      "content_sha3_512": "693ee2179439c79a9eaa9f0291be6d58da0abb3e2c41d59371c6603f18740b5c0199aaae844647f92202e5f5c55b121591097c876b9b59f78cc0e5819c9e8554",
+      "leaf_sha3_512": "9d1177bd047931b23eaeb91883c47654830f481a21426c1d0d196713099aa6b5ab432687a861793c7157e2dddd2d8a133526c4873f618fb9098ef09107e877b8"
     },
     {
       "path": "deliverables/20261001/handshake/sea.html",
@@ -492,12 +486,6 @@
       "leaf_sha3_512": "5eae1bdbf2c59dbd3b53ea15a2d4e3772eb55eb1dc8981c3388f187dfef2712b6be2800f7e2875b8e82a8200704406789e0c2cbd309de477006c88509a3ec73a"
     },
     {
-      "path": "deliverables/20261005/otl/OpenPlanLink全局声明_v2.0_修订版.otl",
-      "size": 24697,
-      "content_sha3_512": "ec0cf48c5f7084ba5bfe765939ea89af525733319101c4263320835caba4a54973311341ac014e109b4badbd2eb90855295a4be7885584d8882ed2311e634880",
-      "leaf_sha3_512": "378d3154aa93c226ef4be688fde9d14278a5722c8248075b047473dd01d7b7d2db1f68e22926f2cc8daa4ba0d360a9de8e8acbe2874ee54c03ebb278c7b7d18e"
-    },
-    {
       "path": "deliverables/20261005/otl/OpenPlanLink全局声明_初始化版.otl",
       "size": 13723,
       "content_sha3_512": "e37d9af299e32c8932d0d7b4968a56b4c25556c2545de49c51b02a79b9a2831f1f13e790f39bdcc76c922a81a5a70b61f568e5f838aa9aa9fe1ca4366ddf3dce",
@@ -532,18 +520,6 @@
       "size": 18260,
       "content_sha3_512": "d3a452670dff4e68d00a940345a6566a087f1b1a29c7e6ce0ec797277b0760f3abe8cb4c9d07906840f2edb4b80f7b59a2998ca60e17e5edd9bc57c31f34eff5",
       "leaf_sha3_512": "40d6023f9848afbbe2c7a8790bd1b903db39a1beff4742e5afa74e0f7ce0232c5f3cc69322572b5f121cd700122346e2ed91fd20d98ff7ce8298ce363540a9f0"
-    },
-    {
-      "path": "deliverables/20261005/otl/secret_scan_20261005.md",
-      "size": 10373,
-      "content_sha3_512": "4825eb7ab32aeb40cb4fb1291419588144d798bc48b3086a89fb4904f40e0253486c5a6d26f391ed7db0845b04eafeae41977b6796b4644ef448ccb117577961",
-      "leaf_sha3_512": "3e133a9b73d093df548ca2ca92cc2dc8dbb033b4b34b760ee94c060bc17691cf045720e4b6e50d18441de7c4216b1fa063a0e4d80262b8757c85a2525130b4b2"
-    },
-    {
-      "path": "deliverables/20261005/otl/secret_scan_review_verdict.md",
-      "size": 5970,
-      "content_sha3_512": "c5c49cb4cefa595e58f06095df0b89342aa12a7b01956a49db53987a36186d7d06a67574975754961f445e1b5b701bdbdc4f4a46d76852840f8095fe6c9028c6",
-      "leaf_sha3_512": "0fea16d0ab7e2eb03d01180909c5672d19103ce2207359369190a07bdb1d1d5102c7f7b7027b87a03bbc6a82861d98c3e699a3544814cb82469d0667e7cdbf32"
     },
     {
       "path": "deliverables/20261005/otl/self_evolution_research.md",
@@ -1398,24 +1374,6 @@
       "leaf_sha3_512": "f373b18330d41a69a3575a8013066dee2a980129e206b5f8556cfadb6724bd66b769bd0c1f9c0e97edb5fb684d3b32310b2d1c1c2705ed3c46952776b7d7a58f"
     },
     {
-      "path": "deliverables/20261007/seat-cairn/mem/dedup_plan.json",
-      "size": 7761,
-      "content_sha3_512": "a3b1459a1b88bce6d8f38955c310714199f8982644cc29c4e915d456fd7a1e9ff6a37fbceb726537fc0d951ea4eec1d4248c569ee3773fa4cb2b0fc568bda086",
-      "leaf_sha3_512": "076a6d1394bdabffb2f47c9ce5751e806ddc9aa5c2a9b8e75b4daf4a24f96756a67986c11dcacb95e9096c5f04d5b63adf04504a28fd3026e7fc8669680caa6b"
-    },
-    {
-      "path": "deliverables/20261007/seat-cairn/mem/dedup_plan_v2.json",
-      "size": 7948,
-      "content_sha3_512": "e2581ef93ce8447f8f676fdf61d5e3a009e47ced11049ee42b7575abf747c2f63e14df8b9844778d4c84a719eb2ea7f583c608e0d0b7388241cadc42a678e189",
-      "leaf_sha3_512": "732999baf773e5babdaa8014ac2a4d91bd3badf7f160582f6566e5410bfe25f405ef49b0907370e64f2ecf284089e1903e40f87a054a0950010b433213de4f74"
-    },
-    {
-      "path": "deliverables/20261007/seat-cairn/mem/dedup_plan_v3.json",
-      "size": 8115,
-      "content_sha3_512": "7ecbe44791a833c6cbe5d7d0f49f651d34d6e4b4c289e758f201ba21fdfe2a16f4065d438ab5e7f0dd0b55d22022618c4519e9f92bde4c667d3925e0b4c99ba2",
-      "leaf_sha3_512": "8d94547e033a805b0af8b079074b717213a59f8f7c6ab074755dea7281af779a545ba2f7214e9c7abbdc31ccd9637a6b66ec60d4a98e77d331facf7db77ad8e1"
-    },
-    {
       "path": "deliverables/20261007/seat-cairn/mem/mem_audit_20261006T235402Z.json",
       "size": 3283,
       "content_sha3_512": "e66c07b537c0fc04ee945ea3adbbb275996fed7738fd7b575831f574d9087141f4e4858c387138ebb98a96e0a3c6eff8df66c5fc6f7912601dc3ea6e9eb74daa",
@@ -1426,18 +1384,6 @@
       "size": 2513,
       "content_sha3_512": "0baad8685ccca90bd63131e802c3d9b5029aa546d2cc29525afec9ee0826f9e44ac025b5e9258ca4acc94b92c9fa513117324dc974927d24c52378caa309eea5",
       "leaf_sha3_512": "438de5129803af8044dba773439f7b28fe3d3fd3a0d1e951a628df1d0c115423cd999751458d95954e9afaad28866d2c75e72dcd0fea9437ec20e4ec1e994346"
-    },
-    {
-      "path": "deliverables/20261007/seat-cairn/mem/mem_tier_scan.json",
-      "size": 8434,
-      "content_sha3_512": "960ad3ec4953284d6c155020290efd21deac14b163b3c972aeba28103a0731f3de18b03fe4a4bbb65f1e1c2d9fefdb9b2c298b8a23dc4172280f431f98bcfde7",
-      "leaf_sha3_512": "875a51e0903ebfaae78f2343c52001fd21e956ff0fac79f1737c20c468ef4a3ceb2493565eee900780957d427e90ed776b8c0004678b0dd9f968d83a43ebb69a"
-    },
-    {
-      "path": "deliverables/20261007/seat-cairn/mem/mem_tier_scan.md",
-      "size": 2063,
-      "content_sha3_512": "0f719aed643f1d4e20c0249013bf3862ed36c6eee2d816ec5dcb0b78c7595ed412f331b91301d5ec29386ea32cd1928eba8730369d61bf35c44f9e2ad30e99e7",
-      "leaf_sha3_512": "1822dac92f258af2380d6389ae96078d47fe9e8e564c9626c8684f7397064c8f4ed4ad1b2c36269f4fdf8a3c49e9cb11b00d644e2688edb39ffc73ed6101a297"
     },
     {
       "path": "deliverables/20261007/seat-cairn/mem/sign_needed_log.jsonl",
@@ -1932,12 +1878,6 @@
       "leaf_sha3_512": "91d7737d9cb181578012f875d19387d6344c4ba51fda35bed3c9090bcfdc088f30eda70167f401ef7268d71b925262f9e7c54c1e9d3138dc267fb7490690eea3"
     },
     {
-      "path": "deliverables/20261008/seat-cairn/mem/dedup_plan_v6.json",
-      "size": 8115,
-      "content_sha3_512": "1636721e99575a4a13d6919cdf946803a5ec6080f4edd529d4a2e488076a505d1cdf7bf26fc8bce0833591d06ed216751eb4e65535323de5f0491b6f94218a01",
-      "leaf_sha3_512": "2df5f3b58ab61b5d85ff5336be77ce1c61acea866a944d613588e77f23b3db17a53b96cf5c1b5b5b451d5dbb574b5be8be77fa5784990d0ffc8c3e3d452ea70b"
-    },
-    {
       "path": "deliverables/20261008/seat-cairn/mem/desktop_tidy_20261008.json",
       "size": 17161,
       "content_sha3_512": "c44f68e42ab76cd4055e04678ea7e568fa90840366c9552ef335c3d5e08c909f6d1da467c75ba04647a5cc0299bd0f80d19c50d865674031c83bb9363fe33ee4",
@@ -2254,12 +2194,6 @@
       "size": 8933,
       "content_sha3_512": "7b25f41fe2ac7b51ccbcc306fb8b817bbf1bbfdce8272afd20360c11b8129d807ac8af2b9fc17923d53e65cdfef535884906db26f1c2d466ae1ec82b6f721254",
       "leaf_sha3_512": "56e60f547b4fd4dd52ef6f2bdda03856fb61444f23334eaf61ad0f4153a7051ea724114b68e3f1956f88d31db4915afb3be54ce1a3f6fb08144c79b6a7f1b922"
-    },
-    {
-      "path": "deliverables/k3-main/govdoc-group/重读批注纪要_WPS十件_DF-MIN-2026-1005-K3-01.md",
-      "size": 21520,
-      "content_sha3_512": "4f099f03fbf252bbedd065906ce7a6ca19c33717e13695f60324684af83f3de47cb34de25dfc3f1a0f61e3c2330c75a109f7ec5afc628cece0a2216e53d83364",
-      "leaf_sha3_512": "1cd57566f988ae3b933f6e7d2eb80fd7006483f57f3884bb9b17c83dee114603ca065125288a3c96c5f18f5e2f014cb2ec611f5411bf01cf2c8f861740a08e6d"
     },
     {
       "path": "deliverables/k3-main/govdoc-group/镜像仓收录缺口勘误与候批包呈批件_DF-NOTICE-2026-1005-K3-05.md",
@@ -2764,12 +2698,6 @@
       "size": 2927,
       "content_sha3_512": "4b08dd0d6bcaaea639eaeb4c5fc1be9d9b179730d9e2244453f566f8ad2a6cc69cc47ad6f683cc66fabb74d6484cb51ee71c5f52d6a012767c4615f90e51eebc",
       "leaf_sha3_512": "b2b9b2c907b814d0b6b687967da67ca6655e6c7bdbba36ebeb8c1761b69c8e51d624f7e101674f7ad2123e74fa1845409e178dc5c0313eae2c6d27fa14157338"
-    },
-    {
-      "path": "sha3_tree/TREE-K3-2026-1003-01_manifest.json",
-      "size": 5543,
-      "content_sha3_512": "525afab9b6da3899f81e207e1322e7f5b1b46fbdfbd96f14418c599af2956062411cfb703040dee9ed3701686549a1ad90f7278dc6fa09088cd448ff865b5ac9",
-      "leaf_sha3_512": "61741082eeb15bba0212e4b61e0089fa2b43f0e4ac6e71cca75a2b2a0416c9560244e5fffe4e9b40356320c1697c1170019543674c6afde482c1d9e8afe19958"
     },
     {
       "path": "sha3_tree/TREE-K3-2026-1003-02_leaf_records.json",
@@ -9001,9 +8929,9 @@
     },
     {
       "path": "skills/opl-document-preflight/scripts/corpus_refresh.py",
-      "size": 9787,
-      "content_sha3_512": "c7215a0022de5625eb4aab99ba7ef40b3e0f74d605eb2e68b836e263e203fa3d5ce48c1ab31fd9b1a148c0b9ec1e4a5565e2e3a5dcd3351b4fb31835fcef539a",
-      "leaf_sha3_512": "13bbef4322bf1f4c10ceb825426a3615ded685fa09cd99a74746c3cacc8dc69a224505c835aeb4c93789ddecc4da039e2bb31fedcc1cccbfa420fd05d67ae252"
+      "size": 9767,
+      "content_sha3_512": "c988b9f8cac492f2a96d1294fe3d4ffb9122d7f39769f7dceb5e55416977b658e22848f5fd263af88e86adc98430b813e49b942c1ed41329cc395aac99febe86",
+      "leaf_sha3_512": "5417272a43201f2552f165294ee9f1ed55e345833e3b5449a3e3d0887371b6a36875251fc4b8b6cf78371a4180958d3d13ca5113fda5427e17bcbea50fa5eb7c"
     },
     {
       "path": "skills/opl-document-preflight/scripts/ooxml_meta.py",
@@ -12817,9 +12745,9 @@
     },
     {
       "path": "tools/opl_docx_refresh.py",
-      "size": 3922,
-      "content_sha3_512": "e0c3d603dba6994b0f93fa473af0ce22b5c34c1842be03916176a4b72bb8fcfecf08d4f6e4c0a18736b014524d50835acd1bd78f3e3905a48f6fecbe994317a1",
-      "leaf_sha3_512": "98c4816b95cb575218d3536947acef88526ea79fef6bddaab43f0cd395773dc14629bee4248d3a6540c4dc4e38d9320b1d76fabb6311856dc9ee7025a665d7a9"
+      "size": 3782,
+      "content_sha3_512": "242c3fc7c8de0a616d494e6173669293022cfa74818a8cb8fb6b26b86f84b43a5db733720447a5198691aab1b519132fdfd2554ce136f9b00abb4efcde49f391",
+      "leaf_sha3_512": "330bf63b99fc074ec790ee5e282b47e6950a4cf978f45ab873015eefa63ecf8fd179223bdde89e346d747eab4427f10ffbc94d15191e1b5befe5ac24dab87143"
     },
     {
       "path": "tools/perm.py",
@@ -12877,9 +12805,9 @@
     },
     {
       "path": "tools/secretscan/scan.py",
-      "size": 17065,
-      "content_sha3_512": "304fb115012670c4c49aeffd97dce49e8ac6f50e653887233cf449a2fbb95e9ff81483cd793e2b872961d0722c3d2cc636d3e0a0ac4bfb449a28079c76377950",
-      "leaf_sha3_512": "b987cbb96a7ac921b4757c30b8e8092990fa91b1b62268afcd0811f837580d47b6b9f1d3a04c112a7e79460d398c3b5a0d0d2d3b2b9012869e60f79b415bf818"
+      "size": 16825,
+      "content_sha3_512": "f1bd5bee9876359fce9ff7d64b41d3a467ef82d464ab8ac7d9cc7f8cad0a45004dd2b3f6dac0c47119f3ea6b47d48240fc14d51fb6dbdc35dbd9fe76fcee81a7",
+      "leaf_sha3_512": "0cfa513cf9fbb12ddba53441924a5fc79e941ac7cce8d57d1cc383b09ced43252806d5dad2c91e74d524679503e683cbde18ebbdcc9872bbd4144bdb2f8adb57"
     },
     {
       "path": "tools/sha3-tree.mjs",
@@ -13249,9 +13177,9 @@
     },
     {
       "path": "videos.json",
-      "size": 1584,
-      "content_sha3_512": "dbe2b69db4824e89ccdf30fe14d35faef6ae3edf7fde95c62a38b801d9ff0da15e3e0109e6633c6d590d45011bae1f37ae73521e573db4d3f0380c47b84c0a3f",
-      "leaf_sha3_512": "d085ff1ebac2fa237967e24bd2d0a071dcba8eb1095abf3298888fdff02b0f036c17fdf170bdb74dfba0fe32e62e2b632c01348d493ac380574443be10a8d325"
+      "size": 1244,
+      "content_sha3_512": "238e65442eb3cfa8b8cb471d04a4cd05660f258a08a3af5ec3db0431a72a8cdfe6e5e3094513a039281222212250baeb5ec675bd5705f3c85b2f8459cee66ac7",
+      "leaf_sha3_512": "c2f02bfb3254658d932a1782cb8e22720e49c001c61d9ef15d5bc89b75c7311ee731ed246d71a5a7d5738a748666d95b87c21384591b8d10060f0eac7e128987"
     }
   ]
 }
