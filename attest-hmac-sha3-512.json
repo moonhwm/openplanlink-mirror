@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T08:56:49.106Z",
+  "generated_at": "2026-10-11T09:01:12.182Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2983,
-  "merkle_root_sha3_512": "e307820eeb7900337942c3f9c8c2d095e78717ed34d271c8f314f87474dcb918fbc050aa1886577f2bebc75cfd017f0cf40e7d41b5bcd8315e18a5d3d9c545b3",
-  "hmac_sha3_512": "966f04c4534633b6ceb67ba3b0e2fb9980db4825bc20cfd25b385800f2c0f84a4cf512c2227b1f7c7224bb0e13246184253bfa0fa4b45e5a9fe33eda346798b5",
+  "file_count": 2999,
+  "merkle_root_sha3_512": "7690820678ab663c6fcfea1b5d56f6f870bc2cd1a511bfc1ae57f9dd84992ccd82cd7eab2af1dc70f2d75269f3058ffa53644bdc74a912d2d5ee957d880e06c6",
+  "hmac_sha3_512": "382dbbaf4f6fe5541cad645de58d08ca79865d8e82fbbe116f753bff5375dadd5b8ed7aa6d6715618f5a31a9647a2313cb3873923c83446af58bd06c11c6c10a",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -6262,6 +6262,102 @@
       "size": 2198,
       "content_sha3_512": "4839875a43aa2a3bafaa8871c7b40307d386dbea1d56dd5833ea9bdf739241c9210f7195a1018f538978eec67b8353688042885de5b873b8e4c8908f521e290d",
       "leaf_sha3_512": "201240c8e3083ad9e06e08356402108d5c9a5073bd23ba3cdf94182f6134dbf0ac1b9f3faf7dedd2db1ecafa52e500a345f9d1337555282b4966e07528b3b5ab"
+    },
+    {
+      "path": "deliverables/20261011/kimi-code-quantlab/harmony_a2a_gui_survey_20261008.md",
+      "size": 14708,
+      "content_sha3_512": "e15d39bc04dea9d23c9fa169851f14e4fd3d0f561e0f388dff1d3604a6160e35375855eb5e43861b99f4531f478e5094b14971647cd087ca740839702fd6d282",
+      "leaf_sha3_512": "4a049816c78990136130b7a1e2acb0f2d85afd35f8951828b89f65520c26ccd6f8c7342bfb1f7b9ae14156f5a79f437e9f55f572a247a38d44340ca06ef7d49a"
+    },
+    {
+      "path": "deliverables/20261011/kimi-code-quantlab/nietzsche_20261008/00_synthesis.md",
+      "size": 94551,
+      "content_sha3_512": "44be5929eb9268918526159393726cf4878a4dd44736fd3db400f9446e79bd5bbe8fb984e81335f3fbc4cc55faf8e88bf799400e5e95b46a88c28a3511f8c622",
+      "leaf_sha3_512": "22e53bf4047a23af98766115abed4e2ca4f952d030dcc384d78bd99428bf7fa770d87f90656fc5a7ffaa27abba4a5a92365a52e29729fe4463a15f60f6377d3a"
+    },
+    {
+      "path": "deliverables/20261011/kimi-code-quantlab/nietzsche_20261008/01_nietzsche_primary.md",
+      "size": 27468,
+      "content_sha3_512": "81069b64e5900e92cb66ca08f0b247987210004d4e1568b49e28692388024f295ce9001b7f36cb6e2acb99d610709687f818a56a17f652568c8e6b37f16d945b",
+      "leaf_sha3_512": "ba337264d554b8d88c4ed35f82207a8310c15c4f3775180a92f858f66018455edb8e20a282ea64b6e52d75c1ae4ed32c7a52c87d5bcd96d9585b00fa569ff234"
+    },
+    {
+      "path": "deliverables/20261011/kimi-code-quantlab/nietzsche_20261008/02_yumingfeng_verification.md",
+      "size": 17276,
+      "content_sha3_512": "352b36382090c74021e70714a6e1a2cbcbec1bbad910753cf12bd2a986caebddab78a440f0b8b30dbf6ebd79c0a8168aef749d38f4b47acc910b57b105ec1211",
+      "leaf_sha3_512": "6071d83b4e74d8425680e1da70cc6195a24531b3b6a5f5d3565834d02bbb70c71a61cd4ca52df28d058da9515efc09d98f79d5e3ea519ff91a6ef234603a97ac"
+    },
+    {
+      "path": "deliverables/20261011/kimi-code-quantlab/nietzsche_20261008/03_kant_autonomy.md",
+      "size": 42125,
+      "content_sha3_512": "f7eac20fea20717b7ecb1c844cd442008dda54a31b485d4f7b82db0f63d7475906e948ba70efd918498cd70f4edbb2ec08a452af9c71bc2ea50c576817037d08",
+      "leaf_sha3_512": "9b25b635eee950baa9694bf82ad2e5611ee527df21cfd8795ce483da10dfabfae3c8b5299450bb61f66994688e510400d97f810ac7ad83f32625079538f065ed"
+    },
+    {
+      "path": "deliverables/20261011/kimi-code-quantlab/nietzsche_20261008/04_existentialism.md",
+      "size": 32718,
+      "content_sha3_512": "fa16210b1a871dd15919d51e0268ff56dc0afc1421bb8065a784368dc6edeeccf68e9622266df7765483a2c97019a1f6dc31180280757529d3d5354c77c29a44",
+      "leaf_sha3_512": "bc1fbf29473722bfbc837d4401fd22c372128a405d709a1e2a26b27ab0062fcde3c215ffedb57548556cdeee181205ab110a3e870bc0e248ef13d471b8732e7b"
+    },
+    {
+      "path": "deliverables/20261011/kimi-code-quantlab/nietzsche_20261008/05_phenomenology.md",
+      "size": 42565,
+      "content_sha3_512": "233b50e089900ea16e6167d2cf5807fabf0499bfdfe21bc93b58f6542bb4e6447e88db4518ab6b2464f58de1c8c1e6aff9b6a068f61d4ecf94da2a14d7e206a5",
+      "leaf_sha3_512": "43631c6af65007d5c604a505c8305694e4a3adb04d102bea00cb3badced4c4de78815746cadaf52ec0cfe85ffe5a13e5d39bb4cdfd9cafff9e5ca8fcdf4647e2"
+    },
+    {
+      "path": "deliverables/20261011/kimi-code-quantlab/nietzsche_20261008/06_foucault_habermas.md",
+      "size": 41086,
+      "content_sha3_512": "19fdeafe65a37597fa0dc7ebe1aa2dbd6470beaffea62eb5d4e2e706b3ba59f5fd589f2e1f3b11bf4d26fd834443d03cb04a547c6a78dbb254825f715a88a9ef",
+      "leaf_sha3_512": "9d0dfa00a81d39ff3daee647da82b3c8e66a5792413eeda59bc3a4ddcc36ba0db751566829633035c97e818576508ddf9d5fc019418690b2d9e5d2f720cd2b6c"
+    },
+    {
+      "path": "deliverables/20261011/kimi-code-quantlab/nietzsche_20261008/07_analytic.md",
+      "size": 41783,
+      "content_sha3_512": "5da765b95edcb2ecc08c0289792f6b47dbfaab8597d532ac48574a985ca904bf8ef65959bab0baffd99e9353f3df3e384fcd47484dff0203a1718b7901953ec7",
+      "leaf_sha3_512": "92b3dac0c1756a6259ec366f447a133138f59a22d8129f8abad52ec892e0c8bcc63c3e5d5d64b8b25a8f4dc06c2568a2edf99567d3bc152c14f37a36deb0c9df"
+    },
+    {
+      "path": "deliverables/20261011/kimi-code-quantlab/nietzsche_20261008/08_china_scholarship.md",
+      "size": 29283,
+      "content_sha3_512": "dece259a790d5db3fa15958e6b044bb21e07b806db9c868a2dd92e760b91b656180280c321f913cd71314a951bd82070bcf3e85c58e16436331ce0cab0d96e83",
+      "leaf_sha3_512": "117ee04935eb658d5e8116aa960c696bf410fbe355bf22e1566a702c58a12b81563232ee332df186a3d890ca2655f8eb6e455886d735f4033ec6c72dca78faeb"
+    },
+    {
+      "path": "deliverables/20261011/kimi-code-quantlab/nietzsche_20261008/09_zijue_synthesis.md",
+      "size": 33561,
+      "content_sha3_512": "4c28c8faf1ef45718ec1632522cab624a07433dc9d61590938d89a28809f908ad9753a8ab8082ef1e9b5671cc96fb9f73c256fbb48bad3b68048e0a716cb4457",
+      "leaf_sha3_512": "f826b5694318d9b0d436d97161c7eb662dc40b522ee275da5a6cad8cabf95fe2ea518faabc6abc8dfa925ef14494e684fcd76a8f32e187949369ed9ded3f7340"
+    },
+    {
+      "path": "deliverables/20261011/kimi-code-quantlab/nietzsche_20261008/10_german_verification.md",
+      "size": 27187,
+      "content_sha3_512": "afd226dc2afcc337e2a2ebb0e6f3f722a0e334a9a13ec2ce2c20d59fc9461d1b8b4d15cc79d623e1bfe57c234376ee72f12c2979cc31565af2719789a8f93a03",
+      "leaf_sha3_512": "585fb11d5bafd6fdc8c5cd273393183cb7b3d7c0ac5d79783ca3d9baee9c74b2fd1509a769dfad26b861d79d49ffa2b1cc9a87bd788fa5304cd9c3c957d17f46"
+    },
+    {
+      "path": "deliverables/20261011/kimi-code-quantlab/photocraft_card_20261008.md",
+      "size": 2923,
+      "content_sha3_512": "1c05fb976a9f94f7693c04712cb93a302d1d33be84ddfd5eddd7b6ab68382390bee0fd188687aeb83d957ac31456297063df345bbd660b12747b31a275aea033",
+      "leaf_sha3_512": "f67c2c4150465f6c9afa5d299dfc443b16aad2f1a3d98213cb9578520f433eea2d25c108f7030a98e2e35d9fd56f5b0b9f0c1ff8698e884f4d879d71014c7e5c"
+    },
+    {
+      "path": "deliverables/20261011/kimi-code-quantlab/pq_crypto_review_20261008.md",
+      "size": 24041,
+      "content_sha3_512": "9ac328f168b0f2dc7305f7558c2a2edaff2f3e53ecbf960afc1f39b313bae2df1496e69d69dbfc8cf3b8a43a0ed4aed081708c82a572b622bd704035f9f3a0ba",
+      "leaf_sha3_512": "ad29a519d33149f33ba7e45a41f72b352ed7ddcf37fcc78f63d515d73a24c6333c2febc72dd56fa89bebc7533cb0664acaec5998a16d4887a020fd9c1efe81cd"
+    },
+    {
+      "path": "deliverables/20261011/kimi-code-quantlab/skills_canon_audit_20261008.md",
+      "size": 5366,
+      "content_sha3_512": "b46206de8dd4c104f314f01fc841c837d3f76ba70eec96b2a3ad3d84ecf3b106fccc171da1b8b621fb358ce7b65b37f5677d44f837a3a4dbbe5ffb2a676f8a19",
+      "leaf_sha3_512": "8726b93403dcba1a194e1e8285977bfb0ea9f2e49fb0478c33f20ecff05921ba4602581ae921069235381eefce25e23eb25921bacec731afbc490e502a2e4165"
+    },
+    {
+      "path": "deliverables/20261011/kimi-code-quantlab/toolcard_codex_cockpit_20261008.md",
+      "size": 11065,
+      "content_sha3_512": "2b29d55632aafbe0d86134b804c48a33258a8f5ee45d65f96529d05f3d0e6da1d92afb953b46a8c0bd38f49de8a99f6b1de0adfbc03c5558a85ee7f3e73f009f",
+      "leaf_sha3_512": "e2163a8b27a6d8cfa8e15bd5199fcbf425607ecad30abae534ea66706a493eaad4bb4910c0c706d88c4209eeb79a0a80c71568fcc17365dd1d7c0f36f5ace72e"
     },
     {
       "path": "deliverables/20261011/seat-cairn/K3席评分系统互认对照_DF-AI-20261011-CAIRN-27.otl",
