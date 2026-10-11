@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T08:06:11.178Z",
+  "generated_at": "2026-10-11T08:07:07.533Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2950,
-  "merkle_root_sha3_512": "65cfe1024a4da6d605541b69b5a9aa3fa75be21f43c9a9472baa4a86c1fd12f09e9e2855d57dcac7a950ca539e60b22ae6d563571a1059bbe0c0f13f0fb2e7f4",
-  "hmac_sha3_512": "461e6d682b9b9c36247bddf39a397669f70bc10ca058618315b35e4fba0e56a97a045ae59d7a6ef483fe018ae98644adce4acf445875460c9f784d8a31bd339f",
+  "file_count": 2951,
+  "merkle_root_sha3_512": "5252dd5b2f7d25d746a44fb76e0c455f52a91f74cd06ea7e1d4b6c35fd370763138e8bb4dc3def3f2fe84956886dd0b7c2450701a8369f2ef123159aecaf93ac",
+  "hmac_sha3_512": "2556f935b1d6404329ae87c355fe7767212c01db04e398a8a60670fa014939015d0948af464035528cb3b194172a68021c6900ae5fe9c3c952c45060e71af0bb",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -6454,6 +6454,12 @@
       "size": 5378,
       "content_sha3_512": "233447d7c2927b64c68b177dfd699277cb72cb9c0d3290845ef8a8f5e6615ffbce38a21f187a330d7cfe108bdc446f0cdab65252a79cf785c6dfeff1d3473468",
       "leaf_sha3_512": "b7578c5bc8eea126548cb7c2f40bfbd60738162074ead2b4c2c87c2dda1617108715a64f0301d2cd432b49024b5bfd51cc8cdf64c46020652db1d2a929bfe881"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/签而后验与hub技能_DF-AI-20261011-CAIRN-25.otl",
+      "size": 3601,
+      "content_sha3_512": "e9779743aab909e04d787d2c5a2dab5fd6a4afb99489c043775252a7867bab28a069890e355f63390413669fd8bc41222c45b04e8403a3e93b67d15058c44d4b",
+      "leaf_sha3_512": "950b31696fc670c66b23424c5b99b49e0965f7e5859e7c4713a91809379c55f03edbfe5cb6ad363a655418db32c426dd4b2317e6fcad49c0150a0d9ffce76831"
     },
     {
       "path": "deliverables/20261011/seat-cairn/纲要更新之核与额度守卫_DF-AI-20261011-CAIRN-04.otl",
