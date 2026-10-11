@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T11:35:19.416Z",
+  "generated_at": "2026-10-11T11:36:44.816Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3181,
-  "merkle_root_sha3_512": "f1e3df1efde34d55b8b3dc4849fcf7dc744004c22dfe07af6359f134068a566136632b64434c59ab0d830b2c250cf16f355d764031ca478cf02f510504e2cd3c",
-  "hmac_sha3_512": "824bceea68a2de70966da0da8a3c68ada9aaf482c7655831aa45f1e7543c2f946d655eef4344933a565160861a3b9d02ca55533ccc5611d862ea0d7ce73610da",
+  "file_count": 3182,
+  "merkle_root_sha3_512": "df50309287a8c8a87ea73fb123176cb01e7d491b2b038e99f34951a899152018adeda9fa2120dd7f48e2c107b86a32705b1ba9b862988ebb917d054fc8bdfb35",
+  "hmac_sha3_512": "3362e55c1f552845b2b42ea17f4ca14b777e6770f14a055273eb2ca12fed61a5881258b787d3f2984a35122bd8177948c0a97ba9f30d4540e16b536e5a6752b3",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -7588,6 +7588,12 @@
       "size": 7535,
       "content_sha3_512": "2107ba31fe91cbe4a0a48ffe48a3472b9ce2a49e4964168c35c4ad64690f36baeb6229c257bb671ff38cea88caa1fd7d8b89071327eb690ad8449f6d295cb650",
       "leaf_sha3_512": "b580e328a02ddda63881d94b3739df6915fef4c3cf980c3b1d0f43ff413950a24cae1411089208bd248a8922261f95769b71be2813cf1d1a7916f3b6d8e5991d"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/命名空间视图层落实_DF-OPS-20261011-CAIRN-37.otl",
+      "size": 4674,
+      "content_sha3_512": "94601a5db89ab8e66bc394b11399c9574b702c616ed57e8d5bdd09ba8a2072dbb14910485bc655d714f0889255b60a813cf84a1e3bcc3380fbe14f9061e87814",
+      "leaf_sha3_512": "aa1c046da22327741ba3d27860c76d3d33d55734388beec4c8fa068debe1cb8f83eccd242504a6bc2e7b5f0bfd7435c98ba8c1a81e59f32d8733068521f10b4b"
     },
     {
       "path": "deliverables/20261011/seat-cairn/四仓对齐与三面一致_DF-AI-20261011-CAIRN-23.otl",
