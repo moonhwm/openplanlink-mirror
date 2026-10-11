@@ -193,11 +193,7 @@ def scan_file(path: str, root: str, out, stats):
 
 
 def scan_office(path: str, root: str, out, stats) -> bool:
-    """解包 OOXML 容器扫描 word/document.xml 等内文。
-
-    源文档《润色-1 (3)》的三个网关 Key 即藏在 document.xml 正文——
-    只按扩展名当二进制跳过会漏检（实测：docx 被跳过后仅 otl 报出腾讯 AKID）。
-    """
+    '[withdrawn-document]'
     import zipfile
     rel = os.path.relpath(path, root)
     try:
