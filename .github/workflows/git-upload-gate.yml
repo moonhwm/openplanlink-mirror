@@ -25,6 +25,16 @@ jobs:
           python3 -m unittest discover -s tests -p test_cos_upload_config.py -v
       - name: Verify delivery keys and multi-remote orchestration
         run: python3 -m unittest discover -s tests -p test_upload_orchestration.py -v
+      - name: Verify A2A card discovery boundaries
+        run: python3 -m unittest discover -s tests -p test_a2a_discovery.py -v
+      - name: Verify night scheduling evidence boundaries
+        run: python3 -m unittest discover -s tests -p test_night_schedule.py -v
+      - name: Verify missing memory sample boundaries
+        run: python3 -m unittest discover -s tests -p test_memory_sample_audit.py -v
+      - name: Verify memory tiers and durable event replay
+        run: python3 -m unittest discover -s tests -p test_memory_tier_pilot.py -v
+      - name: Verify heterogeneous provider route boundaries
+        run: python3 -m unittest discover -s tests -p test_hetero_models.py -v
       - name: Inspect objects relative to the event baseline
         env:
           BASE_OID: ${{ github.event.pull_request.base.sha || github.event.before }}

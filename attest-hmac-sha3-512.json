@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-05T15:49:00.584Z",
+  "generated_at": "2026-10-11T01:50:56.429Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 845,
-  "merkle_root_sha3_512": "2f07336a7f3a374e4c0efd4ac577776e4f138de40c7fd7155dbcf35f7936f0b9cabfa719d9f0f08edab5a12ce1c872205bf1e53ef6a1c1cc089a70efa92a6981",
-  "hmac_sha3_512": "263f05e7a5d0c1c638a5ee4f723da85b54a707023188e94fe8a8017c3498ce7e693d4591c7c5a4eb2e70e8c87d1e725c821c116775e4b278315e287dac681108",
+  "file_count": 931,
+  "merkle_root_sha3_512": "1845c31bfb54a018485f3049b20e20dfcb80f65e4d5221cab5846633fff8587956a79f8a5aa2c0223d473d95115e8252693fff7637038a470413324da7b29482",
+  "hmac_sha3_512": "612e2e9b72e305510c945950e6bdd01def1bcbfaf385c0f6ae5f419647f6e64f6010f70c4f84fe21d4ff46855618bc599f2633f31ee3dec6eeda8de41d847f49",
   "files": [
     {
       "path": ".gitattributes",
@@ -61,9 +61,9 @@
     },
     {
       "path": ".github/workflows/git-upload-gate.yml",
-      "size": 1456,
-      "content_sha3_512": "b1ed01dab697353a212496cff0db4102f3d4f73e7df541b3e6d9f8038c9ff4aa319bd91628dda39cf2117be9b45b31a8473ccacf6c9ad71b2dac2243f59913be",
-      "leaf_sha3_512": "b981c7394587c4e1fa4e0a2ee5739879a6efa43d408963c328ff1344e09e53e0f5f2e4c0a3118c736e73dfff505ffd6f11ace58551bcdbc831d80d2c99f1086e"
+      "size": 2145,
+      "content_sha3_512": "1b2891f21241f24b420495c59496d83e76e5c0d6154836cd7f77565cc64deba4a91a444b971d0c5eea5e443730359a028c80ab0f2378fa5bdecd01da3f250b7c",
+      "leaf_sha3_512": "7be04d12fe332822dc7b8cb2570c3acb916fe6a78f437593605a07c5ce42db71b4b5894f3f4aea313f0f2b745ef2c4002fb2a7b906ac820d1775bc25f61180ce"
     },
     {
       "path": ".gitignore",
@@ -91,9 +91,9 @@
     },
     {
       "path": "HANDSHAKE_LOG.md",
-      "size": 29478,
-      "content_sha3_512": "a138b758d89b4840cc12f0b0f41c7115bbddb489dedb8dff4b4877599f648fd50c48026a4bbbd3cc780c30e1672bd5eebe9219f3f13320d40fb4aa57f7f76f3a",
-      "leaf_sha3_512": "6e58ebfbc492465ca8eb0b19ae1e4a0511d592c1c1bc84de3373809c47f79b4929ddd40ff39a55a4fe6fefec209a6727404ec3a889b91e945923a11244ed8c6b"
+      "size": 29066,
+      "content_sha3_512": "26ef7207a8314a478754c66b1c6fac740a75211306cd70be15537e2f5ce2584fc3ff6c9ed9ab1666c9917ba080d74fc49b541fb465993bb8662f5e5feae1a2f8",
+      "leaf_sha3_512": "e472bf5f0ad4f02e1da968e262e689c33ae806e419eb4d7b81648fcd327e1a4a6c9b470fd9a259859a198634616e3065dda8daa1cd57b7f55fe32d51dc2bde6d"
     },
     {
       "path": "LICENSE",
@@ -168,10 +168,22 @@
       "leaf_sha3_512": "b485a23bf08f6e576d9312a51541b11dcb44a0a47e9d5ea827c611db8587626081ba1148da24a1a4fc6e49c22ae0dd526267c1d072c41532e668ecd2d94a2910"
     },
     {
+      "path": "assets/integration.css",
+      "size": 1342,
+      "content_sha3_512": "fa60e39c6ee1c74184d3a0872458cb8918ce867b9189abc5c2206142f5c5c9cba84ee82fa35b872142845dddea482509b2f5ac6580b9b1e1eea33eb7f3bca7ba",
+      "leaf_sha3_512": "9646de3401a29d1993d9d02f5312ec061cbd740cf576a8732bb136b0e5c81ab840cb938745b061f7976bf0f03203bac79c0b886c6d22023e75c1c41eebc9f96d"
+    },
+    {
+      "path": "assets/integration.js",
+      "size": 2059,
+      "content_sha3_512": "7b9718dddebab2e3fe11b15d587fb6a1a809ba85b364e7133a5478039bfb24e1f3f1f8fe313440f9019d142633dd094c8c5f152a1d98bbeb7483164c39c3ae62",
+      "leaf_sha3_512": "fe9eb047f43810b5a28030a53a7cd23c2e3699572b62b433e8ed661dc5bbb73ad8d359c3fb71579517f859f5a620d5d6562a94254d90f3d5c9baabd7a8f747a1"
+    },
+    {
       "path": "assets/main.js",
-      "size": 12586,
-      "content_sha3_512": "783743fdad237c64b2753b7e2673bd73eec50281fd1cf794a51a8fe13837a27cb46ce0cea0b77f875ae28962a60b71c70bd135dc727521b2aa6e4b4d79885948",
-      "leaf_sha3_512": "7a98cb627b4d0652abbee7134a9dbff4221730b3a168dffb03be7fae90a9977b8942c286f68bc4ea222da3d87529ae6d09577fc023dc83f757c2a02510766d52"
+      "size": 12904,
+      "content_sha3_512": "1e21d2087365e50c093025ffb99934afd4bfe053735894407401ab3bbd51cfd36fd6bc8f0f9baba12f57c069825ff0580ce1e8e4afb3972c62ce82c465fab6f5",
+      "leaf_sha3_512": "2a02bdca21e9879dab74fdc01398bdfe80ead07130ff6e0340722808253d50336b3c45554c8f49d699ebdbfd351b80cb0d5390e76f6de982f7de2a523208a93f"
     },
     {
       "path": "assets/style.css",
@@ -216,16 +228,16 @@
       "leaf_sha3_512": "ee81a9435ce8e9394641b7fee86417d93dc67a37279b4112f6155a382035fa6a7c5e3bf93ea0df2f06699c4d1ab88f49ae27e7d55c74e400628290b27d7255e1"
     },
     {
+      "path": "cockpit/index.html",
+      "size": 406,
+      "content_sha3_512": "320b52e60ca4977eb748f9809e10636753b542a489c2df71eeedb4aff63c9418117d813f58e3e565ce85dced151b1e81254046ce722451d0e9d59a58e16c9220",
+      "leaf_sha3_512": "9c1d4b3667e7faa497faf2967338139c302ab6fc0b7ab77bd7eff5eaa4dd1afbdac5651867716b8d95dc08d3ce09cc228d655095fd6849d97151c0cd7ef80eac"
+    },
+    {
       "path": "data/shelf.json",
       "size": 7853,
       "content_sha3_512": "c9f76dea8959bb638390bbc05788d0d704553c484d20fc818a6c1e74f27ea3e294815b5051899af4e27bf8f3bb1bec1e5d2fccc68cdaeaf37222836442e91d7f",
       "leaf_sha3_512": "bbd5c632cb64a7e4fcc5afdb7ab09004337085e66ab05a930054f75b6cf9456f86326920ccbb927d7c70bbe528fe8331a8af8fafeda16d25129a3b5c994cb5f0"
-    },
-    {
-      "path": "deliverables/20261001/A2A核心产出包_20261001.zip",
-      "size": 375265,
-      "content_sha3_512": "b2286707eefff74f54f551b0f3fefa053f93d46e9478f6ff844831b4d368cc64c4c730ec4d669f089b7c84d60ab1b18a85905b73efd957c94240f498f3a413ce",
-      "leaf_sha3_512": "484f20b2e0f4d4dc765e8976773418bed3df394d302a49bb3bb09b1577a9b9fb3172f1735f9fdc035f5fdc2211c9154f0eb2b603997942af46c3a4702a28d539"
     },
     {
       "path": "deliverables/20261001/A2A议会交付包_20261001.zip",
@@ -337,9 +349,9 @@
     },
     {
       "path": "deliverables/20261001/handshake/sandbox.html",
-      "size": 46586,
-      "content_sha3_512": "230c54c4fb097ab57c829984551560fbc5aec69cc806cd670668fec1df0b8c33ad755982632c871e2536bbfb0d353925b29c31a8aa67dcc6b96748bd17f2f93b",
-      "leaf_sha3_512": "fb8628335d8df3efdcb77f7374fe8e178a90f6554a891c385f5c5bfc1edb4b282e845d367f597fd44da568d3afea431085dd09404ae02f68bdac69d83354b231"
+      "size": 46372,
+      "content_sha3_512": "693ee2179439c79a9eaa9f0291be6d58da0abb3e2c41d59371c6603f18740b5c0199aaae844647f92202e5f5c55b121591097c876b9b59f78cc0e5819c9e8554",
+      "leaf_sha3_512": "9d1177bd047931b23eaeb91883c47654830f481a21426c1d0d196713099aa6b5ab432687a861793c7157e2dddd2d8a133526c4873f618fb9098ef09107e877b8"
     },
     {
       "path": "deliverables/20261001/handshake/sea.html",
@@ -396,10 +408,310 @@
       "leaf_sha3_512": "5459e4b0e865695c0fe3e204fec5c632acd2f54c761e650a8af669afa48dfef396f8f45e296f85281dbb860e812239e0cc2aaa16c66441540118dd1d1e8f6215"
     },
     {
+      "path": "docs/.nojekyll",
+      "size": 0,
+      "content_sha3_512": "a69f73cca23a9ac5c8b567dc185a756e97c982164fe25859e0d1dcc1475c80a615b2123af1f5f94c11e3e9402c3ac558f500199d95b6d3e301758586281dcd26",
+      "leaf_sha3_512": "ccc9173a5b307f5d15aaab8d7556a5c5ebf36039563a2b2edd2df45f680ff061506b1b4749886cb9bb642f5a69995fb920249d5e269584a68d50df0b266a8141"
+    },
+    {
+      "path": "docs/COCKPIT-PROVENANCE.json",
+      "size": 3945,
+      "content_sha3_512": "455cc3a44bcfacf72b886da0306257ab72f416137ee695a55f50c270a287e485ef60e98cac3eb8192a2e7d3c3fbe567a2027f98fd3830454baeaf5895d1ca35a",
+      "leaf_sha3_512": "b3ab92daae313d3783dca599c78779238a06024a2fcb30cbc555fdda4f0375e8015210d7bb5a04c1007be1c63b72d866c0e84d01c61f48a266f12f0e4a251da2"
+    },
+    {
+      "path": "docs/a2a_discovery_experience_20261006.md",
+      "size": 2751,
+      "content_sha3_512": "7ac228333bb5d63c55c33b13c10b7e4346d19f82f8eef5879c4731f17ea69a62b2f2e7ccfb46c2bfee2086ae433b2cfe23f062de480f93fbc3e2c4ffb1d65ac5",
+      "leaf_sha3_512": "0eb080a39da0db3dafddd2f1339d790e6010b1ecd3a80c02c429529ad94d1109073016c64f59d50eb5034511c9b0bbcf09aa1d17dad9872cb1c1ce3248ecc310"
+    },
+    {
+      "path": "docs/a2a_evidence_review_20261008.md",
+      "size": 734,
+      "content_sha3_512": "4de3adb96995c28d6c60db343a97eb224f7780a14cb5fac0b7430db3c0c9e8b9c3c11387323a2f2961d2544db95efc0dbc996be3738e0918d2174aeff5a23f8b",
+      "leaf_sha3_512": "d3190722561699f1e0f353dc143e9ad76e8144c6db9073f925870d0ad0c6bca7c3ef28f6aaa770ab3ac122744ec58045e64f5843ba28f347bf41f9a669151bb7"
+    },
+    {
+      "path": "docs/alibaba_execution_readiness_20261009.md",
+      "size": 19395,
+      "content_sha3_512": "c6d643cadd733eba96b01ebef4b12788ddeb7a365662e39e60a812ec9289976f2a21c072364f4e36733358858e0f413de70c4fe79617b6e8e00642807777229e",
+      "leaf_sha3_512": "1e548c04343c632b8f553e5b4d852e95354e6fb0e2c1b08f69d98ba5d25dee9974f5fb90d0e062f4441463c5f96d1de7992d49fda3370ed25b5fa072b66f4e21"
+    },
+    {
+      "path": "docs/api/nodes.json",
+      "size": 1858,
+      "content_sha3_512": "fffdf63ead7197a1083a75dccd825b304fe2774082c38fd28372882d7740a0f25fd38cf68ce07d344b2bb490584c19d91cf066ac59e523d7b383faf460c05950",
+      "leaf_sha3_512": "3e2e59149a05deaef3a543395aefced24f51b19b1e2c34609b1a0ae7a7e3fc27bc9d29a3d2eca2736bdef0cff1c449ff504313018e0e2e665d0c6a255632b78d"
+    },
+    {
+      "path": "docs/assets/icon.svg",
+      "size": 750,
+      "content_sha3_512": "cf21554453ed6307e7d1b62ff4bdfaa5d747e02d011a9bb1cb17ebbf994636f9090179b8e71ec0bb5ece5e03178ff1b0cf63d3ed4264a79d843c7dd4a9a1e57b",
+      "leaf_sha3_512": "68bb97fdca90866eaa4a520d861d9254966a7831cd5e7c12c47d734b961b26bf95a234d0a99a77d642e9798d524fab1c838ebe57058737e84436ad4c6e3d1a76"
+    },
+    {
+      "path": "docs/assets/integration.css",
+      "size": 1342,
+      "content_sha3_512": "fa60e39c6ee1c74184d3a0872458cb8918ce867b9189abc5c2206142f5c5c9cba84ee82fa35b872142845dddea482509b2f5ac6580b9b1e1eea33eb7f3bca7ba",
+      "leaf_sha3_512": "c677ad9ddda8f883a890b340721318606e6281e91ee5ea29a8bdf89eeb71666564b254f9657f5f3c253ee6b2c566ac2c7a96ebd54283ec304e05a9374ca2330e"
+    },
+    {
+      "path": "docs/assets/integration.js",
+      "size": 2059,
+      "content_sha3_512": "7b9718dddebab2e3fe11b15d587fb6a1a809ba85b364e7133a5478039bfb24e1f3f1f8fe313440f9019d142633dd094c8c5f152a1d98bbeb7483164c39c3ae62",
+      "leaf_sha3_512": "78a2200bc2cbad6f4afcd904cebb57562f63736e3dfe999dad5242176349f48481c99e923914fbc4bfb0321a276a63323b39e550535cd9a13c3e28c75aa3c64b"
+    },
+    {
+      "path": "docs/assets/main.js",
+      "size": 12904,
+      "content_sha3_512": "1e21d2087365e50c093025ffb99934afd4bfe053735894407401ab3bbd51cfd36fd6bc8f0f9baba12f57c069825ff0580ce1e8e4afb3972c62ce82c465fab6f5",
+      "leaf_sha3_512": "6e91c617abc321ef022bd15369ae1bac4067c5f5a3c2f5367cba738c846fb1297e381df10d70700bc60673af16c92308e7564cba4a755111fe6534dece0b9c9e"
+    },
+    {
+      "path": "docs/assets/style.css",
+      "size": 11867,
+      "content_sha3_512": "61cdcc25ccf9a892f33433e24995a94f4ec1e6a8e63e864547553dd7c869069c4c0c94a49c31cd386aca4f56dcd47804fb3a5e9c3913bedd7b2434e56ed5c8f8",
+      "leaf_sha3_512": "160a60dc6203e7474c7654e7c58c0651cc9fe33430839a7a91474abc82bc7cfa28a48dc2e8cf631f0f6aaff21b7f0b4528e0ffe9367478d84c0d7554542dfa20"
+    },
+    {
+      "path": "docs/bailian_night_execution_20261009.md",
+      "size": 8226,
+      "content_sha3_512": "c537e27e6ad5901a21c444bf4cc47a2f1ace6e4387700e16fcf5887f8c777667df7bc18245cf11066fb95d4d8580b9300f6fec9ce9427b3534f6055bff72cbe0",
+      "leaf_sha3_512": "323206c911bf852986fd6161e7b9ff2ddd68e22cd52fe563958acb788fdbf156ac4162ed4bf7a969d7d36ff13e1880cf89575669f31050d6648de8c12f1dda77"
+    },
+    {
+      "path": "docs/chatgpt_ecosystem_results_20261008.md",
+      "size": 3338,
+      "content_sha3_512": "e777b95eb2e951a5c059dde1f514d3e29e45e8bd615dac06d27667c5f43fe4b0493c3da01cb6237438d45767352fc5a2063382d48b8300549c9111f1b8a9d4f4",
+      "leaf_sha3_512": "d7f41e8e122679d25eb279ce4a6122424d80cdda4c8714dd4b94f26253ae9773d05632ead82ee15760162aef2d35f66ca98928d0645342c4b5d32e33702c2b81"
+    },
+    {
+      "path": "docs/cloud_connections_experience_20261006.md",
+      "size": 5606,
+      "content_sha3_512": "e27240b86008956bd03be5b72af4c0444e3870a61d287b1d12db41ef5496a588a9a4ebc2d959e8805d9ead7feeeebb4cef707fbaac2231f49aad06471f161259",
+      "leaf_sha3_512": "ad9ab1ed8eee495cdc0d23d4fa811128e4941ae0b188b741e9ed9d7c9bd8a921b798250aa280651da6b184533a194eceec073e3574201bb1a6d7fd43cddced2c"
+    },
+    {
+      "path": "docs/cloud_connections_status_20261006.json",
+      "size": 5312,
+      "content_sha3_512": "94dabd896991ad17f3476fac072c1cc4978262df4ec6a58075e6061acda71ac3e64b14f3be417453a5b167d061e6c609e21c40326a616361ab7dd05e422e9802",
+      "leaf_sha3_512": "8933f5960832f0ee383746840807abb6b230f2fca83fce96c82d8e5801cda12220ee7fcdc76adde3a19f1040c47bb0e7bceb4d0051ef10410f33f709017969b8"
+    },
+    {
+      "path": "docs/cockpit/LICENSE.txt",
+      "size": 1081,
+      "content_sha3_512": "c80644fe16185f42780313dfb0eacacf08de38754460e12ce53336c602fda9a795162c2df7aca58eb5c44cbdbf6347f81ebee6cb97d058fc29ff53491b1e276f",
+      "leaf_sha3_512": "fa4073e1f1de6ed9bb99665701ae14e0b62df5aac368281dc5c1253cdccca0d7edf47529d62cb0c4d9dc20797e1ccac74f28e81bbfa08bf5bcf0d503b85abe38"
+    },
+    {
+      "path": "docs/cockpit/OFL-1.1.txt",
+      "size": 4422,
+      "content_sha3_512": "1f75e2cb574a6cedbed5c9fc95593706c21aa8decad1ad9aba2d8fcf49add52211c3c1dd03968ffb18cdeab82ff132b88f7a6a98a6a309d8939c4a3b6c228d10",
+      "leaf_sha3_512": "0376efaa7e028accc8959bfb9232f685093414124ff5e35a583122c7806567f0f5abc4afe4cb9c9407e4b9a70d7430fafc3af796b7e69f0b79ea90c6bfbaa93a"
+    },
+    {
+      "path": "docs/cockpit/THIRD-PARTY-NOTICES.txt",
+      "size": 741,
+      "content_sha3_512": "3005ef964be39d8e9aa7cff592b9ba0983da5ff27b21608cca2692148d484781a2547f23f0132e14d9b51f7e6118aab9ee724dbadd6b54546e1e32c7aa6ca321",
+      "leaf_sha3_512": "b21ed91f4713b472e9727efd1726da296bd93a4837d85e766b9428a2ccef7c72eeba5c6aaf513f8afe66f2c25b23cbbd5e26299cdaaf61846a35ece2457ef767"
+    },
+    {
+      "path": "docs/cockpit/app/index.html",
+      "size": 615,
+      "content_sha3_512": "20cec07b9cbd4d9d6523422ecbe238968018ec39da2f675364c617a87d4db92dd6f73daf691742aa71d6fd68657827dc715cbc0f0e361b0692271c3405082a70",
+      "leaf_sha3_512": "bec99891702ac47ac9e55724cd6d0db5127b51a2f592de3ad078936079f9a03ae5548ab4534ba2e19f1d46b5bf230d1f135945e6af9a91208ecee3ecc0e964f3"
+    },
+    {
+      "path": "docs/cockpit/assets/core-DhEqZVGG.js",
+      "size": 2441,
+      "content_sha3_512": "e254b84807492df814fdc15563245f2c57f2fcd3d4e235a77dfa55f38e19b68389981f19765f10bc373c0ae9d4e9e20883c14f34aa3ae19a0acdc4851bd3c286",
+      "leaf_sha3_512": "cf1aae41495bfbe2f9bdb501518be376bb4528a31d62ce361994823e0c6a15b70d18ba5a95b93ed414b6abb2e9de0f6819486230ac4bb8201ccead5ed56e607b"
+    },
+    {
+      "path": "docs/cockpit/assets/event-BK_86lmQ.js",
+      "size": 1407,
+      "content_sha3_512": "7d9fd93ba28ab9d8bfebd5205d1d1ba4f2c540823651c64b305ac32626d0964cae79c421285fac233ea7760b8dc9caa42bee3cf02c16bfc4739a982dafe203f8",
+      "leaf_sha3_512": "271366aaf30138e3933c799e0c3eb384edd034fe446b7bd6bc54698c28c67fa2505de69b5729854c6a1bb4c99ac8baba6e724ffc0e72599444a14944f41bb89a"
+    },
+    {
+      "path": "docs/cockpit/assets/icon-DCvueH29.svg",
+      "size": 519,
+      "content_sha3_512": "12f04947ab83b80f188db4afb097ae33263f78c7d4635d32a4dd50d77259005f81dd3760c6e408c011f61217f587ea6c4a964453f91dbaa22d8395724c4286c5",
+      "leaf_sha3_512": "92a926fffdad2a86e027c8ae5ac63ee14f9443a54431df0a6b6d5183a61144b205c10f56cd7269ff5707699684808557f1d00faee79a840b37d61c294ff13760"
+    },
+    {
+      "path": "docs/cockpit/assets/index-BKMyzTSR.js",
+      "size": 137,
+      "content_sha3_512": "3265ea6918e21094f3cf9fc78aae34fce7167a323191c9216f2b5aeb70e2639070883f5398018ac623d5b67d09a92bfbab6ee928de243d2ab28e7936f84bca78",
+      "leaf_sha3_512": "d485c4e2c394b5bcaf32712d440c988880c9c2fa2b0a70d4b681c1b7a1b52ef8c9926e3d0df10eaec8d39483dcc6c0f0665c352baf6359e42bf41c9baa5bf39a"
+    },
+    {
+      "path": "docs/cockpit/assets/index-CTQdhHlQ.js",
+      "size": 591094,
+      "content_sha3_512": "2d8d00694d74a13b504b753e26e380aab75e77c4347fc5c07b4142302aaafbb02ea3ae354e6d17b08839540f4084fb746f100c330cb3bcfb9a64b86be4962803",
+      "leaf_sha3_512": "2024cb50ad4625251f5e7cbb7eca2efe5a94a9cfb5c870de03c66d87fc21a07c4f6706546632c4b4f8a43cea9de8becc0687203ccf1832c6444fa9040028fa6d"
+    },
+    {
+      "path": "docs/cockpit/assets/index-CzbK2TU3.css",
+      "size": 209907,
+      "content_sha3_512": "b3e5ffb2a3af1310a9ffd4eb6facd1aced43946f9a16617e753c90b1ea9a97c33c3c44964f9343fd4c633fd07fb78785bff956d8efc1e333561bf2f29f11a002",
+      "leaf_sha3_512": "8c6ffc840381affd1b229ce91a0683ac5fdd662a1fecbea86e4e432b8db171cc82f391d9a730b45397b8785837823f708913a45a576baf15459a686485e7966a"
+    },
+    {
+      "path": "docs/cockpit/assets/index-DJOi_VqB.js",
+      "size": 955,
+      "content_sha3_512": "3082727e8493969e06948794d9d6b2038159510ec8696dc5d19b046a0e3890ad36a5a9497b349663a3e13356400aba056aaecc65292812d123429005b5c41c93",
+      "leaf_sha3_512": "376b2b76382e76a60741edf3eedc15468fb90a5c88e2c6c3f78cefec0f34a6e72e34301e132d0230e8f733f602bc80e2e40bd6d0771fc97eabd0b58210cf0d86"
+    },
+    {
+      "path": "docs/cockpit/assets/index-DWAWkcyj.js",
+      "size": 120,
+      "content_sha3_512": "a3218b2eeb888d6fe036724b925493a65834fca6eb7a7a82065d6ebae79ca652706045d8494554b851e4bc85b327b2c062352a18a190ce5763e32899477c4253",
+      "leaf_sha3_512": "54ff42dbb47b92eb0770ae567f64b15ef0af7cc8174a87350b1813beffd6cdbcffa928b0291fac2f8ca1f2ca8157f242d7fc06ebfd7f7cba59073ce56f88fe20"
+    },
+    {
+      "path": "docs/cockpit/assets/index-lBcCbJoJ.js",
+      "size": 291,
+      "content_sha3_512": "4b4312275411694fd5aecbe3e0edf80dc6513d184722f491b6fe406828de908c52edc0b60bd009a799c63dc15d62f891454a6c5b111cbb77a382612a7bbcac05",
+      "leaf_sha3_512": "a665efe549a25b1e0056c716fcdda60ff7be61d6e53afeef7622758ec4c7869efc27d3255b35f36508810a665aa2b9a01ebb48e4f8293db72bb11e56a171caad"
+    },
+    {
+      "path": "docs/cockpit/assets/index-tWTCSe2p.js",
+      "size": 922,
+      "content_sha3_512": "a84efac2de8b8a469dfb3b935e360e7df9fc48f77fea4e0bf8955c5ccf867578d4cae0eb20abbaab534302f6ab1a33ca151a6a0598d353cc1f32d98192da36d5",
+      "leaf_sha3_512": "7cea1bb5b78d0ca4d960479b11c5c6b62e2f74f02832186e5983d4e8c933ee51bd9961e7396998fcd6751ae07e0b42f1c9e098d650774d515f1ccf8d63859554"
+    },
+    {
+      "path": "docs/cockpit/assets/window-CdKvUbOy.js",
+      "size": 13607,
+      "content_sha3_512": "cf0f107127070713fdd3ce81ee12b6a86877cfe764b2ae7f87f1df661ebadf5de536c2f241e4ca278308d1974c2445e88fbf2dda0b0a23ea16bfa84c1e6cd3d0",
+      "leaf_sha3_512": "2f7192efa095ae6faae2c922a79c7583656f0fbdecab73632ed502116cc41861b6a57af96a57a9f8c6cf0dfb08bd01eadac9fccee51901c355c0e51bf5725beb"
+    },
+    {
+      "path": "docs/cockpit/index.html",
+      "size": 406,
+      "content_sha3_512": "320b52e60ca4977eb748f9809e10636753b542a489c2df71eeedb4aff63c9418117d813f58e3e565ce85dced151b1e81254046ce722451d0e9d59a58e16c9220",
+      "leaf_sha3_512": "a3c70759a688effec8742d4b483fbee3d4cb2ffa41cb4689993cac044a9be81688cb05fbcab3cebd89129fda2ed18408b810dc8b550c1a386bd12002b6255a2a"
+    },
+    {
+      "path": "docs/cockpit/licenses/@phosphor-icons-react/LICENSE",
+      "size": 1071,
+      "content_sha3_512": "5defd275d0a05b2e04caa705086eace743aa3bc26b9743980b361ed7504f33c2e1e36ccd6a6490d5062f2acc3fdff4bd13ba759ebb4eec9fb3c1406bd220fb3b",
+      "leaf_sha3_512": "4484ed0dbd2731390e3be53e639b7cb0991a6e5cb22a82663eb6a02a0b507a3b8a13c51678dbaee470f66974147e94ae790359b7bbfb0416458c516a1ae0e9c9"
+    },
+    {
+      "path": "docs/cockpit/licenses/@tauri-apps-api/LICENSE_APACHE-2.0",
+      "size": 10174,
+      "content_sha3_512": "0c7da7e57d8e6b9d0e812cebaa64c6e063066e953a484b455dbc4c90bc1ac87623a78397d2ac5866eba09f45f077c304da9f8091d0cbfe0d058c761ba873c668",
+      "leaf_sha3_512": "1b88802df4dc8be5733a7b2d279e906b9e67d27378c95a9c4d129e1141428c49b630bb64e7fedcdf1fd4544c49be7f0cb5492e88dc4c30da398257cdbb7897d4"
+    },
+    {
+      "path": "docs/cockpit/licenses/@tauri-apps-api/LICENSE_MIT",
+      "size": 1090,
+      "content_sha3_512": "e4500e21bce65bd1a3cee82afa177ac4075b8f795032049d10ce5a41429f6f5b4f31e9a16fb671470e6e09909d54d088b9003a1f0213fc5a37ea5ca10b09fe91",
+      "leaf_sha3_512": "d182de0b982294f0315fab32ec1c1aba621d42a9d3f4c7f233d1b010fc6b5041537738c5908659d5b314962a2db2c4c761affe67753f2fb80f82bee59d70e29c"
+    },
+    {
+      "path": "docs/cockpit/licenses/react-dom/LICENSE",
+      "size": 1088,
+      "content_sha3_512": "07045494787682e5ee94985cf5e11ffb8870c962a2e6ba69f47e98cdef55362fca16992c1cebd3dc9067d0339b54a657563671de3f826184ed0ef47dcccc8a03",
+      "leaf_sha3_512": "04b61192bb995d2f501b6f83639e5ec30451a3c9941b99e639773497808ecd03b3a99d1e6bd6a51158996184180fe16678c2ab457d2b423c91484563eef0ba81"
+    },
+    {
+      "path": "docs/cockpit/licenses/react/LICENSE",
+      "size": 1088,
+      "content_sha3_512": "07045494787682e5ee94985cf5e11ffb8870c962a2e6ba69f47e98cdef55362fca16992c1cebd3dc9067d0339b54a657563671de3f826184ed0ef47dcccc8a03",
+      "leaf_sha3_512": "dabc21535c2cfefdb62320ddd947bf4bb7f623dff169cf24680c06fc0d99b208580f9ec2305710a4144eeadaccc648f92bfaf19dc35403912521a663a5ba2814"
+    },
+    {
+      "path": "docs/cockpit/licenses/scheduler/LICENSE",
+      "size": 1088,
+      "content_sha3_512": "07045494787682e5ee94985cf5e11ffb8870c962a2e6ba69f47e98cdef55362fca16992c1cebd3dc9067d0339b54a657563671de3f826184ed0ef47dcccc8a03",
+      "leaf_sha3_512": "43d1c6f39e87b58e984a47a79f94d6f21bb0160d79df13b596f9906557e9534020a81c996082a4010d2c9803098b65065d89b3d2cbb3b043248ff70aee8dd93c"
+    },
+    {
+      "path": "docs/dual_pillar_cockpit.html",
+      "size": 7922,
+      "content_sha3_512": "3e68c7abff65320d8db24d795bb7f18d381772a346ed3a404b476501cf0c5ae4577366815b59622d1339c10d983799a0d3a4b47c1d06fa341eaaeaf486c1a015",
+      "leaf_sha3_512": "bbaff1f2a52ad251f44a296204b3c47820a7df3cec1bb03874ed5882a635dee09aab4fd1fa60461878e17a26bc2b178b6c325bd533fb83e44ef8a580c39f74e5"
+    },
+    {
+      "path": "docs/dual_pillar_execution_20261008.md",
+      "size": 4831,
+      "content_sha3_512": "4cbea8897ffe2b6450045ba80e903240bb1a6a8fdac60ab46769fbb81a99e31244d9686bcd1142c04b2e3f7071e3c1744579389bb314d87792c5ba8fd90fbc13",
+      "leaf_sha3_512": "d550c8e7d2daad0a51795e98b5045a48ebd7c3d6eedc4c1c36e5dd960b7b343cd17dd19e0487cdb16bb4c62bd6146bfd11ec2ee75b9ba5d89fc4a7dc38b8f5e3"
+    },
+    {
+      "path": "docs/dual_pillar_standards_review_20261008.md",
+      "size": 14592,
+      "content_sha3_512": "aa24989a08c95a068d7d56c78369faed7936485027f3289854731a9f7ead9651cebc730f2f6c3d69e851dbec00719a7382b848ef2d072e03438269a4b057fde3",
+      "leaf_sha3_512": "08e6342ccd7e981728b13df4a36c3e5e50975c99b7ca3bb7d457ea89c7021aab875112a169d8f9604965530736fffb4c867f5b4b46034b7fbd2ec18e7360db08"
+    },
+    {
+      "path": "docs/index.html",
+      "size": 19658,
+      "content_sha3_512": "32b3509c3b5d76e3a0c6b15c7bf5c544106036eb199a2f0655145c9a65fed54e96b8bfddbece92aa5bf6f93b6620a946c85fafb3763c186e6c6cf86a8381f9fe",
+      "leaf_sha3_512": "8cea08bf9df4eaf0fb1ef101fbce8873186c7186c89a38eade5ee220fb59bc2204cbb3b6e76c94ff61e738636f8ce9d214a7fff663b83a0d3de46ffc89251290"
+    },
+    {
+      "path": "docs/memory_tier_pilot_example.json",
+      "size": 4917,
+      "content_sha3_512": "0318818b82406ab300457ff51cca7f970b6dc00e13d5063cf71e5dece0d17eb73cf0ffe650cdf4b8deaa76bb34e1c4a56f7b61d1ca40bddf5b2eabe011cecaa7",
+      "leaf_sha3_512": "be375cbecad294df9ead7c9c7b4a36d0db3f8b8b4e08b801b6073b7d992e5b445384acbba6916b3592a550500394dd467d38b4b1f823fe50b91bd0fba81625a2"
+    },
+    {
+      "path": "docs/network/index.html",
+      "size": 427,
+      "content_sha3_512": "c1097d5461891d878b7b38e752425982ecbe38f6f79de93f051e7c1c91df962a8cf174f15463a03ae1d0e7b6516ef5ff00f36182fd8b15c9e216f3772c830f8e",
+      "leaf_sha3_512": "85f8aca93ec7018256ea3a1f2283f2e29410d86160fbf0ac7f269f03092d9abfdf0432f140126955e9358a113350f1de97191273b3c51b6b18ae3614adbd22f8"
+    },
+    {
+      "path": "docs/nietzsche_corpus_manifest_20261008.json",
+      "size": 10857,
+      "content_sha3_512": "870ca8a7661824875f3a3c023672a6fdac5b35d1493043dab199471f7fc3f8f63f65a0e4610c14d3eb51f3d75553a05d4dea7e5cf89f53d549a542e9b6f30b59",
+      "leaf_sha3_512": "6aa1c2f6ca16b86da75771c662cc1254d59160186a56d28e840cfa0e740f9d93bd068b322b0ed3f334d10426826da16ffec872655214970882c8913d815ec44f"
+    },
+    {
+      "path": "docs/nietzsche_corpus_pilot_20261008.md",
+      "size": 17750,
+      "content_sha3_512": "cd17ee456460c6aba3f9acacc03003b913f7aeff67260d65a796e896e6a8b08e02330e946da3fc63d7c67119362a57816e5646db27d84a5d6b2ee2b2fc703958",
+      "leaf_sha3_512": "54265c7ba85f3ce063ffd0f466ff7ceaf4b327353dbfe7607e972c62e2d63a8447cd05ffb37b3a97de02347ac2af73f4739731797702a5af885f3540431e3569"
+    },
+    {
+      "path": "docs/night_scheduling_experience_20261006.md",
+      "size": 7564,
+      "content_sha3_512": "905c42c5d2585d9502e25a62237c0b1ce83b7d59158e6337938a66d37245c6d8103b7a0c0477bbed9f59b0a301bd5ed9005bcfebea688ce58a992b4ca1d8c7f5",
+      "leaf_sha3_512": "b192525e753679328daf12de978c3cf76d0c84a2c9498ea71548b40acbf47d1c40beaca0d22a72f61f6b9ca7df23cc62c52356e5a46c9dae61881d28f508db5f"
+    },
+    {
+      "path": "docs/persona/initial-functional-persona.json",
+      "size": 4476,
+      "content_sha3_512": "c9badb3eb892c277de2a327a236865c4d503663d25d279dc747949e22e9325c8c1463e62ade49e26d6ed2c38483e679ecb4463f61fc53e83bf4d37359a2657a9",
+      "leaf_sha3_512": "03235e726d5760d9faa2a25414eb7018e74b4a16aa32e32a81d86c6863e8f74cafac68351791061c95229c31f4a3a07aedf13143e15014955118b88f29fef8a8"
+    },
+    {
+      "path": "docs/persona/initial-functional-persona.md",
+      "size": 4375,
+      "content_sha3_512": "cb6e34fa7508c9c083b555ccd958b38a6abf78fc0155d0f0564b92abad7b0b838aec76cad9d54819e559a437f6a94260524e82a3ed90b262b0a0bd84565f2d5e",
+      "leaf_sha3_512": "9312e76e5ac38d7d28fe583f0ad51b4067b350a2edffb74bb17a8dfe471446055b3f647a8cc9eb8ff4e58ed32da993dfda098e00e409c479a7fb55c30382706c"
+    },
+    {
+      "path": "docs/self-host/index.html",
+      "size": 427,
+      "content_sha3_512": "c1097d5461891d878b7b38e752425982ecbe38f6f79de93f051e7c1c91df962a8cf174f15463a03ae1d0e7b6516ef5ff00f36182fd8b15c9e216f3772c830f8e",
+      "leaf_sha3_512": "cec4b5a5f0ece49de565fcb9c3c6a0e4f148b00b49481252a538eea37493d9540f0c137fa5c5d73b05545de6e5bda0a99bbdca15a2b59c1e80195d70f606e8c4"
+    },
+    {
+      "path": "docs/videos.json",
+      "size": 1244,
+      "content_sha3_512": "238e65442eb3cfa8b8cb471d04a4cd05660f258a08a3af5ec3db0431a72a8cdfe6e5e3094513a039281222212250baeb5ec675bd5705f3c85b2f8459cee66ac7",
+      "leaf_sha3_512": "9f1c95e6a0e8e2460e633280c5e27e0738ef92273d16cb7956e9ad9fc2bdc13120cb2093e4d13b33e5d9bff7324cec62091e1f48f8dfb4311bb86709e0a5778c"
+    },
+    {
       "path": "index.html",
-      "size": 12324,
-      "content_sha3_512": "aa07e35f076db6bab30cf301436776b8766709cb2a9ffd1362b0a8acadc0a60613495611ce8fd2002c4c9acc105157fdba8e7d4833775c9b429d4be8b92983de",
-      "leaf_sha3_512": "6e96ee060497c7af8543b815eaa9eb0828a9198176514b4ff1d315fdc44f3ebe6072f95d3a436fd5c64cb37fb8890e2941064ae50369d396a27efe79b7c62f32"
+      "size": 19214,
+      "content_sha3_512": "2516b6a7ece1bb59a5b2ab737e309bda06a67a6a6c99dc7f38e6b0ce79b6dc42b7138435211fbcd6f528785e0654f06e3002f63afd142276379fbc1d9e30d204",
+      "leaf_sha3_512": "1a084bf12018e720b2346a64185a78bf228ceb8313ec65a540c3d55f506e2083b2c77acd98c9184f7ba36138c1ddea869a5c8ddd7d4ebaeda3a99fa1e571d4b1"
     },
     {
       "path": "llms.txt",
@@ -502,12 +814,6 @@
       "size": 2927,
       "content_sha3_512": "4b08dd0d6bcaaea639eaeb4c5fc1be9d9b179730d9e2244453f566f8ad2a6cc69cc47ad6f683cc66fabb74d6484cb51ee71c5f52d6a012767c4615f90e51eebc",
       "leaf_sha3_512": "b2b9b2c907b814d0b6b687967da67ca6655e6c7bdbba36ebeb8c1761b69c8e51d624f7e101674f7ad2123e74fa1845409e178dc5c0313eae2c6d27fa14157338"
-    },
-    {
-      "path": "sha3_tree/TREE-K3-2026-1003-01_manifest.json",
-      "size": 5543,
-      "content_sha3_512": "525afab9b6da3899f81e207e1322e7f5b1b46fbdfbd96f14418c599af2956062411cfb703040dee9ed3701686549a1ad90f7278dc6fa09088cd448ff865b5ac9",
-      "leaf_sha3_512": "61741082eeb15bba0212e4b61e0089fa2b43f0e4ac6e71cca75a2b2a0416c9560244e5fffe4e9b40356320c1697c1170019543674c6afde482c1d9e8afe19958"
     },
     {
       "path": "sha3_tree/TREE-K3-2026-1003-02_leaf_records.json",
@@ -3000,6 +3306,24 @@
       "leaf_sha3_512": "84aadd72efb0be60a6d5f2f2f495dff4b72fb61114be5420e0b3bc3012606e4f9f0062c67bae14447fcc941db3e0ce222e1cd821b092c15303c8fac50d44f5a7"
     },
     {
+      "path": "skills/opl-kimi-preflight-candidate/SKILL.md",
+      "size": 2028,
+      "content_sha3_512": "8677e2f25956d3d5d47d7b6cd7b6f979ec808672fe4e02fa90c80de3fe0c242961caa48fcd85756fe1d10129ea49c73d366349f8c2d44a2cc5560e7b08d9c903",
+      "leaf_sha3_512": "b685a15e4d509e75e34f99d581f218af43781e9e12b467192ec7f3c2e6c789953c26ce216df017d191a97fb48df234acb9c38193b3b8ef545569981514380d01"
+    },
+    {
+      "path": "skills/opl-kimi-preflight-candidate/references/review-basis.md",
+      "size": 2233,
+      "content_sha3_512": "4d6a54b62ddfc7904b095df204d3df32623c71ddef5b7b759bbc4980d0a32efa4ff14fb48881e741bfef3d81649e79402a117fe971041d63b3d5ec8105e37c0a",
+      "leaf_sha3_512": "972a9d9dfaae2ecb0c14d014b8cd3fc62f757b539a1309bc238c11f456fd22f891b7774457c41c2e05d977a95a1afd7b5fb1da73ee20788dae004f30f048be9d"
+    },
+    {
+      "path": "skills/opl-kimi-preflight-candidate/scripts/preflight.py",
+      "size": 11829,
+      "content_sha3_512": "e27f50b91206c10c08f1ed0f5a1a3634b8ec41980229a1503451338b4b3f8b23e70a38ca2a65f4652a64ae7da49445056bd217834852607faa57f4f79c2626ab",
+      "leaf_sha3_512": "31a7cb23205c78cb7b67369197e211cd40fb048d61ce1431ea1e71721eeed04ba83237b3024949a8a9ee9d38d8acbd7bbd38290a006e9069d0114d5b8d2243fd"
+    },
+    {
       "path": "skills/output-verdict-gate/SKILL.md",
       "size": 8888,
       "content_sha3_512": "c5cdd5cb2daa1a57dae5007927d1868ed4b2157aa566b31f2c1b86a905100ac38b18e611e47cdfbe9636a9fd7a2b6d630101166692714325cf918e473d54e2fc",
@@ -4530,6 +4854,120 @@
       "leaf_sha3_512": "128e690458bd9983198d289eddd903574d5b742867fb3cfe44453b792290b0a1f6a75fde64d5d8ed6d03b4fcacdd496e94283e3f57ab81e8317428f849012728"
     },
     {
+      "path": "specs/011-cloud-reader-integration/spec.md",
+      "size": 4582,
+      "content_sha3_512": "0dcda4bc80ad4578e3a7c3aaf9859c9dfff923d6df80356f302c1b4fc47f2b54cf805bcbeda42c6b8ffa17e4cdff5e560c204213a745bd3ef7f126fe2056b3b3",
+      "leaf_sha3_512": "116462b7cba0daa58c5fd752ed73e0a27d7f8df004c80e05a44de5d1a2710fdb290f59c408557ddcd7c86cc5fbfcd3fbc4fa58cf2f8b6d62c416955013306e9a"
+    },
+    {
+      "path": "specs/011-cloud-reader-integration/tasks.md",
+      "size": 1478,
+      "content_sha3_512": "e80e2aafb014e5fbacf22a1b6463de37add1aa899e84a8102a34e4c77578c0d3edcefcf6e152fb9dc36f96172d6e134d373ecfcb695a87de8a121b9c9861eca8",
+      "leaf_sha3_512": "c05b3dbdd722405d0d7104a97d1ffc9553c1d30948fb87f1157619c6a3ce71e9cedc54aaa3cce55189695cb5ab95e10ccb603c36619adc7d398d86c986f15bf3"
+    },
+    {
+      "path": "specs/011-cloud-reader-integration/verification.md",
+      "size": 2862,
+      "content_sha3_512": "1203cf0fe80617afc053634233ae15b1153b0c096c8a5bd96bb5518276d970a8ec724f4efdd5620babd4932789146e1014a474fe9fbb2b12cc2964957fd66477",
+      "leaf_sha3_512": "838c3830938f675d5f82b683aa8e541b1ae9bbb81614847374398d7daea5130b205c336e41dfdcf032e7554db73f9ef314782f52ecd1ed840015a811389a87df"
+    },
+    {
+      "path": "specs/012-a2a-discovery/plan.md",
+      "size": 1318,
+      "content_sha3_512": "84a5630362fff25bb6004f7b203c506fb7ce4f369a5c7543f48022196a35db4b0bb5a4702a421b683e008d092fc177d418bb4f3d8806ee27c4409dad96f078a2",
+      "leaf_sha3_512": "a66b84705fd39227f7ebd9a67a902ad9d19f04fee5263b5222c8e0db5a9246369a2450fe4c49a7e4c333a9da1ba426e3d4b85f9566f4c03bc5df7c7fc5245482"
+    },
+    {
+      "path": "specs/012-a2a-discovery/spec.md",
+      "size": 5054,
+      "content_sha3_512": "2bbf366c54212462b81231e30925fe1d9e843247d3562f86fbad98be880af3225241bdcd0961a0531fafb9a9c7694dbe9a764e9a90b0f5458762203eff59a442",
+      "leaf_sha3_512": "32e1d0204440c843f9f366a770c0276d7f47fc93335b61a73e279163778cb2887b72f4bf3822813d0457ce9feab222173fb7352eab126d38bd7ad4255e6fddfe"
+    },
+    {
+      "path": "specs/012-a2a-discovery/tasks.md",
+      "size": 946,
+      "content_sha3_512": "89e9169b9186b10873656ccc2f900f7b276b1e443fef029749ca6e9568265c72c9c187db21eb1cd967638f0a7881c23b37a3fa6cfcea9e82460c4ce6f0697509",
+      "leaf_sha3_512": "d12199f4f3211a4f64500876902c3446972af26427b3ca8efedf1e273cc7d9d8c8bce4eaf283ff2d630addd19bb301633d540211c56da3fe5033988a4d315e96"
+    },
+    {
+      "path": "specs/012-a2a-discovery/verification.md",
+      "size": 1634,
+      "content_sha3_512": "b9d29ada9cb0598697ef43598fdc3859ab864899fd37024a2e1f477bbeccf031a57393162af621a80696a80c906309139f586a9eee496bedbb93ace592439847",
+      "leaf_sha3_512": "de14761e8c01e99519beb3f063700fe6b0341bb67e0efd757d5c29c8427c725f7fc5ccefa2513f14a4caef751047c06c2eee6a100bd390986a5f1bd49092b0e9"
+    },
+    {
+      "path": "specs/013-night-scheduling/plan.md",
+      "size": 1577,
+      "content_sha3_512": "58966321412407535f446096894f356fed9388df4b41668c4a5a1fa330f80ac556ee44cc41e08f103489d31d48aaee677ac22d4f573dd48c567401d6dd643bc3",
+      "leaf_sha3_512": "ed6b461d5cbe2a87804afd6e58b941808e704a179213758259d6cfb2b3ec6665f7d973bf8bd75d0c7230bf87a82315efd389819d3e2de4f2ad058601b670ab53"
+    },
+    {
+      "path": "specs/013-night-scheduling/spec.md",
+      "size": 6766,
+      "content_sha3_512": "dd16c70789f6618cfb28f0d893e34015389a9a2bd8167ebc3476b3afc625e1aa2970c088274f57be5150146679f328822a2d861f23ec007cd558f8f2984935c5",
+      "leaf_sha3_512": "9aab149451cd9208f8f234a0eabe4990ec742162223878916cdc3f3a08268833eb1038c1a00df64270c764f3358e398a849cbf9b0db556d8a7ecc73ab88cb2ba"
+    },
+    {
+      "path": "specs/013-night-scheduling/tasks.md",
+      "size": 1423,
+      "content_sha3_512": "8d49ac1ca68d2cbccb3f8a9427aeab47503f1fcf2bc2e7c15794d03a7047e48e99a651a321fbdb2975880026b95c6fbc7c9ffd909b68075d45017220b9074098",
+      "leaf_sha3_512": "c193ce08cc14b885aed144f9e16ad68e16d5ab306b956da8b4e319e7a955295c8de2b2475fd7219020e0e1356d84ca909a3c89b59dee58f7b1c6b2c43a9c4e39"
+    },
+    {
+      "path": "specs/013-night-scheduling/verification.md",
+      "size": 6835,
+      "content_sha3_512": "9c0f74cd5938e78fce9b4285c2896fec2ee6c663a14478dfbfbebe06ad9e277834dcff3cd4c904e62be08e728501465e93c719360b4b7f5f6a43a341fed3fb53",
+      "leaf_sha3_512": "abdd079313f818df5fe26346ca43710d773d54a33cdf675dd4f849f6e07c053110a0831f8374c445a161e119e3ec769d609793b0e38eb1d86f9e0f6d122a5d63"
+    },
+    {
+      "path": "specs/014-memory-sample-validity/plan.md",
+      "size": 214,
+      "content_sha3_512": "951ab09f9556210c31e793a44a9240e872546494a48de0328d893f96fca99b91a58152c3b2b2d9d5a720c46507cb49bf37db609971f5d5ad1b725a37f337afc6",
+      "leaf_sha3_512": "24b6a667c6a7af0c422ef4d7b4f09d3f692a10a203bdb463ab72c4e5c6b53431bdd883653085195601d7648c2312d8335e7cc96882bf8df7dda6b5869bc92c52"
+    },
+    {
+      "path": "specs/014-memory-sample-validity/spec.md",
+      "size": 318,
+      "content_sha3_512": "0544c88a508c8bdc99309afe65ce5f7df871c0fcac0d0ec8770fb9fcbb1aa49676ce72f68356aa7c0c5a1aac8530c876a5795df00ca7006c2a1c632603da93f9",
+      "leaf_sha3_512": "dcf3092ab846e7c2f7214d0aeaf6cbc6889cb0c84c86c426a249f7196aa6dc440b67c02c69bbd7d058bc3a03a6bebc5a1b4556876c0462fd6f27545f661c4eb4"
+    },
+    {
+      "path": "specs/014-memory-sample-validity/tasks.md",
+      "size": 357,
+      "content_sha3_512": "f107040411d6ec9e2f977d32836e43171b69f470c7162aaabdd0ac83784e11b4d7c9566ec5e6a7fba31fbfecc292d0811641a6cebea166ec9213ecc366150bda",
+      "leaf_sha3_512": "48f94f01ae42ca6f54a1190e7f4dc79e6fbb081ec157390e3a0ee7bdb1780d64d0e8f674009976df74beb52c10ab756d2a3ffaa10f40a91f45d5c164b8fb6140"
+    },
+    {
+      "path": "specs/014-memory-sample-validity/verification.md",
+      "size": 468,
+      "content_sha3_512": "0a2063b305e8567fc0b70de02b07e6625cf42a70deed12598dcfc689761111ba4af4588cb0a3d17d2808c3ee4dc9287d9f8d928fb427454f50404bbfe0d8b434",
+      "leaf_sha3_512": "789425bb68628cb7eac69f0fa39269372a6c41657a94d08539bae7d808ea5dc61565f02d8bc526bb84d3e5bd7e5a17b99ce8e38184a9d3ed698d5806d1c23f7f"
+    },
+    {
+      "path": "specs/015-dual-pillar-pilot/memory-pilot.md",
+      "size": 6718,
+      "content_sha3_512": "285ce60db65e15602213db5b9cfd61cf461789a7570c152f09c46a12feb76c335c101c47f9a42fec2a63b3225ad8147e4541a50f952f6299e5784caeb4cb8e3a",
+      "leaf_sha3_512": "b1a12f4303f2ea948e9e3d6372faa022071a50ca01d4354ee25085848407e6de0820d50b07ecbd2cde8dd61f2732d45e39d7d231d3af8b02b9a6ec32ed84c0ee"
+    },
+    {
+      "path": "specs/015-dual-pillar-pilot/spec.md",
+      "size": 3958,
+      "content_sha3_512": "06eca74726c6e45e76a421b4e0b6fbafac9df496978f5d927986015c8cc610af3372ef3cc026dd15295daa17be543a52ca8c90c0254dbd97fc528e7fc4325a7f",
+      "leaf_sha3_512": "d8f7ab358ac751bd25703972d7f34141afc8d31a68d6dd278396ad9884b25363ad85511fb193b7d7da76910ab470f156ddfdddfbe9ede033487036f20ea0cebe"
+    },
+    {
+      "path": "specs/015-dual-pillar-pilot/verification.md",
+      "size": 2577,
+      "content_sha3_512": "80bf0bee2db663b4bdeca811c4779ba9220e18b0a7aa899ebaf7bc365c5d29274ce2b3faf38c03426e8306eb4b1d8abdfa829aaf157764f552f6543ed3ba3d96",
+      "leaf_sha3_512": "3deecc9dd58cd9ec6af8ee570c85d3160250d0ef6490a81cb0db7d1869d0cd4882f8836ae12f2864cea23892217115c34bb3a7b7d6466f7fd8386d6d211d08c9"
+    },
+    {
+      "path": "tests/test_a2a_discovery.py",
+      "size": 6435,
+      "content_sha3_512": "8574a46eda42276c970e0ddcb0be9c7fbb71e5aeb518fbe0147b239ade5e597d83ae9993fb56788d689f40e415daa79e8a2e7a6dfa1cda8411e07db4b8be2684",
+      "leaf_sha3_512": "a02e3ad6a4997547849a2c9396521b842161256f0846f34d20aafb84055d3c968c6e8da68e5d02af8a868dbe77247434db637e288101c1613e15652d1c28bddf"
+    },
+    {
       "path": "tests/test_cos_upload_config.py",
       "size": 2586,
       "content_sha3_512": "4e2a53a9f0c95135d1c0af6c7f9cd848019f94b7d9db5da6f60937799fd40e8ca4eb90a16ec7dcc377ca34303c6d64315851526525491cef2c7ad4e2ee03cf34",
@@ -4540,6 +4978,30 @@
       "size": 13463,
       "content_sha3_512": "a1d7c55fa61aa59edbb6a8f76c7f0bb64e49f05402ea8552f2caecc118a905ab87acff2cd7ad18f7f1795bf502d54dcbdd81ed1599fb3b1cf11ab47bffe29647",
       "leaf_sha3_512": "4fd0feb27a35f64066a9f997b049d39306f5add5f1cae54bd8e0b37c421c71ea0fa6128480849f64167121f312e9f512d36a0146ae592f5545dd2a8fdb27b946"
+    },
+    {
+      "path": "tests/test_hetero_models.py",
+      "size": 6209,
+      "content_sha3_512": "13e18ed4de93b26e98e87bf3ae4d2d6e538c39d034298f44a36bd0359a5a4d6d4801c0917a5d8b46a2c68d239d9b4e65205164eac9d3b070393719315922c807",
+      "leaf_sha3_512": "be8c634549e57fe692f6420fba3e6f90146ddf6b00df2c81f771050482acbf4d65a1699b8c4581f55050f76767e9fa1c0894f355e11161d41241b5f68422dbee"
+    },
+    {
+      "path": "tests/test_memory_sample_audit.py",
+      "size": 3959,
+      "content_sha3_512": "1870adcc30a649210e3b25b4a418485ba2e1d8abff85a6bd1dff1273463d198795bc406bc472cc1fd6ca668782538684cf796ee1c0b99b96d3e65569d1b25799",
+      "leaf_sha3_512": "bec407536b3fd2509f2a4b9cdd9d4ab0ca350fda4c48d2bfe450ba6105aa56b4d551e44f4f715d6a0de58abebe27c9912f7eb1fe257b318afcaf4ddeb82cc939"
+    },
+    {
+      "path": "tests/test_memory_tier_pilot.py",
+      "size": 8789,
+      "content_sha3_512": "4608dc27e19652158f6e2d5be690a055fd96053e510344ae64955e4f064bf6ccb7b13b3bd2cd1015b93a4696689559c23a150c8f9a554e212781e1a16a7a2367",
+      "leaf_sha3_512": "f81b56dc3424051b23198451d4bc0008be3602a0f47fd6e55751c688189e7b93d7cacffee861979cec0f010bad7b93e8a940f071252ccc0860bb9c2b6160ca5e"
+    },
+    {
+      "path": "tests/test_night_schedule.py",
+      "size": 33753,
+      "content_sha3_512": "8e3ae3d22842a8d1d3e21c7fa9d0a063136a3a9af8e3f031aeec82a2680e182941a26cc815b69428a41fc0d9a02a5b8e350e4fef0065eb4bee585ee708844218",
+      "leaf_sha3_512": "30cb09881bc329af7649e09c326e12361c0033bd8a475ff495a9a8d15f318afa8c11a54f294fd71bb7394070b581801a2923d4c5a86222f349e0cff83225b7fa"
     },
     {
       "path": "tests/test_upload_orchestration.py",
@@ -4558,6 +5020,12 @@
       "size": 3148,
       "content_sha3_512": "4e807b41d6c0aba3884b7e8ecfbf8a09dd3e7bc86d553abaaf60b5849b3b57b7acce88a5307064ed338a72f11e3b43f91a6677a8b1877a0728b23b599a347bd1",
       "leaf_sha3_512": "f5ee40ce3cfd9ed471435978903976c9aaadac1446b3d2dac88d002800f0c2bbb13c25a5d3763943efaee519869a6d260a9c24c8375d24ea5608e1953af16f67"
+    },
+    {
+      "path": "tools/a2a_discover.py",
+      "size": 9027,
+      "content_sha3_512": "fcb42ac721d98560b559858045c1177a950f73ac90a5c0553fd6bfd417814e8a865d620f11d5192e16722434c181e562eb27aa0764a45b687cd3fb5156468170",
+      "leaf_sha3_512": "53e49b3420999a1eba47c39d5f2242baa1cc243927f14af0e4dfa8c04c633e1c2db95f1a3cef647695ccb550d6997ac203dc38856ed194c8144c42e0ba905e98"
     },
     {
       "path": "tools/a2a_exchange.py",
@@ -4626,6 +5094,18 @@
       "leaf_sha3_512": "b0ae3e0826b3e3139c171a1870ff9aebcae022b98a32c138a16b707a22d5bd51809a298a759b318ecb9ecd5487405eccb00b90c64d89d38b9c859246e144a15e"
     },
     {
+      "path": "tools/connect_neon.py",
+      "size": 3789,
+      "content_sha3_512": "4187d6804a07e7016de8f4686857531497bbb8107e3ad10ce4388589e3450a054c5567afb72ecbf89666dbb70fb926065526c31d568c745a71df589b18ca556d",
+      "leaf_sha3_512": "790539e0b4d54822e4bcc6516d5579cc756b23e894296c9698a6a8751d15b4e279e5c8d003cf57a549d3ceb137b2d4224bcd554c6c7ba3d658b37e006658d056"
+    },
+    {
+      "path": "tools/connect_wps_supabase_ima.py",
+      "size": 13155,
+      "content_sha3_512": "f32eb5d7075dc37bc413c0b5f654da8862fbb6e08eca2c4bba55f3c33f4326e29708c148d86b6af8f1dee114c0428ce6b16fe28808a71d78c3e9dcc95b515e88",
+      "leaf_sha3_512": "2a7ca339e0ad06afb038f8af99affd2d0119cf9643644f45a5bd0b17cfc977f1ca4c82231db1b4454f737c4e9329b92787df12c7fa53bf0cba87a24561a819a1"
+    },
+    {
       "path": "tools/event_driven.py",
       "size": 4810,
       "content_sha3_512": "66b33eddcb801492efab18c5b34d70787618b1167ccfabc42c1baed3ac88b319eded63dd880aed8c164d36ec0bf3721b12dd372764ef472eccff0be2092e1578",
@@ -4651,9 +5131,9 @@
     },
     {
       "path": "tools/hetero_models.py",
-      "size": 2864,
-      "content_sha3_512": "6a37cb9bd05f5ce08b8492edb2fcb77f2be3285f5179690e1a6742492e2d651ee86b49ad6525c582ff019567f673c439e978e6e7c05be66e90afa625e2f22bf3",
-      "leaf_sha3_512": "666769829e3c2db363e8f233f8980d5dd1c9a3eaee11d06086cacf0491f9e76734afbef08ad4b01574c98f7bfeb0fcf2b9aa0f300680da887000fea8bf279ee8"
+      "size": 7074,
+      "content_sha3_512": "96569f2c80051cfd123d468d0c851964d20c1fbc0f31336674b427b23842f9afa08617014cf3469775c88ef2030d396c7f8b0c5a7769daaa4a74e7f890bd0301",
+      "leaf_sha3_512": "dfa949d7c67a72c65ca1fa16a9142ece5f297a7b9f4693b8a1b9deb25c25929cd05e99f90976cd98bda01ae79d66b4a6ebc55b81940dbfa2cd2accc7ca9cde6d"
     },
     {
       "path": "tools/hmac_key_policy.py",
@@ -4669,15 +5149,27 @@
     },
     {
       "path": "tools/hooks/pre-commit",
-      "size": 1407,
-      "content_sha3_512": "1a655fefed59ae9c73bfaef5ec7351bbab0d720191e697df344498484d6af6bc6dc847c30fb2cd55f4006a7c9061bd43531eb6f9b85fb98c3169002569660596",
-      "leaf_sha3_512": "2a5949b5e397d22f21b3e131f3aa7a9c8f7227a42ce04c4b0cf9362861ffbbc027fdce4f80401d7b40eb436749cfedd7143504de5615620d31387425ae4b882d"
+      "size": 1518,
+      "content_sha3_512": "f763a3159153469c7471eba3ba015d210f99c24b1315e7170f368ca0f9f5eaf497410ed172412d9d3f9ecfb192d485bb82e25219c07f0ffbc22f51e42c60cbf1",
+      "leaf_sha3_512": "f1e4f59b541f597fda80c1f7ab4ab124368a7550c175fb87a80f524762b93713f2109192dc0f3987109f2c2d440a56621d3e858b8919260a89c8ed5a455c5342"
     },
     {
       "path": "tools/hooks/pre-push",
       "size": 722,
       "content_sha3_512": "5488fd6dfd80040309a11b11a9e4f84b801e48bc74f4858e6b2bcd4444e15bfb6c0fcf31e09461cf6e95d4b135b672816b56fdb72ea77b3fbef6bb8254dae36e",
       "leaf_sha3_512": "94c4541662130e0a845f9afd29e13be3ff383d9a43a34f821d1abe0821a0e1dcf4ad8f6532d1cf9292042aac5fbf1dd43c38e15f104261fcb4cea92981fbed84"
+    },
+    {
+      "path": "tools/ima_readonly_mcp.cjs",
+      "size": 8528,
+      "content_sha3_512": "5e23594d51554f0462aa152fbbcd30d290b959b361f5c36a784d673b730bbba005d1aac0af9282c10602bb8cd96c03aab17e28c97617f18913584a0be721ecce",
+      "leaf_sha3_512": "52527b806dbd5bf78357fa0972680a864e9933441048de369cf587e0cdf44315922bd1c78a35ccd4b535c9a85484593acaef1eb46c9f16d90eebd447c7758690"
+    },
+    {
+      "path": "tools/install_ima_connection.py",
+      "size": 6143,
+      "content_sha3_512": "526e0025a0ba7fc45218b61ada2ccd26e49f850c149f0303fad0967e4c7247a8be2550772c0af2fe2740fe151b2942f83e0f5048ebac98ec875cd1e606a155be",
+      "leaf_sha3_512": "9f9a9d5651cfa3035420c8d923a34aab0e074a7dd10c37a0704418f30f88fd1d498b2a88500a3a0e8e3575c73707396ea55d76d3bf9facfffaca13eedced4dd1"
     },
     {
       "path": "tools/knowledge_digest.py",
@@ -4698,10 +5190,28 @@
       "leaf_sha3_512": "d3e2be0912b63223199b8d7c04a84e976cc1ff17f9613779905d77d3ccb1c2a7ef13fd5b04c38ee196c9bdcd784106f84e89cc48dd7c9256cbbd63f167ace2fb"
     },
     {
+      "path": "tools/memory_sample_audit.py",
+      "size": 11143,
+      "content_sha3_512": "31603462f28712e2fc0013bae5850f9d2213a654d6ce175cc091b2bf7e6540bc416519928eb66a7f1c054f8d23116f0c288e778c6b059fea2925aa5aed1eb237",
+      "leaf_sha3_512": "d5a7b0929e8f6d6c849aef332e9b509416ed140343bc685b171a89cebcd978ac4a8bbf30ed708b2ac133dda7bae4a3ec24cd5eb6771a646a9ee28c177147bb95"
+    },
+    {
+      "path": "tools/memory_tier_pilot.py",
+      "size": 18996,
+      "content_sha3_512": "440519ab30d317f643f9a0405e487341a17d3b87955ba5c2235d84445b557a074ffb802559e94c1b6c4cad853df9c313dca35582c3eb0b60d89f662f8b4ca13d",
+      "leaf_sha3_512": "787c7da416710c6b818914aa8ad74c27f55d1973b280bef7363dec9fe9a23d856e6cd5cfabba304b3e90e4a3ee8feeda6cbc5b1e69741c418081a1024c638efc"
+    },
+    {
       "path": "tools/mkled.py",
       "size": 6406,
       "content_sha3_512": "3d556fd9ec1751e801a93d739d20ef553d4175f7f854e22856c9f1c4ebc617af33d89812a7dc0409f77697042a39ad0b0d79d1c4d50e420a6cf6ccd5414cbcec",
       "leaf_sha3_512": "97954bdbb9984d3dbde12cb50e830080c00b14e8632f21cf44fd39ee385fdd7c46a2303d09b3cb4be13d63f86b77249ef359178d9ba0186bf0c621f8ee1894fa"
+    },
+    {
+      "path": "tools/night_schedule.py",
+      "size": 24441,
+      "content_sha3_512": "22dbcaf271a4f87b0f91d3436516b9437bccf5fed51ca8f5bffb44e7f60672e5bddddbf1be111be23274c73c5fa9dc295e934725a91b32d259a10b7ef237fadd",
+      "leaf_sha3_512": "ab4425f37df7e4e97715ec9fef39120b07d1c3e4e23c60052d5a25c9d69c5f01693931db4cb02c84c09570751c2cd708e9fdb05b2659055299059230607719bb"
     },
     {
       "path": "tools/open_access.py",
@@ -4855,9 +5365,9 @@
     },
     {
       "path": "tools/spec/spec-hetero_models.md",
-      "size": 252,
-      "content_sha3_512": "94b1e3811e0ef52a585e2f7a217f95219964ed7bfe750a4c315e675508b2cde592458190bd51f70e7a40f0040a8a9ece5f9bed62049a9dd0226d3fa9e4087c00",
-      "leaf_sha3_512": "f12b23efcc30698d9f48ba54000d4a7244f61b4fb002333ba948fcceb41dc98fba92cdcbadad8f3501bc40b99d1e60184353a21e086326e6944e4c11e644b8c7"
+      "size": 1049,
+      "content_sha3_512": "1fa123c93d0cc3c959e1281e3ce16fcd8f0b7f8c0d35d175ecbf1c89f0761f23e0c1a268a89a34ea483703c28d8b2e340bf6e53245c5c6be6b40679c4e116621",
+      "leaf_sha3_512": "d68bd82f4f15fd20ff082d5384764c46ffbca820bd903ddf341cec46aeefe8dcb2d724237cc5337baefb5d9f2393bd8ec3ede95135ed63e94dfcbfeed2ede363"
     },
     {
       "path": "tools/spec/spec-knowledge_digest.md",
@@ -4966,6 +5476,12 @@
       "size": 4216,
       "content_sha3_512": "c82d83b0378e91799d4e162e66cd565acbaef6caab5faa2b7a4b23a646bf40a26049496c048e34ff5ab35d1bb5cc77bc4faaa01fe503828d746d96ca360fe0cc",
       "leaf_sha3_512": "15225e00ff35d36cc54732bd79beabf263ba6be7471f3aac174906ddf8163cdaa540aad8535cbfcebf7b760edd392ac73d608fbdb1598f7c6b574664425de2e2"
+    },
+    {
+      "path": "tools/supabase_oauth_connect.py",
+      "size": 6069,
+      "content_sha3_512": "a90e093670e8ac5ebc34f46337b56c58e45ed6d5eafc73d6b0eb85f9593746a468a8b5c2b3d93de24b53ff3f17e40577a72d989aa75cc41bb3c3877b55cec382",
+      "leaf_sha3_512": "0928e97b1f12fe66555eeb857a705b3fe9c40e21893d593a1a3de456e510462baf87f342bc066463860f1f3e2a337d4a977a141e4081713c414efb49ccd61e57"
     },
     {
       "path": "tools/supply_chain.py",
@@ -5077,9 +5593,9 @@
     },
     {
       "path": "videos.json",
-      "size": 1584,
-      "content_sha3_512": "dbe2b69db4824e89ccdf30fe14d35faef6ae3edf7fde95c62a38b801d9ff0da15e3e0109e6633c6d590d45011bae1f37ae73521e573db4d3f0380c47b84c0a3f",
-      "leaf_sha3_512": "d085ff1ebac2fa237967e24bd2d0a071dcba8eb1095abf3298888fdff02b0f036c17fdf170bdb74dfba0fe32e62e2b632c01348d493ac380574443be10a8d325"
+      "size": 1244,
+      "content_sha3_512": "238e65442eb3cfa8b8cb471d04a4cd05660f258a08a3af5ec3db0431a72a8cdfe6e5e3094513a039281222212250baeb5ec675bd5705f3c85b2f8459cee66ac7",
+      "leaf_sha3_512": "c2f02bfb3254658d932a1782cb8e22720e49c001c61d9ef15d5bc89b75c7311ee731ed246d71a5a7d5738a748666d95b87c21384591b8d10060f0eac7e128987"
     }
   ]
 }

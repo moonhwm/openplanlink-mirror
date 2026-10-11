@@ -1,0 +1,58 @@
+{
+  "scope": "public-discovery-only",
+  "authenticationRequired": false,
+  "upstream": {
+    "repository": "https://github.com/HouSiyuan2001/codex-cockpit",
+    "commit": "d117c9b3b7abddc2d776c70a369c2abbf8e816a5",
+    "dataMode": "upstream-browser-demo"
+  },
+  "nodes": [
+    {
+      "id": "mhdmoon-mirror",
+      "name": "MHDmoon 原镜像",
+      "url": "http://116.62.106.37:8080/",
+      "observedHttpStatus": 200,
+      "observationDate": "2026-10-10",
+      "mfa": "not_verified",
+      "registration": "link-catalog-only",
+      "peerAcknowledged": false
+    },
+    {
+      "id": "cloudbase-mirror",
+      "name": "CloudBase 镜像备站",
+      "url": "https://a2a-commonwealth-d2eepjr928e9c4d-1475054847.tcloudbaseapp.com/",
+      "observedHttpStatus": 200,
+      "observationDate": "2026-10-10",
+      "mfa": "not_verified",
+      "registration": "link-catalog-only",
+      "peerAcknowledged": false
+    },
+    {
+      "id": "huawei-sibling",
+      "name": "华为姊妹节点",
+      "url": "http://120.46.86.165/",
+      "observedHttpStatus": 200,
+      "observationDate": "2026-10-10",
+      "mfa": "not_verified",
+      "registration": "link-catalog-only",
+      "peerAcknowledged": false
+    },
+    {
+      "id": "github-pages",
+      "name": "GitHub Pages 镜像",
+      "url": "https://moonhwm.github.io/openplanlink-mirror/",
+      "observedHttpStatus": 200,
+      "observationDate": "2026-10-10",
+      "mfa": "not_verified",
+      "registration": "link-catalog-only",
+      "peerAcknowledged": false,
+      "observationPhase": "after_pages_restoration"
+    }
+  ],
+  "privateUsage": "not_exposed",
+  "mfa": "not_verified",
+  "signedPeerReceipt": "not_verified",
+  "hosting": "github-pages-static",
+  "a2aRpc": "https://openplanlink-a2a-cockpit.cosmicyew5.chatgpt.site/a2a",
+  "a2aRpcReachability": "not_verified_cloudflare_403_observed"
+}
