@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T10:22:29.786Z",
+  "generated_at": "2026-10-11T10:23:53.051Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3172,
-  "merkle_root_sha3_512": "db4c96bc4902b6a85f6e065d971a80972a1b7ab7575d9cf1bd4f0efc649d88fa7d3d82a092cdc48c599b11fc3818124eba8eeb873ed92b093e321ee3f73219a1",
-  "hmac_sha3_512": "e973660a2edfbfdc4224ecdf97b26667c24de9957fc9865979040c7c9a103a93c50c427f50f70721a94180b0950a0a0c6c9ceaa05b0c653ceccdd1f2827f9d3a",
+  "file_count": 3173,
+  "merkle_root_sha3_512": "636ff2817504ac83a4ccdd78502280c9561c1baa82e66f910503fc6bac83a5c5d0da9a861d28f4f89b6e4046618cae03e71057a3adaa55f1ecf9918af36816ba",
+  "hmac_sha3_512": "6cf79da60408138c73fbe2752832eaa4b1db54c4d2c146ebbfa5fbb4338d1786d993a84d914baf6332c3da60682c76c348f18e95e69cfed41ed55ae736a9289d",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -7378,6 +7378,12 @@
       "size": 5038,
       "content_sha3_512": "bb2f0859aa9d9c37e86ca55ffd6cbf39aab372c729b4438063961280e91d0abd756e0f13d19c8d296c1fd76299676ca81666b92910a007668cabed1acdbacd07",
       "leaf_sha3_512": "04e4705a0f367159f0f5790044182685338ea30d5840faa701bdd22ccec753a9b6cfb09143acaadb72f3cc33663a224dc0d18046b0d162b43ea578da976d2a89"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/七项外力优先序_DF-OPS-20261011-CAIRN-28.otl",
+      "size": 5140,
+      "content_sha3_512": "eda5ecd05d42d5f56d5d138719df2277aa99ef97f911b9f181658203a6257ccb76387d209535ed55a46583fd31ed04b4f6c1862a86597a097cf2d5795e29e104",
+      "leaf_sha3_512": "cc29dbad230dbb05aaf8a176f1405486848deb250fa4e9da22abde30d58e03e165a5ac93e3163c1f042977467e184db265a42279612672888c81ef26440a3a94"
     },
     {
       "path": "deliverables/20261011/seat-cairn/三事复命火山纲要与技能_DF-AI-20261011-CAIRN-03.otl",
