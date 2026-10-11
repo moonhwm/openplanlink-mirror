@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T08:39:00.263Z",
+  "generated_at": "2026-10-11T08:50:30.489Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2981,
-  "merkle_root_sha3_512": "d62c967a0db37a94cc24fe3dd1a9cc2a5e50ec98b0bb9dd406e938e3895f1dbd6d15dc6147b6e23551824793896168fc7ed5ea5782bc5a6b6398560262c6ae18",
-  "hmac_sha3_512": "711f122492fc598d1be8106cb85bd7c7d88afec2043db2bee088abe5c77748928d4c0b176d90c7eb2af55b326e7f1b1201ba59912de3d7b61b557a220ac57b8e",
+  "file_count": 2982,
+  "merkle_root_sha3_512": "928a256ff75e429ce576be0c62e03b10525839b2181b5eaa8bdf0ab2d2b2a24420f28b407ba265cb35e7ad4f6c1b34c2344c461a5ce4575a631d23873e18df2c",
+  "hmac_sha3_512": "7680e674ef55dbb30627b915a9527f9471a6e1bffab5808ab1991d09aa094a283520398ba99cb63397ad2a9c9429ec35fa6c3bb3cbb401778ff81c992a54d10f",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -6532,6 +6532,12 @@
       "size": 3813,
       "content_sha3_512": "309e61d45db246adfda90c42345af0131adf3621db7d981e86ab596edce04b6dc828bf43a04ded2729cde00dd19764500add6e2235926a009a6abcc350d4e873",
       "leaf_sha3_512": "bd004ca72d1327751b4b8fd832d885af82715eebf96027110947c7bb64614119bacde423fb6ea4ffbe79858d6489b5454c52ec35f3cc25636ec6f6a0feae0f23"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/四姿态入世实验十五_DF-AI-20261011-CAIRN-35.otl",
+      "size": 5380,
+      "content_sha3_512": "a55b62900782e981ebc19adcdbdf90e4102aac5e8c83df0751429f1506f99219e07817419205b22a6b2044c8da2ceb433d051202498458336e13b60dfa8340e4",
+      "leaf_sha3_512": "9f070c1f2d022cd25fd7f6eb350aeb8584bfb51f394134cfdb7608699384d6c172e4a6482b5b65dab662c7ae300b67a0f1e5625f7f70f8de9ddc5b46457e5662"
     },
     {
       "path": "deliverables/20261011/seat-cairn/夜班总账_DF-OPS-20261011-CAIRN-10.otl",
