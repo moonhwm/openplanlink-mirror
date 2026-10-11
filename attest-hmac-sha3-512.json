@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T08:08:55.193Z",
+  "generated_at": "2026-10-11T08:09:41.724Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2953,
-  "merkle_root_sha3_512": "4dc9e33ff249453ee2737cdffa85c69c862c7c4e4bf8ea805d24108179b4cbafe6ed87efb71aa5d012b10cacf994a3909f1601f5e6a87880e32612ea9e8a0666",
-  "hmac_sha3_512": "4d69dbc29b332bbbcd89a4253fa68759059cb8eb51bdb9b292fda493ffbd67884813aed95535f8668b157475c1f967055cc88c21a2d564cacb646ff3944b6947",
+  "file_count": 2954,
+  "merkle_root_sha3_512": "2c685113723e001e5b5e8c79c73c7212ae4acbfe0e6dc0f1cf2aff6b7d36f9ca3448f8e9aef029374efa25dbbc2665d7259e88296d6edfa8dc357715b143cf94",
+  "hmac_sha3_512": "d8e8865d1f11da5168c9f14bb2614ecad4505c293e67883f7c54d0bb814857cf069ecc1fac6879117f6f83627e06432ae23879071f9022f90dbc954e1c19cfa2",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -6376,6 +6376,12 @@
       "size": 4537,
       "content_sha3_512": "e3a93bffecf4438863290c3fcf617a5b810807ad5fce57cb4e6c13b65bdf584906eba3d9b7ba1cbfdb730ee3e8d26bfd0c3191bc929941c071ff1af25855a824",
       "leaf_sha3_512": "9e41622d7d46f7c65b96926e0f1e665b703ca161002a218c7f3dad62c6f86b4cb0d09b8e7afd651100635de40d0fe5ce5acfffe5dc32b48d746e9e3f35a92ccd"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/人设总册v3修订r3_DF-PERSONA-20261011-CAIRN-01.otl",
+      "size": 5634,
+      "content_sha3_512": "a8c3c61219a68b05b6ea1059cbc29364c6f5eca6e162075c4f31fb4885ae8a15af6b25a2ee76609c7465850b42d4ae306244533ad880f5d2a596e69f8e77ef33",
+      "leaf_sha3_512": "15ffcbaaab65aec1f34ed7027287561250db6a4f7f01fd16a7f62a054c6c6a07e9165b49c3d77159a61db35132f91c5cdc8fa7e2ac37e1d272e0ac3ce8499bdc"
     },
     {
       "path": "deliverables/20261011/seat-cairn/例行复拉报告0715_DF-OPS-20261011-CAIRN-04.otl",
