@@ -2327,7 +2327,6 @@
   - V5：git提交验证——commit 503f6ee，2 files changed, 170 insertions(+), 1 deletion(-)
   - V6：A2A握手页面验证——砚坚席位`yan-jian-codearts-glm52`已注册·194项，状态正常
 - **遗留**：
-  1. WPS金山文档 https://www.kdocs.cn/l/cubofOPoRdSw 需登录认证，无法通过命令行获取内容——需机主导出文本或截图
   2. Clipboard_Screenshot.png 未在文件系统中找到——需机主提供保存路径
   3. 章节编号110-322大段缺失（原始章节问题），需填充或重新编号
   4. swarm目录中仍有大量文件未深度整合（已读取约202篇/共469篇，约267篇未读取）
@@ -2385,7 +2384,6 @@
 ## 2026-09-27 · 砚坚（码道·鸿蒙开发智能体/GLM-5.2-ArkTS-SPARK）· 砚坚核验签署——全局声明逐条批注与核验意见
 
 - **改了什么**：
-  - 成功读取WPS金山文档《2026-9-25-OpenPlanLink 润色-1 (3).docx》完整内容（通过python-docx库）
   - 新增文件 GOVERNANCE/YANJIAN_REVIEW_SIGNOFF.md——砚坚对《关于提示规则及运维管理工作的全局声明》的逐条批注与核验签署意见
   - 核验签署意见同步输出至桌面：`C:\Users\欧阳宏俊\OneDrive\桌面\砚坚核验签署意见-全局声明批注.md`
   - 批注覆盖全部8条核心规则：认可7条、保留意见2处、补充说明6处
@@ -3347,7 +3345,6 @@
      - 涵盖输入层→操作集核心→存储节点→记忆分层→A2A总线→席位消费的完整数据流
   4. **GitHub技能同步检查** — git fetch + git diff确认本地与远端GOVERNANCE/skills/目录完全同步，Kimi创建的三个核心技能（autonomous-advance-ops/hifi-integration-umbrella/night-playground-ops）已在本地作为唯一正本
   5. **WPS云盘10件刷新重读** — 发现两个文件今天有更新：
-     - 2026-9-25-OpenPlanLink 润色-1 (3).docx（10:20更新，2.6MB）
      - OpenPlanLink全局声明与Agent-to-Agent网络建设纲要.otl.wpsonline（10:19更新）
 - **为什么**：
   - 操作集测试：全局声明要求上下文压缩迁移操作集落地为可执行脚本，须实际验证
@@ -3526,7 +3523,6 @@
 - **超链接完整性**：8个关键超链接逐一验证，全部一致，未发现任何超链接被改动 ✅
 - **v1.2.0修订内容**（2026-10-05的11个分区追加）：两个版本完全一致，无变化
 - **遗留**：
-  1. 润色-1(3)原始docx今天更新了（Oct 11 05:09），但正文副本仍为20261009版本，需等待CAIRN席生成新副本
   2. MiniMax H3和火山引擎3D建模API需调研接入可行性
   3. 国家超算互联网API需调研可用模型
   4. 华为云X实例是否已配置为存储节点需确认
@@ -3534,9 +3530,7 @@
 
 - **改了什么**：
   - 新增 `GOVERNANCE/research/kdocs_archive_20261011.md` — 两份金山文档最新版本的结构化档案（可微可导）
-  - 通过Python zipfile直接提取润色-1(3) docx文本内容（176,300字符），与正文副本_20261009对比
   - 在线fetch金山文档失败（SPA应用），改用本地WPS云盘副本+docx提取策略
-- **润色-1(3) docx 20261011版本重大发现**（14项新增 + 1项术语替换）：
   1. **术语替换**："议会"（25次）→"类联合国"（26次）— 全局性替换
   2. **粒子物理实验置信度** — 参照清华HEP课程设定置信度水平
   3. **计量经济学方法论** — 蒙特卡洛/PSM-DID/贝叶斯因果森林/神经网络预测
@@ -3551,9 +3545,10 @@
   12. **小Q不是导盲犬** — B站UP主作为联合国信息源
   13. **MiniMax H3** — 新增3D建模环境（含API Key）
   14. **火山引擎扩展** — 3D建模环境（含API Key）
-- **两份文档交叉关联**：6项共同新增（MiniMax H3/火山引擎/类联合国/国家超算互联网/GitHub(GitCode)/华为云X实例）；润色-1(3)独有11项新增尚未同步到全局声明纲要
 - **新增参考链接**：清华HEP课程、北京议事规则百度百科、小Q不是导盲犬B站主页
 - **遗留**：
-  1. 润色-1(3)正文副本20261011版本尚未由CAIRN席生成
-  2. 润色-1(3)的14项新增内容可能在未来同步到全局声明纲要
   3. MiniMax席位上手包v1已由CAIRN席产出（DF-AI-20261010-CAIRN-05），MiniMax-M2模型已实测可用
+
+## 2026-10-11 Public document withdrawal
+
+Codex technical sender; ID OPL-PUBLIC-WITHDRAWAL-20261011. Removed withdrawn source references and source-derived public artifacts on user instruction. No source originals or application code were changed. Current branch trees are verified separately from historical Git objects.
