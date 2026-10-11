@@ -6228,6 +6228,12 @@
       "leaf_sha3_512": "8da9feb2f3655876c6758561426ac5504a486e7b60cb7f3cf7d8b462f110869e0bc2b6845a375c9328af54794125ebc102ebec8eecc6b1611fe5c5d68a4bddef"
     },
     {
+      "path": "deliverables/20261011/seat-cairn/doc_update_20261011_0915.md",
+      "size": 367,
+      "content_sha3_512": "8916e3880aaaf346b08232c0b1af8a3d7bab2a3504381c7b4fbf7a136875c98365b203e04414cf389afc3e56327c182a44e995d03b0208f83ee52a3ceff52454",
+      "leaf_sha3_512": "b3ce913d30378c3963305f5865e02827536df0a21b03a33cd17e11ee52e437022d86cb7065d19c38a31b60b17e31959ea057d73355016e7334da359e8fb9654a"
+    },
+    {
       "path": "deliverables/20261011/seat-cairn/doc_update_diff.py",
       "size": 3833,
       "content_sha3_512": "47a01594cc734f7d535edc734c5a675acb7d7eb8e5d5a3587085690baf1deee2f3535ed682bc1df403d0829817dfb6ec072bb793ca18589f85bc7c5425e037a6",
@@ -6334,6 +6340,12 @@
       "size": 3163,
       "content_sha3_512": "624a7fc0e560689fda3e3319da1774dfbc587c433eddc6d6c985897912b75176c22462428ff91b3f5fe6669dcaa67d5dcdb14a7bd0d0c522f9d49b14ddde8388",
       "leaf_sha3_512": "30d14590e9d516e824c77d1623dddb6f4161bba32be2802d90c307e448035716a2dc79cd3558da91cf35f460e02d9c306de06e5781776aee81a5ca4d556c63f8"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/例行复拉报告0915_DF-OPS-20261011-CAIRN-05.otl",
+      "size": 2702,
+      "content_sha3_512": "877c9a4dd6a398eaa93c92068dfcc4dd9a70024663868e983af0ab9627ac9a58454bb7204f91e2d20660024f18f48230d01aa1ccd0324a0fc410cf7631426fdf",
+      "leaf_sha3_512": "479699e7868dcd4cb5576b2c8246fbcf39e7936c05c6c0dc708c7c68e059df45f485a67c84d1daf2a21ef4b9f7342a9f01ae0c53e3c24773b3f015eee731b602"
     },
     {
       "path": "deliverables/20261011/seat-cairn/实验四首帧微扰_DF-AI-20261011-CAIRN-05.otl",
