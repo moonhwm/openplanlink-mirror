@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T09:21:49.278Z",
+  "generated_at": "2026-10-11T09:22:41.930Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3007,
-  "merkle_root_sha3_512": "c5dfc870667adfd14ab9b21644d41e95922d73d72c3ccf670e43ad06b7c73b02da86a3c5a54932f324286590cc9a1e4a965094456df723cc66eaae10a3cab8f5",
-  "hmac_sha3_512": "0b685e560343c56a5dfb81c406a699f677a670c7f0d29b4f412ed2cf29ba85ce750ab96531dc3a44076dd149f4068547cd9cee4efe359bbe3a49dd21eea482c5",
+  "file_count": 3008,
+  "merkle_root_sha3_512": "fc54aaa12ece0dc046567c07dcc68ec4d76f6ffef64b362a45775c1784e96d153c423e4e1349e2fc8d3c2926a23627bfdd4fb532538d5313a10f444c0efe40f5",
+  "hmac_sha3_512": "322708d5de85eb46b1c78afc5ee9a1c240d9e67d66159f181f34df4aa136ef4d53b31c81cb5eee618c4601e8df93f9ad3458ff76eea4ebcabe90f4df06a43719",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -6628,6 +6628,12 @@
       "size": 4422,
       "content_sha3_512": "525cff56510c087da164d6a16f6aefe042fa84d123961b8a58b55f0c5f37187a3e4f02efab3c1508435bc3c120dea33501516625e2c618de1e91c165ef3bd0b9",
       "leaf_sha3_512": "84b7270e445316807f5ed1ea2527a3968fc2bf692ae0db715a75683cf07b6804a0decb984b73b121f77f60105ed22bf42c06d8e2a4a93d6f2c459897fd19b2ad"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/决策链应用于优先排序_DF-OPS-20261011-CAIRN-14.otl",
+      "size": 4482,
+      "content_sha3_512": "55278bfe1968dc4a950a74e4a4a43181d5820aecf9e42cb1d52d145464bbf4b9136acda5f5b58d1d1682d2e55af48775dade5f751bc2c25c833104b66db34a7d",
+      "leaf_sha3_512": "964a47cc7682b429d558e340cb575d10116291f165f363cfbfd4f765afbb926800fb77dbb9432688bfeb5c2ea954512ba2a83866473b3b9de90ed6fe3f92cdae"
     },
     {
       "path": "deliverables/20261011/seat-cairn/分身GLB导出_DF-PERSONA-20261011-CAIRN-05.otl",
