@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T10:15:19.356Z",
+  "generated_at": "2026-10-11T10:17:21.373Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3019,
-  "merkle_root_sha3_512": "ec20df2b208ec535209a0e13d83235fcc11580a0ba420b2412289c51df05f3937e82c2f712ce3b5e7d51b0458b75dfe382f641336bf8382fd40864deff3d2de1",
-  "hmac_sha3_512": "db5261a30184d739a967f5c09f32b0757367b9a7f10935b710d2688579af07e38dc316348659aad79ac8114ad16fd9efc99548de408ff466d46e12a73866e1a9",
+  "file_count": 3020,
+  "merkle_root_sha3_512": "dd86e8340f12accc281683b45eae219a32467fb45140797397300a947577effccc14d6e2833318a3687f786c9e55ea2aecb22ed29a9cef19457c4da21fd84fd2",
+  "hmac_sha3_512": "e908c98a2c705817eeb1b4aabc8d75ab1c0a0dfccd0033d64d3dace7771661252b0a77ea07d1eb88fdc85ae1b9bbf58a8f2286899dcfb676840b2e4f05d4f699",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -6838,6 +6838,12 @@
       "size": 4827,
       "content_sha3_512": "973b0ee99e0e778f0cb37c7c5ccf054edb23d5a2b873fcecadf933fe0a10bfb3e6792e0a68baa365812784da9c5d014b42f511323204d08c22dce26927b85faf",
       "leaf_sha3_512": "b647d3e0562bd23173fc19f075155dff902b527b7e69f877d3535357065822edf84491eff55ee3ea077c75f64adb62219d7faab94c0938028f0d2701a2ea5a0e"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/署名可复验器_DF-OPS-20261011-CAIRN-26.otl",
+      "size": 4237,
+      "content_sha3_512": "b19fbd8c80b316a42d1eb765b1ba0c51caeb6fbd52d8c585ff1139f2058462798e8963849c1052864e6cdfcb15d6bc83ed1fad530d2d8338c8e02768dbcc7e7d",
+      "leaf_sha3_512": "3aa0768949c0d153ab14d3bc943acb4698508e1ab3abfb619c94689620e6b39b3dc2d92abc807af95680a05272653e94b94cc678170cedce6438afcdfbc7f512"
     },
     {
       "path": "deliverables/20261011/seat-cairn/跨厂商复核与裁决_DF-AI-20261011-CAIRN-29.otl",
