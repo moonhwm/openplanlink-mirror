@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T08:04:05.664Z",
+  "generated_at": "2026-10-11T08:05:08.628Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2948,
-  "merkle_root_sha3_512": "56392fa61a711d74419135f24662d87563cc76e1ab4de74c102c0997f98ca0216770deb2a7182672a5d6a4d69d296b8dc46c4a37e6a57d16455faa88069e4b3f",
-  "hmac_sha3_512": "1400262601db89476a9d4283a5819f953517a20e13e9ad892921818a34c1a3120e13f621718a32ba5815cdfea2a8ba754c63dd421777b9f02b790b2e578d9cdd",
+  "file_count": 2949,
+  "merkle_root_sha3_512": "2155eb514295e9ea1865af6ae0dca9c0cfec941f12bf8feea1591613420d0e08c5c2a52a5f29ed4a97c0e65362c234b346d7c3aa940fd4012aa9fc5996993958",
+  "hmac_sha3_512": "f885ff4400fdaf9479db4546d4cd1acd009c0db85cc82c62b105a5190a81b1a48c5b61094d62dd8ee606457e66ead0b3e20f66634f6e8ebe98461c41b1c01d9a",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -6394,6 +6394,12 @@
       "size": 3813,
       "content_sha3_512": "309e61d45db246adfda90c42345af0131adf3621db7d981e86ab596edce04b6dc828bf43a04ded2729cde00dd19764500add6e2235926a009a6abcc350d4e873",
       "leaf_sha3_512": "bd004ca72d1327751b4b8fd832d885af82715eebf96027110947c7bb64614119bacde423fb6ea4ffbe79858d6489b5454c52ec35f3cc25636ec6f6a0feae0f23"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/夜班总账_DF-OPS-20261011-CAIRN-10.otl",
+      "size": 7462,
+      "content_sha3_512": "f1d9187fc14e0fbcbf6380238bea73374974afe27149ff524884b64bbca5d6fd4e08e4b75e204e1bd851e3ee36d33d21d5fdf1773faf0d3dbff4c18e7deacd58",
+      "leaf_sha3_512": "e8c0b7abd4aa6dabfdc98620117e17756193b35729f7ec284c4e7512037f1f7f1473cda5276e2477921f4142cb5a77b17a7899f62799b176baf7f2de11142c88"
     },
     {
       "path": "deliverables/20261011/seat-cairn/实验五状态持久性_DF-AI-20261011-CAIRN-06.otl",
