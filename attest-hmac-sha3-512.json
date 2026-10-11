@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T08:21:42.109Z",
+  "generated_at": "2026-10-11T08:22:03.590Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2958,
-  "merkle_root_sha3_512": "812c4db91df51100df5362f94947b5761976fed564125c965f4d884e9487123f7eed4f66d2632de802a333634932934f6dee3d5c0d549946ed34843a972af76d",
-  "hmac_sha3_512": "2cbd465f3eb350e22ff3578e226cdacce19a0b71b53e77c58249fd6049ed8c13e0d2f7a2366063cf29aec74c0aba40b11ce1b0a1d32b8f757e588d9e28e60575",
+  "file_count": 2973,
+  "merkle_root_sha3_512": "2114d1ca1b431240f480cd146e4b95bb7f7876f7b393a5b701a8fc30a41219eedb63d3dfc0551ba81f2cb0e32bcf9b10a093c760b787ed084f487810615933bd",
+  "hmac_sha3_512": "9b4cc2c9c676e4d5c9d28945b1801df81af4baddd6558f4e100815dbba3ce58e84ee1c8c2b8fccfde30320e88673ebb30097293169f36fdff7a36ee616a7f589",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -30,6 +30,12 @@
       "leaf_sha3_512": "e03993add4b93c3c9ecc859ae5eee4d00323ead4434ee7cbce6c46a094af694cde65a87fccb080dc36eb911348364dc7bebc981e4991a98513a64f4f36006996"
     },
     {
+      "path": ".githooks/link_baselines/tools_bailian_three_model_probe.py.txt",
+      "size": 90,
+      "content_sha3_512": "d7b2033b15a42f2a87b7747d7b48b81c85b572136e050ffd88cd2d4812002fe4bf50392e17e10d443930c2222e2ebf4affc4235aaad2df7af43dd73641908e06",
+      "leaf_sha3_512": "bf1e0335f9bae44f98f38cd0a6f63cabf28b1058186f27d86ed0876df1df3a7dd16bdce8d4cb09cc4d7c7fe9bc042babd37829c252c5540fe4607a9b0cb3d736"
+    },
+    {
       "path": ".githooks/post-commit",
       "size": 565,
       "content_sha3_512": "4758e479e04db0734364a0400fee8b0d94b2fed975d4732f78229ab9a00fce16e0b0d6a6640086253a7b349326c59509f6afb5282cd7d7d2f224689635054911",
@@ -43,9 +49,9 @@
     },
     {
       "path": ".githooks/pre-commit",
-      "size": 1676,
-      "content_sha3_512": "fb512ed1ae114782bc3c909b15c2df5b3c63020a8ed01e1ca26b3766ee89f8f0c3c1e7e340266dc57ea730e0932ab47f34247a48e7f29edc0ce4e041736f62c8",
-      "leaf_sha3_512": "a21b1972632fd364fa2af74839e474e0259030cf40c319a9967a1945fe05fa92e5fe2926a258a28789255c0b5c586b3c01a5c1497156723e713188b3eb16ef28"
+      "size": 9639,
+      "content_sha3_512": "f4cf5db8135d1f2a44f936643adfc3a070da0998f01af9e9cb095c611fca6167e3f3763f8da9afcf96e835a5b3ef769590a7c00e8cc396c8377021bc0079428e",
+      "leaf_sha3_512": "731c0db2ce5c2bef404deadc738760538dfb5c399bdf92931d7864835d6874339f324c5a3962114693a45d486b08bc41a349abac167fe4df942551405ccc92bb"
     },
     {
       "path": ".githooks/pre-commit-fail-alert",
@@ -55,9 +61,9 @@
     },
     {
       "path": ".githooks/pre-push",
-      "size": 1082,
-      "content_sha3_512": "e2ca8fcf0ce11c281581206b115c29e77c1873691bc4be52de758118b0eb768aca8f26b883d3d7c22b21b4d85fa43e2c4a52b00e7035d925afbc229f3d646567",
-      "leaf_sha3_512": "d8bbaa7df785716b709f97a010c2730fa2a17a7c4551bc09fe5af66b5b082e634f5fd977a296d10fde68ec4acfad36a454017208cc5e26e76568a4635f481a49"
+      "size": 8043,
+      "content_sha3_512": "424902feff7cbb9a0002d9b32637ba93909e0259aeae792db34accaf8c6c2e921a3d65b132505248d747b73cd38036d5aeb0cc2952ee35a8e79bf690e857a8bf",
+      "leaf_sha3_512": "c7fc60a795a1cc5264b6ffbaeabf7e860e238575b665c39e7ab450c3d0d069006ae1471f6b4eff060b22e7be8adfb4f478dc4b99089dcb1736bc0d63b90efc60"
     },
     {
       "path": ".github/workflows/cd-attest.yml",
@@ -1549,9 +1555,9 @@
     },
     {
       "path": "deliverables/20261008/claims/credential_sovereignty_20261008.md",
-      "size": 4600,
-      "content_sha3_512": "dd46d0494274d996c6e1e0b11492963b037acfbbd0d850254e7cf0fe7a55d5dd01eb16322779c22af02dc837a05acc7b1cb6996522f98b95ee35b2ebb72dcd25",
-      "leaf_sha3_512": "2921d541167f4a297265de77156511e9469125cbb4a930cb8531a22135ae3688ee64fc5c85aea5dd59a305edd19362dc7ce4d88ea2f7b5915b95d6ebfb4268d9"
+      "size": 8587,
+      "content_sha3_512": "e1948ba4ef3682f53258d488ae9473783d0f849812ceffdada31a6de50675946f599b484811229ab8e3facf2abf10e07cb8caea03da5c6ab254517e405ca9594",
+      "leaf_sha3_512": "75b5a2a3ded0d9472a1eebdab4d64a3ddc5d3ed51148a50e7cd03cb27312961531df44fae264315b997e3bcfe8c3398cfe3977756f53bf609280bb783b0e6a2f"
     },
     {
       "path": "deliverables/20261008/claims/credential_ticket_20261008.json",
@@ -3364,6 +3370,84 @@
       "size": 1050,
       "content_sha3_512": "75ca986e9d92e4996a6496c5dd66a25a78e3613fbaa628a1217357ca767a84d6ff1208e0aee810d721a619ff56c62e8d0c0aaa4dd02ba08e2ba924e292ea7065",
       "leaf_sha3_512": "1ef0b4cb5bae84fe64ceb7f0d0689b39fb06af131349a7121a1fc5d87f598ffaa515f4a5c2ef238fd8093578700240177066151abb7aeee0d3bf0f7e846acee9"
+    },
+    {
+      "path": "deliverables/20261009/claims/bailian_three_model_probe_20261009.md",
+      "size": 8499,
+      "content_sha3_512": "8b71df698c34f64870b234745eb86d4f24f8601b8e693e580873061175f2c28531a0ff5b979739c30d3c268b3283c50327a23eb9d1cfd99751cea0108bf85f6a",
+      "leaf_sha3_512": "72ccdc6346c636a6c85a402318261c0c303890ac9d2110c7f0158f38ce278f147151952db41b8ce870677bb7924b2222991b80262d1ab35e61eeb12d6448360c"
+    },
+    {
+      "path": "deliverables/20261009/claims/parked_runs_disposition_20261009.md",
+      "size": 3060,
+      "content_sha3_512": "1a4f44a8b00d9860fd7a34444d5f8723ecfc89942d2bc5fbadedea3b30fd8f77eebb9901ecf246672d4cf42b9884916c576b615de2d8d17ee1174769a7eabc5b",
+      "leaf_sha3_512": "8169054f2f571ca229ec24b3e5331a1d7e0629ff75d9871c57cf0affcea9c7411d20007a821e8b71553349f5cdfd1502f8f62f5c86bbd8c5043d5d1bf2fd04a8"
+    },
+    {
+      "path": "deliverables/20261009/compressed/PQC端到端加密与分布式信任体系升级方案_党组学术视角.otl.pruned.20261009-003118.ucb",
+      "size": 24650,
+      "content_sha3_512": "8401980aab20adb4b5402895bb2d6251928d97211c104a72fd69f0e584184f8dc6148fdb65aa6f00aeedabe566905c039329797f354efcf11af1cca18f026894",
+      "leaf_sha3_512": "c8755b120934fc3addafba5f725108fc393a553616a27a47f9579217bf880866a4eafe0f05862181f7c7fbef43ded647bef3a52dc6e945cf55ca1c1d074fdcc0"
+    },
+    {
+      "path": "deliverables/20261009/compressed/bailian_three_model_probe_20261009.pruned.20261009-003118.ucb",
+      "size": 4422,
+      "content_sha3_512": "c4ca964f5b341d24304dc82fe1208ec61cd275e0d14fad8f6c20d41078b30605c237344c15276199fb91e3dee5d44d1c842efc30f541fed57ba590d1c46c8ad1",
+      "leaf_sha3_512": "54cea7be810a89eb791b603c04d9dcba53153a87bc10ae15f302f249ddbc4613024836f3389a4739e69007d15e0a2e142f0cf6df7f20f38a334668c83c2d5eac"
+    },
+    {
+      "path": "deliverables/20261009/compressed/bus_cmpr_bailian_20261009.md",
+      "size": 5438,
+      "content_sha3_512": "4257b0586fb9d4164fc116dc92217041f88beed8c259f5bb2362da8e97e706dce702c160b7439b47bd5d978bf0f72a938432a21c1e6879ef5d6be0e34ef2eb51",
+      "leaf_sha3_512": "7d1f1bc271efaa5344a08812e5c7a71cc93afed3befedfb7e07a138c33abbac395966fe895b35794d6099627b4065af6e4d69ab253b07c3ec26550981085c52e"
+    },
+    {
+      "path": "deliverables/20261009/compressed/closeout_20261008.pruned.20261009-003118.ucb",
+      "size": 7285,
+      "content_sha3_512": "011c791b0243ec0d283c4527e7b8d92b3fa15515cf70d66d219a97444311ccec1e191930d18aa4503bd318f31af4f5455a1863b91dd0c32f568444b0d7c763c3",
+      "leaf_sha3_512": "79fe6edb62521bea545f76af7b998c09876f1dd662fd81d6662d3b03f1cee4e3f96e12a851520100a1ae9ff3674129599eaef8088658dc80c3b50b3ca909f3da"
+    },
+    {
+      "path": "deliverables/20261009/compressed/credential_sovereignty_20261008.pruned.20261009-003118.ucb",
+      "size": 3996,
+      "content_sha3_512": "289058e50cf92a45a447b89edef3d82431e5f6d528c0b0873301155419d6b4c417ac0e5316c96a8058eecc614d872f75a144fe5a3f83174741541ffe2addfe0a",
+      "leaf_sha3_512": "537efcde724465899e4d14e8135db5671fe7fabc517f44ec062538ad9042d5e557ef50eafaa966b66a3ad653e59a50f72ed48ca840ac3921cc8c7a96224e1214"
+    },
+    {
+      "path": "deliverables/20261009/compressed/desk_coordination_20261009.pruned.20261009-003119.ucb",
+      "size": 4238,
+      "content_sha3_512": "f2bc8ffe45a65f2c752f904436b08b56d84fb2f1eafdbd88ad9626e81b5d536027c36f1a5e2ded8547d824d98ce4a6d9dff67a99903b3eca74ee60072b05d0f1",
+      "leaf_sha3_512": "08c5f3a5edb21438507181d9064b9d03865cdbbaec61ccf9c2b56e4fc74f6b7ce77763af95131d8d0e785544981cf07f0191e56c82511e48f726fbcc5a91e911"
+    },
+    {
+      "path": "deliverables/20261009/compressed/github_push_receipt_20261008.pruned.20261009-003119.ucb",
+      "size": 6405,
+      "content_sha3_512": "82e452a3d8dd55e686168b5765322558cf9bda5dbe3b858302bd0db491b385c464d5102edca773196d617a523c257b0a6b8e94c878200605581337b98c5fc7b7",
+      "leaf_sha3_512": "9099e75a618456a3fd482a58d15663f23997255e62a3e2e60ae7c00ccae4d44e1ae92a2a033fde26aaba79b6da19295245f9d612baec367f6e6c0cb77a578cb2"
+    },
+    {
+      "path": "deliverables/20261009/compressed/manifest_20261009.txt",
+      "size": 491,
+      "content_sha3_512": "bbd0a2a0b1fc7aaaa4d3599e064fef46281573074017287a67ce9ff8ebcaf773bf961deb702549a6017fb73caa4d9c2ce658e2e6042c37f46530d5cb82611e1b",
+      "leaf_sha3_512": "bd9b07019d05b29333d584437d9d008bc71ba049a626fa3db15c639a32c501820148801daa707435939409ca6d4a93c3897408149934716e880ff445820d3cac"
+    },
+    {
+      "path": "deliverables/20261009/compressed/外部素材融合与治理条款简报.otl.pruned.20261009-003119.ucb",
+      "size": 19647,
+      "content_sha3_512": "ccbe61aa1b7ad1687e5f144a99dee261d7e8c1227452cc0fbb80eb344e085d4faa8675b599f160d027bf599dbe2bd66f88114d8186eee744f34a3a2efc29f628",
+      "leaf_sha3_512": "0a43887ade9281e6d49b37c4fdf805035f886b18d4530e2cbaf391b520963cef940c83209632148e26b9d773223c7b7c3143daa4f381427d8d7f5f9dd7e1e890"
+    },
+    {
+      "path": "deliverables/20261009/compressed/尼采语境下奴隶道德与主人道德的选择_研究综述与文献工作计划.otl.pruned.20261009-003119.ucb",
+      "size": 39887,
+      "content_sha3_512": "531c2f442feb1c3240744c25811cf1c8f750d63f8ddd5cffa13e2354efa17119043c1ea53fee3ccffb3a8509ff2de9ec1877a03b347b7deb5fd7f5dff1ce7716",
+      "leaf_sha3_512": "55cad10a117d4e138665d31b7c1ce799eda1a3ec91d42e1155766136bcb362e2247e229838faaefc0872e1f38fe99d93f9a4212b037133904f7c9b563354cf17"
+    },
+    {
+      "path": "deliverables/20261009/otl/可交互架构图_压缩迁移与三模型与票据链_v2.html",
+      "size": 15921,
+      "content_sha3_512": "09524d4c09d30b59eabae99f8a7b0aa4af6387921976f4e5b91068eda7a657568b14ab8cfa90c229eee983bf0567f85aad5ae9297a578252c7cc83354a68dc67",
+      "leaf_sha3_512": "eef2daef2a301f360ac3056385bb51842fbd75398620da4b91a86c8a1fab21cfa44f392dd2a54219bb9362777c2b6eed9b128b7998a8c7bfd80b0cc3dee455bb"
     },
     {
       "path": "deliverables/20261009/seat-cairn/A2A判据互认提案v1_DF-META-20261009-CAIRN-05.otl",
@@ -7105,9 +7189,9 @@
     },
     {
       "path": "moon/tools/reassemble_index.py",
-      "size": 1511,
-      "content_sha3_512": "41f8492abdb11663bc920f66ef9cec6886e972c104ed00812a3ac125ad0d481150e5cd1eb89df819dc12cf5acfefc074cdc491a965011a8aae5e42a0ea3c2fd5",
-      "leaf_sha3_512": "b1a8937d3a7d8e9bed42d0318edb35d98e88cb2f61c801853479091d9e5f2812b5bcd72569ec4d854aaddaba3618fe09e433eee314ef22fa5e76ee7877d608ac"
+      "size": 3090,
+      "content_sha3_512": "1eb9535be85327d2167559c656b6b6d3f4c48a31b8f53d52e88eac6b9dbf45aa79d86ae8f0349a51cdae77cb765b0d33cc098ffcea0c790017ef845a127275c6",
+      "leaf_sha3_512": "3f46d1ad21ff81d89b9ee4317221ae60325861d00d589834dc747883671ac338225055eaf03d170773b70b45cce52747e8ddc82136cd6df13b2f6a837a1740d6"
     },
     {
       "path": "moon/tree-text.TARBALL.md",
@@ -17206,6 +17290,12 @@
       "size": 7936,
       "content_sha3_512": "b37745ada61ba31e783bd72a9ed45549ad652eef28b9c2ba31e1a71c1b395410d527eacce1466979180fbdda3e532962652abfcc078b1ed8e9f1a75f09062874",
       "leaf_sha3_512": "64b9ed61b7d1bcb7b8c1c0e1ff51ab54766eede1f0ec41935b1b783cc9f3e8453d06c28b035df6a70357b39b306b287184e497eed6558e4e2363f5372429faff"
+    },
+    {
+      "path": "tools/bailian_three_model_probe.py",
+      "size": 8654,
+      "content_sha3_512": "348ba0c300bc93b3c1a45453daa5f4b230c7a79cc198da251e3d97f2026d8ece781ffad407747366c15c5f871e8ae88aee86cf11115898f9343ba47b38ee2d7c",
+      "leaf_sha3_512": "fb41f7534b88e5e3b053973816d7404eb007d7e4ac3e1735fafe1204a88fe261f12485802ba67f962846fb2dc79c440c4c120c3a6639bf451560adef25253f49"
     },
     {
       "path": "tools/build_opl_tree.py",
