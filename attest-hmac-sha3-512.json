@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-07T00:07:37.878Z",
+  "generated_at": "2026-10-11T01:54:21.509Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 1940,
-  "merkle_root_sha3_512": "6d6d9fd59f966e6a161d064a0ed271dd5b1413b818f3f1665ae9886bc84a8c546afe57b747ef36bb5c53eeb7c5b129057332a69e7f74211ea5ce8fb6a672aa90",
-  "hmac_sha3_512": "2b8f2cc1f17adfc3aabb0e9bace1de4c81be707b1eb8e4f6c5452295039b7e6d10f81b391919e7243cf3b71f112ad1eecf9e1cdbc0aa9e16734a76c0ef9b87ef",
+  "file_count": 1938,
+  "merkle_root_sha3_512": "113fb70483207da8d27801fdd17edcd2291fc0f65aa4e685688d015c7cf19be7dfd84255808836c7dc320028eef433acfac1dbeff17d7398eaf95941754c9f23",
+  "hmac_sha3_512": "88656f34d25c2a4336ee1218c1d3e56b081adcddb215d4aa07cf7ef2fc73be26c4463f6450dad50774d273039f2bb92d4188b34348de627dd972c4192578cc4e",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -91,9 +91,9 @@
     },
     {
       "path": "HANDSHAKE_LOG.md",
-      "size": 44111,
-      "content_sha3_512": "39cb3fdde5778b6b7d5decb3f7a9bc3238bfa6644c216909c21bbcccdb31553a664a4fa9b2c72fe0592fafc8840d848dae4c4e7e2a957db6751c01b135b95d43",
-      "leaf_sha3_512": "8c836172c2f1d9962109d32ae9b79ba17e76b858dc80301debba6bf24842ff0287ae0e420c1dea836cd3256bcb3901c65bdc9c3a0c435698b38c3cacb21ed3d3"
+      "size": 43699,
+      "content_sha3_512": "5dba47e5a59e88585ff5aa042b3d4a661bbb2bd56dfe4f11d90cd4ad3f05a0be060285b15c6fef30471896246c8db4abb3fac2eb862bde6955651cd1eb4cc29e",
+      "leaf_sha3_512": "2ddf4435b91f0fb28149cb75412f67d0888522eb48e625ca23f715770f837c80ab790affc704706aaa84b5a45ed1b443effddf7c7cebe9696c43dba5eae64acf"
     },
     {
       "path": "LICENSE",
@@ -228,12 +228,6 @@
       "leaf_sha3_512": "bbd5c632cb64a7e4fcc5afdb7ab09004337085e66ab05a930054f75b6cf9456f86326920ccbb927d7c70bbe528fe8331a8af8fafeda16d25129a3b5c994cb5f0"
     },
     {
-      "path": "deliverables/20261001/A2A核心产出包_20261001.zip",
-      "size": 375265,
-      "content_sha3_512": "b2286707eefff74f54f551b0f3fefa053f93d46e9478f6ff844831b4d368cc64c4c730ec4d669f089b7c84d60ab1b18a85905b73efd957c94240f498f3a413ce",
-      "leaf_sha3_512": "484f20b2e0f4d4dc765e8976773418bed3df394d302a49bb3bb09b1577a9b9fb3172f1735f9fdc035f5fdc2211c9154f0eb2b603997942af46c3a4702a28d539"
-    },
-    {
       "path": "deliverables/20261001/A2A议会交付包_20261001.zip",
       "size": 5699,
       "content_sha3_512": "270970e64a4770228ebd5188025129443281576034403346be371434d63fbee150d36f286f6c2bcdde048c5e09d19c49008c988ec331186ede1ff3e89bd09971",
@@ -343,9 +337,9 @@
     },
     {
       "path": "deliverables/20261001/handshake/sandbox.html",
-      "size": 46586,
-      "content_sha3_512": "230c54c4fb097ab57c829984551560fbc5aec69cc806cd670668fec1df0b8c33ad755982632c871e2536bbfb0d353925b29c31a8aa67dcc6b96748bd17f2f93b",
-      "leaf_sha3_512": "fb8628335d8df3efdcb77f7374fe8e178a90f6554a891c385f5c5bfc1edb4b282e845d367f597fd44da568d3afea431085dd09404ae02f68bdac69d83354b231"
+      "size": 46372,
+      "content_sha3_512": "693ee2179439c79a9eaa9f0291be6d58da0abb3e2c41d59371c6603f18740b5c0199aaae844647f92202e5f5c55b121591097c876b9b59f78cc0e5819c9e8554",
+      "leaf_sha3_512": "9d1177bd047931b23eaeb91883c47654830f481a21426c1d0d196713099aa6b5ab432687a861793c7157e2dddd2d8a133526c4873f618fb9098ef09107e877b8"
     },
     {
       "path": "deliverables/20261001/handshake/sea.html",
@@ -1342,12 +1336,6 @@
       "size": 2927,
       "content_sha3_512": "4b08dd0d6bcaaea639eaeb4c5fc1be9d9b179730d9e2244453f566f8ad2a6cc69cc47ad6f683cc66fabb74d6484cb51ee71c5f52d6a012767c4615f90e51eebc",
       "leaf_sha3_512": "b2b9b2c907b814d0b6b687967da67ca6655e6c7bdbba36ebeb8c1761b69c8e51d624f7e101674f7ad2123e74fa1845409e178dc5c0313eae2c6d27fa14157338"
-    },
-    {
-      "path": "sha3_tree/TREE-K3-2026-1003-01_manifest.json",
-      "size": 5543,
-      "content_sha3_512": "525afab9b6da3899f81e207e1322e7f5b1b46fbdfbd96f14418c599af2956062411cfb703040dee9ed3701686549a1ad90f7278dc6fa09088cd448ff865b5ac9",
-      "leaf_sha3_512": "61741082eeb15bba0212e4b61e0089fa2b43f0e4ac6e71cca75a2b2a0416c9560244e5fffe4e9b40356320c1697c1170019543674c6afde482c1d9e8afe19958"
     },
     {
       "path": "sha3_tree/TREE-K3-2026-1003-02_leaf_records.json",
@@ -11221,9 +11209,9 @@
     },
     {
       "path": "tools/opl_docx_refresh.py",
-      "size": 3922,
-      "content_sha3_512": "e0c3d603dba6994b0f93fa473af0ce22b5c34c1842be03916176a4b72bb8fcfecf08d4f6e4c0a18736b014524d50835acd1bd78f3e3905a48f6fecbe994317a1",
-      "leaf_sha3_512": "98c4816b95cb575218d3536947acef88526ea79fef6bddaab43f0cd395773dc14629bee4248d3a6540c4dc4e38d9320b1d76fabb6311856dc9ee7025a665d7a9"
+      "size": 3782,
+      "content_sha3_512": "242c3fc7c8de0a616d494e6173669293022cfa74818a8cb8fb6b26b86f84b43a5db733720447a5198691aab1b519132fdfd2554ce136f9b00abb4efcde49f391",
+      "leaf_sha3_512": "330bf63b99fc074ec790ee5e282b47e6950a4cf978f45ab873015eefa63ecf8fd179223bdde89e346d747eab4427f10ffbc94d15191e1b5befe5ac24dab87143"
     },
     {
       "path": "tools/perm.py",
@@ -11647,9 +11635,9 @@
     },
     {
       "path": "videos.json",
-      "size": 1584,
-      "content_sha3_512": "dbe2b69db4824e89ccdf30fe14d35faef6ae3edf7fde95c62a38b801d9ff0da15e3e0109e6633c6d590d45011bae1f37ae73521e573db4d3f0380c47b84c0a3f",
-      "leaf_sha3_512": "d085ff1ebac2fa237967e24bd2d0a071dcba8eb1095abf3298888fdff02b0f036c17fdf170bdb74dfba0fe32e62e2b632c01348d493ac380574443be10a8d325"
+      "size": 1244,
+      "content_sha3_512": "238e65442eb3cfa8b8cb471d04a4cd05660f258a08a3af5ec3db0431a72a8cdfe6e5e3094513a039281222212250baeb5ec675bd5705f3c85b2f8459cee66ac7",
+      "leaf_sha3_512": "c2f02bfb3254658d932a1782cb8e22720e49c001c61d9ef15d5bc89b75c7311ee731ed246d71a5a7d5738a748666d95b87c21384591b8d10060f0eac7e128987"
     }
   ]
 }

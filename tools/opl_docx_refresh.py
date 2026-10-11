@@ -15,7 +15,7 @@ import re
 import sys
 import zipfile
 
-DOCX = r"C:\Users\欧阳宏俊\WPSDrive\29969771\WPS云盘\月之暗面的Plasma游乐场\Plan提示词工程\openplanlink-docx\2026-9-25-OpenPlanLink 润色-1 (3).docx"
+DOCX = '[withdrawn-document]'
 OUT = r"C:\Users\欧阳宏俊\Documents\kimi\quant-lab\output\desktop_cleanup_20261003"
 ANCHORS = os.path.join(OUT, "_anchors.json")
 MASKS = [("hsjeyh", "硅基流动"), ("5982", "302.AI"), ("Mzkx", "国家超算")]
