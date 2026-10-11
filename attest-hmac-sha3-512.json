@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T09:01:12.182Z",
+  "generated_at": "2026-10-11T09:06:36.377Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2999,
-  "merkle_root_sha3_512": "7690820678ab663c6fcfea1b5d56f6f870bc2cd1a511bfc1ae57f9dd84992ccd82cd7eab2af1dc70f2d75269f3058ffa53644bdc74a912d2d5ee957d880e06c6",
-  "hmac_sha3_512": "382dbbaf4f6fe5541cad645de58d08ca79865d8e82fbbe116f753bff5375dadd5b8ed7aa6d6715618f5a31a9647a2313cb3873923c83446af58bd06c11c6c10a",
+  "file_count": 3000,
+  "merkle_root_sha3_512": "52c27d4e115fcc661bf76e521a555de660e5a1e91af63fe0f714bb5fd5b490eb98917687811135f0a60adbc721e8ab14db20a5044e7997b6b636dc86e973361a",
+  "hmac_sha3_512": "11a501a7dac8b117480b4f89d3de8a8075151c8e163bc29d5fe166db1bb12fa846260700ea5af920ef8958a241f56d008d1a2b80bec2327d8e909cd041ef3bc1",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -6496,6 +6496,12 @@
       "size": 327,
       "content_sha3_512": "7665efbb8174d52a917c7dfca09df248f23fb8d21625a5a30bdc276716db348961fe4a0b32c9299f7ce1f481f8e0b4a2f980e2d0d761253b096e81ec5c423a62",
       "leaf_sha3_512": "68e8b5795bf75b442549cf356f2cafc55c59127969f6e8454eab313de877442e0586b6dce7f932e33f77eaa5b70519879a31bca0aee544b047034f50d6c01f7c"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/hub交付验收_DF-AI-20261011-CAIRN-37.otl",
+      "size": 4185,
+      "content_sha3_512": "65697d65b19761000c32708851753d3149a94e1fba95f54e71252d44a75f04e2dd008da2525e4564ad65893818104ce5f4aed1095bef8dc6800f390373b49f85",
+      "leaf_sha3_512": "f703d398d93fda8a71aaa1239f88f059d9826a42af1cef1e00458a42f153ac3233037456ce523db0d0ca02d1fc6a132c405d667b9a74bee146939db480130565"
     },
     {
       "path": "deliverables/20261011/seat-cairn/minimax_client.py",
