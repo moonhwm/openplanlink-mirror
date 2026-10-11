@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T13:14:41.608Z",
+  "generated_at": "2026-10-11T13:22:41.793Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3191,
-  "merkle_root_sha3_512": "afdab7afa278bfd4f7a09004beec31c9cd6ac3077b9944b5c54d3eaa497c5975a327d870e97f91849683f520c42ba077092cc9e12280a2e3fe8fee1d7c148f33",
-  "hmac_sha3_512": "59645cc0fa3df57cbe9b84d6a97341b319005825d8c1fa18dd522c9bb273f67f936d374ab375e5967b85cbd437f67bb13ef58b7401d25ee9c86f2addd1973eb9",
+  "file_count": 3192,
+  "merkle_root_sha3_512": "e495862038f54afa9d170e4fc5a1cc5b9be31870f719c994d0f6939377b8d31566399e04dbe49a66817bb6d768ce81dd9c86834326ffc4e1b8d0b4ab9a5fdc2e",
+  "hmac_sha3_512": "b9a11c4012787ff5d66fe8ac0ce9b31628a251ff91c0dd324e2a3217ad46a15d43d6d45397a0513e94675f51d87bf705f5af9ada44a47c2f17201b7307ac22ae",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -7462,6 +7462,12 @@
       "size": 5634,
       "content_sha3_512": "a8c3c61219a68b05b6ea1059cbc29364c6f5eca6e162075c4f31fb4885ae8a15af6b25a2ee76609c7465850b42d4ae306244533ad880f5d2a596e69f8e77ef33",
       "leaf_sha3_512": "15ffcbaaab65aec1f34ed7027287561250db6a4f7f01fd16a7f62a054c6c6a07e9165b49c3d77159a61db35132f91c5cdc8fa7e2ac37e1d272e0ac3ce8499bdc"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/人设立像与首帧候选_DF-OPS-20261011-CAIRN-47.otl",
+      "size": 5768,
+      "content_sha3_512": "808b1217696f86b1e79c9dd4b58d14a28111da99e87edfe9322346faffaffeef9340e9668cf3d3fa86aa7d74ec919841bf31ae7816bf0e160fa1058921f3af89",
+      "leaf_sha3_512": "123798375ce32834d6fd33cedcc34989a096d8f5cce38c5da69f6effd3013bee7053e49685aec0d57012ec5c7e993e25036336f340408a0cf0ee30c99513c6ef"
     },
     {
       "path": "deliverables/20261011/seat-cairn/他人外观入世88倍_DF-OPS-20261011-CAIRN-21.otl",
