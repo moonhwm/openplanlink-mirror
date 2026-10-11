@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T08:02:50.041Z",
+  "generated_at": "2026-10-11T08:04:05.664Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2946,
-  "merkle_root_sha3_512": "7f2d8d6eaee81125aa82032bae1279f5c4a9cc4e5fe44ff15f7523b579bc3b2fe4d2e7d948086e5a47051a4468e158270bd7894072ffd32421b5c032f2c61a33",
-  "hmac_sha3_512": "61904946be9e60348e573c6153bab44a840ce23851074e31489b9bd304a3ec735402bc0dfa1be9ed09f707fe40426d26cad9c2133bc0c90e1be78cd355df6c35",
+  "file_count": 2948,
+  "merkle_root_sha3_512": "56392fa61a711d74419135f24662d87563cc76e1ab4de74c102c0997f98ca0216770deb2a7182672a5d6a4d69d296b8dc46c4a37e6a57d16455faa88069e4b3f",
+  "hmac_sha3_512": "1400262601db89476a9d4283a5819f953517a20e13e9ad892921818a34c1a3120e13f621718a32ba5815cdfea2a8ba754c63dd421777b9f02b790b2e578d9cdd",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -6390,6 +6390,12 @@
       "leaf_sha3_512": "9ecb93408011c333fd19542340dba2b86dfc95427bf0cad5473c6515e916fe0f2754117442351d4a4b3ab94a79aa963561f8682709d1e98b31e07cb061bb8332"
     },
     {
+      "path": "deliverables/20261011/seat-cairn/四仓对齐与三面一致_DF-AI-20261011-CAIRN-23.otl",
+      "size": 3813,
+      "content_sha3_512": "309e61d45db246adfda90c42345af0131adf3621db7d981e86ab596edce04b6dc828bf43a04ded2729cde00dd19764500add6e2235926a009a6abcc350d4e873",
+      "leaf_sha3_512": "bd004ca72d1327751b4b8fd832d885af82715eebf96027110947c7bb64614119bacde423fb6ea4ffbe79858d6489b5454c52ec35f3cc25636ec6f6a0feae0f23"
+    },
+    {
       "path": "deliverables/20261011/seat-cairn/实验五状态持久性_DF-AI-20261011-CAIRN-06.otl",
       "size": 6473,
       "content_sha3_512": "a94be1cf62c44627ff174ad3d9fa9885bd7434d3eb4c519dfc1eaba85d5feee64eb026eee99d9d7ffcfc588e8a2da3973b9c06e7662741df760e42ea6107559a",
@@ -6442,6 +6448,12 @@
       "size": 6543,
       "content_sha3_512": "6bd9198c5d0f78c69ed69c723cf9dce3aca9f5018bc5627b6b7ae14438f3a998f469dbf1b6b46b7463bb74df2cc1fa850d9f6dfaad274f41331b769aeea2cb19",
       "leaf_sha3_512": "32cc366bc249daea0732fd79d943b29c4dee89567b8a2ea1b0d89a2b7c04561a1f73d3bdea80de04665e0741ff9edccabbced807a47eedc1aa159baf9afba20e"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/镜像攻克与四仓对齐_DF-AI-20261011-CAIRN-22.otl",
+      "size": 5600,
+      "content_sha3_512": "f0f9cfd1e89f5749a4e1725adcc4f56f70901a064685cf6942d51bda86686eb0cf2eda7e1555293682766aff1b94bc0a9ee23aa8bcf5c5657e9afef90a012850",
+      "leaf_sha3_512": "5c8ceb62eb09f1f516e93731be1780531d26e78b1989d65ba160856951597ffbbfc56395600ea9f6f54456ae607d9c2172cb3247b091a029a307de303b69232f"
     },
     {
       "path": "deliverables/20261011/seat-k3-scoring/README.md",
