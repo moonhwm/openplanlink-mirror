@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T09:36:53.182Z",
+  "generated_at": "2026-10-11T09:44:35.871Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3011,
-  "merkle_root_sha3_512": "4f807cf6da042ca0e187253d7de07f5c3518baba2ae378fef4b20a85a0e4a31e09af92aa90ca1839c74a8d978465c382e8285f0c9795ab8aa37622a9c977de2d",
-  "hmac_sha3_512": "56a684ae62138db2794efc6eac3cfa340068376c422ff11e9464e4da17bf328644e2c1807574ba34e14a3f3c612bbeff111bc5c520c49d9232711879d252c1a7",
+  "file_count": 3012,
+  "merkle_root_sha3_512": "9b64e84c6d09f94f9fd533cd319fd139515b1dc406899c5e3125dab44fe6fc6ec857b644bc18519c8e9fd1e066d446decafc3c4e18ef60d3980f44b5f6a7f4b7",
+  "hmac_sha3_512": "cba91f82f31943f601f8162152d346bbba8817ba171a38bdb730836ddbd3dfbc114a4997185da2fc898166228a69705717f5639e5b19202173c555ac04790463",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -6370,6 +6370,12 @@
       "size": 7435,
       "content_sha3_512": "0f36770b61e8ab89ccbeffec3931a4394bc434fb1a52e58dedd6c207d7e16c483200998339cfeb1fe61647f1b3f32ac195fb55e92f7943bb128771daf52750f3",
       "leaf_sha3_512": "9d58f1550c58f58505a5519ff3c82b9f06bc6c300fcd862e947bc6d95098cad491d886246bb05f9e3c4a5430c6033a6cc4e7c69ca76e1c70b86b572abb958ae5"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/Tripo资产清点_DF-OPS-20261011-CAIRN-18.otl",
+      "size": 4658,
+      "content_sha3_512": "7a574e789f9e1f542042718387bfaab2fe6dc1187929ec4196b0cab81a0f14adb70923671344ea528dd9fd23996bcd74906402ea2c8103c1a1fed6a27debe850",
+      "leaf_sha3_512": "856329dc2d77e78fba16ed8add386add6dd73fd3a98268eac31ce74614531143950ccb639e213154a6c52024f32f288b46a83d3667764ccd848102c80d4fac72"
     },
     {
       "path": "deliverables/20261011/seat-cairn/ark_signed_probe.py",
