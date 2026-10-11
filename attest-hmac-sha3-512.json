@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T12:16:14.485Z",
+  "generated_at": "2026-10-11T12:18:00.968Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3187,
-  "merkle_root_sha3_512": "4ed2f1011072668776dce01468bff14072353c3014bb5a2ada795f72bcb1291e0fc7defbd6fb171315dba02d5424cec86a9ab158f05e453e7555517f488d79a0",
-  "hmac_sha3_512": "468782cbb3948cea18a0080ea2712afd480cc3beb599781f0f5af7c87230fcf7acfd98fcf5ebf5be19b3d70249a34d493d8b44a715382dc93d57986a8f963b13",
+  "file_count": 3188,
+  "merkle_root_sha3_512": "ff90f9a0dbd9b9fab34f0f3e4c8a608ee7ad3618abf92c0539dfb866288949235f59cdba43922eb02a143e09a9d7992a35aa6c33b78f2adc6b92148de847ba12",
+  "hmac_sha3_512": "a2cbe979e5560790c84a672b83adbd75e90e1754b61f99a3b6f05dcacd376220fbd362718e38fd6bafee1bf48d97a7dfb4a383b2edeba0cab67fe8f1e8b381e4",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -7384,6 +7384,12 @@
       "size": 5038,
       "content_sha3_512": "bb2f0859aa9d9c37e86ca55ffd6cbf39aab372c729b4438063961280e91d0abd756e0f13d19c8d296c1fd76299676ca81666b92910a007668cabed1acdbacd07",
       "leaf_sha3_512": "04e4705a0f367159f0f5790044182685338ea30d5840faa701bdd22ccec753a9b6cfb09143acaadb72f3cc33663a224dc0d18046b0d162b43ea578da976d2a89"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/一页操作手册v2_DF-OPS-20261011-CAIRN-43.otl",
+      "size": 8152,
+      "content_sha3_512": "0e6067ea4260081809d929db25ae84564b29192ae0485b34efae16e988386e3a7bb9b0d878cdf717ad4b79b64d38bc7e278e7055ae3766bbed28fe028e8767bd",
+      "leaf_sha3_512": "9adf67267d560ef909583d119bcfb87cd0ade54898b2cd544144c4f983995b1acd796f689ad2c0db46fd0ffac113116c6c80576204fa9cd29eab51ce3d1a51e3"
     },
     {
       "path": "deliverables/20261011/seat-cairn/七项外力优先序_DF-OPS-20261011-CAIRN-28.otl",
