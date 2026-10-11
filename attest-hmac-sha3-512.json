@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T08:07:07.533Z",
+  "generated_at": "2026-10-11T08:08:01.520Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2951,
-  "merkle_root_sha3_512": "5252dd5b2f7d25d746a44fb76e0c455f52a91f74cd06ea7e1d4b6c35fd370763138e8bb4dc3def3f2fe84956886dd0b7c2450701a8369f2ef123159aecaf93ac",
-  "hmac_sha3_512": "2556f935b1d6404329ae87c355fe7767212c01db04e398a8a60670fa014939015d0948af464035528cb3b194172a68021c6900ae5fe9c3c952c45060e71af0bb",
+  "file_count": 2952,
+  "merkle_root_sha3_512": "09d61ae1a0a61705764bb4a4f560a4b12a7c19448739ac5d24dca10f6270ff33a950b68fa0f53e1ea2121b827385bb921e45cda64ec4cc904e14a347ae4b76b4",
+  "hmac_sha3_512": "34c30e74c98a7d222825de6639c4b746514538aa3b22c9bca19baf055c98f7a1592f21ed89f37f4448656d6333397bb9d8063e20aae48bfdd512be22bacf8c45",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -6466,6 +6466,12 @@
       "size": 6543,
       "content_sha3_512": "6bd9198c5d0f78c69ed69c723cf9dce3aca9f5018bc5627b6b7ae14438f3a998f469dbf1b6b46b7463bb74df2cc1fa850d9f6dfaad274f41331b769aeea2cb19",
       "leaf_sha3_512": "32cc366bc249daea0732fd79d943b29c4dee89567b8a2ea1b0d89a2b7c04561a1f73d3bdea80de04665e0741ff9edccabbced807a47eedc1aa159baf9afba20e"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/重排探底_DF-AI-20261011-CAIRN-26.otl",
+      "size": 3588,
+      "content_sha3_512": "bb2c178d6240d5406f800efd5c8e04cd6ca487ccbb85c8b0cbef149fdc5668261559ab07f3d9983dc6d73d12bc0a69b0f20a97447b533d0a6779cc69b2ac110a",
+      "leaf_sha3_512": "0e5da751a82d9524c5fff054c5df7d4bdcdb1aeb6ac6617294bb656c1d58ec82ab95eb26249575735e8d1a31ba620a2e0ebd990e0c380e65c0831b413f4586f1"
     },
     {
       "path": "deliverables/20261011/seat-cairn/镜像攻克与四仓对齐_DF-AI-20261011-CAIRN-22.otl",
