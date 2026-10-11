@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T09:46:35.333Z",
+  "generated_at": "2026-10-11T09:52:10.606Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3014,
-  "merkle_root_sha3_512": "158c4d721dfe32b87a28f776882df597eeac5c78e8b51298175d12a807963c51efa34f82162d4283d94a44c4f6c906c9053c90f2faba20ef83511c6ffe77f159",
-  "hmac_sha3_512": "39f471c903536861f4dcd93f1c922ab634956939223b76dacbebf607078fbcf76affd322eae2fde4b15593be00e5f9e502679f7a0f0cf7321f9b89bdcb354c70",
+  "file_count": 3015,
+  "merkle_root_sha3_512": "4505c1b5d401f6ae5e8a5b6e50ac912792d88ee8188aec1a89f79b196b84cc9755f62cd2c0fbe1aafe9ae56fe0accf004f8af8722a8acf6846310bdead3e4a9e",
+  "hmac_sha3_512": "ce7d71fcde4d136d1837e86e306dd960f57569eb9737c1e45489d99f2d5fd9a7d5d8cd974e9b776a7eeeb63977ca4185ba28c0a5b276d1bc391605111c7e3a3d",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -6616,6 +6616,12 @@
       "size": 5634,
       "content_sha3_512": "a8c3c61219a68b05b6ea1059cbc29364c6f5eca6e162075c4f31fb4885ae8a15af6b25a2ee76609c7465850b42d4ae306244533ad880f5d2a596e69f8e77ef33",
       "leaf_sha3_512": "15ffcbaaab65aec1f34ed7027287561250db6a4f7f01fd16a7f62a054c6c6a07e9165b49c3d77159a61db35132f91c5cdc8fa7e2ac37e1d272e0ac3ce8499bdc"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/他人外观入世88倍_DF-OPS-20261011-CAIRN-21.otl",
+      "size": 4995,
+      "content_sha3_512": "4c099e33dbb7169181df6f3bd88f522b3f9f9fa41433434ccd837f0bf4634ae4a933f5d634f5ea596923b0da687e9432f8129c92c01bacba95339f0a8db237c4",
+      "leaf_sha3_512": "bf695c1bac88ef745d3bf45b63270f960337a9dbd0ff02500a52a67a53237e012bd8dcb6992572d70b5f52873230f041f2b5caa104d1ccf1254a20ad406aa2a3"
     },
     {
       "path": "deliverables/20261011/seat-cairn/位置对照实验十三_DF-AI-20261011-CAIRN-31.otl",
