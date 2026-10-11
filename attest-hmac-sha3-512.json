@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T13:52:43.147Z",
+  "generated_at": "2026-10-11T13:54:39.503Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3196,
-  "merkle_root_sha3_512": "9f81a93c9afd67e4edfcc2de937c139549d19bc41b4c7340683d8c55eef0da32b52c04b2644098afe0444c36e89d4927793192048a01b7d80c1340233295f20d",
-  "hmac_sha3_512": "29fa2c474a56900963236863526ddec743b77cf071fe852d25516bd623313d28b7f250fd7396dd6b040953b1687575a421a67fc62e6246787228bdc2a89d616e",
+  "file_count": 3197,
+  "merkle_root_sha3_512": "2f6bca342f7cdad14b5911f5fb21825b2b2154fe1b55de690659f6d1fad633cd5d4dec57ae0107a8d8960f0eb89980bbe4fd90c63a7fdcb9e5166767bc9a4530",
+  "hmac_sha3_512": "95b873cec7befb7b9e0099de42c95411590d4692f14b8b259f535c210f94abd9bef74f301d7d9431d245b8003c76c3f1a6ba7b094a2a7d7f2d5af9c9eca88688",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -7414,6 +7414,12 @@
       "size": 4143,
       "content_sha3_512": "d19d53835dc36bdb6d3ff50496965acc5c6840ff3a3e09101f9fce7932f9cc07ae0085359d55f59d2e3304dd90aeb67091d86ecc4236c9a272f88c83e2bfa087",
       "leaf_sha3_512": "1ab7f5b2ae3dc5c1896e0ab7b18ad06fcb41b0b6c52b5d97f1ce391961b24e4cd8d7b0e6484551cb50796d5fde7e8c009d33206f35fa63b11c300dc72d870897"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/三模式可达性与勘误五_DF-OPS-20261011-CAIRN-52.otl",
+      "size": 5920,
+      "content_sha3_512": "588a0654cb1b99b4f8a9240a431b205c9f2a7e30f28f6bae95f4ae1660fe3a2491bc6c30699e905c04976ca5973dd0297c1b8d218ee608e83f62e2b1b90aa7c8",
+      "leaf_sha3_512": "922c2a7f4027041b16a93095a43ede8665e5814a175a454087756b58f7c359d89617a6e6df303f848d8b972da0946e455f19222e824f3e43d289e972950b2f5a"
     },
     {
       "path": "deliverables/20261011/seat-cairn/两条大发现Tripo_DF-OPS-20261011-CAIRN-16.otl",
