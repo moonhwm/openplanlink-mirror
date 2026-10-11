@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T12:33:54.575Z",
+  "generated_at": "2026-10-11T13:14:41.608Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3190,
-  "merkle_root_sha3_512": "194db77ed07ea2fad96786f7d8001ada0dc43e6b99739b323e8d0238876e6449185cf93041025142c47c925c9dd579ba7cf2610f3196850051ce040251c92705",
-  "hmac_sha3_512": "a86d32bcb473bb6df13b07d83104c3c20d3a196117968c77c17c5f5261d336ac4d46455a00ef660cdb156fb400237e9e7274bbd20c129ff564464412b6f0b255",
+  "file_count": 3191,
+  "merkle_root_sha3_512": "afdab7afa278bfd4f7a09004beec31c9cd6ac3077b9944b5c54d3eaa497c5975a327d870e97f91849683f520c42ba077092cc9e12280a2e3fe8fee1d7c148f33",
+  "hmac_sha3_512": "59645cc0fa3df57cbe9b84d6a97341b319005825d8c1fa18dd522c9bb273f67f936d374ab375e5967b85cbd437f67bb13ef58b7401d25ee9c86f2addd1973eb9",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -7798,6 +7798,12 @@
       "size": 4747,
       "content_sha3_512": "f9dfe5459fbcca58f670386890aca3c7eb3f2e1fb7bc0bfaa9b44a18611c62d5e222c9cc4387158293690aff610cf444e83bf7e41f4ae5b7879e8cbda5460244",
       "leaf_sha3_512": "4b3b94c2cc9551559e2b92ea3f938ae1086759f529632e2d310904f86c61722acfdba690409b6dabf242f604092cf176dc3291b35a5b4794b102e001e703fd03"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/真向量与表示选择_DF-OPS-20261011-CAIRN-46.otl",
+      "size": 5804,
+      "content_sha3_512": "64ad8b693b09b138463bcc1bf50396a2bd2d08be9033a7810a1896735607608416c4b9fbc344bf970b99118e03773fa05e9df844647e93e7c6907fa08a0484ae",
+      "leaf_sha3_512": "546f824e6eabebe764f71d8486083e18a3956a1b58b182bdc4fd2f198ca72ee0a09025470a4ced86c539f0e5f1490eaa2ff16f827e6dfab6677b795468872777"
     },
     {
       "path": "deliverables/20261011/seat-cairn/短令对照实验七_DF-AI-20261011-CAIRN-12.otl",
