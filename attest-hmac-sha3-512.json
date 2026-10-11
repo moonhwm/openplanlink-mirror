@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T10:20:39.146Z",
+  "generated_at": "2026-10-11T10:22:29.786Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3171,
-  "merkle_root_sha3_512": "7eb1e3e4fb18759c9ac9e1964ff64c4bcbd02f3b491f9d0a2cd44fc76924b022e31c9d6e81ac0cda2f62fee2849b54fc2375f77921e5da3649810919563f60fe",
-  "hmac_sha3_512": "b4cbf739c221340cf03a246a4dab8e4bdab51c0b40d7861dca655a8bb533731a4c3c8c626e0554e065c2be19bb2fc9dca56d5f58869be7a72b624cf2725a1967",
+  "file_count": 3172,
+  "merkle_root_sha3_512": "db4c96bc4902b6a85f6e065d971a80972a1b7ab7575d9cf1bd4f0efc649d88fa7d3d82a092cdc48c599b11fc3818124eba8eeb873ed92b093e321ee3f73219a1",
+  "hmac_sha3_512": "e973660a2edfbfdc4224ecdf97b26667c24de9957fc9865979040c7c9a103a93c50c427f50f70721a94180b0950a0a0c6c9ceaa05b0c653ceccdd1f2827f9d3a",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -7600,6 +7600,12 @@
       "size": 3597,
       "content_sha3_512": "2f9354fc49e012023b0685dbe1f3611c2903f664a63a9485cf17aacc2e8e5398db1885bccbad395c571599d6ca27b6c1685e1019fa338b797014543601661287",
       "leaf_sha3_512": "2bb1231caad1032e050006831f9b7dbac4708245e04071333bd8e46d12d9529dd25b633a2fd7c054cbfbcdae8ad14abf0c7686e822733048bc1e8cd6cdf5f1f2"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/守望期加固汇录_DF-OPS-20261011-CAIRN-27.otl",
+      "size": 5464,
+      "content_sha3_512": "217b61da451d90a5f79f80b715e89439b5e5b65fff44a50a9675ab7bab808c0da64afba5e3dca75673c26e7e241cc09c01234eb3cc6522971b2d0f98e047fe8e",
+      "leaf_sha3_512": "09c8dc1562a2d7c08280dfaf99a03c295e3c7d337a201b03cba794c83c1416bd138c0eb9011510365ccb6b975bd8c52fd345e57315d13699de6ae064182f170b"
     },
     {
       "path": "deliverables/20261011/seat-cairn/实时交互入口解剖_DF-AI-20261011-CAIRN-08.otl",
