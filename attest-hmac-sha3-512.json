@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T08:32:05.011Z",
+  "generated_at": "2026-10-11T08:33:10.745Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2977,
-  "merkle_root_sha3_512": "1e07669593617e0fb20c6023d11feafdc24f31cb15a4f2106551c7ee500c94b4e3fd69d1a223f9b7168b3542fd8ef1879810a13376bad8138a818ffa37a6a653",
-  "hmac_sha3_512": "854a359dd20aadc20d3d6296d06e1fff6581056abdb2bcf0e724fb2bd045267cd123ef3bfcd75b9032490ec7cbdf9268cf3d5889a11273cbe278a74b031ef1c8",
+  "file_count": 2978,
+  "merkle_root_sha3_512": "f8470d62b087a0b34e9c9cfc243bbc49db1c53781965ea15bec624a99c13fbc525f01372c1ef0bc2889deb6baa14a0d2d991aa1a65740535f958f3ca3e203690",
+  "hmac_sha3_512": "06199025bb234ec0e76cd94c29bc3e46ebd4712ee8f11c23c41b3830b3da59cb2e518f2945020aa791938a3d6a49eae69285d3da0abf41e0285be3a0796cd26a",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -6466,6 +6466,12 @@
       "size": 5293,
       "content_sha3_512": "7871ff9be04bb4f748a66c9e016180fad81d17380782ae4147ed5c93b6933ed1e9fcbde6359e0a26a4b8daec752a7c66cb14f25c7868d171bed3ce0a725c3f58",
       "leaf_sha3_512": "cbd1d7f0a3de93df219f31fdf0cc1f48d8ec24ab6be2992011a7045f779395d117bfea4ea34c08fffcbe569da8d5f41576e3f486791ccdf313994fed216f18a4"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/人设四段动画_DF-PERSONA-20261011-CAIRN-04.otl",
+      "size": 4804,
+      "content_sha3_512": "7bb0fda4d8bae78e9788ba9cdca9d14b65545f6b1ac105bff0ccb7653460636452a0671d4942942dea5d64bb0fe1ebf6236a8b7a43c03efe9ef06b23dbb1dfa5",
+      "leaf_sha3_512": "371e960f9b413f910a90e8c28320d244e18952cddc261b7eda6d46af286ba70453f362e583285f7d9813b1f1439a4b5bd18aebe1b885a54fc667550abd5f6b92"
     },
     {
       "path": "deliverables/20261011/seat-cairn/人设总册v3修订r3_DF-PERSONA-20261011-CAIRN-01.otl",
