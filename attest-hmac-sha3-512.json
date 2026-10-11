@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T11:54:10.696Z",
+  "generated_at": "2026-10-11T11:58:44.802Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3186,
-  "merkle_root_sha3_512": "1a95a99c3ec0f35e56fb37d89ddda6d53c2ba6acbd6ec387ff9c4625595c3c967fdc9e563555768cbdee35e2d4fd4cd9ef0348cb2ee28bd11d963b46acd1966c",
-  "hmac_sha3_512": "cbac9b2404f2c02daaf221db5da3f32ce3a5284e2d2131dc732d9ea5bdb874615e02236c988320b1379e11eb5af7fb774eb7733a1048dea9664e3e61986483eb",
+  "file_count": 3187,
+  "merkle_root_sha3_512": "4ed2f1011072668776dce01468bff14072353c3014bb5a2ada795f72bcb1291e0fc7defbd6fb171315dba02d5424cec86a9ab158f05e453e7555517f488d79a0",
+  "hmac_sha3_512": "817d051ee86c75ff23fcfab9cf8f54baef5a458e1cebf978504c8240fcb70f79452bf64bad17120e943c9d9422bae81e7f41f42e743f6025d0a88872f98948a2",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -7798,6 +7798,12 @@
       "size": 7491,
       "content_sha3_512": "4c07b643e60ba9dc307d2c2ab8ee2dc732fdd1d763c9d96bfc2b14cae202baa769983cddc0eff5cd9a3e81be84a6e2a9e5f86590ec0d8ddeaef70bf8ef4c9852",
       "leaf_sha3_512": "e6a31763ca9591bb71a9479a33335074248375e759d4e642ddf8b9ff793bc138f2532ccfec09b362c08e1fe661ea1e158ce9a3353ae282e57252ad52003dd7d2"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/章节级检索建成_DF-OPS-20261011-CAIRN-42.otl",
+      "size": 4837,
+      "content_sha3_512": "72f7dbf76b7cda88d8a337f7b5530e23a67aa6b2724fb525ee9a0dda639cbfb2b0a459b92a7de2bceffe0a63f460061ebd077e6cd97d4d0cd3d3a38114a5bfc7",
+      "leaf_sha3_512": "03564b11da6fb349ee48ccf703c335725226b89a65d4d140c2d1dcd51b252c4f2898e618caf50cbdfd55c16605b39129b308f744e3ee60d5facd37ddd45512d3"
     },
     {
       "path": "deliverables/20261011/seat-cairn/签而后验与hub技能_DF-AI-20261011-CAIRN-25.otl",
