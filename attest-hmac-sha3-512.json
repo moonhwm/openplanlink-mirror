@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T09:07:30.456Z",
+  "generated_at": "2026-10-11T09:08:33.655Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3001,
-  "merkle_root_sha3_512": "55e3014a9e1aab5067798d6c39d3c4467016e3ecded82ffa7f93a5afb7d9631cb61db619deebadb7a33086cd4e0715c2b7cde1c8edc8eb4d6c28ba62a60cdcd4",
-  "hmac_sha3_512": "fec0746a9915fedb52b314b0f7f13bfb3a668b8c2ffb8897c80dec27e86afa21be70fb830a38c09c5a99a17bc32fe698634823533cc0c88b3692976c251aa46a",
+  "file_count": 3002,
+  "merkle_root_sha3_512": "5e4d0c724593dff8963e431b80f1c1152d27e137b47cc1c06569a954542ad5f4923d857bf9fb799acf05325ffa4f2179f27ec7b9932af7e4380cf6f6f9e1cd7f",
+  "hmac_sha3_512": "d946b07c5d9ccd075f0214f5e73711a09460239ec7ed839ceace0a526d106f36d592c8aac9ca5950b0ba31f0ab06fb421b03f206867cab62e963d038d95bd18a",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -6760,6 +6760,12 @@
       "size": 6153,
       "content_sha3_512": "f0c2cccf2a2ad25bdaea3f2a909b736512e62cd40a49fde7b9b96203fc19633af5020ddd9a8f093a0f58a33b205d4a2cfaede1e1e4b566d907b1f70e2c3d2481",
       "leaf_sha3_512": "ad4cb783d7c32f607d1ea37db867d685ce926a61b6a3625c1e14f58576d5ccf45fd0202e5ec2ff0ba1ac53f463de87c76978807326b6b391bb1ed1c6ebeb775d"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/非像素保真实验十七_DF-AI-20261011-CAIRN-39.otl",
+      "size": 4581,
+      "content_sha3_512": "73abdf9942524a86f1437a3f465165abc70b3747ebc9d9aa182455874a57e5a582194c9c33e92e20f37f120dffb52b0d528ea7e3df37825a54c5a96d7a96e9e6",
+      "leaf_sha3_512": "769d6e1264fbce5c6af08961713834b706d7205c7fc0972ce29032b85b2800e476b6daef1ad982cb10eaea9f60411fa12619b2a4d3e4928b8a175fb1180991ac"
     },
     {
       "path": "deliverables/20261011/seat-cairn/预算墙穷举_DF-AI-20261011-CAIRN-28.otl",
