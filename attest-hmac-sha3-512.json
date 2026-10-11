@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T09:06:36.377Z",
+  "generated_at": "2026-10-11T09:07:30.456Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3000,
-  "merkle_root_sha3_512": "52c27d4e115fcc661bf76e521a555de660e5a1e91af63fe0f714bb5fd5b490eb98917687811135f0a60adbc721e8ab14db20a5044e7997b6b636dc86e973361a",
-  "hmac_sha3_512": "11a501a7dac8b117480b4f89d3de8a8075151c8e163bc29d5fe166db1bb12fa846260700ea5af920ef8958a241f56d008d1a2b80bec2327d8e909cd041ef3bc1",
+  "file_count": 3001,
+  "merkle_root_sha3_512": "55e3014a9e1aab5067798d6c39d3c4467016e3ecded82ffa7f93a5afb7d9631cb61db619deebadb7a33086cd4e0715c2b7cde1c8edc8eb4d6c28ba62a60cdcd4",
+  "hmac_sha3_512": "fec0746a9915fedb52b314b0f7f13bfb3a668b8c2ffb8897c80dec27e86afa21be70fb830a38c09c5a99a17bc32fe698634823533cc0c88b3692976c251aa46a",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -6646,6 +6646,12 @@
       "size": 7462,
       "content_sha3_512": "f1d9187fc14e0fbcbf6380238bea73374974afe27149ff524884b64bbca5d6fd4e08e4b75e204e1bd851e3ee36d33d21d5fdf1773faf0d3dbff4c18e7deacd58",
       "leaf_sha3_512": "e8c0b7abd4aa6dabfdc98620117e17756193b35729f7ec284c4e7512037f1f7f1473cda5276e2477921f4142cb5a77b17a7899f62799b176baf7f2de11142c88"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/姿态不驱动运动实验十六_DF-AI-20261011-CAIRN-38.otl",
+      "size": 4584,
+      "content_sha3_512": "2b09e588622a67bb6688b8e4827adc27fb8e0d9a971d56cf4d39ea2fdb18b0fb07a1fbe63c084338af610d1825c8828cf5d47278aa6233eb868be8c696cfa42a",
+      "leaf_sha3_512": "99e37a8aa97acd2a254cc37dfe22a1bbdc96bbace578cb462d397c87f4b47214b2aae94e11a7bc06d328f1f41cf9ddd657654d604122e767683a7dc0ae4ec93e"
     },
     {
       "path": "deliverables/20261011/seat-cairn/姿态库终判_DF-PERSONA-20261011-CAIRN-03.otl",
