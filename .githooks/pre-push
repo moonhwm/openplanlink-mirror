@@ -1,24 +1,227 @@
 #!/bin/sh
-# 守藏席 2026-10-03/04 部署：预推送门禁（协议一致性 + 凭据扫描）
-# v3：修正 git grep 选项顺序与空 TREES 处理
-set -e
-if ! git cat-file -e HEAD:LICENSE 2>/dev/null; then
-  echo "[hook:pre-push] 阻断：缺失 LICENSE" >&2
-  . "$(git rev-parse --git-path hooks)/pre-commit-fail-alert" "license-missing"
+# ============================================================================
+# 统一 pre-push 门禁（单一门源· core.hooksPath=.githooks）
+# 档号：OPL-SEC-20261005-GATE-02（凭据）+ 守藏席 v3（协议一致性）
+#       + tools/hooks/pre-push（提交签名校验）
+#
+# ★ 排序原则：fail-closed 的安全门在前，构建/测试门在后。
+#
+# 链条：
+#   ① 提交签名校验（tools/hooks/pre-push 的逻辑；advisory + 强制留痕）
+#   ② 全量凭据复扫（tools/secretscan/scan.py，覆盖本次推送涉及的每个 blob）
+#
+# 逃生阀：SKIP_CREDENTIAL_GATE=1 可绕过 ②，强制留审计。① 不可绕过。
+# ============================================================================
+
+set -u
+
+ROOT="$(git rev-parse --show-toplevel)"
+HOOKDIR="$ROOT/.githooks"
+cd "$ROOT"
+
+AUDIT_LOG=".git/hook-audit.log"
+audit() {
+  printf '%s [%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" "$2" >> "$AUDIT_LOG" 2>/dev/null || true
+}
+alert() {
+  . "$(git rev-parse --git-path hooks)/pre-commit-fail-alert" "$1" 2>/dev/null || true
+  [ -f "$(git rev-parse --git-path hooks)/pre-commit-fail-alert" ] || \
+    . "$HOOKDIR/pre-commit-fail-alert" "$1" 2>/dev/null || true
+}
+
+echo "════ [pre-push] 统一门禁启动 ════"
+audit "pre-push-start" "remote=${1:-none}"
+
+# ------------------------------------ ① 提交签名校验（advisory，但强制留痕）
+echo "🔏 [gate-1] 提交签名校验"
+SIG_OK=1
+if [ -f "tools/hooks/pre-push" ]; then
+  if sh "tools/hooks/pre-push" "$@"; then
+    echo "✅ [gate-1] 签名校验 PASS"
+  else
+    SIG_OK=0
+    echo "⚠️  [gate-1] 签名校验未通过（未签名提交）" >&2
+  fi
+else
+  SIG_OK=0
+  echo "⚠️  [gate-1] 未找到 tools/hooks/pre-push，签名校验未执行" >&2
+fi
+
+if [ "$SIG_OK" != "1" ]; then
+  # 裁决 3：过渡期内每次 push 必须留「签名未校验」记录，不接受静默
+  audit "SIGNATURE-NOT-VERIFIED" "advisory pending remediation deadline=2026-11-05"
+  echo "    ↳ 已记入 .git/hook-audit.log：签名未校验（整改到期 2026-11-05）" >&2
+  if [ "${OPL_ENFORCE_LEGACY_GATE:-0}" = "1" ]; then
+    echo "⛔ [gate-1] 签名校验未通过（OPL_ENFORCE_LEGACY_GATE=1），推送被拒。" >&2
+    alert "signature-unverified"
+    exit 1
+  fi
+fi
+
+# ------------------------------------ ② 全量凭据复扫（安全门，fail-closed）
+PY=""
+for cand in \
+  "${OPL_PYTHON:-}" \
+  "${SELFVO_PYTHON:-}" \
+  "C:/Users/欧阳宏俊/.workbuddy/binaries/python/versions/3.13.12/python.exe" \
+  "C:/Users/欧阳宏俊/.workbuddy/binaries/python/versions/3.13.14/python.exe" \
+  "python3" "python"
+do
+  [ -n "$cand" ] || continue
+  if [ -x "$cand" ]; then PY="$cand"; break; fi
+  if command -v "$cand" >/dev/null 2>&1; then PY="$cand"; break; fi
+done
+
+if [ -z "$PY" ]; then
+  echo "⛔ [gate-2] 未找到 Python 解释器 —— 拒绝放行（fail-closed）" >&2
+  audit "gate2-python-missing" "block"
   exit 1
 fi
-if ! git cat-file -e HEAD:NOTICE 2>/dev/null; then
-  echo "[hook:pre-push] 阻断：缺失 NOTICE" >&2
-  . "$(git rev-parse --git-path hooks)/pre-commit-fail-alert" "notice-missing"
+
+SCAN=""
+for cand in \
+  "${OPL_SECRETSCAN:-}" \
+  "tools/secretscan/scan.py" \
+  "src/selfevo/secretscan/scan.py" \
+  "tools/selfevo/secretscan/scan.py"
+do
+  [ -n "$cand" ] || continue
+  if [ -f "$cand" ]; then SCAN="$cand"; break; fi
+done
+
+if [ -z "$SCAN" ]; then
+  echo "⛔ [gate-2] 未找到凭据扫描器 —— 拒绝放行（fail-closed，不是放行）" >&2
+  audit "gate2-scanner-missing" "block"
   exit 1
 fi
-CRED_PATTERNS='BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|password[[:space:]]*=[[:space:]]*"[^"]+"|api[_-]?key[[:space:]]*=[[:space:]]*"[^"]+"|sk-[A-Za-z0-9]{20,}'
-TREES=$(git rev-list origin/main..HEAD 2>/dev/null || true)
-if [ -z "$TREES" ]; then exit 0; fi
-HITS=$(git grep -I -n -E "$CRED_PATTERNS" $TREES -- ':!.githooks/' | head -5)
-if [ -n "$HITS" ]; then
-  echo "[hook:pre-push] 阻断：推送范围检出疑似凭据模式" >&2
-  . "$(git rev-parse --git-path hooks)/pre-commit-fail-alert" "credential-scan"
-  exit 1
+
+# 守藏席 v3：协议一致性（LICENSE / NOTICE 必须在库中存在）
+echo "🧭 [gate-2] 协议一致性 + 凭据复扫"
+for f in LICENSE NOTICE; do
+  if ! git cat-file -e "HEAD:$f" 2>/dev/null; then
+    echo "⛔ [gate-2] 阻断：缺失 $f（协议一致性令）" >&2
+    audit "gate2-missing-$f" "block"
+    alert "$(echo "$f" | tr 'A-Z' 'a-z')-missing"
+    exit 1
+  fi
+done
+echo "    LICENSE/NOTICE 在位：OK"
+
+if [ "${SKIP_CREDENTIAL_GATE:-0}" = "1" ]; then
+  echo "" >&2
+  echo "==========================================================" >&2
+  echo "  [!!] 推送前凭据门禁已被 SKIP_CREDENTIAL_GATE=1 绕过" >&2
+  echo "  本次推送的 blob 未经任何密钥扫描。" >&2
+  echo "  已记入 .git/hook-audit.log。" >&2
+  echo "==========================================================" >&2
+  audit "gate2-BYPASSED" "by=SKIP_CREDENTIAL_GATE=1 trigger=${GIT_AUTHOR_NAME:-unknown}"
+  echo "✅ 全部 pre-push 门禁通过（凭据复扫被绕过）"
+  exit 0
 fi
-exit 0
+
+TMPD=".git/.gate2_tmp.$$"
+REFS="$TMPD/refs.txt"; OBJS="$TMPD/objs.txt"; POBJS="$TMPD/pobjs.txt"
+MAP="$TMPD/map.txt"; SDIR="$TMPD/blobs"
+mkdir -p "$SDIR"
+cleanup2() { rm -rf "$TMPD" >/dev/null 2>&1; }
+trap cleanup2 EXIT
+: > "$REFS"; : > "$OBJS"; : > "$POBJS"; : > "$MAP"
+
+cat > "$REFS"
+while IFS= read -r line; do
+  [ -n "$line" ] || continue
+  LSHA="$(printf '%s' "$line" | awk '{print $2}')"
+  RSHA="$(printf '%s' "$line" | awk '{print $4}')"
+  [ -n "$LSHA" ] || continue
+  if [ "$RSHA" = "0000000000000000000000000000000000000000" ] || [ -z "$RSHA" ]; then
+    RANGE="$LSHA"
+  else
+    RANGE="$LSHA --not $RSHA"
+  fi
+  git rev-list --objects $RANGE 2>/dev/null | while IFS= read -r ol; do
+    [ -n "$ol" ] || continue
+    O="$(printf '%s' "$ol" | awk '{print $1}')"
+    P="$(printf '%s' "$ol" | cut -s -d' ' -f2-)"
+    printf '%s\n' "$O" >> "$OBJS"
+    printf '%s|%s|%s\n' "$O" "$O" "$P" >> "$POBJS"
+  done || true
+done < "$REFS"
+
+BLIST="$TMPD/bl.txt"; : > "$BLIST"
+if [ -s "$OBJS" ]; then
+  git cat-file --batch-check < "$OBJS" | awk '$2 == "blob" { print $1 }' > "$BLIST" || true
+fi
+
+IDX=0
+while IFS= read -r sha; do
+  [ -n "$sha" ] || continue
+  IDX=$((IDX + 1))
+  git cat-file blob "$sha" > "$SDIR/$IDX" 2>/dev/null || continue
+  printf '%s|%s|%s\n' "$IDX" "$sha" "$sha" >> "$MAP"
+done < "$BLIST"
+
+if [ "$IDX" = "0" ]; then
+  echo "    （本次推送无可扫 blob，放行）"
+  audit "gate2-pass" "blobs=0"
+  echo "✅ 全部 pre-push 门禁通过"
+  exit 0
+fi
+
+echo "    Python : $PY"
+echo "    扫描器 : $SCAN"
+echo "    对象   : $IDX 个 blob"
+OUT="$TMPD/scan.json"
+if "$PY" "$SCAN" "$SDIR" --json "$OUT" >/dev/null 2>&1; then
+  echo "✅ [gate-2] 凭据复扫 PASS（$IDX 个 blob 已扫）"
+  audit "gate2-pass" "blobs=$IDX"
+  echo "✅ 全部 pre-push 门禁通过"
+  exit 0
+fi
+
+"$PY" -c 'import json, sys
+def load(p):
+    d = {}
+    try:
+        for ln in open(p, encoding="utf-8"):
+            a = ln.rstrip("\n").split("|")
+            if len(a) == 3:
+                d[a[0]] = (a[1], a[2])
+    except Exception:
+        pass
+    return d
+idx2obj = load(sys.argv[1]); sha2path = {}
+try:
+    for ln in open(sys.argv[2], encoding="utf-8"):
+        a = ln.rstrip("\n").split("|")
+        if len(a) == 3:
+            sha2path[a[0]] = a[2]
+except Exception:
+    pass
+try:
+    d = json.load(open(sys.argv[3], encoding="utf-8"))
+except Exception:
+    d = {}
+seen = set(); n = 0
+for h in d.get("findings", {}).get("P0", []):
+    fp = h.get("file", "")
+    key = (fp, h.get("line"), h.get("pattern"))
+    if key in seen:
+        continue
+    seen.add(key); n += 1
+    base = fp.split("/")[-1]
+    sha = idx2obj.get(base, (base, ""))[1]
+    print("  [%d] 对象 %s" % (n, sha))
+    print("      原路径 : %s" % (sha2path.get(sha, "(路径映射缺失)") or "(无路径/树对象)"))
+    print("      命中   : %s  行%s  %s  sha8=%s" % (
+        h.get("pattern", "?"), h.get("line", "?"), h.get("mask", ""), h.get("sha256_8", "")))
+' "$MAP" "$POBJS" "$OUT" 2>/dev/null || true
+
+echo ""
+echo "════════════════════════════════════════════════════════" >&2
+echo "⛔ [gate-2] 推送被拦截：检出凭据线索（P0）" >&2
+echo "    OPL-SEC-20261005-GATE-02：公开仓库不得含明文密钥。" >&2
+echo "    处置：删除或掩码后重推。确需放行须主权人裁定。" >&2
+echo "════════════════════════════════════════════════════════" >&2
+audit "gate2-credential" "block"
+alert "credential-scan"
+exit 1

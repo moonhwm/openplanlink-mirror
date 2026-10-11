@@ -1,29 +1,217 @@
 #!/bin/sh
-# 守藏席 2026-10-04 部署：预提交门禁 v4（凭据扫描 + 超链接原样性预审）
-# 依据：机主全局声明（MFA/Git/Hook 引入；二期补充「对凭据明文、协议文本完整性及超链接原样性执行自动预审」）
-set -e
-CRED_PATTERNS='BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|password[[:space:]]*=[[:space:]]*"[^"]+"|api[_-]?key[[:space:]]*=[[:space:]]*"[^"]+"|sk-[A-Za-z0-9]{20,}'
-# 1) 凭据泄露扫描
-HITS=$(git grep --cached -I -n -E "$CRED_PATTERNS" -- ':!.githooks/' | head -5)
-if [ -n "$HITS" ]; then
-  echo "[hook:pre-commit] 阻断：暂存区检出疑似凭据模式（见即止不外显）" >&2
-  . "$(git rev-parse --git-path hooks)/pre-commit-fail-alert" "credential-scan"
+# ============================================================================
+# 统一 pre-commit 门禁（单一门源 · core.hooksPath=.githooks）
+# 档号：OPL-SEC-20261005-GATE-01（凭据）+ 守藏席 2026-10-04 v4（链接原样性）
+#       + tools/hooks/pre-commit（编译 + 核心测试）
+#
+# ★ 排序原则：fail-closed 的安全门在前，构建/测试门在后。
+#   理由：凭据问题不该被编译错误掩盖，反之亦然——两类失败的处置动作完全不同，
+#   混在一起会让排查者误判根因。
+#
+# 链条（任一失败即阻断，全部阻断语义）：
+#   ① 凭据零字面量（tools/secretscan/scan.py，fail-closed + 候选路径）
+#   ② 超链接原样性预审（守藏席 v4 link_baselines，逻辑原样保留）
+#   ③ 暂存区 .py 编译 + 核心测试 TOTP/HMAC（advisory，见下）
+#
+# 逃生阀：SKIP_CREDENTIAL_GATE=1 可绕过 ①，但强制留审计（见 §逃生阀）。
+#         ② ③ 不可用该阀绕过。
+# ============================================================================
+
+set -u
+
+HOOKDIR="$(git rev-parse --show-toplevel)/.githooks"
+cd "$(git rev-parse --show-toplevel)"
+
+AUDIT_LOG=".git/hook-audit.log"
+audit() {
+  # $1=事件 $2=细节
+  printf '%s [%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" "$2" >> "$AUDIT_LOG" 2>/dev/null || true
+}
+# 守藏席既有的块审计（保留其落点 ~/.githooks-audit.log，不合并、不删除）
+alert() {
+  . "$(git rev-parse --git-path hooks)/pre-commit-fail-alert" "$1" 2>/dev/null || true
+  # core.hooksPath 生效后 --git-path hooks 指向 .git/hooks，原脚本可能不在那里；
+  # 回落到本目录，保证告警链不断。
+  [ -f "$(git rev-parse --git-path hooks)/pre-commit-fail-alert" ] || \
+    . "$HOOKDIR/pre-commit-fail-alert" "$1" 2>/dev/null || true
+}
+
+# ---------------------------------------------------- ① 凭据零字面量（安全门）
+PY=""
+for cand in \
+  "${OPL_PYTHON:-}" \
+  "${SELFVO_PYTHON:-}" \
+  "C:/Users/欧阳宏俊/.workbuddy/binaries/python/versions/3.13.12/python.exe" \
+  "C:/Users/欧阳宏俊/.workbuddy/binaries/python/versions/3.13.14/python.exe" \
+  "python3" "python"
+do
+  [ -n "$cand" ] || continue
+  if [ -x "$cand" ]; then PY="$cand"; break; fi
+  if command -v "$cand" >/dev/null 2>&1; then PY="$cand"; break; fi
+done
+
+if [ -z "$PY" ]; then
+  echo "❌ [gate-1] 未找到可用 Python 解释器 —— 拒绝放行（fail-closed）" >&2
+  audit "gate1-python-missing" "block"
   exit 1
 fi
-# 2) 超链接原样性预审（首次入库自动固化基线，变更须随 commit 显式更新基线）
-for f in $(git diff --cached --name-only | grep -v '^\.githooks/'); do
+
+# 候选顺序：本仓布局（tools/…）必须排在 selfevo 布局之前，
+# 因为 src/selfevo/secretscan/scan.py 在本仓不存在，排前会恒定miss。
+SCAN=""
+for cand in \
+  "${OPL_SECRETSCAN:-}" \
+  "tools/secretscan/scan.py" \
+  "src/selfevo/secretscan/scan.py" \
+  "tools/selfevo/secretscan/scan.py"
+do
+  [ -n "$cand" ] || continue
+  if [ -f "$cand" ]; then SCAN="$cand"; break; fi
+done
+
+if [ -z "$SCAN" ]; then
+  echo "⛔ [gate-1] 未找到凭据扫描器 —— 拒绝放行（fail-closed，不是放行）" >&2
+  echo "    处置：恢复 tools/secretscan/scan.py（已纳入版本控制），" >&2
+  echo "          或用 OPL_SECRETSCAN=<绝对路径> 指定。" >&2
+  audit "gate1-scanner-missing" "block"
+  exit 1
+fi
+
+echo "🔒 [gate-1] 凭据零字面量（fail-closed）"
+echo "    Python : $PY"
+echo "    扫描器 : $SCAN"
+"$PY" -c 'import sys, hashlib
+print("    指纹   : sha8=%s" % hashlib.sha256(open(sys.argv[1], "rb").read()).hexdigest()[:8])' "$SCAN" 2>/dev/null || true
+
+if [ "${SKIP_CREDENTIAL_GATE:-0}" = "1" ]; then
+  # ---------------------------------------------- 逃生阀（三条纪律，缺一无效）
+  echo "" >&2
+  echo "==========================================================" >&2
+  echo "  [!!] 凭据门禁已被 SKIP_CREDENTIAL_GATE=1 绕过" >&2
+  echo "  本次提交的暂存内容未经任何密钥扫描。" >&2
+  echo "  已记入 .git/hook-audit.log，绕过他人在复核时会看到。" >&2
+  echo "==========================================================" >&2
+  audit "gate1-BYPASSED" "by=SKIP_CREDENTIAL_GATE=1 head=$(git rev-parse --short HEAD 2>/dev/null || echo none) staged=$(git diff --cached --name-only | wc -l | tr -d ' ') trigger=${GIT_AUTHOR_NAME:-unknown}"
+else
+  STAGED_LIST=".git/.gate1_staged.$$"
+  HITDIR=".git/.gate1_hits.$$"
+  mkdir -p "$HITDIR"
+  cleanup_gate1() { rm -f "$STAGED_LIST" >/dev/null 2>&1; rm -rf "$HITDIR" >/dev/null 2>&1; }
+  trap cleanup_gate1 EXIT
+
+  git diff --cached --name-only --diff-filter=ACM > "$STAGED_LIST"
+  N="$(grep -c . "$STAGED_LIST" 2>/dev/null || true)"
+  [ -n "${N:-0}" ] || N=0
+
+  if [ "$N" != "0" ]; then
+    echo "    暂存   : $N 个文件"
+    FAIL1=0
+    while IFS= read -r f; do
+      [ -n "$f" ] || continue
+      [ -f "$f" ] || continue
+      OUT="$HITDIR/$(printf '%s' "$f" | tr '/\\' '__').json"
+      if ! "$PY" "$SCAN" "$f" --json "$OUT" >/dev/null 2>&1; then
+        echo "  ❌ $f"
+        FAIL1=$((FAIL1 + 1))
+        if [ -f "$OUT" ]; then
+          "$PY" -c 'import json, sys
+try:
+    d = json.load(open(sys.argv[1], encoding="utf-8"))
+except Exception:
+    sys.exit(0)
+for h in d.get("findings", {}).get("P0", [])[:5]:
+    print("       命中: %s  行%s  %s  sha8=%s" % (
+        h.get("pattern", "?"), h.get("line", "?"),
+        h.get("mask", ""), h.get("sha256_8", "")))
+' "$OUT" 2>/dev/null || true
+        fi
+      fi
+    done < "$STAGED_LIST"
+
+    if [ "$FAIL1" -gt 0 ]; then
+      echo ""
+      echo "════════════════════════════════════════════════════════" >&2
+      echo "⛔ [gate-1] 提交被拦截：$FAIL1 个暂存文件检出凭据线索" >&2
+      echo "    OPL-SEC-20261005-GATE-01：任何进入公开仓库的文件不得含明文密钥。" >&2
+      echo "    处置：删除或掩码后再提交。确需放行须主权人裁定。" >&2
+      echo "    如确属误报，置 SKIP_CREDENTIAL_GATE=1 绕过——但会留下审计记录。" >&2
+      echo "════════════════════════════════════════════════════════" >&2
+      cleanup_gate1
+      audit "gate1-credential" "block files=$FAIL1"
+      alert "credential-scan"
+      exit 1
+    fi
+  else
+    echo "    （无暂存变更）"
+  fi
+  echo "✅ [gate-1] 凭据扫描 PASS"
+  cleanup_gate1
+  trap - EXIT
+fi
+
+# ------------------------------------- ② 超链接原样性预审（守藏席 v4，逻辑保留）
+echo "🔗 [gate-2] 超链接原样性预审"
+CRED_PATTERNS='BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|password[[:space:]]*=[[:space:]]*"[^"]+"|api[_-]?key[[:space:]]*=[[:space:]]*"[^"]+"|sk-[A-Za-z0-9]{20,}'
+# ★ 修复（守藏席原版恒真阻断）：原版用 `git grep --cached` 扫**整个索引**，
+#   而非仅本次暂存的新增/修改。该仓 tools/test_supply_chain.py:29 存在一个
+#   扫描器自测夹具（sha8=0b803107），使原版对**任何**提交都报命中——
+#   实测空索引时亦阻断（exit 1）。这是「门禁恒真」，等于把仓库改成不能提交。
+#   改为仅对本次暂存的 ACM 文件逐个扫描，意图（拦新增凭据）不变。
+GATE2_FILES=""
+for f in $(git diff --cached --name-only --diff-filter=ACM | grep -v '^\.githooks/'); do
+  [ -f "$f" ] || git cat-file -e ":$f" 2>/dev/null || continue
+  GATE2_FILES="$GATE2_FILES $f"
+done
+HITS=""
+for f in $GATE2_FILES; do
+  H=$(git grep --cached -I -n -E "$CRED_PATTERNS" -- "$f" 2>/dev/null | head -3 || true)
+  [ -n "$H" ] && HITS="$HITS
+$H"
+done
+if [ -n "$HITS" ]; then
+  echo "[gate-2] 阻断：本次暂存内容检出疑似凭据模式（见即止不外显）" >&2
+  audit "gate2-credpattern" "block"
+  alert "credential-scan"
+  exit 1
+fi
+for f in $GATE2_FILES; do
   new_urls=$(git show :"$f" 2>/dev/null | grep -oE 'https?://[^ )"<>]+' | sort -u)
   [ -z "$new_urls" ] && continue
   base=".githooks/link_baselines/$(echo "$f" | tr '/' '_').txt"
   if [ ! -f "$base" ]; then
-    echo "[hook:pre-commit] 新含链接文件 $f：基线自动固化（$(echo "$new_urls" | wc -l) 条）"
+    echo "  ·新含链接文件 $f：基线自动固化（$(echo "$new_urls" | wc -l | tr -d ' ') 条）"
     mkdir -p .githooks/link_baselines && echo "$new_urls" > "$base" && git add "$base"
   else
     if ! diff -q "$base" <(echo "$new_urls") >/dev/null 2>&1; then
-      echo "[hook:pre-commit] 阻断：$f 超链接集合与基线不符（超链接原样性令），如需变更请一并提交更新后的基线文件" >&2
-      . "$(git rev-parse --git-path hooks)/pre-commit-fail-alert" "link-drift"
+      echo "[gate-2] 阻断：$f 超链接集合与基线不符（超链接原样性令）" >&2
+      echo "        如需变更请一并提交更新后的基线文件。" >&2
+      audit "gate2-link-drift" "block file=$f"
+      alert "link-drift"
       exit 1
     fi
   fi
 done
+echo "✅ [gate-2] 超链接原样性 PASS"
+
+# ------------------------- ③ 暂存区 .py 编译 + 核心测试（构建门，默认 advisory）
+# 该门在本机因 sqlite 只读失败（attempt to write a readonly database），
+# 且它此前从未生效；设阻断会使全仓无法提交。整改到期条件见报告 §8。
+if [ -f "tools/hooks/pre-commit" ]; then
+  echo "🧪 [gate-3] 暂存区编译 + 核心测试"
+  if sh "tools/hooks/pre-commit"; then
+    echo "✅ [gate-3] 构建校验 PASS"
+  else
+    if [ "${OPL_ENFORCE_LEGACY_GATE:-0}" = "1" ]; then
+      echo "⛔ [gate-3] 构建校验未通过（OPL_ENFORCE_LEGACY_GATE=1），提交被拒。" >&2
+      audit "gate3-build" "block enforced"
+      exit 1
+    fi
+    echo "⚠️  [gate-3] 构建校验未通过，但本门为 advisory，继续。" >&2
+    echo "    （已知失败点：sqlite 只读；整改到期条件见报告 §8）" >&2
+    audit "gate3-build-FAILED-advisory" "warn"
+  fi
+fi
+
+echo ""
+echo "✅ 全部 pre-commit 门禁通过"
 exit 0
