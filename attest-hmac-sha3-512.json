@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T10:00:37.592Z",
+  "generated_at": "2026-10-11T10:02:02.850Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3016,
-  "merkle_root_sha3_512": "697e284965117c1d2fc3c4398b82ddd8555cf0a29ace37865f00a36be3e40a8caae4b82ae9dbfe31de361c028ecc56c1c1019f235dd007f7fe934b6a632a74cd",
-  "hmac_sha3_512": "df6d733d7c66e29f9461e5edbc9264ca4c5f433d2fae84c1a2973bb854bace9bd6edd88169638b01d7fde504439077fb869dbdacade16693bae72bbce83be414",
+  "file_count": 3017,
+  "merkle_root_sha3_512": "79466b69f98a39937fd78f5f12c30ef28e6552204c8cfbe8f24ac113d82130f0669cdd8abadfbe4de791bb6fd65cdd02ac7f049c80f9a9fd73b3ef431f0e9848",
+  "hmac_sha3_512": "d2fbeb9ade3ab81e47722926f3f869bfabb89f622ad540c23f76b353b778c3b75d43579c679981c385f3694d7c70cdb45d95aa0935ded9fc308c44edf196bf48",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -6370,6 +6370,12 @@
       "size": 7435,
       "content_sha3_512": "0f36770b61e8ab89ccbeffec3931a4394bc434fb1a52e58dedd6c207d7e16c483200998339cfeb1fe61647f1b3f32ac195fb55e92f7943bb128771daf52750f3",
       "leaf_sha3_512": "9d58f1550c58f58505a5519ff3c82b9f06bc6c300fcd862e947bc6d95098cad491d886246bb05f9e3c4a5430c6033a6cc4e7c69ca76e1c70b86b572abb958ae5"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/Tripo十二件总览_DF-OPS-20261011-CAIRN-23.otl",
+      "size": 5137,
+      "content_sha3_512": "30c7d1e3daad91f61b243ce6156aa55356eefeb9afc45db0ad1d94dd7d892c5ea478c3192e212e5f5f53450627a18be69400a12c4b8cc33701a996009133a060",
+      "leaf_sha3_512": "b0ff49782b60419dcd767a436ce9c8ae0deb45cd08a6cfa7bd8b0f828fbb0677442e21daebbd2d0103aae3a756194a25561be9681e495d73e809ac42d19b0d1f"
     },
     {
       "path": "deliverables/20261011/seat-cairn/Tripo资产清点_DF-OPS-20261011-CAIRN-18.otl",
