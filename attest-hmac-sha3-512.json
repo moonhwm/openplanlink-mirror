@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T10:33:36.698Z",
+  "generated_at": "2026-10-11T10:35:59.707Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3174,
-  "merkle_root_sha3_512": "0e5055edde1bd2d277482f1aa0591b6821b898e9a7c29bfff226f03f1d46a799430fa0b065fbd438fac5b0835de4f5ef296764d5039d65c2d0abff03a4f52eda",
-  "hmac_sha3_512": "305b2ec2c71d05e8e846499d40cc94e0a4170f6148fd0e21923136b936a262fcc830bac58819e6d7ab7930d0c110da0aa9f65c739ad63088e331b337c2c5de21",
+  "file_count": 3175,
+  "merkle_root_sha3_512": "40c74bcb9d297eac43935b2e6cda2cd9982d26b18a8e91a612d9daf399b49f8d7528d67cbd23bfe0c130a1694549f44258d227373b945e622f6b4e03ce26fd32",
+  "hmac_sha3_512": "43d7c21334e16b3734d9fc49c977fc598a68c92d5d52c7dcca253f378cc0c3cd9c9d70f44ce72f891fa0a31429dca2dcbb5ed64cfc67d79ebb7fb4e78170af5e",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -7702,6 +7702,12 @@
       "size": 5075,
       "content_sha3_512": "8afe9cf9768202bb7a96326e939d6bb1103d18c55afe679a6093487b57481e4109ba4b8aa341f2af671cfc0c9575552def0690613f0ae4c51c4d9c08e645c4e0",
       "leaf_sha3_512": "06c08db81bc2b79ed965c865fd730a5e333e03cb08d3352307e22e0bd45c9756de1ab75ed981ad31c9c26593b2ecbdcd2443a6bbc8da1567586880e2b69e76ea"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/未闭合清单v1_DF-OPS-20261011-CAIRN-30.otl",
+      "size": 5401,
+      "content_sha3_512": "15e1aeed557c3f813262736fdfdd10c72e6c8e452b0634a7920c2f922ecc9de9a23a52559f35425136f8f15956ae587fd8b943b6d5da8c1ae37c6885aa3a8d1e",
+      "leaf_sha3_512": "a19d767a6115219fb62544f2924c794dda07ba1862ef73a6e57fb501140e100bb54ddecd9319306fb9ecea2fdcb13643951b097a87691c69577d8d68729babb3"
     },
     {
       "path": "deliverables/20261011/seat-cairn/本夜索引v2_DF-OPS-20261011-CAIRN-24.otl",
