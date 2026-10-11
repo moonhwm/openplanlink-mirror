@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T01:55:49.204Z",
+  "generated_at": "2026-10-11T08:01:43.662Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 2912,
-  "merkle_root_sha3_512": "f9ceb00e88cb043ba028cd4ec94d799bcf95917b6b2dbe56996b814654f07ffa1eecfa924166ec7182edaebe415d0f8051d7c27b773b87d6a6890d6eb71fb258",
-  "hmac_sha3_512": "0ac16b8176f14e0fb58f4afb4e3e7ce8b3ec1352c5a67987f4ec8d5aec074be2bf651b6c67b0204320d879c26a840233ee3ee1084e8fe81156abc9a41b00b7eb",
+  "file_count": 2944,
+  "merkle_root_sha3_512": "0f159d68a46499aa2c15234ea88a22ca77ddb93a8c42b9ae027cc6414ba79d01569ac70054f67fda6b0d141ebd667b0ac113bacf190f12c0010062c490ce3ea4",
+  "hmac_sha3_512": "053ad6651e03a37ecfe018e98e4972de2b4bd4d615932a74f991cab7d4f627eba5041d953b89a0b25c6dbc22f7ccb19eef1c8f2af73649e8938385c3a3408315",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -6184,12 +6184,6 @@
       "size": 7435,
       "content_sha3_512": "0f36770b61e8ab89ccbeffec3931a4394bc434fb1a52e58dedd6c207d7e16c483200998339cfeb1fe61647f1b3f32ac195fb55e92f7943bb128771daf52750f3",
       "leaf_sha3_512": "9d58f1550c58f58505a5519ff3c82b9f06bc6c300fcd862e947bc6d95098cad491d886246bb05f9e3c4a5430c6033a6cc4e7c69ca76e1c70b86b572abb958ae5"
-    },
-    {
-      "path": "deliverables/20261011/seat-cairn/OpenPlanLink全局声明与Agent-to-Agent网络建设纲要.otl_正文副本_20261011_CAIRN.md",
-      "size": 74538,
-      "content_sha3_512": "40ced2d8ad2a399d35e089b1e31dd9020cf7cdca471e771163460385c0ac713df175bd33936ed2adb69a9f691483b25803adc9d1b6263d38a5efb97b9d693108",
-      "leaf_sha3_512": "790af137996070a35e8e5a9aa47a5aa7532bc8671394641f29ce4bb4f114013dd4dfcfd2b2b193afae9a6a381e420c0de8327675215523b3228ba566c49cb20c"
     },
     {
       "path": "deliverables/20261011/seat-cairn/ark_signed_probe.py",
