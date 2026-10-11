@@ -6246,6 +6246,36 @@
       "leaf_sha3_512": "c89ae66f1f9fedba94d58bd054d87d4987b345853011c004e7441da2c20f31c88a6f9116ff3aeb1080e237ba5e149c7f7119f16feb9ac0ee5c12f4716be33b00"
     },
     {
+      "path": "deliverables/20261011/seat-cairn/exp4_fetch_videos.py",
+      "size": 3227,
+      "content_sha3_512": "b385f68e3341e51b947687f63d5e392847c0e4afb00d54fb849fd4b82c6e13bea207c470bc8c914ed253d96a23cc074c9e509442a09525334a5218b3956d2e46",
+      "leaf_sha3_512": "03a33714de68cd7f3a716912618f06c20576488b0ee40ec0ed0cd441a4cc946e0a14bf6ef3abe5976a9f39c3864c4dbe946a5f2eb178d0bc0ecb38324d24f478"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/exp4_frame_compare_20261011.json",
+      "size": 366,
+      "content_sha3_512": "ea5e4bcfbd9cd665fc4e081e6efea7d585274cf603b0f4832ea17447f9aa3719fc98a2d91c64ce7cdd2403a986d64642a657eec4cdfbd81117e33ff384e757ca",
+      "leaf_sha3_512": "09a402ddae518e12f463d279581dacd7cb726da443f731dc1da76405efb740c6d6222dce7ab0901d080659dc0a88724917070b69d279e42d4be95c6da328bd7a"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/exp4_nonce_perturbation.py",
+      "size": 6683,
+      "content_sha3_512": "1a8b9208d0a5762b1f3e5966530084fb69e656b527b4f8682b98de5d26e6366de5c157afc17401f7b2c7145debb7a60e5c6d48b24ab63bd05638f0a583333302",
+      "leaf_sha3_512": "5f5b4f4b0210878a66f0d124d0364d7f238c20ba125ae98548bfd9a29720e60a9387274537b3f201afd47b0f806c8fd813152e14714004bae7f28ea8271c757c"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/exp4_nonce_perturbation_20261011.json",
+      "size": 1921,
+      "content_sha3_512": "353db528bbaac98b58408c94f2ebcd2eea9396a45d1f3695ea08eb50c0ac0b74950256629d1331ea91170deb9460069a720f8d9f2c4d122e489a8c5c0dfa14b0",
+      "leaf_sha3_512": "00d13a0c327c69784b39e806d0faf152103143aecb789af446c96b449db31804649ffe5cc9f4dc1c0a7efce6da65683cee574e4fb3e72af789c20b6d833b0e2c"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/exp4_videos_20261011.json",
+      "size": 261,
+      "content_sha3_512": "a044e86bec66fd7bbb2883997e47b5e4c83701606978b871ac4b18714ecf30c3a573c3ba3e648fa012de95a5a3e483ab84130f73f7db971debf7eedc7b18d132",
+      "leaf_sha3_512": "92f14a33495a75dfedc45aafdbb9093f8010a71d256675fb2974e4429753f5570fb51abad7c6f488d5503c1202a21594d2b72bd6ebe9235fb29ad3f0f599986c"
+    },
+    {
       "path": "deliverables/20261011/seat-cairn/minimax_client.py",
       "size": 5294,
       "content_sha3_512": "e2ea1b38e29da9745aea5c431051b352812b970d8f3755836dd33214639639cb72ba2eca941b0b53af32342241cc657e2306b2b37b01fd7d10313531587e22d4",
@@ -6304,6 +6334,12 @@
       "size": 3163,
       "content_sha3_512": "624a7fc0e560689fda3e3319da1774dfbc587c433eddc6d6c985897912b75176c22462428ff91b3f5fe6669dcaa67d5dcdb14a7bd0d0c522f9d49b14ddde8388",
       "leaf_sha3_512": "30d14590e9d516e824c77d1623dddb6f4161bba32be2802d90c307e448035716a2dc79cd3558da91cf35f460e02d9c306de06e5781776aee81a5ca4d556c63f8"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/实验四首帧微扰_DF-AI-20261011-CAIRN-05.otl",
+      "size": 6776,
+      "content_sha3_512": "15d628fe2f7764b8e87bdac6f4348bbec9ec629bffb49d09a931e584636b759254bc24c8ad61b866b4cbd1fa1bcd57a3ae39d70353ce84e9f97501bee0022d8f",
+      "leaf_sha3_512": "4a91f833f46f327707f7f8aa7bcccfd523c9253497a0069a1d5d410b218d840b59aa6517f54b1a56006c54fc425808d7e83bf3e5f67473851f33f456e532b141"
     },
     {
       "path": "deliverables/20261011/seat-cairn/开园实证与MiniMax初始化_DF-AI-20261011-CAIRN-01.otl",
