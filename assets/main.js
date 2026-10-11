@@ -285,7 +285,7 @@
   const row = document.getElementById("folderRow");
   if (!row) return;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  fetch("/videos.json")
+  fetch(new URL("videos.json", document.baseURI), { cache: "no-store" })
     .then((r) => (r.ok ? r.json() : Promise.reject(new Error("http " + r.status))))
     .then((man) => {
       const groups = {};
