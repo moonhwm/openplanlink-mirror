@@ -64,6 +64,8 @@
 | 22 | 技能自改进机制 | skill-self-improvement.md | 1.0.0 | 技能文档持续改进 |
 | 23 | 交接簿纪律 | changelog-discipline.md | 1.0.0 | 规范CHANGELOG追加/串行纪律 |
 | 24 | 8小时自治运维模式 | A37_8小时自治运维模式.md | 1.0.0 | 执行长周期自治运维任务 |
+| 25 | 席位命名操作 | seat-naming-ops.md | 1.0.0 | 新席位命名/身份登记/命名冲突仲裁 |
+| 26 | 人设迭代循环操作 | persona-iteration-loop-ops.md | 1.0.0 | 人设设定/动态完善/3D建模/涌现探索 |
 
 ### crypto类（密码学技能）
 
