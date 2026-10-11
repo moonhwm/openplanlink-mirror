@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T01:50:56.429Z",
+  "generated_at": "2026-10-11T01:59:58.490Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 931,
-  "merkle_root_sha3_512": "1845c31bfb54a018485f3049b20e20dfcb80f65e4d5221cab5846633fff8587956a79f8a5aa2c0223d473d95115e8252693fff7637038a470413324da7b29482",
-  "hmac_sha3_512": "612e2e9b72e305510c945950e6bdd01def1bcbfaf385c0f6ae5f419647f6e64f6010f70c4f84fe21d4ff46855618bc599f2633f31ee3dec6eeda8de41d847f49",
+  "merkle_root_sha3_512": "76af33e0173bf0f8283f593e1420f9f917af8eaed5450643758af822eb8c6b62b292d138e4dd449b94587daca4c6d2ee9d0d62ec80c543473ba00a2db9780922",
+  "hmac_sha3_512": "c6afa0c3a4a4ff3dffba98b1b50af6ef57074bf0ddbc0cc0dc7f9dca25c90466f166dfce05b9dce6f6aa224a4b365919a17f077b8245240f27257481d0891e46",
   "files": [
     {
       "path": ".gitattributes",
@@ -649,9 +649,9 @@
     },
     {
       "path": "docs/index.html",
-      "size": 19658,
-      "content_sha3_512": "32b3509c3b5d76e3a0c6b15c7bf5c544106036eb199a2f0655145c9a65fed54e96b8bfddbece92aa5bf6f93b6620a946c85fafb3763c186e6c6cf86a8381f9fe",
-      "leaf_sha3_512": "8cea08bf9df4eaf0fb1ef101fbce8873186c7186c89a38eade5ee220fb59bc2204cbb3b6e76c94ff61e738636f8ce9d214a7fff663b83a0d3de46ffc89251290"
+      "size": 19687,
+      "content_sha3_512": "c936855732a670639f37a593a9fa3347d3a7167ca8a8d2363136b3270fcb0298a1a9df449f4a4289fa209f7546b3f555da7a88c116ef9af3788fbda694558472",
+      "leaf_sha3_512": "a5824228106ec4c6401198147a816123474ecc34d746b49a1873c4fcc5c87922c57db81d8b353df0682b63de1f5bbb174f2b3301109b84a3682ba8c755af3d03"
     },
     {
       "path": "docs/memory_tier_pilot_example.json",
@@ -709,9 +709,9 @@
     },
     {
       "path": "index.html",
-      "size": 19214,
-      "content_sha3_512": "2516b6a7ece1bb59a5b2ab737e309bda06a67a6a6c99dc7f38e6b0ce79b6dc42b7138435211fbcd6f528785e0654f06e3002f63afd142276379fbc1d9e30d204",
-      "leaf_sha3_512": "1a084bf12018e720b2346a64185a78bf228ceb8313ec65a540c3d55f506e2083b2c77acd98c9184f7ba36138c1ddea869a5c8ddd7d4ebaeda3a99fa1e571d4b1"
+      "size": 19243,
+      "content_sha3_512": "fd6c49f291c25ac652d5ef2212165621611c9cb23b0a40db0bf64e9e92c0db5ea65bbe7a2bc38c04a07b93fac9bc14247b670f6fc0582b32889571537e5caab2",
+      "leaf_sha3_512": "eebcf94e517805133a2b808ad0561bc00f16f9b0b1317eef44119d7cf136e8a5302c871bb66db9cd8a32e4f238d86b3169a57de6c4302cd89bde03f757cd1159"
     },
     {
       "path": "llms.txt",
