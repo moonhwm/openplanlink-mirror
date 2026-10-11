@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-11T11:20:28.959Z",
+  "generated_at": "2026-10-11T11:26:26.861Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3178,
-  "merkle_root_sha3_512": "d8013d115ca33339f79df4d811039dd94c34b5c23663755240b026c137c85b074cb573eceb45614675f7f7d5075e041f7d67af86f463f32290223e959090c83d",
-  "hmac_sha3_512": "da8f73ba9c6d1eb7451de048fd3b207fd3ee063e05bb9798ffd2ff544ec174654147e6f8ca47ea00815c2908752d05ad10dbecd4d60ae13336cf394434bf70fc",
+  "file_count": 3179,
+  "merkle_root_sha3_512": "19204d6814f3557574bddb61967132984c5b3b2b01d9eeca9d9a1d53d1756faa5a094f1468ea850a90922e124cb88d046b0ffe51dfd54c2cbbfc83cd5fc54945",
+  "hmac_sha3_512": "b03d91e3e843f7b8b1182020d38b5be444f44d123f2866421feb6e07a50be928e71c2f325db9bc47d5d9575962897ac0a0ff294a4c3b1ba3a9ef56164799655f",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -7162,6 +7162,12 @@
       "size": 11065,
       "content_sha3_512": "2b29d55632aafbe0d86134b804c48a33258a8f5ee45d65f96529d05f3d0e6da1d92afb953b46a8c0bd38f49de8a99f6b1de0adfbc03c5558a85ee7f3e73f009f",
       "leaf_sha3_512": "e2163a8b27a6d8cfa8e15bd5199fcbf425607ecad30abae534ea66706a493eaad4bb4910c0c706d88c4209eeb79a0a80c71568fcc17365dd1d7c0f36f5ace72e"
+    },
+    {
+      "path": "deliverables/20261011/seat-cairn/A2A重读对照表v1_DF-OPS-20261011-CAIRN-34.otl",
+      "size": 6800,
+      "content_sha3_512": "a966188401e0ffa88c7499b37e2e7df62839a1cfef763874d31e9b4052f5f633e4d3ddbdb84176545e4e091acadc1c70bff7926dc64b721e56c4bc23a00a720f",
+      "leaf_sha3_512": "970eb481f1141d2f4832e9a9a2586c99ac9316791e5761a441545c78f32b05e0ce7720e822612a8e8d7fa3a66cfad1a2ed6e2f0508dd0fa6d9a273884254409d"
     },
     {
       "path": "deliverables/20261011/seat-cairn/K3席评分系统互认对照_DF-AI-20261011-CAIRN-27.otl",
