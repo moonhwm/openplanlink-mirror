@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T07:27:46.161Z",
+  "generated_at": "2026-10-12T07:29:22.693Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3236,
-  "merkle_root_sha3_512": "6da3aa10f9a4fbcc9ca1cd9abfaebdd24e1a74d7aac4dfc11cacd4c2d24349652ce688ff80402535a975a2361ac01be233490b829821e299d60086066ffcf2f2",
-  "hmac_sha3_512": "c5e95e2be799163963f0a2e19b0662a3ff435935cba53527505060bc08f6394d31214b8bcce3c6904705a73d3717846e98e640c232d7df604a12e323c0702c0d",
+  "file_count": 3237,
+  "merkle_root_sha3_512": "819b3041c2d63e702cad04b2a73d165a3b3a53e65f093502d701470842e74bfb4138af0dd28a64d1acbe3342779d6a0c259be037c77af0908f5fd74644ef7443",
+  "hmac_sha3_512": "432bedd78bf8a29c0654c6aa5be81d2d5aa89473b521d7d7977776726171b7cbfecf9b9023fabc339b65bdddc83b92ffed52a144ec0df106da74f54fa04508cd",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8230,6 +8230,12 @@
       "size": 5821,
       "content_sha3_512": "cdd292c1ebb59fc88738c71bab31076adc5186493a45687a64c53cb7f745eb041adcab6c6efd025fe9b5e4b60b2a3a19b6d3daf13951feff6ccf56b655327ffd",
       "leaf_sha3_512": "a2148bf713c11b569a9df0acfbec30e118580c7a56079b9b465290aafffab9fc7ad8ee745a4a94becd2876bea94da0cd51e85183f107c2a8fe71268faeac49b5"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/纲要新增之读记_DF-OPS-20261012-CAIRN-92.otl",
+      "size": 5338,
+      "content_sha3_512": "d3a2cd11bf734656983d16054534fd8c674b476599657f324cb985ddc153f26ea2b2563aaf07587b2e105a8982f9f2e203d93516d6438ccc8e3b6d297eb74e21",
+      "leaf_sha3_512": "21855ab50c9656fc86b9083de3c95171a84b0b0eff2c640bf9601d02af10c2753ad63935805fffeefb1e4bc484c2fd213403e4bf064667762bb40cc1468f3255"
     },
     {
       "path": "deliverables/20261012/seat-cairn/视觉验证三层判_DF-OPS-20261012-CAIRN-66.otl",
