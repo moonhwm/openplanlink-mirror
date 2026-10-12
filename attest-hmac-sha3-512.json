@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T09:42:34.320Z",
+  "generated_at": "2026-10-12T09:43:36.517Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3245,
-  "merkle_root_sha3_512": "481f4d3e6be8126ea08b3be259fc62eaa0821277c71417e756b86fbfd3d9676bbfdc01abdcb5f2bdce2675080e0516f40e7fd6c7abe76d06437427ba34d7cdf2",
-  "hmac_sha3_512": "2b9e97c9265949b68f7334c785f0fd3fca4bcb0bff5607a3d1e9f3067b09489f85e05b23a64513de418da08ec755b44019a995117165d35c6e6eb3cf179a839e",
+  "file_count": 3246,
+  "merkle_root_sha3_512": "9901cb6feb810115506c99eaf860891d0cf846e925578c92ea570952fc471727cf49bbf9d31c2404ff1b229e4e9aa0330ed239a6b952a26fd77c81a0ae67bc88",
+  "hmac_sha3_512": "b40740e2ec5fc6c344a960af7b3843887ed97167f38262581aee6235921e8d50ea84a34b349c431d65fd9e0f24c0b3e0cf4a0dd4a5818237068936da4a12e783",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8218,6 +8218,12 @@
       "size": 9345,
       "content_sha3_512": "29000b102ec3d10c8c284ec2470c7db21264f159f8bb90296efadc230b714460127a02f8f1c811aa1cb3f891b5da68a936420504f1b71ec1be5dc31e8155e03e",
       "leaf_sha3_512": "c807cf10b9dda909b9d1ffbf0ba083922d471c58c35c9d45741ca58d564c028943670feba480c6088fa95a5dd5a13195a592172a7b5a1b84e1cc8963170b6530"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/本夜总账_DF-OPS-20261012-CAIRN-101.otl",
+      "size": 9854,
+      "content_sha3_512": "431f31fa09ba6c1fbab54f54932c988adbc785cf610d2ef0e9d0154bfd5f682d954860b40b3c5ce855f0ef48bf0494074e039ea512fb896c5e08449cbfc47fc4",
+      "leaf_sha3_512": "b86dbf7f1947c2235ac925b337235fa17d6e9b687bc517aa034b100c8f92476953762855e1bde848dd679725c20b95db499fa2c1224da16a97bafa0f959951ca"
     },
     {
       "path": "deliverables/20261012/seat-cairn/检索评测之负结果_DF-OPS-20261012-CAIRN-90.otl",
