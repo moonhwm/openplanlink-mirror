@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T14:10:40.591Z",
+  "generated_at": "2026-10-12T14:11:59.887Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3250,
-  "merkle_root_sha3_512": "7eb590f50b96922b2ce106e9f0bb773d333f4b2328842f1b94bb60d8ccc628f1b0930413207d43003db663c63498a3099702b6f4e47bf8a1ec8f47ce5e612c67",
-  "hmac_sha3_512": "da1d1c367e11d499aa3f3ae338217c6b053e3eae2192c7cf4eaf754a4bbeecbb3b9ac40f07b1de75b9100cd113bf0a3dff376bc4badb5bf7a51d27ae175218bf",
+  "file_count": 3251,
+  "merkle_root_sha3_512": "e92de289cfcd68f846dca211d9c08c508eb988ef47ac0d3436a175a0dd78ab49ad0008401e83bf5e931261ee33036d491e2fac00c3a001c7ad580ef15ca6f5b2",
+  "hmac_sha3_512": "d937e55edd08784e367a17fa046f0bed0d3e7723ab755431c992345ff54e1003c4dba3b7195f5d33fabf27ed1f824c612fac30305a018bdfc68a6d5cf3034f7d",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8092,6 +8092,12 @@
       "size": 5694,
       "content_sha3_512": "22974980c2ad162282494656df5012cd417c28a9e855660fcd88d888bd252c6ed3cb5f36e8f58fa20df3133b410a019e8e13f0f3300d81ccf02c92642e1c7295",
       "leaf_sha3_512": "4697e5cbdc0946f843324d92aad43364f827360c3a495be611c01dcb7d16d3b149293c56ccde6b103534a136862556cb62413a9c16294dfc6673844ceca114b8"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/三模块终值定案_DF-OPS-20261012-CAIRN-106.otl",
+      "size": 7790,
+      "content_sha3_512": "b8a5b94edafa2e8ffad40627aa0442d9b676342a1ff771e932f2dd5b85f8f7735d988bbf07312748bc6c2f3551363c44ed7592cd4f69b30103dd5a87f859698d",
+      "leaf_sha3_512": "074f92855977402695534b88a6710e09dddfce1fc4d03b64b62a1c64d38d9206890720ea333a1f57fa7721dca7a835b3306257f92f3cac324618abce6195bfc7"
     },
     {
       "path": "deliverables/20261012/seat-cairn/两案落器_DF-OPS-20261012-CAIRN-89.otl",
