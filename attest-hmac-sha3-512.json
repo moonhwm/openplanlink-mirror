@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T04:42:08.179Z",
+  "generated_at": "2026-10-12T04:43:06.223Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3202,
-  "merkle_root_sha3_512": "a59d9455eda8aa660ae6e4b7ddb5400435bc94efa74c9d712155fa365d1ec3b3f68d6a1fb0662c2e63f7fb90cc3e956f7391c8826004e2b15746b243aa12eceb",
-  "hmac_sha3_512": "fe2b77742b9ec4ae7d61b96141fe7da6650cc6aae2b61706f4b6628770a43af981547ec63dfbe3aefbc2e02758e294eef8c792b1ab8533986b299783e72b403f",
+  "file_count": 3203,
+  "merkle_root_sha3_512": "8daab3dec89e32a1352e621372231a2ceec42d995980ff1c6d63f6c9c5e423d77c80ad0c689054fad69f5d8f25ff241646414b987ebd7b5c8b7ea0c697e46e2a",
+  "hmac_sha3_512": "71f577ed8ac4427f6595067d39812d1ef330f0e0a2b84f78746f518a1f3ea0d183eaf84b9e8a682f27c4f65abb9ab0f74b31491cf7ea80166ad7b5453b4d1c00",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8050,6 +8050,12 @@
       "size": 5508,
       "content_sha3_512": "8ce117fbbbbecbec051407dc4b91b039a4ab0827e02bc4debf65b54343bb1ec514fcf7bcbc779c8a295b78c1d23d7a4ef6e1c69382cd964e8418ea0ed2e89e26",
       "leaf_sha3_512": "bebbafcbbc276731112a2a862dd3f9688c6739327a4c618ad6eed611a42964ce23534915b3d299102fd36375aa632e33f2daa7b9c1a9844c3717063723c93091"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/勘误四_DF-OPS-20261012-CAIRN-56.otl",
+      "size": 5086,
+      "content_sha3_512": "0c058b117c11e4d886c4deb621eca9d2618fd8780987965d463aaa7c9a2970290d6059cefa980bf182c415e932f62dffe484f3b1938813173e7b08ea091cce79",
+      "leaf_sha3_512": "75e89a6688f8a574872bc77abb2a7fa5b81c3ace67e8037ed597edcaf624363aead186b845a93f0a0b6f2e3500b8e635649925b6bffb7039bcb7df76b6f80d95"
     },
     {
       "path": "deliverables/20261012/seat-cairn/确定性与未闭合结清_DF-OPS-20261012-CAIRN-55.otl",
