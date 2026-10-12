@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T07:44:18.124Z",
+  "generated_at": "2026-10-12T07:47:09.564Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3240,
-  "merkle_root_sha3_512": "4b05cd116b0dfd072dd1e3168bdf36ffd2b26f45a1c1e9d811bcd66890e6e099c640eadff08b7b26454a95155c5bdcb1dc17cf7e801ed524d775590a6b0af86f",
-  "hmac_sha3_512": "856f4d433a707ce9fb2f1a8a3d988708d6ed83bab8e61786432db9f89ae3c83195c18d1f86762e70d4e46f508f38988b3c15cc2dbe5c50778871b25f46b05a36",
+  "file_count": 3241,
+  "merkle_root_sha3_512": "286b189100e7f153ecfcde6d357a9ba2d536bff938bb01bd8d8827c61d1924ffb7e63f8acbd64a71f76ccb1117b82d38bfb8306f399730da92b1d55c8d67fce6",
+  "hmac_sha3_512": "66097f559f05c200616cab1e3ddcabc92319e966328d9cdf520ea73f26e13e88174034916548bed7a69539a09a3390cc98aa998d5681a073d0c62acff2203e70",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8056,6 +8056,12 @@
       "size": 5508,
       "content_sha3_512": "8ce117fbbbbecbec051407dc4b91b039a4ab0827e02bc4debf65b54343bb1ec514fcf7bcbc779c8a295b78c1d23d7a4ef6e1c69382cd964e8418ea0ed2e89e26",
       "leaf_sha3_512": "bebbafcbbc276731112a2a862dd3f9688c6739327a4c618ad6eed611a42964ce23534915b3d299102fd36375aa632e33f2daa7b9c1a9844c3717063723c93091"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/Jev模型之核实_DF-OPS-20261012-CAIRN-96.otl",
+      "size": 6370,
+      "content_sha3_512": "a9df43934ccbce6e7e718224ee8218e14c719723da851f676c24ab1d8ec4b4de74d4150993b8d486f648108e4602c66130254133c9af435dd66901158d5e9076",
+      "leaf_sha3_512": "17c10fbdb8f89cd15469eadced16e47ae3e6ca3ecfc9141036bb1dcbd4f4169d55b06304b0c9c4d8ae7c8d333a12cf76bf1a031ce852549dcf6a661abe2b20ba"
     },
     {
       "path": "deliverables/20261012/seat-cairn/TD预研与假绿之查_DF-OPS-20261012-CAIRN-87.otl",
