@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T05:57:02.079Z",
+  "generated_at": "2026-10-12T05:58:20.712Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 3230,
-  "merkle_root_sha3_512": "c59c4c0c3612197ade7743bb9eed94d4b010581bb9a0c0ad12993bf91a9ad5bb6b03832b2c5513dd8991713c33ee3bcad3424e7049d4901f2e4c735b4780db79",
-  "hmac_sha3_512": "52a7048a2545a361ac6ef7df8ea011ea91ae4b3dc959b90e6b5abdb51b1cfe1a7102f2a2e349eaf10325905afbf7d1f1aa6653a7ce3c8533c0f53a211364c7e4",
+  "merkle_root_sha3_512": "c0e16db4b2f4661cb329c0047ea5d491bb3ac0ce4c10e518bab22ee26d6770aaa647d1db2d733cfd64066056143db56d753cdc15a16089cd8221a9091a432f62",
+  "hmac_sha3_512": "5f219a030a9d3c8fa6d994858c864e872838ba548bcf7e28f6c8bcd5f5bc11b4a3973fa55abf120d93308ae17d762ad8d84cc41a526c0792b72fbf0e8b0cff9f",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8101,9 +8101,9 @@
     },
     {
       "path": "deliverables/20261012/seat-cairn/升级面计时簿_DF-OPS-20261012-CAIRN-82.otl",
-      "size": 4761,
-      "content_sha3_512": "19b2a93f725ff76c43da5de16b13519828db885335a00afe595da8a76b9c49381f5520566ae04df49e7c6d380a75edef9515451e0d74702b7cba53342d5f6325",
-      "leaf_sha3_512": "b673e41aa1cfb91b22f88d53bb95b4e08f1daf7e604960b5f2ff077a2526cb51f5accc0bff849bba3c44ded09f4580b413974508c5c63748e91831b922582239"
+      "size": 4845,
+      "content_sha3_512": "0f41257ba9e1693c1ab7c2d8807576291fc5ad99b0159e8e08fb4895d426bb9712306afa35f44ff1f970b85c7e580e762ffa8dea800207b7667dbd5580365ca3",
+      "leaf_sha3_512": "28e67c5ddd92ce7d9f233b14e86ec430c19f8b422e718332dfab82929f7cd53d5a196377155e80864686fd693f6c63ecdd6f27aca1febf67a9d262dff718db3b"
     },
     {
       "path": "deliverables/20261012/seat-cairn/口径互认提案_DF-OPS-20261012-CAIRN-73.otl",
