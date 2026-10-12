@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T05:09:45.064Z",
+  "generated_at": "2026-10-12T05:12:28.014Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3214,
-  "merkle_root_sha3_512": "d89eff274ce0559d05937c9b009c84e95ea3813240db8f4ebfb844034e69133e60d177daee4e7f0bf182108ec32670177c8257c3179bb085aa5ac8ac2e8c5dda",
-  "hmac_sha3_512": "be710c08027b5c2cff84d534a865c20cefe4459f0f28dc4762c330049ca63fb555a06a3c4cba2f0abe4a9d42131b5571368421609f06aa6a8a09be4cee8d6cea",
+  "file_count": 3215,
+  "merkle_root_sha3_512": "455a608f0e3670e032a52ded0bc261941f93ca2e6e2616eba2788ad7dc74cb697cc6e91ab000cba2b35b99311e63f76b7a196ca83abbc86969e7de04f069c42d",
+  "hmac_sha3_512": "381d59fdc122c2dc8f40f4ad0bd457a07f7e93a305e45abf2dea553185e794d34637d07a5dac6a19f4b706a6020e9aa874335dece2dfb5800233ac069332c453",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8038,6 +8038,12 @@
       "size": 2390,
       "content_sha3_512": "7e8ef6895759d6b7f7b7a70327e8e30965ef30ed49ef6f8ce02eeadef54f6f42350a809104c073b50d8fa192aa20ea5850d9e18c01f5395d98f8040f804a20a9",
       "leaf_sha3_512": "64e8f5a9ce0c8bd67dcfc924e7daabb0ab210ee5f7318c739168f69d24c198610116bcbf07ca0d145acbf6fc2b2b564d88c9a4921ad543af782dc417110e58f8"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/3D人设入世_DF-OPS-20261012-CAIRN-67.otl",
+      "size": 6448,
+      "content_sha3_512": "e164e625d9e6ad04c99dbed9c9a48b8c24566672855c0b1165cf15c6fea6918faea38f07602466d5fd29b039e858a83dbd08d2e2751745a6a536eeb6d8046e59",
+      "leaf_sha3_512": "0c0cb8f7809b481fe146f151ceab41cecf8faa4d3b56d87519414b400340ebc9d8a440e50b0ebbe8d37450497db4123268f33389db4ba2b8ef81e2f633847be6"
     },
     {
       "path": "deliverables/20261012/seat-cairn/A1性质更正_DF-OPS-20261012-CAIRN-53.otl",
