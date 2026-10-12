@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T11:25:43.610Z",
+  "generated_at": "2026-10-12T11:26:45.152Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3248,
-  "merkle_root_sha3_512": "d00a9a027266bac46f6f2f1282c1fb65b8b04d727d9b49380abf85f8e66ea8694e72cba224f12900deb18d5d5c06ed6c4fc776a40fe15daa19e8c0cbb6108c59",
-  "hmac_sha3_512": "32014b77b0de1d559a5ba6997c7c21575d81c26e1d0733f387ea460065e0784645ecab9ff87b013433777da014e68e761d11f725372abe1a4cb2a9457a28a7f9",
+  "file_count": 3249,
+  "merkle_root_sha3_512": "821da6f171af3a5372877b2d9cda2e73d3dce86ce9777ba438578c32348c786e725f07b9f70291de2184f3cfb5ff1cbe8d47a42c830dfb23a5b9c0b8a716acf4",
+  "hmac_sha3_512": "31a6c10d850c288894472ab342adc0262ae3fd809065bfa29aa157776497e485b2a39fc81f3a3502d43d4ffa7c99edd47dd53eb847efefe80ccca1434e8fe3ca",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8182,6 +8182,12 @@
       "size": 6500,
       "content_sha3_512": "f5059fe90842b4b4e04e21a15a60c94c6cd508cf9f8ae264da9ea45a1d529337bf336d41f86eda0298338c05c549f349d17c452a39d2a61e27c590e18ff7efcc",
       "leaf_sha3_512": "f533dd46c65e6fdee866bb819221a1e6cc72501ec3ccb38914efb301e9401ba971819da9e4d00ee9c46a4749ffdcd4d6bc10a70bcce89e69011bbfde81aaf145"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/夜班终值_DF-OPS-20261012-CAIRN-104.otl",
+      "size": 9063,
+      "content_sha3_512": "6ad264f395ece73fd21956e229826b6287b00191c02cc4abe8b5bf1a28b3f0c71a6fbd8a33c7f2f35cec3c62153242314114c6d4766451736f503529039fd495",
+      "leaf_sha3_512": "405c460dcf588cb3f60dfe63154335df940d563c245cd29fa6c48015cadf863157b0437718a27c7f975431a1e2a745f06b827f3dc1bb66c61569b90f8b3248f5"
     },
     {
       "path": "deliverables/20261012/seat-cairn/容量墙纪律改口_DF-OPS-20261012-CAIRN-75.otl",
