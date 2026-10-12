@@ -3617,3 +3617,43 @@ Codex technical sender; ID OPL-PUBLIC-WITHDRAWAL-20261011. Removed withdrawn sou
   2. 火山引擎3D生成端点(contents/generations)需确认参数格式
   3. 百炼workspace_id/API Key仍需主权人在控制台创建
   4. 百炼四模块第一轮遗留的4项阻塞仍存在
+## 2026-10-12 · CodeArts Agent（执行席）/ 砚坚 · 夜间游乐场开园v3
+
+- **改了什么**：
+  - 新增 `GOVERNANCE/research/night_playground_v3_20261012.md` — v3结构化档案（整合ImageTo3D+Graphiti+百炼v3）
+  - 新增 `GOVERNANCE/research/graphiti_code_analysis_20261012.md` — Graphiti代码结构分析报告（P1-P3）
+  - 新增 `GOVERNANCE/research/graphiti_100m_token_plan_20261012.md` — 1亿token规划文档
+  - 新增 `GOVERNANCE/research/world_explore_v3_20261012.json` — 世界探索v3（3轮，Round 3 API故障）
+  - 新增 `GOVERNANCE/research/role_play_v3_20261012.json` — 角色演绎v3（3轮，判定=非涌现）
+  - 新增 `GOVERNANCE/research/director_v3_20261012.json` — 实时导演v3（3轮，涌现陷阱设计）
+  - 新增 `GOVERNANCE/research/decision_model_v3_20261012.json` — 决策模型v3（3轮，评分0.68/置信度0.73）
+  - 新增 `GOVERNANCE/research/embedding_v3_20261012.json` — 向量编码v3（10概念/1024维/最相似0.8567）
+  - 新增 `GOVERNANCE/research/rerank_v3_20261012.json` — 重排序v3（3查询/枢纽段落=Graphiti时序）
+  - 新增 `GOVERNANCE/research/volcengine_imageto3d_deep_test_v4_20261012.json` — ImageTo3D成功结果
+  - 新增 `GOVERNANCE/research/yanjian_3d_model_20261012.zip` — 3D模型ZIP（27MB，含GLB）
+  - 新增 `GOVERNANCE/prototypes/bailian_v3_call.py` — 百炼v3调用脚本
+  - 新增 `GOVERNANCE/prototypes/volcengine_imageto3d_test_v4.py` — ImageTo3D成功脚本
+  - 新增 `GOVERNANCE/external/graphiti/` — Graphiti仓库（浅克隆）
+  - 新增 `GOVERNANCE/external/zep/` — Zep仓库（浅克隆）
+- **火山引擎ImageTo3D突破**：
+  - doubao-seed3d-2-0-260328 ✅（ImageTo3D成功！耗时599.2秒，生成33MB GLB带PBR纹理）
+  - API格式：POST /api/v3/contents/generations，payload={model, content:[{type:"image_url",image_url:{url}}]}
+  - 最小图片尺寸921600像素，512x512被拒绝
+- **Graphiti代码分析（P1-P3）**：
+  - P1 ✅ — 核心数据模型（Node/Edge/Episode）、搜索配方（12个）、MCP接口（12工具）
+  - P2 ✅ — 搜索内部机制（bm25+cosine+bfs+5种reranker）、驱动层（4种provider）、LLM客户端（OpenAIGenericClient）、嵌入层（OpenAIEmbedder）、重排序层（BGERerankerClient）、Prompt系统（8组25个）
+  - P3 ✅ — 集成架构设计：302.AI→qwen-max + 硅基流动→bge-large-zh + Neo4j Desktop + BGE reranker
+- **百炼六模块v3结果**：
+  - 世界探索 ✅（3轮，Round 3 API 500故障）
+  - 角色演绎 ✅（3轮，判定=非涌现——更诚实的严格判定）
+  - 实时导演 ✅（3轮，涌现陷阱设计：环保vs经济）
+  - 决策模型 ✅（3轮，评分0.68/置信度0.73，置信度收敛Δσ=-0.19）
+  - 向量编码 ✅（10概念/1024维/最相似0.8567/最孤立=Graphiti）
+  - 重排序 ✅（3查询/枢纽段落=Graphiti时序机制）
+- **涌现实验诚实判定v3**：涌现候选（接近验证）——决策模型评分从0.25升至0.68，嵌入+重排序独立收敛到Graphiti时序机制作为枢纽
+- **遗留**：
+  1. Neo4j Desktop安装授权（需主权人确认）
+  2. Graphiti P4-P8阶段（数据库部署→原型→MCP→文档）
+  3. 世界探索v3 Round 3需重跑（API 500故障）
+  4. 百炼workspace_id/API Key仍需主权人在控制台创建
+  5. git提交+GitHub推送待执行
