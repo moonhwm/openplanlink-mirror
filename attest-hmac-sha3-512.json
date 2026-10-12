@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T04:43:06.223Z",
+  "generated_at": "2026-10-12T04:49:51.212Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3203,
-  "merkle_root_sha3_512": "8daab3dec89e32a1352e621372231a2ceec42d995980ff1c6d63f6c9c5e423d77c80ad0c689054fad69f5d8f25ff241646414b987ebd7b5c8b7ea0c697e46e2a",
-  "hmac_sha3_512": "71f577ed8ac4427f6595067d39812d1ef330f0e0a2b84f78746f518a1f3ea0d183eaf84b9e8a682f27c4f65abb9ab0f74b31491cf7ea80166ad7b5453b4d1c00",
+  "file_count": 3204,
+  "merkle_root_sha3_512": "1683e637f943ab0ca35db46c5c9331fe1a892540299495d57b3729b71eb6748df9edd16d1cafb8c5fb0b0eac9fa12f01e4c0d71701e151979b7cdcef1979e227",
+  "hmac_sha3_512": "64e12684ae030de9f910b32c35cf17e57a963acfd463b3ce1e83ae027e541ec938faffedd4fa495ebad257e670f31753d7a0a903c941a14b5ca2bd3dd480e6f5",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8062,6 +8062,12 @@
       "size": 4982,
       "content_sha3_512": "4b71540382ef9dbe8f4b80f869ee9a4d64902fde351c0a017603ee2eca917b350d1c36c155577da08452246dadd4973b194af9b9f70ebd767d063ae5369408eb",
       "leaf_sha3_512": "fef57792905dc26b728bdb5f096d7af7e288f5ac3fe20fdbdd130faf20876bbc8fc65b97044746c032e203fb790ff60ee9d1d10528a04a54d879bb09db0e4c62"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/重读增量与新令条_DF-OPS-20261012-CAIRN-57.otl",
+      "size": 6286,
+      "content_sha3_512": "0601d42e46e0f06900d85824ed8fd9afa1591b27427e199b5b5c1823d27c57ae0f7013c59e389394dc5f7befcdc2a80e56fa6f5b115851d2b32ffcc8726ba40c",
+      "leaf_sha3_512": "fc50abf415535db5cbc8b5a9009265a9a777cc46d7bee36a1624b8d7b6f2a57fbc026059b1892f2d3eda063c0341bd3dcb982a7d55bb3362d042cc0b76f9f508"
     },
     {
       "path": "deliverables/k3-main/a2a-plaza/PILOT187-DECISION.md",
