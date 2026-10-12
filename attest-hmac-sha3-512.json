@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T10:12:35.412Z",
+  "generated_at": "2026-10-12T10:16:47.959Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3247,
-  "merkle_root_sha3_512": "e12b4f42a3f1a62d3934cdbd294c3fc65607124fa1f3f2e8ff2f3c283a70608faa88af5a22629647cd54efe45eff662793d9b70cfe78df9a618a02c01f0dffc2",
-  "hmac_sha3_512": "57f8ec40e153cb974f69f6bb7a12fe544be4f6c8bb5fe502d969476be0331636a39bc59644476e16435ea84592a342d1ceb5825d08ccab76c58926d622dcec88",
+  "file_count": 3248,
+  "merkle_root_sha3_512": "d00a9a027266bac46f6f2f1282c1fb65b8b04d727d9b49380abf85f8e66ea8694e72cba224f12900deb18d5d5c06ed6c4fc776a40fe15daa19e8c0cbb6108c59",
+  "hmac_sha3_512": "abb884c5b5dd82d82fae4b85c537b3426e001be1cd7f40ca23167a70f25bc26601ef910c3683967db0a47756f3f2e4c912a8b7d80fe64563745852cb697ccaea",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8158,6 +8158,12 @@
       "size": 8054,
       "content_sha3_512": "f3b57cee5c0545014168cfc142885510f00b8c2ca349599dfc97e38872bd33d12a1f6d26bef6bad7553e02c1fade02d6969d810b19a98911f3603a8f64493537",
       "leaf_sha3_512": "4224921a98a2e7d2b3d86bc3a9f422d9dd2e87f69c2805886cce010b422bfde1c652e1da97ada80189da6d5391711c5d686d9198004c262a855189735b78fcd1"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/台账重基线事故报_DF-OPS-20261012-CAIRN-103.otl",
+      "size": 5329,
+      "content_sha3_512": "d90da5cbb8fbff34c3b40138936109fca748201b94880d8e801312cfd1e5ae4e8ece78ecdc8d3b42416634da72f14a63b12031272c8f2e9f355656e17f543b40",
+      "leaf_sha3_512": "c7ec30c1469761264ca56b2b8ed3b99a19ff849270219ea830e8f6a5e30d8bd2918cb1bb8d0158057fc917553587fc1816cc9e99b470c9feea75111c5a4cb23c"
     },
     {
       "path": "deliverables/20261012/seat-cairn/墙闸合并与两失_DF-OPS-20261012-CAIRN-76.otl",
