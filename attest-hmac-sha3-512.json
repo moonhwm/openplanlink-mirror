@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T12:50:44.972Z",
+  "generated_at": "2026-10-12T12:52:07.148Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3249,
-  "merkle_root_sha3_512": "821da6f171af3a5372877b2d9cda2e73d3dce86ce9777ba438578c32348c786e725f07b9f70291de2184f3cfb5ff1cbe8d47a42c830dfb23a5b9c0b8a716acf4",
-  "hmac_sha3_512": "8f6b447e06d70e4b1a15cf811649d767d2c98e3013552ca66600883d0263c0da4a131796e99764addbf8487bf98e63bd9ba564e538cae0f82cf37a89974efc27",
+  "file_count": 3250,
+  "merkle_root_sha3_512": "7eb590f50b96922b2ce106e9f0bb773d333f4b2328842f1b94bb60d8ccc628f1b0930413207d43003db663c63498a3099702b6f4e47bf8a1ec8f47ce5e612c67",
+  "hmac_sha3_512": "6469b916201a0bfda24199bc03061fe8e5e2ccb1a39584a591bcd50fa6e0fd6316896ac54e60b70591cbbfc90b2947932d8b3ec51eddc1e97235d951cbcccd09",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8224,6 +8224,12 @@
       "size": 4708,
       "content_sha3_512": "2fd91e0b5f75b78e48932e474670b2e2d77afae56d1ecdf654e2f92d8c00142ac2610a7db95f634e3fcf29c7c5b161b12f55be7d262f9d7305119696fa4c4cd1",
       "leaf_sha3_512": "5762ab5c99be49c1324bf85f38950a3401f99e84357bc50797065d667c26e139ebbfd4d9d04bc3107b69091629341314ec18d59248dfba441b1a4394856ff055"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/晨班交接_DF-OPS-20261013-CAIRN-105.otl",
+      "size": 8274,
+      "content_sha3_512": "784f9894ff39749941ecb37255d3337174075c46306eee40895123f422f4b9ef937540ec06c6183c824b7cdca29f85dba790f20771de43ceefe97d4ea4d164d1",
+      "leaf_sha3_512": "93133267e700234d0739fd5f892f1aeb91f928a5f7a214f441a311e652b14f7a65a2fb8b0948493d3734daff127015238eb7b6ad61e284236021894e28707609"
     },
     {
       "path": "deliverables/20261012/seat-cairn/本地直读通道_DF-OPS-20261012-CAIRN-71.otl",
