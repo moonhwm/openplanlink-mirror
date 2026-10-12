@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T05:12:28.014Z",
+  "generated_at": "2026-10-12T05:22:53.203Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -9,7 +9,7 @@
   "key_id": "opl-a2a-2026q4",
   "file_count": 3215,
   "merkle_root_sha3_512": "455a608f0e3670e032a52ded0bc261941f93ca2e6e2616eba2788ad7dc74cb697cc6e91ab000cba2b35b99311e63f76b7a196ca83abbc86969e7de04f069c42d",
-  "hmac_sha3_512": "381d59fdc122c2dc8f40f4ad0bd457a07f7e93a305e45abf2dea553185e794d34637d07a5dac6a19f4b706a6020e9aa874335dece2dfb5800233ac069332c453",
+  "hmac_sha3_512": "77ed12e115cc2b9d4234e43028befa8d988e7fa023218cdbf46715528baa731ccd64ac51ecd8eab9eec12b3047f641ddd9beb496be791752c9b465e09fc42804",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
