@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T05:29:29.062Z",
+  "generated_at": "2026-10-12T05:30:45.114Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 3218,
-  "merkle_root_sha3_512": "8fb367b21d5da0ced6bb59ee80db754eadd37e9106216c84a835c38c617a88687435587afad64dbb5feb853d841dd091049b1ed7ad26e1591ff192f7f82abf64",
-  "hmac_sha3_512": "78c5e85f210c50945fb587719f03f55d679e72a5dc07459058d8db1de0cb069ad78ab5a37c3abbf85acb7e4322e469a166dd89032446dae0755511a0ae198a84",
+  "merkle_root_sha3_512": "abb43a175fa0949d7b6a091ec638328e546cb3f77fd1edbbf3ee1ceccae03e7c442c5069e71a61f1cce4392be62a4d56a85811c0f57f9775baa09c8f1109e9b7",
+  "hmac_sha3_512": "9583037c7e73084daba1822ee5b048689ab1e45b2b44d4951f09149f1073bea96dd59652437db47137d58aded50416a5beb1f133f22c08f08437d9e29c79a889",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8058,12 +8058,6 @@
       "leaf_sha3_512": "bebbafcbbc276731112a2a862dd3f9688c6739327a4c618ad6eed611a42964ce23534915b3d299102fd36375aa632e33f2daa7b9c1a9844c3717063723c93091"
     },
     {
-      "path": "deliverables/20261012/seat-cairn/led_1102_rootcause.led",
-      "size": 5075,
-      "content_sha3_512": "986aea2b66343a96deb4bc564dfce16d08d769c3e0e75091e89ab0978b9fbd839eab74d5d0475339fdfa183cfabc3aab07ff47435d671c84525816513554db15",
-      "leaf_sha3_512": "ada5840bacd37871bc0c0b10c6cc3361b93e9fdb03481332a647a555153501834cd45d43b0bae9db05f5f98e921cb745a8f337a53b4a2cda3bb3d1a08cd4529d"
-    },
-    {
       "path": "deliverables/20261012/seat-cairn/人设3D资产审计_DF-OPS-20261012-CAIRN-63.otl",
       "size": 6414,
       "content_sha3_512": "9185371fea9a370057e4daa5adbe97eb6a02f32a2d2aa87045c0b164dc86cdd5acd6f68ffb866623e33758feba6f8ee2008ac9d5bc161d566b8ad967611b78e7",
@@ -8128,6 +8122,12 @@
       "size": 5321,
       "content_sha3_512": "39f7cbe291ed428057ec76f9e97fbf62929a437b6f8c6b64695c47686c9c1ce1f581b68fcb5daa482d8e9674bc4bd132f2c47347b908d9b43a1fde5372a61154",
       "leaf_sha3_512": "7fc0c6679240efedb171de21976241730543bc09d47257ca9394ab2ec8f0e5a4d34f57a5fe95880a13808cfdcda1808bd24482875175d9a8c3f14de831fa73af"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/空档根因定论_DF-OPS-20261012-CAIRN-70.otl",
+      "size": 5821,
+      "content_sha3_512": "cdd292c1ebb59fc88738c71bab31076adc5186493a45687a64c53cb7f745eb041adcab6c6efd025fe9b5e4b60b2a3a19b6d3daf13951feff6ccf56b655327ffd",
+      "leaf_sha3_512": "a2148bf713c11b569a9df0acfbec30e118580c7a56079b9b465290aafffab9fc7ad8ee745a4a94becd2876bea94da0cd51e85183f107c2a8fe71268faeac49b5"
     },
     {
       "path": "deliverables/20261012/seat-cairn/视觉验证三层判_DF-OPS-20261012-CAIRN-66.otl",
