@@ -15,10 +15,7 @@ ARCH = SEAT/"archive"/"docs"
 ARCH.mkdir(parents=True, exist_ok=True)
 CLI = HOME/".kimi-work"/"bin"/"kdocs-cli.exe"
 
-DOCS = [
-    {"key": "outline", "link_id": "ci2ybbMcccFi", "title": "OpenPlanLink全局声明与Agent-to-Agent网络建设纲要"},
-    {"key": "polish", "link_id": "cubofOPoRdSw", "title": "2026-9-25-OpenPlanLink 润色-1 (3)"},
-]
+DOCS = [{'key': 'outline', 'link_id': 'ci2ybbMcccFi', 'title': 'OpenPlanLink全局声明与Agent-to-Agent网络建设纲要'}]
 
 
 def pull(link_id):

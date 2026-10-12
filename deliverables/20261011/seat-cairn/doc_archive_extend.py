@@ -15,14 +15,7 @@ QUEUE = ARCH/"docs_list.json"
 IDX = ARCH/"index.json"
 
 # 队列：按"全语料出现频次"排序（出现越多＝越重要）
-FREQ = ["cubofOPoRdSw", "clFOjVPjbbOc", "cboAFwILF079", "ceuKopR7LW83", "ci2ybbMcccFi",
-        "cgeO17yb4eiI", "cjdFFj5rrZi1", "caBn4BzDaBMO", "cijGVCsbZsGm", "cnuuL0BZDcsc",
-        "ceWJWwADwbGp", "ck91uLlXnyDK", "ct82eUr6LT66", "cuLQR5ycgR4J", "co3jGF2ridX9",
-        "cplH408hcQMF", "cfUP3XTMb2UG", "cjj1X42H8FMP", "ccmYOO3QvUyd", "cg0IMPqFxDn7",
-        "cfBasPki2r06", "coIQr9TX0W1W", "cm4IPhTYznTs", "ctpxZ2X2JxkG", "cndYJKCF7len",
-        "cn8TJyXeLyop", "cdnTX6c3i3WF", "cbhgTvnOPGTe", "cp0wHNiF4XVj", "caLl83StO4UI",
-        "ciBoOWmoUaDk", "cbfHsqlxCa4V", "ctvWcll0pvgs", "ccVjFCFHR1my", "cqfhnj68m2Mj",
-        "cuumpvPlZ5sI", "ctZUzzclIzqO", "cbioamxelCdZ", "clf5rkybW2gm", "ce64WlT2Dk9G"]
+FREQ = ['clFOjVPjbbOc', 'cboAFwILF079', 'ceuKopR7LW83', 'ci2ybbMcccFi', 'cgeO17yb4eiI', 'cjdFFj5rrZi1', 'caBn4BzDaBMO', 'cijGVCsbZsGm', 'cnuuL0BZDcsc', 'ceWJWwADwbGp', 'ck91uLlXnyDK', 'ct82eUr6LT66', 'cuLQR5ycgR4J', 'co3jGF2ridX9', 'cplH408hcQMF', 'cfUP3XTMb2UG', 'cjj1X42H8FMP', 'ccmYOO3QvUyd', 'cg0IMPqFxDn7', 'cfBasPki2r06', 'coIQr9TX0W1W', 'cm4IPhTYznTs', 'ctpxZ2X2JxkG', 'cndYJKCF7len', 'cn8TJyXeLyop', 'cdnTX6c3i3WF', 'cbhgTvnOPGTe', 'cp0wHNiF4XVj', 'caLl83StO4UI', 'ciBoOWmoUaDk', 'cbfHsqlxCa4V', 'ctvWcll0pvgs', 'ccVjFCFHR1my', 'cqfhnj68m2Mj', 'cuumpvPlZ5sI', 'ctZUzzclIzqO', 'cbioamxelCdZ', 'clf5rkybW2gm', 'ce64WlT2Dk9G']
 if not QUEUE.exists():
     QUEUE.write_text(json.dumps({"note": "按频次排序之待拉队列；出现次数＝引用广度",
                                  "ids": FREQ}, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
