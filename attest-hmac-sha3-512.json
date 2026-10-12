@@ -1,6 +1,6 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T05:52:43.421Z",
+  "generated_at": "2026-10-12T05:54:00.926Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
@@ -8,8 +8,8 @@
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
   "file_count": 3228,
-  "merkle_root_sha3_512": "7b4afd1a1c5204d470f36d1f3e75cc65280617a565eaa35f9c565d11c0874e2aa1df194fa0d9de8deb87ec2b14ba08c4dc9aa7df8c6551472dd4d5d4919709d5",
-  "hmac_sha3_512": "827e859b87c20f8590b5060f153edec964e2a93ade330d1dc5253a64d76e2b30ce78d4db0056d33c0ee118671089ef14067c93d2e627ddc609794d967ac405fc",
+  "merkle_root_sha3_512": "9cace59cdbe7b21a535be1e5d31b3e9beaf741f830e6581b379431f611bebf642c500f04959c3ded17594cd9534a85a43ecfb26676e216c7f9aeeda56581d2de",
+  "hmac_sha3_512": "18f3671bd9f44b995271a4d01c13aea07d1c33aebf819d3c16565242074d01108446cb57cf714ce344f16cfaecb36629442890a7ff373be848a881d3f94c8b94",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -18949,9 +18949,9 @@
     },
     {
       "path": "tools/pre_push_gate.py",
-      "size": 6211,
-      "content_sha3_512": "84332f416c596a2fceabab8d20bf6ed85c182ca17a66de664604210be48bcae58359bd9aef1b91a7adc8fe4c87ad2925505366d9db34ef313e4e3fc8b6b2dd7d",
-      "leaf_sha3_512": "b20c7e5520bc78eaeb2cb600dac2f71caa9ae95a5a4b7b73ec48f0dba0ab4250ac40c2f8c750eb85ac88caabf5fab353063cbfcc38ab15f7f97dfdbacdb68c2f"
+      "size": 6291,
+      "content_sha3_512": "84106931dd2cebe2f257fb8a65ce6c6356aaba54ef228c1fd6a724bcad8946d88ba7bd8283265942aeaf35a7be9e83cb9a8adfe57484010a8aa66c99c763c373",
+      "leaf_sha3_512": "de55badffa7f577e69b4be3794dbdad1b003a9be5a6ab7c7e63267d8feade2ba97e7f71f57df0c537809958d87fec9ed98b9a753a474def3943b52652497aa5a"
     },
     {
       "path": "tools/preflight.py",
