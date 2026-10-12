@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T07:53:10.368Z",
+  "generated_at": "2026-10-12T07:54:43.773Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3242,
-  "merkle_root_sha3_512": "a78ce2bcf8a7de295dc7096547769bb792e7bfbbd1fe0205564ec0290919e56defda75190f80b95146dc519846132b868fd6110801bfd0d7a98f2a194e753eeb",
-  "hmac_sha3_512": "73d920a74a8cbd7f2fcd6aea1c72f68e0cccf99a696ea390d13c4a4f61471f414ed0f36d66d33caaaf0b3d8adce17e2458ca89961e5c2761eb44dcd9c8b08071",
+  "file_count": 3243,
+  "merkle_root_sha3_512": "9e23c503cb5d6f3b7dffe636a9d69792ea853d91cdbde262879d2a1bf1b9fb5ce7030918e0b63cdbb88eb909b7c3d172a3ec070c027a69a3aa074daf51119e5b",
+  "hmac_sha3_512": "078156d9d833955c1804a422146c19ba2542fcd738a089a05b5bed442257a2a7d2d44e84ea9ccbbbbf76492acc27168d6423307ecdb27c2774a5ae6518273206",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8128,6 +8128,12 @@
       "size": 6250,
       "content_sha3_512": "540151fcaeb6bac4baa5298c7751464c4e0128bccfdc94b7aa6f7f649fd9fa0d50619ddb9610c403da7a918ae1a5fc8edfcfa5b0bd01171e5deb5d7ce7e807b4",
       "leaf_sha3_512": "3d74f1a4f468cebc4e7ffa3f9f6556f73bf2df3586c8faadeeb0e020e8f8e156280574f660b0a53a0377e5b5b90ef5904ac6250d19e65460b21987e3b1113e4a"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/决策模型实测之复核_DF-OPS-20261012-CAIRN-98.otl",
+      "size": 5297,
+      "content_sha3_512": "3c40418fb19d24410987a2d30a53656ca7cd413fb21247ecdcd3faa843479d0ef203caf2792009fef774d9ea60ab602e01f180a58acd56035a742b04d5c86209",
+      "leaf_sha3_512": "60ab72a762593b4a16b33af0a2dfc33c8d2c91e3128b83458a0bd018a700d7c96964c24add844f957b8b73df3decea3eb63245cfa58f1e1be83466157832336c"
     },
     {
       "path": "deliverables/20261012/seat-cairn/勘误四_DF-OPS-20261012-CAIRN-56.otl",
