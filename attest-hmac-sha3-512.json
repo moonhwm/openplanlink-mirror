@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T05:51:22.341Z",
+  "generated_at": "2026-10-12T05:52:43.421Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3227,
-  "merkle_root_sha3_512": "bf77fe35ed41fa91bc45885ed5bfd428f64346b5cb55a9c8c51ba1d4fea91b786a4e2ad2d378801cb502aa91a81059248f15b82d6688aac6b7402a0c806e56b3",
-  "hmac_sha3_512": "bfb74e1779e0bad206f2d131a3440883aeb91db097c397a9451b59571905d23a5cbf2707308313ef4d7cb002a5ab5e3293d91ca5f14fdd35722d25cab4a11f95",
+  "file_count": 3228,
+  "merkle_root_sha3_512": "7b4afd1a1c5204d470f36d1f3e75cc65280617a565eaa35f9c565d11c0874e2aa1df194fa0d9de8deb87ec2b14ba08c4dc9aa7df8c6551472dd4d5d4919709d5",
+  "hmac_sha3_512": "827e859b87c20f8590b5060f153edec964e2a93ade330d1dc5253a64d76e2b30ce78d4db0056d33c0ee118671089ef14067c93d2e627ddc609794d967ac405fc",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8056,6 +8056,12 @@
       "size": 5508,
       "content_sha3_512": "8ce117fbbbbecbec051407dc4b91b039a4ab0827e02bc4debf65b54343bb1ec514fcf7bcbc779c8a295b78c1d23d7a4ef6e1c69382cd964e8418ea0ed2e89e26",
       "leaf_sha3_512": "bebbafcbbc276731112a2a862dd3f9688c6739327a4c618ad6eed611a42964ce23534915b3d299102fd36375aa632e33f2daa7b9c1a9844c3717063723c93091"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/五幕全绿_DF-OPS-20261012-CAIRN-80.otl",
+      "size": 5820,
+      "content_sha3_512": "c65a6b0023ddaeaed9586d0552f32ed568c13b22858f711b2c010dd95ec1eeef8cd03392695fa4e79285488df52b3a6b68c829b2bc90326308b554b26ed27b50",
+      "leaf_sha3_512": "7440aea4463f3145d3044c97c34d3054ebc5af4e6bedb386cdd19cea6dc66acf3decea45eda1e71321f8b70c50041a93a60d1a369f6ef8809e97d2518c7f9dd3"
     },
     {
       "path": "deliverables/20261012/seat-cairn/五幕即代码_DF-OPS-20261012-CAIRN-79.otl",
@@ -18943,9 +18949,9 @@
     },
     {
       "path": "tools/pre_push_gate.py",
-      "size": 5627,
-      "content_sha3_512": "d8a27fab0dc358f0becc9ba691eb585cffac98266f7e9d03a3634d72e73e0fdfe315fa45025aa7b3aa73df92164c982a61dc016d9e9b1fb4ef8ffe2063fe1986",
-      "leaf_sha3_512": "b995efb7e6939d1120a291e84fa14dd49abdd814eb85a350ed3c1ba07e717805b0f8eb60085feecb6d6c24872d35b39acf7b118305f17bff52bf824d63cd48ce"
+      "size": 6211,
+      "content_sha3_512": "84332f416c596a2fceabab8d20bf6ed85c182ca17a66de664604210be48bcae58359bd9aef1b91a7adc8fe4c87ad2925505366d9db34ef313e4e3fc8b6b2dd7d",
+      "leaf_sha3_512": "b20c7e5520bc78eaeb2cb600dac2f71caa9ae95a5a4b7b73ec48f0dba0ab4250ac40c2f8c750eb85ac88caabf5fab353063cbfcc38ab15f7f97dfdbacdb68c2f"
     },
     {
       "path": "tools/preflight.py",
