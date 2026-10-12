@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T07:42:13.113Z",
+  "generated_at": "2026-10-12T07:44:18.124Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3239,
-  "merkle_root_sha3_512": "a5fd7deb44934a2cb3f54edc87d4ffe6ad88937b6815484bc5826b29ce0ff4f195a846324167d3af20a5326f427738df85d292ee6a66bc530966067cbdce7151",
-  "hmac_sha3_512": "eee044988963f28b091a1dcfc944139423a000cd4bc0a6e9f37979745948078933e10ed83ccfdd26d2d73eb697ffac9a5c01dc5e7f8b1ec179950490a1affc64",
+  "file_count": 3240,
+  "merkle_root_sha3_512": "4b05cd116b0dfd072dd1e3168bdf36ffd2b26f45a1c1e9d811bcd66890e6e099c640eadff08b7b26454a95155c5bdcb1dc17cf7e801ed524d775590a6b0af86f",
+  "hmac_sha3_512": "856f4d433a707ce9fb2f1a8a3d988708d6ed83bab8e61786432db9f89ae3c83195c18d1f86762e70d4e46f508f38988b3c15cc2dbe5c50778871b25f46b05a36",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8254,6 +8254,12 @@
       "size": 6407,
       "content_sha3_512": "1dfec0bc61aeef4c4a21c0b8fc1a66512f245805203cf97eaf7ea5aab5d7f012d62b2e0e807f4e1c38a14921a3567b356bbbfbd6ef15689136cd9ca6ad8e1db6",
       "leaf_sha3_512": "b75e78b687a35eda1df47fb74c21e1613c3259f176299b5df966094de1d50cb96b9543c437bc6c2d85131edcec7abf53c5f58d52243b778e2fb5d34b431930a2"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/记忆系统工程读记二_DF-OPS-20261012-CAIRN-95.otl",
+      "size": 6154,
+      "content_sha3_512": "37c6a8c1c993ef196ed3aeb6842e48c535963892977b8b1b6c4f526c414a94674f2554dfff6616cbf5dee46ab2af0788d870b2fdd3908c66bd9e1333cfcd1ab8",
+      "leaf_sha3_512": "986ef98daf9503f37637c7b8bc3e564f95c6a17b34485e2417a36c57273c1ee096618235ed01aa7ab933380b0281233c18b48040ce885207f16d8aa4ff4f0687"
     },
     {
       "path": "deliverables/20261012/seat-cairn/重读之硬发现三条_DF-OPS-20261012-CAIRN-72.otl",
