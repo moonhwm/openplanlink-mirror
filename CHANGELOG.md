@@ -3657,3 +3657,38 @@ Codex technical sender; ID OPL-PUBLIC-WITHDRAWAL-20261011. Removed withdrawn sou
   3. 世界探索v3 Round 3需重跑（API 500故障）
   4. 百炼workspace_id/API Key仍需主权人在控制台创建
   5. git提交+GitHub推送待执行
+## 2026-10-12 22:30 · 砚坚（GLM-5.2 ArkTS神经中枢席）· 多仓库整合实施计划+三模块服务层
+
+### 新增文件
+
+- `GOVERNANCE/research/multi_repo_integration_plan_20261012.md` — 多仓库整合实施计划Q1-Q6（含架构总览图、优先级排序、候裁清单裁十一/裁十二）
+- `GOVERNANCE/prototypes/embedding_service.py` — 向量编码服务层（百炼→302.AI→硅基流动三通道降级链）
+- `GOVERNANCE/prototypes/rerank_service.py` — 重排序服务层（百炼→硅基流动双通道降级链）
+- `GOVERNANCE/prototypes/decision_service.py` — 决策模型服务层（百炼→302.AI双通道降级链+候裁清单8项+确定性验证）
+- `GOVERNANCE/prototypes/persona_3d_pipeline.py` — 人设3D建模管线（图像生成→ImageTo3D→LOD→带标记首帧→世界模型入世→涌现判定）
+- `GOVERNANCE/prototypes/graphiti_config.py` — Graphiti时序知识图谱集成配置（Neo4j+302.AI+硅基流动+12搜索配方+MCP 12工具）
+- `GOVERNANCE/research/persona_3d/first_frame_test.png` — 砚坚人设首帧图像（302.AI dall-e-3生成，1.77MB）
+
+### 关键成果
+
+- **Q1向量编码服务层**：302.AI（3072维）+ 硅基流动（1024维）降级链验证通过，百炼通道待裁五
+- **Q1重排序服务层**：硅基流动 bge-reranker-v2-m3 验证通过，裁五相关排序正确（0.8923最高分）
+- **Q3决策模型服务层**：8项候裁事项全部输出{class,verdict,score,prob_distribution,confidence}，裁八score=0.95最高
+- **Q3确定性验证**：LLM通道非确定性（3次输出均不同）——需百炼decision-model-preview或nn_deep.py本地基座补充
+- **Q4人设3D建模管线**：步骤A图像生成✅（302.AI dall-e-3），步骤E世界模型待裁五；涌现判定三问三判据已实现
+- **Q2 Graphiti配置**：10项配置验证全✅，含.env模板+docker-compose.yml+12搜索配方+MCP 12工具
+
+### 候裁清单增量
+
+| 编号 | 事项 | 本席立场 |
+|---|---|---|
+| 裁十一 | Neo4j Desktop安装授权 | Graphiti集成前置条件，免费本地版 |
+| 裁十二 | Q4人设3D建模使用已有10个ready世界 | 建议先用已有世界试跑，免建世费 |
+
+### 遗留
+
+1. 百炼预算解阻（裁五）——向量编码/重排序/决策模型主通道待启用
+2. Neo4j Desktop安装授权（裁十一）——Graphiti部署前置条件
+3. 世界模型实跑预算（裁六）——人设3D入世待裁六
+4. 决策模型确定性——LLM通道非确定性，需nn_deep.py本地基座或百炼decision-model-preview
+5. 人设3D建模完整管线测试——步骤B(ImageTo3D ~10分钟)待运行
