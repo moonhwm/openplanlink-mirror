@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T06:00:55.203Z",
+  "generated_at": "2026-10-12T06:02:24.021Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3230,
-  "merkle_root_sha3_512": "7751c45e042426d28cec7d94d312f3f1a555aae7cf0f76ac6a49c0d9645ab0f1040825fca969b3a9ba18c9613767d91f77da9295a463aded0303728cad9e5b75",
-  "hmac_sha3_512": "e5c4855f7c6a3a859984fd62f9fbaeafa00c01ffb13ea8eae38dae44967797a2b2ccf5f80423aef655cf813c6ad111b6f7d424c25ab80582211ee87c703636d0",
+  "file_count": 3231,
+  "merkle_root_sha3_512": "5b1ec141e5251255957dd356639dc5f67f7f7b20367b3c5689748bf828ea5f865e03b2679b8736980760936b836f91470300037b94365c41d51dd73b0cdd06de",
+  "hmac_sha3_512": "7e862025a07936fe45583cc204d8def003e3194542314eac0b155e09d08c7f66364ee6ce4ab804d29c56660dd58defc96ee4ddd3cb4f828e5c3f029cc81f5fa0",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8152,6 +8152,12 @@
       "size": 6150,
       "content_sha3_512": "cf655471e7b4e25ea6f713021b695c3f3d2afaf973eac90e76a400d9a8b25736e9eb9a4c6084c7cd2e5e1071e72950718cdcd3cfedc93960e89f76deb0847153",
       "leaf_sha3_512": "dcdbed0859bb5193db58d1c3d525ee544396e7b496b1107f71312d72046860d882d569b53ea94d61aefce6ea3efa20222fcdc45cd909e2277725db9aafb0e71f"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/本夜总卷_DF-OPS-20261012-CAIRN-85.otl",
+      "size": 9273,
+      "content_sha3_512": "8445193a0506abd7e842c8fc9bec9621d08f9d0a54bd15cb0d86bf7e1ab10520398e9c8cba8c35ad1de40aee7a1d14662ba4d9998e2a83b24db83b8877a1f647",
+      "leaf_sha3_512": "eb4f23f5f8fbe8872a10543ac7e2515c882927b0a46d47e5a7bd210f93efaf5c4b63d72427b80b711353254979cdfb77dd10adc6862d28906acb9127d94818bc"
     },
     {
       "path": "deliverables/20261012/seat-cairn/死信队列与假成功_DF-OPS-20261012-CAIRN-60.otl",
