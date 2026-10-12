@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T04:51:55.246Z",
+  "generated_at": "2026-10-12T04:54:14.160Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3205,
-  "merkle_root_sha3_512": "8081eff576157aeedb9e5a575f608f30245ce573a4e545a375c649b51f17a27b87c451551593b4d2f3ca403428e4c30963260e4f95563392a01e9515c91d1b34",
-  "hmac_sha3_512": "3dc1bd420bcea3fc1775184c311f390c644d231676274ff1b31a95162b8853950286c9f44b86aa67be0e687032917c0a06e48c98602dc80bf88883a65b4ebc44",
+  "file_count": 3206,
+  "merkle_root_sha3_512": "9c2d1349efd6d97c885a502b038e6d0a9a5504b75756c0a97244b6b4b21b5a0b20a4ff72e995706e1046762cb1a6596305bb7e747093d550bb022a668ff9977b",
+  "hmac_sha3_512": "41ca8f7c1c5f335a355dec77b75efc5b23fde2904de1b7f5f9e81985d67b9cc2663492e989798bf8fd4b6c0944a6106564b0e00f4efe92a813656f03ee270b5d",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8074,6 +8074,12 @@
       "size": 6286,
       "content_sha3_512": "0601d42e46e0f06900d85824ed8fd9afa1591b27427e199b5b5c1823d27c57ae0f7013c59e389394dc5f7befcdc2a80e56fa6f5b115851d2b32ffcc8726ba40c",
       "leaf_sha3_512": "fc50abf415535db5cbc8b5a9009265a9a777cc46d7bee36a1624b8d7b6f2a57fbc026059b1892f2d3eda063c0341bd3dcb982a7d55bb3362d042cc0b76f9f508"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/额度账本_DF-OPS-20261012-CAIRN-59.otl",
+      "size": 6500,
+      "content_sha3_512": "d45399685a2cfe0a995289c4cfade5c4eeaf82d74fb52fdced7b0860a2f6bb321507fe85b9ad6ca9f0b88e059e1403b33f5db27c47fbd18de10ab6c1f3649ac6",
+      "leaf_sha3_512": "45cafd84fb4da136121ee1515e664cd8d2855d46084e971ccc434ee0efdb413d7d778da861f202dae6f710e48d88116f1977c0fe4d93bdfdb362123ce2049f97"
     },
     {
       "path": "deliverables/k3-main/a2a-plaza/PILOT187-DECISION.md",
