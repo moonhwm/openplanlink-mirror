@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T15:55:54.141Z",
+  "generated_at": "2026-10-12T15:57:15.142Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3252,
-  "merkle_root_sha3_512": "e4fe40f1a12b4371846f21b9d679afd564da09d033d421b9f02fd4599857a45e88ec54f9464b832183930d4ed7db535a73f1c4a56da2086917bcead31a122abb",
-  "hmac_sha3_512": "44c3f1d014c9d0a17702682ec3c697961a2a102b68fc94f4ef3524467a7a64f20458e189690fa24fd2bb7d9a3a33d7f3d69039e65b35cc544220f90bb6ffef00",
+  "file_count": 3253,
+  "merkle_root_sha3_512": "9d0f59d6dcbc8c8775594b781942a8505db112af2107c8147579db6205779c05756857e1a5cce233b4a46bbbc362e0f044ec7262abedb94c219ae5bd7e7577d3",
+  "hmac_sha3_512": "52326acc08e176f704c373515f5cc361f8903012d20a307e210091288d187091b343e951ab91e075578c2a1a7bdc588d3c07bc9fd0faf494c54f39c398ba40e4",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8098,6 +8098,12 @@
       "size": 7790,
       "content_sha3_512": "b8a5b94edafa2e8ffad40627aa0442d9b676342a1ff771e932f2dd5b85f8f7735d988bbf07312748bc6c2f3551363c44ed7592cd4f69b30103dd5a87f859698d",
       "leaf_sha3_512": "074f92855977402695534b88a6710e09dddfce1fc4d03b64b62a1c64d38d9206890720ea333a1f57fa7721dca7a835b3306257f92f3cac324618abce6195bfc7"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/世界模型线阶段收束_DF-OPS-20261012-CAIRN-108.otl",
+      "size": 8440,
+      "content_sha3_512": "373e08c6b5afeb8f4fcbfae4589bd5e3be29bffd28e0abfe556e464e75130b680ac31c82460a2b25edc55cac2782f496ef831c4266fb94b4bc9873ab2d2d88d0",
+      "leaf_sha3_512": "d3f7ce2b3a73e1b8100177f1b9d8f73d811f2b4a482068e7f761392bedda287bf21982880d2e5684bd62801c5f7d1f69b2055179a178a48300ea735ed4720fe4"
     },
     {
       "path": "deliverables/20261012/seat-cairn/两案落器_DF-OPS-20261012-CAIRN-89.otl",
