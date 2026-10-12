@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T06:03:59.584Z",
+  "generated_at": "2026-10-12T06:05:45.248Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3231,
-  "merkle_root_sha3_512": "a758424f78609636acc75fb702c2aa96841c9b91b405a4f643f117740e2515266f67d7d33bb7131a33345c451614ca0c667449465a66a3e8f27ebcedd53f857a",
-  "hmac_sha3_512": "3a852daa43dcfe271816f0553d076543b8cf39b94f918623bcf09bd9ff7fa565b766d92a123eb8ace8a42ffa991da310b83a63751b75f60347e820dcfaf11eaf",
+  "file_count": 3232,
+  "merkle_root_sha3_512": "5d6f02bfbe693cd4b13f4f395fadef6113bb992cb483a9ca340bcec674a6f479d23ee742499e4c45c72b01ada3faaf18cd8fb1b2c3415eb24f059f0842ae9f0e",
+  "hmac_sha3_512": "cc7ff28c687bfdec5f742d36f38f40f6300306823da8f23e675282500613ac09883d690ac11a1a303eb624aba6c87e51f994b2cc9fc63bf4dd0c7665f314134b",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8056,6 +8056,12 @@
       "size": 5508,
       "content_sha3_512": "8ce117fbbbbecbec051407dc4b91b039a4ab0827e02bc4debf65b54343bb1ec514fcf7bcbc779c8a295b78c1d23d7a4ef6e1c69382cd964e8418ea0ed2e89e26",
       "leaf_sha3_512": "bebbafcbbc276731112a2a862dd3f9688c6739327a4c618ad6eed611a42964ce23534915b3d299102fd36375aa632e33f2daa7b9c1a9844c3717063723c93091"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/TD预研与假绿之查_DF-OPS-20261012-CAIRN-87.otl",
+      "size": 5318,
+      "content_sha3_512": "b8c8804fb771ea7014803d615653e913f0170bc5ad1daf4561dd5f93f444513f1ec2913ab5ecb0ce404d0d8203d7fab6dd462f28537c54209760ad9354869587",
+      "leaf_sha3_512": "546a29294a9b1a922445401c727168c8d0d774780cb50907e1f2087e31c6bfb963b6e5f0cff27519884f8aa8acb2b2ff2671d85b4b059d8009d62cd592c4a33c"
     },
     {
       "path": "deliverables/20261012/seat-cairn/UMC三面分面校验_DF-OPS-20261012-CAIRN-81.otl",
