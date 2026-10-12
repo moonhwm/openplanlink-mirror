@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T16:24:05.310Z",
+  "generated_at": "2026-10-12T16:26:45.509Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3254,
-  "merkle_root_sha3_512": "c3198655762ff02649497630c0ff217255e18be89860f8c767f83d09f632afe9d1d7098038c07db068565f7d4ee593355b1f78f03bdc6bd5e817dbea024898de",
-  "hmac_sha3_512": "bddc8ddd64b5205a7c975bdaf714eee0c8460dffe8e05d3e9a46e1393af98ce826d56ffab3ed71528db2ad109c17e6653f8aeb974161bbc869abd978785f67cf",
+  "file_count": 3255,
+  "merkle_root_sha3_512": "ad26056482f21716f0a2e59a4b72d9a152bbd1548bd5657ada5b1a576b1226e0314d5a1591309e3c2279d99734d98edc4127a91b914aa214d50c8940c94b99a1",
+  "hmac_sha3_512": "39cc01bc3edfee0fcaf8e895cf5f30c58b14e62e144bdf58a7d1db8f757fd5a5b0bb3927c0f94a456b224b7f93802f4f9e343cb0be9b5ad2a21b5dce2d35a8a7",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8356,6 +8356,12 @@
       "size": 6500,
       "content_sha3_512": "d45399685a2cfe0a995289c4cfade5c4eeaf82d74fb52fdced7b0860a2f6bb321507fe85b9ad6ca9f0b88e059e1403b33f5db27c47fbd18de10ab6c1f3649ac6",
       "leaf_sha3_512": "45cafd84fb4da136121ee1515e664cd8d2855d46084e971ccc434ee0efdb413d7d778da861f202dae6f710e48d88116f1977c0fe4d93bdfdb362123ce2049f97"
+    },
+    {
+      "path": "deliverables/20261013/seat-cairn/世界已建成并进入_DF-OPS-20261013-CAIRN-110.otl",
+      "size": 4962,
+      "content_sha3_512": "29759c7669f2f2c6eec5815a7e867638e84f47a8d2a709e1067ee82f9a32ee75c6364c46032a6fc94bbc098db95f70b36780e797f570285cbd01103fb9c5cda5",
+      "leaf_sha3_512": "94e39c785f8e81c2c196d3927363b9fa988153dd73adb3d37771540d845cf6c6f707675a879e06b48a9e85460eedee6ad5e54b4018860c930463f1a7567500b7"
     },
     {
       "path": "deliverables/20261013/seat-cairn/跨日交接_DF-OPS-20261013-CAIRN-109.otl",
