@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T06:09:28.359Z",
+  "generated_at": "2026-10-12T06:20:08.735Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3233,
-  "merkle_root_sha3_512": "cf42a5de73e5d70f01777ec9f083104c987cbab3ef5c1c16258dfdb77ff095887ea819b23267c8fdfae14ab78bbef8975522b24467faec719c8793a022d30e13",
-  "hmac_sha3_512": "f01ff7d5cb55efac79f797338ce42393e9a44e859cc949f05ff23597d18b2c03b6e8e52c0e777194ed9072235ab3f257ed0f87c06fe8072558f6d9aeb72cdce7",
+  "file_count": 3234,
+  "merkle_root_sha3_512": "b866350fab0b8c6f5c8afcfee9da92b4e78e791224d8313dee59f320d430c526c48bb4d1e1207b80be8f33835c89936db6e7454ee72ad0e376b154b8b06a2126",
+  "hmac_sha3_512": "9af0737bbef0725b4c083ea24a38386c7115272f59ac7f00c3455e687bc9fe931c32eb1e4344ab27094ac262ea358cadbdfba520054364c00128fb194f59061e",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8074,6 +8074,12 @@
       "size": 7006,
       "content_sha3_512": "5e1000a3a7230ab07348c7817daceb1c03980178424d4f8d9b455637ace69b2abe6e0e07cd7670cd00fd8d8f1cc2a3c89acb2293c450520d7f98f0db1e37b56b",
       "leaf_sha3_512": "f24f4af66afdac93413e34b629d59c9aaaca9e05d03b7217f399d5336dea9f27c2206bf94cb2c412444ae84f98684deebf1ac593f42c6fec3322fe04db7ab5bc"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/两案落器_DF-OPS-20261012-CAIRN-89.otl",
+      "size": 6274,
+      "content_sha3_512": "90b511bfaaab206e329fd2bb97e1576aac7a98881efb8aa43984a42413f7717052ebe7070fa948edd45777ee4e9ff03544fd2e617c1ca1cba69805ece35ffdaf",
+      "leaf_sha3_512": "73c5616a8088727af4301031d1998590e5ade052fa8c999552d96ef6fa406eadc40865c1bc0910f236cf6ead0e8846e180d517915b1451b587cc695942f1fd7b"
     },
     {
       "path": "deliverables/20261012/seat-cairn/五幕全绿_DF-OPS-20261012-CAIRN-80.otl",
