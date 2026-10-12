@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T14:54:22.482Z",
+  "generated_at": "2026-10-12T14:55:30.231Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3251,
-  "merkle_root_sha3_512": "e92de289cfcd68f846dca211d9c08c508eb988ef47ac0d3436a175a0dd78ab49ad0008401e83bf5e931261ee33036d491e2fac00c3a001c7ad580ef15ca6f5b2",
-  "hmac_sha3_512": "50c6d3412f3e3c573eb285c7eab09c1b1831993aa0f325745d2b336d512d233667f2ee12c22ae344539bff111a00542221cbef2c0fb2c1386211a27b06e8afb4",
+  "file_count": 3252,
+  "merkle_root_sha3_512": "e4fe40f1a12b4371846f21b9d679afd564da09d033d421b9f02fd4599857a45e88ec54f9464b832183930d4ed7db535a73f1c4a56da2086917bcead31a122abb",
+  "hmac_sha3_512": "0efe1c5007d2ca9d74995fb35385f54598e0986b450bcaff2ff080b737d23ef30c3fe89e86941daab805f99cbd4791c477b7861c858865ed2e36cb083c0d8ab1",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8290,6 +8290,12 @@
       "size": 4982,
       "content_sha3_512": "4b71540382ef9dbe8f4b80f869ee9a4d64902fde351c0a017603ee2eca917b350d1c36c155577da08452246dadd4973b194af9b9f70ebd767d063ae5369408eb",
       "leaf_sha3_512": "fef57792905dc26b728bdb5f096d7af7e288f5ac3fe20fdbdd130faf20876bbc8fc65b97044746c032e203fb790ff60ee9d1d10528a04a54d879bb09db0e4c62"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/穷尽性报告_DF-OPS-20261012-CAIRN-107.otl",
+      "size": 6229,
+      "content_sha3_512": "a096c3e7228d7a0511df0e7553ca6cb2bf9cdecbe8ab2e79b93d2a24e65d23b5812ef953c6cc4d850a004fdb85c8b77cc93f0013a432ce4ea4cd0121208bebda",
+      "leaf_sha3_512": "ffb1cab8dbb877565fa136f37880c687a89c8722d534904fa68624d4fb3f3de9688c9de563bb8689db1490831eda92bdcebf57eb4598bd8fafd4f3e2efb64288"
     },
     {
       "path": "deliverables/20261012/seat-cairn/空内容闸与纲要哈希核_DF-OPS-20261012-CAIRN-69.otl",
