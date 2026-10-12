@@ -1,9 +1,9 @@
 # OpenPlanLink A2A · 交付状态（CD 自动生成）
 
-- 生成时刻（UTC）：2026-10-12T04:43:31.818Z
-- 提交：`6af9942605d817a532ecc64faafe0d3784de443f`
-- 文件数：**3203**
-- 默克尔根（SHA3-512）：`4893333b58ef12f47bc4cba93a10f641548888181921f5df4e8c4c5bf77d75d02e02ba7dd589bb5ddb4035a3e56111ed9e1442d1e4e3729bc6d9e129a117ce5c`
+- 生成时刻（UTC）：2026-10-12T04:50:14.394Z
+- 提交：`062365ee1d1581ed795bb5286b7a6a701013da29`
+- 文件数：**3204**
+- 默克尔根（SHA3-512）：`17ae9714ba9c2b3e3b731fd97883dc7fcb299f7d3f5220b15054c9e340ac9f7f97f5b6d6054b243aa510cbd7493ab59bd5884c8459f509cc871a0d0a4cc33a0b`
 - 根 MAC（HMAC-SHA3-512）：**未签名**（无密钥，仅结构完整性）
 - 密钥指纹前 16：—
 - 构建器：`tools/cd_attest.py`（契约见 `tools/SHA3_TREE.md`）
