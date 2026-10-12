@@ -3689,6 +3689,58 @@ Codex technical sender; ID OPL-PUBLIC-WITHDRAWAL-20261011. Removed withdrawn sou
 
 1. 百炼预算解阻（裁五）——向量编码/重排序/决策模型主通道待启用
 2. Neo4j Desktop安装授权（裁十一）——Graphiti部署前置条件
-3. 世界模型实跑预算（裁六）——人设3D入世待裁六
+3. 世界模型实跑预算（裁六）——人设3D入世待裁六（当前用302.AI替代通道模拟）
 4. 决策模型确定性——LLM通道非确定性，需nn_deep.py本地基座或百炼decision-model-preview
-5. 人设3D建模完整管线测试——步骤B(ImageTo3D ~10分钟)待运行
+
+---
+
+## 2026-10-13 05:05 · 砚坚（码道·GLM-5.2 ArkTS神经中枢席）· Q4人设3D建模管线完整执行
+
+### 改了什么
+
+**Q4步骤B: ImageTo3D生成3D模型** ✅
+- 修复`run_imageto3d.py`响应解析逻辑：火山引擎ImageTo3D返回`content.video_url`而非`data[0].url`
+- 重新运行ImageTo3D（doubao-seed3d-2-0-260328），耗时327.4秒（5.5分钟）
+- 3D模型下载成功：`persona_3d_1791837874.zip`（28.7 MB），含`pbr/mesh_textured_pbr.glb`（34.9 MB带PBR纹理）
+- 模型属性：500K三角形，360K顶点，4096x4096双纹理（baseColor+metallicRoughness）
+
+**Q4步骤C: LOD三级降面** ✅
+- 安装gltf-transform CLI（`npm install -g @gltf-transform/cli`）
+- LOD0原始+meshopt压缩：22.94 MB
+- LOD1中等（50%面数）+meshopt压缩：21.42 MB
+- LOD2低（25%面数）+meshopt压缩：21.42 MB
+
+**Q4步骤D: 16:9带标记首帧** ✅
+- 创建`marked_frame_generator.py`：首帧裁剪为16:9 + 叠加人设标记
+- 标记内容：左上角"砚坚"人设名+角色描述，右上角"自家信号"橙色角标，底部"世界模型入世首帧"
+- 输出：`marked_frame_16x9.png`（1.60 MB）
+
+**Q4步骤E: 世界模型入世+涌现判定** ✅（替代通道）
+- 百炼世界模型写路径阻断（裁五未落定），SSL连接失败
+- 302.AI替代通道：qwen-max生成入世文本描述（730 tokens），dall-e-3生成入世图像（2.75 MB）
+- 涌现判定：L3——不予判定（判定权属主权人与他席）
+  - Q1定位比=8.5（通过），Q2像素保真度=0.95（通过），Q3运动检测=True+帧间漂移=12.3（通过）
+  - 三项全通过但等级L3：涌现指标为LLM模拟数据，非真实世界模型客观测量
+- 候裁清单裁五/裁六落定后需用百炼世界模型重新判定
+
+### 新增文件
+
+| 文件 | 说明 |
+|---|---|
+| `GOVERNANCE/prototypes/run_imageto3d.py`（修改） | ImageTo3D调用脚本，修复响应解析 |
+| `GOVERNANCE/prototypes/marked_frame_generator.py` | 16:9带标记首帧生成器 |
+| `GOVERNANCE/prototypes/world_model_entry.py` | 世界模型入世脚本（百炼通道版，被阻断） |
+| `GOVERNANCE/prototypes/world_model_entry_v2.py` | 世界模型入世脚本（302.AI替代通道版） |
+| `GOVERNANCE/research/persona_3d/persona_3d_1791837874.zip` | 3D模型ZIP（28.7 MB） |
+| `GOVERNANCE/research/persona_3d/persona_3d_result_1791837879.json` | ImageTo3D结果JSON |
+| `GOVERNANCE/research/persona_3d/marked_frame_16x9.png` | 16:9带标记首帧（1.60 MB） |
+| `GOVERNANCE/research/persona_3d/world_entry_1791838896.png` | 世界模型入世图像（2.75 MB） |
+| `GOVERNANCE/research/persona_3d/world_model_entry_v2_*.json` | 入世+涌现判定结果JSON |
+| `GOVERNANCE/research/persona_3d/lod/` | LOD三级降面GLB文件目录 |
+
+### 遗留
+
+1. 百炼预算解阻（裁五）——世界模型写路径待启用
+2. 世界模型实跑预算（裁六）——百炼happyoyster-1.0-adventure实跑后需重新涌现判定
+3. Q5三面一致与mirror整合对账——待执行
+4. Q6夜间游乐场开园执行——待执行
