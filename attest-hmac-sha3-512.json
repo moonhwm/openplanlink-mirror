@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T05:01:54.511Z",
+  "generated_at": "2026-10-12T05:03:58.156Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3209,
-  "merkle_root_sha3_512": "d2bb9d3a2432c7cf839f452867341fca70620c8fc4061b64347f9958871508a000496f9ed70c4e5da1cfe0ddcbd4d672ccbf90dc231e060fcda9d4291ab3a1b1",
-  "hmac_sha3_512": "3e1389a21d4ae8a574c892d4f86df1a3215cd51bbe7c91ba170726244cf4a5471b202afee80d115fb6e3f0c7a8044b918a412ee9979cf5409dc0e0292094076e",
+  "file_count": 3211,
+  "merkle_root_sha3_512": "135056121c3e2e6ae3b09001b0d2a08a3a9afbecf1c56800bd7bd76ecb1ef2300982d9c7c3a26885bfae65bdb9dd76a354ad3dd28fd097016ece5caf659bd2a8",
+  "hmac_sha3_512": "f7e59fe8d6fecb8481b17ad0256ed147dbbc9125b457576b8685ebebbc3894a50d03a0b95230caad15b90471cbdf4a50b9e306db5bfec96f44e48219d5f3cdbb",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8052,6 +8052,12 @@
       "leaf_sha3_512": "bebbafcbbc276731112a2a862dd3f9688c6739327a4c618ad6eed611a42964ce23534915b3d299102fd36375aa632e33f2daa7b9c1a9844c3717063723c93091"
     },
     {
+      "path": "deliverables/20261012/seat-cairn/人设3D资产审计_DF-OPS-20261012-CAIRN-63.otl",
+      "size": 6414,
+      "content_sha3_512": "9185371fea9a370057e4daa5adbe97eb6a02f32a2d2aa87045c0b164dc86cdd5acd6f68ffb866623e33758feba6f8ee2008ac9d5bc161d566b8ad967611b78e7",
+      "leaf_sha3_512": "938dafaede2e100f6ad80e69090eed221022205b561ff0c21c2d745f5cf2ee36d22e70e59aee4fa4c28dfcd589b84ea7dd3feb1f7bfab5f4c2a9672b19ab159a"
+    },
+    {
       "path": "deliverables/20261012/seat-cairn/令条二三落实_DF-OPS-20261012-CAIRN-58.otl",
       "size": 5898,
       "content_sha3_512": "c1fa04ab99a909e1a4d1e11f9ec29896dfd8095b69f446f352d8196132116b933969250a6f8649057e89b0b06e2de58a9b679390804d8772baf7221df8bb6561",
@@ -8062,6 +8068,12 @@
       "size": 5086,
       "content_sha3_512": "0c058b117c11e4d886c4deb621eca9d2618fd8780987965d463aaa7c9a2970290d6059cefa980bf182c415e932f62dffe484f3b1938813173e7b08ea091cce79",
       "leaf_sha3_512": "75e89a6688f8a574872bc77abb2a7fa5b81c3ace67e8037ed597edcaf624363aead186b845a93f0a0b6f2e3500b8e635649925b6bffb7039bcb7df76b6f80d95"
+    },
+    {
+      "path": "deliverables/20261012/seat-cairn/总线先行四步走通_DF-OPS-20261012-CAIRN-62.otl",
+      "size": 6101,
+      "content_sha3_512": "51739e527f51254104cd6dcac8b03a80465b3e0551debd48c280bf592987681d680aef3e1beae1646b8143915be0ed624470eddfe56c7502027c9891a0002020",
+      "leaf_sha3_512": "5f6cd9aa0a657de1e62df3e66cd8776d0b604c7eef6bd4f3d4daed80d4b328280ee1cba79718440b1ed52dcc7fc86caab021e2a2fafda29229b5cd83966f676b"
     },
     {
       "path": "deliverables/20261012/seat-cairn/推送前闸_DF-OPS-20261012-CAIRN-61.otl",
