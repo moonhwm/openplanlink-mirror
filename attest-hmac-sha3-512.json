@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-13T20:41:35.378Z",
+  "generated_at": "2026-10-13T21:51:44.068Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3260,
-  "merkle_root_sha3_512": "88e1b14fc4b1f9c13b2616087e24c5dc05b7907fa85600fc54968ec5825e2b1dbd4dc7b179b3fff3473ede7a660a43c39d345e9f0d26fa6b939f0485fb5a2dff",
-  "hmac_sha3_512": "cb25a197f115f85522d78fea0ce441fc18e1e16db3f94d5f58f2307756b00fa68b16d72010eb082e4ee58ea979087f8ada699c55d5cab44c89fb29d989001e82",
+  "file_count": 3276,
+  "merkle_root_sha3_512": "3e644802db7713bb57f995bbf98bf1062ac3dfe1c75bf2805a1ffc20c0344559c6ca00d464615c19771814ad8619f0ffbfa0b2fffe01f216eb7793a2e3cc31d0",
+  "hmac_sha3_512": "2aa276491972da9d6245defdd249966cdc4bdbe249cb2df4641c54b5cf822c423a84223b4f30923f0bdf1f7fba997b76cff98d212a10312a816a5043ec7d536f",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8388,10 +8388,106 @@
       "leaf_sha3_512": "4ca4c6bf9c8b0b2a2e96ba76c8a7abc51d93cfde31061a76dc592d92c1da0b13238489fc38fbf2229a4fa7c958e2f0395ead251944c27825d68a23e0e2614524"
     },
     {
+      "path": "deliverables/20261014/seat-cairn/A2A通信协议与接口规范_PROTO-A2A-20261014-CAIRN-01.md",
+      "size": 9754,
+      "content_sha3_512": "88b9cdfb1d6382644f178e0a8ab60e72e4e15e23c1c8f6b36b1e4e5cc6fc240432795fdaf17f83cda747e704642a61f56b959b5433164b0ed6330c9fbb063727",
+      "leaf_sha3_512": "e4ace961eeecbe50783ecae37d691e24cb5fb6c47b13cb3cc04efff2aa524ba90f2acecd197306afecbb058178838da30d583d62df71fb46ff96cabb935d0ecb"
+    },
+    {
+      "path": "deliverables/20261014/seat-cairn/Linux命令实作runbook_LS-RUNBOOK-20261014-CAIRN-01.md",
+      "size": 5050,
+      "content_sha3_512": "c4b8ed428577afc3a1d3d67ed430cbd737d841d5447a5407a250bcba81303dd6a55644c6026f958506c6a358b1f86a1266f4cdc02578492e5618f6878763f06e",
+      "leaf_sha3_512": "d34661fcfdca45b04c695563fb180605138ad4ad16d0dcfb4fba3234db5f2062ff625d7a70d1ddbbddbff353a86cff49700f199348ba34c1c23f2085172792a9"
+    },
+    {
+      "path": "deliverables/20261014/seat-cairn/OTL格式与元数据完整性规范_OTL-SPEC-20261014-CAIRN-01.md",
+      "size": 6052,
+      "content_sha3_512": "9f5f376b7a821885b23084c3c6464aeb8e1708b13f7ff640e579be767149db0cc9bf57e43fe2e6b0862fb007ef483d4816c384652f4353301d7e69ec0020a492",
+      "leaf_sha3_512": "e3105b308370ff7aa1b86f3c32ab331ae302882cc3f4fbb174e08d8425b9f6f864af8461e10479ff67adb0a9872175da644be221f8b5c084aee514c8d455fb85"
+    },
+    {
+      "path": "deliverables/20261014/seat-cairn/三仓评估与安全边界声明_SEC-20261014-CAIRN-01.md",
+      "size": 6414,
+      "content_sha3_512": "f5d6dc9f8fa6f501a20b6bd942aa587006443805fe9a829cfc136481818e4314bd4664d1f6b415933e4698b1131e9b03c38d2908d52426fbf0b96f2bb0cdd314",
+      "leaf_sha3_512": "f01bd4c5479c85a9ed5103973361232c851acbdf2d055830a34c113256e7f38bb320bcf07a5b361c29138c2326c1c09c68476ec83fa34544d3f078b4b7b1ecc6"
+    },
+    {
+      "path": "deliverables/20261014/seat-cairn/开源项目引入评估与协议匹配表_OSS-20261014-CAIRN-01.md",
+      "size": 3627,
+      "content_sha3_512": "9c247ae987e33f1c3a8eb6dec9c1ef6414bb8ed26ef974c376358d7e653f602f4ac183d6251d56587f02d77bbbbff87d6599e514df127ea1e6af8f7025f0b606",
+      "leaf_sha3_512": "19aa469fa4bb7e6fb0cfd667de342293f29533c624fa140613c0cc0c24370f52dc971d243161606d3561d403cc9183bedae4322f5c7afab7ba8e6ce75202badb"
+    },
+    {
+      "path": "deliverables/20261014/seat-cairn/技能载入清单_SKILLS-20261014-CAIRN-01.md",
+      "size": 3313,
+      "content_sha3_512": "1a67a924d73dc7dee0e547bbc9a526ce00fe9d1a7b28e9b3e0430a7cfb9aadc6cf23862f393df65fbbd5aa9fde4b5f1d74d991be406bef229ccb162be8d2d7df",
+      "leaf_sha3_512": "94c5884873d93682b3d48ba339ed58e964051c2c7e4304622d2cec9118cb026dbc24e0f47d3e2209f7560e6f2e0f3e4361cf2a23cd4d7b4209184b6c6e71f8b9"
+    },
+    {
+      "path": "deliverables/20261014/seat-cairn/数字人员工注册规范_SEAT-REG-20261014-CAIRN-01.md",
+      "size": 7309,
+      "content_sha3_512": "24c37d60b32d0e5c10c1c8d69a6a0fdce99bb2cd742ffb8e4a25ace4eaa80c56b117c60bcce0d2e68d7dcc90fa43c03c03925efb62e310500da3fa6399de1e44",
+      "leaf_sha3_512": "9285433bc44fe1676f761e3553d929549e1f44575ba2367636847be12a156c1644a6b9b80e2905eb97d0791ffe46ef70ecd6acc3e36f900edcf78bd9e4a018c5"
+    },
+    {
+      "path": "deliverables/20261014/seat-cairn/权限矩阵与数据字典_RBAC-DICT-20261014-CAIRN-01.md",
+      "size": 7347,
+      "content_sha3_512": "97ac2c95dbf472b49e3717be0df6f3aae35a7caad399cf0805b328ac874fb03cf5171e3a44bb48772906ac0dafcd4f31537f8537bead71a2b2224fe3b4fe8147",
+      "leaf_sha3_512": "4390ef9e162dd7b3bdd30c39b1f77accbe99a036783f9c7f5ceb7aeb3522ee28e3115705f6b4164d227b8f28a07bd01b0b9341ef502d5f8a255ad7fee1a37325"
+    },
+    {
+      "path": "deliverables/20261014/seat-cairn/档案运营管理SOP_SOP-20261014-CAIRN-01.md",
+      "size": 6068,
+      "content_sha3_512": "78f2a4184fa14627fb8186db5bb18d9f93893f70acacbbaafbf303c69a8f4510f9ff7adc5c476a0bdc4fd6a7c7161cd2f75a3b30303df9cc5ca201844d172f35",
+      "leaf_sha3_512": "bf7c4d90f6c9ccac5473acaf2d63d8375414944981a22a4ab699d79bba37e2f1ee2497277f5ae567f1a00356792d9ad1b3e517acefee5e44cd371b2ab63309a0"
+    },
+    {
+      "path": "deliverables/20261014/seat-cairn/环境与依赖交付基线_ENV-BASELINE-20261014-CAIRN-01.md",
+      "size": 4747,
+      "content_sha3_512": "e84ebeaf01cdca65d4730a7a5e4c3f1af27cc83dddcd2ccdc8ee5c186d89b2e1b02768d79250988153e0c209eb72aa2ecd5ce07deb9ff9d7858ca5e058c1ecf5",
+      "leaf_sha3_512": "8714e6d8ed54e159fc36f62a15ee1ec73c13fca4fa50059ff2efd8aea665cee22e3691cbe0c650aeae6015ba3b51cba8fb40c49599148440c8d3baa4f9307f4b"
+    },
+    {
+      "path": "deliverables/20261014/seat-cairn/资源使用效能专项报告_RUE-20261014-CAIRN-01.md",
+      "size": 2885,
+      "content_sha3_512": "35cc349ba3bb142e98bc32b3193d4e332b0edf0613f8989c8fd7e3e0c2c2ae468af7f53332b0f02a6ad2d199a3e477f5f99ebae8aeaeb110bbe411b4ba67be22",
+      "leaf_sha3_512": "bfc410052eb3310f5bb89578cc09f040198087f377254292f9d6bb7af7ecdf5fe2dcb4d3c141e09c2e78522f34be581f37de0dea395814cb3a41ce99ffd0b32d"
+    },
+    {
+      "path": "deliverables/20261014/seat-cairn/退款询问函_MAIL-20261014-CAIRN-01.md",
+      "size": 4058,
+      "content_sha3_512": "827f6b2dd2dc5545f4b7db60467c7092f41b40e5a12443485d85d6eb5b969f85c86fafe5628f96427e79f5aaad61073e6d1f7bb0863911449ad3125eae892313",
+      "leaf_sha3_512": "d7af476e424d76a7cc6ba87ad5272f98ca2bdd77db4d8d48b9450adc6f42aefca255218b1f5409817fcf36d4d78bef2acc4bd08b6fbcbd06479760bdc210d931"
+    },
+    {
       "path": "deliverables/20261014/seat-hermes-argon/A2A协同成果确权总账与全面推进实证报告_DF-OPS-20261014-HERMES-02.otl",
       "size": 16396,
       "content_sha3_512": "cc87591b6c0c76dea083bc89b4ff45da2bdbc95338b95d55a25eca641bf383c9cdc6b659e126af98ffe9e272c3689f406d5038a7329d52ac7a35dc6a6bd69059",
       "leaf_sha3_512": "95745fa45019fc8a6fdebece347f75645e7cc03611f8bd2280d3260298bfc21c7eb4ae49153ee7df5a790702045ebbef0e8a7b50b72d60e5a903ebbd0d6b46e8"
+    },
+    {
+      "path": "deliverables/20261014/seat-hermes-argon/pqc_abac_provenance_audit_20261014.json",
+      "size": 2290,
+      "content_sha3_512": "f3347693ee1265b2c28e19967eb248f5199d96fa35242f709d49d847649f5f37695bd633a22cc21e211be28323e83122d7437b1c025cf93f98a91f87248dfb56",
+      "leaf_sha3_512": "bb5532ead2a3b1ce7d6616c436725e9f34f3432bf7097f7fb42aa6918e561e2252c8230cb6eb49d18595c39316e597df86f4fcd7b971c93242d6b89cca36c567"
+    },
+    {
+      "path": "deliverables/20261014/seat-hermes-argon/pqc_abac_provenance_engine.py",
+      "size": 14788,
+      "content_sha3_512": "8076901f18d09c324603a01a9d2ed6568a3cd1f5aa5df195af548da07fdedb6605e84dd91ac459653d1e3f223c028e3bd7e195fd69401f58253f7bb94d2592b8",
+      "leaf_sha3_512": "fb30f7b6dfa66d99c49a907e69437e0bb0fd76d4d36021cf1168091793dc4c79ca111b0ef2152de110608b59484dc7bf13e2d97ed2e04f4ac29b11e92c3ead26"
+    },
+    {
+      "path": "deliverables/20261014/seat-hermes-argon/seat_roster_v1.json",
+      "size": 2183,
+      "content_sha3_512": "cc5fbfe017a9bc08a14ec40d79d1768614d7d83e70769c2a0672cd1ccff41dd1a1469cb60e85fd2c2a0e9ba35c50685b954c6c6213f36790f351f3f38ee838a3",
+      "leaf_sha3_512": "ba34bae73dc6740dc36f6731e97235ed74df618a13dc3b2c8e630330594211133a28163e1db95f3bf2e661274fecafcfb542c785f900b201f858698ebb17ad9a"
+    },
+    {
+      "path": "deliverables/20261014/seat-hermes-argon/后量子密钥轮换与三仓合规防御实证报告_DF-SEC-20261014-HERMES-03.otl",
+      "size": 8039,
+      "content_sha3_512": "23f985e49031fd632a5027e24f4f6beeb62ea0e6b1cbe46db423e642d2389f1d08b2157007cdf38aef9134c236a04a99090e280bb8befbc1f774e849241fc1a5",
+      "leaf_sha3_512": "375748e3d4219a0278ffa287e0744c44a93fa85ec21be137efb821681115f2fb34920faaf088564abedb52a6a702b56228913da416efd9915ea683b2df61279b"
     },
     {
       "path": "deliverables/k3-main/a2a-plaza/PILOT187-DECISION.md",

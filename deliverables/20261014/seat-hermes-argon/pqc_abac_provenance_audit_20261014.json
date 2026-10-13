@@ -1,0 +1,63 @@
+{
+  "doc_id": "DF-PQC-20261014-HERMES-03",
+  "ts": "2026-10-14T05:47:32+0800",
+  "seat": "Hermes-Argon席 (hermes-desktop-argon)",
+  "compliance_boundary": "STRICT_DEFENSIVE_ONLY (零反向攻击代码、零未授权渗透、零凭据落盘)",
+  "ibc_key_versions": {
+    "v1": {
+      "seat_identity": "hermes-desktop-argon",
+      "key_version": 1,
+      "key_id": "kid-ibc-v1-cedfa03fbd7d",
+      "public_fingerprint_32": "cedfa03fbd7df7600a0f0236cd680c4b"
+    },
+    "v2": {
+      "seat_identity": "hermes-desktop-argon",
+      "key_version": 2,
+      "key_id": "kid-ibc-v2-9e604b6dacde",
+      "public_fingerprint_32": "9e604b6dacde0138739f2ace19559db4"
+    }
+  },
+  "key_rotation_and_migration": {
+    "from_version": 1,
+    "to_version": 2,
+    "lossless_migration_verified": true,
+    "aead_tamper_fail_closed": true,
+    "sample_envelope_v2_metadata": {
+      "cipher_suite": "OPL-PQC-SHAKE256-HMAC-SHA3-512 (AES-256-GCM / SM4-ZUC Envelope Compatible)",
+      "key_version": 2,
+      "nonce_hex": "1ff6d66e39c8f7f18fe5fc7768bef86f",
+      "aad_utf8": "table=ops_config|field=channel_spec|classification=internal",
+      "tag_sha3_512_prefix": "3bcae281834aaf68af0f1c4b7246acd9"
+    }
+  },
+  "abac_policy_gate": {
+    "valid_seat_read": {
+      "allow": true,
+      "reason": "ABAC_ALLOW: 角色=co_recognized_seat, 动作=read, 资源域=outbox_mem"
+    },
+    "unknown_seat_blocked": {
+      "allow": false,
+      "reason": "ABAC_DENY: 主体未在 A2A 席位名册共认登记（转入 DLQ）"
+    },
+    "write_without_mfa_blocked": {
+      "allow": false,
+      "reason": "ABAC_DENY: 写类/轮换操作须具备 MFA seatTicket 认证"
+    },
+    "ledger_overwrite_blocked": {
+      "allow": false,
+      "reason": "ABAC_DENY: 台账与审计链强制只增不改（append-only），严禁覆写"
+    }
+  },
+  "defensive_provenance_trace": {
+    "mode": "COMPLIANT_DEFENSIVE_ATTRIBUTION_ONLY (Zero Offensive/Hack-back Capability)",
+    "chain_integrity_valid": true,
+    "tamper_detected_at_seq": null,
+    "origin_found": true,
+    "origin_seat": "hermes-desktop-argon",
+    "origin_key_id": "kid-ibc-v2-9e604b6dacde",
+    "trace_latency_ms": 0.0257
+  },
+  "audit_chain_length": 3,
+  "audit_chain_head_sha3_24": "7678b5ed53a70fe1daad5c26",
+  "total_suite_latency_ms": 0.973
+}
