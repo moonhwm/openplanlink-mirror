@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-12T19:26:22.943Z",
+  "generated_at": "2026-10-13T20:41:35.378Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3257,
-  "merkle_root_sha3_512": "efd539d09e6d4a64b78a853cd8eac977cd286efadfa31a19729b6f52fabdf58347c45571dfc316b98615ca00b9e6dd895aee22ca165e390247f085949d7cafca",
-  "hmac_sha3_512": "b0c59b3db8335c748c3acfb9cc06f17c1ac56fcd65772ba568b18d6fe0c65eb26522bfd325a9056362db67b990d56c7fd4f968b326c558ff12c1ba271ad0b6ef",
+  "file_count": 3260,
+  "merkle_root_sha3_512": "88e1b14fc4b1f9c13b2616087e24c5dc05b7907fa85600fc54968ec5825e2b1dbd4dc7b179b3fff3473ede7a660a43c39d345e9f0d26fa6b939f0485fb5a2dff",
+  "hmac_sha3_512": "cb25a197f115f85522d78fea0ce441fc18e1e16db3f94d5f58f2307756b00fa68b16d72010eb082e4ee58ea979087f8ada699c55d5cab44c89fb29d989001e82",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8358,6 +8358,12 @@
       "leaf_sha3_512": "45cafd84fb4da136121ee1515e664cd8d2855d46084e971ccc434ee0efdb413d7d778da861f202dae6f710e48d88116f1977c0fe4d93bdfdb362123ce2049f97"
     },
     {
+      "path": "deliverables/20261013/seat-cairn/下一步实施计划_DF-OPS-20261013-CAIRN-113.otl",
+      "size": 4951,
+      "content_sha3_512": "9eda7057be5f30e0a8fe66a09c61103845fa0a01a17a7616dcdbc059679edba874e2d0695f92b25222b222a4e9a98835b3efdf423360b3306d6dd52cf815c8d4",
+      "leaf_sha3_512": "184569e1a67ed23e65fdd2ecffd5a94e7ee9bb93d45a21780659a9b9795a6c97b7077cc452c6d5e93cc797498a51aa5bd84d748f8bf09049f9ccf8f294e05fa6"
+    },
+    {
       "path": "deliverables/20261013/seat-cairn/世界已建成并进入_DF-OPS-20261013-CAIRN-110.otl",
       "size": 4962,
       "content_sha3_512": "29759c7669f2f2c6eec5815a7e867638e84f47a8d2a709e1067ee82f9a32ee75c6364c46032a6fc94bbc098db95f70b36780e797f570285cbd01103fb9c5cda5",
@@ -8380,6 +8386,12 @@
       "size": 6340,
       "content_sha3_512": "249ee53bc70c8671caefb8bcb65426350bafa4fafad3b5144a1bad4d416edaf8811269892b3dbfd7d0245e0080b206298c9f9e145381615a84fc68d78f00443d",
       "leaf_sha3_512": "4ca4c6bf9c8b0b2a2e96ba76c8a7abc51d93cfde31061a76dc592d92c1da0b13238489fc38fbf2229a4fa7c958e2f0395ead251944c27825d68a23e0e2614524"
+    },
+    {
+      "path": "deliverables/20261014/seat-hermes-argon/A2A协同成果确权总账与全面推进实证报告_DF-OPS-20261014-HERMES-02.otl",
+      "size": 16396,
+      "content_sha3_512": "cc87591b6c0c76dea083bc89b4ff45da2bdbc95338b95d55a25eca641bf383c9cdc6b659e126af98ffe9e272c3689f406d5038a7329d52ac7a35dc6a6bd69059",
+      "leaf_sha3_512": "95745fa45019fc8a6fdebece347f75645e7cc03611f8bd2280d3260298bfc21c7eb4ae49153ee7df5a790702045ebbef0e8a7b50b72d60e5a903ebbd0d6b46e8"
     },
     {
       "path": "deliverables/k3-main/a2a-plaza/PILOT187-DECISION.md",
@@ -8950,6 +8962,12 @@
       "size": 7210,
       "content_sha3_512": "143ac9f560efe28f64a9a0cb65cd0cac87a303423f70440ac1fa574f67d48a9a3ffc57ec992a2ca45c530ad257aad01a058e1540c89fa67196077a965e186d5e",
       "leaf_sha3_512": "cc87a76b8e42a0aae5beb4f93b1794c45d977f12ef5810e0bd22543dad31e68a61b36f507a0ce29aedf9e489a108623628753d424e1d061f9ac4455f7d662e45"
+    },
+    {
+      "path": "seats/hermes-desktop-argon/persona_card_v1.md",
+      "size": 1134,
+      "content_sha3_512": "2a2d7b718350823773207154f887aee92708200d73a5a3426e6b5e4da729c00cabbf8f92cedf59a3ffc9afda54f71069907c7af78951984bc08eb2382fa69cb8",
+      "leaf_sha3_512": "6302fa20f3c57820090ad3e5857a09ec290bc89ab76bb7553323142d9854cd0d10474d9e7ff02dc525933859dc9bf62837bb4d1d0d8828662cf09920230d04e7"
     },
     {
       "path": "seats/huan16-kimi-seat/persona_seed_v0.md",
