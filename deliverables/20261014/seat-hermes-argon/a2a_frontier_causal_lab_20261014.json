@@ -1,6 +1,6 @@
 {
   "doc_id": "DF-LAB-20261014-HERMES-01",
-  "ts": "2026-10-14T06:08:44+0800",
+  "ts": "2026-10-14T06:17:09+0800",
   "seat": "Hermes-Argon席 (hermes-desktop-argon)",
   "honesty": {
     "level": "L1-Prototype-Verified",
@@ -21,6 +21,8 @@
       "z_sigma": 11.9063,
       "delta_minus_2lnL_vs_null": 141.761,
       "p_value": 0.0,
+      "log10_p_value": -31.9598,
+      "p_value_asymptotic": "1.10e-32 (< 1e-30)",
       "hep_verdict": "5σ Discovery (≥5.0σ)",
       "intervals": {
         "1sigma_68.27%": {
@@ -63,6 +65,8 @@
       "z_sigma": 9.2848,
       "delta_minus_2lnL_vs_null": 86.2072,
       "p_value": 0.0,
+      "log10_p_value": -19.7904,
+      "p_value_asymptotic": "1.62e-20 (< 1e-19)",
       "hep_verdict": "5σ Discovery (≥5.0σ)",
       "intervals": {
         "1sigma_68.27%": {
@@ -115,6 +119,8 @@
       "z_sigma": 2586.256,
       "delta_minus_2lnL_vs_null": 6688720.0043,
       "p_value": 0.0,
+      "log10_p_value": -1452440.6052,
+      "p_value_asymptotic": "2.48e-1452441 (< 1e-30)",
       "hep_verdict": "5σ Discovery (≥5.0σ)",
       "intervals": {
         "1sigma_68.27%": {
@@ -147,7 +153,7 @@
   "5_pqc_hmac_sha3_512_bench": {
     "algorithms": "HMAC-SHA3-512 Merkle Tree (64 leaves) + 3-Tier Key Derivation + Constant-Time Verify",
     "guomi_alignment": "SM9(IBC identity mapping) / SM10 / ZUC stream cipher envelope ready",
-    "latency_ms": 0.797,
+    "latency_ms": 6.106,
     "sla_under_10ms": true,
     "verify_ok": true,
     "ephemeral_root_sha3_16": "8a871dce09efb482"
@@ -190,6 +196,6 @@
     "贝叶斯因果森林（BCF）在中小样本下依赖共轭先验收缩强度，异质性 CATE 排序仅供分层参考；",
     "BASE/ACID 收敛时间蒙特卡洛模拟基于 8% 瞬时网络抖动假设，若遇持续性外部断网则转入本地挂账队列（DLQ）。"
   ],
-  "elapsed_s": 0.3817,
-  "sha3_512_digest": "eeb25a21b925434c3b11343579f1a4611359e3a1e8bb14b95e34237ca05803a541d9f1082d85ca072192b0ce6c0174c4664f12e5e77767008f40469e2d809d32"
+  "elapsed_s": 0.537,
+  "sha3_512_digest": "5840f757c092f88ec8bd6158c5a618f86ac84a8a84d6038e72687ef31911a8399451148fe30c0ee393baef1067e30195b14b2280184bbdffb557a0a0e758c8e5"
 }
