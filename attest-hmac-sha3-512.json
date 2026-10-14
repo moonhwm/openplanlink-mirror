@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-14T02:54:23.174Z",
+  "generated_at": "2026-10-14T03:01:02.972Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3336,
-  "merkle_root_sha3_512": "38af2eaf75420d20a5814d99b5e986aa0ee26b77608e1d9414d2ae1b49f94cb635df8701d9bc6e721ed51a602497e3a77f0005e8f52c12c1cde0a49d8dd5225d",
-  "hmac_sha3_512": "26c467964893c7eba0567eb4c0a2e04ffb410c0937e6d96b1c91276e256211b9fcafc534537acf3fd35e3de6a1e79de16e91e10055b4e53aaa700ac363fbc66d",
+  "file_count": 3338,
+  "merkle_root_sha3_512": "3f548968e11406a433dbf421bdcbf75dad6cbb91f4060424c44b9619b44d1db76c3da3ad6c5f18fbb202168d9c0f15b352c995951d9ad3a183788b4ae86dca84",
+  "hmac_sha3_512": "af15135da2c7525fab4cac7a4957d1bdaf364ad16dbf57904771f33aeab290c5bfed3f1d33302483f68ef86574f87907db585b5f20cc3a4a13b1bcdc541e571b",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -8736,6 +8736,12 @@
       "leaf_sha3_512": "85321f7164bef0782399b898503ad116bcebf79578e9af334993d215dfacfe3f55a12da9f600f7c652020a60846a7de46079c4efa11b95f22964ecb5ffb635ca"
     },
     {
+      "path": "deliverables/20261014/seat-hermes-argon/all_clauses_100pct_manifest_20261014.json",
+      "size": 2789,
+      "content_sha3_512": "c3141d9d8ecc23e9f5ba1d535f06003edf6a5451ac058cc00f6004ac67a8013a0475d23f08da2d4626b2308471bc6a710e2100562f8f27c02e3aaf80b5587adb",
+      "leaf_sha3_512": "1a761332b6ad43940bd467394fb541469fe27a82bf3a6e786f213ee15b4deae73ddedab01242c45368ffb0243e990f114edbc6f1f62d8eb0b49c10329ee7a971"
+    },
+    {
       "path": "deliverables/20261014/seat-hermes-argon/bus_snapshot_20261014.jsonl",
       "size": 209326,
       "content_sha3_512": "2329b4cf24d4b7d390c253078ea90cf428d877b4baaa453a0d6e3505a65bfe33e431a3d77d369ab55c8125c5021342f59e105454b0f633f45c878a5347f0cd13",
@@ -8806,6 +8812,12 @@
       "size": 2183,
       "content_sha3_512": "cc5fbfe017a9bc08a14ec40d79d1768614d7d83e70769c2a0672cd1ccff41dd1a1469cb60e85fd2c2a0e9ba35c50685b954c6c6213f36790f351f3f38ee838a3",
       "leaf_sha3_512": "ba34bae73dc6740dc36f6731e97235ed74df618a13dc3b2c8e630330594211133a28163e1db95f3bf2e661274fecafcfb542c785f900b201f858698ebb17ad9a"
+    },
+    {
+      "path": "deliverables/20261014/seat-hermes-argon/unity_unreal_blender_scene_v1.json",
+      "size": 1578,
+      "content_sha3_512": "2bf5ceeabd4b6efef6d6db92370d8c765f9ecef66890f0da2eb7023207ce1a2f45fca65c0d951abace31752da6029b23eede72ab93f1a486e0d98664a484a509",
+      "leaf_sha3_512": "3f92d8f349c8131bedce370f1bee2cf954594626f62c911c5ec6851b94fee810d66ccf6d4d45c225a4d10f9d1e34c3ab7189b9303276c36ecef8fa3a5ec7620b"
     },
     {
       "path": "deliverables/20261014/seat-hermes-argon/unmech_defense_discovery_20261014.json",
