@@ -3,6 +3,7 @@ import {
   closeSync,
   lstatSync,
   openSync,
+  readFileSync,
   realpathSync,
   renameSync,
   unlinkSync,
@@ -10,7 +11,8 @@ import {
 } from "node:fs";
 import { createHash, createHmac, randomUUID, timingSafeEqual } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { basename, resolve } from "node:path";
+import { tmpdir } from "node:os";
+import { basename, join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { TextDecoder } from "node:util";
 
@@ -262,6 +264,11 @@ function indexRecords(root) {
     }
     normalizePath(filePath);
     if (stage !== "0") throw new Error(`unmerged index entry: ${filePath}`);
+    if (mode === "160000") {
+      // ★2026-10-14：跳过子模块指针（gitlink，mode 160000）—— 其为外链引用而非内容
+      // （合并之远端树含 GOVERNANCE/external/graphiti 等未声明之 gitlink ⇒ 不参与内容树证明）
+      continue;
+    }
     if (mode !== "100644" && mode !== "100755") {
       throw new Error(`unsupported git mode ${mode}: ${filePath}`);
     }
@@ -270,24 +277,53 @@ function indexRecords(root) {
   return records.sort((left, right) => comparePaths(left.path, right.path));
 }
 
+function gitBatchToFile(root, input) {
+  // ★2026-10-14：stdout 直写文件句柄 —— 免 Windows spawnSync 管道 ENOBUFS
+  // （大 blob 经管道时 git 报「unable to stream … to stdout」，因同步父进程未及时排空）
+  const tag = randomUUID();
+  const outFile = join(tmpdir(), `opl-blob-out-${tag}.bin`);
+  const fd = openSync(outFile, "w");
+  try {
+    execFileSync("git", ["-C", root, "cat-file", "--batch"], {
+      encoding: "buffer",
+      env: gitEnvironment(),
+      maxBuffer: 1024 * 1024,
+      stdio: ["pipe", fd, "inherit"],
+      input,
+    });
+  } finally {
+    closeSync(fd);
+  }
+  const data = readFileSync(outFile);
+  try { unlinkSync(outFile); } catch {}
+  return data;
+}
+
 function readIndexBlobs(root, records) {
-  const input = Buffer.from(`${records.map(({ objectId }) => objectId).join("\n")}\n`, "ascii");
-  const output = runGit(root, ["cat-file", "--batch"], { input });
-  let offset = 0;
-  return records.map((record) => {
-    const newline = output.indexOf(10, offset);
-    if (newline < 0) throw new Error("truncated git cat-file header");
-    const [objectId, type, sizeText] = output.subarray(offset, newline).toString("ascii").split(" ");
-    const size = Number(sizeText);
-    if (objectId !== record.objectId || type !== "blob" || !Number.isSafeInteger(size) || size < 0) {
-      throw new Error(`invalid git blob response: ${record.path}`);
+  // ★2026-10-14：分批（每批 200 blob）＋落盘中转 ⇒ 免 ENOBUFS
+  const CHUNK = 200;
+  const parsed = [];
+  for (let start = 0; start < records.length; start += CHUNK) {
+    const batch = records.slice(start, start + CHUNK);
+    const input = Buffer.from(`${batch.map(({ objectId }) => objectId).join("\n")}\n`, "ascii");
+    const output = gitBatchToFile(root, input);
+    let offset = 0;
+    for (const record of batch) {
+      const newline = output.indexOf(10, offset);
+      if (newline < 0) throw new Error("truncated git cat-file header");
+      const [objectId, type, sizeText] = output.subarray(offset, newline).toString("ascii").split(" ");
+      const size = Number(sizeText);
+      if (objectId !== record.objectId || type !== "blob" || !Number.isSafeInteger(size) || size < 0) {
+        throw new Error(`invalid git blob response: ${record.path}`);
+      }
+      const s0 = newline + 1;
+      const e0 = s0 + size;
+      if (e0 >= output.length || output[e0] !== 10) throw new Error(`truncated git blob: ${record.path}`);
+      offset = e0 + 1;
+      parsed.push({ path: record.path, bytes: output.subarray(s0, e0) });
     }
-    const start = newline + 1;
-    const end = start + size;
-    if (end >= output.length || output[end] !== 10) throw new Error(`truncated git blob: ${record.path}`);
-    offset = end + 1;
-    return { path: record.path, bytes: output.subarray(start, end) };
-  });
+  }
+  return parsed;
 }
 
 function validateOutputIndexPath(records, outputName) {
