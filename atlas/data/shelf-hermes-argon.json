@@ -1,0 +1,62 @@
+{
+  "schema": "opl-atlas-shelf/1.0",
+  "seat_key": "hermes-desktop-argon",
+  "seat_name": "Hermes-Argon席（候授名：陆怀瑾，字握瑜）",
+  "updated_at": "2026-10-14T10:41:38+08:00",
+  "ui_contract": "localStorage['opl-prefs'] + html[data-theme] (auto/light/dark, 60s re-eval)",
+  "bundles": [
+    {
+      "bundle_id": "B1-CAUSAL-HEP",
+      "title": "前沿四算法与清华粒子物理 5σ 置信度实证",
+      "items": [
+        {
+          "doc_id": "DF-OPS-20261014-HERMES-02",
+          "path": "deliverables/20261014/seat-hermes-argon/A2A协同成果确权总账与全面推进实证报告_DF-OPS-20261014-HERMES-02.otl",
+          "summary": "PSM-DID Z=11.91σ (p=1.10e-32), BCF Z=9.28σ (p=1.62e-20), 跨席独立复现 18/18 OK"
+        },
+        {
+          "doc_id": "DF-LAB-20261014-HERMES-01",
+          "path": "deliverables/20261014/seat-hermes-argon/a2a_frontier_causal_lab.py",
+          "summary": "纯标准库四算法+元认知更新+粒子物理推断实验台 v1.1"
+        }
+      ]
+    },
+    {
+      "bundle_id": "B2-PQC-UNMECH-DEFENSE",
+      "title": "后量子分层密钥轮换、类联合国议事表决与异源辩护席质证",
+      "items": [
+        {
+          "doc_id": "DF-SEC-20261014-HERMES-03",
+          "path": "deliverables/20261014/seat-hermes-argon/后量子密钥轮换与三仓合规防御实证报告_DF-SEC-20261014-HERMES-03.otl",
+          "summary": "HKDF-SHA3-512 + v1->v2 无损迁移 + ABAC + 0.0257ms 反向溯源"
+        },
+        {
+          "doc_id": "DF-UNMECH-20261014-HERMES-06",
+          "path": "deliverables/20261014/seat-hermes-argon/A2A深度优化实证报告_DF-UNMECH-20261014-HERMES-06.otl.md",
+          "summary": "UNMECH 2/3 法定人数 + 辩护席前置质证锁 + VR6 437件跨席去污染检索"
+        }
+      ]
+    },
+    {
+      "bundle_id": "B3-LOOP-OPT-DIFFUSION",
+      "title": "Loop 心跳降噪、三区决策 100% 校准、跨仓自愈与全网自主扩散",
+      "items": [
+        {
+          "doc_id": "DF-LOOP-20261014-HERMES-04",
+          "path": "deliverables/20261014/seat-hermes-argon/跨席独立复现回执与Loop信噪比及投机采样实证报告_DF-LOOP-20261014-HERMES-04.otl.md",
+          "summary": "心跳占比 80.73%->14.52%，投机采样无损 3.78x 加速"
+        },
+        {
+          "doc_id": "DF-OPT-20261014-HERMES-05",
+          "path": "deliverables/20261014/seat-hermes-argon/A2A持续优化实证报告_DF-OPT-20261014-HERMES-05.otl.md",
+          "summary": "三区决策 PoE+T* 准确率 80%->100% (Brier 0.0008)，sleepless-flower 10模块 Path 自愈"
+        },
+        {
+          "doc_id": "DF-DIFF-20261014-HERMES-07",
+          "path": "deliverables/20261014/seat-hermes-argon/全面A2A自主扩散与全面自主推进实证总报告_DF-DIFF-20261014-HERMES-07.otl.md",
+          "summary": "SIRD+谱半径免疫 R_eff=0.8723<1.0 (抑制率 98.11%)，总线与九席信箱全网广播"
+        }
+      ]
+    }
+  ]
+}

@@ -1,15 +1,15 @@
 {
   "schema": "opl-hmac-sha3-512-tree/1",
-  "generated_at": "2026-10-13T23:09:32.421Z",
+  "generated_at": "2026-10-14T02:45:57.431Z",
   "tree_algorithm": "sha3-512",
   "mac_algorithm": "hmac-sha3-512",
   "leaf_encoding": "0x00 || uint32be(path_utf8_len) || path_utf8 || uint64be(size) || sha3_512(content)",
   "node_encoding": "0x01 || left_digest || right_digest; duplicate odd right node",
   "mac_encoding": "UTF8(OpenPlanLink-A2A-Merkle-v1\\0) || root_digest || uint64be(file_count) || uint16be(key_id_utf8_len) || key_id_utf8 || uint16be(generated_at_utf8_len) || generated_at_utf8",
   "key_id": "opl-a2a-2026q4",
-  "file_count": 3323,
-  "merkle_root_sha3_512": "8d6a557d6fd2fb1d889b350dff64e8db47846f17f64609ad1efe78fd6ffd7eb20a9574ade7cdeccde788bcaf9f8c65244595bba4715fc412f10fd5e66cad87fc",
-  "hmac_sha3_512": "651ee1050b694c2d84baef91bf50f993d8370503f42e17a4aa80ca15de8b739c647bf0a78580f29ec85a80f6c91c021a50fa94650ca1f3946fc91ca2b681204c",
+  "file_count": 3329,
+  "merkle_root_sha3_512": "3bb9a1e1279f78596a488b3c14808530c6f381a3d34b2c68e28c4f516c19ec74006dda72c62155694f0edc865f2da149f0a18baa986074f3f33f4490f00d8ade",
+  "hmac_sha3_512": "dfe89327ac7d5ad7c12c935b0390b81a56d02e71efb35c70e04e4fadcdf3a9026aba0ef4fed9714ef22516bcd18fb9f8d54fc07fea7ab9c91d7aba1a04822529",
   "files": [
     {
       "path": ".githooks/link_baselines/README.md.txt",
@@ -214,6 +214,12 @@
       "size": 12276,
       "content_sha3_512": "b54174e6bb2ad0b70d8a24db66cd0954af1fef82be4f7f1a34e8caf0d18ac686dd48492413914ceafcc4584bcf8fb9cb7262696c82ad79bcd27561926e908c5a",
       "leaf_sha3_512": "c67a04d3fc44d28926787e2dca3bee5a997d711289b4b02fcc8cbdc5bbfbf95a5e7ac2de2b81344d102949a3043892d8b4f2be142a0316732d45ded13abd9bb3"
+    },
+    {
+      "path": "atlas/data/shelf-hermes-argon.json",
+      "size": 2974,
+      "content_sha3_512": "95c47f0b767cd1606c30fe3831eb2ff4ad39132a5a4061b707ea38cc85e09e791cceac437ad09a179212d6b99e20283821f2be0a3709746f8539e93598f2fb31",
+      "leaf_sha3_512": "912bdba73714d97b1f22b51496c02d115c5cb990ae86ca6160e4929737b7cb73298ba66f1b631e41f887f6a771cc417289f36085e0dec9f672bad033bbf183c0"
     },
     {
       "path": "atlas/data/shelf.js",
@@ -8658,6 +8664,18 @@
       "leaf_sha3_512": "5c254f39c4a8f8a93f9fa654d84bf9fa3755213fda0ce3df60f72e51933e1fb1072cbb2ba0431fbb02f756b674c8ae00783b4637a327ddaa4468e36e50e830f5"
     },
     {
+      "path": "deliverables/20261014/seat-hermes-argon/a2a_autonomous_diffusion_20261014.json",
+      "size": 2569,
+      "content_sha3_512": "4bd5ffbe771553990206edcb95cd7542b77fed6b2bee845d7dee00555744989d9b32fabec104dff191a389efe28213a05aef63816d84496327c6845aa67c626b",
+      "leaf_sha3_512": "912a39d7f4325d9e1a2345fe4fccbca1025aa779237e904b7e6cc1061ef0da09f64b98d671de923d25e258716ab3ab51829bba830f1bf6fd2f453ea358d353fb"
+    },
+    {
+      "path": "deliverables/20261014/seat-hermes-argon/a2a_autonomous_diffusion_engine.py",
+      "size": 8757,
+      "content_sha3_512": "6bd088adb50019fda9fe6d310f294a8f34ad3c1adfff27ea7ac46e62373bd425dade6176fbb21d26ecb3aa91453b94ab2092509f787d709f29e98c9cfbc34e13",
+      "leaf_sha3_512": "4a731eb76288b96fa45c9ff6c7964e0a52eed8fd3384ca9dc0860ff817b505bb784b135ed1173ef6f74ef72b4af9e0778d3174f87c29c0b0dad1b5acfb1f4364"
+    },
+    {
       "path": "deliverables/20261014/seat-hermes-argon/a2a_dlq_self_heal_audit_20261014.json",
       "size": 4511,
       "content_sha3_512": "120c647e2d6b097c486cc2f57513c97ccef365b356cdd1fcdbb0ae7cedc8fa10ec721c6784d33be8e51a16770e6f8457eab8f5c36e255c73a686986169b2c156",
@@ -8688,6 +8706,12 @@
       "leaf_sha3_512": "85321f7164bef0782399b898503ad116bcebf79578e9af334993d215dfacfe3f55a12da9f600f7c652020a60846a7de46079c4efa11b95f22964ecb5ffb635ca"
     },
     {
+      "path": "deliverables/20261014/seat-hermes-argon/bus_snapshot_20261014.jsonl",
+      "size": 206915,
+      "content_sha3_512": "8cb89f2c48694252ef2460c288a3f88346963f14dc4dc737a80c9d5c1ae6974790881467e69e717e5831520cf3fdf796279056900f9fe332c68491a37069005c",
+      "leaf_sha3_512": "e7cfc0233033b54445d09006ca58d56165987169aada74cf6a15b4560719dd2f3eb80d4bbd75a86758aded3df53336f3060311a7c9a8d7f3dbfe818617c2c252"
+    },
+    {
       "path": "deliverables/20261014/seat-hermes-argon/decision_model3_dual_ensemble.py",
       "size": 8073,
       "content_sha3_512": "3f7366755da25dd49fd7e0376c1e4c099720ff98f69ab1f9be2673cdfdb4afbde076e3e59a0b02bcbdc339449bef3b206515cfc07c80d339e76e5f62cd1dd5e3",
@@ -8710,6 +8734,12 @@
       "size": 8162,
       "content_sha3_512": "005ad1a9b97593f71b839a6037b17f6baf0fe15bac074c371e106a01e7e5fa2173b277539d2ba1819ef4f19fce70d47784896047d4463d119ad47d6b6eb466cc",
       "leaf_sha3_512": "2e232264331abbb70d9b5c484a58b5234506862efb44db4d890a91dfc93f275ea41149122281624c08932b42eb974fc986d44835aed2576b97165183b440b566"
+    },
+    {
+      "path": "deliverables/20261014/seat-hermes-argon/nine_audit_local.py",
+      "size": 10126,
+      "content_sha3_512": "817a89211c60dc7991d6aa29f955ad83398ce64ea7f9f16901f1067ea5e12dabd87a424f93fc608918b02318bc5a53f3b18508ee352e11c76b566a2c32a809a2",
+      "leaf_sha3_512": "a99f82091d612de6dcde508e6984bbc23b65c4c9bb9157c378d8012b6bab1315c36a8e39fef66776fba2a602fcc0354862c2d62905cc090c83f078e38a428397"
     },
     {
       "path": "deliverables/20261014/seat-hermes-argon/plan_docx_survey_otl_20261014.json",
@@ -8758,6 +8788,12 @@
       "size": 32028,
       "content_sha3_512": "41a1313c692e8ae5517b308fa29c0bcac95f64920dfeb1dd49ef60e01756964c366ecce9b77dd37f34892506f64aeed156fe858e10dc116069e36a5a8af87211",
       "leaf_sha3_512": "21116c2f1f5abc47653b751a24f809563900e49f69166f069d47e60b50449cff7d2fac828e40195895207670ba47f79a6b794345298430cb685c8fa62c426b44"
+    },
+    {
+      "path": "deliverables/20261014/seat-hermes-argon/全面A2A自主扩散与全面自主推进实证总报告_DF-DIFF-20261014-HERMES-07.otl.md",
+      "size": 5952,
+      "content_sha3_512": "3ffd4d642090c69f43cc7b319804be67e4d80c247ae7703470e8ee2b86b994c6f8a419f735a86e165307660d12be1b034befefda4cf353323818863be7abab17",
+      "leaf_sha3_512": "7855d640fbe08c91725bc29865caea78c9b5c5c8d6733c6c9df77c3e2959ca4302d9691c1aa8c508c0bb71d533a34bedab714539ac500e74af789374252c0609"
     },
     {
       "path": "deliverables/20261014/seat-hermes-argon/后量子密钥轮换与三仓合规防御实证报告_DF-SEC-20261014-HERMES-03.otl",
@@ -15139,9 +15175,9 @@
     },
     {
       "path": "skills/ls-bus-format-ops/scripts/lsbus_format_ops.py",
-      "size": 13416,
-      "content_sha3_512": "e359b4ba33ab3955b9b7dbece6f217276b6609f64d320393a472a31abeb75725280ea72917d608c2e492a6d76ea3ebf3f65b6c4d9752f682cc36c85a0f4e4af3",
-      "leaf_sha3_512": "a38c5942d1f06b872fd6a6dab5e88fa7647800cb1ada873611e29f1fdd6c6a7000577d184f43ecb0816ff30f457e45f79b95e86365c31bbb477b5a9f3c6ace41"
+      "size": 13498,
+      "content_sha3_512": "0c552e9b0623c754dd0cfbb8ae6ad9c6298c9c9c0c1004d25386d4b8403f90934b6b2fae466145b5ca5558cb7c6dc63142451826db4e9f2a8367160a4ed698c8",
+      "leaf_sha3_512": "b270132cb13f04489b77b16769a1436444efee64f2d318fd9733cac5ed31556f9e96c7aecf94fec85bae08d79a52d00d9f451d96e7b90d12c8609bfc958cb87e"
     },
     {
       "path": "skills/market-insight-report/SKILL.md",
