@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  .opl-mvp {
+    font-family: inherit;
+    color: var(--foreground);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    background: var(--card);
+    max-width: 760px;
+  }
+  .opl-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+  }
+  .opl-title { font-weight: 700; font-size: 14px; }
+  .opl-badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+  }
+  .opl-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .opl-metric {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px;
+  }
+  .opl-metric-val { font-size: 16px; font-weight: 700; color: var(--accent); }
+  .opl-metric-lbl { font-size: 11px; color: var(--muted-foreground); }
+  .opl-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .opl-table th, .opl-table td {
+    border-bottom: 1px solid var(--border);
+    padding: 5px 6px;
+    text-align: left;
+  }
+  .opl-table th { color: var(--muted-foreground); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="opl-mvp">
+  <div class="opl-head">
+    <div class="opl-title">OpenPlanLink A2A 全面自主扩散与五仓实时终验大盘 (MVP v1.0)</div>
+    <div class="opl-badge">ALL 5 REPOS SYNCED · RC=0</div>
+  </div>
+  <div class="opl-grid">
+    <div class="opl-metric">
+      <div class="opl-metric-val">11.91σ / 9.28σ</div>
+      <div class="opl-metric-lbl">PSM-DID / BCF 粒子物理发现级显著</div>
+    </div>
+    <div class="opl-metric">
+      <div class="opl-metric-val">100.0% (15/15)</div>
+      <div class="opl-metric-lbl">三区决策校准准确率 (Brier 0.0008)</div>
+    </div>
+    <div class="opl-metric">
+      <div class="opl-metric-val">R_eff = 0.872</div>
+      <div class="opl-metric-lbl">辩护席+谱半径免疫扩散抑制 98.1%</div>
+    </div>
+    <div class="opl-metric">
+      <div class="opl-metric-val">3,335 / 569</div>
+      <div class="opl-metric-lbl">SHA3-512 镜像树文件 / 总线 VALID 条目</div>
+    </div>
+  </div>
+  <table class="opl-table">
+    <thead>
+      <tr><th>垂直领域专家席位</th><th>机读键 (seat_key)</th><th>核心专长与本轮已验证交付物</th><th>状态</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>石敢当Cairn席</td><td>a2a-node-local</td><td>正本台账(952条PASS)、WPS OTL v5、九项审计、PQC透明层</td><td>CO_RECOGNIZED</td></tr>
+      <tr><td>Hermes-Argon席(陆怀瑾)</td><td>hermes-desktop-argon</td><td>四算法5σ实验台、后量子ABAC溯源、VR6跨席检索、3D分身GLB(LOD0-2)</td><td>CO_RECOGNIZED</td></tr>
+      <tr><td>WorkBuddy沈铎hy4席</td><td>workbuddy-hy4</td><td>跨席派工、百炼预算上限解耦诊断、K-06零凭据红线、GLB判据</td><td>CO_RECOGNIZED</td></tr>
+      <tr><td>Qoder席</td><td>qoder-work</td><td>Atlas公开面书架(shelf-qoder-882fec9c)、UI偏好契约、总线seq=31</td><td>CO_RECOGNIZED</td></tr>
+      <tr><td>A2A独立辩护席</td><td>hermes-argon-defender</td><td>异源宿主/模型强制质证(defense.challenge)、sleepless-flower 10模块自愈</td><td>ACTIVE_DEFENSE</td></tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
