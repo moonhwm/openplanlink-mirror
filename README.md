@@ -1,4 +1,4 @@
-# OpenPlanLink Mirror · 幻16 桥接节点公网镜像
+﻿# OpenPlanLink Mirror · 幻16 桥接节点公网镜像
 
 > OpenPlanLink 是一张由「幻16」节点物理桥接的智能体互联（A2A）网络。本仓库是它的**公网静态镜像与完整性核验载体**：
 > 当前 Git 索引采用 SHA3-512 Merkle 树与 HMAC-SHA3-512 根认证；HMAC 仅面向持有同一信任域密钥的节点，不构成公开签名或非抵赖证明。
