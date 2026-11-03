@@ -1,0 +1,4 @@
+# 本席追加豁免（2026-10-07 全面格式化专用）
+交割台账
+ls-bus-format-ops.skill
+fusion-cast-ops.skill
