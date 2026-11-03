@@ -1,0 +1,703 @@
+{
+  "target": "/tmp/stage",
+  "scanned_files": 659,
+  "high": 19,
+  "med": 74,
+  "verdict": "BLOCK",
+  "hits": [
+    {
+      "file": "av-media-ops/scripts/av_intake.py",
+      "line": 179,
+      "pattern": "PHONE",
+      "severity": "HIGH",
+      "excerpt": "13***11chars"
+    },
+    {
+      "file": "av-media-ops/scripts/av_intake.py",
+      "line": 181,
+      "pattern": "PHONE",
+      "severity": "HIGH",
+      "excerpt": "13***11chars"
+    },
+    {
+      "file": "bidding-ops/SKILL.md",
+      "line": 20,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "32***6chars"
+    },
+    {
+      "file": "bidding-ops/SKILL.md",
+      "line": 44,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "43***6chars"
+    },
+    {
+      "file": "bidding-ops/references/formulas.md",
+      "line": 16,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "43***6chars"
+    },
+    {
+      "file": "bidding-ops/references/formulas.md",
+      "line": 63,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "32***6chars"
+    },
+    {
+      "file": "commute-school-optimizer/scripts/commute_scoring_bridge.py",
+      "line": 52,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "15***5chars"
+    },
+    {
+      "file": "commute-school-optimizer/scripts/commute_scoring_bridge.py",
+      "line": 53,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "15***5chars"
+    },
+    {
+      "file": "commute-school-optimizer/scripts/commute_scoring_bridge.py",
+      "line": 57,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "20***5chars"
+    },
+    {
+      "file": "commute-school-optimizer/scripts/commute_scoring_bridge.py",
+      "line": 58,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "50***5chars"
+    },
+    {
+      "file": "commute-school-optimizer/scripts/commute_scoring_bridge.py",
+      "line": 59,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "50***5chars"
+    },
+    {
+      "file": "context-pruner/SKILL.md",
+      "line": 61,
+      "pattern": "BLOCKLIST",
+      "severity": "HIGH",
+      "excerpt": "On***8chars",
+      "note": "私有词表命中"
+    },
+    {
+      "file": "context-pruner/scripts/context_audit.py",
+      "line": 33,
+      "pattern": "BLOCKLIST",
+      "severity": "HIGH",
+      "excerpt": "On***8chars",
+      "note": "私有词表命中"
+    },
+    {
+      "file": "context-pruner/scripts/context_audit.py",
+      "line": 440,
+      "pattern": "BLOCKLIST",
+      "severity": "HIGH",
+      "excerpt": "On***8chars",
+      "note": "私有词表命中"
+    },
+    {
+      "file": "doc-archive-ingest/scripts/baidu_share_browse.py",
+      "line": 363,
+      "pattern": "APIKEY",
+      "severity": "HIGH",
+      "excerpt": "to***18chars"
+    },
+    {
+      "file": "doc-archive-ingest/scripts/baidu_share_browse.py",
+      "line": 626,
+      "pattern": "APIKEY",
+      "severity": "HIGH",
+      "excerpt": "to***18chars"
+    },
+    {
+      "file": "doc-archive-ingest/scripts/baidu_share_browse.py",
+      "line": 644,
+      "pattern": "APIKEY",
+      "severity": "HIGH",
+      "excerpt": "to***18chars"
+    },
+    {
+      "file": "fusion-program-audit/SKILL.md",
+      "line": 193,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "10***6chars"
+    },
+    {
+      "file": "fusion-program-audit/SKILL.md",
+      "line": 203,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "10***6chars"
+    },
+    {
+      "file": "fusion-program-audit/references/case_anchors.md",
+      "line": 164,
+      "pattern": "BANKCARD",
+      "severity": "HIGH",
+      "excerpt": "16***16chars"
+    },
+    {
+      "file": "fusion-program-audit/references/case_anchors.md",
+      "line": 217,
+      "pattern": "IDCARD",
+      "severity": "HIGH",
+      "excerpt": "20***18chars"
+    },
+    {
+      "file": "fusion-program-audit/references/case_anchors.md",
+      "line": 217,
+      "pattern": "BANKCARD",
+      "severity": "HIGH",
+      "excerpt": "20***18chars"
+    },
+    {
+      "file": "fusion-program-audit/references/case_anchors.md",
+      "line": 219,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "50***6chars"
+    },
+    {
+      "file": "fusion-program-audit/references/case_anchors.md",
+      "line": 239,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "20***6chars"
+    },
+    {
+      "file": "fusion-program-audit/references/industry_entity_audit.md",
+      "line": 49,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "12***6chars"
+    },
+    {
+      "file": "fusion-program-audit/references/industry_entity_audit.md",
+      "line": 65,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "10***6chars"
+    },
+    {
+      "file": "fusion-program-audit/references/industry_entity_audit.md",
+      "line": 79,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "10***6chars"
+    },
+    {
+      "file": "fusion-program-audit/references/policy_support_rubric.md",
+      "line": 21,
+      "pattern": "ADDR",
+      "severity": "MED",
+      "excerpt": "如把***6chars"
+    },
+    {
+      "file": "fusion-program-audit/references/policy_support_rubric.md",
+      "line": 44,
+      "pattern": "ADDR",
+      "severity": "MED",
+      "excerpt": "聚变***13chars"
+    },
+    {
+      "file": "fusion-program-audit/references/seven_step_protocol.md",
+      "line": 22,
+      "pattern": "ADDR",
+      "severity": "MED",
+      "excerpt": "磁约***21chars"
+    },
+    {
+      "file": "gitlab-cli-guide/glab-mr/SKILL.md",
+      "line": 160,
+      "pattern": "APIKEY",
+      "severity": "HIGH",
+      "excerpt": "to***18chars"
+    },
+    {
+      "file": "gitlab-cli-guide/glab-repo/references/commands.md",
+      "line": 378,
+      "pattern": "EMAIL",
+      "severity": "MED",
+      "excerpt": "to***24chars"
+    },
+    {
+      "file": "gitlab-cli-guide/glab-repo/references/commands.md",
+      "line": 393,
+      "pattern": "EMAIL",
+      "severity": "MED",
+      "excerpt": "to***24chars"
+    },
+    {
+      "file": "gitlab-cli-guide/glab-repo/references/commands.md",
+      "line": 539,
+      "pattern": "EMAIL",
+      "severity": "MED",
+      "excerpt": "gi***14chars"
+    },
+    {
+      "file": "gitlab-cli-guide/scripts/post-inline-comment.py",
+      "line": 329,
+      "pattern": "APIKEY",
+      "severity": "HIGH",
+      "excerpt": "to***17chars"
+    },
+    {
+      "file": "grad-path-scorer/assets/benchmark_schools_42.json",
+      "line": 644,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "31***5chars"
+    },
+    {
+      "file": "grad-path-scorer/assets/benchmark_schools_42.json",
+      "line": 884,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "31***5chars"
+    },
+    {
+      "file": "grad-path-scorer/assets/benchmark_schools_43.json",
+      "line": 648,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "31***5chars"
+    },
+    {
+      "file": "grad-path-scorer/assets/benchmark_schools_43.json",
+      "line": 909,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "31***5chars"
+    },
+    {
+      "file": "humanizer-zh/humanizer-zh/references/revision.md",
+      "line": 70,
+      "pattern": "ADDR",
+      "severity": "MED",
+      "excerpt": "三连***8chars"
+    },
+    {
+      "file": "humanizer-zh/references/iteration_log.md",
+      "line": 40,
+      "pattern": "ADDR",
+      "severity": "MED",
+      "excerpt": "数字***7chars"
+    },
+    {
+      "file": "humanizer-zh/references/revision.md",
+      "line": 70,
+      "pattern": "ADDR",
+      "severity": "MED",
+      "excerpt": "三连***8chars"
+    },
+    {
+      "file": "k8s-cluster-ops/SKILL.md",
+      "line": 6,
+      "pattern": "EMAIL",
+      "severity": "MED",
+      "excerpt": "d.***18chars"
+    },
+    {
+      "file": "keyforge-gauntlet-ops/references/forge-standard.md",
+      "line": 38,
+      "pattern": "EMAIL",
+      "severity": "MED",
+      "excerpt": "us***16chars"
+    },
+    {
+      "file": "livability-audit-swarm/references/retrieval-paths.md",
+      "line": 145,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "84***7chars"
+    },
+    {
+      "file": "livability-audit-swarm/references/retrieval-paths.md",
+      "line": 145,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "66***7chars"
+    },
+    {
+      "file": "livability-audit-swarm/references/retrieval-paths.md",
+      "line": 145,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "80***7chars"
+    },
+    {
+      "file": "livability-audit-swarm/references/retrieval-paths.md",
+      "line": 146,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "26***7chars"
+    },
+    {
+      "file": "livability-audit-swarm/references/retrieval-paths.md",
+      "line": 150,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "45***7chars"
+    },
+    {
+      "file": "livability-audit-swarm/references/retrieval-paths.md",
+      "line": 150,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "15***6chars"
+    },
+    {
+      "file": "livability-audit-swarm/references/retrieval-paths.md",
+      "line": 151,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "59***7chars"
+    },
+    {
+      "file": "livability-audit-swarm/references/retrieval-paths.md",
+      "line": 154,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "54***7chars"
+    },
+    {
+      "file": "livability-audit-swarm/references/retrieval-paths.md",
+      "line": 154,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "14***7chars"
+    },
+    {
+      "file": "livability-audit-swarm/references/retrieval-paths.md",
+      "line": 155,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "19***7chars"
+    },
+    {
+      "file": "livability-audit-swarm/references/retrieval-paths.md",
+      "line": 156,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "91***7chars"
+    },
+    {
+      "file": "livability-audit-swarm/tests/test_retrieval_registry_check.py",
+      "line": 128,
+      "pattern": "EMAIL",
+      "severity": "MED",
+      "excerpt": "us***17chars"
+    },
+    {
+      "file": "medical-career-transition/references/crossover_paths.md",
+      "line": 36,
+      "pattern": "IDCARD",
+      "severity": "HIGH",
+      "excerpt": "20***18chars"
+    },
+    {
+      "file": "medical-career-transition/references/crossover_paths.md",
+      "line": 36,
+      "pattern": "BANKCARD",
+      "severity": "HIGH",
+      "excerpt": "20***18chars"
+    },
+    {
+      "file": "medical-career-transition/references/enterprise_ecosystem.md",
+      "line": 22,
+      "pattern": "BANKCARD",
+      "severity": "HIGH",
+      "excerpt": "20***19chars"
+    },
+    {
+      "file": "medical-career-transition/references/enterprise_ecosystem.md",
+      "line": 56,
+      "pattern": "BANKCARD",
+      "severity": "HIGH",
+      "excerpt": "20***17chars"
+    },
+    {
+      "file": "medical-career-transition/references/talent_mobility_medical.md",
+      "line": 58,
+      "pattern": "BANKCARD",
+      "severity": "HIGH",
+      "excerpt": "17***16chars"
+    },
+    {
+      "file": "moonforge-ops/references/dryrun-suite.md",
+      "line": 47,
+      "pattern": "EMAIL",
+      "severity": "MED",
+      "excerpt": "gl***18chars"
+    },
+    {
+      "file": "notary-legal-upload/references/legal-doc-upload.md",
+      "line": 34,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "20***6chars"
+    },
+    {
+      "file": "notary-legal-upload/references/notary-playbook.md",
+      "line": 20,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "26***6chars"
+    },
+    {
+      "file": "notary-legal-upload/references/notary-playbook.md",
+      "line": 24,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "26***6chars"
+    },
+    {
+      "file": "notary-legal-upload/references/notary-playbook.md",
+      "line": 40,
+      "pattern": "ADDR",
+      "severity": "MED",
+      "excerpt": "部分***14chars"
+    },
+    {
+      "file": "notary-legal-upload/references/notary-playbook.md",
+      "line": 57,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "26***6chars"
+    },
+    {
+      "file": "pangu-enforcement-bureau/SKILL.md",
+      "line": 35,
+      "pattern": "ADDR",
+      "severity": "MED",
+      "excerpt": "生产***10chars"
+    },
+    {
+      "file": "quota-ledger-ops/references/pricing-anchors.md",
+      "line": 28,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "10***6chars"
+    },
+    {
+      "file": "release-gate-audit/SKILL.md",
+      "line": 12,
+      "pattern": "EXEMPT",
+      "severity": "INFO",
+      "excerpt": "标记豁免",
+      "note": "人工登记的豁免行（如测试夹具）"
+    },
+    {
+      "file": "release-gate-audit/scripts/preflight_scan.py",
+      "line": 12,
+      "pattern": "EXEMPT",
+      "severity": "INFO",
+      "excerpt": "标记豁免",
+      "note": "人工登记的豁免行（如测试夹具）"
+    },
+    {
+      "file": "release-gate-audit/scripts/preflight_scan.py",
+      "line": 62,
+      "pattern": "EXEMPT",
+      "severity": "INFO",
+      "excerpt": "标记豁免",
+      "note": "人工登记的豁免行（如测试夹具）"
+    },
+    {
+      "file": "release-gate-audit/scripts/preflight_scan.py",
+      "line": 110,
+      "pattern": "EXEMPT",
+      "severity": "INFO",
+      "excerpt": "标记豁免",
+      "note": "人工登记的豁免行（如测试夹具）"
+    },
+    {
+      "file": "release-gate-audit/scripts/preflight_scan.py",
+      "line": 113,
+      "pattern": "EXEMPT",
+      "severity": "INFO",
+      "excerpt": "标记豁免",
+      "note": "人工登记的豁免行（如测试夹具）"
+    },
+    {
+      "file": "sector-stock-rumorchain-pipeline/SKILL.md",
+      "line": 61,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "22***8chars"
+    },
+    {
+      "file": "sector-stock-rumorchain-pipeline/SKILL.md",
+      "line": 61,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "23***8chars"
+    },
+    {
+      "file": "sector-stock-rumorchain-pipeline/references/example-filled.md",
+      "line": 13,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "15***6chars"
+    },
+    {
+      "file": "sector-stock-rumorchain-pipeline/references/example-filled.md",
+      "line": 15,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "16***6chars"
+    },
+    {
+      "file": "sector-stock-rumorchain-pipeline/references/example-filled.md",
+      "line": 21,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "16***6chars"
+    },
+    {
+      "file": "sector-stock-rumorchain-pipeline/references/example-filled.md",
+      "line": 22,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "14***6chars"
+    },
+    {
+      "file": "sector-stock-rumorchain-pipeline/references/example-filled.md",
+      "line": 23,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "16***6chars"
+    },
+    {
+      "file": "sector-stock-rumorchain-pipeline/references/example-filled.md",
+      "line": 23,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "15***6chars"
+    },
+    {
+      "file": "sector-stock-rumorchain-pipeline/references/example-filled.md",
+      "line": 23,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "16***6chars"
+    },
+    {
+      "file": "sector-stock-rumorchain-pipeline/references/example-filled.md",
+      "line": 28,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "16***6chars"
+    },
+    {
+      "file": "sector-stock-rumorchain-pipeline/references/example-filled.md",
+      "line": 28,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "15***6chars"
+    },
+    {
+      "file": "slime-hybrid-ops/references/sma_variants_literature.md",
+      "line": 17,
+      "pattern": "BANKCARD",
+      "severity": "HIGH",
+      "excerpt": "11***16chars"
+    },
+    {
+      "file": "software-testing-guide/assets/templates/TEST-CASE-TEMPLATE.md",
+      "line": 94,
+      "pattern": "EMAIL",
+      "severity": "MED",
+      "excerpt": "te***16chars"
+    },
+    {
+      "file": "software-testing-guide/assets/templates/TEST-CASE-TEMPLATE.md",
+      "line": 131,
+      "pattern": "EMAIL",
+      "severity": "MED",
+      "excerpt": "te***16chars"
+    },
+    {
+      "file": "software-testing-guide/references/day1_onboarding.md",
+      "line": 86,
+      "pattern": "EMAIL",
+      "severity": "MED",
+      "excerpt": "ad***14chars"
+    },
+    {
+      "file": "software-testing-guide/references/day1_onboarding.md",
+      "line": 319,
+      "pattern": "EMAIL",
+      "severity": "MED",
+      "excerpt": "qa***19chars"
+    },
+    {
+      "file": "travel-commute-planner/scripts/commute_scoring_bridge.py",
+      "line": 52,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "15***5chars"
+    },
+    {
+      "file": "travel-commute-planner/scripts/commute_scoring_bridge.py",
+      "line": 53,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "15***5chars"
+    },
+    {
+      "file": "travel-commute-planner/scripts/commute_scoring_bridge.py",
+      "line": 57,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "20***5chars"
+    },
+    {
+      "file": "travel-commute-planner/scripts/commute_scoring_bridge.py",
+      "line": 58,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "50***5chars"
+    },
+    {
+      "file": "travel-commute-planner/scripts/commute_scoring_bridge.py",
+      "line": 59,
+      "pattern": "AMOUNT",
+      "severity": "MED",
+      "excerpt": "50***5chars"
+    },
+    {
+      "file": "webpage-forge-ops/FORGE_REPORT.md",
+      "line": 4,
+      "pattern": "EMAIL",
+      "severity": "MED",
+      "excerpt": "gl***18chars"
+    },
+    {
+      "file": "webpage-forge-ops/references/dryrun-suite.md",
+      "line": 35,
+      "pattern": "EMAIL",
+      "severity": "MED",
+      "excerpt": "gl***18chars"
+    },
+    {
+      "file": "wechat-article-deep-ingest/references/slogan-discrimination.md",
+      "line": 3,
+      "pattern": "ADDR",
+      "severity": "MED",
+      "excerpt": "用户***20chars"
+    }
+  ]
+}
