@@ -33,12 +33,14 @@ EXEMPT = {"同步待授权说明.md", "总线灵感清扫与安全告警报告_2
 # —— 第十一检常量（2026-10-05 巡检登记；新增词表条目默认归入硬类，保守从严）——
 PUBLIC_STRUCTURAL = {1, 2, 3, 4, 10, 11, 16, 17}   # 已公开结构性标记（署名/路径/端点/代号/域名哨兵）
 GENERIC_PHRASE = {12, 13, 18}                      # 通用短语标记（散文提及不构成泄漏）
-EXEMPT_FP = {"1ed906668e", "0b8031074c"}           # 公开仓占位符/测试向量指纹（脱敏定性在案）
+EXEMPT_FP = {"1ed906668e", "0b8031074c", "32f4cf588c"}           # 公开仓占位符/测试向量指纹（脱敏定性在案）（32f4cf588c=CAS-VERIFY 占位样例，裁决一豁免 2026-10-08）
 LOCAL_KNOWN = {}  # 序号15遗留直引 2026-10-05 已就地脱敏（指纹 5cc1b079→33b3c71c），豁免清零
+# 远端消化件同词直引登记（主权裁 2026-10-08 批次十五至十八去污案：远端公仓不再回改历史，直引处登记为条件通过注记，本地新建件不在此列）
+REMOTE_DIGESTED_KNOWN = {"_sync_work/repo/deliverables/20261005/otl/secret_scan_20261005.md": {9}}  # 序号9 COS桶名直引——扫描规则语境引述，非泄漏面（rel 含前缀）
 CRED_PAT = re.compile(r"sk-[A-Za-z0-9]{16,}|AKID[A-Za-z0-9]{16,}|eyJ[\w\-]+\.[\w\-]+\.[\w\-]+")
 QUAR_PREFIX = "_goal_a2a/wps_corpus_20261005"
 REMOTE_REFS_BASELINE = {                          # 远端引用态势基线（2026-10-06 批次十五消化后在案）
-    "refs/heads/main": "d757f67b7742f7cebd7dcf5d1d82ab1d75f242c0",
+    "refs/heads/main": "5cb3bebf9c2ad46427646d5b3e1e9c1b9624af1f",
     "refs/heads/codex/fix-git-upload-gate-20261005": "591ed601d90bd5d9007486ed9f67cd4a16fd33ed",
     "refs/pull/2/head": "591ed601d90bd5d9007486ed9f67cd4a16fd33ed",
     "refs/pull/2/merge": "31e9849ff93857a8706faa354528decabc9d6684",
@@ -221,6 +223,8 @@ def check_output_credential_scan():
                         quar += 1
                     elif rel in LOCAL_KNOWN and i in LOCAL_KNOWN[rel]:
                         notes.append(f"{rel}#序号{i}(遗留豁免)")
+                    elif rel in REMOTE_DIGESTED_KNOWN and i in REMOTE_DIGESTED_KNOWN[rel]:
+                        notes.append(f"{rel}#序号{i}(远端消化件登记)")
                     elif in_fail_scope:
                         fails.append(f"{rel}#序号{i}")
                     else:
