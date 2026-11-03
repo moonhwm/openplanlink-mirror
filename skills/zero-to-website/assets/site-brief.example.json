@@ -1,0 +1,52 @@
+{
+  "project_name": "独立研究工作室新站",
+  "goal": "让潜在合作方理解研究方向并提交可跟进的项目咨询",
+  "audience": [
+    "科研机构合作者",
+    "产业研究负责人"
+  ],
+  "primary_action": "提交项目咨询并获得明确回执",
+  "site_type": "marketing",
+  "must_ship": [
+    "研究方向与真实项目展示",
+    "团队与方法说明",
+    "带成功和失败反馈的咨询表单",
+    "咨询记录服务端持久化与回读"
+  ],
+  "out_of_scope": [
+    "在线支付",
+    "公开社区",
+    "多租户后台"
+  ],
+  "content_readiness": "partial",
+  "device_priority": "responsive",
+  "languages": [
+    "zh-CN"
+  ],
+  "brand": {
+    "direction": "克制、编辑化、证据优先，深色文字与单一暖色强调",
+    "assets_ready": false
+  },
+  "data": {
+    "accounts": false,
+    "persistent_records": true,
+    "shared_data": false,
+    "submissions": true,
+    "file_uploads": false,
+    "payments": false
+  },
+  "integrations": [],
+  "domain": {
+    "desired": "studio.example",
+    "status": "undecided"
+  },
+  "launch_requested": false,
+  "constraints": {
+    "budget": "待确认",
+    "timeline": "先完成可验收首版",
+    "assumptions": [
+      "项目咨询不需要访客注册",
+      "示例域名仅用于结构演示，不代表可注册或已持有"
+    ]
+  }
+}
