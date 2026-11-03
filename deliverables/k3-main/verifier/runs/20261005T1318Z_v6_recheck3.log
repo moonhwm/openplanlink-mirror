@@ -1,0 +1,15 @@
+[PASS] boundary_map 三档在场 — 字数 754
+[PASS] 台账哈希链完好 — rows=27 head=de34b1b9b93b
+[PASS] precheck self-test — self-test PASS
+[PASS] SDD 文书四闸 — SDD规范驱动开发立项书_DF-ORD-2026-1005-K3-01.md exit=0
+[PASS] 回归:预检报告_OpenPla… — exit=0
+[PASS] 回归:规范化表述文本_DF-O… — exit=0
+[PASS] 写回队列 v0.2.1
+[PASS] 闸门自更新链接能力 — v0.3.0 自检 PASS
+[PASS] 豁免件术语零 error — 5 件在册
+[WAIVED] 镜像新鲜度 — 网络三次重试均失败，WAIVED；本地 54f045ab19db
+[WAIVED] 远端态势监测 — 网络三次重试均失败，WAIVED
+[FAIL] 文书群锚点互检 — 基准 5 件：5-K3-01=v1.5.11／5-K3-01=v1.2.1／5-K3-02=v1.3.10／5-K3-03=v1.1.2／5-K3-04=v1.0.0；漂移：姊妹OTL件锚定…引K3-01:v1.4.0≠基准v1.5.11；姊妹OTL件锚定…引K3-02:v1.2.0≠基准v1.3.10；姊妹OTL件锚定…引K3-01:v1.1.0≠基准v1.2.1；协同规约候批条款…引K3-01:v1.5.7≠基准v1.5.11
+[PASS] 输出区凭据标记扫描 — 硬类序号 18 条；隔离区命中 48 处（待裁）；注记 0 处
+
+1 FAIL (13 项)
