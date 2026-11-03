@@ -1,0 +1,11 @@
+# GitHub 镜像仓基线核验 2026-10-05T08:30Z
+方法：ledger.json pushed 清单（653 件）随机抽 5 件（seed=20261005），
+GitHub MCP get_file_contents 取远端 blob sha，与本地 _sync_work/repo 重算 git blob sha1 比对。
+结果：5/5 MATCH（逐字节一致，零漂移）
+样本：
+  skills/humanizer-zh/references/battle_lessons.md = 1ca3f18c5c85
+  skills/pangu-enforcement-bureau/SKILL.md = de7ed8987e97
+  skills/source-semantics-sentinel/references/poisoning_detection.md = 0e069921d956
+  skills/debt-claim-deep-audit/references/direction-catalog.md = 8dc68f90ac1b
+  skills/skill-reinstall-ops/references/pipify.md = 3618e13b67bf
+结论：本轮未发现 GitHub 上传链路问题；镜像仓健康基线成立。

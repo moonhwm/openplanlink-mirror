@@ -1,0 +1,15 @@
+# verifier v3 run 20261005T0856Z（全量基线重锚后复跑）
+# exit=0
+
+[PASS] boundary_map 三档在场 — 字数 754
+[PASS] 台账哈希链完好 — rows=20 head=a3a987289154
+[PASS] precheck self-test — self-test PASS
+[PASS] SDD 文书四闸 — SDD规范驱动开发立项书_DF-ORD-2026-1005-K3-01.md exit=0
+[PASS] 回归:预检报告_OpenPla… — exit=0
+[PASS] 回归:规范化表述文本_DF-O… — exit=0
+[PASS] 写回队列 v0.2.1
+[PASS] 闸门自更新链接能力 — v0.3.0 自检 PASS
+[PASS] 豁免件术语零 error — 5 件在册
+[PASS] 镜像新鲜度 — local=f3801b6c6233 remote=f3801b6c6233
+
+ALL PASS (10 项)
