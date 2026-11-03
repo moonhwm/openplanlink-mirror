@@ -1,0 +1,10 @@
+# 跑批实录 2026-11-03T05:04Z — skills13 全量推送验收
+任务: 推送 /app/.user/skills 差集 13 技能 76 件 (75文本+1pyc豁免) 至 moonhwm/openplanlink-mirror@main
+隔离纪律: exclusion 8件未推在案; 私有词29条+凭证模式5类预扫零命中(2处sk-命中验明为占位/金丝雀)
+过程:
+ 1. 首轮 coder 推送 claim 37/76 — 独立复验实到 31, phantom×6 (写通道 phantom-success 失真, 瞬断谱系新增第6类)
+ 2. 续推 retry44 严格串行+双验 — 44/44 (含5件延迟显形, 1件漂移更新)
+ 3. 本席独立全量复验遇 API 限流(60/hr), 恢复后复验 74/75 全等
+ 4. govdoc-compliance-ops/SKILL.md 残损(尾双换行+中间1字节差) → 单件修复 commit 878e85b5 → 本席终验 size=8367 sha256-16=2914edd88076d864 逐字节全等
+结论: 75/75 文本件远端字节级全等 PASS; pyc 1件豁免候裁(派生缓存, 源.py已在仓)
+远端 HEAD: 4582a2df → 878e85b59bbd466f7b2f8a802d56925cc8a2db2a
