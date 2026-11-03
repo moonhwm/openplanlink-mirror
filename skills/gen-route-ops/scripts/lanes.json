@@ -1,0 +1,437 @@
+{
+  "registry_version": "1.1.2",
+  "snapshot_date": "2026-10-10",
+  "discipline": "状态以 probe 实测为准；本表为快照，凡 status 含 unverified/unknown 者调用前必须复测。⚠️=未独立核实。gacha_risk 分级：low=机器直办（代码/参数/直接操纵）、medium=锚定制导（参考图/首尾帧/多视图/幂等键）、high=纯 prompt 抽卡。身份一致性/精度敏感任务禁选 high 裸跑——走 anchor-first 剧本（references/control-doctrine.md）。",
+  "lanes": [
+    {
+      "id": "tripo302",
+      "name": "302.AI · tripo3d 车道",
+      "kind": "model_3d",
+      "caps": [
+        "text_to_3d",
+        "image_to_3d",
+        "multiview_to_3d",
+        "texture",
+        "rig",
+        "animate",
+        "convert",
+        "stylize"
+      ],
+      "entry": "api",
+      "base": "https://api.302ai.cn/tripo3d/v2/openapi",
+      "credential_env": [
+        "AI302_API_KEY"
+      ],
+      "cost": "image_to_model v3.0 实测 30 credits/次（2026-10-08）；PTC 计价，价目以任务提交响应为准",
+      "status": "ready_proven",
+      "evidence": "2026-10-08 task 815d3cf2 image_to_model v3.0-20250812 success（台账 76）",
+      "gacha_risk": "medium",
+      "notes": "api.302.ai 域在本沙箱不可达（90s 超时实测），必须用 api.302ai.cn；上传端点偶发 502 瞬时故障，重试即通；产物 URL 约 5 分钟短效，即取即存；重摇=新任务须重新批准",
+      "quality_note": "主权人 2026-10-10 观感：目前 Tripo 效果一般（302 为 Tripo 引擎中转，同源质量口径）——质量敏感任务须呈报此口径并对比替代车道",
+      "executor": "直接 API：POST {base}/task → GET {base}/task/{task_id}；上传 POST {base}/upload (multipart file)",
+      "gacha_note": "单视图图生；multiview_to_3d 四视图锚定可降至 low-medium"
+    },
+    {
+      "id": "tripo_mcp",
+      "name": "Tripo 官方 MCP 车道",
+      "kind": "model_3d",
+      "caps": [
+        "text_to_3d",
+        "image_to_3d",
+        "multiview_to_3d",
+        "texture",
+        "rig_check",
+        "rig",
+        "animate",
+        "convert",
+        "decimate",
+        "segment",
+        "import_model"
+      ],
+      "entry": "mcp_tools",
+      "tool_prefix": "tripo_",
+      "credential_env": [],
+      "cost": "credits 计费；multiview 带贴图报价 30 积分（2026-10-08 在案）",
+      "status": "pending_wallet",
+      "evidence": "2026-10-08 tripo_balance 实测余额 0、冻结 0（台账 75）；plans_url=https://developers.tripo3d.com/en/pricing；主权人 2026-10-10 勘正：Tripo 官方与 Tripo Studio（studio.tripo3d.ai 网页端）同账户但不同钱包——API 钱包与 Studio 钱包分立，Studio 端有折扣；钱包是否可划转未证 ⚠️（沙箱 2026-10-10 探测 20s 无响应，仅本次实测口径，未证不可达）",
+      "gacha_risk": "medium",
+      "notes": "OAuth 账户与 Tripo Studio 同账户、不同钱包（API/Studio 钱包分立，Studio 端有折扣，主权人口径），与 302 车道/百炼互不通用；本车道余额 0 须自充，勿指望 Studio 钱包抵扣；充值后立即可用；upload_ticket 一次性短效，勿空建",
+      "quality_note": "主权人 2026-10-10 观感：目前 Tripo 效果一般——质量敏感任务须呈报此口径并对比替代车道",
+      "executor": "插件技能 tripo-3d（/app/.agents/plugins/tripo-3d/skills/tripo-3d/SKILL.md）",
+      "gacha_note": "multiview 锚定可降"
+    },
+    {
+      "id": "tripo_env",
+      "name": "Tripo 官方 API 直连（env key）",
+      "kind": "model_3d",
+      "caps": [
+        "text_to_3d",
+        "image_to_3d",
+        "multiview_to_3d"
+      ],
+      "entry": "api",
+      "base": "https://api.tripo3d.ai/v2/openapi",
+      "credential_env": [
+        "TRIPO_API_KEY"
+      ],
+      "cost": "⚠️ 未实测",
+      "status": "unknown_unverified",
+      "evidence": "env 有 TRIPO_API_KEY；余额未验；主权人 2026-10-10 勘正：Tripo 官方与 Tripo Studio 同账户、不同钱包——env key 走 API 钱包，与 Studio 钱包分立（账户归属以余额实测复核为准）；沙箱 2026-10-10 api.tripo3d.ai 探测 20s 无响应（仅本次实测口径）",
+      "gacha_risk": "medium",
+      "notes": "⚠️ 端点与余额调用前必须实测；勿与 302 车道混记费用；Studio 网页端可作账户管理入口（折扣在 Studio 端，钱包分立勿混记）",
+      "quality_note": "主权人 2026-10-10 观感：目前 Tripo 效果一般——质量敏感任务须呈报此口径并对比替代车道",
+      "executor": "直接 API（契约同 tripo v2 openapi 族 ⚠️）"
+    },
+    {
+      "id": "v2fun",
+      "name": "V2Fun（极顶数创）",
+      "kind": "model_3d",
+      "caps": [
+        "text_to_3d",
+        "image_to_3d",
+        "multiview_to_3d",
+        "texture",
+        "rig",
+        "animate",
+        "video_mocap",
+        "image_gen"
+      ],
+      "entry": "api",
+      "base": "https://api.v2fun.art/api/v1",
+      "credential_env": [
+        "V2FUN_API_KEY"
+      ],
+      "cost": "图生 3D 40 积分实测（2026-10-02 v2fun-ops 快照）；角色全管线约 46 积分",
+      "status": "pending_key",
+      "evidence": "credentials.env 无 V2FUN_API_KEY（2026-10-08 名册核查）",
+      "gacha_risk": "medium",
+      "notes": "key 分区：.art 控制台建的 key 只能打 .art；.ai 从中国被 WAF 拦（v2fun-ops 实测）；轮询 ≥15s+429 退避",
+      "executor": "用户技能 v2fun-ops（/app/.user/skills/v2fun-ops/SKILL.md）",
+      "gacha_note": "图像智能参考四视图锚定可降"
+    },
+    {
+      "id": "rodin",
+      "name": "Hyper3D Rodin（Gen-2.5/BANG）",
+      "kind": "model_3d",
+      "caps": [
+        "image_to_3d",
+        "text_to_3d",
+        "bang_segment"
+      ],
+      "entry": "mcp_streamable_http",
+      "base": "https://api.hyper3d.com/api/mcp",
+      "credential_env": [],
+      "cost": "⚠️ 未实测（配额属用户账户）",
+      "status": "pending_oauth",
+      "evidence": "2026-10-08 probe_mcp.py 实测：端点可达但 initialize 返 401 unauthorized——较技能基线（2026-09-23 免鉴）漂移，端点策略收紧（台账 77）",
+      "gacha_risk": "medium",
+      "notes": "OAuth 全程浏览器，永不向用户索取 API key；与 Tripo 系两套账户勿混",
+      "executor": "用户技能 hyper3d-rodin-mcp（/app/.user/skills/hyper3d-rodin-mcp/SKILL.md）"
+    },
+    {
+      "id": "image_generation_plugin",
+      "name": "image_generation 插件（agent-gw）",
+      "kind": "image",
+      "caps": [
+        "text_to_image",
+        "transparent_bg",
+        "reference_guidance"
+      ],
+      "entry": "plugin_tools",
+      "credential_env": [],
+      "cost": "平台额度内（未见单独计价 ⚠️）",
+      "status": "ready",
+      "evidence": "插件在册（plugins_added 公告）",
+      "gacha_risk": "high",
+      "notes": "尺寸须 16 倍数、≤3840、总像素 655360–8294400、纵横比 ≤3:1；透明背景仅 PNG；身份锁定任务禁裸抽，走参考图锚定",
+      "executor": "插件技能 image_generation",
+      "gacha_note": "纯 prompt；reference_guidance 可降至 medium"
+    },
+    {
+      "id": "ai302_image",
+      "name": "302.AI 生图模型群",
+      "kind": "image",
+      "caps": [
+        "text_to_image",
+        "image_to_image"
+      ],
+      "entry": "api",
+      "base": "https://api.302ai.cn",
+      "credential_env": [
+        "AI302_API_KEY"
+      ],
+      "cost": "⚠️ 按模型计价（历史战役口径 gpt-image 系 15k/次、nano-banana 系 20k/次，2026-09-21 台账，单位为其生态额度；当前价以 /v1/models 目录与提交响应为准）",
+      "status": "ready_unverified_models",
+      "evidence": "2026-10-08 GET /v1/models 实测 200、1003 模型在册；具体图像模型名未逐一核验",
+      "gacha_risk": "high",
+      "notes": "与 tripo302 同 key 同域；调用前先查目录确认模型在册与计价；2024 MyTan 战役教训在案——纯 prompt 人像重构 500 元未竟（control-doctrine §案例）",
+      "executor": "直接 API（OpenAI 兼容族 ⚠️ 按模型定）",
+      "gacha_note": "image_to_image 参考锚定可降至 medium"
+    },
+    {
+      "id": "aimlapi",
+      "name": "AIMLAPI 模型集市",
+      "kind": "image",
+      "caps": [
+        "text_to_image",
+        "image_to_image",
+        "chat"
+      ],
+      "entry": "api",
+      "base": "https://api.aimlapi.com",
+      "credential_env": [
+        "AIMLAPI_KEY"
+      ],
+      "cost": "⚠️ 未实测",
+      "status": "unknown_unverified",
+      "evidence": "env 有 AIMLAPI_KEY；余额与模型面未验",
+      "gacha_risk": "high",
+      "notes": "⚠️ 调用前实测余额与目标模型在册情况",
+      "executor": "直接 API（OpenAI 兼容族 ⚠️）"
+    },
+    {
+      "id": "openrouter",
+      "name": "OpenRouter 模型集市",
+      "kind": "image",
+      "caps": [
+        "text_to_image",
+        "chat"
+      ],
+      "entry": "api",
+      "base": "https://openrouter.ai/api/v1",
+      "credential_env": [
+        "OPENROUTER_API_KEY"
+      ],
+      "cost": "⚠️ 未实测",
+      "status": "unknown_unverified",
+      "evidence": "env 有 OPENROUTER_API_KEY；余额与图像模型面未验",
+      "gacha_risk": "high",
+      "notes": "⚠️ 图像模型可用性随平台变动，调用前查 /models",
+      "executor": "直接 API（OpenAI 兼容）"
+    },
+    {
+      "id": "modelscope",
+      "name": "ModelScope 魔搭",
+      "kind": "image",
+      "caps": [
+        "text_to_image"
+      ],
+      "entry": "api",
+      "base": "https://api-inference.modelscope.cn",
+      "credential_env": [
+        "MODELSCOPE_TOKEN"
+      ],
+      "cost": "⚠️ 社区免费额度口径未核",
+      "status": "unknown_unverified",
+      "evidence": "env 有 MODELSCOPE_TOKEN；未实测",
+      "gacha_risk": "high",
+      "notes": "⚠️ 免费档有日调用上限口径，实测为准",
+      "executor": "直接 API（OpenAI 兼容族 ⚠️）"
+    },
+    {
+      "id": "happyhorse",
+      "name": "HappyHorse CLI（AI 视频）",
+      "kind": "video",
+      "caps": [
+        "text2video",
+        "image2video",
+        "reference2video",
+        "video2video",
+        "refine",
+        "upload"
+      ],
+      "entry": "cli",
+      "cli_name": "happyhorse",
+      "credential_env": [],
+      "cost": "⚠️ 按任务计价（付费命令：text2video/image2video/reference2video/video2video/refine；提交前页面/响应示价）",
+      "status": "ready_unauth",
+      "evidence": "2026-10-08 安装 0.1.9（Linux-x64，SHA256SUMS 校验过）并验证 --version/--help/agent-guide；whoami 双区（cn/global）未登录",
+      "gacha_risk": "medium",
+      "notes": "登录=happyhorse login --region cn（浏览器授权，永不索取凭据）；付费提交必带 --yes 且逐次经用户批准；SUBMIT_OUTCOME_UNKNOWN 禁自动重试（凭 task-recent/网页任务中心恢复）；产物 download --if-exists skip",
+      "executor": "CLI 五拍：whoami → <cmd> --dry-run --json → <cmd> --yes --json（批准后） → task <id> --wait --json → download <id> --json；详见 references/happyhorse.md",
+      "gacha_note": "reference2video 1–9 图锚定；纯 t2v 为 high"
+    },
+    {
+      "id": "video_generation_plugin",
+      "name": "video_generation 插件（agent-gw）",
+      "kind": "video",
+      "caps": [
+        "text_to_video",
+        "reference_image",
+        "reference_video",
+        "reference_audio"
+      ],
+      "entry": "plugin_tools",
+      "credential_env": [],
+      "cost": "平台额度内（未见单独计价 ⚠️）",
+      "status": "ready",
+      "evidence": "插件在册（plugins_added 公告）",
+      "gacha_risk": "medium",
+      "notes": "4–12 秒、480p/720p、mp4；参考件须公网可达 URL",
+      "executor": "插件技能 video_generation",
+      "gacha_note": "参考图/视频/音频锚定制导；纯 t2v 为 high"
+    },
+    {
+      "id": "remotion",
+      "name": "Remotion 程序化视频（代码锻造）",
+      "kind": "video",
+      "caps": [
+        "code_driven_video",
+        "batch_video",
+        "data_to_video",
+        "suno_bgm",
+        "narration",
+        "lambda_scale"
+      ],
+      "entry": "skill_pipeline",
+      "credential_env": [],
+      "cost": "渲染本地零边际成本；素材生成经 302 网关（Suno ~0.1 PTC/次，2026-10 快照；须先 --dry-run）",
+      "status": "ready",
+      "evidence": "用户技能 remotion-video-forge 在册（/app/.user/skills/remotion-video-forge/SKILL.md）",
+      "gacha_risk": "low",
+      "notes": "Node ≥16；302 key 走 S302_API_KEY 环境变量——⚠️ 与本表 AI302_API_KEY 是否同钥未验，用前映射须主权人确认；交付物 SHA3-256 封印（该线纪律：SHA3-256 only）；模型名为 302 页面声称口径须带标",
+      "executor": "用户技能 remotion-video-forge",
+      "gacha_note": "每帧是帧号的纯函数——编译后干预的范式车道"
+    },
+    {
+      "id": "minimax_h3",
+      "name": "CompShare · MiniMax H3 媒体任务",
+      "kind": "video",
+      "caps": [
+        "t2v",
+        "first_last_frame_video",
+        "reference_driven_video",
+        "image_gen",
+        "speech_tts",
+        "voice_clone",
+        "idempotent_retry"
+      ],
+      "entry": "cli",
+      "cli_name": "compshare",
+      "credential_env": [
+        "COMPSHARE_PUBLIC_KEY",
+        "COMPSHARE_PRIVATE_KEY",
+        "COMPSHARE_MINIMAX_API_KEY"
+      ],
+      "cost": "⚠️ 积分制（minimax points/packages 查价后再烧；视频 480P–4K、4–30s）",
+      "status": "pending_key",
+      "evidence": "2026-10-10 compshare-cli 0.5.3 pip 安装实测（SDK 0.11.145），doctor 凭证未配置；minimax 命令面在册",
+      "gacha_risk": "medium",
+      "notes": "一切变更先 --dry-run 后 --yes；重试必带 --idempotency-key；产物 URL 默认脱敏（--show-sensitive 须用户明示）；语音产物 7 天留存即取",
+      "executor": "用户技能 compshare-cli（/app/.user/skills/compshare-cli/SKILL.md）",
+      "gacha_note": "首尾帧/参考件/技能 context-ir 锚定制导 + 幂等键防重复扣费"
+    },
+    {
+      "id": "compshare_gpu",
+      "name": "CompShare GPU 算力（自托管管线）",
+      "kind": "compute",
+      "caps": [
+        "gpu_instance",
+        "ssh_job",
+        "durable_remote_job",
+        "custom_pipeline_hosting",
+        "us3_storage"
+      ],
+      "entry": "cli",
+      "cli_name": "compshare",
+      "credential_env": [
+        "COMPSHARE_PUBLIC_KEY",
+        "COMPSHARE_PRIVATE_KEY"
+      ],
+      "cost": "⚠️ 按实例计费（instance create --dry-run 先出价，max-price 封顶；价以分为单位 API 返回）",
+      "status": "pending_key",
+      "evidence": "2026-10-10 compshare-cli 0.5.3 在轨；doctor 凭证未配置",
+      "gacha_risk": "low",
+      "notes": "创建/停删/重装均须 --dry-run→批准→--yes+显式 timeout；超时先查资源再重试（远端可能仍在跑）；job 断线续查 logs --stdout-offset",
+      "executor": "用户技能 compshare-cli",
+      "gacha_note": "算力直办：自托管 TripoSR/InstantMesh/定制重建管线，本地确定性管线的基础设施"
+    },
+    {
+      "id": "maya_dcc",
+      "name": "Maya DCC 线（场景直操纵）",
+      "kind": "dcc",
+      "caps": [
+        "scene_ops",
+        "batch_rename",
+        "export",
+        "direct_mesh_edit"
+      ],
+      "entry": "mcp_tools",
+      "tool_prefix": "mcp__plugin-",
+      "credential_env": [],
+      "cost": "本地工具零生成费用",
+      "status": "server_unavailable",
+      "evidence": "2026-10-08/10 本会话 maya MCP 服务器连接失败（plugin_status 公告在案）；插件已注册但服务器断连",
+      "gacha_risk": "low",
+      "notes": "断连时不可调用，不可伪称；修复路径=重连/重授权插件；3ds Max/Blender 线当前环境未见注册（预留位）",
+      "executor": "用户技能 dcc-mcp-umbrella（/app/.user/skills/dcc-mcp-umbrella/SKILL.md）——先 probe_dcc.py 探活再路由",
+      "gacha_note": "直接操纵场景图——零抽卡"
+    },
+    {
+      "id": "cad_engineering",
+      "name": "工程/参数化域（SolidWorks/CAD 预留位）",
+      "kind": "dcc",
+      "caps": [
+        "parametric_modeling",
+        "assembly",
+        "engineering_drawing"
+      ],
+      "entry": "none",
+      "credential_env": [],
+      "cost": "—",
+      "status": "not_integrated",
+      "evidence": "当前环境未见注册（dcc-mcp-umbrella 预留位口径）",
+      "gacha_risk": "low",
+      "notes": "工程域任务（尺寸链/公差/装配体/工程图）禁拿网格域工具冒充——跨域须显式声明精度损失；未接入则如实声明",
+      "executor": "候接入；路由规则归 dcc-mcp-umbrella",
+      "gacha_note": "B-rep 精确建模"
+    }
+  ],
+  "deciders": [
+    {
+      "id": "bailian",
+      "name": "阿里百炼 qwen",
+      "credential_env": [
+        "BAILIAN_API_KEY"
+      ],
+      "base_env": "BAILIAN_BASE_URL",
+      "default_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "model": "qwen-plus",
+      "status": "unavailable",
+      "notes": "⚠️ 2026-10-08 实测：BAILIAN_API_KEY 401 invalid_api_key（专属 maas 与标准 dashscope 端点双验均败）；BAILIAN_GIFT_API_KEY 有效但 BudgetLimitExceeded（预算耗尽）——候凭据更新或预算重置"
+    },
+    {
+      "id": "deepseek",
+      "name": "DeepSeek",
+      "credential_env": [
+        "DEEPSEEK_API_KEY"
+      ],
+      "default_base": "https://api.deepseek.com",
+      "model": "deepseek-chat",
+      "status": "ready_proven",
+      "notes": "2026-10-08 实测三次决策调用成功（决策卡 ead133dd/7c219267/a71c0e75）"
+    },
+    {
+      "id": "ark",
+      "name": "火山方舟 doubao",
+      "credential_env": [
+        "ARK_API_KEY"
+      ],
+      "default_base": "https://ark.cn-beijing.volces.com/api/v3",
+      "model": "",
+      "status": "unknown_unverified",
+      "notes": "⚠️ 模型名/接入点按账户配置，可用 GEN_ROUTE_MODEL_ARK 指定；未实测"
+    },
+    {
+      "id": "openrouter",
+      "name": "OpenRouter",
+      "credential_env": [
+        "OPENROUTER_API_KEY"
+      ],
+      "default_base": "https://openrouter.ai/api/v1",
+      "model": "openai/gpt-4o-mini",
+      "status": "unknown_unverified",
+      "notes": "⚠️ 模型名按平台在册；未实测"
+    }
+  ]
+}
